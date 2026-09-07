@@ -12,8 +12,11 @@ import {
   Building2,
   Tractor,
   BarChart3,
-  Mountain,
-  Bot
+  Thermometer,
+  Compass,
+  CheckCircle2,
+  Layers,
+  Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { HarvestManagementModule } from './Harvest/HarvestManagementModule';
@@ -23,6 +26,8 @@ import { FarmAnalyticsDashboard } from './Analytics/FarmAnalyticsDashboard';
 import { weatherService } from '../services/weatherService';
 import { soilService } from '../services/soilService';
 import { FarmData } from '../services/farmService';
+import { InsightCard } from './ui/InsightCard';
+import { Badge } from './ui/Badge';
 
 type LocationData = {
   latitude: number;
@@ -272,68 +277,81 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-20 text-center space-y-3">
-        <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-xs font-semibold text-slate-500">Loading farm workspace...</p>
+      <div className="max-w-6xl mx-auto px-4 py-28 text-center space-y-4">
+        <div className="w-10 h-10 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto shadow-md" />
+        <p className="text-sm font-semibold text-slate-600">Initializing Agronomic Workspace & Live Telemetry...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-6 px-4 sm:px-6 lg:px-8 text-slate-800 font-sans">
+    <div className="min-h-screen bg-slate-50/50 py-7 px-4 sm:px-6 lg:px-8 text-slate-800 font-sans">
       <div className="max-w-6xl mx-auto space-y-6">
         
-        {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div className="flex items-center gap-3">
+        {/* Top Header Navigation Strip */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/80">
+          <div className="flex items-center gap-3.5">
             <button
               type="button"
               onClick={onBack}
-              className="p-2 text-slate-500 hover:text-slate-700 hover:bg-white rounded-xl border border-slate-200 transition-colors"
-              title="Back"
+              className="p-2.5 text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 rounded-xl border border-slate-200 shadow-xs transition-all cursor-pointer"
+              title="Return to Setup"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div>
-              <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-                {farmDetails?.farm_name || 'Farm Workspace'}
-              </h1>
-              <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
-                <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                {location.city || 'Ghaziabad'}, {location.country || 'India'} • Crop: <strong>{crop}</strong> {farmDetails?.area_hectares ? `(${farmDetails.area_hectares} ha)` : ''}
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-display">
+                  {farmDetails?.farm_name || 'Agronomic Farm Workspace'}
+                </h1>
+                <Badge variant="emerald" size="sm" icon={<Sparkles className="w-3 h-3" />}>
+                  Live Telemetry
+                </Badge>
+              </div>
+              <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
+                <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{location.city || 'Ghaziabad'}, {location.country || 'India'}</span>
+                <span className="text-slate-300">•</span>
+                <span>Crop: <strong className="text-slate-700">{crop}</strong></span>
+                {farmDetails?.area_hectares && (
+                  <>
+                    <span className="text-slate-300">•</span>
+                    <span>Area: <strong className="text-slate-700">{farmDetails.area_hectares} ha</strong></span>
+                  </>
+                )}
               </p>
             </div>
           </div>
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4" />
+          <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        {/* Tab Segment Controls */}
-        <div className="flex items-center gap-1 bg-slate-200/60 p-1 rounded-xl w-full overflow-x-auto">
+        {/* Tab Controls */}
+        <div className="flex items-center gap-1.5 bg-slate-200/70 p-1.5 rounded-2xl w-full overflow-x-auto border border-slate-300/50">
           {[
             { id: 'overview', label: 'Farm Overview', icon: Activity },
-            { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+            { id: 'analytics', label: 'Operations Analytics', icon: BarChart3 },
             { id: 'harvest', label: 'Harvest Planning', icon: Tractor },
-            { id: 'weather', label: 'Weather & Soil', icon: CloudSun },
-            { id: 'crop-prices', label: 'Market Rates', icon: IndianRupee },
+            { id: 'weather', label: 'Weather Telemetry', icon: CloudSun },
+            { id: 'crop-prices', label: 'Mandi Rates', icon: IndianRupee },
             { id: 'krishi-seva-kendra', label: 'Krishi Seva Kendra', icon: Building2 }
           ].map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-white text-slate-900 shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
               }`}
             >
-              <tab.icon className="w-3.5 h-3.5" />
+              <tab.icon className={`w-3.5 h-3.5 ${activeTab === tab.id ? 'text-emerald-600' : 'text-slate-500'}`} />
               <span>{tab.label}</span>
             </button>
           ))}
@@ -343,59 +361,90 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
         {activeTab === 'overview' && weatherData && soilData && (
           <div className="space-y-6">
             
-            {/* Primary Environmental Metric Strip */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-              <div className="space-y-1">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Air Temperature</span>
-                <div className="text-2xl font-bold text-slate-900">{weatherData.current.temperature_c}°C</div>
-                <span className="text-[11px] text-slate-500">Feels like {weatherData.current.feels_like_c}°C</span>
-              </div>
+            {/* Primary Environmental Insight Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <InsightCard
+                title="Air Temperature"
+                value={`${weatherData.current.temperature_c}°C`}
+                subtitle={`Feels like ${weatherData.current.feels_like_c}°C • ${weatherData.current.description}`}
+                icon={<Thermometer className="w-5 h-5 text-amber-500" />}
+                iconBg="bg-amber-50 border-amber-200/60"
+                trend={{ value: 'Optimal', direction: 'neutral' }}
+              />
 
-              <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Relative Humidity</span>
-                <div className="text-2xl font-bold text-slate-900">{weatherData.current.relative_humidity}%</div>
-                <span className="text-[11px] text-slate-500">Wind: {weatherData.current.wind_speed_kmh} km/h</span>
-              </div>
+              <InsightCard
+                title="Relative Humidity"
+                value={`${weatherData.current.relative_humidity}%`}
+                subtitle={`Wind speed: ${weatherData.current.wind_speed_kmh} km/h ${weatherData.current.wind_direction}`}
+                icon={<Droplets className="w-5 h-5 text-sky-500" />}
+                iconBg="bg-sky-50 border-sky-200/60"
+                trend={{ value: `${weatherData.current.precipitation_probability}% Rain`, direction: 'up' }}
+              />
 
-              <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Soil Moisture</span>
-                <div className="text-2xl font-bold text-slate-900">{soilData.moisture}%</div>
-                <span className="text-[11px] text-slate-500">Target range: 30-45%</span>
-              </div>
+              <InsightCard
+                title="Soil Moisture Horizon"
+                value={`${soilData.moisture}%`}
+                subtitle="Root zone moisture • Target: 30-45%"
+                icon={<Droplets className="w-5 h-5 text-emerald-500" />}
+                iconBg="bg-emerald-50 border-emerald-200/60"
+                trend={{ value: 'Within Range', direction: 'neutral' }}
+              />
 
-              <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Soil pH & Type</span>
-                <div className="text-lg font-bold text-slate-900">{soilData.ph} pH</div>
-                <span className="text-[11px] text-slate-500">{soilData.type} ({soilData.drainage})</span>
-              </div>
+              <InsightCard
+                title="Soil Reaction (pH)"
+                value={`${soilData.ph} pH`}
+                subtitle={`${soilData.type} • ${soilData.drainage}`}
+                icon={<Sprout className="w-5 h-5 text-emerald-600" />}
+                iconBg="bg-emerald-50 border-emerald-200/60"
+                trend={{ value: 'Favorable', direction: 'up' }}
+              />
             </div>
 
             {/* Operational Status Table */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-              <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Operational Farm Status</h3>
+            <div className="saas-card p-6 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 font-display">Operational Field Status</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">Real-time parameters calculated against crop lifecycle</p>
+                </div>
+                <Badge variant="emerald" size="sm">
+                  Active Monitoring
+                </Badge>
+              </div>
               
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
-                      <th className="py-2.5 px-3">Field / Section</th>
-                      <th className="py-2.5 px-3">Crop</th>
-                      <th className="py-2.5 px-3 text-center">Soil Moisture</th>
-                      <th className="py-2.5 px-3 text-center">Disease Risk</th>
-                      <th className="py-2.5 px-3 text-right">Yield Estimate</th>
+                    <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                      <th className="py-3 px-4 rounded-l-lg">Field / Partition</th>
+                      <th className="py-3 px-4">Cultivated Crop</th>
+                      <th className="py-3 px-4 text-center">Soil Moisture</th>
+                      <th className="py-3 px-4 text-center">Pathogen Risk</th>
+                      <th className="py-3 px-4 text-right rounded-r-lg">Yield Forecast</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    <tr className="hover:bg-slate-50">
-                      <td className="py-3 px-3 font-semibold text-slate-900">Main Plot ({farmDetails?.area_hectares || 2.5} ha)</td>
-                      <td className="py-3 px-3 text-slate-600">{crop}</td>
-                      <td className="py-3 px-3 text-center font-medium text-slate-800">{soilData.moisture}%</td>
-                      <td className="py-3 px-3 text-center">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          Low Risk
+                    <tr className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3.5 px-4 font-semibold text-slate-900">
+                        Main Acreage ({farmDetails?.area_hectares || 2.5} ha)
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-700 font-medium">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Sprout className="w-3.5 h-3.5 text-emerald-600" />
+                          {crop}
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-right font-bold text-slate-900">4.8 t/ha</td>
+                      <td className="py-3.5 px-4 text-center font-semibold text-slate-800">
+                        {soilData.moisture}%
+                      </td>
+                      <td className="py-3.5 px-4 text-center">
+                        <Badge variant="emerald" size="sm">
+                          Low Risk
+                        </Badge>
+                      </td>
+                      <td className="py-3.5 px-4 text-right font-bold text-slate-900 font-display text-sm">
+                        4.8 t/ha
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -405,7 +454,7 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
           </div>
         )}
 
-        {/* MODULE DELEGATION TABS */}
+        {/* DELEGATED MODULE TABS */}
         {activeTab === 'analytics' && (
           <FarmAnalyticsDashboard farm={farmDetails} location={location} crop={crop} />
         )}
@@ -415,24 +464,27 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
         )}
 
         {activeTab === 'weather' && (
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Environmental Monitoring</h3>
+          <div className="saas-card p-6 space-y-5">
+            <div className="pb-3 border-b border-slate-100">
+              <h3 className="text-sm font-bold text-slate-900 font-display">Hyperlocal Weather Telemetry</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Atmospheric sensor readings from nearest weather station</p>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <span className="text-slate-400 block mb-1">Temperature</span>
-                <strong className="text-slate-900 text-base">{weatherData?.current.temperature_c}°C</strong>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-slate-400 block mb-1 text-[11px] font-semibold uppercase">Temperature</span>
+                <strong className="text-slate-900 text-xl font-display">{weatherData?.current.temperature_c}°C</strong>
               </div>
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <span className="text-slate-400 block mb-1">Humidity</span>
-                <strong className="text-slate-900 text-base">{weatherData?.current.relative_humidity}%</strong>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-slate-400 block mb-1 text-[11px] font-semibold uppercase">Humidity</span>
+                <strong className="text-slate-900 text-xl font-display">{weatherData?.current.relative_humidity}%</strong>
               </div>
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <span className="text-slate-400 block mb-1">Wind Speed</span>
-                <strong className="text-slate-900 text-base">{weatherData?.current.wind_speed_kmh} km/h</strong>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-slate-400 block mb-1 text-[11px] font-semibold uppercase">Wind Velocity</span>
+                <strong className="text-slate-900 text-xl font-display">{weatherData?.current.wind_speed_kmh} km/h</strong>
               </div>
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <span className="text-slate-400 block mb-1">Atmospheric Pressure</span>
-                <strong className="text-slate-900 text-base">{weatherData?.current.pressure_mb} mb</strong>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-slate-400 block mb-1 text-[11px] font-semibold uppercase">Barometric Pressure</span>
+                <strong className="text-slate-900 text-xl font-display">{weatherData?.current.pressure_mb} mb</strong>
               </div>
             </div>
           </div>

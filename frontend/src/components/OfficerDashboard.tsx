@@ -21,11 +21,16 @@ import {
   Bug,
   ChevronRight,
   RefreshCw,
-  Loader2
+  Loader2,
+  Sparkles,
+  Layers,
+  Activity
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { InsightCard } from './ui/InsightCard';
+import { Badge } from './ui/Badge';
 
 const backendUrl = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001';
 
@@ -35,22 +40,21 @@ const createRiskIcon = (color: string) => {
     className: 'custom-risk-icon',
     html: `<div style="
       background-color: ${color};
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       border: 3px solid white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: pulse 2s infinite;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
     "></div>`,
-    iconSize: [22, 22],
-    iconAnchor: [11, 11]
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
   });
 };
 
 const riskIcons = {
   LOW: createRiskIcon('#10b981'),      // Green
-  MEDIUM: createRiskIcon('#f59e0b'),   // Yellow
-  HIGH: createRiskIcon('#f97316'),     // Amber/Orange
+  MEDIUM: createRiskIcon('#f59e0b'),   // Amber
+  HIGH: createRiskIcon('#f97316'),     // Orange
   CRITICAL: createRiskIcon('#ef4444')  // Red
 };
 
@@ -160,186 +164,167 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-4 py-20 text-center space-y-4">
-        <Loader2 className="w-12 h-12 text-emerald-600 animate-spin mx-auto" />
-        <h3 className="text-xl font-bold text-gray-800">Authenticating Officer Credentials & Regional Telemetry...</h3>
+      <div className="max-w-6xl mx-auto px-4 py-28 text-center space-y-4">
+        <Loader2 className="w-10 h-10 text-indigo-500 animate-spin mx-auto" />
+        <h3 className="text-lg font-bold text-slate-800 font-display">
+          Authenticating Officer Console & Geospatial Boundaries...
+        </h3>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
-      {/* Officer Header Bar */}
-      <div className="bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-900 rounded-3xl p-6 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-emerald-500/20 rounded-2xl border border-emerald-400/30 backdrop-blur-md">
-            <Shield className="w-8 h-8 text-emerald-400" />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      
+      {/* Officer Command Center Header Bar */}
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 bg-indigo-500/20 rounded-2xl border border-indigo-400/30 flex items-center justify-center text-indigo-400 shadow-md">
+            <Shield className="w-6 h-6" />
           </div>
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">
-              👮 Agricultural Officer Command Center
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 text-[10px] font-bold uppercase tracking-wider border border-indigo-500/30 mb-1">
+              <Sparkles className="w-2.5 h-2.5 text-indigo-400" />
+              Administrative Command Center
             </div>
-            <h2 className="text-2xl font-black tracking-tight">Regional Farm Administration & GIS Dashboard</h2>
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight font-display">
+              Regional Farm Administration & GIS Telemetry
+            </h2>
           </div>
         </div>
 
         <button
+          type="button"
           onClick={onLogout}
-          className="px-4 py-2.5 bg-rose-600/90 hover:bg-rose-600 text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center gap-2 border border-rose-500/30"
+          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-rose-300 hover:text-rose-200 font-semibold text-xs rounded-xl border border-white/10 transition-colors flex items-center gap-2 cursor-pointer"
         >
-          <LogOut className="w-4 h-4" /> Officer Logout
+          <LogOut className="w-4 h-4" />
+          <span>Exit Officer Console</span>
         </button>
       </div>
 
       {error && (
-        <div className="bg-rose-50 border border-rose-200 text-rose-800 p-4 rounded-2xl text-sm font-bold flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
-          {error}
+        <div className="bg-rose-50 border border-rose-200 text-rose-800 p-4 rounded-2xl text-xs font-semibold flex items-center gap-2">
+          <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+          <span>{error}</span>
         </div>
       )}
 
-      {/* 8 Summary KPI Cards Grid */}
+      {/* KPI Insight Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {/* KPI 1: Farmers */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>REGISTERED FARMERS</span>
-            <Users className="w-4 h-4 text-emerald-600" />
-          </div>
-          <div className="text-2xl font-black text-gray-900">{metrics?.totalFarmers || farms.length}</div>
-          <div className="text-[11px] text-emerald-700 font-semibold">Active Agriculture Accounts</div>
-        </div>
+        <InsightCard
+          title="Registered Farmers"
+          value={metrics?.totalFarmers || farms.length}
+          subtitle="Active agriculture profiles"
+          icon={<Users className="w-5 h-5 text-indigo-500" />}
+          iconBg="bg-indigo-50 border-indigo-200/60"
+        />
 
-        {/* KPI 2: Total Farms */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>TOTAL FARMS / FIELDS</span>
-            <MapPin className="w-4 h-4 text-blue-600" />
-          </div>
-          <div className="text-2xl font-black text-gray-900">{metrics?.totalFarms || farms.length}</div>
-          <div className="text-[11px] text-blue-700 font-semibold">GIS Monitored Plots</div>
-        </div>
+        <InsightCard
+          title="Total Monitored Fields"
+          value={metrics?.totalFarms || farms.length}
+          subtitle="GIS bound plots"
+          icon={<MapPin className="w-5 h-5 text-sky-500" />}
+          iconBg="bg-sky-50 border-sky-200/60"
+        />
 
-        {/* KPI 3: Cultivated Area */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>CULTIVATED AREA</span>
-            <Sprout className="w-4 h-4 text-purple-600" />
-          </div>
-          <div className="text-2xl font-black text-gray-900">{metrics?.totalAreaHectares || 18.2} <span className="text-xs text-gray-500 font-normal">Ha</span></div>
-          <div className="text-[11px] text-purple-700 font-semibold">Across Regional Districts</div>
-        </div>
+        <InsightCard
+          title="Cultivated Area"
+          value={`${metrics?.totalAreaHectares || 18.2} Ha`}
+          subtitle="Across monitored districts"
+          icon={<Sprout className="w-5 h-5 text-emerald-500" />}
+          iconBg="bg-emerald-50 border-emerald-200/60"
+        />
 
-        {/* KPI 4: Avg Yield */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>AVG PREDICTED YIELD</span>
-            <TrendingUp className="w-4 h-4 text-emerald-600" />
-          </div>
-          <div className="text-2xl font-black text-emerald-700">{metrics?.avgPredictedYield || 4.9} <span className="text-xs text-gray-500 font-normal">t/ha</span></div>
-          <div className="text-[11px] text-emerald-600 font-semibold">AI Benchmark Score</div>
-        </div>
+        <InsightCard
+          title="Avg Yield Forecast"
+          value={`${metrics?.avgPredictedYield || 4.9} t/ha`}
+          subtitle="ML regional benchmark"
+          icon={<TrendingUp className="w-5 h-5 text-emerald-600" />}
+          iconBg="bg-emerald-50 border-emerald-200/60"
+        />
 
-        {/* KPI 5: High Risk Farms */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>HIGH PEST/DISEASE RISK</span>
-            <AlertTriangle className="w-4 h-4 text-rose-600" />
-          </div>
-          <div className="text-2xl font-black text-rose-600">{metrics?.highRiskFarmsCount || 2} <span className="text-xs text-gray-500 font-normal">Plots</span></div>
-          <div className="text-[11px] text-rose-700 font-semibold">Requires Officer Advisory</div>
-        </div>
+        <InsightCard
+          title="Pathogen Risk Flags"
+          value={`${metrics?.highRiskFarmsCount || 2} Plots`}
+          subtitle="Requires advisory action"
+          icon={<AlertTriangle className="w-5 h-5 text-rose-500" />}
+          iconBg="bg-rose-50 border-rose-200/60"
+        />
 
-        {/* KPI 6: Upcoming Harvests */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>UPCOMING HARVESTS</span>
-            <Calendar className="w-4 h-4 text-amber-600" />
-          </div>
-          <div className="text-2xl font-black text-amber-700">{metrics?.upcomingHarvestsCount || 5} <span className="text-xs text-gray-500 font-normal">Plots</span></div>
-          <div className="text-[11px] text-amber-800 font-semibold">Next 30-45 Days</div>
-        </div>
+        <InsightCard
+          title="Upcoming Harvests"
+          value={`${metrics?.upcomingHarvestsCount || 5} Plots`}
+          subtitle="Next 30-45 Days"
+          icon={<Calendar className="w-5 h-5 text-amber-500" />}
+          iconBg="bg-amber-50 border-amber-200/60"
+        />
 
-        {/* KPI 7: Crop Distribution */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>DOMINANT CROP</span>
-            <Sprout className="w-4 h-4 text-teal-600" />
-          </div>
-          <div className="text-lg font-black text-gray-900 truncate">Rice (Paddy)</div>
-          <div className="text-[11px] text-teal-700 font-semibold">60% Regional Coverage</div>
-        </div>
+        <InsightCard
+          title="Dominant Crop"
+          value="Rice (Paddy)"
+          subtitle="60% regional coverage"
+          icon={<Sprout className="w-5 h-5 text-teal-500" />}
+          iconBg="bg-teal-50 border-teal-200/60"
+        />
 
-        {/* KPI 8: Active Alerts */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-md space-y-1">
-          <div className="flex items-center justify-between text-xs text-gray-500 font-bold">
-            <span>ACTIVE EMERGENCY ALERTS</span>
-            <Bell className="w-4 h-4 text-rose-600 animate-bounce" />
-          </div>
-          <div className="text-2xl font-black text-rose-700">{metrics?.activeAlertsCount || 4}</div>
-          <div className="text-[11px] text-rose-800 font-semibold">Weather & Pest Flags</div>
-        </div>
+        <InsightCard
+          title="Emergency Alerts"
+          value={metrics?.activeAlertsCount || 4}
+          subtitle="Telemetry triggers active"
+          icon={<Bell className="w-5 h-5 text-rose-600" />}
+          iconBg="bg-rose-50 border-rose-200/60"
+        />
       </div>
 
-      {/* Interactive GIS Section with Risk Color-Coded Markers */}
-      <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-xl space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+      {/* GIS Leaflet Map Section */}
+      <div className="saas-card p-6 space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <h3 className="font-black text-gray-900 text-lg flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-emerald-600" /> Regional GIS Interactive Field Map
+            <h3 className="font-bold text-slate-900 text-base flex items-center gap-2 font-display">
+              <MapPin className="w-4 h-4 text-emerald-600" />
+              Regional GIS Interactive Field Map
             </h3>
-            <p className="text-xs text-gray-500 font-medium">Color-coded boundary polygons & disease risk markers across registered farms</p>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Risk color-coded markers and boundary polygons for monitored acreages
+            </p>
           </div>
 
-          {/* Map Risk Filters */}
+          {/* Map Filters */}
           <div className="flex flex-wrap items-center gap-2">
-            {/* Filter by Crop */}
             <select
               value={selectedCrop}
               onChange={(e) => setSelectedCrop(e.target.value)}
-              className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-gray-700 outline-none cursor-pointer"
+              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 outline-none cursor-pointer"
             >
               <option value="all">All Crops</option>
-              <option value="rice">Rice (Paddy)</option>
-              <option value="coconut">Coconut</option>
-              <option value="cardamom">Cardamom</option>
+              <option value="Rice">Rice</option>
+              <option value="Wheat">Wheat</option>
+              <option value="Maize">Maize</option>
+              <option value="Cotton">Cotton</option>
             </select>
 
-            {/* Filter by District */}
-            <select
-              value={selectedDistrict}
-              onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-gray-700 outline-none cursor-pointer"
-            >
-              <option value="all">All Districts</option>
-              <option value="Ernakulam">Ernakulam</option>
-              <option value="Alappuzha">Alappuzha</option>
-              <option value="Idukki">Idukki</option>
-              <option value="Palakkad">Palakkad</option>
-              <option value="Thrissur">Thrissur</option>
-            </select>
-
-            {/* Filter by Risk Level */}
             <select
               value={selectedRisk}
               onChange={(e) => setSelectedRisk(e.target.value)}
-              className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-gray-700 outline-none cursor-pointer"
+              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 outline-none cursor-pointer"
             >
               <option value="all">All Risk Levels</option>
-              <option value="LOW">🟢 Low Risk</option>
-              <option value="MEDIUM">🟡 Medium Risk</option>
-              <option value="HIGH">🟠 High Risk</option>
-              <option value="CRITICAL">🔴 Critical Risk</option>
+              <option value="LOW">Low Risk</option>
+              <option value="MEDIUM">Medium Risk</option>
+              <option value="HIGH">High Risk</option>
+              <option value="CRITICAL">Critical Risk</option>
             </select>
           </div>
         </div>
 
-        {/* Leaflet Map Rendering */}
-        <div className="h-[420px] w-full rounded-2xl overflow-hidden border border-gray-200 shadow-inner relative">
+        {/* Leaflet Map Frame */}
+        <div className="h-[420px] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-inner z-0 relative">
           <MapContainer
-            center={[10.0261, 76.3105]}
+            center={[28.6692, 77.4538]}
             zoom={8}
-            style={{ height: '100%', width: '100%' }}
+            scrollWheelZoom={false}
+            className="h-full w-full"
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -356,7 +341,6 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
 
               return (
                 <React.Fragment key={f.farm_id}>
-                  {/* Boundary Polygon */}
                   {boundary.length > 2 && (
                     <Polygon
                       positions={boundary}
@@ -369,13 +353,12 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
                     />
                   )}
 
-                  {/* Risk Marker */}
                   <Marker position={[f.latitude, f.longitude]} icon={icon}>
                     <Popup>
                       <div className="p-1 space-y-2 max-w-xs font-sans text-xs">
                         <div className="flex items-center justify-between border-b pb-1">
-                          <span className="font-extrabold text-gray-900">{f.farm_name}</span>
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
+                          <span className="font-bold text-slate-900">{f.farm_name}</span>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                             f.risk_level === 'CRITICAL' ? 'bg-rose-100 text-rose-800' :
                             f.risk_level === 'HIGH' ? 'bg-amber-100 text-amber-800' :
                             f.risk_level === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800' : 'bg-emerald-100 text-emerald-800'
@@ -383,14 +366,16 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
                             {f.risk_level} RISK
                           </span>
                         </div>
-                        <p><span className="font-bold text-gray-700">Farmer:</span> {f.farmer_name}</p>
-                        <p><span className="font-bold text-gray-700">Crop:</span> {f.crop} ({f.area_hectares} Ha)</p>
-                        <p><span className="font-bold text-gray-700">Predicted Yield:</span> {f.predicted_yield_tha} tons/ha</p>
+                        <p><span className="font-semibold text-slate-600">Farmer:</span> {f.farmer_name}</p>
+                        <p><span className="font-semibold text-slate-600">Crop:</span> {f.crop} ({f.area_hectares} Ha)</p>
+                        <p><span className="font-semibold text-slate-600">Predicted Yield:</span> {f.predicted_yield_tha} t/ha</p>
                         <button
+                          type="button"
                           onClick={() => setInspectingFarm(f)}
-                          className="w-full mt-2 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-lg shadow transition-all flex items-center justify-center gap-1"
+                          className="w-full mt-2 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer"
                         >
-                          <Eye className="w-3.5 h-3.5" /> Inspect Farm Telemetry
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Inspect Farm Telemetry</span>
                         </button>
                       </div>
                     </Popup>
@@ -402,78 +387,88 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
         </div>
       </div>
 
-      {/* Searchable / Filterable Farmers & Farms Table */}
-      <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-xl space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+      {/* Directory Table */}
+      <div className="saas-card p-6 space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <h3 className="font-black text-gray-900 text-lg flex items-center gap-2">
-              <Users className="w-5 h-5 text-emerald-600" /> Monitored Farms & Farmers Directory
+            <h3 className="font-bold text-slate-900 text-base flex items-center gap-2 font-display">
+              <Users className="w-4 h-4 text-emerald-600" />
+              Monitored Farms & Farmers Directory
             </h3>
-            <p className="text-xs text-gray-500 font-medium">Search and inspect detailed agricultural telemetry for registered farmers</p>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Search and inspect detailed agricultural telemetry for registered farmers
+            </p>
           </div>
 
-          {/* Search Box */}
           <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
               type="text"
               placeholder="Search farmer, farm, crop or district..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-medium text-gray-900 outline-none focus:border-emerald-500 transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 outline-none focus:border-emerald-500 focus:bg-white transition-all"
             />
           </div>
         </div>
 
-        {/* Table Rendering */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-gray-700">
-            <thead className="bg-gray-50 text-gray-500 font-extrabold uppercase text-[11px] border-b border-gray-200">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50/80 text-slate-500 font-semibold uppercase text-[11px] border-b border-slate-200">
               <tr>
                 <th className="p-3">Farmer & Contact</th>
-                <th className="p-3">Farm Name & Location</th>
+                <th className="p-3">Farm & Region</th>
                 <th className="p-3">Crop Variety</th>
                 <th className="p-3">Area (Ha)</th>
-                <th className="p-3">Predicted Yield</th>
-                <th className="p-3">Disease Risk</th>
-                <th className="p-3">Harvest Date</th>
+                <th className="p-3">Yield Forecast</th>
+                <th className="p-3">Pathogen Risk</th>
+                <th className="p-3">Harvest Target</th>
                 <th className="p-3 text-center">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-100">
               {filteredFarms.map((f) => (
-                <tr key={f.farm_id} className="hover:bg-emerald-50/40 transition-colors">
+                <tr key={f.farm_id} className="hover:bg-slate-50/80 transition-colors">
                   <td className="p-3">
-                    <p className="font-extrabold text-gray-900">{f.farmer_name}</p>
-                    <p className="text-[11px] text-gray-500 font-mono">{f.farmer_phone}</p>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-700 text-xs shrink-0">
+                        {f.farmer_name[0]}
+                      </div>
+                      <div>
+                        <p className="font-bold text-slate-900">{f.farmer_name}</p>
+                        <p className="text-[11px] text-slate-400 font-mono">{f.farmer_phone}</p>
+                      </div>
+                    </div>
                   </td>
                   <td className="p-3">
-                    <p className="font-bold text-gray-800">{f.farm_name}</p>
-                    <p className="text-[11px] text-gray-500">{f.district}, {f.state}</p>
+                    <p className="font-semibold text-slate-800">{f.farm_name}</p>
+                    <p className="text-[11px] text-slate-500">{f.district}, {f.state}</p>
                   </td>
                   <td className="p-3">
-                    <span className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-800 font-extrabold border border-emerald-200">
-                      🌾 {f.crop}
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200/80 text-xs">
+                      {f.crop}
                     </span>
                   </td>
-                  <td className="p-3 font-bold text-gray-800">{f.area_hectares} Ha</td>
-                  <td className="p-3 font-extrabold text-emerald-700">{f.predicted_yield_tha} t/ha</td>
+                  <td className="p-3 font-semibold text-slate-800">{f.area_hectares} Ha</td>
+                  <td className="p-3 font-bold text-slate-900">{f.predicted_yield_tha} t/ha</td>
                   <td className="p-3">
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-black ${
-                      f.risk_level === 'CRITICAL' ? 'bg-rose-100 text-rose-800 border border-rose-300' :
-                      f.risk_level === 'HIGH' ? 'bg-amber-100 text-amber-800 border border-amber-300' :
-                      f.risk_level === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800 border border-yellow-300' : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${
+                      f.risk_level === 'CRITICAL' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                      f.risk_level === 'HIGH' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                      f.risk_level === 'MEDIUM' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
                     }`}>
                       {f.risk_level} ({f.risk_score}%)
                     </span>
                   </td>
-                  <td className="p-3 font-medium text-gray-700">{f.expected_harvest_date}</td>
+                  <td className="p-3 font-medium text-slate-600">{f.expected_harvest_date}</td>
                   <td className="p-3 text-center">
                     <button
+                      type="button"
                       onClick={() => setInspectingFarm(f)}
-                      className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] rounded-lg shadow transition-all flex items-center gap-1 mx-auto"
+                      className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1 mx-auto cursor-pointer"
                     >
-                      <Eye className="w-3.5 h-3.5" /> Inspect
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Inspect</span>
                     </button>
                   </td>
                 </tr>
@@ -483,97 +478,101 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
         </div>
       </div>
 
-      {/* Farm Telemetry Detail Modal Drawer */}
+      {/* Farm Inspection Modal */}
       {inspectingFarm && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-3xl w-full p-6 space-y-6 shadow-2xl relative border border-gray-100">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-7 space-y-6 shadow-2xl relative border border-slate-200 animate-fade-in">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">OFFICER INSPECTION TELEMETRY</span>
-                <h3 className="text-xl font-black text-gray-900">{inspectingFarm.farm_name}</h3>
-                <p className="text-xs text-gray-500 font-medium">Farmer: {inspectingFarm.farmer_name} ({inspectingFarm.farmer_phone})</p>
+                <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">
+                  OFFICER INSPECTION TELEMETRY
+                </span>
+                <h3 className="text-xl font-bold text-slate-900 font-display">{inspectingFarm.farm_name}</h3>
+                <p className="text-xs text-slate-500">Farmer: {inspectingFarm.farmer_name} ({inspectingFarm.farmer_phone})</p>
               </div>
 
               <button
+                type="button"
                 onClick={() => setInspectingFarm(null)}
-                className="p-2 hover:bg-gray-100 rounded-full text-gray-400 hover:text-gray-600 transition-all"
+                className="p-2 hover:bg-slate-100 rounded-full text-slate-400 hover:text-slate-600 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Telemetry Grid */}
+            {/* Telemetry 4-Box Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              {/* Box 1: Location & Coordinates */}
-              <div className="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-1">
-                <h4 className="font-bold text-emerald-900 text-sm flex items-center gap-1.5">
+              <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100 space-y-1.5">
+                <h4 className="font-bold text-emerald-900 text-sm flex items-center gap-1.5 font-display">
                   <MapPin className="w-4 h-4 text-emerald-600" /> Farm Identity & Location
                 </h4>
-                <p><span className="font-bold text-gray-700">Location:</span> {inspectingFarm.location_name}</p>
-                <p><span className="font-bold text-gray-700">GIS Coordinates:</span> {inspectingFarm.latitude.toFixed(4)}, {inspectingFarm.longitude.toFixed(4)}</p>
-                <p><span className="font-bold text-gray-700">Crop & Area:</span> {inspectingFarm.crop} ({inspectingFarm.area_hectares} Ha)</p>
+                <p><span className="font-semibold text-slate-700">Location:</span> {inspectingFarm.location_name}</p>
+                <p><span className="font-semibold text-slate-700">GIS Coordinates:</span> {inspectingFarm.latitude.toFixed(4)}, {inspectingFarm.longitude.toFixed(4)}</p>
+                <p><span className="font-semibold text-slate-700">Crop & Area:</span> {inspectingFarm.crop} ({inspectingFarm.area_hectares} Ha)</p>
               </div>
 
-              {/* Box 2: Weather & Growth Stage */}
-              <div className="p-4 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-1">
-                <h4 className="font-bold text-blue-900 text-sm flex items-center gap-1.5">
-                  <CloudSun className="w-4 h-4 text-blue-600" /> Weather & Growth Progress
+              <div className="p-4 bg-sky-50/60 rounded-2xl border border-sky-100 space-y-1.5">
+                <h4 className="font-bold text-sky-900 text-sm flex items-center gap-1.5 font-display">
+                  <CloudSun className="w-4 h-4 text-sky-600" /> Weather & Growth Stage
                 </h4>
-                <p><span className="font-bold text-gray-700">Weather:</span> {inspectingFarm.weather_temp_c}°C ({inspectingFarm.weather_description})</p>
-                <p><span className="font-bold text-gray-700">Growth Stage:</span> {inspectingFarm.growth_stage} ({inspectingFarm.current_gdd} GDD)</p>
-                <p><span className="font-bold text-gray-700">Expected Harvest:</span> {inspectingFarm.expected_harvest_date}</p>
+                <p><span className="font-semibold text-slate-700">Weather:</span> {inspectingFarm.weather_temp_c}°C ({inspectingFarm.weather_description})</p>
+                <p><span className="font-semibold text-slate-700">Growth Stage:</span> {inspectingFarm.growth_stage} ({inspectingFarm.current_gdd} GDD)</p>
+                <p><span className="font-semibold text-slate-700">Expected Harvest:</span> {inspectingFarm.expected_harvest_date}</p>
               </div>
 
-              {/* Box 3: Soil Health & Nutrients */}
-              <div className="p-4 bg-purple-50/50 rounded-2xl border border-purple-100 space-y-1">
-                <h4 className="font-bold text-purple-900 text-sm flex items-center gap-1.5">
-                  <FlaskConical className="w-4 h-4 text-purple-600" /> Soil Health Analysis
+              <div className="p-4 bg-purple-50/60 rounded-2xl border border-purple-100 space-y-1.5">
+                <h4 className="font-bold text-purple-900 text-sm flex items-center gap-1.5 font-display">
+                  <FlaskConical className="w-4 h-4 text-purple-600" /> Soil Health Horizon
                 </h4>
-                <p><span className="font-bold text-gray-700">Soil Type:</span> {inspectingFarm.soil_type} (pH: {inspectingFarm.ph})</p>
-                <p><span className="font-bold text-gray-700">Soil Moisture:</span> {inspectingFarm.soil_moisture}%</p>
-                <p><span className="font-bold text-gray-700">NPK Levels:</span> N: {inspectingFarm.nitrogen}%, P: {inspectingFarm.phosphorus}%, K: {inspectingFarm.potassium}%</p>
+                <p><span className="font-semibold text-slate-700">Soil Type:</span> {inspectingFarm.soil_type} (pH: {inspectingFarm.ph})</p>
+                <p><span className="font-semibold text-slate-700">Soil Moisture:</span> {inspectingFarm.soil_moisture}%</p>
+                <p><span className="font-semibold text-slate-700">NPK Levels:</span> N: {inspectingFarm.nitrogen}%, P: {inspectingFarm.phosphorus}%, K: {inspectingFarm.potassium}%</p>
               </div>
 
-              {/* Box 4: AI Yield & Disease Assessment */}
-              <div className="p-4 bg-rose-50/50 rounded-2xl border border-rose-100 space-y-1">
-                <h4 className="font-bold text-rose-900 text-sm flex items-center gap-1.5">
+              <div className="p-4 bg-rose-50/60 rounded-2xl border border-rose-100 space-y-1.5">
+                <h4 className="font-bold text-rose-900 text-sm flex items-center gap-1.5 font-display">
                   <Bug className="w-4 h-4 text-rose-600" /> AI Yield & Risk Assessment
                 </h4>
-                <p><span className="font-bold text-gray-700">Predicted Yield:</span> {inspectingFarm.predicted_yield_tha} tons/ha ({inspectingFarm.expected_production_tons} Tons)</p>
-                <p><span className="font-bold text-gray-700">Risk Assessment:</span> <span className="font-black text-rose-700">{inspectingFarm.risk_level} ({inspectingFarm.risk_score}%)</span></p>
-                <p><span className="font-bold text-gray-700">Last Telemetry Sync:</span> {new Date(inspectingFarm.last_updated).toLocaleString()}</p>
+                <p><span className="font-semibold text-slate-700">Predicted Yield:</span> {inspectingFarm.predicted_yield_tha} t/ha ({inspectingFarm.expected_production_tons} Tons)</p>
+                <p><span className="font-semibold text-slate-700">Risk Assessment:</span> <span className="font-bold text-rose-700">{inspectingFarm.risk_level} ({inspectingFarm.risk_score}%)</span></p>
+                <p><span className="font-semibold text-slate-700">Last Telemetry Sync:</span> {new Date(inspectingFarm.last_updated).toLocaleString()}</p>
               </div>
             </div>
 
-            {/* Officer Action: Broadcast Advisory to Farmer */}
-            <div className="border-t border-gray-100 pt-4 space-y-2">
-              <h4 className="font-bold text-gray-900 text-xs">Broadcast Officer Advisory / Emergency Alert to Farmer</h4>
+            {/* Advisory Box */}
+            <div className="border-t border-slate-100 pt-4 space-y-2.5">
+              <h4 className="font-bold text-slate-900 text-xs font-display">
+                Dispatch Official Advisory / Protocol to Farmer
+              </h4>
               <textarea
                 rows={3}
-                placeholder={`Type official recommendation or pest advisory for ${inspectingFarm.farmer_name}...`}
+                placeholder={`Type official recommendations for ${inspectingFarm.farmer_name}...`}
                 value={advisoryNote}
                 onChange={(e) => setAdvisoryNote(e.target.value)}
-                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-900 outline-none focus:border-emerald-500 transition-all"
+                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 outline-none focus:border-emerald-500 focus:bg-white transition-all"
               />
               <div className="flex items-center justify-between">
                 {advisorySentSuccess && (
-                  <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
-                    <CheckCircle className="w-4 h-4 text-emerald-600" /> Advisory dispatched to farmer's portal & SMS!
+                  <span className="text-xs font-semibold text-emerald-700 flex items-center gap-1.5">
+                    <CheckCircle className="w-4 h-4 text-emerald-600" />
+                    Advisory successfully dispatched to farmer's portal & SMS!
                   </span>
                 )}
                 <button
+                  type="button"
                   onClick={handleSendAdvisory}
                   disabled={!advisoryNote.trim()}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-extrabold text-xs rounded-xl shadow transition-all flex items-center gap-2 ml-auto"
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-semibold text-xs rounded-xl shadow-xs transition-all flex items-center gap-2 ml-auto cursor-pointer"
                 >
-                  <Send className="w-3.5 h-3.5" /> Dispatch Advisory
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Dispatch Advisory</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 };

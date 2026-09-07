@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import { motion } from "framer-motion"
-import { Mail, Lock, Eye, EyeOff, User, ArrowRight } from 'lucide-react'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Lock, Eye, EyeOff, User, ArrowRight, Sprout, Sparkles } from 'lucide-react';
 
 interface LoginProps {
   onLogin?: (email: string, password: string) => Promise<void>;
@@ -9,202 +9,175 @@ interface LoginProps {
 }
 
 export default function Login({ onLogin, onGuestLogin, onSwitchToSignup }: LoginProps = {}) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
       if (onLogin) {
         await onLogin(email, password);
       }
     } catch (err: any) {
-      setError(err.message || "Login failed. Please try again.");
+      setError(err.message || "Login failed. Please check credentials.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleGuestLogin = (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    console.log("Guest login triggered in Login.tsx");
     if (onGuestLogin) {
       onGuestLogin();
-    } else {
-      console.log("Continue as guest");
     }
-  }
+  };
 
   const handleSwitchToSignup = () => {
     if (onSwitchToSignup) {
       onSwitchToSignup();
-    } else {
-      console.log("Switch to signup");
     }
-  }
+  };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 relative"
-      style={{
-        backgroundImage: "url(/agri-background.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/40"></div>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden select-none">
+      {/* Aurora Ambient Background */}
+      <div className="aurora-glow -top-24 -left-24 bg-emerald-600/30" />
+      <div className="aurora-glow -bottom-24 -right-24 bg-amber-600/20" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="bg-black/30 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/30">
+        <div className="glass-action-card p-8 sm:p-9 shadow-2xl">
           {/* Header */}
-          <div className="text-center mb-8">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg border border-white/30"
-            >
-              <User className="w-8 h-8 text-white" />
-            </motion.div>
-            <h1
-              className="text-2xl font-bold text-white mb-2 drop-shadow-lg"
-              style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.8)" }}
-            >
-              Welcome Back
+          <div className="text-center mb-7">
+            <div className="w-13 h-13 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-600/30 border border-emerald-300/40">
+              <Sprout className="w-6 h-6 text-slate-950" />
+            </div>
+            <h1 className="text-2xl font-bold text-white tracking-tight font-display mb-1.5">
+              Welcome Back to AgriSense
             </h1>
-            <p className="text-white/90 drop-shadow" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}>
-              Sign in to your AgriSense account
+            <p className="text-xs sm:text-sm text-slate-400">
+              Precision Agronomic Intelligence & Farm Management
             </p>
           </div>
 
           {/* Error Message */}
           {error && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-red-500/30 backdrop-blur-sm border border-red-300/50 text-white px-4 py-3 rounded-xl mb-6"
+              className="bg-rose-500/15 border border-rose-500/30 text-rose-300 px-3.5 py-2.5 rounded-xl mb-5 text-xs flex items-center gap-2"
             >
-              {error}
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+              <span>{error}</span>
             </motion.div>
           )}
 
           {/* Login Form */}
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label
-                className="block text-sm font-medium text-white mb-2 drop-shadow"
-                style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}
-              >
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-600" />
+              <div className="relative flex items-center">
+                <Mail className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50 outline-none transition-all text-black placeholder-gray-500"
-                  placeholder="Enter your email"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                  placeholder="name@agrisense.farm"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label
-                className="block text-sm font-medium text-white mb-2 drop-shadow"
-                style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}
-              >
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
                 Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-600" />
+              <div className="relative flex items-center">
+                <Lock className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50 outline-none transition-all text-black placeholder-gray-500"
-                  placeholder="Enter your password"
+                  className="w-full pl-10 pr-11 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                  placeholder="••••••••"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-600 hover:text-gray-800 transition-colors"
+                  className="absolute right-3.5 text-slate-400 hover:text-slate-200 transition-colors p-1"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            {/* Submit Button */}
+            <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600/90 backdrop-blur-sm hover:bg-green-700/90 text-white py-3 rounded-xl font-medium shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border border-green-500/50"
+              className="w-full h-12 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-bold text-sm tracking-wide shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  Sign In
+                  <span>Sign In to Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
-            </motion.button>
+            </button>
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-px bg-white/30"></div>
-            <span className="text-sm text-white/90" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}>
-              or
+          <div className="relative my-6 text-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-white/10" />
+            </div>
+            <span className="relative px-3 bg-slate-950 text-xs text-slate-400 uppercase tracking-wider">
+              Or Explore Instantly
             </span>
-            <div className="flex-1 h-px bg-white/30"></div>
           </div>
 
-          {/* Guest Login */}
-          <motion.button
+          {/* Guest Access CTA */}
+          <button
             type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
             onClick={handleGuestLogin}
-            className="w-full bg-blue-600/90 backdrop-blur-sm hover:bg-blue-700/90 text-white py-3 rounded-xl font-medium shadow-lg transition-all flex items-center justify-center gap-2 border border-blue-500/50 cursor-pointer"
+            className="w-full h-11 bg-slate-800/80 hover:bg-slate-700 border border-white/10 hover:border-white/20 text-slate-200 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            Continue as Guest
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
+            <User className="w-4 h-4 text-emerald-400" />
+            <span>Continue as Guest Farmer</span>
+          </button>
 
           {/* Switch to Signup */}
-          <div className="text-center mt-6">
-            <p className="text-white/90" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}>
-              Don't have an account?{" "}
-              <button
-                onClick={handleSwitchToSignup}
-                className="text-green-300 hover:text-green-200 font-medium transition-colors"
-                style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}
-              >
-                Sign up
-              </button>
-            </p>
+          <div className="text-center mt-6 text-xs text-slate-400">
+            <span>Don't have an account yet? </span>
+            <button
+              type="button"
+              onClick={handleSwitchToSignup}
+              className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors cursor-pointer"
+            >
+              Sign up now
+            </button>
           </div>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

@@ -18,11 +18,12 @@ import {
   ChevronDown,
   Menu,
   X,
-  Layers,
-  Wrench,
   Activity,
-  ClipboardList
+  Wrench,
+  Sparkles,
+  Layers
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 interface NavbarProps {
@@ -44,24 +45,33 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   
-  const [farmDropdownOpen, setFarmDropdownOpen] = useState(false);
-  const [monitorDropdownOpen, setMonitorDropdownOpen] = useState(false);
-  const [opsDropdownOpen, setOpsDropdownOpen] = useState(false);
-  const [intelDropdownOpen, setIntelDropdownOpen] = useState(false);
+  // Dropdown states
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  const farmRef = useRef<HTMLDivElement>(null);
-  const monitorRef = useRef<HTMLDivElement>(null);
-  const opsRef = useRef<HTMLDivElement>(null);
-  const intelRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  // Scroll listener for glass elevation
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (farmRef.current && !farmRef.current.contains(event.target as Node)) setFarmDropdownOpen(false);
-      if (monitorRef.current && !monitorRef.current.contains(event.target as Node)) setMonitorDropdownOpen(false);
-      if (opsRef.current && !opsRef.current.contains(event.target as Node)) setOpsDropdownOpen(false);
-      if (intelRef.current && !intelRef.current.contains(event.target as Node)) setIntelDropdownOpen(false);
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -72,327 +82,242 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isOpsActive = ['inventory', 'harvest'].includes(currentView);
   const isIntelActive = ['yield', 'prices', 'chat'].includes(currentView);
 
+  const navSections = [
+    {
+      id: 'farm',
+      label: 'Workspace',
+      icon: <Sprout className="w-4 h-4" />,
+      isActive: isFarmActive,
+      items: [
+        { id: 'home', label: 'Field Setup & Entry', sub: 'Coordinates & crop parameters', icon: <Activity className="w-4 h-4 text-emerald-400" /> },
+        { id: 'dashboard', label: 'Agronomic Overview', sub: 'Telemetry & operations summary', icon: <BarChart3 className="w-4 h-4 text-emerald-400" /> },
+        { id: 'gis', label: 'GIS Boundary Map', sub: 'Boundary polygons & coordinates', icon: <MapPin className="w-4 h-4 text-emerald-400" /> },
+        { id: 'analytics', label: 'Farm Analytics', sub: 'Historical & sensory performance', icon: <Layers className="w-4 h-4 text-emerald-400" /> },
+      ]
+    },
+    {
+      id: 'monitor',
+      label: 'Monitoring',
+      icon: <CloudSun className="w-4 h-4" />,
+      isActive: isMonitorActive,
+      items: [
+        { id: 'weather', label: 'Weather Telemetry', sub: 'Hyperlocal forecast & precip', icon: <CloudSun className="w-4 h-4 text-sky-400" /> },
+        { id: 'soil', label: 'Soil Horizon & NPK', sub: 'Moisture, pH & nutrients', icon: <FlaskConical className="w-4 h-4 text-emerald-400" /> },
+        { id: 'disease', label: 'Pathogen & Pest Risk', sub: 'Random Forest risk classifier', icon: <Bug className="w-4 h-4 text-rose-400" /> },
+      ]
+    },
+    {
+      id: 'ops',
+      label: 'Operations',
+      icon: <Wrench className="w-4 h-4" />,
+      isActive: isOpsActive,
+      items: [
+        { id: 'inventory', label: 'Inventory Tracker', sub: 'Stock, fertilizers & pesticides', icon: <Pill className="w-4 h-4 text-purple-400" /> },
+        { id: 'harvest', label: 'Harvest Planning', sub: 'Schedules, logistics & storage', icon: <Tractor className="w-4 h-4 text-amber-400" /> },
+      ]
+    },
+    {
+      id: 'intel',
+      label: 'Intelligence',
+      icon: <Brain className="w-4 h-4" />,
+      isActive: isIntelActive,
+      items: [
+        { id: 'yield', label: 'Yield Prediction ML', sub: 'Multi-variable tonnage forecast', icon: <Brain className="w-4 h-4 text-emerald-400" /> },
+        { id: 'prices', label: 'Mandi Market Rates', sub: 'Live commodity price tracking', icon: <IndianRupee className="w-4 h-4 text-emerald-400" /> },
+        { id: 'chat', label: 'Agronomist Advisor', sub: 'Bilingual AI voice & chat assistant', icon: <MessageSquare className="w-4 h-4 text-sky-400" /> },
+      ]
+    }
+  ];
+
   return (
-    <header className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800 text-white shadow-lg backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-slate-950/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-slate-950/40 py-2.5'
+          : 'bg-slate-950/95 backdrop-blur-md border-b border-white/5 py-3'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between">
           
-          {/* Left: Brand Logo & Title */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onSelectView('home')}>
-            <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center shadow-md">
+          {/* Brand Logo & Wordmark */}
+          <div
+            className="flex items-center gap-3 cursor-pointer group select-none"
+            onClick={() => onSelectView('home')}
+          >
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-emerald-300/30 group-hover:scale-105 transition-transform duration-200">
               <Sprout className="w-5 h-5 text-slate-950" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-lg font-bold tracking-tight text-white">AgriSense</span>
-                <span className="px-1.5 py-0.2 text-[10px] font-semibold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded">
-                  Agronomic Platform
+              <div className="flex items-center gap-2">
+                <span className="text-base font-bold tracking-tight text-white font-display">
+                  Agri<span className="text-emerald-400">Sense</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-full">
+                  <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
+                  SaaS
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Desktop Navigation Workflow Dropdowns */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Sliding Nav - Linear Style */}
+          <nav className="hidden lg:flex items-center bg-slate-900/80 p-1 rounded-2xl border border-white/10" ref={navRef}>
+            {navSections.map((sec) => {
+              const isOpen = activeDropdown === sec.id;
+              return (
+                <div key={sec.id} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setActiveDropdown(isOpen ? null : sec.id)}
+                    className={`relative px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 select-none cursor-pointer ${
+                      sec.isActive
+                        ? 'text-white bg-emerald-600/30 border border-emerald-500/40 shadow-sm'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className={sec.isActive ? 'text-emerald-400' : 'text-slate-400'}>
+                      {sec.icon}
+                    </span>
+                    <span>{sec.label}</span>
+                    <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-emerald-400' : ''}`} />
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                        transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-0 mt-2 w-64 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-2xl shadow-2xl p-2 space-y-1 z-50"
+                      >
+                        {sec.items.map((item) => {
+                          const isCurrent = currentView === item.id;
+                          return (
+                            <button
+                              key={item.id}
+                              type="button"
+                              onClick={() => {
+                                onSelectView(item.id);
+                                setActiveDropdown(null);
+                              }}
+                              className={`w-full px-3 py-2.5 rounded-xl text-left flex items-start gap-3 transition-colors cursor-pointer ${
+                                isCurrent
+                                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                                  : 'text-slate-200 hover:bg-slate-800/80'
+                              }`}
+                            >
+                              <div className="p-1.5 rounded-lg bg-slate-800 border border-white/5 shrink-0 mt-0.5">
+                                {item.icon}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-xs font-semibold tracking-tight">{item.label}</div>
+                                <div className="text-[11px] text-slate-400 truncate">{item.sub}</div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* Right Utility Section: Alerts + Officer Portal + User Avatar */}
+          <div className="hidden lg:flex items-center gap-3">
             
-            {/* 1. FARM WORKSPACE */}
-            <div className="relative" ref={farmRef}>
-              <button
-                type="button"
-                onClick={() => setFarmDropdownOpen(!farmDropdownOpen)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                  isFarmActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <Sprout className="w-4 h-4 text-emerald-400" />
-                <span>Farm Workspace</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${farmDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {farmDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-1.5 space-y-1 z-50">
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('home'); setFarmDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'home' || currentView === 'dashboard' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <Activity className="w-4 h-4 text-emerald-400" />
-                    <div>
-                      <div className="font-semibold">Farm Overview</div>
-                      <div className="text-[10px] text-slate-400">Operations & attention required</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('gis'); setFarmDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'gis' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <MapPin className="w-4 h-4 text-emerald-400" />
-                    <div>
-                      <div className="font-semibold">Fields & GIS Map</div>
-                      <div className="text-[10px] text-slate-400">Interactive boundary layers</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('analytics'); setFarmDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'analytics' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <BarChart3 className="w-4 h-4 text-blue-400" />
-                    <div>
-                      <div className="font-semibold">Farm Analytics</div>
-                      <div className="text-[10px] text-slate-400">Seasonal trends & PDF report</div>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* 2. MONITOR WORKSPACE */}
-            <div className="relative" ref={monitorRef}>
-              <button
-                type="button"
-                onClick={() => setMonitorDropdownOpen(!monitorDropdownOpen)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                  isMonitorActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <CloudSun className="w-4 h-4 text-teal-400" />
-                <span>Crop Monitoring</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${monitorDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {monitorDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-1.5 space-y-1 z-50">
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('weather'); setMonitorDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'weather' ? 'bg-teal-500/20 text-teal-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <CloudSun className="w-4 h-4 text-teal-400" />
-                    <div>
-                      <div className="font-semibold">Weather & Soil Monitoring</div>
-                      <div className="text-[10px] text-slate-400">Real-time environmental trends</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('soil'); setMonitorDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'soil' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <FlaskConical className="w-4 h-4 text-emerald-400" />
-                    <div>
-                      <div className="font-semibold">Soil Health & NPK</div>
-                      <div className="text-[10px] text-slate-400">Nutrients & pH testing</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('disease'); setMonitorDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'disease' ? 'bg-rose-500/20 text-rose-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <Bug className="w-4 h-4 text-rose-400" />
-                    <div>
-                      <div className="font-semibold">Disease & Pest Incidents</div>
-                      <div className="text-[10px] text-slate-400">Risk tracking & incident management</div>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* 3. OPERATIONS WORKSPACE */}
-            <div className="relative" ref={opsRef}>
-              <button
-                type="button"
-                onClick={() => setOpsDropdownOpen(!opsDropdownOpen)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                  isOpsActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <Wrench className="w-4 h-4 text-amber-400" />
-                <span>Farm Operations</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${opsDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {opsDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-1.5 space-y-1 z-50">
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('inventory'); setOpsDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'inventory' ? 'bg-purple-500/20 text-purple-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <Pill className="w-4 h-4 text-purple-400" />
-                    <div>
-                      <div className="font-semibold">Inventory Tracker</div>
-                      <div className="text-[10px] text-slate-400">Fertilizers & pesticides stock</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('harvest'); setOpsDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'harvest' ? 'bg-amber-500/20 text-amber-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <Tractor className="w-4 h-4 text-amber-400" />
-                    <div>
-                      <div className="font-semibold">Harvest Planning</div>
-                      <div className="text-[10px] text-slate-400">Schedules, labour & storage</div>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* 4. AGRONOMIC INTELLIGENCE WORKSPACE */}
-            <div className="relative" ref={intelRef}>
-              <button
-                type="button"
-                onClick={() => setIntelDropdownOpen(!intelDropdownOpen)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                  isIntelActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <Brain className="w-4 h-4 text-emerald-400" />
-                <span>Agronomic Intelligence</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${intelDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {intelDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-1.5 space-y-1 z-50">
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('yield'); setIntelDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'yield' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <Brain className="w-4 h-4 text-emerald-400" />
-                    <div>
-                      <div className="font-semibold">Yield Prediction</div>
-                      <div className="text-[10px] text-slate-400">ML prediction decision workspace</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('prices'); setIntelDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'prices' ? 'bg-emerald-500/20 text-emerald-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <IndianRupee className="w-4 h-4 text-emerald-400" />
-                    <div>
-                      <div className="font-semibold">Crop Market Prices</div>
-                      <div className="text-[10px] text-slate-400">Mandis rates & revenue calculator</div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { onSelectView('chat'); setIntelDropdownOpen(false); }}
-                    className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center gap-2.5 transition-colors ${
-                      currentView === 'chat' ? 'bg-blue-500/20 text-blue-300 font-semibold' : 'text-slate-200 hover:bg-slate-700'
-                    }`}
-                  >
-                    <MessageSquare className="w-4 h-4 text-blue-400" />
-                    <div>
-                      <div className="font-semibold">Agronomic Advisor</div>
-                      <div className="text-[10px] text-slate-400">Consult advisor assistant</div>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* 5. OFFICER PORTAL */}
+            {/* Officer Portal Button */}
             <button
               type="button"
               onClick={() => onSelectView('officer')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border select-none cursor-pointer ${
                 currentView === 'officer'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-slate-800 text-amber-300 border border-amber-500/30 hover:bg-amber-500/10'
+                  ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-md shadow-amber-500/20'
+                  : 'bg-slate-900/80 text-amber-300 border-amber-500/30 hover:bg-amber-500/10 hover:border-amber-500/50'
               }`}
             >
-              <Shield className="w-4 h-4" />
-              Officer Portal
+              <Shield className="w-3.5 h-3.5" />
+              <span>Officer Portal</span>
             </button>
-          </nav>
 
-          {/* Right Actions: Smart Alerts & User Session */}
-          <div className="hidden lg:flex items-center gap-3">
+            {/* Smart Alerts Center Trigger */}
             <button
               type="button"
               onClick={onOpenAlerts}
-              className="relative px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-300 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5"
-              title="Smart Alerts"
+              className="relative p-2 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 hover:border-white/20 text-slate-200 rounded-xl transition-all select-none cursor-pointer group"
+              title="Smart Telemetry Alerts"
             >
-              <Bell className="w-4 h-4 text-red-400" />
-              <span>Alerts</span>
+              <Bell className="w-4 h-4 group-hover:text-amber-400 transition-colors" />
               {unreadAlertCount > 0 && (
-                <span className="px-1.5 py-0.2 text-[10px] font-bold bg-red-500 text-white rounded-full">
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-rose-600 text-[10px] font-bold text-white shadow-lg animate-pulse">
                   {unreadAlertCount}
                 </span>
               )}
             </button>
 
+            {/* User Profile / Avatar Dropdown */}
             {user && (
-              <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
-                <div className="flex items-center gap-2 px-2.5 py-1 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-200 font-medium">
-                  <User className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="max-w-[100px] truncate">{user.name || user.email || 'Farmer'}</span>
-                </div>
+              <div className="relative" ref={userMenuRef}>
                 <button
                   type="button"
-                  onClick={onLogout}
-                  className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
-                  title="Logout"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 p-1.5 pl-2.5 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 rounded-xl text-xs text-slate-200 transition-all cursor-pointer"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <div className="w-6 h-6 rounded-lg bg-emerald-600/30 border border-emerald-500/50 flex items-center justify-center text-emerald-400 font-bold text-[11px]">
+                    {(user.name || user.email || 'F')[0].toUpperCase()}
+                  </div>
+                  <span className="max-w-[100px] truncate font-medium">{user.name || user.email || 'Farmer'}</span>
+                  <ChevronDown className="w-3 h-3 text-slate-400" />
                 </button>
+
+                <AnimatePresence>
+                  {userMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-52 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-2xl shadow-2xl p-2 z-50"
+                    >
+                      <div className="px-3 py-2 border-b border-slate-800 mb-1">
+                        <p className="text-xs font-semibold text-white truncate">{user.name || 'User'}</p>
+                        <p className="text-[11px] text-slate-400 truncate">{user.email || 'guest@agrisense.farm'}</p>
+                        <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase rounded bg-slate-800 text-emerald-400 border border-emerald-500/20">
+                          {user.role || 'Guest Mode'}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUserMenuOpen(false);
+                          onLogout();
+                        }}
+                        className="w-full px-3 py-2 rounded-xl text-left text-xs font-medium text-rose-300 hover:bg-rose-500/10 hover:text-rose-200 flex items-center gap-2 transition-colors cursor-pointer"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        <span>Sign Out</span>
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Actions: Alerts + Hamburger */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
               type="button"
               onClick={onOpenAlerts}
-              className="relative p-2 bg-red-500/10 text-red-300 rounded-xl border border-red-500/30"
+              className="relative p-2 bg-slate-900/80 text-slate-200 rounded-xl border border-white/10"
             >
               <Bell className="w-4 h-4" />
               {unreadAlertCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                   {unreadAlertCount}
                 </span>
               )}
@@ -401,9 +326,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-xl"
+              className="p-2 text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 rounded-xl border border-white/10"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
@@ -411,49 +336,64 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-slate-900 border-b border-slate-800 px-4 py-4 space-y-3">
-          <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-            <button type="button" onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <Sprout className="w-4 h-4 text-emerald-400" /> Farm Overview
-            </button>
-            <button type="button" onClick={() => { onSelectView('gis'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-emerald-400" /> Fields & Map
-            </button>
-            <button type="button" onClick={() => { onSelectView('weather'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <CloudSun className="w-4 h-4 text-teal-400" /> Weather & Soil
-            </button>
-            <button type="button" onClick={() => { onSelectView('disease'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <Bug className="w-4 h-4 text-rose-400" /> Disease Incidents
-            </button>
-            <button type="button" onClick={() => { onSelectView('inventory'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <Pill className="w-4 h-4 text-purple-400" /> Inventory
-            </button>
-            <button type="button" onClick={() => { onSelectView('harvest'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <Tractor className="w-4 h-4 text-amber-400" /> Harvest Planning
-            </button>
-            <button type="button" onClick={() => { onSelectView('yield'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <Brain className="w-4 h-4 text-emerald-400" /> Yield Prediction
-            </button>
-            <button type="button" onClick={() => { onSelectView('prices'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2">
-              <IndianRupee className="w-4 h-4 text-emerald-400" /> Crop Prices
-            </button>
-            <button type="button" onClick={() => { onSelectView('chat'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-800 rounded-xl text-left flex items-center gap-2 col-span-2">
-              <MessageSquare className="w-4 h-4 text-blue-400" /> Agronomic Advisor
-            </button>
-            <button type="button" onClick={() => { onSelectView('officer'); setMobileMenuOpen(false); }} className="p-2.5 bg-amber-500 text-slate-950 font-bold rounded-xl text-center col-span-2">
-              Shield Officer Portal
-            </button>
-          </div>
-
-          {user && (
-            <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-300">{user.name || user.email}</span>
-              <button type="button" onClick={onLogout} className="text-rose-400 hover:underline">Log out</button>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-slate-950/98 backdrop-blur-2xl border-b border-white/10 px-4 py-4 space-y-3 overflow-hidden"
+          >
+            <div className="grid grid-cols-2 gap-2 text-xs font-medium">
+              <button type="button" onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <Sprout className="w-4 h-4 text-emerald-400" /> Setup & Entry
+              </button>
+              <button type="button" onClick={() => { onSelectView('dashboard'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <BarChart3 className="w-4 h-4 text-emerald-400" /> Dashboard
+              </button>
+              <button type="button" onClick={() => { onSelectView('gis'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <MapPin className="w-4 h-4 text-emerald-400" /> GIS Map
+              </button>
+              <button type="button" onClick={() => { onSelectView('weather'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <CloudSun className="w-4 h-4 text-sky-400" /> Weather
+              </button>
+              <button type="button" onClick={() => { onSelectView('soil'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <FlaskConical className="w-4 h-4 text-emerald-400" /> Soil NPK
+              </button>
+              <button type="button" onClick={() => { onSelectView('disease'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <Bug className="w-4 h-4 text-rose-400" /> Disease Risk
+              </button>
+              <button type="button" onClick={() => { onSelectView('inventory'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <Pill className="w-4 h-4 text-purple-400" /> Inventory
+              </button>
+              <button type="button" onClick={() => { onSelectView('harvest'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <Tractor className="w-4 h-4 text-amber-400" /> Harvest
+              </button>
+              <button type="button" onClick={() => { onSelectView('yield'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <Brain className="w-4 h-4 text-emerald-400" /> Yield Prediction
+              </button>
+              <button type="button" onClick={() => { onSelectView('prices'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+                <IndianRupee className="w-4 h-4 text-emerald-400" /> Crop Prices
+              </button>
+              <button type="button" onClick={() => { onSelectView('chat'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-sky-500/30 rounded-xl text-left flex items-center gap-2 col-span-2 text-sky-300">
+                <MessageSquare className="w-4 h-4 text-sky-400" /> Agronomic Advisor
+              </button>
+              <button type="button" onClick={() => { onSelectView('officer'); setMobileMenuOpen(false); }} className="p-2.5 bg-amber-500 text-slate-950 font-bold rounded-xl text-center col-span-2 shadow-md">
+                <Shield className="w-4 h-4 inline mr-1" /> Officer Portal
+              </button>
             </div>
-          )}
-        </div>
-      )}
+
+            {user && (
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                <span className="text-slate-300">{user.name || user.email}</span>
+                <button type="button" onClick={onLogout} className="text-rose-400 hover:text-rose-300 font-semibold">
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
