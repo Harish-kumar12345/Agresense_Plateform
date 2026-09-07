@@ -49,7 +49,47 @@ async function getOfficerFarmsOverview(req, res) {
       const mongoose = require('mongoose');
       if (mongoose.connection.readyState === 1) {
         const { Farm } = require('../models/Farm');
-        dbFarms = await Farm.find().lean();
+        const { User } = require('../models/User');
+
+        const rawFarms = await Farm.find().lean();
+
+        // Build a user lookup map: _id (string) → user doc
+        const allUsers = await User.find({ role: 'farmer' }).lean();
+        const userMap = {};
+        allUsers.forEach(u => { userMap[u._id.toString()] = u; });
+
+        // Enrich each DB farm with farmer info + default telemetry fields
+        dbFarms = rawFarms.map(f => {
+          const user = userMap[f.farmer_id] || null;
+          return {
+            ...f,
+            farm_id: f.farm_id || f._id?.toString(),
+            farmer_name:  user?.name  || f.farmer_id || 'Registered Farmer',
+            farmer_email: user?.email || 'N/A',
+            farmer_phone: 'N/A',
+            district:     f.location_name || 'N/A',
+            state:        'India',
+            soil_moisture: f.soil_moisture ?? 40,
+            ph:            f.ph ?? 6.5,
+            nitrogen:      f.nitrogen ?? 45,
+            phosphorus:    f.phosphorus ?? 30,
+            potassium:     f.potassium ?? 25,
+            predicted_yield_tha:    f.predicted_yield_tha ?? 4.5,
+            expected_production_tons: f.expected_production_tons ?? (f.area_hectares * 4.5),
+            risk_level:    f.risk_level    || 'LOW',
+            risk_score:    f.risk_score    ?? 20,
+            growth_stage:  f.growth_stage  || 'Growing',
+            current_gdd:   f.current_gdd   ?? 900,
+            expected_harvest_date: f.expected_harvest_date || null,
+            harvest_window: f.harvest_window || 'To be determined',
+            weather_temp_c:    f.weather_temp_c    ?? 28,
+            weather_humidity:  f.weather_humidity  ?? 70,
+            weather_description: f.weather_description || 'Normal',
+            last_updated: f.created_at || new Date().toISOString()
+          };
+        });
+
+        console.log(`✅ Loaded ${dbFarms.length} DB farms with enriched farmer data`);
       }
     } catch (e) {
       console.warn('DB Farm query fallback for officer overview:', e.message);
