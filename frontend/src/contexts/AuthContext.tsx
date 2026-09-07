@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+
+const API_URL = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001'
 
 interface User {
   id: string
   email?: string
   name?: string
+  role?: string
   isGuest?: boolean
 }
 
@@ -16,123 +18,151 @@ interface AuthContextType {
   signup: (email: string, password: string, name: string) => Promise<void>
   logout: () => Promise<void>
   continueAsGuest: () => void
+  getAuthHeaders: () => Record<string, string>
 }
 
 const AuthContext = createContext(undefined)
 
+/** Helper: return auth headers if a token exists */
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('agrisense_token');
+  if (!token) return { 'Content-Type': 'application/json' };
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  };
+}
+
 export function AuthProvider({ children }: { children: any }) {
-  const [user, setUser] = useState<User | null>(() => {
-    try {
-      const saved = localStorage.getItem('agrisense_guest_user');
-      return saved ? JSON.parse(saved) : null;
-    } catch (e) {
-      return null;
-    }
-  });
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // On mount: verify stored token with /me endpoint
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false);
-      return;
-    }
+    const verifyToken = async () => {
+      const token = localStorage.getItem('agrisense_token');
 
-    try {
-      // Get initial session
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        if (session?.user) {
-          setUser({
-            id: session.user.id,
-            email: session.user.email,
-            name: session.user.user_metadata?.name
-          });
-        }
-        setLoading(false);
-      }).catch(() => {
-        setLoading(false);
-      });
-
-      // Listen for auth changes
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        async (event, session) => {
-          if (session?.user) {
-            setUser({
-              id: session.user.id,
-              email: session.user.email,
-              name: session.user.user_metadata?.name
-            });
-          } else {
-            // Preserve guest user if currently set
-            setUser(prev => (prev?.isGuest ? prev : null));
+      // Check for guest user
+      const savedUser = localStorage.getItem('agrisense_user');
+      if (savedUser) {
+        try {
+          const parsed = JSON.parse(savedUser);
+          if (parsed.isGuest) {
+            setUser(parsed);
+            setLoading(false);
+            return;
           }
-          setLoading(false);
-        }
-      );
+        } catch (e) {}
+      }
 
-      return () => subscription?.unsubscribe();
-    } catch (error) {
-      console.warn('Supabase not configured properly, auth features disabled');
-      setLoading(false);
-    }
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_URL}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setUser({
+            id: data.user.id,
+            email: data.user.email,
+            name: data.user.name,
+            role: data.user.role
+          });
+        } else {
+          // Token expired or invalid — clear it
+          localStorage.removeItem('agrisense_token');
+          localStorage.removeItem('agrisense_user');
+        }
+      } catch (err) {
+        // Server unreachable — fall back to cached user
+        if (savedUser) {
+          try { setUser(JSON.parse(savedUser)); } catch (e) {}
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyToken();
   }, []);
 
+  // Persist user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      try { localStorage.setItem('agrisense_user', JSON.stringify(user)); } catch (e) {}
+    } else {
+      try { localStorage.removeItem('agrisense_user'); } catch (e) {}
+    }
+  }, [user]);
+
   const login = async (email: string, password: string) => {
-    if (!supabase) {
-      throw new Error('Supabase not configured. Please set up your Supabase credentials.');
-    }
-    
+    let res: Response;
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+      res = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       });
-      if (error) throw error;
-      try { localStorage.removeItem('agrisense_guest_user'); } catch (e) {}
-    } catch (error) {
-      throw error;
+    } catch (networkErr) {
+      throw new Error('Cannot reach server. Please check if the backend is running.');
     }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || 'Login failed');
+    }
+
+    localStorage.setItem('agrisense_token', data.token);
+
+    setUser({
+      id: data.user.id,
+      email: data.user.email,
+      name: data.user.name,
+      role: data.user.role
+    });
   };
 
   const signup = async (email: string, password: string, name: string) => {
-    if (!supabase) {
-      throw new Error('Supabase not configured. Please set up your Supabase credentials.');
-    }
-    
+    let res: Response;
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            name
-          }
-        }
+      res = await fetch(`${API_URL}/api/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
       });
-      if (error) throw error;
-      try { localStorage.removeItem('agrisense_guest_user'); } catch (e) {}
-    } catch (error) {
-      throw error;
+    } catch (networkErr) {
+      throw new Error('Cannot reach server. Please check if the backend is running.');
     }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || 'Signup failed');
+    }
+
+    localStorage.setItem('agrisense_token', data.token);
+
+    setUser({
+      id: data.user.id,
+      email: data.user.email,
+      name: data.user.name,
+      role: data.user.role
+    });
   };
 
   const logout = async () => {
     try {
+      localStorage.removeItem('agrisense_user');
+      localStorage.removeItem('agrisense_token');
       localStorage.removeItem('agrisense_guest_user');
     } catch (e) {}
-
-    if (!supabase) {
-      setUser(null);
-      return;
-    }
-    
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      setUser(null);
-    }
+    setUser(null);
   };
 
   const continueAsGuest = () => {
@@ -141,9 +171,6 @@ export function AuthProvider({ children }: { children: any }) {
       name: 'Guest User',
       isGuest: true
     };
-    try {
-      localStorage.setItem('agrisense_guest_user', JSON.stringify(guestUser));
-    } catch (e) {}
     setUser(guestUser);
   };
 
@@ -156,7 +183,8 @@ export function AuthProvider({ children }: { children: any }) {
     login,
     signup,
     logout,
-    continueAsGuest
+    continueAsGuest,
+    getAuthHeaders
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

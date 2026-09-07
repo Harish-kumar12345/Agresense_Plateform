@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Navigation, Search, Layers, CheckCircle2, ArrowRight, RefreshCw, AlertCircle, ShieldAlert, Sparkles } from 'lucide-react';
 import { FarmMap } from './FarmMap';
 import { FarmBoundaryDrawer } from './FarmBoundaryDrawer';
@@ -6,18 +6,24 @@ import { FarmAreaCalculator } from './FarmAreaCalculator';
 import { FarmDetailsForm } from './FarmDetailsForm';
 import { SavedFields } from './SavedFields';
 import { farmService, FarmData } from '../../services/farmService';
+import { useAuth } from '../../contexts/AuthContext';
 
 type Point = [number, number]; // [lat, lng]
 
 interface FarmGISPageProps {
   onSelectFarmForDashboard?: (farm: FarmData) => void;
   onGoToDashboard?: () => void;
+  initialTab?: 'saved-fields' | 'new-field';
 }
 
 export const FarmGISPage: React.FC<FarmGISPageProps> = ({
   onSelectFarmForDashboard,
-  onGoToDashboard
+  onGoToDashboard,
+  initialTab
 }) => {
+  const { user } = useAuth();
+  const farmerId = user?.id || 'default_farmer';
+  const savedFieldsRef = useRef<HTMLDivElement>(null);
   // Map position state (Default: Ghaziabad/Delhi region or Kerala fallback)
   const [mapCenter, setMapCenter] = useState<Point>([28.6692, 77.4538]);
   const [userGpsLocation, setUserGpsLocation] = useState<Point | null>(null);
@@ -52,7 +58,7 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
 
   const loadFarms = async () => {
     try {
-      const farms = await farmService.getFarms();
+      const farms = await farmService.getFarms(farmerId);
       setSavedFarms(farms);
       if (farms.length > 0 && !activeFarmId) {
         setActiveFarmId(farms[0].farm_id);
@@ -61,6 +67,15 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
       console.error('Failed to load farms:', e);
     }
   };
+
+  // Auto-scroll to saved fields section when navigated with initialTab='saved-fields'
+  useEffect(() => {
+    if (initialTab === 'saved-fields' && savedFarms.length > 0 && savedFieldsRef.current) {
+      setTimeout(() => {
+        savedFieldsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  }, [initialTab, savedFarms]);
 
   // 1. Live GPS Location Handler
   const handleUseCurrentLocation = () => {
@@ -183,6 +198,7 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     try {
       const saved = await farmService.saveFarm({
         ...farmPayload,
+        farmer_id: farmerId,
         boundary_geojson: geojsonBoundary
       });
 
@@ -357,17 +373,21 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
           boundaryGeoJSON={polygonPoints.length >= 3 ? { type: 'Feature', geometry: { type: 'Polygon', coordinates: [polygonPoints.map(p => [p[1], p[0]])] } } : null}
           onSave={handleSaveFarm}
           isSaving={isSaving}
+          farmerId={farmerId}
+          farmerName={user?.name}
         />
       </div>
 
       {/* Saved Farms Fields Manager */}
-      <SavedFields
-        farms={savedFarms}
-        activeFarmId={activeFarmId}
-        onSelectFarm={handleSelectFarm}
-        onViewOnMap={handleViewOnMap}
-        onDeleteFarm={handleDeleteFarm}
-      />
+      <div ref={savedFieldsRef}>
+        <SavedFields
+          farms={savedFarms}
+          activeFarmId={activeFarmId}
+          onSelectFarm={handleSelectFarm}
+          onViewOnMap={handleViewOnMap}
+          onDeleteFarm={handleDeleteFarm}
+        />
+      </div>
     </div>
   );
 };

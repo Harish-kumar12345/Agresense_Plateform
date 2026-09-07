@@ -4,6 +4,7 @@ import { Home } from './components/Home';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import { FarmGISPage } from './components/FarmGIS/FarmGISPage';
+import { FarmFieldChooser } from './components/FarmGIS/FarmFieldChooser';
 import { WeatherDashboard } from './components/Weather/WeatherDashboard';
 import { SoilAnalysisModule } from './components/Soil/SoilAnalysisModule';
 import { YieldPredictionModule } from './components/Yield/YieldPredictionModule';
@@ -47,14 +48,22 @@ const DEFAULT_CROP = 'Rice';
 function AppContent() {
   const [token, setToken] = useState<string | null>(null);
   const [view, setView] = useState('home');
+  const [gisInitialTab, setGisInitialTab] = useState<'saved-fields' | 'new-field' | undefined>(undefined);
   const [activeFarm, setActiveFarm] = useState<FarmData | null>(null);
   const [dashboardData, setDashboardData] = useState<{
     location: LocationData;
     crop: string;
     farmDetails?: FarmData;
   } | null>(null);
-  const { user, logout } = useAuth();
+  const { user, logout, isGuest } = useAuth();
   const { t } = useLanguage();
+
+  // On first load after auth, redirect authenticated farmers to field-chooser
+  React.useEffect(() => {
+    if (user && !isGuest && user.role !== 'officer' && view === 'home') {
+      setView('field-chooser');
+    }
+  }, [user, isGuest]);
   const [isAlertsOpen, setIsAlertsOpen] = useState(false);
   const [unreadAlertCount, setUnreadAlertCount] = useState(0);
 
@@ -133,6 +142,19 @@ function AppContent() {
       />
       <main className="flex-1">
         <ErrorBoundary>
+          {view === 'field-chooser' && (
+            <FarmFieldChooser
+              onViewSavedFields={() => {
+                setGisInitialTab('saved-fields');
+                setView('gis');
+              }}
+              onOpenGISMap={() => {
+                setGisInitialTab('new-field');
+                setView('gis');
+              }}
+              onSelectFarm={handleSelectFarmFromGIS}
+            />
+          )}
           {view === 'home' && (
             <LandingPage onSubmit={handleDashboardSubmit} />
           )}
@@ -140,6 +162,7 @@ function AppContent() {
             <FarmGISPage
               onSelectFarmForDashboard={handleSelectFarmFromGIS}
               onGoToDashboard={() => setView('dashboard')}
+              initialTab={gisInitialTab}
             />
           )}
           {view === 'analytics' && (
@@ -209,7 +232,11 @@ function AppContent() {
           {view === 'chat' && (
             <div className="px-4 py-8">
               <div className="max-w-6xl mx-auto">
-                <Chat />
+                <Chat
+                  activeFarm={activeFarm}
+                  location={currentLocation}
+                  crop={currentCrop}
+                />
               </div>
             </div>
           )}

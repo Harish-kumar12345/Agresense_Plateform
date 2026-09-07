@@ -4,11 +4,12 @@ import { Mail, Lock, Eye, EyeOff, User, ArrowRight, UserPlus } from 'lucide-reac
 import { useAuth } from '../contexts/AuthContext'
 
 interface SignupProps {
+  onSignup?: (email: string, password: string, name: string) => Promise<void>;
   onSwitchToLogin: () => void;
   onGuestLogin?: () => void;
 }
 
-export function Signup({ onSwitchToLogin, onGuestLogin }: SignupProps) {
+export function Signup({ onSignup, onSwitchToLogin, onGuestLogin }: SignupProps) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,7 +20,8 @@ export function Signup({ onSwitchToLogin, onGuestLogin }: SignupProps) {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
-  const { signup, continueAsGuest } = useAuth()
+  const { signup: authSignup, continueAsGuest } = useAuth()
+  const doSignup = onSignup || authSignup;
 
   const handleSignup = async (e: any) => {
     e.preventDefault()
@@ -40,8 +42,8 @@ export function Signup({ onSwitchToLogin, onGuestLogin }: SignupProps) {
     }
 
     try {
-      await signup(email, password, name)
-      setSuccess('Account created successfully! Please check your email to verify your account.')
+      await doSignup(email, password, name)
+      setSuccess('Account created successfully!')
     } catch (error: any) {
       setError(error.message || 'Signup failed')
     } finally {

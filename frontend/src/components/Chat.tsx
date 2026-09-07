@@ -5,12 +5,26 @@ import { Mic, MicOff, Send, Volume2, VolumeX, Bot, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ImageUpload } from './ImageUpload';
+import { FarmData } from '../services/farmService';
 
 const backendUrl = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001';
 
 type Message = { role: 'user' | 'assistant'; text: string; ts: number };
 
-export const Chat = () => {
+interface ChatProps {
+  activeFarm?: FarmData | null;
+  location?: {
+    latitude: number;
+    longitude: number;
+    city: string;
+    country: string;
+    state?: string;
+    district?: string;
+  };
+  crop?: string;
+}
+
+export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   const { t, language, speak } = useLanguage();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -61,27 +75,22 @@ export const Chat = () => {
     setInput('');
     setIsTyping(true);
     
+    // Build farm context dynamically from actual farm data
     const farmContext = {
-      location: 'Kochi, Kerala',
-      crop: 'Rice (Paddy)',
-      area_hectares: 1.5,
-      temperature_c: 28,
-      rainfall_mm: 12,
-      humidity: 78,
-      soil_moisture: 58,
-      ph: 6.5,
-      nitrogen: 45,
-      phosphorus: 30,
-      potassium: 25,
-      current_gdd: 1450,
-      predicted_yield_tha: 4.8,
-      disease_risk: 'Low fungal risk',
-      growth_stage: 'Ripening / Grain Filling',
-      harvest_window: 'Oct 28 - Nov 10',
-      fertilizer_stock: 'Urea (50 kg), NPK 20:20:0 (100 kg)'
+      location: activeFarm?.location_name || location?.city || 'India',
+      crop: activeFarm?.crop || crop || 'Not specified',
+      area_hectares: activeFarm?.area_hectares || 0,
+      soil_type: activeFarm?.soil_type || 'Unknown',
+      irrigation_type: activeFarm?.irrigation_type || 'Unknown',
+      season: activeFarm?.season || 'Not specified',
+      latitude: activeFarm?.latitude || location?.latitude || 0,
+      longitude: activeFarm?.longitude || location?.longitude || 0,
+      farm_name: activeFarm?.farm_name || 'My Farm',
+      state: location?.state || '',
+      district: location?.district || ''
     };
 
-    // Send message via Socket.IO only
+    // Send message via Socket.IO with real farm context
     socket.emit('user_message', {
       roomId,
       text,

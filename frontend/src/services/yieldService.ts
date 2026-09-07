@@ -45,6 +45,15 @@ export type YieldPredictionResult = {
   regionalInsight: string;
   modelType: string;
   timestamp: string;
+  dataSources?: {
+    weather: string;
+    soil: string;
+    gdd: string;
+  };
+  // Alias fields used by analyticsService
+  predicted_yield_tha?: number;
+  expected_production_tons?: number;
+  confidence_score?: number;
 };
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -105,6 +114,49 @@ export const yieldService = {
     }
 
     return this.calculateLocalYieldPrediction(featurePayload);
+  },
+
+  /**
+   * AUTO-ENRICHED prediction: only needs crop, area, lat/lon.
+   * Backend fetches LIVE weather (Open-Meteo), soil (SoilGrids), and GDD automatically.
+   */
+  async predictYieldAuto(params: {
+    crop: string;
+    farm_area_ha: number;
+    latitude: number;
+    longitude: number;
+    sowing_date?: string;
+    historical_yield_tha?: number;
+  }): Promise<YieldPredictionResult> {
+    try {
+      const response = await axios.post(`${API_BASE}/api/ml/predict-yield-auto`, params, { timeout: 15000 });
+      if (response.data && response.data.success) {
+        // Add alias fields for backward compatibility
+        const result = response.data;
+        result.predicted_yield_tha = result.predictedYieldPerHectare;
+        result.expected_production_tons = result.totalProductionTons;
+        result.confidence_score = result.confidenceScore;
+        return result;
+      }
+    } catch (e: any) {
+      console.warn('Auto yield prediction failed, falling back to local:', e.message);
+    }
+
+    // Fallback: use local calculation with default values
+    return this.calculateLocalYieldPrediction({
+      crop: params.crop,
+      farm_area_ha: params.farm_area_ha,
+      temperature_c: 28,
+      rainfall_mm: 5,
+      humidity_pct: 70,
+      soil_moisture_pct: 35,
+      soil_ph: 6.5,
+      soil_n: 40,
+      soil_p: 25,
+      soil_k: 30,
+      gdd: 1200,
+      historical_yield_tha: params.historical_yield_tha || 0
+    });
   },
 
   /**

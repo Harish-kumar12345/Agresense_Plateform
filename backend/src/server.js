@@ -1,3 +1,8 @@
+// Force Google DNS — fixes MongoDB Atlas SRV resolution on networks
+// where the router DNS doesn't support SRV record lookups
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+
 const http = require('http');
 const path = require('path');
 const express = require('express');
@@ -55,6 +60,7 @@ const inventoryRoutes = require('./routes/inventory');
 const farmActivityRoutes = require('./routes/farmActivity');
 const harvestManagementRoutes = require('./routes/harvestManagement');
 const alertRoutes = require('./routes/alerts');
+const authRoutes = require('./routes/auth');
 
 // Routes
 app.use('/api/query', queryRoutes);
@@ -69,6 +75,7 @@ app.use('/api', inventoryRoutes);
 app.use('/api/farm-activities', farmActivityRoutes);
 app.use('/api/harvest-management', harvestManagementRoutes);
 app.use('/api/alerts', alertRoutes);
+app.use('/api/auth', authRoutes);
 
 // Socket.io
 initChatSockets(io);

@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 
 export function AuthWrapper({ children }: { children: any }) {
   const [showSignup, setShowSignup] = useState(false);
-  const { user, isGuest, loading, continueAsGuest } = useAuth();
+  const { user, isGuest, loading, login, signup, continueAsGuest } = useAuth();
 
   if (loading) {
     return (
@@ -28,11 +28,13 @@ export function AuthWrapper({ children }: { children: any }) {
     <>
       {showSignup ? (
         <Signup
+          onSignup={signup}
           onSwitchToLogin={() => setShowSignup(false)}
           onGuestLogin={continueAsGuest}
         />
       ) : (
         <Login 
+          onLogin={login}
           onSwitchToSignup={() => setShowSignup(true)}
           onGuestLogin={continueAsGuest}
         />
@@ -40,3 +42,4 @@ export function AuthWrapper({ children }: { children: any }) {
     </>
   );
 }
+

@@ -50,6 +50,8 @@ interface FarmDetailsFormProps {
   boundaryGeoJSON: any;
   onSave: (farm: Omit<FarmData, 'farm_id'>) => Promise<void>;
   isSaving: boolean;
+  farmerId?: string;
+  farmerName?: string;
 }
 
 export const FarmDetailsForm: React.FC<FarmDetailsFormProps> = ({
@@ -59,14 +61,16 @@ export const FarmDetailsForm: React.FC<FarmDetailsFormProps> = ({
   areaMetrics,
   boundaryGeoJSON,
   onSave,
-  isSaving
+  isSaving,
+  farmerId: propsFormerId,
+  farmerName
 }) => {
   const [farmName, setFarmName] = useState('');
   const [crop, setCrop] = useState('Rice');
   const [season, setSeason] = useState('Kharif');
   const [soilType, setSoilType] = useState('Clay Loam');
   const [irrigationType, setIrrigationType] = useState('Canal');
-  const [farmerId, setFarmerId] = useState('FARMER_001');
+  const [farmerId, setFarmerId] = useState(propsFormerId || 'FARMER_001');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {

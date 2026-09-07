@@ -31,12 +31,20 @@ export type FarmData = {
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 const STORAGE_KEY = 'agrisense_saved_farms';
 
+// Helper: get auth headers if a token exists
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('agrisense_token');
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
 export const farmService = {
   // Fetch all saved farms
   async getFarms(farmerId: string = 'default_farmer'): Promise<FarmData[]> {
     try {
       const response = await axios.get(`${API_BASE_URL}/farms`, {
         params: { farmer_id: farmerId },
+        headers: getAuthHeaders(),
         timeout: 5000
       });
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
@@ -70,7 +78,10 @@ export const farmService = {
     };
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/farms`, newFarm, { timeout: 5000 });
+      const response = await axios.post(`${API_BASE_URL}/farms`, newFarm, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (response.data && response.data.success && response.data.data) {
         // Update local cache
         const farms = await this.getFarms(farm.farmer_id);
@@ -98,7 +109,10 @@ export const farmService = {
   // Delete a farm
   async deleteFarm(farmId: string): Promise<boolean> {
     try {
-      await axios.delete(`${API_BASE_URL}/farms/${farmId}`, { timeout: 5000 });
+      await axios.delete(`${API_BASE_URL}/farms/${farmId}`, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
     } catch (error) {
       console.warn('Backend API delete error, removing from local storage:', error);
     }

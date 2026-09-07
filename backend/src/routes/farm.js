@@ -1,7 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const { Farm } = require('../models/Farm');
+
+// Optional auth: extracts user from JWT if present, but doesn't reject unauthenticated requests
+function optionalAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'dev_secret');
+      req.user = decoded; // { sub: userId, role, iat, exp }
+    } catch (err) {
+      // Token invalid/expired — proceed as unauthenticated
+    }
+  }
+  next();
+}
 
 // In-memory fallback storage when MongoDB is disconnected
 const inMemoryFarms = [
@@ -39,9 +55,10 @@ const inMemoryFarms = [
 ];
 
 // GET /api/farms - Get all farms
-router.get('/', async (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
   try {
-    const { farmer_id } = req.query;
+    // If authenticated, always use the JWT user ID; ignore client-supplied farmer_id
+    const farmer_id = req.user?.sub || req.query.farmer_id;
     
     if (mongoose.connection.readyState === 1) {
       const filter = farmer_id ? { farmer_id } : {};
@@ -87,11 +104,11 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/farms - Save a new farm
-router.post('/', async (req, res) => {
+router.post('/', optionalAuth, async (req, res) => {
   try {
     const {
       farm_name,
-      farmer_id = 'default_farmer',
+      farmer_id: clientFarmerId = 'default_farmer',
       crop,
       season = 'Kharif',
       latitude,
@@ -105,6 +122,9 @@ router.post('/', async (req, res) => {
       soil_type = 'Loamy',
       irrigation_type = 'Canal'
     } = req.body;
+
+    // Use authenticated user's ID if available; otherwise fall back to client-supplied value
+    const farmer_id = req.user?.sub || clientFarmerId;
 
     if (!farm_name || !crop || latitude === undefined || longitude === undefined || !area_hectares) {
       return res.status(400).json({

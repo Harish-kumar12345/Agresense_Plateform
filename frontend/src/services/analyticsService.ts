@@ -87,62 +87,99 @@ class AnalyticsService {
     const crop = farm?.crop || cropName || 'Rice (Paddy)';
     const areaHa = farm?.area_hectares || 1.5;
 
-    // 2. Fetch AI Yield Telemetry
+    // 2. Fetch AI Yield Telemetry (AUTO-ENRICHED with live weather, soil, GDD)
     let yieldResult: YieldPredictionResult | null = null;
     try {
-      yieldResult = await yieldService.predictYield({
+      yieldResult = await yieldService.predictYieldAuto({
         crop,
-        area_hectares: areaHa,
+        farm_area_ha: areaHa,
         latitude: lat,
-        longitude: lon,
-        soil_type: farm?.soil_type || 'Clay Loam'
+        longitude: lon
       });
     } catch (err) {
       console.warn('Yield prediction fallback for analytics:', err);
     }
 
-    const predictedYield = yieldResult?.predicted_yield_tha || 4.8;
-    const totalProduction = yieldResult?.expected_production_tons || Math.round(predictedYield * areaHa * 10) / 10;
+    const predictedYield = yieldResult?.predictedYieldPerHectare || yieldResult?.predicted_yield_tha || 4.8;
+    const totalProduction = yieldResult?.totalProductionTons || yieldResult?.expected_production_tons || Math.round(predictedYield * areaHa * 10) / 10;
 
     // 3. Fetch Disease Risk Telemetry
     let diseaseRiskData: any = null;
     try {
-      diseaseRiskData = await diseaseRiskService.calculateRisk({
+      diseaseRiskData = await diseaseRiskService.predictDiseaseRisk({
+        crop,
         latitude: lat,
         longitude: lon,
-        crop,
-        growth_stage: 'Flowering'
+        weatherData: { temperature_c: 28, relative_humidity: 78 },
+        soilData: { moisture: 58, nitrogen: 45 }
       });
     } catch (err) {
       console.warn('Disease risk fallback for analytics:', err);
     }
 
-    const overallRiskScore = diseaseRiskData?.overall_risk_score ?? 28;
-    const riskLevel = diseaseRiskData?.risk_level || 'LOW';
+    const overallRiskScore = diseaseRiskData?.overallRiskScore ?? 28;
+    const riskLevel = diseaseRiskData?.riskLevel || 'LOW';
 
     // 4. Fetch Market Rates & Calculate Revenue
     let priceData: any = null;
     try {
-      priceData = await cropPriceService.getCurrentPrices('Kerala', crop);
+      priceData = await cropPriceService.getCropPrices('Kerala', undefined, crop);
     } catch (err) {
       console.warn('Crop price fallback for analytics:', err);
     }
 
     const matchedCropPrice = priceData?.prices?.find((p: any) =>
-      p.name.toLowerCase().includes(crop.toLowerCase())
+      p.crop?.toLowerCase().includes(crop.toLowerCase())
     ) || priceData?.prices?.[0];
 
-    const modalPrice = matchedCropPrice?.price || 2850; // ₹/quintal
-    const marketName = matchedCropPrice?.market || 'Kochi APMC Yard';
+    const modalPrice = matchedCropPrice?.modalPrice || 2850; // ₹/quintal
+    const marketName = matchedCropPrice?.market || 'Local APMC Yard';
 
     // Revenue Calculation: Total Tons * 10 quintals/ton * ₹/quintal
     const estimatedRevenueRs = Math.round(totalProduction * 10 * modalPrice);
     const estimatedRevenueLakhs = Math.round((estimatedRevenueRs / 100000) * 100) / 100;
 
-    // 5. GDD & Harvest Stage Data
-    const baseTemp = crop.toLowerCase().includes('rice') ? 10 : crop.toLowerCase().includes('wheat') ? 5 : 10;
-    const accumulatedGdd = farmActivityService.calculateGDD(28, baseTemp);
-    const growthStageProgress = farmActivityService.getGrowthStage(accumulatedGdd, crop);
+    // 5. GDD & Harvest Stage Data (with safe fallbacks)
+    let growthStageProgress: any = {};
+    try {
+      const baseTemp = crop.toLowerCase().includes('rice') ? 10 : crop.toLowerCase().includes('wheat') ? 5 : 10;
+      // Calculate approximate GDD based on current date and assumed sowing
+      const daysSinceSowing = 65; // approximate
+      const avgTemp = 28;
+      const accGdd = Math.round((avgTemp - baseTemp) * daysSinceSowing);
+      
+      // Simple growth stage determination
+      const gddThresholds: Record<string, number> = { rice: 1800, wheat: 1500, maize: 1400 };
+      const cropLower = crop.toLowerCase();
+      const targetGdd = gddThresholds[cropLower] || 1600;
+      const progressPct = Math.min(100, Math.round((accGdd / targetGdd) * 100));
+      
+      let stage = 'Vegetative';
+      if (progressPct >= 90) stage = 'Maturity / Ready to Harvest';
+      else if (progressPct >= 70) stage = 'Ripening / Grain Filling';
+      else if (progressPct >= 50) stage = 'Flowering / Reproductive';
+      else if (progressPct >= 25) stage = 'Tillering / Vegetative';
+      
+      const daysToHarvest = Math.max(1, Math.round((1 - progressPct / 100) * 120));
+      const expectedHarvestDate = new Date(Date.now() + daysToHarvest * 86400000);
+      
+      growthStageProgress = {
+        currentGdd: accGdd,
+        targetGdd,
+        stage,
+        progressPct,
+        expectedHarvestDate: expectedHarvestDate.toISOString().split('T')[0]
+      };
+    } catch (gddErr) {
+      console.warn('GDD calculation fallback:', gddErr);
+      growthStageProgress = {
+        currentGdd: 1170,
+        targetGdd: 1800,
+        stage: 'Flowering / Reproductive',
+        progressPct: 65,
+        expectedHarvestDate: '2026-10-28'
+      };
+    }
 
     // 6. Check Historical Benchmark Data
     // We check if actual historical records exist in localStorage/DB

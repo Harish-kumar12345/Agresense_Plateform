@@ -235,32 +235,50 @@ async function testAI(query = "What crops are good for monsoon season?") {
 function buildComprehensiveFarmPrompt(text, farmContext, retrievedContext) {
   const fc = farmContext || {};
 
+  // Build a clean summary of what farm data is actually available
+  const farmName = fc.farm_name || 'Unnamed Farm';
+  const location = fc.location || fc.location_name || fc.city || 'Not specified';
+  const crop = fc.crop || 'Not specified';
+  const area = fc.area_hectares ? `${fc.area_hectares} ha` : 'Not specified';
+  const soilType = fc.soil_type || 'Not specified';
+  const irrigationType = fc.irrigation_type || 'Not specified';
+  const season = fc.season || 'Not specified';
+
   return `You are Krishi Mitra, an expert AI Agricultural Advisor for Indian farmers.
 
-FARMLAND TELEMETRY & LIVE CONTEXT:
-📍 1. Location: ${fc.location || fc.location_name || fc.city || 'Kerala, India'}
-🌾 2. Crop Variety: ${fc.crop || 'Rice / Paddy'}
-📐 3. Farm Area: ${fc.area_hectares ? `${fc.area_hectares} ha` : '1.5 ha'}
-🌡️ 4. Temperature: ${fc.temperature_c ? `${fc.temperature_c}°C` : '28°C'}
-🌧️ 5. Rainfall / Forecast: ${fc.rainfall_mm ? `${fc.rainfall_mm} mm` : 'Moderate precipitation'}
-💧 6. Humidity: ${fc.humidity ? `${fc.humidity}%` : '78%'}
-🌱 7. Soil Moisture: ${fc.soil_moisture ? `${fc.soil_moisture}%` : '58%'}
-🧪 8. Soil pH Level: ${fc.ph ? fc.ph : '6.5 (Optimal)'}
-📊 9. Soil Nutrients (NPK): N-${fc.nitrogen || 45}%, P-${fc.phosphorus || 30}%, K-${fc.potassium || 25}%
-🔥 10. Accumulated GDD: ${fc.current_gdd || 1450} Degree Days
-📈 11. AI Predicted Yield: ${fc.predicted_yield_tha ? `${fc.predicted_yield_tha} tons/ha` : '4.8 tons/ha'} (${fc.expected_production_tons || 7.2} tons total)
-🐛 12. Disease / Pest Risk: ${fc.disease_risk || 'Low / Moderate fungal monitoring'}
-🚜 13. Growth & Harvest Stage: ${fc.growth_stage || 'Ripening / Grain Filling'} (Window: ${fc.harvest_window || 'Oct 28 - Nov 10'})
-💊 14. Fertilizer & Inventory: ${fc.fertilizer_stock || 'Urea (50 kg), NPK 20:20:0 (100 kg), Neem Oil (2L)'}
+FARMER'S CURRENT FARM DATA:
+🏡 Farm Name: ${farmName}
+📍 Location: ${location}${fc.state ? ` (${fc.state})` : ''}${fc.district ? `, ${fc.district}` : ''}
+🌾 Current Crop: ${crop}
+🗓️ Cropping Season: ${season}
+📐 Farm Area: ${area}
+🌍 Soil Type: ${soilType}
+💧 Irrigation System: ${irrigationType}
+${fc.latitude && fc.longitude ? `📌 GPS Coordinates: ${fc.latitude}, ${fc.longitude}` : ''}
+
+LIVE TELEMETRY (if available):
+${fc.temperature_c ? `🌡️ Temperature: ${fc.temperature_c}°C` : '🌡️ Temperature: Not available'}
+${fc.rainfall_mm ? `🌧️ Rainfall: ${fc.rainfall_mm} mm` : '🌧️ Rainfall: Not available'}
+${fc.humidity ? `💧 Humidity: ${fc.humidity}%` : ''}
+${fc.soil_moisture ? `🌱 Soil Moisture: ${fc.soil_moisture}%` : ''}
+${fc.ph ? `🧪 Soil pH: ${fc.ph}` : ''}
+${fc.nitrogen || fc.phosphorus || fc.potassium ? `📊 NPK: N-${fc.nitrogen || '?'}%, P-${fc.phosphorus || '?'}%, K-${fc.potassium || '?'}%` : ''}
+${fc.current_gdd ? `🔥 GDD: ${fc.current_gdd} Degree Days` : ''}
+${fc.predicted_yield_tha ? `📈 Predicted Yield: ${fc.predicted_yield_tha} tons/ha` : ''}
+${fc.disease_risk ? `🐛 Disease Risk: ${fc.disease_risk}` : ''}
+${fc.growth_stage ? `🚜 Growth Stage: ${fc.growth_stage}` : ''}
+${fc.harvest_window ? `📅 Harvest Window: ${fc.harvest_window}` : ''}
+${fc.fertilizer_stock ? `💊 Inventory: ${fc.fertilizer_stock}` : ''}
 
 DATABASE & HISTORICAL CONTEXT:
-${retrievedContext || 'Standard Kerala APMC market prices & seasonal guidance active.'}
+${retrievedContext || 'No additional context available.'}
 
 FARMER'S QUESTION: "${text}"
 
-INSTRUCTIONS FOR RESPONSE:
-- Provide clear, actionable, friendly advice tailored to the farmer's specific farm telemetry above.
-- Address the user's specific question using relevant parameters from their farm context.
+CRITICAL INSTRUCTIONS:
+- ALWAYS use the FARMER'S CURRENT FARM DATA above when answering. For example, if their crop is "${crop}", answer about "${crop}" — NOT about any other crop.
+- If data says "Not specified" or is missing, ask the farmer to clarify or provide general advice, but NEVER assume a specific crop or location.
+- Provide clear, actionable, friendly advice tailored specifically to the farmer's data above.
 - Keep response concise, encouraging, and easy to understand (3-4 bullet points or short paragraphs).
 - Do NOT ask the farmer to re-enter details that are already given above.`;
 }

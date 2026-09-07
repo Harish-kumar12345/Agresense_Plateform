@@ -67,6 +67,7 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
   // Analytics Data State
   const [analytics, setAnalytics] = useState<FarmAnalyticsData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [generatingPdf, setGeneratingPdf] = useState<boolean>(false);
 
   // Ref for PDF Export Element
@@ -93,6 +94,7 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
   // Fetch telemetry & compute analytics whenever selected farm changes
   const loadAnalyticsData = async () => {
     setLoading(true);
+    setLoadError(null);
     try {
       const data = await analyticsService.getFarmAnalytics(
         selectedFarm || farm,
@@ -100,8 +102,9 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
         crop
       );
       setAnalytics(data);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error fetching farm analytics:', err);
+      setLoadError(err?.message || 'Failed to load analytics data');
     } finally {
       setLoading(false);
     }
@@ -143,12 +146,28 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
     }
   };
 
-  if (loading || !analytics) {
+  if (loading) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-20 text-center space-y-4">
         <Loader2 className="w-12 h-12 text-emerald-600 animate-spin mx-auto" />
         <h3 className="text-xl font-bold text-gray-800">Consolidating Farm Telemetry & Analytics...</h3>
         <p className="text-sm text-gray-500">Retrieving data from GIS, Weather, Soil, GDD, AI Yield, Disease Risk, and Market Prices</p>
+      </div>
+    );
+  }
+
+  if (!analytics) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-20 text-center space-y-4">
+        <AlertTriangle className="w-12 h-12 text-amber-500 mx-auto" />
+        <h3 className="text-xl font-bold text-gray-800">Unable to Load Analytics</h3>
+        <p className="text-sm text-gray-500">{loadError || 'An unexpected error occurred while fetching farm data.'}</p>
+        <button
+          onClick={loadAnalyticsData}
+          className="mt-4 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm inline-flex items-center gap-2 transition-colors"
+        >
+          <RefreshCw className="w-4 h-4" /> Retry
+        </button>
       </div>
     );
   }

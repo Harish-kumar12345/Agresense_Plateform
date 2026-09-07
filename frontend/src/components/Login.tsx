@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Mail, Lock, Eye, EyeOff, User, ArrowRight } from 'lucide-react'
 
 interface LoginProps {
-  onLogin?: (email: string, password: string) => void;
+  onLogin?: (email: string, password: string) => Promise<void>;
   onGuestLogin?: () => void;
   onSwitchToSignup?: () => void;
 }
@@ -21,16 +21,11 @@ export default function Login({ onLogin, onGuestLogin, onSwitchToSignup }: Login
     setError("")
 
     try {
-      // Simulate login process
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
       if (onLogin) {
-        onLogin(email, password);
-      } else {
-        console.log("Login attempted with:", { email, password });
+        await onLogin(email, password);
       }
-    } catch (err) {
-      setError("Login failed. Please try again.");
+    } catch (err: any) {
+      setError(err.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }

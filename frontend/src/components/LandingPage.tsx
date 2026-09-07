@@ -322,7 +322,7 @@ function LandingPage({ onSubmit }: LandingPageProps) {
             {t('home.title')}
           </h1>
           <p className="text-xl text-white mb-8 drop-shadow-md opacity-90">
-            Kerala's Smart Agriculture Platform
+            AgriSense — Smart Agriculture Platform
           </p>
           <p className="text-lg text-white/80 leading-relaxed drop-shadow-sm">
             {t('home.subtitle')}
@@ -502,29 +502,54 @@ function LandingPage({ onSubmit }: LandingPageProps) {
                   onChange={(e) => setCrop(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all bg-gray-50 focus:bg-white"
                 >
-                  {/* Kerala-specific crops */}
-                  <option value="Rice">{t('crops.rice')}</option>
-                  <option value="Coconut">{t('crops.coconut')}</option>
-                  <option value="Black Pepper">{t('crops.black_pepper')}</option>
-                  <option value="Cardamom">{t('crops.cardamom')}</option>
-                  <option value="Rubber">{t('crops.rubber')}</option>
-                  <option value="Tea">{t('crops.tea')}</option>
-                  <option value="Coffee">{t('crops.coffee')}</option>
-                  <option value="Banana">{t('crops.banana')}</option>
-                  <option value="Cashew">{t('crops.cashew')}</option>
-                  <option value="Ginger">{t('crops.ginger')}</option>
-                  <option value="Turmeric">{t('crops.turmeric')}</option>
-                  <option value="Tapioca">{t('crops.tapioca')}</option>
-                  <option value="Areca Nut">{t('crops.areca_nut')}</option>
-                  <option value="Vanilla">{t('crops.vanilla')}</option>
-                  <option value="Cocoa">{t('crops.cocoa')}</option>
-                  <option value="Nutmeg">{t('crops.nutmeg')}</option>
-                  <option value="Cloves">{t('crops.cloves')}</option>
-                  <option value="Cinnamon">{t('crops.cinnamon')}</option>
-                  <option value="Jackfruit">{t('crops.jackfruit')}</option>
-                  <option value="Mango">{t('crops.mango')}</option>
-                  <option value="Papaya">{t('crops.papaya')}</option>
-                  <option value="Pineapple">{t('crops.pineapple')}</option>
+                  {/* Major Indian crops */}
+                  <optgroup label="Cereal & Grain Crops">
+                    <option value="Rice">{t('crops.rice')}</option>
+                    <option value="Wheat">{t('crops.wheat')}</option>
+                    <option value="Maize">{t('crops.maize')}</option>
+                    <option value="Bajra">{t('crops.bajra')}</option>
+                    <option value="Jowar">{t('crops.jowar')}</option>
+                    <option value="Barley">{t('crops.barley')}</option>
+                  </optgroup>
+                  <optgroup label="Cash Crops">
+                    <option value="Sugarcane">{t('crops.sugarcane')}</option>
+                    <option value="Cotton">{t('crops.cotton')}</option>
+                    <option value="Mustard">{t('crops.mustard')}</option>
+                  </optgroup>
+                  <optgroup label="Pulses & Legumes">
+                    <option value="Arhar">{t('crops.arhar')}</option>
+                    <option value="Gram">{t('crops.gram')}</option>
+                    <option value="Peas">{t('crops.peas')}</option>
+                    <option value="Masoor">{t('crops.masoor')}</option>
+                  </optgroup>
+                  <optgroup label="Vegetables & Tubers">
+                    <option value="Potato">{t('crops.potato')}</option>
+                    <option value="Tapioca">{t('crops.tapioca')}</option>
+                    <option value="Ginger">{t('crops.ginger')}</option>
+                    <option value="Turmeric">{t('crops.turmeric')}</option>
+                  </optgroup>
+                  <optgroup label="Fruits">
+                    <option value="Banana">{t('crops.banana')}</option>
+                    <option value="Mango">{t('crops.mango')}</option>
+                    <option value="Papaya">{t('crops.papaya')}</option>
+                    <option value="Pineapple">{t('crops.pineapple')}</option>
+                    <option value="Jackfruit">{t('crops.jackfruit')}</option>
+                    <option value="Coconut">{t('crops.coconut')}</option>
+                  </optgroup>
+                  <optgroup label="Plantation & Spices">
+                    <option value="Black Pepper">{t('crops.black_pepper')}</option>
+                    <option value="Cardamom">{t('crops.cardamom')}</option>
+                    <option value="Tea">{t('crops.tea')}</option>
+                    <option value="Coffee">{t('crops.coffee')}</option>
+                    <option value="Rubber">{t('crops.rubber')}</option>
+                    <option value="Cashew">{t('crops.cashew')}</option>
+                    <option value="Areca Nut">{t('crops.areca_nut')}</option>
+                    <option value="Vanilla">{t('crops.vanilla')}</option>
+                    <option value="Cocoa">{t('crops.cocoa')}</option>
+                    <option value="Nutmeg">{t('crops.nutmeg')}</option>
+                    <option value="Cloves">{t('crops.cloves')}</option>
+                    <option value="Cinnamon">{t('crops.cinnamon')}</option>
+                  </optgroup>
                 </select>
               </div>
 

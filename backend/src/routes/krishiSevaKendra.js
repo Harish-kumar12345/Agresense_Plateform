@@ -1,325 +1,300 @@
 const express = require('express');
 const axios = require('axios');
-const cheerio = require('cheerio');
 const router = express.Router();
 
-// Utility function to calculate distance between two coordinates
+// ---------------------------------------------------------------------------
+// Haversine distance (km)
+// ---------------------------------------------------------------------------
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; // Earth's radius in kilometers
+  const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 };
 
-// Comprehensive Dataset of Government & Agricultural Centers
-const fetchAgriCentersData = async (userLat, userLon) => {
-  const centers = [
-    // 1. Krishi Seva Kendras / Krishi Bhavans (KSK)
-    {
-      id: 'ksk_1',
-      name: 'Ernakulam District Krishi Bhavan',
-      nameLocal: 'എറണാകുളം ജില്ലാ കൃഷി ഭവൻ',
-      category: 'KSK',
-      categoryLabel: 'Krishi Seva Kendra',
-      address: 'Agriculture Office Complex, Kakkanad',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '682030',
-      phone: '+91-484-2422334',
-      email: 'dao-ernakulam@kerala.gov.in',
-      services: ['Soil Testing', 'Crop Advisory', 'Seed Distribution', 'Fertilizer Guidance', 'Subsidy Information'],
-      coordinates: { latitude: 10.0261, longitude: 76.3105 },
-      workingHours: '9:00 AM - 5:00 PM (Mon-Fri)',
-      officerName: 'Dr. Rajesh Kumar (DAO)',
-      rating: 4.8
-    },
-    {
-      id: 'ksk_2',
-      name: 'Thrissur District Krishi Bhavan',
-      nameLocal: 'തൃശ്ശൂർ ജില്ലാ കൃഷി ഭവൻ',
-      category: 'KSK',
-      categoryLabel: 'Krishi Seva Kendra',
-      address: 'Round East, Thrissur',
-      district: 'Thrissur',
-      state: 'Kerala',
-      pincode: '680001',
-      phone: '+91-487-2442156',
-      email: 'dao-thrissur@kerala.gov.in',
-      services: ['Organic Farming', 'Water Management', 'Crop Insurance', 'Training Programs'],
-      coordinates: { latitude: 10.5276, longitude: 76.2144 },
-      workingHours: '9:00 AM - 5:00 PM (Mon-Fri)',
-      officerName: 'Mrs. Priya Nair (DAO)',
-      rating: 4.7
-    },
+// ---------------------------------------------------------------------------
+// Reverse-geocode: get district + state from lat/lon
+// ---------------------------------------------------------------------------
+async function reverseGeocode(lat, lon) {
+  try {
+    const res = await axios.get(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`,
+      { timeout: 6000, headers: { 'User-Agent': 'AgriSense/1.0' } }
+    );
+    const addr = res.data?.address || {};
+    return {
+      district: addr.county || addr.state_district || addr.city_district || addr.city || addr.town || addr.village || 'Local Area',
+      state: addr.state || 'India'
+    };
+  } catch {
+    return { district: 'Local Area', state: 'India' };
+  }
+}
 
-    // 2. Krishi Vigyan Kendras (KVK)
-    {
-      id: 'kvk_1',
-      name: 'ICAR - Krishi Vigyan Kendra Ernakulam (KAU)',
-      nameLocal: 'കെ.വി.കെ എറണാകുളം',
-      category: 'KVK',
-      categoryLabel: 'Krishi Vigyan Kendra',
-      address: 'CMFRI Campus, Narakkal, Ernakulam',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '682505',
-      phone: '+91-484-2492417',
-      email: 'kvkernakulam@yahoo.co.in',
-      services: ['Frontline Demonstration', 'Soil & Water Testing', 'Farmer Training', 'High Yield Seedlings'],
-      coordinates: { latitude: 10.0412, longitude: 76.2235 },
-      workingHours: '9:00 AM - 5:30 PM (Mon-Sat)',
-      officerName: 'Dr. Shinoj Subramannian (Head)',
-      rating: 4.9
+// ---------------------------------------------------------------------------
+// Nominatim search — search for agri centers by keyword near coordinates
+// Returns real geocoded places
+// ---------------------------------------------------------------------------
+async function searchNominatim(keyword, lat, lon, radiusKm) {
+  try {
+    // viewbox: bounding box around the user location
+    const delta = radiusKm / 111; // roughly 1 degree ≈ 111 km
+    const viewbox = `${lon - delta},${lat + delta},${lon + delta},${lat - delta}`;
+
+    const res = await axios.get('https://nominatim.openstreetmap.org/search', {
+      params: {
+        q: keyword,
+        format: 'json',
+        limit: 20,
+        viewbox,
+        bounded: 1,
+        addressdetails: 1,
+        countrycodes: 'in'
+      },
+      timeout: 8000,
+      headers: { 'User-Agent': 'AgriSense/1.0' }
+    });
+
+    return res.data || [];
+  } catch (e) {
+    console.warn(`  ⚠️ Nominatim search failed for "${keyword}":`, e.message);
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Resolve category from place data
+// ---------------------------------------------------------------------------
+function resolveCategory(name = '', type = '', classTag = '') {
+  const n = name.toLowerCase();
+  if (n.includes('vigyan kendra') || n.includes('kvk')) return { category: 'KVK', categoryLabel: 'Krishi Vigyan Kendra' };
+  if (n.includes('fertilizer') || n.includes('khad') || n.includes('iffco') || n.includes('kribhco')) return { category: 'FERTILIZER', categoryLabel: 'Fertilizer Shop' };
+  if (n.includes('seed') || n.includes('beej') || n.includes('nursery')) return { category: 'SEEDS', categoryLabel: 'Seed Supplier' };
+  if (n.includes('pesticide') || n.includes('agrochem') || n.includes('plant protection')) return { category: 'PESTICIDES', categoryLabel: 'Pesticide Shop' };
+  if (n.includes('mandi') || n.includes('market') || n.includes('apmc')) return { category: 'OFFICE', categoryLabel: 'Agricultural Market' };
+  return { category: 'KSK', categoryLabel: 'Krishi Seva Kendra' };
+}
+
+// ---------------------------------------------------------------------------
+// Build services from category
+// ---------------------------------------------------------------------------
+function servicesFor(category) {
+  switch (category) {
+    case 'KVK': return ['Farmer Training', 'Frontline Demonstrations', 'Soil Testing', 'High Yield Seedlings'];
+    case 'FERTILIZER': return ['Urea & NPK Fertilizers', 'Organic Bio-fertilizers', 'Micronutrients'];
+    case 'SEEDS': return ['Certified Seeds', 'Hybrid Varieties', 'Seedlings'];
+    case 'PESTICIDES': return ['Bio-pesticides', 'Fungicides', 'Insecticides', 'Sprayers'];
+    case 'OFFICE': return ['Government Schemes', 'Subsidies', 'Crop Insurance', 'Soil Health Cards'];
+    default: return ['Crop Advisory', 'Soil Testing', 'Seed Distribution', 'Fertilizer Guidance', 'Subsidy Info'];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Convert a Nominatim result to our center format
+// ---------------------------------------------------------------------------
+function nominatimToCenter(place, idPrefix) {
+  const name = place.display_name.split(',')[0].trim();
+  const addr = place.address || {};
+  const { category, categoryLabel } = resolveCategory(
+    place.display_name, place.type, place.class
+  );
+
+  return {
+    id: `${idPrefix}_${place.place_id}`,
+    name,
+    nameLocal: '',
+    category,
+    categoryLabel,
+    address: [
+      addr.road || addr.pedestrian,
+      addr.suburb || addr.neighbourhood,
+      addr.city || addr.town || addr.village,
+      addr.state_district || addr.county
+    ].filter(Boolean).join(', ') || place.display_name.split(',').slice(1, 4).join(',').trim(),
+    district: addr.county || addr.state_district || addr.city || addr.town || '',
+    state: addr.state || 'India',
+    pincode: addr.postcode || '',
+    phone: '',
+    email: '',
+    services: servicesFor(category),
+    coordinates: {
+      latitude: parseFloat(place.lat),
+      longitude: parseFloat(place.lon)
     },
+    workingHours: '9:00 AM - 5:00 PM (Mon-Fri)',
+    rating: 4.5,
+    source: 'OpenStreetMap / Nominatim'
+  };
+}
 
-    // 3. Fertilizer Shops
-    {
-      id: 'fert_1',
-      name: 'FACT Agro Service & Fertilizer Depot',
-      nameLocal: 'ഫാക്ട് ഫെർട്ടിലൈസർ ഡിപ്പോ',
-      category: 'FERTILIZER',
-      categoryLabel: 'Fertilizer Shop',
-      address: 'Udyogamandal, Eloor, Kochi',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '683501',
-      phone: '+91-484-2545161',
-      services: ['Urea & NPK Fertilizers', 'Organic Bio-fertilizers', 'Factamfos 20:20:0:13', 'Micronutrients'],
-      coordinates: { latitude: 10.0768, longitude: 76.2941 },
-      workingHours: '8:30 AM - 6:00 PM (Mon-Sat)',
-      rating: 4.6
-    },
-    {
-      id: 'fert_2',
-      name: 'Kisan Agro Fertilizer Traders',
-      category: 'FERTILIZER',
-      categoryLabel: 'Fertilizer Shop',
-      address: 'Main Road, Aluva',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '683101',
-      phone: '+91-94471-23890',
-      services: ['Chemical Fertilizers', 'Compost', 'Magnesium Sulfate', 'Neem Cake'],
-      coordinates: { latitude: 10.1086, longitude: 76.3571 },
-      workingHours: '8:00 AM - 7:00 PM (Daily)',
-      rating: 4.5
-    },
-
-    // 4. Seed Suppliers
-    {
-      id: 'seed_1',
-      name: 'Kerala State Seed Development Authority Hub',
-      nameLocal: 'കേരള സംസ്ഥാന വിത്ത് വികസന അതോറിറ്റി',
-      category: 'SEEDS',
-      categoryLabel: 'Seed Supplier',
-      address: 'Agronomic Research Station, Chalakudy',
-      district: 'Thrissur',
-      state: 'Kerala',
-      pincode: '680307',
-      phone: '+91-480-2701235',
-      services: ['Certified Paddy Seeds', 'Hybrid Vegetable Seeds', 'Tissue Culture Banana', 'Coconut Seedlings'],
-      coordinates: { latitude: 10.3072, longitude: 76.3312 },
-      workingHours: '9:00 AM - 5:00 PM (Mon-Sat)',
-      rating: 4.8
-    },
-
-    // 5. Pesticide Shops
-    {
-      id: 'pest_1',
-      name: 'Green Shield Plant Protection & Agro-Chemicals',
-      category: 'PESTICIDES',
-      categoryLabel: 'Pesticide Shop',
-      address: 'Market Junction, Angamaly',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '683572',
-      phone: '+91-98950-44123',
-      services: ['Bio-pesticides', 'Fungicides', 'Insecticides', 'Neem Oil Formulations', 'Sprayer Machinery'],
-      coordinates: { latitude: 10.1964, longitude: 76.3860 },
-      workingHours: '8:30 AM - 7:30 PM (Daily)',
-      rating: 4.4
-    },
-
-    // 6. Agricultural Offices
-    {
-      id: 'off_1',
-      name: 'Principal Agricultural Office (PAO)',
-      nameLocal: 'പ്രിൻസിപ്പൽ കൃഷി ഓഫീസ്',
-      category: 'OFFICE',
-      categoryLabel: 'Agricultural Office',
-      address: 'Civil Station, Kakkanad',
-      district: 'Ernakulam',
-      state: 'Kerala',
-      pincode: '682030',
-      phone: '+91-484-2422201',
-      services: ['Government Schemes', 'Farm Subsidies', 'Disaster Relief', 'Soil Health Cards'],
-      coordinates: { latitude: 10.0275, longitude: 76.3090 },
-      workingHours: '10:00 AM - 5:00 PM (Mon-Fri)',
-      officerName: 'Principal Agricultural Officer',
-      rating: 4.6
-    }
-  ];
-
-  return centers;
-};
-
-// Check if a center is currently open based on local time
-const checkIsOpenNow = (workingHoursStr) => {
+// ---------------------------------------------------------------------------
+// Is center open right now?
+// ---------------------------------------------------------------------------
+function checkIsOpenNow(workingHoursStr) {
   if (!workingHoursStr) return true;
   const now = new Date();
-  const day = now.getDay(); // 0 is Sun
+  const day = now.getDay();
   const hour = now.getHours();
+  if (workingHoursStr.includes('Mon-Fri') && (day === 0 || day === 6)) return false;
+  return hour >= 9 && hour < 17;
+}
 
-  if (workingHoursStr.includes('Mon-Fri') && (day === 0 || day === 6)) {
-    return false;
-  }
-  if (hour >= 9 && hour < 17) {
-    return true;
-  }
-  return false;
-};
-
-// Main API endpoint
+// ---------------------------------------------------------------------------
+// GET /api/krishi-seva-kendra?latitude=&longitude=&category=&search=&radius=
+// ---------------------------------------------------------------------------
 router.get('/', async (req, res) => {
   try {
-    const { latitude, longitude, category = 'ALL', search = '', state = 'kerala' } = req.query;
+    const { latitude, longitude, category = 'ALL', search = '', radius = 50 } = req.query;
 
     if (!latitude || !longitude) {
-      return res.status(400).json({
-        success: false,
-        error: 'Latitude and longitude are required',
-        message: 'Please provide valid GIS coordinates'
-      });
+      return res.status(400).json({ success: false, error: 'latitude and longitude are required' });
     }
 
     const userLat = parseFloat(latitude);
     const userLon = parseFloat(longitude);
+    const radiusKm = Math.min(Math.max(parseInt(radius) || 50, 10), 100);
 
     if (isNaN(userLat) || isNaN(userLon)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid coordinates'
-      });
+      return res.status(400).json({ success: false, error: 'Invalid coordinates' });
     }
 
-    console.log(`Fetching Agri Centers for location: ${userLat}, ${userLon}, Category: ${category}`);
+    console.log(`🌾 Fetching nearby agri centers [${userLat}, ${userLon}] radius=${radiusKm}km`);
 
-    // Load curated government centers + Overpass OSM telemetry
-    let allCenters = await fetchAgriCentersData(userLat, userLon);
+    // 1. Reverse geocode to get location context
+    const locationInfo = await reverseGeocode(userLat, userLon);
+    console.log(`  📍 Location: ${locationInfo.district}, ${locationInfo.state}`);
 
-    // Attempt OpenStreetMap Overpass API for real local agrarian shops around coordinates
-    try {
-      const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json][timeout:10];(node["shop"~"agrarian|fertilizer|seeds|farm"](around:35000,${userLat},${userLon});node["office"="government"]["government"="agriculture"](around:35000,${userLat},${userLon}););out body;`;
-      const overpassRes = await axios.get(overpassUrl, { timeout: 4000 });
+    // 2. Search Nominatim with multiple agricultural keywords in parallel
+    const keywords = [
+      'Krishi Bhavan',
+      'Krishi Seva Kendra',
+      'Krishi Vigyan Kendra',
+      'Agriculture office',
+      `${locationInfo.district} agricultural office`,
+      'IFFCO fertilizer',
+      'agri supply store',
+      'seed shop',
+      'kisan seva kendra'
+    ];
 
-      if (overpassRes.data && Array.isArray(overpassRes.data.elements)) {
-        const osmNodes = overpassRes.data.elements.map((el, i) => ({
-          id: `osm_${el.id}`,
-          name: el.tags.name || el.tags['name:en'] || `Agri Supplier (${el.tags.shop || 'Agrarian'})`,
-          nameLocal: el.tags['name:ml'] || el.tags.name || '',
-          category: el.tags.shop === 'fertilizer' ? 'FERTILIZER' : el.tags.shop === 'seeds' ? 'SEEDS' : el.tags.shop === 'pesticides' ? 'PESTICIDES' : 'KSK',
-          categoryLabel: el.tags.shop === 'fertilizer' ? 'Fertilizer Dealer' : el.tags.shop === 'seeds' ? 'Seed Merchant' : 'Agri Center',
-          address: el.tags['addr:full'] || el.tags['addr:street'] || 'Local Market Area',
-          district: el.tags['addr:city'] || 'Local District',
-          state: 'Kerala',
-          phone: el.tags.phone || el.tags['contact:phone'] || '+91-484-2400000',
-          services: ['Agri Products', 'Farm Supplies', 'Local Trade'],
-          coordinates: { latitude: el.lat, longitude: el.lon },
-          workingHours: el.tags.opening_hours || '8:30 AM - 6:30 PM (Mon-Sat)',
-          rating: 4.5
-        }));
+    const searchResults = await Promise.allSettled(
+      keywords.map((kw, i) => searchNominatim(kw, userLat, userLon, radiusKm))
+    );
 
-        allCenters = [...allCenters, ...osmNodes.filter(n => !allCenters.some(c => c.name === n.name))];
+    // 3. Merge all results, deduplicate by place_id
+    const seenIds = new Set();
+    const rawCenters = [];
+    for (const result of searchResults) {
+      if (result.status === 'fulfilled') {
+        for (const place of result.value) {
+          if (!seenIds.has(place.place_id)) {
+            seenIds.add(place.place_id);
+            rawCenters.push(nominatimToCenter(place, 'nom'));
+          }
+        }
       }
-    } catch (osmErr) {
-      console.warn('Overpass API query fallback:', osmErr.message);
     }
 
-    // Compute Haversine distance & open/closed status for each center
-    let processedCenters = allCenters.map(center => {
-      const distance = calculateDistance(userLat, userLon, center.coordinates.latitude, center.coordinates.longitude);
-      const isOpenNow = checkIsOpenNow(center.workingHours);
-      return {
-        ...center,
-        distance: Math.round(distance * 10) / 10, // 1 decimal place
-        isOpenNow
-      };
-    });
+    console.log(`  ✅ Nominatim returned ${rawCenters.length} unique centers`);
 
-    // Sort ascending by distance (nearest first)
-    processedCenters.sort((a, b) => a.distance - b.distance);
+    // 4. Compute distance + open status
+    let processed = rawCenters.map(center => ({
+      ...center,
+      district: center.district || locationInfo.district,
+      state: center.state || locationInfo.state,
+      distance: Math.round(calculateDistance(userLat, userLon, center.coordinates.latitude, center.coordinates.longitude) * 10) / 10,
+      isOpenNow: checkIsOpenNow(center.workingHours)
+    }));
 
-    // Apply category filter if specified
+    // 5. Sort by distance
+    processed.sort((a, b) => a.distance - b.distance);
+
+    // 6. Filter by radius
+    processed = processed.filter(c => c.distance <= radiusKm);
+
+    // 7. Category filter
     if (category && category !== 'ALL') {
-      processedCenters = processedCenters.filter(c => c.category.toUpperCase() === category.toUpperCase());
+      processed = processed.filter(c => c.category.toUpperCase() === category.toUpperCase());
     }
 
-    // Apply search filter if specified
+    // 8. Search filter
     if (search && search.trim()) {
       const q = search.toLowerCase().trim();
-      processedCenters = processedCenters.filter(c =>
+      processed = processed.filter(c =>
         c.name.toLowerCase().includes(q) ||
-        (c.nameLocal && c.nameLocal.toLowerCase().includes(q)) ||
         c.address.toLowerCase().includes(q) ||
-        c.district.toLowerCase().includes(q)
+        c.district.toLowerCase().includes(q) ||
+        c.services.some(s => s.toLowerCase().includes(q))
       );
     }
-
-    const nearestDistrict = processedCenters[0]?.district || 'Local Area';
 
     return res.json({
       success: true,
       userLocation: {
         latitude: userLat,
         longitude: userLon,
-        district: nearestDistrict,
-        state: state.charAt(0).toUpperCase() + state.slice(1)
+        district: locationInfo.district,
+        state: locationInfo.state,
+        radiusKm
       },
-      count: processedCenters.length,
-      centers: processedCenters,
+      count: processed.length,
+      centers: processed,
       lastUpdated: new Date().toISOString(),
-      source: 'Government Agriculture Dept & OpenStreetMap Real Telemetry'
+      source: 'OpenStreetMap Nominatim (Live)'
     });
 
   } catch (error) {
-    console.error('Error in Krishi Seva Kendra API:', error);
+    console.error('Krishi Seva Kendra API error:', error);
     return res.status(500).json({
       success: false,
-      error: 'Internal server error',
-      message: 'Failed to fetch agricultural center telemetry: ' + error.message
+      error: 'Failed to fetch agricultural centers',
+      message: error.message
     });
   }
 });
 
-// Additional endpoint to get centers by district
+// ---------------------------------------------------------------------------
+// GET /api/krishi-seva-kendra/district/:districtName
+// ---------------------------------------------------------------------------
 router.get('/district/:districtName', async (req, res) => {
   try {
     const { districtName } = req.params;
-    const allCenters = await fetchAgriCentersData(10.0261, 76.3105);
 
-    const districtCenters = allCenters.filter(center => 
-      center.district.toLowerCase().includes(districtName.toLowerCase())
-    );
+    // Get coordinates for the district
+    const geoRes = await axios.get('https://nominatim.openstreetmap.org/search', {
+      params: { q: `${districtName} district India`, format: 'json', limit: 1 },
+      timeout: 6000,
+      headers: { 'User-Agent': 'AgriSense/1.0' }
+    });
+
+    let lat = 20.5937, lon = 78.9629;
+    if (geoRes.data?.[0]) {
+      lat = parseFloat(geoRes.data[0].lat);
+      lon = parseFloat(geoRes.data[0].lon);
+    }
+
+    const results = await searchNominatim('Krishi Bhavan Agriculture office', lat, lon, 40);
+    const centers = results
+      .map((p, i) => ({
+        ...nominatimToCenter(p, 'dist'),
+        distance: Math.round(calculateDistance(lat, lon, parseFloat(p.lat), parseFloat(p.lon)) * 10) / 10
+      }))
+      .sort((a, b) => a.distance - b.distance);
 
     res.json({
       success: true,
       district: districtName,
-      count: districtCenters.length,
-      centers: districtCenters,
+      count: centers.length,
+      centers,
       lastUpdated: new Date().toISOString()
     });
-
   } catch (error) {
-    console.error('Error fetching district centers:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to fetch district centers'
-    });
+    console.error('District centers error:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch district centers' });
   }
 });
 
