@@ -1,7 +1,19 @@
 /// <reference path="../types/speech.d.ts" />
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import io from 'socket.io-client';
-import { Mic, MicOff, Send, Volume2, VolumeX, Bot, User } from 'lucide-react';
+import { 
+  Mic, 
+  MicOff, 
+  Send, 
+  Volume2, 
+  VolumeX, 
+  Bot, 
+  User, 
+  Sparkles,
+  ArrowDown,
+  Languages,
+  Check
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ImageUpload } from './ImageUpload';
@@ -25,26 +37,35 @@ interface ChatProps {
 }
 
 export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
-  const { t, language, speak } = useLanguage();
-  const [messages, setMessages] = useState([]);
+  const { t, language, setLanguage, speak } = useLanguage();
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [roomId] = useState(() => Math.random().toString(36).slice(2));
   const [listening, setListening] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-  const recognitionRef = useRef(null);
-  const messagesEndRef = useRef(null);
+  const [showScrollBottom, setShowScrollBottom] = useState(false);
+  
+  const recognitionRef = useRef<any>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
 
   const socket = useMemo(() => io(backendUrl, { transports: ['websocket'] }), []);
 
-  // Auto-scroll to bottom when new messages arrive
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isTyping]);
+
+  const handleScroll = () => {
+    if (!chatScrollRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = chatScrollRef.current;
+    const isScrolledUp = scrollHeight - scrollTop - clientHeight > 100;
+    setShowScrollBottom(isScrolledUp);
+  };
 
   useEffect(() => {
     socket.emit('join', { roomId });
@@ -53,11 +74,11 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       setIsTyping(true);
     });
     
-    socket.on('user_message', ({ text: t }) => {
+    socket.on('user_message', ({ text: t }: { text: string }) => {
       setMessages((m) => [...m, { role: 'user', text: t, ts: Date.now() }]);
     });
     
-    socket.on('assistant_message', ({ text: t }) => {
+    socket.on('assistant_message', ({ text: t }: { text: string }) => {
       setIsTyping(false);
       setMessages((m) => [...m, { role: 'assistant', text: t, ts: Date.now() }]);
     });
@@ -70,12 +91,10 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   async function sendMessage(text: string) {
     if (!text.trim()) return;
     
-    // Add user message immediately to UI
     setMessages((m) => [...m, { role: 'user', text, ts: Date.now() }]);
     setInput('');
     setIsTyping(true);
     
-    // Build farm context dynamically from actual farm data
     const farmContext = {
       location: activeFarm?.location_name || location?.city || 'India',
       crop: activeFarm?.crop || crop || 'Not specified',
@@ -90,7 +109,6 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       district: location?.district || ''
     };
 
-    // Send message via Socket.IO with real farm context
     socket.emit('user_message', {
       roomId,
       text,
@@ -103,14 +121,12 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   const handleImageUpload = (imageData: string, fileName: string) => {
     setIsUploadingImage(true);
     
-    // Add user message showing the image upload
     setMessages((m) => [...m, { 
       role: 'user', 
       text: `📸 Uploaded plant image: ${fileName}`, 
       ts: Date.now() 
     }]);
     
-    // Send image via Socket.IO
     socket.emit('plant_image_upload', {
       roomId,
       imageData,
@@ -119,13 +135,12 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       language
     });
     
-    // Reset upload state after a delay
     setTimeout(() => {
       setIsUploadingImage(false);
     }, 2000);
   };
 
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage(input);
@@ -140,7 +155,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     }
     if (!recognitionRef.current) {
       recognitionRef.current = new SpeechRecognitionCtor();
-      recognitionRef.current.lang = 'en-US';
+      recognitionRef.current.lang = language === 'ml' ? 'ml-IN' : 'en-IN';
       recognitionRef.current.interimResults = false;
       recognitionRef.current.maxAlternatives = 1;
       recognitionRef.current.onresult = (event: any) => {
@@ -149,7 +164,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       };
       recognitionRef.current.onend = () => setListening(false);
     } else {
-      recognitionRef.current.lang = 'en-US';
+      recognitionRef.current.lang = language === 'ml' ? 'ml-IN' : 'en-IN';
     }
     if (!listening) {
       setListening(true);
@@ -159,504 +174,251 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     }
   }
 
-  // Using speak function from LanguageContext for multilingual TTS
-
   function stopSpeaking() {
     try {
       window.speechSynthesis.cancel();
     } catch {}
   }
 
+  const samplePrompts = [
+    language === 'ml' ? 'നെല്ലിലെ കീടങ്ങളെ എങ്ങനെ നിയന്ത്രിക്കാം?' : 'How do I control Rice Blast & stem borer?',
+    language === 'ml' ? 'ഈ ആഴ്ചയിലെ നനയ്ക്കുന്ന രീതി എന്താണ്?' : 'What is the optimal irrigation schedule for this soil moisture?',
+    language === 'ml' ? 'NPK വളങ്ങളുടെ അളവ് പറയുക' : 'Recommend NPK dosage for current crop stage',
+    language === 'ml' ? 'വിപണി വിലകൾ എങ്ങനെയാണ്?' : 'Analyze current mandi price trends'
+  ];
+
   return (
-    <div className="fixed inset-x-0 top-16 bottom-0 bg-gradient-to-br from-emerald-50 via-green-50 to-yellow-50 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 z-0">
-        <div className="absolute top-10 left-10 w-32 h-32 text-green-200">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2L8 12L12 22L16 12L12 2Z"/>
-          </svg>
+    <div className="flex flex-col h-[calc(100vh-5.5rem)] max-w-5xl mx-auto saas-card overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl relative">
+      
+      {/* Header Bar */}
+      <div className="p-4 px-6 bg-slate-950/90 border-b border-white/10 flex items-center justify-between shrink-0 z-20 backdrop-blur-xl">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-emerald-300/30">
+            <Bot className="w-5 h-5 text-slate-950" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-white tracking-tight font-display">
+                {t('chat.title') || 'Agronomic AI Advisor'}
+              </h2>
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+            </div>
+            <p className="text-xs text-slate-400">
+              {activeFarm?.farm_name || location?.city || 'Indian Agriculture'} • Crop: {crop || activeFarm?.crop || 'Rice'}
+            </p>
+          </div>
         </div>
-        <div className="absolute top-32 right-20 w-24 h-24 text-yellow-200">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5C14.8 6.1 14.6 5.8 14.3 5.5L16.5 1L14.5 0L12.4 4.8C12.3 4.8 12.2 4.8 12.1 4.8H11.9C11.8 4.8 11.7 4.8 11.6 4.8L9.5 0L7.5 1L9.7 5.5C9.4 5.8 9.2 6.1 9 6.5L3 7V9L9 9.5C9.2 9.9 9.4 10.2 9.7 10.5L7.5 15L9.5 16L11.6 11.2C11.7 11.2 11.8 11.2 11.9 11.2H12.1C12.2 11.2 12.3 11.2 12.4 11.2L14.5 16L16.5 15L14.3 10.5C14.6 10.2 14.8 9.9 15 9.5L21 9Z"/>
-          </svg>
-        </div>
-        <div className="absolute bottom-20 left-32 w-28 h-28 text-green-200">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
-          </svg>
+
+        {/* Clean Segmented Language Toggle */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center bg-slate-800/90 p-1 rounded-xl border border-white/10 text-xs font-semibold select-none">
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                language === 'en'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              English
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('ml')}
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                language === 'ml'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              മലയാളം
+            </button>
+          </div>
         </div>
       </div>
-      
-      <div className="relative z-10 h-full flex flex-col overflow-hidden">
-        <div className="w-4/5 mx-auto h-full flex flex-col px-0 py-4 gap-0 overflow-hidden">
-          
-          {/* Enhanced Header - Fixed */}
-          <motion.div 
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-white/90 backdrop-blur-lg rounded-t-3xl border border-white/20 shadow-xl p-2 sm:p-3 lg:p-4 flex-shrink-0 z-30"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,253,244,0.95) 100%)',
-              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6)'
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <motion.div 
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="relative"
-                >
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600 rounded-3xl flex items-center justify-center shadow-lg relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                    <Bot className="w-7 h-7 text-white relative z-10" />
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
-                  </div>
-                </motion.div>
-                <div className="flex-1">
-                  <motion.h1 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-emerald-700 via-green-600 to-emerald-700 bg-clip-text text-transparent"
-                  >
-                    {t('chat.title')}
-                  </motion.h1>
-                  <motion.p 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-sm sm:text-base text-emerald-600 font-medium"
-                  >
-                    {t('chat.subtitle')}
-                  </motion.p>
-                </div>
-              </div>
-              
-              {/* Status Indicator */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
-                className="hidden sm:flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200"
-              >
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-medium text-emerald-700">AI Active</span>
-              </motion.div>
+
+      {/* Messages Scroll View */}
+      <div 
+        ref={chatScrollRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gradient-to-b from-slate-950/80 via-slate-900 to-slate-950"
+      >
+        {messages.length === 0 ? (
+          <div className="h-full flex flex-col items-center justify-center text-center p-6 max-w-lg mx-auto select-none">
+            <div className="w-14 h-14 rounded-3xl bg-slate-800/80 border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 mb-4 text-emerald-400">
+              <Sparkles className="w-7 h-7" />
             </div>
-          </motion.div>
+            <h3 className="text-lg font-bold text-white mb-1.5 font-display">
+              {language === 'ml' ? 'കാർഷിക എഐ അസിസ്റ്റന്റിലേക്ക് സ്വാഗതം' : 'Personalized Agronomic Guidance'}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+              {language === 'ml'
+                ? 'നിങ്ങളുടെ വിളവെടുപ്പ്, കീടനിയന്ത്രണം, വളപ്രയോഗം, കാലാവസ്ഥ എന്നിവയെക്കുറിച്ച് ഏതു സംശയങ്ങളും ചോദിക്കാം.'
+                : 'Ask questions regarding crop pathology, fertilizer dosages, optimal irrigation schedules, or mandi market rates.'}
+            </p>
 
-          {/* Enhanced Messages Container */}
-          <div className="flex-1 flex flex-col min-h-0 z-20 overflow-hidden">
-            <div 
-              className="flex-1 overflow-y-auto overflow-x-hidden px-2 py-4 space-y-4 scroll-smooth scrollbar-thin scrollbar-thumb-emerald-300 scrollbar-track-transparent hover:scrollbar-thumb-emerald-400"
-              style={{
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(248,250,252,0.9) 100%)',
-                backdropFilter: 'blur(20px)',
-                borderLeft: '1px solid rgba(255,255,255,0.2)',
-                borderRight: '1px solid rgba(255,255,255,0.2)',
-                marginTop: '0',
-                marginBottom: '0',
-                maxHeight: '100%',
-                height: '100%',
-                scrollbarWidth: 'thin',
-                scrollbarColor: 'rgba(16, 185, 129, 0.3) transparent'
-              }}
-            >
-              <AnimatePresence initial={false}>
-                {messages.length === 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="flex flex-col items-center justify-center min-h-[400px] text-center px-4 py-8"
+            {/* Quick Prompt Chips */}
+            <div className="w-full space-y-2">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">
+                Suggested Prompts
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {samplePrompts.map((prompt, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => sendMessage(prompt)}
+                    className="p-2.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-white/5 hover:border-emerald-500/30 text-left text-xs text-slate-300 transition-all cursor-pointer"
                   >
-                    {/* Welcome Animation */}
-                    <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                      className="relative mb-6"
-                    >
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-emerald-400 via-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent"></div>
-                        <Bot className="w-10 h-10 sm:w-12 sm:h-12 text-white relative z-10" />
-                        <motion.div 
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                          className="absolute inset-0 border-4 border-transparent border-t-yellow-300 rounded-full"
-                        ></motion.div>
-                      </div>
-                      <motion.div
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full shadow-lg flex items-center justify-center"
-                      >
-                        <span className="text-xs">🌱</span>
-                      </motion.div>
-                    </motion.div>
-
-                    <motion.h3 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-emerald-700 via-green-600 to-emerald-700 bg-clip-text text-transparent mb-3"
-                    >
-                      {t('chat.welcome_title')}
-                    </motion.h3>
-                    
-                    <motion.p 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 }}
-                      className="text-gray-600 max-w-md mb-8 text-base sm:text-lg leading-relaxed"
-                    >
-                      {t('chat.welcome_text')}
-                    </motion.p>
-                    
-                    {/* Enhanced Plant Disease Feature Card */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ delay: 0.6, duration: 0.6 }}
-                      className="bg-gradient-to-br from-emerald-50 via-green-50 to-yellow-50 rounded-2xl p-6 border border-emerald-200/50 max-w-lg w-full shadow-xl backdrop-blur-sm"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(240,253,244,0.9) 0%, rgba(254,252,232,0.9) 100%)',
-                        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6)'
-                      }}
-                    >
-                      <div className="flex items-center gap-3 mb-4">
-                        <motion.div 
-                          animate={{ rotate: [0, 10, -10, 0] }}
-                          transition={{ duration: 3, repeat: Infinity }}
-                          className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg"
-                        >
-                          <span className="text-white text-xl">🌿</span>
-                        </motion.div>
-                        <div className="text-left">
-                          <h4 className="font-bold text-emerald-800 text-lg">{t('chat.plant_disease_detection')}</h4>
-                          <p className="text-emerald-600 text-sm">Powered by AI Vision</p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-emerald-700 mb-4 leading-relaxed">
-                        {t('chat.plant_disease_description')}
-                      </p>
-                      
-                      <div className="flex items-center justify-center gap-3 text-sm text-emerald-600 bg-emerald-100/50 rounded-xl p-3 border border-emerald-200/50">
-                        <motion.span 
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-xl"
-                        >
-                          📸
-                        </motion.span>
-                        <span className="font-medium">{t('chat.upload_or_capture')}</span>
-                      </div>
-                    </motion.div>
-
-                    {/* Feature Pills */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8 }}
-                      className="flex flex-wrap justify-center gap-2 mt-6 max-w-md"
-                    >
-                      {['🎤 Voice Chat', '🤖 AI-Powered', '📊 Smart Analysis', '💡 Expert Tips'].map((feature, index) => (
-                        <motion.div
-                          key={feature}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.9 + index * 0.1 }}
-                          className="bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-medium text-emerald-700 border border-emerald-200/50 shadow-sm"
-                        >
-                          {feature}
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  </motion.div>
-                )}
-
-                {messages.map((m, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className={`flex gap-3 sm:gap-4 ${m.role === 'assistant' ? 'justify-start' : 'justify-end'}`}
-                  >
-                    {m.role === 'assistant' && (
-                      <motion.div 
-                        initial={{ scale: 0, rotate: -90 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative flex-shrink-0 mt-2"
-                      >
-                        <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                          <Bot className="w-5 h-5 text-white relative z-10" />
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
-                      </motion.div>
-                    )}
-                    
-                    <div className={`max-w-[85%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[70%] xl:max-w-[65%] ${m.role === 'user' ? 'order-2' : ''}`}>
-                      <motion.div
-                        initial={{ scale: 0.9, y: 10 }}
-                        animate={{ scale: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`relative rounded-3xl px-4 py-3 sm:px-6 sm:py-4 shadow-lg ${
-                          m.role === 'assistant' 
-                            ? 'bg-white border border-emerald-100/50 text-gray-800' 
-                            : 'text-white shadow-xl'
-                        }`}
-                        style={m.role === 'assistant' ? {
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,253,244,0.95) 100%)',
-                          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)'
-                        } : {
-                          background: 'linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)',
-                          boxShadow: '0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 8px 10px -6px rgba(16, 185, 129, 0.2)'
-                        }}
-                      >
-                        {/* Message tail */}
-                        <div className={`absolute top-4 w-3 h-3 transform rotate-45 ${
-                          m.role === 'assistant' 
-                            ? 'bg-white -left-1.5 border-l border-b border-emerald-100/50' 
-                            : 'bg-emerald-500 -right-1.5'
-                        }`}></div>
-                        
-                        <div className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap relative z-10">{m.text}</div>
-                        
-                        <div className={`mt-3 text-xs flex items-center justify-between ${
-                          m.role === 'assistant' ? 'text-gray-500' : 'text-white/80'
-                        }`}>
-                          <span className="font-medium">{new Date(m.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                          {m.role === 'assistant' && (
-                            <div className="flex items-center gap-2">
-                              <motion.button 
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors p-1 rounded-lg hover:bg-emerald-50" 
-                                onClick={() => speak(m.text)} 
-                                aria-label="Play TTS"
-                              >
-                                <Volume2 className="w-4 h-4" />
-                                <span className="hidden sm:inline text-xs font-medium">{t('chat.play')}</span>
-                              </motion.button>
-                              <motion.button 
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="flex items-center gap-1 text-red-500 hover:text-red-600 transition-colors p-1 rounded-lg hover:bg-red-50" 
-                                onClick={stopSpeaking} 
-                                aria-label="Stop TTS"
-                              >
-                                <VolumeX className="w-4 h-4" />
-                                <span className="hidden sm:inline text-xs font-medium">{t('chat.stop')}</span>
-                              </motion.button>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    </div>
-                    
-                    {m.role === 'user' && (
-                      <motion.div 
-                        initial={{ scale: 0, rotate: 90 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative flex-shrink-0 mt-2"
-                      >
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                          <User className="w-5 h-5 text-white relative z-10" />
-                        </div>
-                        <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-blue-400 rounded-full border-2 border-white"></div>
-                      </motion.div>
-                    )}
-                  </motion.div>
+                    {prompt}
+                  </button>
                 ))}
-              
-                {/* Enhanced Typing Indicator */}
-                {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex gap-3 sm:gap-4 justify-start"
-                  >
-                    <div className="relative flex-shrink-0 mt-2">
-                      <motion.div
-                        animate={{ rotate: [0, 360] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        className="w-10 h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                        <Bot className="w-5 h-5 text-white relative z-10" />
-                      </motion.div>
-                      <motion.div
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="absolute -bottom-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white"
-                      ></motion.div>
-                    </div>
-                    
-                    <div 
-                      className="bg-white border border-emerald-100/50 rounded-3xl px-6 py-4 shadow-lg max-w-xs"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,253,244,0.95) 100%)',
-                        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-emerald-600 text-sm font-medium">AI is thinking...</span>
-                      </div>
-                      <div className="flex gap-1.5">
-                        <motion.div
-                          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
-                          transition={{ repeat: Infinity, duration: 1.2, delay: 0 }}
-                          className="w-2.5 h-2.5 bg-emerald-500 rounded-full"
-                        />
-                        <motion.div
-                          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
-                          transition={{ repeat: Infinity, duration: 1.2, delay: 0.2 }}
-                          className="w-2.5 h-2.5 bg-emerald-500 rounded-full"
-                        />
-                        <motion.div
-                          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
-                          transition={{ repeat: Infinity, duration: 1.2, delay: 0.4 }}
-                          className="w-2.5 h-2.5 bg-emerald-500 rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <div ref={messagesEndRef} />
+              </div>
             </div>
           </div>
+        ) : (
+          messages.map((m, idx) => (
+            <div
+              key={idx}
+              className={`flex gap-3 items-end ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {m.role === 'assistant' && (
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 flex items-center justify-center shrink-0 shadow-md border border-emerald-300/30 text-slate-950 mb-1">
+                  <Bot className="w-4 h-4" />
+                </div>
+              )}
 
-          {/* Enhanced Input Area - Fixed */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-b-3xl border-t border-white/20 p-2 sm:p-3 lg:p-4 flex-shrink-0 z-30"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,253,244,0.95) 100%)',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 -10px 25px -5px rgba(0, 0, 0, 0.1), 0 -8px 10px -6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-              marginTop: '0'
-            }}
-          >
-            <div className="flex items-end gap-3 sm:gap-4">
-              {/* Enhanced Input Field */}
-              <div className="flex-1 relative">
-                <motion.input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder={t('chat.placeholder')}
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-2xl border-2 border-emerald-200/50 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 outline-none bg-white/80 backdrop-blur-sm transition-all duration-300 text-gray-800 placeholder-gray-500 text-sm sm:text-base shadow-lg"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%)',
-                    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1)'
-                  }}
-                  whileFocus={{ scale: 1.02 }}
-                />
-                {input && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"
-                  />
-                )}
-              </div>
-              
-              {/* Enhanced Action Buttons */}
-              <div className="flex items-end gap-2 sm:gap-3">
-                {/* Image Upload Component */}
-                <ImageUpload 
-                  onImageUpload={handleImageUpload}
-                  isUploading={isUploadingImage}
-                />
+              <div
+                className={`max-w-[85%] sm:max-w-[75%] rounded-2xl p-4 text-sm leading-relaxed shadow-md ${
+                  m.role === 'user'
+                    ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-br-xs border border-emerald-500/30'
+                    : 'bg-slate-800/90 text-slate-100 rounded-bl-xs border border-slate-700/80'
+                }`}
+              >
+                <div className="whitespace-pre-wrap">{m.text}</div>
                 
-                {/* Voice Input Button */}
-                <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={toggleMic}
-                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 relative overflow-hidden ${
-                    listening 
-                      ? 'bg-gradient-to-br from-red-500 via-red-600 to-red-700 animate-pulse' 
-                      : 'bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:to-blue-800'
-                  }`}
-                  style={{
-                    boxShadow: listening 
-                      ? '0 10px 25px -5px rgba(239, 68, 68, 0.4), 0 8px 10px -6px rgba(239, 68, 68, 0.2)' 
-                      : '0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 8px 10px -6px rgba(59, 130, 246, 0.2)'
-                  }}
-                  aria-label="Toggle microphone"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                  <motion.div
-                    animate={listening ? { rotate: [0, 10, -10, 0] } : {}}
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                    className="relative z-10"
-                  >
-                    {listening ? (
-                      <MicOff className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    ) : (
-                      <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    )}
-                  </motion.div>
-                  {listening && (
-                    <motion.div
-                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ repeat: Infinity, duration: 1.5 }}
-                      className="absolute inset-0 bg-red-400 rounded-2xl"
-                    />
+                <div className="flex items-center justify-between gap-4 mt-2 pt-1 text-[11px] opacity-70">
+                  <span>
+                    {new Date(m.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                  
+                  {m.role === 'assistant' && (
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => speak(m.text)}
+                        className="hover:text-emerald-300 transition-colors p-0.5 rounded cursor-pointer"
+                        title="Read aloud"
+                      >
+                        <Volume2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={stopSpeaking}
+                        className="hover:text-rose-400 transition-colors p-0.5 rounded cursor-pointer"
+                        title="Stop speaking"
+                      >
+                        <VolumeX className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   )}
-                </motion.button>
-                
-                {/* Send Button */}
-                <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => sendMessage(input)}
-                  disabled={!input.trim() || isTyping}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 disabled:cursor-not-allowed relative overflow-hidden"
-                  style={{
-                    background: !input.trim() || isTyping 
-                      ? 'linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%)'
-                      : 'linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)',
-                    boxShadow: !input.trim() || isTyping
-                      ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                      : '0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 8px 10px -6px rgba(16, 185, 129, 0.2)'
-                  }}
-                  aria-label="Send message"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                  <motion.div
-                    animate={isTyping ? { rotate: 360 } : {}}
-                    transition={{ duration: 1, repeat: isTyping ? Infinity : 0, ease: "linear" }}
-                    className="relative z-10"
-                  >
-                    <Send className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                  </motion.div>
-                </motion.button>
+                </div>
               </div>
+
+              {m.role === 'user' && (
+                <div className="w-8 h-8 rounded-xl bg-slate-800 border border-white/10 flex items-center justify-center shrink-0 text-slate-300 mb-1">
+                  <User className="w-4 h-4 text-emerald-400" />
+                </div>
+              )}
             </div>
-          </motion.div>
+          ))
+        )}
+
+        {/* Bouncing Dots Typing Indicator */}
+        {isTyping && (
+          <div className="flex gap-3 items-end justify-start">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 flex items-center justify-center shrink-0 shadow-md text-slate-950">
+              <Bot className="w-4 h-4" />
+            </div>
+            <div className="bg-slate-800/90 border border-slate-700 rounded-2xl rounded-bl-xs p-3.5 px-4 shadow-sm flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:-0.3s]"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:-0.15s]"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce"></span>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Floating Jump to Latest Button */}
+      {showScrollBottom && (
+        <button
+          type="button"
+          onClick={scrollToBottom}
+          className="absolute bottom-24 right-8 p-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-black/40 transition-transform active:scale-95 cursor-pointer z-20"
+          title="Scroll to latest message"
+        >
+          <ArrowDown className="w-4 h-4" />
+        </button>
+      )}
+
+      {/* Input Bar */}
+      <div className="p-3 sm:p-4 bg-slate-950/90 border-t border-white/10 backdrop-blur-xl z-20">
+        <div className="flex items-center gap-2 max-w-4xl mx-auto">
+          
+          {/* Image Upload Trigger */}
+          <div className="shrink-0">
+            <ImageUpload 
+              onImageUpload={handleImageUpload}
+              isUploading={isUploadingImage}
+            />
+          </div>
+
+          {/* Voice Input Mic Button */}
+          <button
+            type="button"
+            onClick={toggleMic}
+            className={`p-2.5 sm:p-3 rounded-xl transition-all cursor-pointer shrink-0 border ${
+              listening
+                ? 'bg-rose-600 text-white border-rose-500 shadow-lg shadow-rose-600/30 animate-pulse'
+                : 'bg-slate-800/90 hover:bg-slate-800 text-slate-300 hover:text-white border-white/10'
+            }`}
+            title={listening ? "Listening... click to stop" : "Voice Input"}
+          >
+            {listening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+          </button>
+
+          {/* Text Input */}
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={language === 'ml' ? 'ഇവിടെ ടൈപ്പ് ചെയ്യുക...' : 'Ask about crop health, pest diagnosis, or irrigation...'}
+              className="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            />
+          </div>
+
+          {/* Send Button */}
+          <button
+            type="button"
+            onClick={() => sendMessage(input)}
+            disabled={!input.trim() || isTyping}
+            className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-700/30 transition-all disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0"
+            title="Send query"
+          >
+            <Send className="w-4 h-4" />
+          </button>
+
         </div>
       </div>
+
     </div>
   );
 };
-
-

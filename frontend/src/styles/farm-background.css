@@ -1,66 +1,13 @@
-/* Farm Background Styles */
-.farm-background {
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 193, 7, 0.9) 0%,
-    rgba(76, 175, 80, 0.8) 30%,
-    rgba(139, 195, 74, 0.7) 60%,
-    rgba(165, 214, 167, 0.6) 100%
-  ),
-  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none"><defs><pattern id="farm-pattern" patternUnits="userSpaceOnUse" width="120" height="120"><circle cx="60" cy="60" r="20" fill="%23FFC107" opacity="0.1"/><path d="M30 30h60v60h-60z" fill="%234CAF50" opacity="0.05"/></pattern></defs><rect width="1200" height="600" fill="url(%23farm-pattern)"/><g transform="translate(100,150)"><path d="M0 200 Q200 100 400 200 T800 200 L800 400 L0 400 Z" fill="%234CAF50" opacity="0.3"/><circle cx="150" cy="100" r="40" fill="%23FFC107" opacity="0.6"/><path d="M50 250 L70 230 L90 250 L110 230 L130 250" stroke="%234CAF50" stroke-width="3" fill="none" opacity="0.4"/><path d="M200 280 L220 260 L240 280 L260 260 L280 280" stroke="%234CAF50" stroke-width="3" fill="none" opacity="0.4"/></g></svg>');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
+/* ==========================================================================
+   AgriSense Premium Agronomic Theme & Background Styles
+   Linear / Vercel style Polish with Agriculture / Nature Harmony
+   ========================================================================== */
 
-.farm-background-mobile {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 193, 7, 0.95) 0%,
-    rgba(76, 175, 80, 0.9) 50%,
-    rgba(139, 195, 74, 0.85) 100%
-  );
-}
-
-/* Glassmorphism effect for the form */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-/* Animated tractor */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-}
-
-.floating-tractor {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Enhanced button styles */
-.farm-button {
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-.farm-button:hover {
-  background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-}
-
-/* Split screen layout */
 .split-screen {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   min-height: 100vh;
+  background-color: #090d16;
 }
 
 @media (max-width: 1024px) {
@@ -69,132 +16,99 @@
   }
 }
 
-/* Left panel with background */
+/* Left Hero Panel: Layered Aurora Gradient Mesh + Micro Grid Texture */
 .left-panel {
-  background-image: 
-    linear-gradient(
-      135deg,
-      rgba(255, 193, 7, 0.8) 0%,
-      rgba(76, 175, 80, 0.7) 30%,
-      rgba(139, 195, 74, 0.6) 60%,
-      rgba(165, 214, 167, 0.5) 100%
-    );
   position: relative;
   overflow: hidden;
+  background: radial-gradient(circle at 15% 25%, rgba(21, 128, 61, 0.45) 0%, transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.25) 0%, transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(5, 46, 22, 0.95) 0%, #090d16 100%);
 }
 
 .left-panel::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234CAF50' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.3;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
-.farm-tractor-icon {
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+/* Soft Ambient Aurora Glow in Left Panel */
+.aurora-glow {
+  position: absolute;
+  width: 550px;
+  height: 550px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 20px 40px rgba(255, 193, 7, 0.3);
-  margin: 0 auto 2rem;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: pulse-aurora 8s ease-in-out infinite alternate;
 }
 
-/* Right panel form */
+@keyframes pulse-aurora {
+  0% { transform: scale(1) translate(-20px, 10px); opacity: 0.25; }
+  100% { transform: scale(1.15) translate(30px, -20px); opacity: 0.4; }
+}
+
+/* Right Panel: Content Holder */
 .right-panel {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-/* Split screen layout for landing page with actual image background */
-.landing-split-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.landing-left-panel {
-  flex: 1;
-  background-image: url('/farm-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: #090d16;
+  overflow-y: auto;
 }
 
-.landing-left-panel::before {
+@media (min-width: 768px) {
+  .right-panel {
+    padding: 3.5rem 2.5rem;
+  }
+}
+
+.right-panel::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(46, 125, 50, 0.8), rgba(102, 187, 106, 0.6));
-  z-index: 1;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.12) 0%, transparent 60%);
+  pointer-events: none;
 }
 
-.landing-brand-content {
+/* Premium 24px Glass Action Card */
+.glass-action-card {
   position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  padding: 2rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 35px -10px rgba(34, 197, 94, 0.15);
+  border-radius: 1.5rem;
+  z-index: 10;
 }
 
-.landing-right-panel {
-  flex: 1;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+/* 3D Glass Composition Icon Badge */
+.farm-hero-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px -5px rgba(22, 163, 74, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  min-width: 400px;
 }
 
-.landing-form-container {
-  width: 100%;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Floating animation */
+.floating-hero {
+  animation: float-hero 5s ease-in-out infinite;
 }
 
-/* Mobile responsiveness for landing page */
-@media (max-width: 768px) {
-  .landing-split-container {
-    flex-direction: column;
-  }
-  
-  .landing-left-panel {
-    min-height: 40vh;
-    flex: none;
-  }
-  
-  .landing-right-panel {
-    flex: 1;
-    min-width: unset;
-    padding: 1rem;
-  }
-  
-  .landing-form-container {
-    padding: 1.5rem;
-  }
-  
-  .landing-brand-content {
-    padding: 1rem;
-  }
+@keyframes float-hero {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
