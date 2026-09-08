@@ -296,23 +296,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
             Real-time sensory telemetry, soil NPK horizon diagnostics, Random Forest pathogen forecasting, and bilingual AI agronomy — built for modern farm management.
           </motion.p>
 
-          {/* Feature Pill Row */}
+          {/* Feature Pill Row - Unified Brand Green Accent */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="pt-8 border-t border-white/10 flex flex-wrap items-center gap-3"
           >
-            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200">
-              <CloudSun className="w-4 h-4 text-sky-400" />
+            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200 hover:border-emerald-500/40">
+              <CloudSun className="w-4 h-4 text-emerald-400" />
               <span>Weather Telemetry</span>
             </div>
-            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200">
+            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200 hover:border-emerald-500/40">
               <Leaf className="w-4 h-4 text-emerald-400" />
               <span>Soil Horizon & NPK</span>
             </div>
-            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200">
-              <Activity className="w-4 h-4 text-amber-400" />
+            <div className="glass-pill px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs font-medium text-slate-200 hover:border-emerald-500/40">
+              <Activity className="w-4 h-4 text-emerald-400" />
               <span>ML Yield & Disease</span>
             </div>
           </motion.div>
@@ -367,7 +367,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                     onChange={handleLocationInputChange}
                     onKeyPress={handleLocationInputKeyPress}
                     placeholder="Enter city, district, or PIN (e.g. Kochi, Kerala)"
-                    className="w-full pl-10 pr-20 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:bg-slate-900 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
+                    className="w-full pl-10 pr-20 py-3 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-sm text-white placeholder:text-emerald-700/60 focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none"
                   />
                   <div className="absolute right-1.5 flex items-center gap-1">
                     <button
@@ -392,7 +392,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                     type="button"
                     onClick={handleGetCurrentLocation}
                     disabled={locationLoading}
-                    className="h-10 px-3 bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 rounded-xl text-xs font-medium text-slate-200 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="h-10 px-3 bg-[#070D0A]/90 hover:bg-emerald-950/40 border border-emerald-900/40 rounded-xl text-xs font-medium text-[#D1DED6] hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {locationLoading ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-400" />
@@ -413,10 +413,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                           setCurrentLocation(null);
                         }
                       }}
-                      className="w-full h-full px-3 pr-7 bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 rounded-xl text-xs font-medium text-slate-200 transition-all outline-none appearance-none cursor-pointer"
+                      className="w-full h-full px-3 pr-7 bg-[#070D0A]/90 hover:bg-emerald-950/40 border border-emerald-900/40 rounded-xl text-xs font-medium text-[#D1DED6] hover:text-white transition-all outline-none appearance-none cursor-pointer"
                     >
                       <option value="">Quick Regions</option>
-                      <optgroup label="Kerala Districts">
+                      <optgroup label="Kerala Districts" className="bg-[#070D0A] text-white">
                         <option value="Kochi, Kerala">Kochi, Kerala</option>
                         <option value="Thiruvananthapuram, Kerala">Thiruvananthapuram, Kerala</option>
                         <option value="Thrissur, Kerala">Thrissur, Kerala</option>
@@ -425,7 +425,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                         <option value="Wayanad, Kerala">Wayanad, Kerala</option>
                         <option value="Idukki, Kerala">Idukki, Kerala</option>
                       </optgroup>
-                      <optgroup label="Major Agricultural Zones">
+                      <optgroup label="Major Agricultural Zones" className="bg-[#070D0A] text-white">
                         <option value="Ghaziabad, Uttar Pradesh">Ghaziabad, UP</option>
                         <option value="Punjab, India">Punjab Agricultural Belt</option>
                         <option value="Mumbai, Maharashtra">Mumbai Region</option>
@@ -482,9 +482,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                   <select
                     value={crop}
                     onChange={(e) => setCrop(e.target.value)}
-                    className="w-full pl-10 pr-10 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:border-emerald-500 focus:bg-slate-900 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none appearance-none cursor-pointer"
+                    className="w-full pl-10 pr-10 py-3 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-sm text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none appearance-none cursor-pointer"
                   >
-                    <optgroup label="Cereal & Grain Crops" className="bg-slate-900 text-white">
+                    <optgroup label="Cereal & Grain Crops" className="bg-[#070D0A] text-white">
                       <option value="Rice">{t('crops.rice') || 'Rice'}</option>
                       <option value="Wheat">{t('crops.wheat') || 'Wheat'}</option>
                       <option value="Maize">{t('crops.maize') || 'Maize'}</option>
@@ -492,7 +492,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                       <option value="Jowar">{t('crops.jowar') || 'Jowar'}</option>
                       <option value="Barley">{t('crops.barley') || 'Barley'}</option>
                     </optgroup>
-                    <optgroup label="Cash & Commercial Crops" className="bg-slate-900 text-white">
+                    <optgroup label="Cash & Commercial Crops" className="bg-[#070D0A] text-white">
                       <option value="Sugarcane">{t('crops.sugarcane') || 'Sugarcane'}</option>
                       <option value="Cotton">{t('crops.cotton') || 'Cotton'}</option>
                       <option value="Mustard">{t('crops.mustard') || 'Mustard'}</option>
@@ -500,7 +500,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
                       <option value="Coffee">{t('crops.coffee') || 'Coffee'}</option>
                       <option value="Rubber">{t('crops.rubber') || 'Rubber'}</option>
                     </optgroup>
-                    <optgroup label="Plantation & Horticulture" className="bg-slate-900 text-white">
+                    <optgroup label="Plantation & Horticulture" className="bg-[#070D0A] text-white">
                       <option value="Coconut">{t('crops.coconut') || 'Coconut'}</option>
                       <option value="Black Pepper">{t('crops.black_pepper') || 'Black Pepper'}</option>
                       <option value="Cardamom">{t('crops.cardamom') || 'Cardamom'}</option>
@@ -543,19 +543,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onSubmit }) => {
               </button>
             </div>
 
-            {/* Bottom Mini Themed Feature Cards */}
-            <div className="grid grid-cols-3 gap-2.5 mt-6 pt-5 border-t border-white/10">
-              <div className="p-2.5 rounded-xl bg-sky-500/10 border border-sky-500/20 text-center hover:bg-sky-500/15 transition-colors">
-                <CloudSun className="w-5 h-5 text-sky-400 mx-auto mb-1" />
-                <span className="text-[11px] font-semibold text-slate-300 block">Weather</span>
+            {/* Bottom Mini Themed Feature Cards - Unified Brand Green Accent */}
+            <div className="grid grid-cols-3 gap-2.5 mt-6 pt-5 border-t border-emerald-900/30">
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center hover:bg-emerald-500/20 transition-colors">
+                <CloudSun className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
+                <span className="text-[11px] font-semibold text-[#D1DED6] block">Weather</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center hover:bg-emerald-500/15 transition-colors">
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center hover:bg-emerald-500/20 transition-colors">
                 <Leaf className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
-                <span className="text-[11px] font-semibold text-slate-300 block">Soil NPK</span>
+                <span className="text-[11px] font-semibold text-[#D1DED6] block">Soil NPK</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-center hover:bg-purple-500/15 transition-colors">
-                <Activity className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-                <span className="text-[11px] font-semibold text-slate-300 block">AI Insights</span>
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center hover:bg-emerald-500/20 transition-colors">
+                <Activity className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
+                <span className="text-[11px] font-semibold text-[#D1DED6] block">AI Insights</span>
               </div>
             </div>
 

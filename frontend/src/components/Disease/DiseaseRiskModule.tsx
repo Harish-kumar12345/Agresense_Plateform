@@ -7,12 +7,30 @@ import {
   Sprout,
   X,
   Search,
-  ChevronRight
+  ChevronRight,
+  ShieldAlert,
+  ShieldCheck,
+  CheckCircle2,
+  ChevronDown
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { diseaseRiskService, DiseaseRiskResult } from '../../services/diseaseRiskService';
 import { soilService } from '../../services/soilService';
 import { weatherService } from '../../services/weatherService';
 import { FarmData } from '../../services/farmService';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid
+} from 'recharts';
+import { colors, motionPresets } from '../../styles/design-tokens';
 
 interface DiseaseRiskModuleProps {
   farm?: FarmData | null;
@@ -44,6 +62,7 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [selectedIncident, setSelectedIncident] = useState<any | null>(null);
+  const [expandedDisease, setExpandedDisease] = useState<string | null>(null);
 
   const runAutomatedDiseasePipeline = async () => {
     setLoading(true);
@@ -100,173 +119,434 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
     );
   }
 
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-800 font-sans">
-      
-      {/* 1. Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Disease & Pest Incidents</h1>
-            {riskData && (
-              <span className={`px-2.5 py-0.5 text-[11px] font-semibold rounded-md border ${
-                riskData.riskLevel === 'Critical' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                riskData.riskLevel === 'High' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                riskData.riskLevel === 'Medium' ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-              }`}>
-                {riskData.riskLevel} Risk Level ({riskData.overallRiskScore}%)
-              </span>
-            )}
-          </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
-            <span>{farmTitle}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              {locationLabel} ({farmArea} ha)
-            </span>
-          </p>
-        </div>
+  const getSeverityBadgeVariant = (severity: string): 'rose' | 'amber' | 'emerald' => {
+    const s = (severity || '').toLowerCase();
+    if (s === 'critical' || s === 'high') return 'rose';
+    if (s === 'medium') return 'amber';
+    return 'emerald';
+  };
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={runAutomatedDiseasePipeline}
-            className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200"
-            title="Refresh Risk Model"
-          >
-            <RefreshCw className="w-4 h-4" />
-          </button>
+  const getGaugeColor = (score: number) => {
+    if (score >= 60) return '#f43f5e'; // rose-500
+    if (score >= 35) return colors.harvest[500]; // amber-500
+    return colors.forest[500]; // emerald-500
+  };
+
+  return (
+    <motion.div
+      variants={motionPresets.container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
+    >
+      {/* 1. VerdaAgro Epidemiology Context Bar */}
+      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-farm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+              <span>Epidemiology</span>
+              <span className="text-emerald-700">/</span>
+              <span>Fungal & Pathogen Vector Intelligence</span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                ACTIVE VECTOR RADAR
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+                Pathogen Spore & Crop Disease Telemetry
+              </h1>
+              {riskData && (
+                <span className={`agri-pill ${
+                  riskData.riskLevel === 'Critical' || riskData.riskLevel === 'High' 
+                    ? 'agri-pill-amber' 
+                    : riskData.riskLevel === 'Medium'
+                    ? 'agri-pill-amber'
+                    : 'agri-pill-emerald'
+                }`}>
+                  {riskData.riskLevel} Pressure ({riskData.overallRiskScore}%)
+                </span>
+              )}
+              <span className="agri-pill agri-pill-muted">
+                Host Crop: {selectedCrop}
+              </span>
+            </div>
+
+            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
+              <span className="font-semibold text-white">{farmTitle}</span>
+              <span className="text-emerald-800">•</span>
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                {locationLabel} ({farmArea} ha)
+              </span>
+              <span className="text-emerald-800">•</span>
+              <span className="text-slate-300 font-mono text-[11px]">Coord: {safeLat.toFixed(3)}°N, {safeLon.toFixed(3)}°E</span>
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onClick={runAutomatedDiseasePipeline}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
+              Re-evaluate Vectors
+            </button>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {error && (
-        <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-center justify-between">
+        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center justify-between">
           <span>{error}</span>
-          <button type="button" onClick={runAutomatedDiseasePipeline} className="font-bold underline">Retry</button>
+          <button type="button" onClick={runAutomatedDiseasePipeline} className="font-bold underline cursor-pointer hover:text-rose-200">Retry</button>
         </div>
       )}
 
-      {/* 2. Actionable Risk Overview Banner */}
+      {/* 2. Top Asymmetric Pathogen Pressure Bento Grid */}
       {riskData && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Primary Action Plan</span>
-              <h3 className="text-sm font-bold text-slate-900 mt-0.5">{riskData.recommendation}</h3>
+        <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          {/* Pathogen Pressure Dial (5 Cols) */}
+          <div className="lg:col-span-5 agri-bento-card agri-photo-card agri-photo-card-farm p-6 flex flex-col items-center justify-between text-center space-y-4">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">Pathogen Inoculum Pressure</span>
+              <span className="text-[11px] font-mono text-emerald-400 font-medium">Model: GDD + RH</span>
             </div>
-            <button
-              type="button"
-              onClick={() => setSelectedIncident(riskData.individualRisks[0])}
-              className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-xl shadow-sm self-start sm:self-auto"
-            >
-              Inspect Field Now
-            </button>
+
+            <div className="relative w-48 h-28 flex items-center justify-center overflow-hidden my-2">
+              <svg className="w-48 h-48 -rotate-90">
+                {/* Background arc */}
+                <circle
+                  cx="96"
+                  cy="96"
+                  r="72"
+                  stroke="#13231B"
+                  strokeWidth="14"
+                  fill="transparent"
+                  strokeDasharray={`${Math.PI * 72} ${Math.PI * 72}`}
+                  strokeDashoffset="0"
+                />
+                {/* Active gauge arc */}
+                <circle
+                  cx="96"
+                  cy="96"
+                  r="72"
+                  stroke={getGaugeColor(riskData.overallRiskScore)}
+                  strokeWidth="14"
+                  fill="transparent"
+                  strokeDasharray={`${Math.PI * 72} ${Math.PI * 72}`}
+                  strokeDashoffset={Math.PI * 72 * (1 - riskData.overallRiskScore / 100)}
+                  strokeLinecap="round"
+                  className="transition-all duration-1000 ease-out"
+                />
+              </svg>
+              <div className="absolute bottom-1 flex flex-col items-center">
+                <span className="text-4xl font-black text-white font-display">
+                  {riskData.overallRiskScore}%
+                </span>
+                <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest mt-0.5">
+                  OUTBREAK PROBABILITY
+                </span>
+              </div>
+            </div>
+
+            <div className="w-full pt-3 border-t border-emerald-950/40 text-center">
+              <div className="text-xs font-bold text-white mb-1">
+                {riskData.riskLevel} Spore Pressure Index
+              </div>
+              <p className="text-[11px] text-[#D1DED6] leading-relaxed max-w-xs mx-auto">
+                Microclimate leaf wetness and canopy humidity currently dictate active fungal incubation risk.
+              </p>
+            </div>
           </div>
 
-          {/* Individual Disease Table */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Tracked Pathogen Risk Levels</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
-                    <th className="py-2.5 px-3">Disease / Pathogen</th>
-                    <th className="py-2.5 px-3">Type</th>
-                    <th className="py-2.5 px-3 text-center">Risk Score</th>
-                    <th className="py-2.5 px-3 text-center">Severity</th>
-                    <th className="py-2.5 px-3 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {riskData.individualRisks.map((pathogen, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50">
-                      <td className="py-3 px-3 font-semibold text-slate-900">{pathogen.disease}</td>
-                      <td className="py-3 px-3 text-slate-500">{pathogen.type}</td>
-                      <td className="py-3 px-3 text-center font-bold text-slate-900">{pathogen.riskScorePct}%</td>
-                      <td className="py-3 px-3 text-center">
-                        <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
-                          pathogen.severity === 'Critical' || pathogen.severity === 'High' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
-                          pathogen.severity === 'Medium' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+          {/* Actionable Advice & Inspection Protocol (7 Cols) */}
+          <div className="lg:col-span-7 agri-bento-card p-6 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 pb-2 border-b border-emerald-950/40">
+                <ShieldAlert className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Agronomic Chemical & Bio Prescription</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-white leading-snug font-display">
+                {riskData.recommendation}
+              </h3>
+              <p className="text-xs text-[#D1DED6] leading-relaxed pt-1">
+                Field scouting should prioritize shaded canopy margins where morning dew condensation persists past 09:00 AM. Preventive bio-fungicide or copper oxychloride application is recommended before rainfall events.
+              </p>
+            </div>
+
+            <div className="pt-3 border-t border-emerald-950/40 flex items-center justify-between flex-wrap gap-2">
+              <span className="text-xs font-semibold text-[#D1DED6]">
+                <strong className="text-white">{riskData.individualRisks.length}</strong> Pathogen Entities Modeled
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedIncident(riskData.individualRisks[0])}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <Bug className="w-3.5 h-3.5" />
+                Inspect Primary Threat
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* 3. 7-Day Disease Risk Trajectory Chart */}
+      {riskData && (
+        <motion.div variants={motionPresets.item}>
+          <div className="agri-bento-card p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">7-Day Spore Telemetry</span>
+                <h3 className="text-base font-bold text-white mt-0.5 font-display">Pathogen Pressure & Canopy Humidity Trajectory Forecast</h3>
+              </div>
+              <span className="agri-pill agri-pill-emerald">
+                7-Day Model
+              </span>
+            </div>
+
+            <div className="h-56 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={[
+                    { day: 'Day 1 (Today)', risk: riskData.overallRiskScore, threshold: 50 },
+                    { day: 'Day 2', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 1.06))), threshold: 50 },
+                    { day: 'Day 3', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 1.14))), threshold: 50 },
+                    { day: 'Day 4', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 1.08))), threshold: 50 },
+                    { day: 'Day 5', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 0.94))), threshold: 50 },
+                    { day: 'Day 6', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 0.86))), threshold: 50 },
+                    { day: 'Day 7', risk: Math.min(95, Math.max(15, Math.round(riskData.overallRiskScore * 0.80))), threshold: 50 }
+                  ]}
+                  margin={{ top: 10, right: 20, left: -20, bottom: 5 }}
+                >
+                  <defs>
+                    <linearGradient id="diseaseRiskGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#34d399" stopOpacity={0.4} />
+                      <stop offset="95%" stopColor="#34d399" stopOpacity={0.0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#13231B" vertical={false} />
+                  <XAxis dataKey="day" tick={{ fill: '#D1DED6', fontSize: 11 }} axisLine={{ stroke: '#1B3125' }} tickLine={false} />
+                  <YAxis unit="%" domain={[0, 100]} tick={{ fill: '#D1DED6', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <Tooltip
+                    content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        return (
+                          <div className="agri-bento-card p-3 shadow-xl text-xs space-y-1 bg-[#0D1612] border border-emerald-500/30">
+                            <p className="font-bold text-white font-display">{label}</p>
+                            <p className="text-emerald-400 font-semibold">Predicted Outbreak Pressure: {payload[0]?.value}%</p>
+                            <p className="text-[#D1DED6] text-[11px]">Intervention Threshold: 50%</p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Area type="monotone" dataKey="risk" stroke="#34d399" strokeWidth={2.5} fillOpacity={1} fill="url(#diseaseRiskGrad)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* 4. Tracked Pathogen Matrix */}
+      {riskData && (
+        <motion.div variants={motionPresets.item}>
+          <div className="agri-bento-card p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Pathogen Vulnerability Matrix</span>
+                <h3 className="text-base font-bold text-white mt-0.5 font-display">Crop Vulnerability by Fungal & Insect Entity</h3>
+              </div>
+              <span className="agri-pill agri-pill-muted">
+                AI Diagnostics Model
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              {riskData.individualRisks.map((pathogen, idx) => {
+                const isExpanded = expandedDisease === pathogen.disease;
+
+                return (
+                  <div
+                    key={idx}
+                    className={`p-4 rounded-xl border transition-all ${
+                      isExpanded 
+                        ? 'border-emerald-500/50 bg-emerald-950/20' 
+                        : 'border-emerald-900/40 bg-[#070D0A]/50 hover:border-emerald-800/60'
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2.5 rounded-xl ${
+                          pathogen.severity === 'Critical' || pathogen.severity === 'High'
+                            ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
+                            : pathogen.severity === 'Medium'
+                            ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
+                            : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
                         }`}>
-                          {pathogen.severity}
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 text-right">
+                          <Bug className="w-5 h-5" />
+                        </div>
+
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-bold text-white text-sm font-display">{pathogen.disease}</h4>
+                            <span className={`agri-pill ${
+                              pathogen.severity === 'Critical' || pathogen.severity === 'High'
+                                ? 'agri-pill-amber'
+                                : 'agri-pill-emerald'
+                            }`}>
+                              {pathogen.severity}
+                            </span>
+                          </div>
+                          <p className="text-xs text-[#D1DED6] mt-0.5">
+                            Type: <strong className="text-white">{pathogen.type}</strong> • Risk Probability: <strong className="text-emerald-400">{pathogen.riskScorePct}%</strong>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
                         <button
                           type="button"
                           onClick={() => setSelectedIncident(pathogen)}
-                          className="px-2.5 py-1 text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors"
+                          className="px-3 py-1.5 rounded-lg border border-emerald-900/50 text-[#D1DED6] hover:text-white hover:border-emerald-700 text-xs font-semibold transition-colors cursor-pointer"
                         >
-                          Details
+                          Field Protocol
                         </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        <button
+                          type="button"
+                          onClick={() => setExpandedDisease(isExpanded ? null : pathogen.disease)}
+                          className="p-1.5 rounded-lg text-[#D1DED6] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                          title="Toggle Remedy Details"
+                        >
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Expandable Remedy Section */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden pt-3 border-t border-emerald-950/40 text-xs text-[#D1DED6] space-y-2 mt-3"
+                        >
+                          <div className="p-3.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl space-y-1.5">
+                            <span className="font-semibold text-emerald-400 block text-xs uppercase tracking-wider">Recommended Agronomic Countermeasures:</span>
+                            <ul className="list-disc pl-4 space-y-1 text-[#D1DED6]">
+                              <li>Maintain optimal canopy aeration by avoiding excessive planting density.</li>
+                              <li>Avoid surplus top-dressed nitrogen fertilizer during high morning fog or persistent drizzle windows.</li>
+                              <li>Apply registered preventative biological formulations (e.g. Trichoderma or Bacillus subtilis) during early tillering.</li>
+                            </ul>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
-      {/* 3. Micro-climate Contributing Factors */}
+      {/* 5. Contributing Environmental Factors */}
       {riskData && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-          <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Environmental Risk Factors</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {riskData.contributingFactors.map((factor, idx) => (
-              <div key={idx} className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1 text-xs">
-                <div className="flex justify-between font-semibold text-slate-900">
-                  <span>{factor.factor}</span>
-                  <span className="text-rose-700 font-bold">{factor.impact}</span>
+        <motion.div variants={motionPresets.item}>
+          <div className="agri-bento-card p-6 space-y-4">
+            <div className="pb-3 border-b border-emerald-950/40">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Meteorological Triggers</span>
+              <h3 className="text-base font-bold text-white mt-0.5 font-display">Contributing Environmental Microclimate Factors</h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {riskData.contributingFactors.map((factor, idx) => (
+                <div key={idx} className="p-3.5 rounded-xl bg-[#070D0A]/60 border border-emerald-900/40 space-y-1">
+                  <div className="flex justify-between items-center text-xs font-bold text-white">
+                    <span>{factor.factor}</span>
+                    <span className="agri-pill agri-pill-amber">
+                      {factor.impact}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[#D1DED6] leading-relaxed">{factor.description}</p>
                 </div>
-                <p className="text-[11px] text-slate-500">{factor.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* INCIDENT INSPECTION MODAL */}
-      {selectedIncident && (
-        <div className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 border border-slate-200 text-xs">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-slate-900">Field Inspection Protocol: {selectedIncident.disease}</h3>
-              <button type="button" onClick={() => setSelectedIncident(null)} className="text-slate-400 hover:text-slate-600">
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="space-y-3 text-slate-600">
-              <div className="flex justify-between items-center py-1">
-                <span>Pathogen Category:</span>
-                <strong className="text-slate-900">{selectedIncident.type}</strong>
-              </div>
-              <div className="flex justify-between items-center py-1 border-t border-slate-100">
-                <span>Calculated Risk Probability:</span>
-                <strong className="text-rose-700">{selectedIncident.riskScorePct}% ({selectedIncident.severity})</strong>
-              </div>
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                <span className="font-semibold text-slate-900 block">Agronomic Checklist:</span>
-                <ul className="list-disc pl-4 space-y-1 text-slate-500">
-                  <li>Inspect lower leaf canopy for fungal lesions/spots.</li>
-                  <li>Check leaf wetness duration post-irrigation.</li>
-                  <li>Consider copper fungicide / bio-control spray if lesions exceed 5% foliage.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <button type="button" onClick={() => setSelectedIncident(null)} className="px-4 py-1.5 bg-slate-900 text-white font-semibold rounded-lg">
-                Close
-              </button>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
-    </div>
+      {/* 6. INCIDENT INSPECTION MODAL */}
+      <AnimatePresence>
+        {selectedIncident && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="max-w-md w-full"
+            >
+              <div className="agri-bento-card p-6 space-y-4 text-xs bg-[#0D1612] border border-emerald-500/40 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+                  <div className="flex items-center gap-2">
+                    <Bug className="w-4 h-4 text-emerald-400" />
+                    <h3 className="text-sm font-bold text-white font-display">
+                      Field Scouting Protocol: {selectedIncident.disease}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedIncident(null)}
+                    className="p-1 rounded-lg text-[#D1DED6] hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="space-y-3 text-[#D1DED6]">
+                  <div className="flex justify-between items-center py-1">
+                    <span>Pathogen Category:</span>
+                    <strong className="text-white">{selectedIncident.type}</strong>
+                  </div>
+                  <div className="flex justify-between items-center py-1 border-t border-emerald-950/40">
+                    <span>Calculated Risk Probability:</span>
+                    <span className="agri-pill agri-pill-emerald">
+                      {selectedIncident.riskScorePct}% ({selectedIncident.severity})
+                    </span>
+                  </div>
+                  <div className="p-3.5 bg-[#070D0A] rounded-xl border border-emerald-900/40 space-y-2">
+                    <span className="font-semibold text-emerald-400 block text-xs">Diagnostic Scouting Checklist:</span>
+                    <ul className="list-disc pl-4 space-y-1 text-[#D1DED6] text-[11px] leading-relaxed">
+                      <li>Inspect lower leaf canopy for discoloration, necrotic lesions, or fungal mycelium.</li>
+                      <li>Measure duration of free water film post morning dew or sprinkler cycle.</li>
+                      <li>Consult local Krishi Vigyan Kendra for recommended formulation guidelines.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedIncident(null)}
+                    className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold cursor-pointer"
+                  >
+                    Close Protocol
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
+

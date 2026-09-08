@@ -41,14 +41,18 @@ module.exports = {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+        display: ['"Sora"', '"Fraunces"', 'sans-serif'],
+        serifDisplay: ['"Fraunces"', 'serif'],
       },
       boxShadow: {
         'saas': '0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(15, 23, 42, 0.06)',
         'saas-hover': '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 20px 35px -4px rgba(15, 23, 42, 0.12)',
         'glow-emerald': '0 0 35px -5px rgba(22, 163, 74, 0.28)',
         'glow-harvest': '0 0 35px -5px rgba(245, 158, 11, 0.28)',
+        'glow-amber': '0 0 35px -5px rgba(245, 158, 11, 0.28)',
         'glow-sky': '0 0 35px -5px rgba(14, 165, 233, 0.28)',
+        'glow-rose': '0 0 35px -5px rgba(244, 63, 94, 0.28)',
+        'glow-indigo': '0 0 35px -5px rgba(99, 102, 241, 0.28)',
       },
       borderRadius: {
         '2xl': '1rem',

@@ -1,20 +1,16 @@
 @import "tailwindcss";
+@import "./styles/tokens.css";
 @import "./styles/farm-background.css";
 
 :root {
-  --brand-primary: #15803d;
-  --brand-primary-light: #22c55e;
-  --brand-accent: #f59e0b;
-  --bg-app: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-elevated: #ffffff;
-  --border-subtle: #e2e8f0;
-  --border-glass: rgba(255, 255, 255, 0.12);
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --ring-focus: rgba(22, 163, 74, 0.25);
-  color-scheme: light dark;
+  --brand-primary: var(--brand-500);
+  --brand-primary-light: var(--brand-400);
+  --brand-accent: var(--status-warning);
+  --bg-app: var(--bg-canvas);
+  --bg-surface: var(--bg-surface);
+  --bg-surface-elevated: var(--bg-surface-2);
+  --ring-focus: rgba(16, 185, 129, 0.35);
+  color-scheme: dark;
 }
 
 html, body {
@@ -24,8 +20,8 @@ html, body {
 }
 
 body {
-  background-color: #f8fafc;
-  color: var(--text-primary);
+  background-color: #090d16;
+  color: #f8fafc;
   font-family: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,56 +39,59 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #334155;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #475569;
 }
 
-/* SaaS Floating Card System */
+/* SaaS Floating Cyber-Glass Card System - VerdaAgro Organic Earth */
 .saas-card {
-  background: #ffffff;
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 1.25rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
 .saas-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 18px 32px -4px rgba(15, 23, 42, 0.09);
-  border-color: #cbd5e1;
+  box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.75), 0 0 25px -5px rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 /* Dark SaaS Card for high-contrast panels */
 .saas-card-dark {
-  background: #0f172a;
+  background: var(--bg-canvas);
   border-radius: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  color: #f8fafc;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+  color: var(--text-primary);
 }
 
 /* Glassmorphism Surface */
 .glass-header {
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(9, 13, 22, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-pill:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(34, 197, 94, 0.4);
   transform: translateY(-1px);
 }
 

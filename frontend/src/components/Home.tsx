@@ -795,16 +795,16 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
               {t('home.title')}
             </h1>
           </div>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-slate-600 max-w-3xl mx-auto">
             {t('home.subtitle')}
           </p>
         </div>
 
         {/* Controls */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
                 <MapPin className="w-4 h-4 inline mr-1" />
                 {t('home.location')}
               </label>
@@ -814,7 +814,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder={t('home.current_location')}
-                  className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                  className="flex-1 px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
                 />
                 <button
                   onClick={handleGetCurrentLocation}
@@ -828,14 +828,14 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             </div>
             
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
                 <Sprout className="w-4 h-4 inline mr-1" />
                 {t('home.select_crop')}
               </label>
               <select
                 value={crop}
                 onChange={(e) => setCrop(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
               >
                 <option value="Rice">{t('crops.rice')}</option>
                 <option value="Coconut">{t('crops.coconut')}</option>
@@ -900,7 +900,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
         )}
 
         {/* Tab Navigation */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-2">
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-2">
           <div className="flex flex-wrap gap-2">
             {[
               { id: 'overview', label: t('home.overview'), icon: Activity },
@@ -914,7 +914,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all ${
                   activeTab === tab.id
                     ? 'bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg'
-                    : 'text-gray-600 hover:bg-gray-100'
+                    : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -928,25 +928,25 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Current Weather */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <CloudSun className="w-6 h-6 text-blue-600" />
-                  <h3 className="text-lg font-bold text-gray-800">{t('home.weather')}</h3>
+                  <h3 className="text-lg font-bold text-slate-800">{t('home.weather')}</h3>
                 </div>
-                <div className="text-xs text-gray-500 capitalize">
+                <div className="text-xs text-slate-500 capitalize">
                   {weatherData?.current.description}
                 </div>
               </div>
               
               <div className="text-center mb-6">
-                <div className="text-4xl font-bold text-gray-800 mb-2">
+                <div className="text-4xl font-bold text-slate-800 mb-2">
                   {loading ? '---' : `${weatherData?.current.temperature_c || '--'}°C`}
                 </div>
-                <div className="text-gray-600">
+                <div className="text-slate-600">
                   {t('home.feels_like')} {weatherData?.current.feels_like_c || '--'}°C
                 </div>
-                <div className="text-sm text-gray-500 mt-2">
+                <div className="text-sm text-slate-500 mt-2">
                   {weatherData?.location.city}, {weatherData?.location.country}
                 </div>
               </div>
@@ -954,28 +954,28 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div className="flex items-center gap-2">
                   <Droplets className="w-4 h-4 text-blue-500" />
-                  <span className="text-gray-600">{t('home.humidity')}</span>
+                  <span className="text-slate-600">{t('home.humidity')}</span>
                   <span className="ml-auto font-semibold">
                     {loading ? '--' : `${weatherData?.current.relative_humidity || '--'}%`}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Wind className="w-4 h-4 text-gray-500" />
-                  <span className="text-gray-600">{t('home.wind_speed')}</span>
+                  <Wind className="w-4 h-4 text-slate-500" />
+                  <span className="text-slate-600">{t('home.wind_speed')}</span>
                   <span className="ml-auto font-semibold">
                     {loading ? '--' : `${weatherData?.current.wind_speed_kmh || '--'} km/h`}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-green-500" />
-                  <span className="text-gray-600">{t('home.visibility')}</span>
+                  <span className="text-slate-600">{t('home.visibility')}</span>
                   <span className="ml-auto font-semibold">
                     {loading ? '--' : `${weatherData?.current.visibility_km || '--'} km`}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Activity className="w-4 h-4 text-purple-500" />
-                  <span className="text-gray-600">{t('home.pressure')}</span>
+                  <span className="text-slate-600">{t('home.pressure')}</span>
                   <span className="ml-auto font-semibold">
                     {loading ? '--' : `${weatherData?.current.pressure_mb || '--'} mb`}
                   </span>
@@ -984,24 +984,24 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             </div>
 
             {/* Soil Status */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Mountain className="w-6 h-6 text-amber-600" />
-                <h3 className="text-lg font-bold text-gray-800">Soil Status</h3>
+                <h3 className="text-lg font-bold text-slate-800">Soil Status</h3>
               </div>
               
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">{t('home.soil_type')}</span>
+                  <span className="text-slate-600">{t('home.soil_type')}</span>
                   <span className="font-semibold">{soilData?.type || t('common.loading')}</span>
                 </div>
                 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">{t('home.soil_moisture')}</span>
+                    <span className="text-slate-600">{t('home.soil_moisture')}</span>
                     <span className="font-semibold">{soilData?.moisture || '--'}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-slate-200 rounded-full h-2">
                     <div 
                       className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${Math.min((soilData?.moisture || 0), 100)}%` }}
@@ -1011,10 +1011,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">{t('home.ph_level')}</span>
+                    <span className="text-slate-600">{t('home.ph_level')}</span>
                     <span className="font-semibold">{soilData?.ph || '--'}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-slate-200 rounded-full h-2">
                     <div 
                       className={`h-2 rounded-full transition-all duration-300 ${
                         (soilData?.ph || 0) >= 6.0 && (soilData?.ph || 0) <= 7.5 
@@ -1029,31 +1029,31 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 <div className="grid grid-cols-3 gap-3 text-xs">
                   <div className="text-center">
                     <div className="font-semibold text-lg text-blue-600">{soilData?.nitrogen || '--'}</div>
-                    <div className="text-gray-500">N</div>
+                    <div className="text-slate-500">N</div>
                   </div>
                   <div className="text-center">
                     <div className="font-semibold text-lg text-orange-600">{soilData?.phosphorus || '--'}</div>
-                    <div className="text-gray-500">P</div>
+                    <div className="text-slate-500">P</div>
                   </div>
                   <div className="text-center">
                     <div className="font-semibold text-lg text-purple-600">{soilData?.potassium || '--'}</div>
-                    <div className="text-gray-500">K</div>
+                    <div className="text-slate-500">K</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Recommendations */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Leaf className="w-6 h-6 text-green-600" />
-                  <h3 className="text-lg font-bold text-gray-800">AI Recommendations</h3>
+                  <h3 className="text-lg font-bold text-slate-800">AI Recommendations</h3>
                 </div>
                 <button
                   onClick={generateBasicRecommendation}
                   disabled={recommendationLoading || !weatherData || !soilData || !landData}
-                  className="p-2 text-gray-500 hover:text-green-600 transition-colors disabled:opacity-50"
+                  className="p-2 text-slate-500 hover:text-green-600 transition-colors disabled:opacity-50"
                   title="Refresh AI recommendations"
                 >
                   <RefreshCw className={`w-4 h-4 ${recommendationLoading ? 'animate-spin' : ''}`} />
@@ -1071,16 +1071,16 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                     <div className="flex-1">
                       {recommendationLoading ? (
                         <div className="space-y-2">
-                          <div className="h-3 bg-gray-200 rounded animate-pulse"></div>
-                          <div className="h-3 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+                          <div className="h-3 bg-slate-200 rounded animate-pulse"></div>
+                          <div className="h-3 bg-slate-200 rounded w-3/4 animate-pulse"></div>
                         </div>
                       ) : (
-                        <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+                        <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">
                           {basicRecommendation}
                         </p>
                       )}
                       {!recommendationLoading && (
-                        <div className="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <div className="text-xs text-slate-500 mt-2 flex items-center gap-1">
                           <Zap className="w-3 h-3" />
                           
                         </div>
@@ -1092,15 +1092,15 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 {landData && (
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
-                      <span className="text-gray-500">{t('home.elevation')}</span>
+                      <span className="text-slate-500">{t('home.elevation')}</span>
                       <div className="font-semibold">{landData.elevation}m</div>
                     </div>
                     <div>
-                      <span className="text-gray-500">{t('home.drainage')}</span>
+                      <span className="text-slate-500">{t('home.drainage')}</span>
                       <div className="font-semibold">{landData.drainage}</div>
                     </div>
                     <div>
-                      <span className="text-gray-500">{t('home.flood_risk')}</span>
+                      <span className="text-slate-500">{t('home.flood_risk')}</span>
                       <div className={`font-semibold ${
                         landData.floodRisk === 'Low' ? 'text-green-600' : 
                         landData.floodRisk === 'Moderate' ? 'text-yellow-600' : 'text-red-600'
@@ -1109,7 +1109,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       </div>
                     </div>
                     <div>
-                      <span className="text-gray-500">{t('home.drought_risk')}</span>
+                      <span className="text-slate-500">{t('home.drought_risk')}</span>
                       <div className={`font-semibold ${
                         landData.droughtRisk === 'Low' ? 'text-green-600' : 
                         landData.droughtRisk === 'Moderate' ? 'text-yellow-600' : 'text-red-600'
@@ -1128,38 +1128,38 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
           <div className="space-y-6">
             {/* Detailed Weather Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-orange-100 rounded-lg">
                     <ThermometerSun className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">{t('home.temperature')}</h4>
-                    <p className="text-xs text-gray-500">{t('weather.current_conditions')}</p>
+                    <h4 className="font-semibold text-slate-800">{t('home.temperature')}</h4>
+                    <p className="text-xs text-slate-500">{t('weather.current_conditions')}</p>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <div className="text-2xl font-bold text-slate-800 mb-1">
                   {weatherData?.current.temperature_c || '--'}°C
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-slate-600">
                   {t('home.feels_like')} {weatherData?.current.feels_like_c || '--'}°C
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <Droplets className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">{t('home.humidity')}</h4>
-                    <p className="text-xs text-gray-500">{t('weather.relative_humidity')}</p>
+                    <h4 className="font-semibold text-slate-800">{t('home.humidity')}</h4>
+                    <p className="text-xs text-slate-500">{t('weather.relative_humidity')}</p>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <div className="text-2xl font-bold text-slate-800 mb-1">
                   {weatherData?.current.relative_humidity || '--'}%
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
                     className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${weatherData?.current.relative_humidity || 0}%` }}
@@ -1167,45 +1167,45 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <Wind className="w-5 h-5 text-gray-600" />
+                  <div className="p-2 bg-slate-100 rounded-lg">
+                    <Wind className="w-5 h-5 text-slate-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">{t('weather.wind')}</h4>
-                    <p className="text-xs text-gray-500">{t('weather.speed_direction')}</p>
+                    <h4 className="font-semibold text-slate-800">{t('weather.wind')}</h4>
+                    <p className="text-xs text-slate-500">{t('weather.speed_direction')}</p>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <div className="text-2xl font-bold text-slate-800 mb-1">
                   {weatherData?.current.wind_speed_kmh || '--'} km/h
                 </div>
-                <p className="text-sm text-gray-600 flex items-center gap-1">
+                <p className="text-sm text-slate-600 flex items-center gap-1">
                   <Compass className="w-3 h-3" />
                   {weatherData?.current.wind_direction || '--'}
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-purple-100 rounded-lg">
                     <Activity className="w-5 h-5 text-purple-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">{t('home.pressure')}</h4>
-                    <p className="text-xs text-gray-500">{t('weather.atmospheric_pressure')}</p>
+                    <h4 className="font-semibold text-slate-800">{t('home.pressure')}</h4>
+                    <p className="text-xs text-slate-500">{t('weather.atmospheric_pressure')}</p>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <div className="text-2xl font-bold text-slate-800 mb-1">
                   {weatherData?.current.pressure_mb || '--'}
                 </div>
-                <p className="text-sm text-gray-600">mb</p>
+                <p className="text-sm text-slate-600">mb</p>
               </div>
             </div>
 
             {/* Hourly Forecast */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <Clock className="w-6 h-6 text-green-600" />
                 {t('weather.hourly_forecast')}
               </h3>
@@ -1253,21 +1253,21 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                   };
                   
                   return (
-                    <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-3 border border-gray-100 text-center">
-                      <div className="text-xs font-medium text-gray-600 mb-2">
+                    <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-3 border border-slate-100 text-center">
+                      <div className="text-xs font-medium text-slate-600 mb-2">
                         {hour.time}
                       </div>
-                      <div className="text-lg font-bold text-gray-800 mb-1">
+                      <div className="text-lg font-bold text-slate-800 mb-1">
                         {Math.round(hour.temperature_c)}°
                       </div>
-                      <div className="text-xs text-gray-600 mb-2">
+                      <div className="text-xs text-slate-600 mb-2">
                         {translateWeatherDescription(hour.description)}
                       </div>
                       <div className="flex items-center justify-center gap-1 text-xs text-blue-600 mb-1">
                         <Droplets className="w-3 h-3" />
                         {Math.round(hour.precip_probability)}%
                       </div>
-                      <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
+                      <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
                         <Wind className="w-3 h-3" />
                         {Math.round(hour.wind_speed_kmh)} km/h
                       </div>
@@ -1278,8 +1278,8 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             </div>
 
             {/* 6-Day Forecast */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <TrendingUp className="w-6 h-6 text-blue-600" />
                 {t('weather.forecast_6_day')}
               </h3>
@@ -1352,25 +1352,25 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                   };
                   
                   return (
-                    <div key={day.date} className="bg-gradient-to-br from-blue-50 to-green-50 rounded-xl p-4 border border-gray-100">
+                    <div key={day.date} className="bg-gradient-to-br from-blue-50 to-green-50 rounded-xl p-4 border border-slate-100">
                       <div className="text-center">
-                        <div className="text-xs font-medium text-gray-600 mb-2">
+                        <div className="text-xs font-medium text-slate-600 mb-2">
                           {dayName}
                         </div>
-                        <div className="text-sm font-semibold text-gray-800 mb-2">
+                        <div className="text-sm font-semibold text-slate-800 mb-2">
                           {translateWeatherDescription(day.description)}
                         </div>
-                        <div className="text-lg font-bold text-gray-800 mb-1">
+                        <div className="text-lg font-bold text-slate-800 mb-1">
                           {Math.round(day.temp_max_c)}°
                         </div>
-                        <div className="text-sm text-gray-600 mb-2">
+                        <div className="text-sm text-slate-600 mb-2">
                           {Math.round(day.temp_min_c)}°
                         </div>
                         <div className="flex items-center justify-center gap-1 text-xs text-blue-600">
                           <Droplets className="w-3 h-3" />
                           {Math.round(day.precip_probability_max)}%
                         </div>
-                        <div className="flex items-center justify-center gap-1 text-xs text-gray-500 mt-1">
+                        <div className="flex items-center justify-center gap-1 text-xs text-slate-500 mt-1">
                           <Wind className="w-3 h-3" />
                           {Math.round(day.wind_speed_kmh)} km/h
                         </div>
@@ -1387,18 +1387,18 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
           <div className="space-y-6">
             {/* Soil Analysis */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+                <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                   <Mountain className="w-6 h-6 text-amber-600" />
                   {t('soil.composition')}
                 </h3>
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">{t('soil.ph_level')}</span>
+                      <span className="text-slate-600">{t('soil.ph_level')}</span>
                       <span className="font-semibold">{soilData?.ph || '--'}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className={`h-3 rounded-full transition-all duration-300 ${
                           (soilData?.ph || 0) >= 6.0 && (soilData?.ph || 0) <= 7.5 
@@ -1410,7 +1410,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                         style={{ width: `${Math.min(((soilData?.ph || 0) / 14) * 100, 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-slate-500">
                       {(soilData?.ph || 0) >= 6.0 && (soilData?.ph || 0) <= 7.5 
                         ? t('soil.optimal_range')
                         : (soilData?.ph || 0) < 6.0 
@@ -1421,10 +1421,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
 
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">{t('soil.moisture_content')}</span>
+                      <span className="text-slate-600">{t('soil.moisture_content')}</span>
                       <span className="font-semibold">{soilData?.moisture || '--'}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className={`h-3 rounded-full transition-all duration-300 ${
                           (soilData?.moisture || 0) >= 40 && (soilData?.moisture || 0) <= 70 
@@ -1436,7 +1436,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                         style={{ width: `${Math.min((soilData?.moisture || 0), 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-slate-500">
                       {(soilData?.moisture || 0) >= 40 && (soilData?.moisture || 0) <= 70 
                         ? t('soil.good_moisture')
                         : (soilData?.moisture || 0) < 40 
@@ -1447,10 +1447,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
 
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">{t('soil.organic_matter')}</span>
+                      <span className="text-slate-600">{t('soil.organic_matter')}</span>
                       <span className="font-semibold">{soilData?.organic_matter || '--'}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className={`h-3 rounded-full transition-all duration-300 ${
                           (soilData?.organic_matter || 0) >= 3 
@@ -1462,7 +1462,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                         style={{ width: `${Math.min(((soilData?.organic_matter || 0) / 10) * 100, 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-slate-500">
                       {(soilData?.organic_matter || 0) >= 3 
                         ? t('soil.excellent_organic')
                         : (soilData?.organic_matter || 0) >= 2 
@@ -1473,81 +1473,81 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+                <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                   <Zap className="w-6 h-6 text-yellow-600" />
                   {t('soil.nutrient_levels')}
                 </h3>
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600 flex items-center gap-2">
+                      <span className="text-slate-600 flex items-center gap-2">
                         <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                         {t('soil.nitrogen')}
                       </span>
                       <span className="font-semibold">{soilData?.nitrogen || '--'}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className="bg-blue-500 h-3 rounded-full transition-all duration-300"
                         style={{ width: `${Math.min((soilData?.nitrogen || 0), 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">{t('soil.nitrogen_desc')}</div>
+                    <div className="text-xs text-slate-500">{t('soil.nitrogen_desc')}</div>
                   </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600 flex items-center gap-2">
+                      <span className="text-slate-600 flex items-center gap-2">
                         <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                         {t('soil.phosphorus')}
                       </span>
                       <span className="font-semibold">{soilData?.phosphorus || '--'}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className="bg-orange-500 h-3 rounded-full transition-all duration-300"
                         style={{ width: `${Math.min((soilData?.phosphorus || 0), 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">{t('soil.phosphorus_desc')}</div>
+                    <div className="text-xs text-slate-500">{t('soil.phosphorus_desc')}</div>
                   </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600 flex items-center gap-2">
+                      <span className="text-slate-600 flex items-center gap-2">
                         <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
                         {t('soil.potassium')}
                       </span>
                       <span className="font-semibold">{soilData?.potassium || '--'}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                    <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                       <div 
                         className="bg-purple-500 h-3 rounded-full transition-all duration-300"
                         style={{ width: `${Math.min((soilData?.potassium || 0), 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-500">{t('soil.potassium_desc')}</div>
+                    <div className="text-xs text-slate-500">{t('soil.potassium_desc')}</div>
                   </div>
                 </div>
 
                 <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
-                  <h4 className="font-semibold text-gray-800 mb-2">{t('soil.characteristics')}</h4>
+                  <h4 className="font-semibold text-slate-800 mb-2">{t('soil.characteristics')}</h4>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
-                      <span className="text-gray-600">{t('soil.type')}:</span>
+                      <span className="text-slate-600">{t('soil.type')}:</span>
                       <span className="ml-2 font-semibold">{soilData?.type || '--'}</span>
                     </div>
                     <div>
-                      <span className="text-gray-600">{t('soil.drainage')}:</span>
+                      <span className="text-slate-600">{t('soil.drainage')}:</span>
                       <span className="ml-2 font-semibold">{soilData?.drainage || '--'}</span>
                     </div>
                     <div>
-                      <span className="text-gray-600">{t('soil.temperature')}:</span>
+                      <span className="text-slate-600">{t('soil.temperature')}:</span>
                       <span className="ml-2 font-semibold">{soilData?.temperature || '--'}°C</span>
                     </div>
                     <div>
-                      <span className="text-gray-600">{t('soil.salinity')}:</span>
+                      <span className="text-slate-600">{t('soil.salinity')}:</span>
                       <span className="ml-2 font-semibold">{soilData?.salinity || '--'} dS/m</span>
                     </div>
                   </div>
@@ -1556,47 +1556,47 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             </div>
 
             {/* Land Information */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <MapPin className="w-6 h-6 text-green-600" />
                 {t('soil.land_information')}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.elevation')}</span>
+                    <span className="text-slate-600">{t('soil.elevation')}</span>
                     <span className="font-semibold">{landData?.elevation || '--'} m</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.slope')}</span>
+                    <span className="text-slate-600">{t('soil.slope')}</span>
                     <span className="font-semibold">{landData?.slope || '--'}°</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.aspect')}</span>
+                    <span className="text-slate-600">{t('soil.aspect')}</span>
                     <span className="font-semibold">{landData?.aspect || '--'}</span>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.land_use')}</span>
+                    <span className="text-slate-600">{t('soil.land_use')}</span>
                     <span className="font-semibold">{landData?.landUse || '--'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.irrigation_access')}</span>
+                    <span className="text-slate-600">{t('soil.irrigation_access')}</span>
                     <span className={`font-semibold ${landData?.irrigationAccess ? 'text-green-600' : 'text-red-600'}`}>
                       {landData?.irrigationAccess ? t('soil.available') : t('soil.not_available')}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">{t('soil.water_source')}</span>
+                    <span className="text-slate-600">{t('soil.water_source')}</span>
                     <span className="font-semibold">{landData?.nearestWaterSource || '--'} km</span>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Erosion Risk</span>
+                    <span className="text-slate-600">Erosion Risk</span>
                     <span className={`font-semibold ${
                       landData?.soilErosionRisk === 'Low' ? 'text-green-600' : 
                       landData?.soilErosionRisk === 'Moderate' ? 'text-yellow-600' : 'text-red-600'
@@ -1605,7 +1605,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Flood Risk</span>
+                    <span className="text-slate-600">Flood Risk</span>
                     <span className={`font-semibold ${
                       landData?.floodRisk === 'Low' || landData?.floodRisk === 'Minimal' ? 'text-green-600' : 
                       landData?.floodRisk === 'Moderate' ? 'text-yellow-600' : 'text-red-600'
@@ -1614,7 +1614,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Drought Risk</span>
+                    <span className="text-slate-600">Drought Risk</span>
                     <span className={`font-semibold ${
                       landData?.droughtRisk === 'Low' ? 'text-green-600' : 
                       landData?.droughtRisk === 'Moderate' ? 'text-yellow-600' : 'text-red-600'
@@ -1631,10 +1631,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
         {activeTab === 'ai-advisor' && (
           <div className="space-y-6">
             {/* AI Chat Interface */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
               <div className="flex items-center gap-2 mb-6">
                 <Bot className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xl font-bold text-gray-800">{t('home.ai_agricultural_advisor')}</h3>
+                <h3 className="text-xl font-bold text-slate-800">{t('home.ai_agricultural_advisor')}</h3>
               </div>
               
               <div className="space-y-4">
@@ -1644,7 +1644,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                     value={aiQuestion}
                     onChange={(e) => setAiQuestion(e.target.value)}
                     placeholder={t('home.ask_question')}
-                    className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                    className="flex-1 px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     onKeyPress={(e) => e.key === 'Enter' && handleAIQuestion()}
                   />
                   <button
@@ -1668,7 +1668,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-3">
-                          <h4 className="font-semibold text-gray-800">AI Agricultural Advisor</h4>
+                          <h4 className="font-semibold text-slate-800">AI Agricultural Advisor</h4>
                           
                         </div>
                         <div className="space-y-3 max-h-96 overflow-y-auto">
@@ -1695,19 +1695,19 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                             const isDivider = trimmedLine.startsWith('---') || trimmedLine === '';
                             
                             if (isDivider) {
-                              return <div key={index} className="border-t border-gray-200 my-2"></div>;
+                              return <div key={index} className="border-t border-slate-200 my-2"></div>;
                             } else if (isHeader) {
                               return (
                                 <div key={index} className="border-l-4 border-blue-500 pl-4 py-2 bg-white/50 rounded-r-lg">
-                                  <h5 className="font-bold text-gray-800 text-base leading-relaxed">
+                                  <h5 className="font-bold text-slate-800 text-base leading-relaxed">
                                     {trimmedLine.replace(/\*\*/g, '')}
                                   </h5>
                                 </div>
                               );
                             } else if (isBulletPoint) {
                               return (
-                                <div key={index} className="ml-4 pl-4 border-l-2 border-gray-200">
-                                  <div className="text-gray-700 text-sm leading-relaxed flex items-start gap-2">
+                                <div key={index} className="ml-4 pl-4 border-l-2 border-slate-200">
+                                  <div className="text-slate-700 text-sm leading-relaxed flex items-start gap-2">
                                     {trimmedLine.startsWith('-') ? (
                                       <>
                                         <span className="text-blue-500 mt-1.5 text-xs">•</span>
@@ -1728,8 +1728,8 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                               );
                             } else if (hasMetrics) {
                               return (
-                                <div key={index} className="bg-white/70 rounded-lg p-3 border border-gray-200">
-                                  <p className="text-gray-700 text-sm leading-relaxed font-medium">
+                                <div key={index} className="bg-white/70 rounded-lg p-3 border border-slate-200">
+                                  <p className="text-slate-700 text-sm leading-relaxed font-medium">
                                     {trimmedLine}
                                   </p>
                                 </div>
@@ -1737,7 +1737,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                             } else {
                               return (
                                 <div key={index} className="py-1">
-                                  <p className="text-gray-700 text-sm leading-relaxed">
+                                  <p className="text-slate-700 text-sm leading-relaxed">
                                     {trimmedLine}
                                   </p>
                                 </div>
@@ -1745,13 +1745,13 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                             }
                           })}
                         </div>
-                        <div className="mt-4 pt-3 border-t border-gray-200">
+                        <div className="mt-4 pt-3 border-t border-slate-200">
                           <div className="flex items-center justify-between">
-                            <p className="text-xs text-gray-500 flex items-center gap-1">
+                            <p className="text-xs text-slate-500 flex items-center gap-1">
                               <Clock className="w-3 h-3" />
                               Generated: {new Date().toLocaleTimeString()}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-slate-500">
                               Based on current weather, soil & land conditions
                             </p>
                           </div>
@@ -1767,10 +1767,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       setAiQuestion("What's the best time to irrigate my crops today?");
                       handleAIQuestion();
                     }}
-                    className="p-4 text-left border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+                    className="p-4 text-left border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="font-medium text-gray-800 mb-1">{t('home.irrigation_timing')}</div>
-                    <div className="text-sm text-gray-600">{t('home.get_optimal_watering')}</div>
+                    <div className="font-medium text-slate-800 mb-1">{t('home.irrigation_timing')}</div>
+                    <div className="text-sm text-slate-600">{t('home.get_optimal_watering')}</div>
                   </button>
                   
                   <button
@@ -1778,10 +1778,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       setAiQuestion("What pests should I watch out for in current conditions?");
                       handleAIQuestion();
                     }}
-                    className="p-4 text-left border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+                    className="p-4 text-left border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="font-medium text-gray-800 mb-1">{t('home.pest_management')}</div>
-                    <div className="text-sm text-gray-600">{t('home.identify_threats')}</div>
+                    <div className="font-medium text-slate-800 mb-1">{t('home.pest_management')}</div>
+                    <div className="text-sm text-slate-600">{t('home.identify_threats')}</div>
                   </button>
                   
                   <button
@@ -1789,10 +1789,10 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       setAiQuestion("Should I apply fertilizer based on current soil conditions?");
                       handleAIQuestion();
                     }}
-                    className="p-4 text-left border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+                    className="p-4 text-left border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="font-medium text-gray-800 mb-1">{t('home.fertilizer_advice')}</div>
-                    <div className="text-sm text-gray-600">{t('home.optimize_nutrients')}</div>
+                    <div className="font-medium text-slate-800 mb-1">{t('home.fertilizer_advice')}</div>
+                    <div className="text-sm text-slate-600">{t('home.optimize_nutrients')}</div>
                   </button>
                   
                   <button
@@ -1800,18 +1800,18 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                       setAiQuestion("What field operations can I safely perform today?");
                       handleAIQuestion();
                     }}
-                    className="p-4 text-left border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+                    className="p-4 text-left border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="font-medium text-gray-800 mb-1">{t('home.field_operations')}</div>
-                    <div className="text-sm text-gray-600">{t('home.plan_daily_tasks')}</div>
+                    <div className="font-medium text-slate-800 mb-1">{t('home.field_operations')}</div>
+                    <div className="text-sm text-slate-600">{t('home.plan_daily_tasks')}</div>
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Quick Insights */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">{t('home.todays_insights')}</h3>
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+              <h3 className="text-xl font-bold text-slate-800 mb-4">{t('home.todays_insights')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl border border-green-200">
@@ -1864,7 +1864,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
         )}
 
         {/* Footer */}
-        <div className="text-center text-gray-500 text-sm border-t border-gray-200 pt-6">
+        <div className="text-center text-slate-500 text-sm border-t border-slate-200 pt-6">
           <p>{t('home.footer_dashboard')}</p>
           <p className="mt-1">
             {t('home.location_label')}: {weatherData ? `${weatherData.location.city}, ${weatherData.location.country}` : t('common.loading')} | 

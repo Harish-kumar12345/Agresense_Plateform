@@ -54,10 +54,10 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
     return (
       <div className="min-h-[80vh] flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 flex items-center justify-center">
-            <Loader2 className="w-7 h-7 text-emerald-600 animate-spin" />
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+            <Loader2 className="w-7 h-7 text-emerald-400 animate-spin" />
           </div>
-          <p className="text-sm font-medium text-gray-500">Loading your farm fields...</p>
+          <p className="text-sm font-medium text-slate-400">Loading your farm fields...</p>
         </div>
       </div>
     );
@@ -78,13 +78,13 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
       >
         {/* Welcome Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-4 border border-emerald-100">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-semibold mb-4 border border-emerald-500/25">
             <Sparkles className="w-3.5 h-3.5" /> Welcome to AgriSense
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-            Hello, <span className="text-emerald-600">{farmerName}</span> 👋
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+            Hello, <span className="text-emerald-400">{farmerName}</span> 👋
           </h1>
-          <p className="mt-3 text-base text-gray-500 max-w-lg mx-auto">
+          <p className="mt-3 text-base text-slate-400 max-w-lg mx-auto leading-relaxed">
             Get started by mapping your first farm field using our satellite GIS tools.
             Draw boundaries, calculate area, and unlock precision agriculture insights.
           </p>
@@ -92,7 +92,7 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
 
         {/* Single CTA Card */}
         <div
-          className="group relative bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 rounded-3xl p-8 sm:p-10 text-white shadow-2xl overflow-hidden cursor-pointer hover:shadow-emerald-200/40 transition-all duration-500 hover:-translate-y-1"
+          className="group relative bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 rounded-3xl p-8 sm:p-10 text-white shadow-2xl overflow-hidden cursor-pointer hover:shadow-emerald-900/40 transition-all duration-500 hover:-translate-y-1 border border-emerald-500/30"
           onClick={onOpenGISMap}
         >
           {/* Decorative elements */}
@@ -108,15 +108,15 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
             </div>
 
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Set Up Your First Farm Field</h2>
-              <p className="mt-2 text-emerald-100/80 text-sm max-w-md">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight font-display">Set Up Your First Farm Field</h2>
+              <p className="mt-2 text-emerald-100/80 text-sm max-w-md leading-relaxed">
                 Open the satellite GIS map, locate your farm, draw precision boundaries,
                 and save your field to start receiving AI-powered insights.
               </p>
             </div>
 
             <div className="flex items-center gap-2 pt-2">
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-emerald-700 font-bold text-sm rounded-xl shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
+              <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-emerald-950 font-bold text-sm rounded-xl shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
                 Open GIS Map
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
@@ -125,16 +125,16 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
         </div>
 
         {/* Steps preview */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 text-center text-xs font-medium text-gray-500">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 text-center text-xs font-medium text-slate-400">
           {[
             { label: 'Locate on Map', icon: '📍' },
             { label: 'Draw Boundary', icon: '✏️' },
             { label: 'Calculate Area', icon: '📐' },
             { label: 'Save & Analyze', icon: '🚀' }
           ].map((step, i) => (
-            <div key={i} className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div key={i} className="p-3.5 bg-slate-900/80 backdrop-blur-md rounded-xl border border-white/10 shadow-md">
               <span className="text-lg block mb-1">{step.icon}</span>
-              <span className="font-semibold text-gray-700">{step.label}</span>
+              <span className="font-semibold text-slate-200">{step.label}</span>
             </div>
           ))}
         </div>
@@ -154,14 +154,14 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
     >
       {/* Welcome Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-4 border border-emerald-100">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-semibold mb-4 border border-emerald-500/25">
           <Leaf className="w-3.5 h-3.5" /> Welcome Back
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-          Welcome back, <span className="text-emerald-600">{farmerName}</span>!
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+          Welcome back, <span className="text-emerald-400">{farmerName}</span>!
         </h1>
-        <p className="mt-3 text-base text-gray-500 max-w-lg mx-auto">
-          You have <strong className="text-emerald-700">{savedFarms.length} saved farm field{savedFarms.length > 1 ? 's' : ''}</strong>.
+        <p className="mt-3 text-base text-slate-400 max-w-lg mx-auto">
+          You have <strong className="text-emerald-400">{savedFarms.length} saved farm field{savedFarms.length > 1 ? 's' : ''}</strong>.
           What would you like to do?
         </p>
       </div>
@@ -171,7 +171,7 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
 
         {/* ── Card A: View Saved Fields ── */}
         <div
-          className="group relative bg-gradient-to-br from-emerald-600 via-emerald-700 to-green-800 rounded-3xl p-7 text-white shadow-xl overflow-hidden cursor-pointer hover:shadow-emerald-200/40 transition-all duration-500 hover:-translate-y-1"
+          className="group relative bg-gradient-to-br from-emerald-600 via-emerald-700 to-green-800 rounded-3xl p-7 text-white shadow-xl overflow-hidden cursor-pointer hover:shadow-emerald-950/50 transition-all duration-500 hover:-translate-y-1 border border-emerald-500/30"
           onClick={onViewSavedFields}
         >
           {/* Decorative */}
@@ -235,11 +235,11 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
 
         {/* ── Card B: Add New Field via GIS ── */}
         <div
-          className="group relative bg-gradient-to-br from-teal-600 via-cyan-700 to-blue-800 rounded-3xl p-7 text-white shadow-xl overflow-hidden cursor-pointer hover:shadow-cyan-200/40 transition-all duration-500 hover:-translate-y-1"
+          className="group relative bg-gradient-to-br from-emerald-700 via-emerald-800 to-slate-900 rounded-3xl p-7 text-white shadow-xl overflow-hidden cursor-pointer hover:shadow-emerald-500/20 transition-all duration-500 hover:-translate-y-1 border border-emerald-500/30"
           onClick={onOpenGISMap}
         >
           {/* Decorative */}
-          <div className="absolute -left-8 -bottom-8 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -left-8 -bottom-8 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute right-6 bottom-4 opacity-[0.06] pointer-events-none">
             <Map className="w-28 h-28" />
           </div>
@@ -251,7 +251,7 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
 
             <div>
               <h2 className="text-xl font-bold tracking-tight">Add New Farm Field</h2>
-              <p className="mt-1.5 text-cyan-100/70 text-sm">
+              <p className="mt-1.5 text-emerald-100/70 text-sm">
                 Open the satellite GIS map to locate and draw a new farm boundary.
               </p>
             </div>
@@ -274,13 +274,13 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
                   }}
                 >
                   <span className="text-sm">{feat.icon}</span>
-                  <span className="text-xs font-medium text-cyan-100/80">{feat.label}</span>
+                  <span className="text-xs font-medium text-emerald-100/80">{feat.label}</span>
                 </div>
               ))}
             </div>
 
             <div className="flex items-center gap-2 pt-2">
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-teal-700 font-bold text-sm rounded-xl shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
+              <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-emerald-800 font-bold text-sm rounded-xl shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
                 <MapPin className="w-4 h-4" />
                 Open GIS Map
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -293,21 +293,21 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
       {/* Quick-Select: Jump directly to a saved farm */}
       {savedFarms.length > 0 && (
         <div
-          className="mt-8 bg-white rounded-2xl border border-gray-100 shadow-sm p-5"
+          className="mt-8 saas-card p-6"
           style={{
             opacity: fadeIn ? 1 : 0,
             transform: fadeIn ? 'translateY(0)' : 'translateY(16px)',
             transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s'
           }}
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+              <div className="p-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">
                 <Sprout className="w-4 h-4" />
               </div>
-              <h3 className="text-sm font-bold text-gray-800">Quick Access — Jump to a Field</h3>
+              <h3 className="text-sm font-bold text-white font-display">Quick Access — Jump to a Field</h3>
             </div>
-            <span className="text-xs text-gray-400">Select to go directly to the dashboard</span>
+            <span className="text-xs text-slate-400">Select to go directly to the dashboard</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {savedFarms.slice(0, 6).map((farm) => (
@@ -315,16 +315,16 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
                 key={farm.farm_id}
                 type="button"
                 onClick={() => onSelectFarm(farm)}
-                className="group/card flex items-center gap-3 p-3 rounded-xl border border-gray-200 bg-gray-50 hover:bg-emerald-50 hover:border-emerald-300 transition-all text-left"
+                className="group/card flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-slate-900/80 hover:bg-slate-800 hover:border-emerald-500/40 transition-all text-left cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover/card:bg-emerald-200 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover/card:bg-emerald-500/30 transition-colors">
                   <Wheat className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-bold text-gray-800 block truncate">{farm.farm_name}</span>
-                  <span className="text-xs text-gray-500">{farm.crop} • {farm.area_hectares} ha • {farm.location_name?.split(',')[0]}</span>
+                  <span className="text-sm font-bold text-white block truncate font-display">{farm.farm_name}</span>
+                  <span className="text-xs text-slate-400">{farm.crop} • {farm.area_hectares} ha • {farm.location_name?.split(',')[0]}</span>
                 </div>
-                <ArrowRight className="w-4 h-4 text-gray-300 group-hover/card:text-emerald-600 transition-colors shrink-0" />
+                <ArrowRight className="w-4 h-4 text-slate-500 group-hover/card:text-emerald-400 transition-colors shrink-0" />
               </button>
             ))}
           </div>

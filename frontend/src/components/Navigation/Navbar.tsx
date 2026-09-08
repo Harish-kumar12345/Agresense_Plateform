@@ -101,9 +101,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <CloudSun className="w-4 h-4" />,
       isActive: isMonitorActive,
       items: [
-        { id: 'weather', label: 'Weather Telemetry', sub: 'Hyperlocal forecast & precip', icon: <CloudSun className="w-4 h-4 text-sky-400" /> },
+        { id: 'weather', label: 'Weather Telemetry', sub: 'Hyperlocal forecast & precip', icon: <CloudSun className="w-4 h-4 text-emerald-400" /> },
         { id: 'soil', label: 'Soil Horizon & NPK', sub: 'Moisture, pH & nutrients', icon: <FlaskConical className="w-4 h-4 text-emerald-400" /> },
-        { id: 'disease', label: 'Pathogen & Pest Risk', sub: 'Random Forest risk classifier', icon: <Bug className="w-4 h-4 text-rose-400" /> },
+        { id: 'disease', label: 'Pathogen & Pest Risk', sub: 'Random Forest risk classifier', icon: <Bug className="w-4 h-4 text-emerald-400" /> },
       ]
     },
     {
@@ -112,8 +112,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <Wrench className="w-4 h-4" />,
       isActive: isOpsActive,
       items: [
-        { id: 'inventory', label: 'Inventory Tracker', sub: 'Stock, fertilizers & pesticides', icon: <Pill className="w-4 h-4 text-purple-400" /> },
-        { id: 'harvest', label: 'Harvest Planning', sub: 'Schedules, logistics & storage', icon: <Tractor className="w-4 h-4 text-amber-400" /> },
+        { id: 'inventory', label: 'Inventory Tracker', sub: 'Stock, fertilizers & pesticides', icon: <Pill className="w-4 h-4 text-emerald-400" /> },
+        { id: 'harvest', label: 'Harvest Planning', sub: 'Schedules, logistics & storage', icon: <Tractor className="w-4 h-4 text-emerald-400" /> },
       ]
     },
     {
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       items: [
         { id: 'yield', label: 'Yield Prediction ML', sub: 'Multi-variable tonnage forecast', icon: <Brain className="w-4 h-4 text-emerald-400" /> },
         { id: 'prices', label: 'Mandi Market Rates', sub: 'Live commodity price tracking', icon: <IndianRupee className="w-4 h-4 text-emerald-400" /> },
-        { id: 'chat', label: 'Agronomist Advisor', sub: 'Bilingual AI voice & chat assistant', icon: <MessageSquare className="w-4 h-4 text-sky-400" /> },
+        { id: 'chat', label: 'Agronomist Advisor', sub: 'Bilingual AI voice & chat assistant', icon: <MessageSquare className="w-4 h-4 text-emerald-400" /> },
       ]
     }
   ];
@@ -133,8 +133,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-950/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-slate-950/40 py-2.5'
-          : 'bg-slate-950/95 backdrop-blur-md border-b border-white/5 py-3'
+          ? 'bg-[#070D0A]/92 backdrop-blur-2xl border-b border-emerald-900/30 shadow-2xl shadow-black/70 py-2.5'
+          : 'bg-[#070D0A]/80 backdrop-blur-xl border-b border-white/10 py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,8 +161,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Desktop Sliding Nav - Linear Style */}
-          <nav className="hidden lg:flex items-center bg-slate-900/80 p-1 rounded-2xl border border-white/10" ref={navRef}>
+          {/* Desktop Sliding Nav - VerdaAgro Organic Glass Pill */}
+          <nav className="hidden lg:flex items-center bg-[#0D1612]/90 p-1.5 rounded-full border border-emerald-900/40 shadow-inner" ref={navRef}>
             {navSections.map((sec) => {
               const isOpen = activeDropdown === sec.id;
               return (
@@ -170,13 +170,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveDropdown(isOpen ? null : sec.id)}
-                    className={`relative px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 select-none cursor-pointer ${
+                    className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 select-none cursor-pointer ${
                       sec.isActive
-                        ? 'text-white bg-emerald-600/30 border border-emerald-500/40 shadow-sm'
-                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                        ? 'text-white bg-emerald-500/20 border border-emerald-400/40 shadow-sm'
+                        : 'text-[#D1DED6] hover:text-white hover:bg-white/5 border border-transparent'
                     }`}
                   >
-                    <span className={sec.isActive ? 'text-emerald-400' : 'text-slate-400'}>
+                    <span className={sec.isActive ? 'text-emerald-400' : 'text-[#D1DED6]'}>
                       {sec.icon}
                     </span>
                     <span>{sec.label}</span>
@@ -191,7 +191,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 6, scale: 0.96 }}
                         transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute left-0 mt-2 w-64 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-2xl shadow-2xl p-2 space-y-1 z-50"
+                        className="absolute left-0 mt-2 w-64 bg-[#0D1612]/98 backdrop-blur-2xl border border-emerald-900/50 rounded-2xl shadow-2xl p-2 space-y-1 z-50"
                       >
                         {sec.items.map((item) => {
                           const isCurrent = currentView === item.id;
@@ -206,15 +206,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                               className={`w-full px-3 py-2.5 rounded-xl text-left flex items-start gap-3 transition-colors cursor-pointer ${
                                 isCurrent
                                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                                  : 'text-slate-200 hover:bg-slate-800/80'
+                                  : 'text-white hover:bg-[#13231B] hover:text-white'
                               }`}
                             >
-                              <div className="p-1.5 rounded-lg bg-slate-800 border border-white/5 shrink-0 mt-0.5">
+                              <div className="p-1.5 rounded-lg bg-[#070D0A] border border-emerald-900/40 shrink-0 mt-0.5">
                                 {item.icon}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="text-xs font-semibold tracking-tight">{item.label}</div>
-                                <div className="text-[11px] text-slate-400 truncate">{item.sub}</div>
+                                <div className="text-xs font-semibold tracking-tight text-white">{item.label}</div>
+                                <div className="text-[11px] text-[#D1DED6] truncate">{item.sub}</div>
                               </div>
                             </button>
                           );
@@ -234,10 +234,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => onSelectView('officer')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border select-none cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border select-none cursor-pointer ${
                 currentView === 'officer'
-                  ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-md shadow-amber-500/20'
-                  : 'bg-slate-900/80 text-amber-300 border-amber-500/30 hover:bg-amber-500/10 hover:border-amber-500/50'
+                  ? 'bg-emerald-600 text-white border-emerald-400 shadow-md shadow-emerald-600/20'
+                  : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50'
               }`}
             >
               <Shield className="w-3.5 h-3.5" />
@@ -248,10 +248,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenAlerts}
-              className="relative p-2 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 hover:border-white/20 text-slate-200 rounded-xl transition-all select-none cursor-pointer group"
+              className="relative p-2 bg-[#0D1612]/90 hover:bg-emerald-950/40 border border-emerald-900/40 hover:border-emerald-500/40 text-[#D1DED6] hover:text-white rounded-xl transition-all select-none cursor-pointer group"
               title="Smart Telemetry Alerts"
             >
-              <Bell className="w-4 h-4 group-hover:text-amber-400 transition-colors" />
+              <Bell className="w-4 h-4 group-hover:text-emerald-400 transition-colors" />
               {unreadAlertCount > 0 && (
                 <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-rose-600 text-[10px] font-bold text-white shadow-lg animate-pulse">
                   {unreadAlertCount}
@@ -265,12 +265,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 p-1.5 pl-2.5 bg-slate-900/80 hover:bg-slate-800/80 border border-white/10 rounded-xl text-xs text-slate-200 transition-all cursor-pointer"
+                  className="flex items-center gap-2 p-1.5 pl-2.5 bg-[#0D1612]/90 hover:bg-emerald-950/40 border border-emerald-900/40 hover:border-emerald-500/40 rounded-xl text-xs text-white transition-all cursor-pointer"
                 >
                   <div className="w-6 h-6 rounded-lg bg-emerald-600/30 border border-emerald-500/50 flex items-center justify-center text-emerald-400 font-bold text-[11px]">
                     {(user.name || user.email || 'F')[0].toUpperCase()}
                   </div>
-                  <span className="max-w-[100px] truncate font-medium">{user.name || user.email || 'Farmer'}</span>
+                  <span className="max-w-[100px] truncate font-medium text-white">{user.name || user.email || 'Farmer'}</span>
                   <ChevronDown className="w-3 h-3 text-slate-400" />
                 </button>
 
@@ -281,12 +281,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 6, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-52 bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-2xl shadow-2xl p-2 z-50"
+                      className="absolute right-0 mt-2 w-52 bg-[#0D1612]/98 backdrop-blur-2xl border border-emerald-900/50 rounded-2xl shadow-2xl p-2 z-50"
                     >
-                      <div className="px-3 py-2 border-b border-slate-800 mb-1">
+                      <div className="px-3 py-2 border-b border-emerald-900/30 mb-1">
                         <p className="text-xs font-semibold text-white truncate">{user.name || 'User'}</p>
-                        <p className="text-[11px] text-slate-400 truncate">{user.email || 'guest@agrisense.farm'}</p>
-                        <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase rounded bg-slate-800 text-emerald-400 border border-emerald-500/20">
+                        <p className="text-[11px] text-[#D1DED6] truncate">{user.email || 'guest@agrisense.farm'}</p>
+                        <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-bold uppercase rounded bg-[#070D0A] text-emerald-400 border border-emerald-500/30">
                           {user.role || 'Guest Mode'}
                         </span>
                       </div>
@@ -313,7 +313,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenAlerts}
-              className="relative p-2 bg-slate-900/80 text-slate-200 rounded-xl border border-white/10"
+              className="relative p-2 bg-[#0D1612]/90 text-[#D1DED6] hover:text-white rounded-xl border border-emerald-900/40"
             >
               <Bell className="w-4 h-4" />
               {unreadAlertCount > 0 && (
@@ -326,7 +326,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 rounded-xl border border-white/10"
+              className="p-2 text-[#D1DED6] hover:text-white bg-[#0D1612]/90 hover:bg-emerald-950/40 rounded-xl border border-emerald-900/40"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -342,43 +342,43 @@ export const Navbar: React.FC<NavbarProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-slate-950/98 backdrop-blur-2xl border-b border-white/10 px-4 py-4 space-y-3 overflow-hidden"
+            className="lg:hidden bg-[#070D0A]/98 backdrop-blur-2xl border-b border-emerald-900/40 px-4 py-4 space-y-3 overflow-hidden"
           >
             <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-              <button type="button" onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <Sprout className="w-4 h-4 text-emerald-400" /> Setup & Entry
               </button>
-              <button type="button" onClick={() => { onSelectView('dashboard'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('dashboard'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <BarChart3 className="w-4 h-4 text-emerald-400" /> Dashboard
               </button>
-              <button type="button" onClick={() => { onSelectView('gis'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('gis'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <MapPin className="w-4 h-4 text-emerald-400" /> GIS Map
               </button>
-              <button type="button" onClick={() => { onSelectView('weather'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('weather'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <CloudSun className="w-4 h-4 text-sky-400" /> Weather
               </button>
-              <button type="button" onClick={() => { onSelectView('soil'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('soil'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <FlaskConical className="w-4 h-4 text-emerald-400" /> Soil NPK
               </button>
-              <button type="button" onClick={() => { onSelectView('disease'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('disease'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <Bug className="w-4 h-4 text-rose-400" /> Disease Risk
               </button>
-              <button type="button" onClick={() => { onSelectView('inventory'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('inventory'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <Pill className="w-4 h-4 text-purple-400" /> Inventory
               </button>
-              <button type="button" onClick={() => { onSelectView('harvest'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('harvest'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <Tractor className="w-4 h-4 text-amber-400" /> Harvest
               </button>
-              <button type="button" onClick={() => { onSelectView('yield'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('yield'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <Brain className="w-4 h-4 text-emerald-400" /> Yield Prediction
               </button>
-              <button type="button" onClick={() => { onSelectView('prices'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-white/5 rounded-xl text-left flex items-center gap-2 text-slate-200">
+              <button type="button" onClick={() => { onSelectView('prices'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <IndianRupee className="w-4 h-4 text-emerald-400" /> Crop Prices
               </button>
-              <button type="button" onClick={() => { onSelectView('chat'); setMobileMenuOpen(false); }} className="p-2.5 bg-slate-900/80 border border-sky-500/30 rounded-xl text-left flex items-center gap-2 col-span-2 text-sky-300">
+              <button type="button" onClick={() => { onSelectView('chat'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-sky-500/30 rounded-xl text-left flex items-center gap-2 col-span-2 text-sky-300">
                 <MessageSquare className="w-4 h-4 text-sky-400" /> Agronomic Advisor
               </button>
-              <button type="button" onClick={() => { onSelectView('officer'); setMobileMenuOpen(false); }} className="p-2.5 bg-amber-500 text-slate-950 font-bold rounded-xl text-center col-span-2 shadow-md">
+              <button type="button" onClick={() => { onSelectView('officer'); setMobileMenuOpen(false); }} className="p-2.5 bg-emerald-600 text-white font-bold rounded-xl text-center col-span-2 shadow-md">
                 <Shield className="w-4 h-4 inline mr-1" /> Officer Portal
               </button>
             </div>

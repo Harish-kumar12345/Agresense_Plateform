@@ -21,10 +21,10 @@ export const FarmBoundaryDrawer: React.FC<FarmBoundaryDrawerProps> = ({
   onRedraw
 }) => {
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 border border-emerald-100 shadow-lg flex flex-wrap items-center justify-between gap-2">
+    <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-3.5 border border-white/10 shadow-2xl flex flex-wrap items-center justify-between gap-2">
       <div className="flex items-center gap-2">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">Boundary Tools</span>
-        <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Boundary Tools</span>
+        <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-white/10 font-semibold">
           {pointCount} Points Added
         </span>
       </div>
@@ -34,7 +34,7 @@ export const FarmBoundaryDrawer: React.FC<FarmBoundaryDrawerProps> = ({
           <button
             type="button"
             onClick={onStartDrawing}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-emerald-600/30 cursor-pointer"
           >
             <PenTool className="w-3.5 h-3.5" />
             Draw Boundary
@@ -47,10 +47,10 @@ export const FarmBoundaryDrawer: React.FC<FarmBoundaryDrawerProps> = ({
               type="button"
               disabled={pointCount < 3}
               onClick={onFinishPolygon}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                 pointCount >= 3
-                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm cursor-pointer'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 cursor-pointer'
+                  : 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/5'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
@@ -63,7 +63,7 @@ export const FarmBoundaryDrawer: React.FC<FarmBoundaryDrawerProps> = ({
           <button
             type="button"
             onClick={onRedraw}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition-all shadow-md cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Redraw Boundary
@@ -74,7 +74,7 @@ export const FarmBoundaryDrawer: React.FC<FarmBoundaryDrawerProps> = ({
           <button
             type="button"
             onClick={onClearPoints}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-xs font-medium transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 rounded-xl text-xs font-semibold transition-all cursor-pointer"
           >
             <Trash2 className="w-3.5 h-3.5" />
             Clear

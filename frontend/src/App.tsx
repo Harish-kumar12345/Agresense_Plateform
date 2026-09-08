@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Chat } from './components/Chat';
-import { Home } from './components/Home';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import { FarmGISPage } from './components/FarmGIS/FarmGISPage';
@@ -130,7 +129,11 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-light flex flex-col">
+    <div className="min-h-screen agri-canvas text-slate-100 flex flex-col relative overflow-x-hidden">
+      {/* Background ambient lighting effects for luminous cyber-glass look */}
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+
       {/* Sleek Modern Application Navbar */}
       <Navbar
         currentView={view}
@@ -246,7 +249,7 @@ function AppContent() {
                 {token ? (
                   <OfficerDashboard token={token} onLogout={() => setToken(null)} />
                 ) : (
-                  <div className="max-w-md mx-auto card p-6">
+                  <div className="max-w-md mx-auto py-6">
                     <OfficerLogin onToken={(t) => setToken(t)} />
                   </div>
                 )}
@@ -262,10 +265,10 @@ function AppContent() {
         activeFarmId={activeFarm?.id || 'farm_01'}
         isOfficer={user?.role === 'officer' || user?.role === 'admin'}
       />
-      <footer className="border-t border-gray-100 bg-white/70">
-        <div className="max-w-6xl mx-auto px-4 py-5 text-sm text-gray-600 flex items-center justify-between">
-          <span>© {new Date().getFullYear()} AgriSense Assistant</span>
-          <span>Built with care for farmers</span>
+      <footer className="border-t border-emerald-900/30 bg-[#070D0A]/90 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 py-5 text-sm text-[#D1DED6] flex items-center justify-between">
+          <span>© {new Date().getFullYear()} AgriSense Precision Agronomic Suite</span>
+          <span className="text-emerald-400 font-semibold">Verified for Indian Precision Agriculture</span>
         </div>
       </footer>
     </div>

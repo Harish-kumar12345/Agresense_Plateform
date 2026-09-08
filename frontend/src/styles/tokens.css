@@ -1,0 +1,42 @@
+:root {
+  /* ---- Brand primary (AgriSense Forest / Emerald Green) ---- */
+  --brand-50:  #E8FAF2;
+  --brand-100: #C7F4DE;
+  --brand-200: #93ECC2;
+  --brand-300: #55DDA1;
+  --brand-400: #22C57E;
+  --brand-500: #10B981;   /* Core Brand Green */
+  --brand-600: #059669;   /* Hover / Active */
+  --brand-700: #047857;
+  --brand-800: #065F46;
+  --brand-900: #064E3B;
+
+  /* ---- Organic Earth & Dark-Forest Neutral Canvas ---- */
+  --bg-canvas:    #070D0A;   /* Deep organic night earth */
+  --bg-surface:   #0D1612;   /* Card surface */
+  --bg-surface-2: #131F19;   /* Elevated bento panel / hover state */
+  --bg-surface-3: #1A2A22;   /* Nested sub-card / widget */
+
+  /* ---- Borders with subtle organic undertone ---- */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-glass:  rgba(255, 255, 255, 0.12);
+  --border-brand:  rgba(16, 185, 129, 0.25);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  /* ---- Ultra High-Contrast Text Hierarchy (WCAG AAA/AA) ---- */
+  --text-primary:   #FFFFFF;   /* Crisp white for headings & values */
+  --text-secondary: #D1DED6;   /* High-legibility soft sage-slate */
+  --text-muted:     #82968C;   /* Muted captions & labels */
+
+  /* ---- Semantic Data Status ---- */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-danger:  #F43F5E;
+  --status-info:    #38BDF8;
+
+  /* ---- Chart Data Series ---- */
+  --chart-1: #10B981;
+  --chart-2: #38BDF8;
+  --chart-3: #F59E0B;
+  --chart-4: #A78BFA;
+}
