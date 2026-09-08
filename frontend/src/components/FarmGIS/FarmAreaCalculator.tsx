@@ -74,54 +74,54 @@ export const FarmAreaCalculator: React.FC<FarmAreaCalculatorProps> = ({
   }, [polygonPoints, areaSqm]);
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-emerald-100 shadow-md">
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+    <div className="saas-card p-6 space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+          <div className="p-2 rounded-xl bg-emerald-500/15 border border-emerald-500/25 text-emerald-400">
             <Maximize2 className="w-5 h-5" />
           </div>
-          <h3 className="font-semibold text-gray-800">Farm Area Calculation</h3>
+          <h3 className="font-semibold text-white text-sm font-display">Farm Area Calculation</h3>
         </div>
-        <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-medium">
+        <span className="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-white/10 font-medium">
           {polygonPoints.length >= 3 ? 'Geodesic Calculated' : 'Awaiting Boundary'}
         </span>
       </div>
 
       {polygonPoints.length < 3 ? (
-        <div className="py-6 text-center text-gray-500 flex flex-col items-center gap-2">
+        <div className="py-8 text-center text-slate-400 flex flex-col items-center gap-2">
           <AlertCircle className="w-8 h-8 text-amber-400" />
-          <p className="text-sm font-medium">Draw a boundary on the map to calculate area</p>
-          <p className="text-xs text-gray-400">Click at least 3 points around your farm field</p>
+          <p className="text-sm font-medium text-slate-300">Draw a boundary on the map to calculate area</p>
+          <p className="text-xs text-slate-500">Click at least 3 points around your farm field</p>
         </div>
       ) : (
         <div className="space-y-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-center">
-              <span className="text-xs text-gray-500 font-medium block">Hectares</span>
-              <span className="text-xl font-bold text-emerald-700">{areaHectares.toFixed(2)}</span>
-              <span className="text-[10px] text-emerald-600 block font-medium">ha</span>
+            <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-center">
+              <span className="text-xs text-slate-400 font-medium block">Hectares</span>
+              <span className="text-2xl font-bold text-emerald-400 font-display">{areaHectares.toFixed(2)}</span>
+              <span className="text-[10px] text-emerald-400/70 block font-semibold">ha</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 text-center">
-              <span className="text-xs text-gray-500 font-medium block">Acres</span>
-              <span className="text-xl font-bold text-blue-700">{areaAcres.toFixed(2)}</span>
-              <span className="text-[10px] text-blue-600 block font-medium">ac</span>
+            <div className="p-3.5 rounded-xl bg-sky-950/40 border border-sky-500/30 text-center">
+              <span className="text-xs text-slate-400 font-medium block">Acres</span>
+              <span className="text-2xl font-bold text-sky-400 font-display">{areaAcres.toFixed(2)}</span>
+              <span className="text-[10px] text-sky-400/70 block font-semibold">ac</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-purple-50/70 border border-purple-100 text-center">
-              <span className="text-xs text-gray-500 font-medium block">Sq Meters</span>
-              <span className="text-xl font-bold text-purple-700">{Math.round(areaSqm).toLocaleString()}</span>
-              <span className="text-[10px] text-purple-600 block font-medium">m²</span>
+            <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-center">
+              <span className="text-xs text-slate-400 font-medium block">Sq Meters</span>
+              <span className="text-2xl font-bold text-purple-400 font-display">{Math.round(areaSqm).toLocaleString()}</span>
+              <span className="text-[10px] text-purple-400/70 block font-semibold">m²</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-100 text-center">
-              <span className="text-xs text-gray-500 font-medium block">Bigha (Standard)</span>
-              <span className="text-xl font-bold text-amber-700">{areaBigha.toFixed(2)}</span>
-              <span className="text-[10px] text-amber-600 block font-medium">bigha*</span>
+            <div className="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-center">
+              <span className="text-xs text-slate-400 font-medium block">Bigha (Standard)</span>
+              <span className="text-2xl font-bold text-amber-400 font-display">{areaBigha.toFixed(2)}</span>
+              <span className="text-[10px] text-amber-400/70 block font-semibold">bigha*</span>
             </div>
           </div>
 
-          <p className="text-[11px] text-gray-400 italic text-right">
+          <p className="text-[11px] text-slate-400 italic text-right">
             * Note: Bigha conversion uses standard Pucca Bigha (approx. 2,508 m²). Regional variations may apply.
           </p>
         </div>

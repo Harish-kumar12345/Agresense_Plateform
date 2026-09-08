@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Camera, Upload, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -97,7 +97,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, isUploa
           whileTap={{ scale: 0.95 }}
           onClick={triggerCameraCapture}
           disabled={isUploading}
-          className="p-2 text-gray-500 hover:text-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-emerald-400 border border-white/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
           title={t('chat.take_photo')}
         >
           <Camera className="w-5 h-5" />
@@ -109,15 +109,15 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, isUploa
           whileTap={{ scale: 0.95 }}
           onClick={triggerFileUpload}
           disabled={isUploading}
-          className="p-2 text-gray-500 hover:text-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-sky-400 border border-white/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
           title={t('chat.upload_image')}
         >
           <Upload className="w-5 h-5" />
         </motion.button>
 
         {isUploading && (
-          <div className="flex items-center gap-1 text-xs text-blue-600">
-            <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
+            <div className="w-3.5 h-3.5 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin"></div>
             <span>{t('chat.analyzing_image')}</span>
           </div>
         )}
@@ -127,9 +127,9 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, isUploa
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 mt-2 p-2 bg-red-100 border border-red-300 rounded-lg text-xs text-red-700 flex items-center gap-1 whitespace-nowrap z-10"
+            className="absolute top-full left-0 mt-2 p-2.5 bg-rose-500/15 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center gap-1.5 whitespace-nowrap z-10 shadow-lg"
           >
-            <AlertCircle className="w-3 h-3" />
+            <AlertCircle className="w-3.5 h-3.5" />
             <span>{t('chat.camera_error')}</span>
           </motion.div>
         )}

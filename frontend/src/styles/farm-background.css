@@ -1,114 +1,269 @@
 /* ==========================================================================
-   AgriSense Premium Agronomic Theme & Background Styles
-   Linear / Vercel style Polish with Agriculture / Nature Harmony
+   AgriSense — VerdaAgro Inspired Agronomic Design System & Card Utilities
+   High Contrast • Organic Earth Tones • Authentic Data Widgets
    ========================================================================== */
 
-.split-screen {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
+/* App Shell Background with Cinematic Farmland Drone View & Organic Vignette */
+.agri-canvas {
+  background-color: #070D0A;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 10, 0.82) 0%, rgba(7, 13, 10, 0.92) 40%, rgba(7, 13, 10, 0.98) 100%),
+    url('/assets/images/farm-hero.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
   min-height: 100vh;
-  background-color: #090d16;
 }
 
-@media (max-width: 1024px) {
-  .split-screen {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Left Hero Panel: Layered Aurora Gradient Mesh + Micro Grid Texture */
-.left-panel {
+/* Compact Agronomic Context Header Bar with Glassmorphism */
+.agri-context-header {
   position: relative;
+  background: linear-gradient(135deg, rgba(13, 22, 18, 0.96) 0%, rgba(19, 31, 25, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  background: radial-gradient(circle at 15% 25%, rgba(21, 128, 61, 0.45) 0%, transparent 45%),
-              radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.25) 0%, transparent 45%),
-              radial-gradient(circle at 50% 50%, rgba(5, 46, 22, 0.95) 0%, #090d16 100%);
 }
 
-.left-panel::before {
+/* Domain-Specific Photographic Glass Panels */
+.agri-context-header-farm {
+  background-image: 
+    linear-gradient(90deg, #0D1612 0%, rgba(13, 22, 18, 0.96) 50%, rgba(13, 22, 18, 0.75) 75%, rgba(13, 22, 18, 0.35) 100%),
+    url('/assets/images/farm-hero.jpg');
+  background-size: cover;
+  background-position: right center;
+}
+
+.agri-context-header-weather {
+  background-image: 
+    linear-gradient(90deg, #0D1612 0%, rgba(13, 22, 18, 0.96) 50%, rgba(13, 22, 18, 0.75) 75%, rgba(13, 22, 18, 0.35) 100%),
+    url('/assets/images/weather-canopy.jpg');
+  background-size: cover;
+  background-position: right center;
+}
+
+.agri-context-header-soil {
+  background-image: 
+    linear-gradient(90deg, #0D1612 0%, rgba(13, 22, 18, 0.96) 50%, rgba(13, 22, 18, 0.75) 75%, rgba(13, 22, 18, 0.35) 100%),
+    url('/assets/images/soil-horizon.jpg');
+  background-size: cover;
+  background-position: right center;
+}
+
+.agri-context-header-harvest {
+  background-image: 
+    linear-gradient(90deg, #0D1612 0%, rgba(13, 22, 18, 0.96) 50%, rgba(13, 22, 18, 0.75) 75%, rgba(13, 22, 18, 0.35) 100%),
+    url('/assets/images/harvest-field.jpg');
+  background-size: cover;
+  background-position: right center;
+}
+
+/* VerdaAgro Asymmetric Bento Card */
+.agri-bento-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.agri-bento-card:hover {
+  border-color: rgba(52, 211, 153, 0.35);
+  box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.75), 0 0 25px -5px rgba(16, 185, 129, 0.12);
+}
+
+/* Photo-infused cards with high-contrast text overlay */
+.agri-photo-card {
+  position: relative;
+}
+
+.agri-photo-card-harvest::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: url('/assets/images/harvest-field.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
   pointer-events: none;
-  opacity: 0.6;
+  z-index: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Soft Ambient Aurora Glow in Left Panel */
-.aurora-glow {
+.agri-photo-card-weather::before {
+  content: '';
   position: absolute;
-  width: 550px;
-  height: 550px;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
+  inset: 0;
+  background-image: url('/assets/images/weather-canopy.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
   pointer-events: none;
-  animation: pulse-aurora 8s ease-in-out infinite alternate;
+  z-index: 0;
+  transition: opacity 0.3s ease;
 }
 
-@keyframes pulse-aurora {
-  0% { transform: scale(1) translate(-20px, 10px); opacity: 0.25; }
-  100% { transform: scale(1.15) translate(30px, -20px); opacity: 0.4; }
+.agri-photo-card-soil::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/soil-horizon.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Right Panel: Content Holder */
-.right-panel {
+.agri-photo-card-farm::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/farm-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.agri-photo-card:hover::before {
+  opacity: 0.22;
+}
+
+.agri-photo-card > * {
   position: relative;
+  z-index: 1;
+}
+
+/* Data Table with Pristine Contrast */
+.agri-table-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.agri-table-container th {
+  background: var(--bg-surface-2);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.agri-table-container td {
+  padding: 1rem 1.25rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.agri-table-container tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Clean Micro-Pill */
+.agri-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34D399;
+}
+
+/* ==========================================================================
+   VerdaAgro Unified Photographic Backdrop & Glass Action Card System
+   ========================================================================== */
+.split-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #070D0A;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 10, 0.82) 0%, rgba(7, 13, 10, 0.92) 50%, rgba(7, 13, 10, 0.98) 100%),
+    url('/assets/images/farm-hero.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+@media (min-width: 1024px) {
+  .split-screen {
+    flex-direction: row;
+  }
+}
+
+.left-panel {
+  position: relative;
+  flex: 1 1 52%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.right-panel {
+  flex: 1 1 48%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2.5rem 1.5rem;
-  background: #090d16;
-  overflow-y: auto;
+  background: transparent;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .right-panel {
-    padding: 3.5rem 2.5rem;
-  }
+.glass-action-card {
+  background: rgba(13, 22, 18, 0.92);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
 }
 
-.right-panel::before {
-  content: '';
+.aurora-glow {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.12) 0%, transparent 60%);
+  width: 24rem;
+  height: 24rem;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.2;
   pointer-events: none;
 }
 
-/* Premium 24px Glass Action Card */
-.glass-action-card {
-  position: relative;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 35px -10px rgba(34, 197, 94, 0.15);
-  border-radius: 1.5rem;
-  z-index: 10;
-}
-
-/* 3D Glass Composition Icon Badge */
 .farm-hero-icon {
-  width: 90px;
-  height: 90px;
-  border-radius: 1.5rem;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(245, 158, 11, 0.2) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 35px -5px rgba(22, 163, 74, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  display: inline-flex;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
   backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Floating animation */
 .floating-hero {
-  animation: float-hero 5s ease-in-out infinite;
+  animation: floating 4s ease-in-out infinite;
 }
 
-@keyframes float-hero {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }

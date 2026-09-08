@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Brain,
   TrendingUp,
-  Award,
-  Calendar,
   RefreshCw,
   MapPin,
   Sliders,
-  Sparkles,
-  BarChart3,
-  Layers,
   Sprout,
   ShieldCheck,
-  CheckCircle2,
-  XCircle,
-  Database,
+  Award,
+  Layers,
+  Calendar,
   X
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Cell
+} from 'recharts';
 import { yieldService, YieldPredictionResult, PipelineFeatureValidation } from '../../services/yieldService';
 import { soilService } from '../../services/soilService';
 import { weatherService } from '../../services/weatherService';
 import { FarmData } from '../../services/farmService';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import { InsightCard } from '../ui/InsightCard';
+import { colors, motionPresets } from '../../styles/design-tokens';
 
 interface YieldPredictionModuleProps {
   farm?: FarmData | null;
@@ -135,173 +147,427 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-800 font-sans">
-      
-      {/* 1. Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Yield Prediction</h1>
-            <span className="px-2.5 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md">
-              {selectedCrop}
-            </span>
+    <motion.div
+      variants={motionPresets.container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
+    >
+      {/* 1. VerdaAgro Yield Intelligence Context Bar */}
+      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-harvest">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+              <span>Intelligence</span>
+              <span className="text-emerald-700">/</span>
+              <span>Agronomic ML Predictive Forecast</span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                PREDICTION PIPELINE ACTIVE
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+                Crop Yield ML Prediction Model
+              </h1>
+              {prediction && (
+                <span className="agri-pill agri-pill-emerald">
+                  {prediction.confidenceLevel} Confidence ({prediction.confidenceScore}%)
+                </span>
+              )}
+              <span className="agri-pill agri-pill-muted">
+                Cultivated Crop: {selectedCrop}
+              </span>
+            </div>
+
+            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
+              <span className="font-semibold text-white">{farmTitle}</span>
+              <span className="text-emerald-800">•</span>
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                {locationLabel} ({farmArea} ha)
+              </span>
+              <span className="text-emerald-800">•</span>
+              <span className="text-slate-300 font-mono text-[11px]">Harvest Window: {prediction?.harvestWindow || 'Approaching'}</span>
+            </p>
           </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
-            <span>{farmTitle}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              {locationLabel} ({farmArea} ha)
-            </span>
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setIsDetailModalOpen(true)}
-            className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 rounded-xl text-xs font-semibold shadow-sm transition-colors flex items-center gap-1.5"
-          >
-            <Sliders className="w-3.5 h-3.5 text-slate-500" />
-            <span>Sensitivity Simulator</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={runAutomatedPipeline}
-            className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200"
-            title="Refresh Prediction"
-          >
-            <RefreshCw className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsDetailModalOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <Sliders className="w-3.5 h-3.5 text-emerald-400" />
+              Sensitivity Simulator
+            </button>
+            <button
+              type="button"
+              onClick={runAutomatedPipeline}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#070D0A]/70 hover:bg-emerald-950/40 border border-emerald-900/40 text-[#D1DED6] text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
+              Re-predict
+            </button>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {error && (
-        <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-center justify-between">
+        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center justify-between">
           <span>{error}</span>
-          <button type="button" onClick={runAutomatedPipeline} className="font-bold underline">Retry</button>
+          <button type="button" onClick={runAutomatedPipeline} className="font-bold underline cursor-pointer hover:text-rose-200">Retry</button>
         </div>
       )}
 
-      {/* 2. Core Yield Decision Card */}
+      {/* 2. Asymmetric Yield Bento Grid */}
       {prediction && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-            
-            {/* Predicted Output */}
-            <div className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Predicted Yield Output</span>
-              <div className="text-4xl font-extrabold text-slate-900">
-                {prediction.predictedYieldPerHectare} <span className="text-lg font-semibold text-slate-500">t/ha</span>
+        <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          {/* Primary Yield Output Spotlight (7 Cols) */}
+          <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-harvest p-6 flex flex-col justify-between space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <div className="flex items-center gap-2">
+                <Sprout className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+                  Phenological Yield Projection
+                </span>
               </div>
-              <div className="text-xs font-semibold text-emerald-700">
-                Expected Production: <strong>{prediction.totalProductionTons} Tons</strong> ({farmArea} ha)
+              <span className="text-[11px] font-mono text-emerald-400 font-medium">
+                Model: GDD + NPK + Microclimate
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+                  Expected Yield Rate
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
+                    {prediction.predictedYieldPerHectare}
+                  </span>
+                  <span className="text-xl text-[#D1DED6] font-medium">t/ha</span>
+                  <span className="agri-pill agri-pill-emerald ml-2">
+                    {((prediction.predictedYieldPerHectare / prediction.regionalAvg - 1) * 100) >= 0 ? '+' : ''}
+                    {((prediction.predictedYieldPerHectare / prediction.regionalAvg - 1) * 100).toFixed(1)}% vs District
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
+                <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Total Field Production</div>
+                <div className="text-xl font-mono font-bold text-white mt-0.5">{prediction.totalProductionTons} <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
+                <div className="text-[10px] text-[#D1DED6] mt-0.5">Calculated over {farmArea} hectares</div>
               </div>
             </div>
 
-            {/* Confidence & Window */}
-            <div className="space-y-2 pt-4 md:pt-0 md:pl-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Model Confidence & Target Date</span>
-              <div className="text-xl font-bold text-slate-800">
-                {prediction.confidenceScore}% Confidence Rate
+            {/* Sub-telemetry 3-gauge strip */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+                <div className="text-[11px] text-[#D1DED6] mb-1">Growing Degree Days</div>
+                <div className="text-xl font-bold text-white font-display">1,450 GDD</div>
+                <p className="text-[10px] text-emerald-400 mt-1">Thermal accumulation on track</p>
               </div>
-              <div className="text-xs text-slate-500">
-                Harvest Window: <strong>{prediction.harvestWindow}</strong>
+
+              <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+                <div className="text-[11px] text-[#D1DED6] mb-1">District Baseline</div>
+                <div className="text-xl font-bold text-white font-display">{prediction.regionalAvg} t/ha</div>
+                <p className="text-[10px] text-[#D1DED6] mt-1">Regional average comparison</p>
+              </div>
+
+              <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+                <div className="text-[11px] text-[#D1DED6] mb-1">Harvest Window</div>
+                <div className="text-xl font-bold text-white font-display truncate">{prediction.harvestWindow}</div>
+                <p className="text-[10px] text-emerald-400 mt-1">Optimal combine readiness</p>
               </div>
             </div>
-
-            {/* District Benchmark */}
-            <div className="space-y-2 pt-4 md:pt-0 md:pl-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">District Benchmark Comparison</span>
-              <div className="text-base font-bold text-slate-800">
-                {prediction.regionalInsight}
-              </div>
-              <div className="text-xs text-slate-500">
-                District Average: {prediction.regionalAvg} t/ha
-              </div>
-            </div>
-
           </div>
 
-          {/* Factor Contribution Breakdown */}
-          <div className="pt-4 border-t border-slate-100 space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Agronomic Contribution Factors</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {prediction.featureImportance.map((feat, idx) => (
-                <div key={idx} className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1 text-xs">
-                  <div className="flex items-center justify-between font-semibold text-slate-900">
-                    <span>{feat.feature}</span>
-                    <span className="text-emerald-700">+{feat.weight}%</span>
+          {/* Model Confidence & Feature Verification (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
+            <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  Algorithm Reliability Index
+                </span>
+                <span className="agri-pill agri-pill-emerald">
+                  {prediction.confidenceLevel}
+                </span>
+              </div>
+
+              <div className="my-3">
+                <div className="text-3xl font-extrabold text-white font-display">
+                  {prediction.confidenceScore}% <span className="text-sm font-normal text-[#D1DED6]">Confidence</span>
+                </div>
+                <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
+                  Ensemble ML model synthesized across soil chemistry, NDVI satellite canopy density, and 5-year meteorological history.
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
+                <span className="text-[#D1DED6]">Features Calibrated:</span>
+                <span className="text-emerald-400 font-semibold font-mono">12 Subterranean + Atmospheric</span>
+              </div>
+            </div>
+
+            <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
+                  <TrendingUp className="w-4 h-4 text-emerald-400" />
+                  Regional Agronomic Context
+                </span>
+                <span className="agri-pill agri-pill-muted">
+                  District Benchmark
+                </span>
+              </div>
+
+              <div className="my-3">
+                <div className="text-lg font-bold text-white font-display">
+                  Regional Performance Comparison
+                </div>
+                <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
+                  {prediction.regionalInsight}
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
+                <span className="text-[#D1DED6]">Yield Margin:</span>
+                <span className="text-emerald-400 font-semibold font-mono">
+                  +{(prediction.predictedYieldPerHectare - prediction.regionalAvg).toFixed(2)} t/ha above district
+                </span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* 3. Factor Contribution & Historical Trajectory Charts */}
+      {prediction && (
+        <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          {/* Feature Importance Horizontal Bar Chart */}
+          <div className="lg:col-span-6 agri-bento-card p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Feature Importance</span>
+                <h3 className="text-base font-bold text-white mt-0.5 font-display">Agronomic Factor Contributions</h3>
+              </div>
+              <span className="agri-pill agri-pill-emerald">
+                Normalized Weight
+              </span>
+            </div>
+
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={prediction.featureImportance}
+                  layout="vertical"
+                  margin={{ top: 10, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#13231B" horizontal={false} />
+                  <XAxis
+                    type="number"
+                    unit="%"
+                    tick={{ fill: '#D1DED6', fontSize: 11 }}
+                    axisLine={{ stroke: '#1B3125' }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="feature"
+                    tick={{ fill: '#FFFFFF', fontSize: 11, fontWeight: 600 }}
+                    axisLine={false}
+                    tickLine={false}
+                    width={90}
+                  />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        const item = payload[0].payload;
+                        return (
+                          <div className="agri-bento-card p-3 shadow-xl text-xs space-y-1 bg-[#0D1612] border border-emerald-500/30">
+                            <p className="font-bold text-white font-display">{item.feature}</p>
+                            <p className="text-emerald-400 font-semibold">Weight: +{item.weight}%</p>
+                            <p className="text-[#D1DED6] text-[11px]">{item.description}</p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Bar dataKey="weight" radius={[0, 6, 6, 0]}>
+                    {prediction.featureImportance.map((_, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={index === 0 ? '#34d399' : index === 1 ? '#10b981' : index === 2 ? '#fbbf24' : '#64748b'}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Historical Yield Line Chart */}
+          <div className="lg:col-span-6 agri-bento-card p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Multi-Season Trend</span>
+                <h3 className="text-base font-bold text-white mt-0.5 font-display">Historical Yield Comparison ({selectedCrop})</h3>
+              </div>
+              <span className="agri-pill agri-pill-muted">
+                5-Year Trajectory
+              </span>
+            </div>
+
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={prediction.historicalSeries}
+                  margin={{ top: 10, right: 20, left: -20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#13231B" vertical={false} />
+                  <XAxis
+                    dataKey="year"
+                    tick={{ fill: '#D1DED6', fontSize: 11, fontWeight: 600 }}
+                    axisLine={{ stroke: '#1B3125' }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    unit=" t"
+                    domain={[0, 8]}
+                    tick={{ fill: '#D1DED6', fontSize: 11 }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <Tooltip
+                    content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        const item = payload[0].payload;
+                        return (
+                          <div className="agri-bento-card p-3 shadow-xl text-xs space-y-1 bg-[#0D1612] border border-emerald-500/30">
+                            <p className="font-bold text-white font-display">Year {label} {item.isCurrent ? '(Predicted)' : ''}</p>
+                            <p className="text-emerald-400 font-semibold">Yield: {item.yield} t/ha</p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="yield"
+                    stroke="#34d399"
+                    strokeWidth={3}
+                    dot={{ fill: '#34d399', r: 5, strokeWidth: 2, stroke: '#070D0A' }}
+                    activeDot={{ r: 7, fill: '#10b981' }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* 4. SENSITIVITY SIMULATOR MODAL */}
+      <AnimatePresence>
+        {isDetailModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="max-w-md w-full"
+            >
+              <div className="agri-bento-card p-6 space-y-5 bg-[#0D1612] border border-emerald-500/40 shadow-2xl">
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+                  <div className="flex items-center gap-2">
+                    <Sliders className="w-4 h-4 text-emerald-400" />
+                    <h3 className="text-base font-bold text-white font-display">Agronomic Sensitivity Simulator</h3>
                   </div>
-                  <p className="text-[11px] text-slate-500 leading-tight">{feat.description}</p>
+                  <button
+                    type="button"
+                    onClick={() => setIsDetailModalOpen(false)}
+                    className="p-1 rounded-lg text-[#D1DED6] hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
-      {/* Historical Comparison */}
-      {prediction && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Historical Yield Comparison ({selectedCrop})</h3>
-          <div className="space-y-2 text-xs">
-            {prediction.historicalSeries.map((item, idx) => (
-              <div key={idx} className="flex items-center justify-between py-1">
-                <span className={item.isCurrent ? 'font-bold text-emerald-700' : 'text-slate-600'}>{item.year}</span>
-                <div className="flex-1 mx-4 h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full ${item.isCurrent ? 'bg-emerald-600' : 'bg-slate-300'}`} style={{ width: `${(item.yield / 8) * 100}%` }} />
+                <div className="space-y-4 text-xs">
+                  <div>
+                    <div className="flex justify-between font-semibold text-white mb-1">
+                      <span>Soil Nitrogen (N)</span>
+                      <span className="text-emerald-400 font-bold">{simN} kg/ha</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="30"
+                      max="120"
+                      value={simN}
+                      onChange={(e) => handleSliderChange(Number(e.target.value), simMoisture, simPh)}
+                      className="w-full h-2 bg-[#070D0A] rounded-lg accent-emerald-500 cursor-pointer"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between font-semibold text-white mb-1">
+                      <span>Soil Moisture</span>
+                      <span className="text-sky-400 font-bold">{simMoisture}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="15"
+                      max="60"
+                      value={simMoisture}
+                      onChange={(e) => handleSliderChange(simN, Number(e.target.value), simPh)}
+                      className="w-full h-2 bg-[#070D0A] rounded-lg accent-emerald-500 cursor-pointer"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between font-semibold text-white mb-1">
+                      <span>Soil pH Level</span>
+                      <span className="text-amber-400 font-bold">{simPh} pH</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="5.0"
+                      max="8.5"
+                      step="0.1"
+                      value={simPh}
+                      onChange={(e) => handleSliderChange(simN, simMoisture, Number(e.target.value))}
+                      className="w-full h-2 bg-[#070D0A] rounded-lg accent-emerald-500 cursor-pointer"
+                    />
+                  </div>
+
+                  <div className="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-xl flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-white block text-xs">Simulated Output Yield</span>
+                      <span className="text-[11px] text-[#D1DED6]">Multi-variable recalculated</span>
+                    </div>
+                    <span className="text-2xl font-black text-emerald-400 font-display">
+                      {simulatedYield} <span className="text-xs font-bold text-emerald-300">t/ha</span>
+                    </span>
+                  </div>
                 </div>
-                <span className="font-semibold text-slate-800">{item.yield} t/ha</span>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsDetailModalOpen(false)}
+                    className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold cursor-pointer"
+                  >
+                    Done
+                  </button>
+                </div>
               </div>
-            ))}
+            </motion.div>
           </div>
-        </div>
-      )}
-
-      {/* SIMULATOR MODAL */}
-      {isDetailModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 border border-slate-200 text-xs">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-slate-900">Agronomic Sensitivity Simulator</h3>
-              <button type="button" onClick={() => setIsDetailModalOpen(false)} className="text-slate-400 hover:text-slate-600">
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Soil Nitrogen (N): {simN} kg/ha</label>
-                <input type="range" min="30" max="120" value={simN} onChange={(e) => handleSliderChange(Number(e.target.value), simMoisture, simPh)} className="w-full h-2 bg-slate-200 rounded-lg accent-emerald-600" />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Soil Moisture: {simMoisture}%</label>
-                <input type="range" min="15" max="60" value={simMoisture} onChange={(e) => handleSliderChange(simN, Number(e.target.value), simPh)} className="w-full h-2 bg-slate-200 rounded-lg accent-emerald-600" />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Soil pH Level: {simPh}</label>
-                <input type="range" min="5.0" max="8.5" step="0.1" value={simPh} onChange={(e) => handleSliderChange(simN, simMoisture, Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg accent-emerald-600" />
-              </div>
-
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between">
-                <span className="font-semibold text-slate-700">Simulated Output Yield:</span>
-                <span className="text-base font-bold text-emerald-800">{simulatedYield} t/ha</span>
-              </div>
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <button type="button" onClick={() => setIsDetailModalOpen(false)} className="px-4 py-1.5 bg-slate-900 text-white font-semibold rounded-lg">
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-    </div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };

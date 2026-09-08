@@ -1,7 +1,9 @@
 import React from 'react';
+import { CategoryTone } from '../../styles/design-tokens';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'emerald' | 'amber' | 'sky' | 'rose' | 'slate' | 'outline';
+  variant?: 'emerald' | 'amber' | 'sky' | 'rose' | 'slate' | 'outline' | 'weather' | 'soil' | 'yield' | 'price' | 'disease' | 'inventory' | 'farm' | 'harvest';
+  tone?: CategoryTone;
   size?: 'sm' | 'md';
   icon?: React.ReactNode;
   children: React.ReactNode;
@@ -9,6 +11,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Badge: React.FC<BadgeProps> = ({
   variant = 'emerald',
+  tone,
   size = 'md',
   icon,
   children,
@@ -20,18 +23,30 @@ export const Badge: React.FC<BadgeProps> = ({
     md: 'text-xs px-2.5 py-1 gap-1.5',
   };
 
-  const variantStyles = {
-    emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200/80',
-    amber: 'bg-amber-50 text-amber-800 border-amber-200/80',
-    sky: 'bg-sky-50 text-sky-700 border-sky-200/80',
-    rose: 'bg-rose-50 text-rose-700 border-rose-200/80',
-    slate: 'bg-slate-100 text-slate-700 border-slate-200',
-    outline: 'bg-transparent text-slate-600 border-slate-300',
+  const activeKey = tone || variant;
+
+  const variantStyles: Record<string, string> = {
+    emerald: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+    soil: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+    farm: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+    amber: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    yield: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    price: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    harvest: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    sky: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
+    weather: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
+    rose: 'bg-rose-500/15 text-rose-300 border-rose-500/30',
+    disease: 'bg-rose-500/15 text-rose-300 border-rose-500/30',
+    indigo: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+    inventory: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+    slate: 'bg-slate-800/80 text-slate-300 border-white/10',
+    default: 'bg-slate-800/80 text-slate-300 border-white/10',
+    outline: 'bg-transparent text-slate-300 border-white/20',
   };
 
   return (
     <span
-      className={`inline-flex items-center font-medium rounded-full border shadow-2xs select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center font-medium rounded-full border shadow-2xs select-none backdrop-blur-xs ${sizeStyles[size]} ${variantStyles[activeKey] || variantStyles.emerald} ${className}`}
       {...props}
     >
       {icon && <span className="shrink-0">{icon}</span>}

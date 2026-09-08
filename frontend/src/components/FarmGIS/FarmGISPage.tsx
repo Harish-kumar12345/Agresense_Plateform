@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Navigation, Search, Layers, CheckCircle2, ArrowRight, RefreshCw, AlertCircle, ShieldAlert, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { FarmMap } from './FarmMap';
 import { FarmBoundaryDrawer } from './FarmBoundaryDrawer';
 import { FarmAreaCalculator } from './FarmAreaCalculator';
@@ -7,6 +8,10 @@ import { FarmDetailsForm } from './FarmDetailsForm';
 import { SavedFields } from './SavedFields';
 import { farmService, FarmData } from '../../services/farmService';
 import { useAuth } from '../../contexts/AuthContext';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import { colors, motionPresets } from '../../styles/design-tokens';
 
 type Point = [number, number]; // [lat, lng]
 
@@ -24,7 +29,7 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
   const { user } = useAuth();
   const farmerId = user?.id || 'default_farmer';
   const savedFieldsRef = useRef<HTMLDivElement>(null);
-  // Map position state (Default: Ghaziabad/Delhi region or Kerala fallback)
+
   const [mapCenter, setMapCenter] = useState<Point>([28.6692, 77.4538]);
   const [userGpsLocation, setUserGpsLocation] = useState<Point | null>(null);
   const [locationName, setLocationName] = useState('Ghaziabad, Uttar Pradesh');
@@ -51,7 +56,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Load saved farms on mount
   useEffect(() => {
     loadFarms();
   }, []);
@@ -68,7 +72,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     }
   };
 
-  // Auto-scroll to saved fields section when navigated with initialTab='saved-fields'
   useEffect(() => {
     if (initialTab === 'saved-fields' && savedFarms.length > 0 && savedFieldsRef.current) {
       setTimeout(() => {
@@ -77,7 +80,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     }
   }, [initialTab, savedFarms]);
 
-  // 1. Live GPS Location Handler
   const handleUseCurrentLocation = () => {
     setLocationError('');
     if (!navigator.geolocation) {
@@ -91,7 +93,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
         setUserGpsLocation(coords);
         setMapCenter(coords);
         
-        // Reverse Geocode location
         try {
           const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${coords[0]}&lon=${coords[1]}&format=json`);
           const data = await res.json();
@@ -115,7 +116,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     );
   };
 
-  // 2. Search Location Handler
   const handleSearchLocation = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -141,7 +141,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     }
   };
 
-  // 3. Boundary Drawing Handlers
   const handleMapClick = (pt: Point) => {
     if (isClosed) return;
     setPolygonPoints(prev => [...prev, pt]);
@@ -171,16 +170,14 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
     setIsDrawing(true);
   };
 
-  // 4. Save Farm Handler
   const handleSaveFarm = async (farmPayload: Omit<FarmData, 'farm_id'>) => {
     setIsSaving(true);
     setSuccessMessage('');
 
-    // Generate GeoJSON boundary polygon feature
     let geojsonBoundary = null;
     if (polygonPoints.length >= 3) {
-      const coords = polygonPoints.map(p => [p[1], p[0]]); // [lng, lat]
-      coords.push([polygonPoints[0][1], polygonPoints[0][0]]); // Close loop
+      const coords = polygonPoints.map(p => [p[1], p[0]]);
+      coords.push([polygonPoints[0][1], polygonPoints[0][0]]);
       geojsonBoundary = {
         type: 'Feature',
         geometry: {
@@ -239,100 +236,114 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+    <motion.div
+      variants={motionPresets.container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
+    >
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-semibold backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" /> GIS & Precision Location Intelligence
+      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
+        <div className="hero-banner-content space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold backdrop-blur-md border border-emerald-400/30">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <span>GIS & Precision Cadastral Intelligence</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Farm GIS Boundary & Location Setup</h2>
-          <p className="text-sm text-emerald-100 max-w-2xl">
-            Locate your field on live satellite maps, draw precision farm boundaries, automatically calculate geodesic land area, and save fields to sync with AgriSense AI intelligence.
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-display text-white">
+            Farm Boundary & Geodesic Mapping
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            Locate your field on live satellite maps, draw precision polygon boundaries, automatically calculate geodesic land area, and synchronize plots with AgriSense predictive models.
           </p>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Setup Step Progress Workflow */}
-      <div className="bg-white rounded-2xl p-4 border border-emerald-100 shadow-sm">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-medium">
-          <div className={`p-2.5 rounded-xl border ${userGpsLocation || mapCenter ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-gray-50 border-gray-100 text-gray-400'}`}>
+      {/* Setup Step Progress Stepper */}
+      <motion.div variants={motionPresets.item}>
+        <Card variant="elevated" tone="farm" className="p-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
+          <div className={`p-3 rounded-2xl border transition-all ${userGpsLocation || mapCenter ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 1</span>
-            1. Set Location
+            Set Location
           </div>
-          <div className={`p-2.5 rounded-xl border ${polygonPoints.length > 0 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-gray-50 border-gray-100 text-gray-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${polygonPoints.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 2</span>
-            2. Draw Boundary
+            Draw Boundary
           </div>
-          <div className={`p-2.5 rounded-xl border ${isClosed ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-gray-50 border-gray-100 text-gray-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${isClosed ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 3</span>
-            3. Calculate Area
+            Calculate Area
           </div>
-          <div className={`p-2.5 rounded-xl border ${savedFarms.length > 0 ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-gray-50 border-gray-100 text-gray-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${savedFarms.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 4</span>
-            4. Save & Launch
+            Save & Sync
           </div>
         </div>
-      </div>
+      </Card>
+      </motion.div>
 
       {/* Success Notification Alert */}
       {successMessage && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-sm flex items-center justify-between shadow-sm">
+        <div className="p-4 bg-emerald-500/15 border border-emerald-500/30 rounded-2xl text-emerald-300 text-xs sm:text-sm flex items-center justify-between shadow-xs">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-            <span className="font-semibold">{successMessage}</span>
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+            <span className="font-bold text-white">{successMessage}</span>
           </div>
           {onGoToDashboard && (
-            <button
+            <Button
+              variant="primary"
+              size="sm"
+              icon={<ArrowRight className="w-3.5 h-3.5" />}
               onClick={onGoToDashboard}
-              className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-xs flex items-center gap-1 transition-all shadow-sm"
             >
-              Go to Dashboard <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+              Go to Dashboard
+            </Button>
           )}
         </div>
       )}
 
       {/* Error Notification Alert */}
       {locationError && (
-        <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs flex items-center gap-2">
-          <AlertCircle className="w-5 h-5 shrink-0 text-rose-600" />
+        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-2xl text-rose-300 text-xs flex items-center gap-2">
+          <AlertCircle className="w-5 h-5 shrink-0 text-rose-400" />
           <span>{locationError}</span>
         </div>
       )}
 
       {/* Location Search Bar & Live GPS Button */}
-      <div className="bg-white rounded-2xl p-4 border border-emerald-100 shadow-md flex flex-col md:flex-row items-center gap-3">
+      <Card variant="elevated" className="p-4 flex flex-col md:flex-row items-center gap-3">
         <form onSubmit={handleSearchLocation} className="flex-1 flex items-center gap-2 w-full">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-gray-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search city, district, village, or landmark (e.g. Ghaziabad, Palakkad)..."
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none"
+              placeholder="Search city, district, village, or landmark (e.g. Palakkad, Ghaziabad)..."
+              className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-white/10 rounded-xl text-xs text-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none placeholder:text-slate-500"
             />
           </div>
-          <button
+          <Button
             type="submit"
+            variant="primary"
+            size="sm"
             disabled={isSearching}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-all shadow-sm shrink-0"
           >
             {isSearching ? 'Searching...' : 'Search'}
-          </button>
+          </Button>
         </form>
 
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
+          icon={<Navigation className="w-4 h-4 text-emerald-400" />}
           onClick={handleUseCurrentLocation}
-          className="w-full md:w-auto px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all shrink-0"
+          className="w-full md:w-auto border-white/10 text-slate-200 hover:bg-white/5"
         >
-          <Navigation className="w-4 h-4 text-emerald-600" />
-          Use My Current GPS Location
-        </button>
-      </div>
+          Use Current GPS Location
+        </Button>
+      </Card>
 
       {/* Main Map & Boundary Drawing Section */}
       <div className="space-y-3">
@@ -388,6 +399,6 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
           onDeleteFarm={handleDeleteFarm}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };

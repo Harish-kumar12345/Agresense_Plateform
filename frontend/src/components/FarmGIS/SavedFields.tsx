@@ -1,6 +1,9 @@
 import React from 'react';
-import { Layers, MapPin, Eye, Trash2, CheckCircle2, ArrowRight, ExternalLink } from 'lucide-react';
+import { Layers, MapPin, Eye, Trash2, CheckCircle2, ArrowRight } from 'lucide-react';
 import { FarmData } from '../../services/farmService';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
 
 interface SavedFieldsProps {
   farms: FarmData[];
@@ -19,26 +22,30 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
 }) => {
   if (!farms || farms.length === 0) {
     return (
-      <div className="bg-white rounded-2xl p-6 border border-emerald-100 shadow-md text-center">
-        <div className="p-3 bg-emerald-50 text-emerald-600 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+      <Card variant="elevated" className="p-8 text-center space-y-3">
+        <div className="p-3 bg-emerald-500/15 text-emerald-400 rounded-2xl w-12 h-12 mx-auto flex items-center justify-center border border-emerald-500/20">
           <Layers className="w-6 h-6" />
         </div>
-        <h4 className="font-semibold text-gray-800 text-sm">No Saved Farm Fields Yet</h4>
-        <p className="text-xs text-gray-500 mt-1">Draw your farm boundary above and click "Save Farm" to start managing multiple fields.</p>
-      </div>
+        <h4 className="font-bold text-white text-sm font-display">No Saved Farm Fields Yet</h4>
+        <p className="text-xs text-slate-400 max-w-sm mx-auto">
+          Draw your farm boundary above and click "Save Farm" to start managing multiple fields.
+        </p>
+      </Card>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-emerald-100 shadow-md space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+    <Card variant="elevated" className="p-6 space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+          <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
             <Layers className="w-5 h-5" />
           </div>
-          <h3 className="font-semibold text-gray-800">My Farm Fields ({farms.length})</h3>
+          <div>
+            <h3 className="font-bold text-white text-base font-display">My Farm Fields ({farms.length})</h3>
+            <p className="text-xs text-slate-400">Select a field to run AgriSense predictive telemetry</p>
+          </div>
         </div>
-        <span className="text-xs text-gray-500 font-medium">Select a field to run AgriSense analysis</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -46,66 +53,66 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
           const isActive = farm.farm_id === activeFarmId;
 
           return (
-            <div
+            <Card
               key={farm.farm_id}
-              className={`p-4 rounded-xl border transition-all flex flex-col justify-between ${
+              variant="default"
+              className={`p-4 flex flex-col justify-between transition-all ${
                 isActive
-                  ? 'border-emerald-500 bg-emerald-50/40 shadow-md ring-2 ring-emerald-500/20'
-                  : 'border-gray-200 bg-white hover:border-emerald-300 hover:shadow-sm'
+                  ? 'border-emerald-500/60 bg-emerald-500/15 shadow-lg ring-2 ring-emerald-500/30'
+                  : 'hover:border-white/20'
               }`}
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div>
-                    <h4 className="font-bold text-gray-900 text-sm">{farm.farm_name}</h4>
-                    <p className="text-xs text-emerald-700 font-medium">{farm.crop} • {farm.season}</p>
+                    <h4 className="font-bold text-white text-sm">{farm.farm_name}</h4>
+                    <p className="text-xs text-emerald-400 font-semibold">{farm.crop} • {farm.season}</p>
                   </div>
                   {isActive && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-600 text-white font-semibold flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" /> Active
-                    </span>
+                    <Badge variant="emerald" size="sm">
+                      <CheckCircle2 className="w-3 h-3 mr-1 inline" /> Active
+                    </Badge>
                   )}
                 </div>
 
-                <div className="space-y-1 my-3 text-xs text-gray-600">
+                <div className="space-y-1.5 my-3 text-xs text-slate-300">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Area:</span>
-                    <span className="font-semibold text-gray-800">{farm.area_hectares} ha ({farm.area_acres} ac)</span>
+                    <span className="text-slate-400">Area:</span>
+                    <span className="font-bold text-white">{farm.area_hectares} ha ({farm.area_acres} ac)</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Location:</span>
-                    <span className="font-medium text-gray-700 truncate max-w-[150px]">{farm.location_name}</span>
+                    <span className="text-slate-400">Location:</span>
+                    <span className="font-medium text-slate-200 truncate max-w-[150px]">{farm.location_name}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Coordinates:</span>
-                    <span className="font-mono text-[11px] text-gray-500">{farm.latitude.toFixed(4)}, {farm.longitude.toFixed(4)}</span>
+                    <span className="text-slate-400">Coordinates:</span>
+                    <span className="font-mono text-[11px] text-slate-400">{farm.latitude.toFixed(4)}, {farm.longitude.toFixed(4)}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Boundary:</span>
-                    <span className="text-emerald-700 font-semibold">{farm.boundary_geojson ? 'Saved ✓' : 'Point'}</span>
+                    <span className="text-slate-400">Boundary:</span>
+                    <Badge variant={farm.boundary_geojson ? 'emerald' : 'slate'} size="sm">
+                      {farm.boundary_geojson ? 'Cadastral ✓' : 'Point'}
+                    </Badge>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-gray-100 mt-2">
-                <button
-                  type="button"
+              <div className="flex items-center gap-2 pt-3 border-t border-white/10 mt-2">
+                <Button
+                  size="sm"
+                  variant={isActive ? 'primary' : 'outline'}
                   onClick={() => onSelectFarm(farm)}
-                  className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
-                    isActive
-                      ? 'bg-emerald-700 text-white'
-                      : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
-                  }`}
+                  className="flex-1"
+                  icon={<ArrowRight className="w-3.5 h-3.5" />}
                 >
-                  <span>Select</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  Select
+                </Button>
 
                 <button
                   type="button"
                   onClick={() => onViewOnMap(farm)}
                   title="View on Map"
-                  className="p-1.5 bg-gray-100 hover:bg-emerald-50 text-gray-600 hover:text-emerald-700 rounded-lg text-xs transition-colors"
+                  className="p-2 bg-slate-900 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-400 border border-white/10 rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   <Eye className="w-4 h-4" />
                 </button>
@@ -114,15 +121,15 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
                   type="button"
                   onClick={() => onDeleteFarm(farm.farm_id)}
                   title="Delete Field"
-                  className="p-1.5 bg-gray-100 hover:bg-rose-50 text-gray-600 hover:text-rose-600 rounded-lg text-xs transition-colors"
+                  className="p-2 bg-slate-900 hover:bg-rose-500/20 text-slate-300 hover:text-rose-400 border border-white/10 rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
-            </div>
+            </Card>
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 };

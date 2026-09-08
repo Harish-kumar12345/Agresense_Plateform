@@ -6,29 +6,22 @@ import {
   Clock,
   Navigation,
   Search,
-  Filter,
-  RefreshCw,
-  Sprout,
-  Droplets,
-  FlaskConical,
-  Bug,
-  Shield,
-  ExternalLink,
-  CheckCircle2,
-  AlertTriangle,
-  Award,
-  Layers,
-  ArrowUpRight
+  RefreshCw
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FarmData } from '../../services/farmService';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import { motionPresets } from '../../styles/design-tokens';
 
 // Custom Leaflet pins for user farm and centers
 const farmIcon = L.divIcon({
   className: 'custom-farm-marker',
-  html: `<div style="background-color: #059669; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; items-center; justify-content: center; color: white; font-size: 16px;">🌾</div>`,
+  html: `<div style="background-color: #059669; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">🌾</div>`,
   iconSize: [32, 32],
   iconAnchor: [16, 16]
 });
@@ -107,7 +100,6 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
   // Telemetry Data State
   const [centers, setCenters] = useState<AgriCenter[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
   const [selectedCenter, setSelectedCenter] = useState<AgriCenter | null>(null);
 
   // Load nearby centers from backend API using saved GIS coordinates
@@ -118,7 +110,6 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
     }
 
     setLoading(true);
-    setError('');
 
     try {
       const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
@@ -155,109 +146,123 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
   };
 
   // Helper badge color per category
-  const getCategoryBadge = (category: string) => {
+  const getCategoryBadgeVariant = (category: string): 'emerald' | 'sky' | 'amber' | 'rose' | 'slate' => {
     switch (category) {
       case 'KSK':
-        return { label: 'Krishi Seva Kendra', bg: 'bg-emerald-100 text-emerald-800 border-emerald-300' };
+        return 'emerald';
       case 'FERTILIZER':
-        return { label: 'Fertilizer Dealer', bg: 'bg-blue-100 text-blue-800 border-blue-300' };
       case 'SEEDS':
-        return { label: 'Seed Supplier', bg: 'bg-purple-100 text-purple-800 border-purple-300' };
+        return 'sky';
       case 'PESTICIDES':
-        return { label: 'Pesticide Shop', bg: 'bg-rose-100 text-rose-800 border-rose-300' };
+        return 'rose';
       case 'OFFICE':
-        return { label: 'Agricultural Office', bg: 'bg-amber-100 text-amber-800 border-amber-300' };
       case 'KVK':
-        return { label: 'Krishi Vigyan Kendra', bg: 'bg-teal-100 text-teal-800 border-teal-300' };
+        return 'amber';
       default:
-        return { label: 'Agri Center', bg: 'bg-gray-100 text-gray-800 border-gray-300' };
+        return 'slate';
     }
   };
 
   // MISSING GIS LOCATION FALLBACK UI
   if (!safeLat || !safeLon) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6 bg-white rounded-3xl border border-amber-200 shadow-xl my-6">
-        <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto text-amber-600">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="max-w-4xl mx-auto px-4 py-16 text-center space-y-6 bg-slate-900/90 rounded-3xl border border-amber-500/30 shadow-2xl my-6 backdrop-blur-md"
+      >
+        <div className="w-16 h-16 bg-amber-500/15 rounded-full flex items-center justify-center mx-auto text-amber-400 border border-amber-500/20">
           <MapPin className="w-8 h-8" />
         </div>
         <div className="space-y-2">
-          <h3 className="text-2xl font-black text-gray-800">Set Farm GIS Location Required</h3>
-          <p className="text-sm text-gray-600 max-w-md mx-auto">
+          <h3 className="text-2xl font-black text-white font-display">Set Farm GIS Location Required</h3>
+          <p className="text-sm text-slate-300 max-w-md mx-auto">
             To locate nearest Krishi Seva Kendras, fertilizer depots, seed merchants, and KVK centers, please select or set your farm location in the Farm GIS map.
           </p>
         </div>
-        <button
+        <Button
           onClick={onGoToGIS}
-          className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl font-extrabold shadow-lg transition-all inline-flex items-center gap-2 text-sm"
+          variant="primary"
+          size="lg"
+          icon={<MapPin className="w-4 h-4" />}
         >
-          <MapPin className="w-4 h-4" /> Open Farm GIS Map & Set Location
-        </button>
-      </div>
+          Open Farm GIS Map & Set Location
+        </Button>
+      </motion.div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
-      {/* Top Banner Header */}
-      <div className="bg-gradient-to-r from-blue-950 via-teal-950 to-emerald-950 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <motion.div
+      variants={motionPresets.container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
+    >
+      {/* 1. Category Aurora Hero Banner */}
+      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
+        <div className="hero-banner-content flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-bold backdrop-blur-md">
-              <Building2 className="w-4 h-4 text-blue-400" /> 🏪 Krishi Seva Kendra & Agri Business Telemetry
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold backdrop-blur-md border border-emerald-400/30">
+              <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Krishi Seva Kendra & Agri Business Telemetry</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
               Nearest Agricultural Support Centers
-            </h2>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-blue-100/90 font-medium">
-              <span className="flex items-center gap-1 font-bold text-emerald-300">
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              Locate government-certified input dealers, soil testing laboratories, Krishi Vigyan Kendras (KVK), and fertilizer supply depots near your field.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-300">
+              <span className="flex items-center gap-1 font-semibold text-emerald-400">
                 <MapPin className="w-3.5 h-3.5" />
                 Plot Origin: {locationLabel} ({safeLat.toFixed(4)}, {safeLon.toFixed(4)})
               </span>
-              <span>•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/20 text-white font-bold text-[11px]">
+              <span className="text-slate-500">•</span>
+              <span className="px-2.5 py-0.5 rounded-full bg-white/15 text-white font-semibold text-[11px]">
                 {centers.length} Centers Found Nearby
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <button
+            <Button
               onClick={loadCenters}
-              className="p-2.5 bg-white/10 hover:bg-white/20 rounded-xl text-white backdrop-blur-md transition-all border border-white/20 shadow-sm flex items-center gap-1.5 text-xs font-bold"
-              title="Refresh Location Telemetry"
+              variant="secondary"
+              size="sm"
+              icon={<RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />}
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} /> Refresh
-            </button>
+              Refresh
+            </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Controls Bar: Search & Category Filters */}
-      <div className="bg-white rounded-3xl p-5 border border-blue-100 shadow-md space-y-4">
+      <motion.div variants={motionPresets.item}>
+        <Card variant="elevated" tone="farm" className="p-5 space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Search bar */}
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, address, or service..."
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-300 rounded-2xl text-xs font-medium focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-white/10 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all text-white placeholder:text-slate-500"
             />
           </div>
 
           {/* Active Radius / Sort Badge */}
-          <span className="text-xs font-extrabold text-blue-800 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200 shrink-0">
+          <Badge variant="sky" size="md">
             Sorted by Nearest Distance (Haversine Formula)
-          </span>
+          </Badge>
         </div>
 
         {/* Category Pills Filter */}
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-gray-100">
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/10">
           {[
             { id: 'ALL', label: 'All Centers', icon: '🏪' },
             { id: 'KSK', label: 'Krishi Seva Kendras', icon: '🌾' },
@@ -270,31 +275,33 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                 selectedCategory === cat.id
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                  : 'bg-slate-900/80 border border-white/10 text-slate-300 hover:text-white hover:bg-white/5'
               }`}
             >
               <span>{cat.icon}</span>
-              {cat.label}
+              <span>{cat.label}</span>
             </button>
           ))}
         </div>
-      </div>
+      </Card>
+      </motion.div>
 
       {/* Main Layout: Leaflet Map (Left) + Centers List (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Interactive Leaflet Map Panel */}
-        <div className="lg:col-span-6 bg-white rounded-3xl p-4 border border-blue-100 shadow-lg space-y-3 flex flex-col h-[520px]">
+        <Card variant="elevated" tone="farm" className="lg:col-span-6 p-4 space-y-3 flex flex-col h-[520px]">
           <div className="flex items-center justify-between px-1">
-            <h3 className="font-extrabold text-gray-800 text-sm flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-blue-600" /> Interactive Map View
+            <h3 className="font-bold text-white text-sm flex items-center gap-2 font-display">
+              <MapPin className="w-4 h-4 text-emerald-400" />
+              <span>Interactive Map View</span>
             </h3>
-            <span className="text-xs text-gray-500 font-medium">Click marker for directions</span>
+            <span className="text-xs text-slate-400 font-medium">Click marker for directions</span>
           </div>
 
-          <div className="flex-1 w-full rounded-2xl overflow-hidden border border-gray-200 relative z-0">
+          <div className="flex-1 w-full rounded-2xl overflow-hidden border border-white/10 relative z-0">
             <MapContainer
               center={[safeLat, safeLon]}
               zoom={11}
@@ -311,7 +318,7 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
                 <Popup>
                   <div className="text-xs font-bold space-y-1">
                     <p className="text-emerald-700">🌾 {farmName}</p>
-                    <p className="text-gray-600">Saved GIS Farm Origin</p>
+                    <p className="text-slate-600">Saved GIS Farm Origin</p>
                   </div>
                 </Popup>
               </Marker>
@@ -327,13 +334,13 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
                   }}
                 >
                   <Popup>
-                    <div className="text-xs space-y-1.5">
-                      <h4 className="font-extrabold text-gray-900">{center.name}</h4>
-                      <p className="text-blue-700 font-bold">{center.distance} km away</p>
-                      <p className="text-gray-600">{center.address}</p>
+                    <div className="text-xs space-y-1.5 p-0.5">
+                      <h4 className="font-bold text-slate-900">{center.name}</h4>
+                      <p className="text-emerald-700 font-semibold">{center.distance} km away</p>
+                      <p className="text-slate-600">{center.address}</p>
                       <button
                         onClick={() => handleGetDirections(center)}
-                        className="mt-1 px-2.5 py-1 bg-blue-600 text-white font-bold rounded-lg text-[11px] block text-center w-full"
+                        className="mt-1 px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-[11px] block text-center w-full transition-colors cursor-pointer"
                       >
                         Get Directions →
                       </button>
@@ -343,117 +350,130 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
               ))}
             </MapContainer>
           </div>
-        </div>
+        </Card>
 
         {/* Center Cards List Panel */}
-        <div className="lg:col-span-6 space-y-4 max-h-[520px] overflow-y-auto pr-1">
+        <div className="lg:col-span-6 space-y-3.5 max-h-[520px] overflow-y-auto pr-1">
           {loading ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-md space-y-3">
-              <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-              <p className="text-xs font-bold text-gray-600">Locating nearby centers from GIS coordinates...</p>
-            </div>
+            <Card variant="elevated" className="text-center py-16 space-y-3">
+              <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-xs font-semibold text-slate-400">Locating nearby centers from GIS coordinates...</p>
+            </Card>
           ) : centers.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-md space-y-3">
-              <Building2 className="w-12 h-12 text-gray-300 mx-auto" />
-              <h4 className="font-bold text-gray-700 text-base">No Centers Found</h4>
-              <p className="text-xs text-gray-500">Try adjusting your search query or selecting "All Centers".</p>
-            </div>
+            <Card variant="elevated" className="text-center py-16 space-y-3">
+              <Building2 className="w-12 h-12 text-slate-500 mx-auto" />
+              <h4 className="font-bold text-white text-base">No Centers Found</h4>
+              <p className="text-xs text-slate-400">Try adjusting your search query or selecting "All Centers".</p>
+            </Card>
           ) : (
-            centers.map((center) => {
-              const badge = getCategoryBadge(center.category);
-              const isSelected = selectedCenter?.id === center.id;
+            <AnimatePresence>
+              {centers.map((center, index) => {
+                const badgeVariant = getCategoryBadgeVariant(center.category);
+                const isSelected = selectedCenter?.id === center.id;
 
-              return (
-                <div
-                  key={center.id}
-                  onClick={() => setSelectedCenter(center)}
-                  className={`p-5 rounded-3xl border transition-all cursor-pointer space-y-3 ${
-                    isSelected
-                      ? 'bg-blue-50/70 border-blue-400 shadow-md ring-2 ring-blue-400/30'
-                      : 'bg-white border-gray-200 hover:border-blue-300 hover:bg-gray-50/60 shadow-sm'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className={`px-2.5 py-0.5 rounded-full border text-[11px] font-extrabold ${badge.bg}`}>
-                          {badge.label}
-                        </span>
+                return (
+                  <motion.div
+                    key={center.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.25 }}
+                  >
+                    <Card
+                      variant="elevated"
+                      onClick={() => setSelectedCenter(center)}
+                      className={`p-5 cursor-pointer space-y-3 transition-all ${
+                        isSelected
+                          ? 'border-emerald-500 bg-emerald-500/10 ring-2 ring-emerald-500/30'
+                          : 'hover:border-white/20'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-2">
+                            <Badge variant={badgeVariant} size="sm">
+                              {center.categoryLabel}
+                            </Badge>
 
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          center.isOpenNow ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-                        }`}>
-                          {center.isOpenNow ? '🟢 Open Now' : '🔴 Closed'}
-                        </span>
+                            <Badge
+                              variant={center.isOpenNow ? 'emerald' : 'rose'}
+                              size="sm"
+                            >
+                              {center.isOpenNow ? 'Open Now' : 'Closed'}
+                            </Badge>
+                          </div>
+
+                          <h4 className="text-base font-bold text-white">{center.name}</h4>
+                          {center.nameLocal && <p className="text-xs text-slate-400 font-medium">{center.nameLocal}</p>}
+                        </div>
+
+                        <div className="text-right shrink-0">
+                          <div className="text-lg font-black text-emerald-400 font-display">{center.distance} km</div>
+                          <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider block">Nearest</span>
+                        </div>
                       </div>
 
-                      <h4 className="text-base font-extrabold text-gray-900">{center.name}</h4>
-                      {center.nameLocal && <p className="text-xs text-gray-500 font-medium">{center.nameLocal}</p>}
-                    </div>
+                      <div className="text-xs space-y-1.5 text-slate-300 pt-2 border-t border-white/10">
+                        <p className="flex items-start gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
+                          <span>{center.address}, {center.district}</span>
+                        </p>
 
-                    <div className="text-right shrink-0">
-                      <div className="text-lg font-black text-blue-700">{center.distance} km</div>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Nearest</span>
-                    </div>
-                  </div>
+                        {center.workingHours && (
+                          <p className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                            <span>Hours: {center.workingHours}</span>
+                          </p>
+                        )}
 
-                  <div className="text-xs space-y-1.5 text-gray-700 pt-1 border-t border-gray-100">
-                    <p className="flex items-start gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" />
-                      <span>{center.address}, {center.district}</span>
-                    </p>
+                        {center.phone && (
+                          <p className="flex items-center gap-1.5">
+                            <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                            <a href={`tel:${center.phone}`} className="text-emerald-400 hover:underline font-semibold">
+                              {center.phone}
+                            </a>
+                          </p>
+                        )}
+                      </div>
 
-                    {center.workingHours && (
-                      <p className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                        <span>Hours: {center.workingHours}</span>
-                      </p>
-                    )}
+                      {/* Services Tag Pills */}
+                      {center.services && center.services.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {center.services.slice(0, 4).map((srv, i) => (
+                            <Badge key={i} variant="slate" size="sm">
+                              ✓ {srv}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
 
-                    {center.phone && (
-                      <p className="flex items-center gap-1.5">
-                        <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                        <a href={`tel:${center.phone}`} className="text-blue-600 hover:underline font-bold">
-                          {center.phone}
-                        </a>
-                      </p>
-                    )}
-                  </div>
+                      {/* Get Directions Button */}
+                      <div className="pt-2 flex items-center justify-between">
+                        {center.officerName ? (
+                          <span className="text-[11px] text-slate-400 font-medium">Officer: {center.officerName}</span>
+                        ) : <span />}
 
-                  {/* Services Tag Pills */}
-                  {center.services && center.services.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {center.services.slice(0, 4).map((srv, i) => (
-                        <span key={i} className="px-2 py-0.5 bg-white border border-gray-200 text-gray-600 rounded-lg text-[10px] font-semibold">
-                          ✓ {srv}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Get Directions Button */}
-                  <div className="pt-2 flex items-center justify-between">
-                    {center.officerName ? (
-                      <span className="text-[11px] text-gray-500 font-medium">Officer: {center.officerName}</span>
-                    ) : <span />}
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleGetDirections(center);
-                      }}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow-sm transition-all inline-flex items-center gap-1.5"
-                    >
-                      <Navigation className="w-3.5 h-3.5" /> Get Directions
-                    </button>
-                  </div>
-                </div>
-              );
-            })
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          icon={<Navigation className="w-3.5 h-3.5 text-emerald-400" />}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleGetDirections(center);
+                          }}
+                          className="border-white/10 text-slate-200 hover:bg-white/5"
+                        >
+                          Get Directions
+                        </Button>
+                      </div>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

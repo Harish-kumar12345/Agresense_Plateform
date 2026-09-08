@@ -64,7 +64,7 @@ export function Signup({ onSignup, onSwitchToLogin, onGuestLogin }: SignupProps)
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 agri-canvas relative overflow-hidden select-none">
       {/* Aurora Ambient Background */}
       <div className="aurora-glow -top-24 -right-24 bg-emerald-600/30" />
       <div className="aurora-glow -bottom-24 -left-24 bg-teal-600/20" />

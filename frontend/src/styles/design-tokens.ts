@@ -70,3 +70,147 @@ export const motionTokens = {
   },
   easing: [0.16, 1, 0.3, 1] as [number, number, number, number],
 };
+
+export type CategoryTone = 'weather' | 'soil' | 'yield' | 'price' | 'disease' | 'inventory' | 'farm' | 'default';
+
+export const categoryTones: Record<CategoryTone, {
+  name: string;
+  accent: string;
+  badgeBg: string;
+  badgeText: string;
+  badgeBorder: string;
+  cardBg: string;
+  cardBorder: string;
+  glowHover: string;
+  iconBg: string;
+  iconColor: string;
+  heroGradient: string;
+}> = {
+  weather: {
+    name: 'Weather Telemetry',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  soil: {
+    name: 'Soil Horizon & NPK',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  yield: {
+    name: 'Yield Prediction ML',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  price: {
+    name: 'Mandi Market Rates',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  disease: {
+    name: 'Pathogen & Pest Risk',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  inventory: {
+    name: 'Inventory & Stock Tracker',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  farm: {
+    name: 'Farm GIS & Field Boundaries',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  },
+  default: {
+    name: 'Agronomic Operations',
+    accent: 'emerald',
+    badgeBg: 'bg-emerald-500/15',
+    badgeText: 'text-emerald-300',
+    badgeBorder: 'border-emerald-500/30',
+    cardBg: 'bg-[#0D1612]/90',
+    cardBorder: 'border-emerald-900/30 hover:border-emerald-500/40',
+    glowHover: 'hover:shadow-glow-emerald',
+    iconBg: 'bg-emerald-500/15 border-emerald-500/30',
+    iconColor: 'text-emerald-400',
+    heroGradient: 'from-emerald-950/70 via-[#0D1612] to-[#070D0A]',
+  }
+};
+
+export const motionPresets = {
+  container: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05 }
+    },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05 }
+    }
+  },
+  item: {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }
+  },
+  hoverLift: {
+    scale: 1.015,
+    transition: { duration: 0.15, ease: [0.16, 1, 0.3, 1] }
+  }
+};

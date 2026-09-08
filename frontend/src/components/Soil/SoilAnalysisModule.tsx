@@ -9,10 +9,35 @@ import {
   FlaskConical,
   Edit3,
   RotateCcw,
-  Save
+  Save,
+  Droplets,
+  Leaf,
+  BarChart3,
+  Layers
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar
+} from 'recharts';
 import { soilService, ComprehensiveSoilAnalysis, SoilData } from '../../services/soilService';
 import { FarmData } from '../../services/farmService';
+import { Card } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import { InsightCard } from '../ui/InsightCard';
+import { colors, motionPresets } from '../../styles/design-tokens';
 
 interface SoilAnalysisModuleProps {
   farm?: FarmData | null;
@@ -122,7 +147,7 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="p-4 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-center justify-between">
           <span>{error || 'Unable to load soil analysis.'}</span>
-          <button type="button" onClick={loadSoil} className="font-bold underline">Retry</button>
+          <button type="button" onClick={loadSoil} className="font-bold underline cursor-pointer">Retry</button>
         </div>
       </div>
     );
@@ -130,136 +155,493 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
 
   const { soilData, healthScore, suitabilityRating, nutrientStatus, recommendations } = analysis;
 
+  const getStatusBg = (statusText: string) => {
+    const s = (statusText || '').toLowerCase();
+    if (s.includes('low') || s.includes('deficient')) {
+      return 'bg-rose-50 text-rose-600 border-rose-200/60';
+    }
+    if (s.includes('high') || s.includes('excess')) {
+      return 'bg-amber-50 text-amber-600 border-amber-200/60';
+    }
+    return 'bg-emerald-50 text-emerald-600 border-emerald-200/60';
+  };
+
+  const getStatusBadgeVariant = (statusText: string): 'emerald' | 'amber' | 'rose' => {
+    const s = (statusText || '').toLowerCase();
+    if (s.includes('low') || s.includes('deficient')) return 'rose';
+    if (s.includes('high') || s.includes('excess')) return 'amber';
+    return 'emerald';
+  };
+
+  // NPK Comparison Data (Current vs Ideal Target Benchmark)
+  const npkComparisonData = [
+    {
+      nutrient: 'Nitrogen (N)',
+      current: soilData.nitrogen || 0,
+      ideal: 90,
+      unit: 'kg/ha'
+    },
+    {
+      nutrient: 'Phosphorus (P)',
+      current: soilData.phosphorus || 0,
+      ideal: 50,
+      unit: 'kg/ha'
+    },
+    {
+      nutrient: 'Potassium (K)',
+      current: soilData.potassium || 0,
+      ideal: 85,
+      unit: 'kg/ha'
+    }
+  ];
+
+  // Radar chart representation
+  const radarData = [
+    { subject: 'Nitrogen', current: Math.min(100, Math.round((soilData.nitrogen / 120) * 100)), ideal: 80 },
+    { subject: 'Phosphorus', current: Math.min(100, Math.round((soilData.phosphorus / 60) * 100)), ideal: 80 },
+    { subject: 'Potassium', current: Math.min(100, Math.round((soilData.potassium / 100) * 100)), ideal: 85 },
+    { subject: 'Moisture', current: Math.min(100, soilData.moisture * 2), ideal: 70 },
+    { subject: 'pH Balance', current: Math.min(100, Math.round((soilData.ph / 8) * 100)), ideal: 80 }
+  ];
+
+  // Circular progress calculations
+  const circumference = 2 * Math.PI * 34;
+  const strokeDashoffset = circumference - (healthScore / 100) * circumference;
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-800 font-sans">
-      
-      {/* 1. Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Soil Health & NPK Analysis</h1>
-            <span className="px-2.5 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md">
-              Score: {healthScore}/100
-            </span>
+    <motion.div
+      variants={motionPresets.container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
+    >
+      {/* 1. VerdaAgro Pedology Context Bar */}
+      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-soil">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+              <span>Pedology</span>
+              <span className="text-emerald-700">/</span>
+              <span>Subterranean NPK & Horizon Diagnostics</span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                ACTIVE SENSOR CALIBRATION
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+                Subterranean Soil Health & Chemistry
+              </h1>
+              <span className="agri-pill agri-pill-emerald">
+                Health Score: {healthScore}/100
+              </span>
+              <span className="agri-pill agri-pill-muted">
+                Target Crop: {selectedCrop}
+              </span>
+            </div>
+
+            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
+              <span className="font-semibold text-white">{farmTitle}</span>
+              <span className="text-emerald-800">•</span>
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                {locationLabel}
+              </span>
+              <span className="text-emerald-800">•</span>
+              <span className="text-slate-300 font-mono text-[11px]">Coord: {safeLat.toFixed(3)}°N, {safeLon.toFixed(3)}°E</span>
+            </p>
           </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
-            <span>{farmTitle}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              {locationLabel}
-            </span>
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setShowEditForm(!showEditForm)}
-            className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 rounded-xl text-xs font-semibold shadow-sm transition-colors flex items-center gap-1.5"
-          >
-            <Edit3 className="w-3.5 h-3.5 text-slate-500" />
-            <span>{showEditForm ? 'Close Form' : 'Update Soil Test'}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={loadSoil}
-            className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200"
-            title="Refresh"
-          >
-            <RefreshCw className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onClick={() => setShowEditForm(!showEditForm)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+              {showEditForm ? 'Close Lab Form' : 'Update Soil Test'}
+            </button>
+            <button
+              type="button"
+              onClick={loadSoil}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#070D0A]/70 hover:bg-emerald-950/40 border border-emerald-900/40 text-[#D1DED6] text-xs font-semibold transition-colors cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
+              Refresh
+            </button>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {saveSuccess && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-700 flex items-center gap-2">
-          <CheckCircle className="w-4 h-4" />
+        <div className="p-3.5 bg-emerald-500/15 border border-emerald-500/30 rounded-xl text-xs text-emerald-300 flex items-center gap-2 font-medium">
+          <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{saveSuccess}</span>
         </div>
       )}
 
       {/* Edit Form */}
-      {showEditForm && (
-        <form onSubmit={handleSaveLabTest} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-xs">
-            <h3 className="font-bold text-slate-900">Lab Soil Test Results Input</h3>
-            <button type="button" onClick={handleResetToSensor} className="text-rose-600 font-semibold hover:underline">
-              Reset to Satellite Estimates
-            </button>
-          </div>
+      <AnimatePresence>
+        {showEditForm && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -8 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="agri-bento-card p-6 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40 text-xs">
+                <div>
+                  <h3 className="font-bold text-white text-sm font-display">Lab Soil Test Results Input</h3>
+                  <p className="text-[#D1DED6] text-[11px]">Override satellite approximations with actual soil sample reports.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleResetToSensor}
+                  className="text-rose-400 hover:text-rose-300 text-xs font-semibold underline cursor-pointer"
+                >
+                  Reset to Satellite Estimates
+                </button>
+              </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-            <div>
-              <label className="block text-slate-600 mb-1 font-medium">Nitrogen (N kg/ha)</label>
-              <input type="number" value={inputN} onChange={(e) => setInputN(Number(e.target.value))} className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800 font-semibold" />
+              <form onSubmit={handleSaveLabTest} className="space-y-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                  <div>
+                    <label className="block text-white mb-1 font-semibold">Nitrogen (N kg/ha)</label>
+                    <input
+                      type="number"
+                      value={inputN}
+                      onChange={(e) => setInputN(Number(e.target.value))}
+                      className="w-full px-3 py-2 bg-[#070D0A] border border-emerald-900/60 rounded-xl text-white font-semibold focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white mb-1 font-semibold">Phosphorus (P kg/ha)</label>
+                    <input
+                      type="number"
+                      value={inputP}
+                      onChange={(e) => setInputP(Number(e.target.value))}
+                      className="w-full px-3 py-2 bg-[#070D0A] border border-emerald-900/60 rounded-xl text-white font-semibold focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white mb-1 font-semibold">Potassium (K kg/ha)</label>
+                    <input
+                      type="number"
+                      value={inputK}
+                      onChange={(e) => setInputK(Number(e.target.value))}
+                      className="w-full px-3 py-2 bg-[#070D0A] border border-emerald-900/60 rounded-xl text-white font-semibold focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white mb-1 font-semibold">pH Level</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={inputPh}
+                      onChange={(e) => setInputPh(Number(e.target.value))}
+                      className="w-full px-3 py-2 bg-[#070D0A] border border-emerald-900/60 rounded-xl text-white font-semibold focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-3 border-t border-emerald-950/40">
+                  <button
+                    type="button"
+                    onClick={() => setShowEditForm(false)}
+                    className="px-3.5 py-1.5 rounded-lg border border-emerald-900/40 text-[#D1DED6] hover:text-white text-xs font-semibold cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" />
+                    Save Values
+                  </button>
+                </div>
+              </form>
             </div>
-            <div>
-              <label className="block text-slate-600 mb-1 font-medium">Phosphorus (P kg/ha)</label>
-              <input type="number" value={inputP} onChange={(e) => setInputP(Number(e.target.value))} className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800 font-semibold" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 2. Asymmetric VerdaAgro Pedology Bento Grid */}
+      <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Subterranean Vitality Core (7 Cols) */}
+        <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-soil p-6 flex flex-col justify-between space-y-6">
+          <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+            <div className="flex items-center gap-2">
+              <Sprout className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+                Root-Zone Vitality & Chemistry Horizon
+              </span>
             </div>
-            <div>
-              <label className="block text-slate-600 mb-1 font-medium">Potassium (K kg/ha)</label>
-              <input type="number" value={inputK} onChange={(e) => setInputK(Number(e.target.value))} className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800 font-semibold" />
+            <span className="text-[11px] font-mono text-emerald-400 font-medium">
+              Suitability: {suitabilityRating}
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="flex items-center gap-5">
+              {/* Circular Health Meter */}
+              <div className="relative w-28 h-28 shrink-0 flex items-center justify-center">
+                <svg className="w-28 h-28 transform -rotate-90">
+                  <circle
+                    cx="56"
+                    cy="56"
+                    r="44"
+                    stroke="#13231B"
+                    strokeWidth="8"
+                    fill="transparent"
+                  />
+                  <circle
+                    cx="56"
+                    cy="56"
+                    r="44"
+                    stroke={healthScore >= 70 ? '#34d399' : healthScore >= 50 ? '#fbbf24' : '#f43f5e'}
+                    strokeWidth="8"
+                    strokeDasharray={2 * Math.PI * 44}
+                    strokeDashoffset={2 * Math.PI * 44 * (1 - healthScore / 100)}
+                    strokeLinecap="round"
+                    className="transition-all duration-1000 ease-out"
+                    fill="transparent"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span className="text-2xl font-black text-white font-display">{healthScore}</span>
+                  <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest">/ 100</span>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+                  Soil Fertility Score
+                </div>
+                <div className="text-2xl font-extrabold text-white font-display">
+                  {suitabilityRating || 'Optimal Crop Condition'}
+                </div>
+                <p className="text-xs text-[#D1DED6] mt-1 leading-relaxed">
+                  Subterranean nutrients calibrated for high-yield <span className="font-semibold text-white">{selectedCrop}</span> cultivation.
+                </p>
+              </div>
             </div>
-            <div>
-              <label className="block text-slate-600 mb-1 font-medium">pH Level</label>
-              <input type="number" step="0.1" value={inputPh} onChange={(e) => setInputPh(Number(e.target.value))} className="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800 font-semibold" />
+
+            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3 text-right shrink-0">
+              <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Soil Reaction (pH)</div>
+              <div className="text-xl font-mono font-bold text-white mt-0.5">{soilData.ph} <span className="text-xs text-emerald-400 font-normal">pH</span></div>
+              <div className="text-[10px] text-[#D1DED6] mt-0.5">{soilData.ph >= 6.0 && soilData.ph <= 7.5 ? 'Neutral (Optimal)' : 'Needs amendment'}</div>
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
-            <button type="button" onClick={() => setShowEditForm(false)} className="px-3 py-1.5 text-xs text-slate-600">Cancel</button>
-            <button type="submit" className="px-4 py-1.5 text-xs bg-emerald-600 text-white font-semibold rounded-lg">Save Values</button>
+          {/* Subterranean 3-horizon metadata strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
+                <span className="text-[11px] font-medium flex items-center gap-1">
+                  <Droplets className="w-3.5 h-3.5 text-sky-400" />
+                  Root Moisture
+                </span>
+                <span className="text-[10px] font-semibold text-emerald-400">{soilData.moisture}% vol</span>
+              </div>
+              <div className="text-xl font-bold text-white font-display">
+                {soilData.moisture >= 30 ? 'Field Capacity' : 'Low Moisture'}
+              </div>
+              <div className="w-full bg-slate-800/80 rounded-full h-1.5 mt-2 overflow-hidden">
+                <div 
+                  className="bg-sky-400 h-1.5 rounded-full transition-all"
+                  style={{ width: `${Math.min(100, soilData.moisture * 2)}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
+                <span className="text-[11px] font-medium flex items-center gap-1">
+                  <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+                  Organic Carbon
+                </span>
+                <span className="text-[10px] font-semibold text-emerald-400">Horizon A</span>
+              </div>
+              <div className="text-xl font-bold text-white font-display">
+                {inputOrganic}% <span className="text-xs font-normal text-[#D1DED6]">OM</span>
+              </div>
+              <p className="text-[10px] text-[#D1DED6] mt-2">
+                {inputOrganic >= 1.5 ? 'High microbial activity' : 'Incorporate compost'}
+              </p>
+            </div>
+
+            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
+              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
+                <span className="text-[11px] font-medium flex items-center gap-1">
+                  <Layers className="w-3.5 h-3.5 text-teal-400" />
+                  Soil Texture
+                </span>
+                <span className="text-[10px] font-semibold text-[#D1DED6] font-mono">Profile</span>
+              </div>
+              <div className="text-xl font-bold text-white font-display">
+                {soilData.type}
+              </div>
+              <p className="text-[10px] text-[#D1DED6] mt-2">
+                High cation exchange capacity
+              </p>
+            </div>
           </div>
-        </form>
-      )}
-
-      {/* 2. Compact Primary Soil Parameters Bar */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-        <div className="space-y-1">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Nitrogen (N)</span>
-          <div className="text-xl font-bold text-slate-900">{soilData.nitrogen} kg/ha</div>
-          <span className="text-[11px] text-slate-500">{nutrientStatus.nitrogenStatus}</span>
         </div>
 
-        <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Phosphorus (P)</span>
-          <div className="text-xl font-bold text-slate-900">{soilData.phosphorus} kg/ha</div>
-          <span className="text-[11px] text-slate-500">{nutrientStatus.phosphorusStatus}</span>
-        </div>
-
-        <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">Potassium (K)</span>
-          <div className="text-xl font-bold text-slate-900">{soilData.potassium} kg/ha</div>
-          <span className="text-[11px] text-slate-500">{nutrientStatus.potassiumStatus}</span>
-        </div>
-
-        <div className="space-y-1 pt-3 md:pt-0 md:pl-4">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">pH & Moisture</span>
-          <div className="text-lg font-bold text-slate-900">{soilData.ph} pH • {soilData.moisture}%</div>
-          <span className="text-[11px] text-slate-500">{soilData.type}</span>
-        </div>
-      </div>
-
-      {/* 3. Agronomic Soil Management Plan */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-        <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Soil Management & Fertilizer Plan for {selectedCrop}</h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
-            <span className="font-semibold text-slate-900 block">Fertilizer Recommendation:</span>
-            <p className="text-slate-600 leading-relaxed">{recommendations.fertilizerPlan}</p>
+        {/* NPK Macro-Nutrient Triad Desk (5 Cols) */}
+        <div className="lg:col-span-5 flex flex-col justify-between gap-3">
+          {/* Nitrogen Tile */}
+          <div className="agri-bento-card p-4 flex items-center justify-between">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center justify-center font-mono">N</span>
+                <span className="text-xs font-bold text-white font-display">Available Nitrogen</span>
+              </div>
+              <div className="text-lg font-bold text-white font-mono">
+                {soilData.nitrogen} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              </div>
+              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 90 kg/ha</p>
+            </div>
+            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.nitrogenStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+              {nutrientStatus.nitrogenStatus}
+            </span>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
-            <span className="font-semibold text-slate-900 block">pH & Soil Conditioning:</span>
-            <p className="text-slate-600 leading-relaxed">{recommendations.phCorrection}</p>
+          {/* Phosphorus Tile */}
+          <div className="agri-bento-card p-4 flex items-center justify-between">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-lg bg-sky-500/20 border border-sky-500/30 text-sky-300 text-xs font-bold flex items-center justify-center font-mono">P</span>
+                <span className="text-xs font-bold text-white font-display">Available Phosphorus</span>
+              </div>
+              <div className="text-lg font-bold text-white font-mono">
+                {soilData.phosphorus} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              </div>
+              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 50 kg/ha</p>
+            </div>
+            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.phosphorusStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+              {nutrientStatus.phosphorusStatus}
+            </span>
+          </div>
+
+          {/* Potassium Tile */}
+          <div className="agri-bento-card p-4 flex items-center justify-between">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center justify-center font-mono">K</span>
+                <span className="text-xs font-bold text-white font-display">Available Potassium</span>
+              </div>
+              <div className="text-lg font-bold text-white font-mono">
+                {soilData.potassium} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              </div>
+              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 85 kg/ha</p>
+            </div>
+            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.potassiumStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+              {nutrientStatus.potassiumStatus}
+            </span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-    </div>
+      {/* 3. NPK Benchmark Comparison Bar Chart */}
+      <motion.div variants={motionPresets.item}>
+        <div className="agri-bento-card p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-emerald-950/40">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Nutrient Benchmarking</span>
+              <h3 className="text-base font-bold text-white mt-0.5 font-display">Current Pedology Levels vs. Target Thresholds for {selectedCrop}</h3>
+            </div>
+            <div className="flex items-center gap-4 text-xs">
+              <span className="flex items-center gap-1.5 text-white font-medium">
+                <span className="w-3 h-3 rounded-md bg-emerald-400 inline-block" /> Current (kg/ha)
+              </span>
+              <span className="flex items-center gap-1.5 text-[#D1DED6] font-medium">
+                <span className="w-3 h-3 rounded-md bg-amber-400 inline-block" /> Target Benchmark
+              </span>
+            </div>
+          </div>
+
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={npkComparisonData}
+                margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#13231B" vertical={false} />
+                <XAxis
+                  dataKey="nutrient"
+                  tick={{ fill: '#D1DED6', fontSize: 12, fontWeight: 600 }}
+                  axisLine={{ stroke: '#1B3125' }}
+                  tickLine={false}
+                />
+                <YAxis
+                  unit=" kg"
+                  tick={{ fill: '#D1DED6', fontSize: 11 }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <Tooltip
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="agri-bento-card p-3 shadow-2xl text-xs space-y-1 bg-[#0D1612] border border-emerald-500/30">
+                          <p className="font-bold text-white font-display">{label}</p>
+                          <p className="text-emerald-400 font-semibold">
+                            Current: {payload[0]?.value} kg/ha
+                          </p>
+                          <p className="text-amber-400 font-semibold">
+                            Target Ideal: {payload[1]?.value} kg/ha
+                          </p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Bar dataKey="current" name="Current Level" fill="#34d399" radius={[6, 6, 0, 0]} maxBarSize={48} />
+                <Bar dataKey="ideal" name="Target Ideal" fill="#fbbf24" radius={[6, 6, 0, 0]} maxBarSize={48} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 4. Agronomic Soil Management Plan */}
+      <motion.div variants={motionPresets.item}>
+        <div className="agri-bento-card p-6 space-y-4">
+          <div className="flex items-center gap-2 pb-3 border-b border-emerald-950/40">
+            <Leaf className="w-5 h-5 text-emerald-400" />
+            <h3 className="text-base font-bold text-white font-display">
+              Subterranean Conditioning & Fertilizer Plan for {selectedCrop}
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div className="p-4 rounded-xl border border-emerald-900/40 bg-[#070D0A]/60 space-y-2">
+              <div className="flex items-center gap-2 text-emerald-400 font-bold">
+                <Sprout className="w-4 h-4" />
+                <span className="text-white">Fertilizer Application Recommendation</span>
+              </div>
+              <p className="text-[#D1DED6] leading-relaxed font-normal">
+                {recommendations.fertilizerPlan}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl border border-emerald-900/40 bg-[#070D0A]/60 space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold">
+                <FlaskConical className="w-4 h-4" />
+                <span className="text-white">pH Correction & Soil Conditioning</span>
+              </div>
+              <p className="text-[#D1DED6] leading-relaxed font-normal">
+                {recommendations.phCorrection}
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };

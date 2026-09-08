@@ -91,16 +91,16 @@ export const FarmMap: React.FC<FarmMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden border border-emerald-100 shadow-md">
+    <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
       {/* Tile Switcher Controls */}
-      <div className="absolute top-4 right-4 z-[1000] flex items-center gap-1.5 bg-white/95 backdrop-blur-sm p-1.5 rounded-xl shadow-lg border border-emerald-100">
+      <div className="absolute top-4 right-4 z-[1000] flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-xl shadow-xl border border-white/10">
         <button
           type="button"
           onClick={() => setMapTileType('satellite')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mapTileType === 'satellite'
               ? 'bg-emerald-600 text-white shadow-sm'
-              : 'text-gray-600 hover:bg-gray-100'
+              : 'text-slate-300 hover:text-white hover:bg-white/10'
           }`}
         >
           🛰️ Satellite
@@ -108,10 +108,10 @@ export const FarmMap: React.FC<FarmMapProps> = ({
         <button
           type="button"
           onClick={() => setMapTileType('street')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mapTileType === 'street'
               ? 'bg-emerald-600 text-white shadow-sm'
-              : 'text-gray-600 hover:bg-gray-100'
+              : 'text-slate-300 hover:text-white hover:bg-white/10'
           }`}
         >
           🗺️ Street Map
@@ -147,7 +147,7 @@ export const FarmMap: React.FC<FarmMapProps> = ({
             <Popup>
               <div className="p-1 text-center font-sans">
                 <span className="font-bold text-emerald-700 block text-xs">📍 Current Location</span>
-                <span className="text-[11px] text-gray-500 block">
+                <span className="text-[11px] text-slate-500 block">
                   {userLocation[0].toFixed(5)}, {userLocation[1].toFixed(5)}
                 </span>
               </div>
@@ -170,10 +170,10 @@ export const FarmMap: React.FC<FarmMapProps> = ({
               <Marker position={[farm.latitude, farm.longitude]} icon={savedFarmIcon}>
                 <Popup>
                   <div className="p-1 font-sans">
-                    <h4 className="font-bold text-gray-800 text-sm">{farm.farm_name}</h4>
+                    <h4 className="font-bold text-slate-900 text-sm">{farm.farm_name}</h4>
                     <p className="text-xs text-emerald-700 font-medium">{farm.crop} ({farm.season})</p>
-                    <p className="text-xs text-gray-600 mt-1">Area: <strong>{farm.area_hectares} ha</strong> ({farm.area_acres} ac)</p>
-                    <p className="text-[11px] text-gray-400">{farm.location_name}</p>
+                    <p className="text-xs text-slate-600 mt-1">Area: <strong>{farm.area_hectares} ha</strong> ({farm.area_acres} ac)</p>
+                    <p className="text-[11px] text-slate-500">{farm.location_name}</p>
                     {onSelectSavedFarm && (
                       <button
                         type="button"
@@ -191,8 +191,8 @@ export const FarmMap: React.FC<FarmMapProps> = ({
                 <Polygon
                   positions={boundaryCoords}
                   pathOptions={{
-                    color: '#eab308',
-                    fillColor: '#fef08a',
+                    color: '#10b981',
+                    fillColor: '#34d399',
                     fillOpacity: 0.35,
                     weight: 2
                   }}
