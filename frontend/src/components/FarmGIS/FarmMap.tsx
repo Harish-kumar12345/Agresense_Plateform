@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Polygon, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Layers, MapPin, Search } from 'lucide-react';
+import { Layers, MapPin, Search, Map as MapIcon, Globe, Navigation } from 'lucide-react';
 import { FarmData } from '../../services/farmService';
 
 // Fix Leaflet default marker icon paths in Vite
@@ -91,38 +91,41 @@ export const FarmMap: React.FC<FarmMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-      {/* Tile Switcher Controls */}
-      <div className="absolute top-4 right-4 z-[1000] flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-xl shadow-xl border border-white/10">
+    <div className={`relative w-full h-[450px] sm:h-[520px] rounded-2xl overflow-hidden border border-emerald-900/40 shadow-2xl ${isDrawing ? 'cursor-crosshair' : ''}`}>
+      {/* Tactical Layer Switcher */}
+      <div className="absolute top-4 right-4 z-[1000] flex items-center bg-[#070D0A]/90 backdrop-blur-xl p-1 rounded-xl shadow-2xl border border-emerald-900/50">
         <button
           type="button"
           onClick={() => setMapTileType('satellite')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mapTileType === 'satellite'
-              ? 'bg-emerald-600 text-white shadow-sm'
-              : 'text-slate-300 hover:text-white hover:bg-white/10'
+              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
+              : 'text-[#D1DED6] hover:text-white hover:bg-white/5'
           }`}
         >
-          🛰️ Satellite
+          <Globe className="w-3.5 h-3.5" />
+          <span>Satellite</span>
         </button>
         <button
           type="button"
           onClick={() => setMapTileType('street')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mapTileType === 'street'
-              ? 'bg-emerald-600 text-white shadow-sm'
-              : 'text-slate-300 hover:text-white hover:bg-white/10'
+              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
+              : 'text-[#D1DED6] hover:text-white hover:bg-white/5'
           }`}
         >
-          🗺️ Street Map
+          <MapIcon className="w-3.5 h-3.5" />
+          <span>Cadastral Map</span>
         </button>
       </div>
 
-      {/* Map Hint Badge */}
+      {/* Tactical Digitizing Indicator */}
       {isDrawing && !isClosed && (
-        <div className="absolute top-4 left-4 z-[1000] bg-emerald-700/90 text-white backdrop-blur-sm px-3.5 py-1.5 rounded-xl text-xs font-medium shadow-lg animate-pulse flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-300"></span>
-          Click on the map to add boundary corner points
+        <div className="absolute top-4 left-4 z-[1000] bg-[#0D1612]/95 border border-emerald-500/40 text-white backdrop-blur-md px-3.5 py-1.5 rounded-xl text-xs font-medium shadow-xl flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span className="font-semibold text-emerald-300">Plot Mode Active:</span>
+          <span className="text-slate-200">Click corners to digitize boundary</span>
         </div>
       )}
 
@@ -145,11 +148,14 @@ export const FarmMap: React.FC<FarmMapProps> = ({
         {userLocation && (
           <Marker position={userLocation} icon={userLocationIcon}>
             <Popup>
-              <div className="p-1 text-center font-sans">
-                <span className="font-bold text-emerald-700 block text-xs">📍 Current Location</span>
-                <span className="text-[11px] text-slate-500 block">
-                  {userLocation[0].toFixed(5)}, {userLocation[1].toFixed(5)}
-                </span>
+              <div className="p-2 space-y-1 font-sans">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Verified GPS Location</span>
+                </div>
+                <div className="text-[11px] font-mono text-slate-300">
+                  {userLocation[0].toFixed(5)}°N, {userLocation[1].toFixed(5)}°E
+                </div>
               </div>
             </Popup>
           </Marker>
@@ -169,18 +175,28 @@ export const FarmMap: React.FC<FarmMapProps> = ({
             <React.Fragment key={farm.farm_id}>
               <Marker position={[farm.latitude, farm.longitude]} icon={savedFarmIcon}>
                 <Popup>
-                  <div className="p-1 font-sans">
-                    <h4 className="font-bold text-slate-900 text-sm">{farm.farm_name}</h4>
-                    <p className="text-xs text-emerald-700 font-medium">{farm.crop} ({farm.season})</p>
-                    <p className="text-xs text-slate-600 mt-1">Area: <strong>{farm.area_hectares} ha</strong> ({farm.area_acres} ac)</p>
-                    <p className="text-[11px] text-slate-500">{farm.location_name}</p>
+                  <div className="p-2 space-y-2 font-sans min-w-[200px]">
+                    <div className="flex items-center justify-between border-b border-emerald-900/40 pb-1.5">
+                      <h4 className="font-bold text-white text-sm font-display">{farm.farm_name}</h4>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">
+                        {farm.crop}
+                      </span>
+                    </div>
+                    <div className="space-y-1 text-xs text-slate-300">
+                      <p><span className="text-slate-400">Season:</span> <span className="font-medium text-white">{farm.season}</span></p>
+                      <p><span className="text-slate-400">Plot Area:</span> <strong className="text-emerald-400">{farm.area_hectares} ha</strong> ({farm.area_acres} ac)</p>
+                      <p className="text-[11px] text-slate-400 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-emerald-400 shrink-0" />
+                        <span className="truncate">{farm.location_name}</span>
+                      </p>
+                    </div>
                     {onSelectSavedFarm && (
                       <button
                         type="button"
                         onClick={() => onSelectSavedFarm(farm)}
-                        className="mt-2 text-xs w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-1 px-2 rounded-md shadow-sm transition-colors"
+                        className="w-full mt-2 py-1.5 px-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-950 font-bold text-xs rounded-lg shadow-sm transition-all cursor-pointer"
                       >
-                        Load to Dashboard
+                        Load to Telemetry Dashboard
                       </button>
                     )}
                   </div>

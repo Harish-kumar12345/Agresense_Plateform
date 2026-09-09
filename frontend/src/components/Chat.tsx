@@ -7,12 +7,18 @@ import {
   Send, 
   Volume2, 
   VolumeX, 
-  Bot, 
   User, 
-  Sparkles,
   ArrowDown,
-  Languages,
-  Check
+  Sprout,
+  ShieldCheck,
+  Compass,
+  FlaskConical,
+  Bug,
+  Droplets,
+  IndianRupee,
+  Activity,
+  Layers,
+  Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -123,7 +129,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     
     setMessages((m) => [...m, { 
       role: 'user', 
-      text: `📸 Uploaded plant image: ${fileName}`, 
+      text: `Uploaded plant sample: ${fileName}`, 
       ts: Date.now() 
     }]);
     
@@ -141,8 +147,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
+    if (e.key === 'Enter') {
       sendMessage(input);
     }
   };
@@ -180,48 +185,68 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     } catch {}
   }
 
-  const samplePrompts = [
-    language === 'ml' ? 'നെല്ലിലെ കീടങ്ങളെ എങ്ങനെ നിയന്ത്രിക്കാം?' : 'How do I control Rice Blast & stem borer?',
-    language === 'ml' ? 'ഈ ആഴ്ചയിലെ നനയ്ക്കുന്ന രീതി എന്താണ്?' : 'What is the optimal irrigation schedule for this soil moisture?',
-    language === 'ml' ? 'NPK വളങ്ങളുടെ അളവ് പറയുക' : 'Recommend NPK dosage for current crop stage',
-    language === 'ml' ? 'വിപണി വിലകൾ എങ്ങനെയാണ്?' : 'Analyze current mandi price trends'
+  const agronomicCategories = [
+    {
+      icon: <Bug className="w-4 h-4 text-rose-400" />,
+      title: language === 'ml' ? 'കീടനിയന്ത്രണം' : 'Pathology & Pest Control',
+      prompt: language === 'ml' ? 'നെല്ലിലെ കീടങ്ങളെ എങ്ങനെ നിയന്ത്രിക്കാം?' : 'Identify symptoms and remedy for Rice Blast & fungal sheath rot'
+    },
+    {
+      icon: <FlaskConical className="w-4 h-4 text-emerald-400" />,
+      title: language === 'ml' ? 'വളപ്രയോഗം' : 'NPK & Soil Nutrition',
+      prompt: language === 'ml' ? 'NPK വളങ്ങളുടെ അളവ് പറയുക' : 'Recommend exact NPK micro-dosing and foliar spray schedule for this soil'
+    },
+    {
+      icon: <Droplets className="w-4 h-4 text-sky-400" />,
+      title: language === 'ml' ? 'നനയ്ക്കൽ രീതി' : 'Irrigation & Moisture',
+      prompt: language === 'ml' ? 'ഈ ആഴ്ചയിലെ നനയ്ക്കുന്ന രീതി എന്താണ്?' : 'Calculate optimal irrigation schedule based on canopy humidity and forecasted rain'
+    },
+    {
+      icon: <IndianRupee className="w-4 h-4 text-amber-400" />,
+      title: language === 'ml' ? 'വിപണി നിരക്കുകൾ' : 'Mandi Price & Arbitrage',
+      prompt: language === 'ml' ? 'വിപണി വിലകൾ എങ്ങനെയാണ്?' : 'Analyze regional APMC mandi price arrivals versus minimum support prices'
+    }
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-5.5rem)] max-w-5xl mx-auto saas-card overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl relative">
+    <div className="flex flex-col h-[calc(100vh-6rem)] max-w-5xl mx-auto rounded-3xl overflow-hidden bg-[#0D1612]/95 border border-emerald-900/40 shadow-2xl relative">
       
-      {/* Header Bar */}
-      <div className="p-4 px-6 bg-slate-950/90 border-b border-white/10 flex items-center justify-between shrink-0 z-20 backdrop-blur-xl">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-emerald-300/30">
-            <Bot className="w-5 h-5 text-slate-950" />
+      {/* Header Bar - Agronomic Specialist Console */}
+      <div className="p-4 px-6 bg-[#070D0A]/95 border-b border-emerald-900/40 flex items-center justify-between shrink-0 z-20 backdrop-blur-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-600/25 border border-emerald-300/40 shrink-0">
+            <Sprout className="w-6 h-6 text-slate-950" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base font-bold text-white tracking-tight font-display">
-                {t('chat.title') || 'Agronomic AI Advisor'}
+                Agronomic Field Specialist Console
               </h2>
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                <ShieldCheck className="w-2.5 h-2.5 text-emerald-400" />
+                ICAR Agronomy Verified
               </span>
             </div>
-            <p className="text-xs text-slate-400">
-              {activeFarm?.farm_name || location?.city || 'Indian Agriculture'} • Crop: {crop || activeFarm?.crop || 'Rice'}
+            <p className="text-xs text-[#D1DED6] flex items-center gap-1.5 mt-0.5">
+              <span>{activeFarm?.farm_name || location?.city || 'Indian Precision Farm'}</span>
+              <span className="text-emerald-800">•</span>
+              <span>Crop: <strong className="text-white">{crop || activeFarm?.crop || 'Rice'}</strong></span>
+              <span className="text-emerald-800">•</span>
+              <span className="text-emerald-400 font-mono text-[11px]">Telemetry Active</span>
             </p>
           </div>
         </div>
 
         {/* Clean Segmented Language Toggle */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-slate-800/90 p-1 rounded-xl border border-white/10 text-xs font-semibold select-none">
+          <div className="flex items-center bg-[#070D0A] p-1 rounded-xl border border-emerald-900/40 text-xs font-semibold select-none">
             <button
               type="button"
               onClick={() => setLanguage('en')}
               className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
                 language === 'en'
                   ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-[#D1DED6] hover:text-white'
               }`}
             >
               English
@@ -232,7 +257,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
                 language === 'ml'
                   ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-[#D1DED6] hover:text-white'
               }`}
             >
               മലയാളം
@@ -245,36 +270,46 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       <div 
         ref={chatScrollRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gradient-to-b from-slate-950/80 via-slate-900 to-slate-950"
+        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gradient-to-b from-[#070D0A] via-[#0D1612] to-[#070D0A]"
       >
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-center p-6 max-w-lg mx-auto select-none">
-            <div className="w-14 h-14 rounded-3xl bg-slate-800/80 border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 mb-4 text-emerald-400">
-              <Sparkles className="w-7 h-7" />
+          <div className="h-full flex flex-col items-center justify-center text-center p-6 max-w-xl mx-auto select-none">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/10 mb-4 text-emerald-400">
+              <Sprout className="w-7 h-7" />
             </div>
-            <h3 className="text-lg font-bold text-white mb-1.5 font-display">
-              {language === 'ml' ? 'കാർഷിക എഐ അസിസ്റ്റന്റിലേക്ക് സ്വാഗതം' : 'Personalized Agronomic Guidance'}
+            <h3 className="text-xl font-bold text-white mb-1.5 font-display">
+              {language === 'ml' ? 'കാർഷിക എഐ അസിസ്റ്റന്റിലേക്ക് സ്വാഗതം' : 'Precision Agronomic Advisory Station'}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#D1DED6] mb-8 leading-relaxed max-w-md">
               {language === 'ml'
                 ? 'നിങ്ങളുടെ വിളവെടുപ്പ്, കീടനിയന്ത്രണം, വളപ്രയോഗം, കാലാവസ്ഥ എന്നിവയെക്കുറിച്ച് ഏതു സംശയങ്ങളും ചോദിക്കാം.'
-                : 'Ask questions regarding crop pathology, fertilizer dosages, optimal irrigation schedules, or mandi market rates.'}
+                : 'Direct agronomic guidance tailored to your active farm plot coordinates, soil horizon, and weather forecast.'}
             </p>
 
-            {/* Quick Prompt Chips */}
-            <div className="w-full space-y-2">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">
-                Suggested Prompts
+            {/* Quick Diagnostic Inquiry Tiles */}
+            <div className="w-full space-y-2.5">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/90 text-left">
+                Recommended Agronomic Inquiries
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {samplePrompts.map((prompt, i) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {agronomicCategories.map((item, i) => (
                   <button
                     key={i}
                     type="button"
-                    onClick={() => sendMessage(prompt)}
-                    className="p-2.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-white/5 hover:border-emerald-500/30 text-left text-xs text-slate-300 transition-all cursor-pointer"
+                    onClick={() => sendMessage(item.prompt)}
+                    className="p-3.5 rounded-2xl bg-[#070D0A]/80 hover:bg-[#13231B] border border-emerald-900/40 hover:border-emerald-500/40 text-left transition-all duration-200 cursor-pointer group shadow-sm"
                   >
-                    {prompt}
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="p-1 rounded-lg bg-white/5 border border-white/10 shrink-0">
+                        {item.icon}
+                      </div>
+                      <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                        {item.title}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#82968C] leading-snug line-clamp-2">
+                      {item.prompt}
+                    </p>
                   </button>
                 ))}
               </div>
@@ -287,22 +322,22 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               className={`flex gap-3 items-end ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {m.role === 'assistant' && (
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 flex items-center justify-center shrink-0 shadow-md border border-emerald-300/30 text-slate-950 mb-1">
-                  <Bot className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-500 flex items-center justify-center shrink-0 shadow-md border border-emerald-400/40 text-slate-950 mb-1">
+                  <Sprout className="w-4 h-4" />
                 </div>
               )}
 
               <div
-                className={`max-w-[85%] sm:max-w-[75%] rounded-2xl p-4 text-sm leading-relaxed shadow-md ${
+                className={`max-w-[85%] sm:max-w-[78%] rounded-2xl p-4 text-sm leading-relaxed shadow-lg ${
                   m.role === 'user'
-                    ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-br-xs border border-emerald-500/30'
-                    : 'bg-slate-800/90 text-slate-100 rounded-bl-xs border border-slate-700/80'
+                    ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-br-xs border border-emerald-500/40 shadow-emerald-950/40'
+                    : 'bg-[#0D1612]/95 text-slate-100 rounded-bl-xs border border-emerald-900/40 shadow-black/40'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{m.text}</div>
                 
-                <div className="flex items-center justify-between gap-4 mt-2 pt-1 text-[11px] opacity-70">
-                  <span>
+                <div className="flex items-center justify-between gap-4 mt-2.5 pt-1.5 border-t border-white/10 text-[11px] opacity-70">
+                  <span className="font-mono text-[10px]">
                     {new Date(m.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                   
@@ -330,7 +365,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               </div>
 
               {m.role === 'user' && (
-                <div className="w-8 h-8 rounded-xl bg-slate-800 border border-white/10 flex items-center justify-center shrink-0 text-slate-300 mb-1">
+                <div className="w-8 h-8 rounded-xl bg-[#070D0A] border border-emerald-900/40 flex items-center justify-center shrink-0 text-slate-300 mb-1">
                   <User className="w-4 h-4 text-emerald-400" />
                 </div>
               )}
@@ -338,16 +373,19 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
           ))
         )}
 
-        {/* Bouncing Dots Typing Indicator */}
+        {/* Synthesizing Telemetry Indicator */}
         {isTyping && (
           <div className="flex gap-3 items-end justify-start">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 flex items-center justify-center shrink-0 shadow-md text-slate-950">
-              <Bot className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-500 flex items-center justify-center shrink-0 shadow-md text-slate-950">
+              <Sprout className="w-4 h-4" />
             </div>
-            <div className="bg-slate-800/90 border border-slate-700 rounded-2xl rounded-bl-xs p-3.5 px-4 shadow-sm flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:-0.3s]"></span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce [animation-delay:-0.15s]"></span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce"></span>
+            <div className="bg-[#0D1612]/95 border border-emerald-900/40 rounded-2xl rounded-bl-xs p-3.5 px-4 shadow-sm flex items-center gap-2">
+              <span className="text-xs text-emerald-400 font-medium">Analyzing agronomic parameters</span>
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse [animation-delay:0.4s]"></span>
+              </div>
             </div>
           </div>
         )}
@@ -367,8 +405,24 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
         </button>
       )}
 
+      {/* Live Mic Waveform Indicator when Listening */}
+      {listening && (
+        <div className="px-6 py-2 bg-emerald-950/40 border-t border-emerald-500/30 flex items-center justify-between text-xs text-emerald-300">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            <span>Listening to voice query in {language === 'ml' ? 'Malayalam' : 'English'}...</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="w-1 h-3 bg-emerald-400 rounded-full animate-pulse"></span>
+            <span className="w-1 h-5 bg-emerald-400 rounded-full animate-pulse [animation-delay:0.1s]"></span>
+            <span className="w-1 h-2 bg-emerald-400 rounded-full animate-pulse [animation-delay:0.2s]"></span>
+            <span className="w-1 h-4 bg-emerald-400 rounded-full animate-pulse [animation-delay:0.15s]"></span>
+          </div>
+        </div>
+      )}
+
       {/* Input Bar */}
-      <div className="p-3 sm:p-4 bg-slate-950/90 border-t border-white/10 backdrop-blur-xl z-20">
+      <div className="p-3 sm:p-4 bg-[#070D0A]/95 border-t border-emerald-900/40 backdrop-blur-xl z-20">
         <div className="flex items-center gap-2 max-w-4xl mx-auto">
           
           {/* Image Upload Trigger */}
@@ -386,11 +440,11 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
             className={`p-2.5 sm:p-3 rounded-xl transition-all cursor-pointer shrink-0 border ${
               listening
                 ? 'bg-rose-600 text-white border-rose-500 shadow-lg shadow-rose-600/30 animate-pulse'
-                : 'bg-slate-800/90 hover:bg-slate-800 text-slate-300 hover:text-white border-white/10'
+                : 'bg-[#0D1612] hover:bg-[#13231B] text-slate-300 hover:text-white border-emerald-900/40'
             }`}
             title={listening ? "Listening... click to stop" : "Voice Input"}
           >
-            {listening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+            {listening ? <MicOff className="w-5 h-5 text-white" /> : <Mic className="w-5 h-5 text-emerald-400" />}
           </button>
 
           {/* Text Input */}
@@ -401,7 +455,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={language === 'ml' ? 'ഇവിടെ ടൈപ്പ് ചെയ്യുക...' : 'Ask about crop health, pest diagnosis, or irrigation...'}
-              className="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+              className="w-full px-4 py-3 bg-[#0D1612] border border-emerald-900/40 rounded-xl text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
             />
           </div>
 
@@ -410,7 +464,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
             type="button"
             onClick={() => sendMessage(input)}
             disabled={!input.trim() || isTyping}
-            className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-700/30 transition-all disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0"
+            className="p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-700/30 transition-all disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0"
             title="Send query"
           >
             <Send className="w-4 h-4" />

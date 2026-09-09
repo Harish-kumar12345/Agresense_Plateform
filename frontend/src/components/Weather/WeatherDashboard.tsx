@@ -90,9 +90,9 @@ export const WeatherDashboard: React.FC<WeatherDashboardProps> = ({
   if (error || !weatherData) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-rose-700 flex items-center justify-between">
+        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-2xl text-xs text-rose-300 flex items-center justify-between shadow-lg">
           <span>{error || 'Unable to load weather data.'}</span>
-          <button type="button" onClick={loadWeather} className="font-bold underline cursor-pointer">Retry</button>
+          <button type="button" onClick={loadWeather} className="font-bold text-rose-200 hover:text-white underline cursor-pointer">Retry</button>
         </div>
       </div>
     );

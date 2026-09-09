@@ -119,3 +119,59 @@ input:focus, select:focus, textarea:focus, button:focus-visible {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* ==========================================================================
+   Leaflet Dark Mode Popup & Tactical Map Overrides
+   ========================================================================== */
+.leaflet-popup-content-wrapper {
+  background: rgba(13, 22, 18, 0.95) !important;
+  color: #f8fafc !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(16, 185, 129, 0.2) !important;
+  padding: 0.25rem !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(13, 22, 18, 0.95) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button {
+  color: #94a3b8 !important;
+  padding: 8px !important;
+  font-size: 16px !important;
+  transition: color 0.15s ease !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #34d399 !important;
+}
+
+/* Tactical HUD Glow & Digitizing Waveform */
+.cadastral-hud {
+  background: linear-gradient(135deg, rgba(13, 22, 18, 0.94) 0%, rgba(7, 13, 10, 0.96) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.cadastral-hud-active {
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(16, 185, 129, 0.25);
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pulse-target {
+  animation: pulse-ring 2.5s infinite ease-in-out;
+}
+

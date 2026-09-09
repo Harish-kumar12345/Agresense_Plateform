@@ -19,6 +19,7 @@ import { AuthWrapper } from './components/AuthWrapper';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { SmartAlertsCenter } from './components/Alerts/SmartAlertsCenter';
+import { LiveAlertToast } from './components/Alerts/LiveAlertToast';
 import { alertService } from './services/alertService';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navbar } from './components/Navigation/Navbar';
@@ -76,10 +77,19 @@ function AppContent() {
   const currentCrop = dashboardData?.crop || activeFarm?.crop || DEFAULT_CROP;
 
   React.useEffect(() => {
+    const handleAlertsUpdate = (e: any) => {
+      if (e.detail && typeof e.detail.unreadCount === 'number') {
+        setUnreadAlertCount(e.detail.unreadCount);
+      }
+    };
+    window.addEventListener('agrisense:alerts-updated', handleAlertsUpdate);
+
     const loadAlerts = async () => {
       try {
+        const farmId = activeFarm?.farm_id || (activeFarm as any)?.id || 'farm_01';
+        const farmName = activeFarm?.farm_name || (activeFarm as any)?.name || 'Ghaziabad Rice Field';
         const telemetry = {
-          farm: { id: activeFarm?.id || 'farm_01', name: activeFarm?.name || 'Ghaziabad Rice Field', crop: currentCrop },
+          farm: { id: farmId, name: farmName, crop: currentCrop },
           weather: { temperature_c: 34, humidity: 76, wind_speed_kmh: 18, rain_mm: 12 },
           soil: { moisture: 24, ph: 5.4 },
           disease: { riskScore: 82, name: 'Rice Blast & Sheath Rot' },
@@ -92,7 +102,10 @@ function AppContent() {
     };
     loadAlerts();
     const interval = setInterval(loadAlerts, 30000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('agrisense:alerts-updated', handleAlertsUpdate);
+    };
   }, [activeFarm, dashboardData, currentCrop]);
 
   const handleLogout = async () => {
@@ -262,8 +275,12 @@ function AppContent() {
         isOpen={isAlertsOpen}
         onClose={() => setIsAlertsOpen(false)}
         onNavigateModule={(modKey) => setView(modKey)}
-        activeFarmId={activeFarm?.id || 'farm_01'}
+        activeFarmId={activeFarm?.farm_id || (activeFarm as any)?.id || 'farm_01'}
         isOfficer={user?.role === 'officer' || user?.role === 'admin'}
+      />
+      <LiveAlertToast
+        onOpenAlerts={() => setIsAlertsOpen(true)}
+        onNavigateModule={(modKey) => setView(modKey)}
       />
       <footer className="border-t border-emerald-900/30 bg-[#070D0A]/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 py-5 text-sm text-[#D1DED6] flex items-center justify-between">
