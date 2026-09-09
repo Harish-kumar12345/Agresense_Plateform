@@ -39,6 +39,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface SoilAnalysisModuleProps {
   farm?: FarmData | null;
   location?: {
@@ -234,7 +236,7 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
                 Subterranean Soil Health & Chemistry
               </h1>
               <span className="verda-glow-pill">
-                Health Score: {healthScore}/100
+                <AnimatedCounter value={healthScore} prefix="Health Score: " suffix="/100" />
               </span>
               <span className="agri-pill agri-pill-muted font-bold">
                 Target Crop: {selectedCrop}

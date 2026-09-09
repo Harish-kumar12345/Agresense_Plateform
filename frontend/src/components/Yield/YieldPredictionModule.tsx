@@ -34,6 +34,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface YieldPredictionModuleProps {
   farm?: FarmData | null;
   location?: {
@@ -245,7 +247,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
-                    {prediction.predictedYieldPerHectare}
+                    <AnimatedCounter value={prediction.predictedYieldPerHectare} decimals={2} />
                   </span>
                   <span className="text-xl text-[#D1DED6] font-medium">t/ha</span>
                   <span className="agri-pill agri-pill-emerald ml-2">
@@ -257,7 +259,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
 
               <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
                 <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Total Field Production</div>
-                <div className="text-xl font-mono font-bold text-white mt-0.5">{prediction.totalProductionTons} <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
+                <div className="text-xl font-mono font-bold text-white mt-0.5"><AnimatedCounter value={prediction.totalProductionTons} decimals={1} /> <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
                 <div className="text-[10px] text-[#D1DED6] mt-0.5">Calculated over {farmArea} hectares</div>
               </div>
             </div>
