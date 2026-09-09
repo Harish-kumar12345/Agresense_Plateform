@@ -160,7 +160,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     }
     if (!recognitionRef.current) {
       recognitionRef.current = new SpeechRecognitionCtor();
-      recognitionRef.current.lang = language === 'ml' ? 'ml-IN' : 'en-IN';
+      recognitionRef.current.lang = 'en-IN';
       recognitionRef.current.interimResults = false;
       recognitionRef.current.maxAlternatives = 1;
       recognitionRef.current.onresult = (event: any) => {
@@ -169,7 +169,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       };
       recognitionRef.current.onend = () => setListening(false);
     } else {
-      recognitionRef.current.lang = language === 'ml' ? 'ml-IN' : 'en-IN';
+      recognitionRef.current.lang = 'en-IN';
     }
     if (!listening) {
       setListening(true);
@@ -188,23 +188,23 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   const agronomicCategories = [
     {
       icon: <Bug className="w-4 h-4 text-rose-400" />,
-      title: language === 'ml' ? 'കീടനിയന്ത്രണം' : 'Pathology & Pest Control',
-      prompt: language === 'ml' ? 'നെല്ലിലെ കീടങ്ങളെ എങ്ങനെ നിയന്ത്രിക്കാം?' : 'Identify symptoms and remedy for Rice Blast & fungal sheath rot'
+      title: 'Pathology & Pest Control',
+      prompt: 'Identify symptoms and remedy for Rice Blast & fungal sheath rot'
     },
     {
       icon: <FlaskConical className="w-4 h-4 text-emerald-400" />,
-      title: language === 'ml' ? 'വളപ്രയോഗം' : 'NPK & Soil Nutrition',
-      prompt: language === 'ml' ? 'NPK വളങ്ങളുടെ അളവ് പറയുക' : 'Recommend exact NPK micro-dosing and foliar spray schedule for this soil'
+      title: 'NPK & Soil Nutrition',
+      prompt: 'Recommend exact NPK micro-dosing and foliar spray schedule for this soil'
     },
     {
       icon: <Droplets className="w-4 h-4 text-sky-400" />,
-      title: language === 'ml' ? 'നനയ്ക്കൽ രീതി' : 'Irrigation & Moisture',
-      prompt: language === 'ml' ? 'ഈ ആഴ്ചയിലെ നനയ്ക്കുന്ന രീതി എന്താണ്?' : 'Calculate optimal irrigation schedule based on canopy humidity and forecasted rain'
+      title: 'Irrigation & Moisture',
+      prompt: 'Calculate optimal irrigation schedule based on canopy humidity and forecasted rain'
     },
     {
       icon: <IndianRupee className="w-4 h-4 text-amber-400" />,
-      title: language === 'ml' ? 'വിപണി നിരക്കുകൾ' : 'Mandi Price & Arbitrage',
-      prompt: language === 'ml' ? 'വിപണി വിലകൾ എങ്ങനെയാണ്?' : 'Analyze regional APMC mandi price arrivals versus minimum support prices'
+      title: 'Mandi Price & Arbitrage',
+      prompt: 'Analyze regional APMC mandi price arrivals versus minimum support prices'
     }
   ];
 
@@ -237,32 +237,11 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
           </div>
         </div>
 
-        {/* Clean Segmented Language Toggle */}
+        {/* Console Mode Badge */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-[#070D0A] p-1 rounded-xl border border-emerald-900/40 text-xs font-semibold select-none">
-            <button
-              type="button"
-              onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                language === 'en'
-                  ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'text-[#D1DED6] hover:text-white'
-              }`}
-            >
-              English
-            </button>
-            <button
-              type="button"
-              onClick={() => setLanguage('ml')}
-              className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-                language === 'ml'
-                  ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'text-[#D1DED6] hover:text-white'
-              }`}
-            >
-              മലയാളം
-            </button>
-          </div>
+          <span className="px-3 py-1 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-semibold">
+            English Mode
+          </span>
         </div>
       </div>
 
@@ -278,12 +257,10 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               <Sprout className="w-7 h-7" />
             </div>
             <h3 className="text-xl font-bold text-white mb-1.5 font-display">
-              {language === 'ml' ? 'കാർഷിക എഐ അസിസ്റ്റന്റിലേക്ക് സ്വാഗതം' : 'Precision Agronomic Advisory Station'}
+              Precision Agronomic Advisory Station
             </h3>
             <p className="text-xs sm:text-sm text-[#D1DED6] mb-8 leading-relaxed max-w-md">
-              {language === 'ml'
-                ? 'നിങ്ങളുടെ വിളവെടുപ്പ്, കീടനിയന്ത്രണം, വളപ്രയോഗം, കാലാവസ്ഥ എന്നിവയെക്കുറിച്ച് ഏതു സംശയങ്ങളും ചോദിക്കാം.'
-                : 'Direct agronomic guidance tailored to your active farm plot coordinates, soil horizon, and weather forecast.'}
+              Direct agronomic guidance tailored to your active farm plot coordinates, soil horizon, and weather forecast.
             </p>
 
             {/* Quick Diagnostic Inquiry Tiles */}
