@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Sliding Nav - VerdaAgro Organic Glass Pill */}
-          <nav className="hidden lg:flex items-center bg-[#0D1612]/90 p-1.5 rounded-full border border-emerald-900/40 shadow-inner" ref={navRef}>
+          <nav className="hidden lg:flex items-center shrink-0 bg-[#0D1612]/90 p-1.5 rounded-full border border-emerald-900/40 shadow-inner" ref={navRef}>
             {navSections.map((sec) => {
               const isOpen = activeDropdown === sec.id;
               return (
