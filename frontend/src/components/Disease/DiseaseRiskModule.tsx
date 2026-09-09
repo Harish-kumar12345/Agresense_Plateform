@@ -209,41 +209,35 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
               <span className="text-[11px] font-mono text-emerald-400 font-medium">Model: GDD + RH</span>
             </div>
 
-            <div className="relative w-48 h-28 flex items-center justify-center overflow-hidden my-2">
-              <svg className="w-48 h-48 -rotate-90">
+            <div className="relative w-full max-w-[240px] h-32 flex items-center justify-center my-2">
+              <svg className="w-56 h-32" viewBox="0 0 220 120">
                 {/* Background arc */}
-                <circle
-                  cx="96"
-                  cy="96"
-                  r="72"
+                <path
+                  d="M 30 110 A 80 80 0 0 1 190 110"
+                  fill="none"
                   stroke="#13231B"
                   strokeWidth="14"
-                  fill="transparent"
-                  strokeDasharray={`${Math.PI * 72} ${Math.PI * 72}`}
-                  strokeDashoffset="0"
+                  strokeLinecap="round"
                 />
                 {/* Active gauge arc */}
-                <circle
-                  cx="96"
-                  cy="96"
-                  r="72"
+                <path
+                  d="M 30 110 A 80 80 0 0 1 190 110"
+                  fill="none"
                   stroke={getGaugeColor(riskData.overallRiskScore)}
                   strokeWidth="14"
-                  fill="transparent"
-                  strokeDasharray={`${Math.PI * 72} ${Math.PI * 72}`}
-                  strokeDashoffset={Math.PI * 72 * (1 - riskData.overallRiskScore / 100)}
                   strokeLinecap="round"
+                  strokeDasharray="251.327"
+                  strokeDashoffset={251.327 * (1 - riskData.overallRiskScore / 100)}
                   className="transition-all duration-1000 ease-out"
                 />
-              </svg>
-              <div className="absolute bottom-1 flex flex-col items-center">
-                <span className="text-4xl font-black text-white font-display">
+                {/* SVG Text inside arc */}
+                <text x="110" y="78" textAnchor="middle" fill="#FFFFFF" style={{ fontSize: '34px', fontWeight: 900, fontFamily: 'Outfit, sans-serif' }}>
                   {riskData.overallRiskScore}%
-                </span>
-                <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest mt-0.5">
+                </text>
+                <text x="110" y="98" textAnchor="middle" fill="#34D399" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px' }}>
                   OUTBREAK PROBABILITY
-                </span>
-              </div>
+                </text>
+              </svg>
             </div>
 
             <div className="w-full pt-3 border-t border-emerald-950/40 text-center">
