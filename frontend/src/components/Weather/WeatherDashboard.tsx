@@ -33,6 +33,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface WeatherDashboardProps {
   farm?: FarmData | null;
   location?: {
@@ -211,7 +213,7 @@ export const WeatherDashboard: React.FC<WeatherDashboardProps> = ({
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
-                  {current.temperature_c}°C
+                  <AnimatedCounter value={current.temperature_c} decimals={1} suffix="°C" />
                 </span>
                 <span className="text-sm text-[#D1DED6] font-medium">
                   (Feels like {current.feels_like_c}°C)
