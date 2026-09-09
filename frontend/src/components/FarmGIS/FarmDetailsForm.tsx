@@ -129,98 +129,102 @@ export const FarmDetailsForm: React.FC<FarmDetailsFormProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Farm Name */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Farm Name <span className="text-rose-400">*</span>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+            Farm Plot Name <span className="text-emerald-400">*</span>
           </label>
           <input
             type="text"
             required
             value={farmName}
             onChange={(e) => setFarmName(e.target.value)}
-            placeholder="e.g. Green Valley Rice Field"
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            placeholder="e.g. North Acre Paddy Field"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white placeholder:text-slate-500 focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
           />
         </div>
 
         {/* Crop Selection */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Primary Crop <span className="text-rose-400">*</span>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+            Cultivated Crop <span className="text-emerald-400">*</span>
           </label>
           <select
             value={crop}
             onChange={(e) => setCrop(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all cursor-pointer"
           >
             {CROPS.map(c => (
-              <option key={c} value={c} className="bg-slate-900 text-white">{c}</option>
+              <option key={c} value={c} className="bg-[#070D0A] text-white">{c}</option>
             ))}
           </select>
         </div>
 
         {/* Season Selection */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">Cropping Season</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Agronomic Season</label>
           <select
             value={season}
             onChange={(e) => setSeason(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all cursor-pointer"
           >
             {SEASONS.map(s => (
-              <option key={s} value={s} className="bg-slate-900 text-white">{s}</option>
+              <option key={s} value={s} className="bg-[#070D0A] text-white">{s}</option>
             ))}
           </select>
         </div>
 
         {/* Soil Type */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">Soil Type</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Soil Classification</label>
           <select
             value={soilType}
             onChange={(e) => setSoilType(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all cursor-pointer"
           >
             {SOIL_TYPES.map(st => (
-              <option key={st} value={st} className="bg-slate-900 text-white">{st}</option>
+              <option key={st} value={st} className="bg-[#070D0A] text-white">{st}</option>
             ))}
           </select>
         </div>
 
         {/* Irrigation Type */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">Irrigation System</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Irrigation Scheme</label>
           <select
             value={irrigationType}
             onChange={(e) => setIrrigationType(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all cursor-pointer"
           >
             {IRRIGATION_TYPES.map(it => (
-              <option key={it} value={it} className="bg-slate-900 text-white">{it}</option>
+              <option key={it} value={it} className="bg-[#070D0A] text-white">{it}</option>
             ))}
           </select>
         </div>
 
         {/* Farmer ID */}
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">Farmer / Owner ID</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Farmer Cadastral ID</label>
           <input
             type="text"
             value={farmerId}
             onChange={(e) => setFarmerId(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+            className="w-full px-3.5 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:border-emerald-500 focus:bg-[#070D0A] focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all font-mono"
           />
         </div>
       </div>
 
-      {/* Auto-populated Auto Readonly Summary Fields */}
-      <div className="p-3.5 bg-emerald-950/40 rounded-xl border border-emerald-500/20 text-xs space-y-1 text-slate-300">
+      {/* Auto-populated Cadastral Summary Box */}
+      <div className="p-3.5 bg-[#070D0A]/80 rounded-xl border border-emerald-900/40 text-xs space-y-1.5 text-slate-300">
         <div className="flex items-center justify-between">
-          <span>Location: <strong className="text-white">{locationName}</strong></span>
-          <span>Coordinates: <strong className="text-emerald-400">{latitude.toFixed(4)}, {longitude.toFixed(4)}</strong></span>
+          <span className="text-slate-400">Location:</span>
+          <span className="font-semibold text-white truncate max-w-[200px]">{locationName}</span>
         </div>
         <div className="flex items-center justify-between">
-          <span>Calculated Area: <strong className="text-white">{areaMetrics.areaHectares} ha ({areaMetrics.areaAcres} ac)</strong></span>
-          <span>Boundary Status: <strong className="text-emerald-400">{boundaryGeoJSON ? 'Boundary Defined ✓' : 'Point Marker'}</strong></span>
+          <span className="text-slate-400">Coordinates:</span>
+          <span className="font-mono text-emerald-400">{latitude.toFixed(4)}°N, {longitude.toFixed(4)}°E</span>
+        </div>
+        <div className="flex items-center justify-between pt-1 border-t border-emerald-950/40">
+          <span className="text-slate-400">Calculated Land Area:</span>
+          <span className="font-bold text-white">{areaMetrics.areaHectares} ha ({areaMetrics.areaAcres} ac)</span>
         </div>
       </div>
 
@@ -233,12 +237,12 @@ export const FarmDetailsForm: React.FC<FarmDetailsFormProps> = ({
         {isSaving ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Saving Farm Field...</span>
+            <span>Synchronizing Plot to Database...</span>
           </>
         ) : (
           <>
             <Save className="w-4 h-4" />
-            <span>Save Field to AgriSense GIS</span>
+            <span>Save Field to Cadastral Database</span>
           </>
         )}
       </button>

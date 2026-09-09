@@ -111,8 +111,8 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
                 <button
                   type="button"
                   onClick={() => onViewOnMap(farm)}
-                  title="View on Map"
-                  className="p-2 bg-slate-900 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-400 border border-white/10 rounded-xl text-xs transition-colors cursor-pointer"
+                  title="View on Cadastral Map"
+                  className="p-2 bg-[#070D0A] hover:bg-emerald-950/40 text-slate-300 hover:text-emerald-400 border border-emerald-900/40 rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   <Eye className="w-4 h-4" />
                 </button>
@@ -121,7 +121,7 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
                   type="button"
                   onClick={() => onDeleteFarm(farm.farm_id)}
                   title="Delete Field"
-                  className="p-2 bg-slate-900 hover:bg-rose-500/20 text-slate-300 hover:text-rose-400 border border-white/10 rounded-xl text-xs transition-colors cursor-pointer"
+                  className="p-2 bg-[#070D0A] hover:bg-rose-500/15 text-slate-300 hover:text-rose-400 border border-emerald-900/40 hover:border-rose-500/30 rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>

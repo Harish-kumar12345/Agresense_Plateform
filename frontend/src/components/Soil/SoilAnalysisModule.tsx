@@ -39,6 +39,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface SoilAnalysisModuleProps {
   farm?: FarmData | null;
   location?: {
@@ -216,35 +218,35 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. VerdaAgro Pedology Context Bar */}
-      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-soil">
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-soil">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
               <span>Pedology</span>
               <span className="text-emerald-700">/</span>
               <span>Subterranean NPK & Horizon Diagnostics</span>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 ACTIVE SENSOR CALIBRATION
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
                 Subterranean Soil Health & Chemistry
               </h1>
-              <span className="agri-pill agri-pill-emerald">
-                Health Score: {healthScore}/100
+              <span className="verda-glow-pill">
+                <AnimatedCounter value={healthScore} prefix="Health Score: " suffix="/100" />
               </span>
-              <span className="agri-pill agri-pill-muted">
+              <span className="agri-pill agri-pill-muted font-bold">
                 Target Crop: {selectedCrop}
               </span>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
-              <span className="font-semibold text-white">{farmTitle}</span>
+            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
+              <span className="font-bold text-white">{farmTitle}</span>
               <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1 text-emerald-300">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {locationLabel}
               </span>

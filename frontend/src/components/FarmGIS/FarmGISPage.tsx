@@ -243,16 +243,16 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* Header Banner */}
-      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
-        <div className="hero-banner-content space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold backdrop-blur-md border border-emerald-400/30">
+      <motion.div variants={motionPresets.item} className="verda-hero-header">
+        <div className="space-y-2 relative z-10">
+          <div className="verda-glow-pill">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
             <span>GIS & Precision Cadastral Intelligence</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-display text-white">
-            Farm Boundary & Geodesic Mapping
+            <span className="verda-gradient-title">Farm Boundary</span> & Geodesic Mapping
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#D1DED6] max-w-2xl leading-relaxed">
             Locate your field on live satellite maps, draw precision polygon boundaries, automatically calculate geodesic land area, and synchronize plots with AgriSense predictive models.
           </p>
         </div>
@@ -262,19 +262,19 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
       <motion.div variants={motionPresets.item}>
         <Card variant="elevated" tone="farm" className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
-          <div className={`p-3 rounded-2xl border transition-all ${userGpsLocation || mapCenter ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${userGpsLocation || mapCenter ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300 shadow-xs' : 'bg-[#070D0A]/70 border-emerald-900/40 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 1</span>
             Set Location
           </div>
-          <div className={`p-3 rounded-2xl border transition-all ${polygonPoints.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${polygonPoints.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300 shadow-xs' : 'bg-[#070D0A]/70 border-emerald-900/40 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 2</span>
             Draw Boundary
           </div>
-          <div className={`p-3 rounded-2xl border transition-all ${isClosed ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${isClosed ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300 shadow-xs' : 'bg-[#070D0A]/70 border-emerald-900/40 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 3</span>
             Calculate Area
           </div>
-          <div className={`p-3 rounded-2xl border transition-all ${savedFarms.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 shadow-xs' : 'bg-slate-900/60 border-white/10 text-slate-400'}`}>
+          <div className={`p-3 rounded-2xl border transition-all ${savedFarms.length > 0 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300 shadow-xs' : 'bg-[#070D0A]/70 border-emerald-900/40 text-slate-400'}`}>
             <span className="font-bold text-sm block">Step 4</span>
             Save & Sync
           </div>
@@ -314,13 +314,13 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
       <Card variant="elevated" className="p-4 flex flex-col md:flex-row items-center gap-3">
         <form onSubmit={handleSearchLocation} className="flex-1 flex items-center gap-2 w-full">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-emerald-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search city, district, village, or landmark (e.g. Palakkad, Ghaziabad)..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-white/10 rounded-xl text-xs text-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none placeholder:text-slate-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-[#070D0A]/90 border border-emerald-900/40 rounded-xl text-xs text-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none placeholder:text-slate-500"
             />
           </div>
           <Button

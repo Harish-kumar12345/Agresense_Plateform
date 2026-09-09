@@ -300,37 +300,39 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Top Header Navigation Strip */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
-          <div className="flex items-center gap-3.5">
-            <button
-              type="button"
-              onClick={onBack}
-              className="p-2.5 text-[#D1DED6] hover:text-white bg-[#0D1612]/90 hover:bg-emerald-950/40 rounded-xl border border-emerald-900/40 shadow-xs transition-all cursor-pointer"
-              title="Return to Setup"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight font-display">
-                  {farmDetails?.farm_name || 'Agronomic Farm Workspace'}
-                </h1>
-                <Badge variant="emerald" size="sm" icon={<Sparkles className="w-3 h-3" />}>
-                  Live Telemetry
-                </Badge>
+        <div className="verda-hero-header">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+            <div className="flex items-center gap-3.5">
+              <button
+                type="button"
+                onClick={onBack}
+                className="p-2.5 text-[#D1DED6] hover:text-white bg-[#0D1612]/90 hover:bg-emerald-950/40 rounded-xl border border-emerald-900/40 shadow-xs transition-all cursor-pointer"
+                title="Return to Setup"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
+                    <span className="verda-gradient-title">{farmDetails?.farm_name || 'Agronomic Farm Workspace'}</span>
+                  </h1>
+                  <span className="verda-glow-pill">
+                    <Sparkles className="w-3 h-3 text-emerald-400" /> Live Telemetry
+                  </span>
+                </div>
+                <p className="text-xs text-[#D1DED6] flex items-center gap-2 mt-1">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{location.city || 'Ghaziabad'}, {location.country || 'India'}</span>
+                  <span className="text-emerald-800">•</span>
+                  <span>Crop: <strong className="text-emerald-300">{crop}</strong></span>
+                  {farmDetails?.area_hectares && (
+                    <>
+                      <span className="text-emerald-800">•</span>
+                      <span>Area: <strong className="text-emerald-300">{farmDetails.area_hectares} ha</strong></span>
+                    </>
+                  )}
+                </p>
               </div>
-              <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{location.city || 'Ghaziabad'}, {location.country || 'India'}</span>
-                <span className="text-slate-600">•</span>
-                <span>Crop: <strong className="text-slate-200">{crop}</strong></span>
-                {farmDetails?.area_hectares && (
-                  <>
-                    <span className="text-slate-600">•</span>
-                    <span>Area: <strong className="text-slate-200">{farmDetails.area_hectares} ha</strong></span>
-                  </>
-                )}
-              </p>
             </div>
           </div>
         </div>

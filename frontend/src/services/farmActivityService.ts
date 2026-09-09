@@ -326,6 +326,27 @@ export const farmActivityService = {
     ];
   },
 
+  async getHarvestAlerts(): Promise<HarvestAlert[]> {
+    return this.getAlerts();
+  },
+
+  calculateHarvestReadiness(
+    cropName: string,
+    areaHa: number = 2.5,
+    avgTempC: number = 28,
+    manualHarvestDateStr?: string | null
+  ) {
+    return this.calculateHarvestStatus(
+      cropName,
+      undefined,
+      1450,
+      4.8,
+      areaHa,
+      avgTempC,
+      manualHarvestDateStr
+    );
+  },
+
   // Calculate Growth Stage, Expected Harvest Date, Window, Status, Labour and Storage from Sowing Date, Weather Temp GDD, Crop & Yield
   calculateHarvestStatus(
     cropName: string,

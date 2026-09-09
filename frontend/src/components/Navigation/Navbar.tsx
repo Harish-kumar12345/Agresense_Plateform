@@ -153,16 +153,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="text-base font-bold tracking-tight text-white font-display">
                   Agri<span className="text-emerald-400">Sense</span>
                 </span>
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-full">
-                  <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
-                  SaaS
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-full">
+                  Precision Suite
                 </span>
               </div>
             </div>
           </div>
 
           {/* Desktop Sliding Nav - VerdaAgro Organic Glass Pill */}
-          <nav className="hidden lg:flex items-center bg-[#0D1612]/90 p-1.5 rounded-full border border-emerald-900/40 shadow-inner" ref={navRef}>
+          <nav className="hidden lg:flex items-center shrink-0 bg-[#0D1612]/90 p-1.5 rounded-full border border-emerald-900/40 shadow-inner" ref={navRef}>
             {navSections.map((sec) => {
               const isOpen = activeDropdown === sec.id;
               return (

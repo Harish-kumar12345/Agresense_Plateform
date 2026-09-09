@@ -32,12 +32,22 @@ import {
 } from 'recharts';
 import {
   cropPriceService,
-  CropPriceRecord,
-  MandiComparison,
-  PriceHistoryPoint,
   PriceAlert,
   RevenueEstimate
 } from '../../services/cropPriceService';
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
+// APMC Mandi Live Commodity Ticker Stream Data
+const tickerCommodities = [
+  { name: 'Rice (Paddy)', price: 2450, change: '+3.2%', isUp: true },
+  { name: 'Wheat (Sharbati)', price: 2280, change: '+1.5%', isUp: true },
+  { name: 'Maize (Hybrid)', price: 1950, change: '-0.8%', isUp: false },
+  { name: 'Cotton (Long Staple)', price: 6800, change: '+4.1%', isUp: true },
+  { name: 'Potato (Jyoti)', price: 1420, change: '+2.0%', isUp: true },
+  { name: 'Onion (Nashik)', price: 2100, change: '+5.4%', isUp: true },
+  { name: 'Soybean (Yellow)', price: 4650, change: '+0.5%', isUp: true },
+  { name: 'Sugarcane (CO 0238)', price: 350, change: 'FRP', isUp: true }
+];
 import { yieldService, YieldPredictionResult } from '../../services/yieldService';
 import { weatherService } from '../../services/weatherService';
 import { soilService } from '../../services/soilService';
@@ -238,18 +248,18 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. Sleek Agronomic Context Bar (VerdaAgro Style - Zero Wasted Space) */}
-      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-harvest flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="space-y-1">
+      <motion.div variants={motionPresets.item} className="verda-hero-header flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-2 relative z-10">
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
             <span>Intelligence</span>
             <span className="text-slate-600">/</span>
             <span className="text-white">Mandi Market Rates & Commodity Terminal</span>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white font-display">
-              APMC Market Telemetry
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white font-display">
+              <span className="verda-gradient-title">APMC Market Telemetry</span>
             </h1>
-            <span className="agri-pill">
+            <span className="verda-glow-pill">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
               Live Agmarknet Sync
             </span>
@@ -257,12 +267,12 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               🌾 {selectedCrop}
             </Badge>
           </div>
-          <p className="text-xs text-slate-300 flex items-center gap-2">
+          <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
             <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            <span className="font-medium text-white">{farmName}</span>
-            <span className="text-slate-500">•</span>
+            <span className="font-semibold text-white">{farmName}</span>
+            <span className="text-emerald-800">•</span>
             <span>{locationLabel}</span>
-            <span className="text-slate-500">•</span>
+            <span className="text-emerald-800">•</span>
             <span className="text-emerald-300 font-semibold">{farmArea} Hectares Cultivated</span>
           </p>
         </div>
@@ -299,6 +309,22 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
         </div>
       </motion.div>
 
+      {/* APMC Mandi Live Ticker Marquee Bar */}
+      <motion.div variants={motionPresets.item} className="verda-ticker-wrap">
+        <div className="verda-ticker-content">
+          {[...tickerCommodities, ...tickerCommodities].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
+              <span className="text-white font-medium">{item.name}:</span>
+              <span className="text-emerald-300 font-mono font-bold">₹{item.price.toLocaleString()}/q</span>
+              <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${item.isUp ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                {item.change}
+              </span>
+              <span className="text-emerald-900 mx-1">•</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
       {/* 2. Asymmetric Trading Bento Desk (Spotlight Rate + Live Harvest Valuation Desk) */}
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         
@@ -324,7 +350,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
           {/* Huge Crisp Modal Price & Trend */}
           <div className="flex items-baseline gap-4">
             <span className="text-4xl sm:text-5xl font-black text-white tracking-tight font-display">
-              ₹{(currentCropRecord?.modalPrice || 3000).toLocaleString('en-IN')}
+              <AnimatedCounter value={currentCropRecord?.modalPrice || 3000} prefix="₹" />
             </span>
             <span className="text-xs font-semibold text-slate-400">/ Quintal</span>
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">

@@ -34,6 +34,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface YieldPredictionModuleProps {
   farm?: FarmData | null;
   location?: {
@@ -154,37 +156,37 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. VerdaAgro Yield Intelligence Context Bar */}
-      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-harvest">
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-harvest">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
               <span>Intelligence</span>
               <span className="text-emerald-700">/</span>
               <span>Agronomic ML Predictive Forecast</span>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 PREDICTION PIPELINE ACTIVE
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
                 Crop Yield ML Prediction Model
               </h1>
               {prediction && (
-                <span className="agri-pill agri-pill-emerald">
+                <span className="verda-glow-pill">
                   {prediction.confidenceLevel} Confidence ({prediction.confidenceScore}%)
                 </span>
               )}
-              <span className="agri-pill agri-pill-muted">
+              <span className="agri-pill agri-pill-muted font-bold">
                 Cultivated Crop: {selectedCrop}
               </span>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
-              <span className="font-semibold text-white">{farmTitle}</span>
+            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
+              <span className="font-bold text-white">{farmTitle}</span>
               <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1 text-emerald-300">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
@@ -245,7 +247,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
-                    {prediction.predictedYieldPerHectare}
+                    <AnimatedCounter value={prediction.predictedYieldPerHectare} decimals={2} />
                   </span>
                   <span className="text-xl text-[#D1DED6] font-medium">t/ha</span>
                   <span className="agri-pill agri-pill-emerald ml-2">
@@ -257,7 +259,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
 
               <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
                 <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Total Field Production</div>
-                <div className="text-xl font-mono font-bold text-white mt-0.5">{prediction.totalProductionTons} <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
+                <div className="text-xl font-mono font-bold text-white mt-0.5"><AnimatedCounter value={prediction.totalProductionTons} decimals={1} /> <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
                 <div className="text-[10px] text-[#D1DED6] mt-0.5">Calculated over {farmArea} hectares</div>
               </div>
             </div>

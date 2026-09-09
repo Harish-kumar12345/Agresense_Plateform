@@ -175,23 +175,21 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. Header Banner */}
-      <div className="bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden border border-white/10">
-        <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-
+      <div className="verda-hero-header">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-bold backdrop-blur-md">
+            <div className="verda-glow-pill">
               <BarChart3 className="w-3.5 h-3.5 text-emerald-400" /> AgriSense Consolidated Farm Intelligence
             </div>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display text-white">
-              {farmInfo.farmName}
+              <span className="verda-gradient-title">{farmInfo.farmName}</span> Analytics & Telemetry
             </h2>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-emerald-100/90 font-medium">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-[#D1DED6] font-medium">
               <span className="flex items-center gap-1 font-semibold text-emerald-300">
-                <MapPin className="w-3.5 h-3.5" />
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {farmInfo.locationName} ({farmInfo.coordinates.latitude.toFixed(4)}, {farmInfo.coordinates.longitude.toFixed(4)})
               </span>
-              <span>•</span>
+              <span className="text-emerald-800">•</span>
               <Badge variant="emerald" size="sm">
                 🌾 {farmInfo.crop} • {farmInfo.areaHectares} ha
               </Badge>
