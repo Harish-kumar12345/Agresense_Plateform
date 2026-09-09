@@ -226,22 +226,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Utility Section: Alerts + Officer Portal + User Avatar */}
+          {/* Right Utility Section: Alerts + User Avatar */}
           <div className="hidden lg:flex items-center gap-3">
-            
-            {/* Officer Portal Button */}
-            <button
-              type="button"
-              onClick={() => onSelectView('officer')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border select-none cursor-pointer ${
-                currentView === 'officer'
-                  ? 'bg-emerald-600 text-white border-emerald-400 shadow-md shadow-emerald-600/20'
-                  : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50'
-              }`}
-            >
-              <Shield className="w-3.5 h-3.5" />
-              <span>Officer Portal</span>
-            </button>
 
             {/* Smart Alerts Center Trigger */}
             <button
@@ -376,9 +362,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
               <button type="button" onClick={() => { onSelectView('chat'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-sky-500/30 rounded-xl text-left flex items-center gap-2 col-span-2 text-sky-300">
                 <MessageSquare className="w-4 h-4 text-sky-400" /> Agronomic Advisor
-              </button>
-              <button type="button" onClick={() => { onSelectView('officer'); setMobileMenuOpen(false); }} className="p-2.5 bg-emerald-600 text-white font-bold rounded-xl text-center col-span-2 shadow-md">
-                <Shield className="w-4 h-4 inline mr-1" /> Officer Portal
               </button>
             </div>
 

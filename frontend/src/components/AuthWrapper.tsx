@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import Login from './Login'
 import { Signup } from './Signup'
+import RoleSelectionScreen from './RoleSelectionScreen'
 import { useAuth } from '../contexts/AuthContext'
+import type { Role } from './RoleContext'
 
 export function AuthWrapper({ children }: { children: any }) {
   const [showSignup, setShowSignup] = useState(false);
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
   const { user, isGuest, loading, login, signup, continueAsGuest } = useAuth();
 
   if (loading) {
@@ -23,18 +26,45 @@ export function AuthWrapper({ children }: { children: any }) {
     return <>{children}</>;
   }
 
-  // Otherwise show login/signup
+  // Step 1: No role selected yet → show role selection screen
+  if (!selectedRole) {
+    return (
+      <RoleSelectionScreen
+        onSelectRole={(role) => {
+          if (role === 'guest') {
+            continueAsGuest();
+          } else {
+            setSelectedRole(role);
+            setShowSignup(false);
+          }
+        }}
+      />
+    );
+  }
+
+  // Step 2: Role selected → show login or signup
+  const handleChangeRole = () => {
+    setSelectedRole(null);
+    setShowSignup(false);
+  };
+
   return (
     <>
       {showSignup ? (
         <Signup
-          onSignup={signup}
+          role={selectedRole}
+          onChangeRole={handleChangeRole}
+          onSignup={(email, password, name, role, extraFields) =>
+            signup(email, password, name, role, extraFields)
+          }
           onSwitchToLogin={() => setShowSignup(false)}
           onGuestLogin={continueAsGuest}
         />
       ) : (
-        <Login 
-          onLogin={login}
+        <Login
+          role={selectedRole}
+          onChangeRole={handleChangeRole}
+          onLogin={(email, password) => login(email, password, selectedRole)}
           onSwitchToSignup={() => setShowSignup(true)}
           onGuestLogin={continueAsGuest}
         />
@@ -42,4 +72,3 @@ export function AuthWrapper({ children }: { children: any }) {
     </>
   );
 }
-

@@ -61,6 +61,7 @@ const farmActivityRoutes = require('./routes/farmActivity');
 const harvestManagementRoutes = require('./routes/harvestManagement');
 const alertRoutes = require('./routes/alerts');
 const authRoutes = require('./routes/auth');
+const mandiRoutes = require('./routes/mandi');
 
 // Routes
 app.use('/api/query', queryRoutes);
@@ -76,6 +77,7 @@ app.use('/api/farm-activities', farmActivityRoutes);
 app.use('/api/harvest-management', harvestManagementRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/mandi', mandiRoutes);
 
 // Socket.io
 initChatSockets(io);
