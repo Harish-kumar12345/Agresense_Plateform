@@ -46,7 +46,13 @@ const DEFAULT_LOCATION: LocationData = {
 const DEFAULT_CROP = 'Rice';
 
 function AppContent() {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem('agrisense_token');
+    } catch {
+      return null;
+    }
+  });
   const [view, setView] = useState('home');
   const [gisInitialTab, setGisInitialTab] = useState<'saved-fields' | 'new-field' | undefined>(undefined);
   const [activeFarm, setActiveFarm] = useState<FarmData | null>(null);
@@ -58,10 +64,16 @@ function AppContent() {
   const { user, logout, isGuest } = useAuth();
   const { t } = useLanguage();
 
-  // On first load after auth, redirect authenticated farmers to field-chooser
+  // On first load after auth, redirect authenticated farmers to field-chooser and officers to officer portal
   React.useEffect(() => {
-    if (user && !isGuest && user.role !== 'officer' && view === 'home') {
-      setView('field-chooser');
+    if (user && !isGuest) {
+      if (user.role === 'officer' && view === 'home') {
+        const storedToken = localStorage.getItem('agrisense_token');
+        if (storedToken) setToken(storedToken);
+        setView('officer');
+      } else if (user.role !== 'officer' && view === 'home') {
+        setView('field-chooser');
+      }
     }
   }, [user, isGuest]);
   const [isAlertsOpen, setIsAlertsOpen] = useState(false);
@@ -257,8 +269,8 @@ function AppContent() {
             </div>
           )}
           {view === 'officer' && (
-            <div className="px-4 py-8">
-              <div className="max-w-6xl mx-auto">
+            <div className="px-2 sm:px-4 py-6">
+              <div className="max-w-7xl mx-auto">
                 {token ? (
                   <OfficerDashboard token={token} onLogout={() => setToken(null)} />
                 ) : (

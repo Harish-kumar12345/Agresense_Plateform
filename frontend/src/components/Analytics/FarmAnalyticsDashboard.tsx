@@ -40,6 +40,8 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { colors } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface FarmAnalyticsDashboardProps {
   farm?: FarmData | null;
   location?: {
@@ -175,21 +177,21 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. Header Banner */}
-      <div className="verda-hero-header">
+      <div className="apple-hero-header">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-2">
-            <div className="verda-glow-pill">
-              <BarChart3 className="w-3.5 h-3.5 text-emerald-400" /> AgriSense Consolidated Farm Intelligence
+            <div className="apple-segmented-item active">
+              <BarChart3 className="w-3.5 h-3.5 text-emerald-400 inline-block mr-1.5" /> AgriSense Consolidated Farm Intelligence
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display text-white">
-              <span className="verda-gradient-title">{farmInfo.farmName}</span> Analytics & Telemetry
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight font-display text-white">
+              <span className="apple-title-gradient">{farmInfo.farmName}</span> Analytics & Telemetry
             </h2>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#D1DED6] font-medium">
-              <span className="flex items-center gap-1 font-semibold text-emerald-300">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-[#94A3B8] font-medium">
+              <span className="flex items-center gap-1 font-semibold text-slate-300">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {farmInfo.locationName} ({farmInfo.coordinates.latitude.toFixed(4)}, {farmInfo.coordinates.longitude.toFixed(4)})
               </span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-slate-700">•</span>
               <Badge variant="emerald" size="sm">
                 🌾 {farmInfo.crop} • {farmInfo.areaHectares} ha
               </Badge>

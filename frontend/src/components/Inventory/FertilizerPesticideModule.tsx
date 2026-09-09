@@ -36,6 +36,8 @@ import {
 } from 'recharts';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
+import { AnimatedCounter } from '../Common/AnimatedCounter';
+
 interface FertilizerPesticideModuleProps {
   farm?: FarmData | null;
   location?: {
@@ -240,41 +242,41 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. VerdaAgro Inventory Context Bar */}
-      <motion.div variants={motionPresets.item} className="verda-hero-header">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 1. Apple-Style Pristine Inventory Context Bar */}
+      <motion.div variants={motionPresets.item} className="apple-hero-header">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
-              <span>Warehouse</span>
-              <span className="text-emerald-700">/</span>
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+              <span>Inventory</span>
+              <span className="text-slate-600">/</span>
               <span>Input Supply Chain & Warehouse Stock Ledger</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="apple-segmented-item active ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1.5"></span>
                 ACTIVE WAREHOUSE AUDIT
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
-                Inventory & Application Tracker
+              <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white font-display">
+                <span className="apple-title-gradient">Inventory & Application</span> Tracker
               </h1>
-              <span className="verda-glow-pill">
-                {items.length} Tracked Batches
+              <span className="agri-pill agri-pill-emerald font-semibold">
+                <AnimatedCounter value={items.length} suffix=" Tracked Batches" />
               </span>
-              <span className="agri-pill agri-pill-muted font-bold">
+              <span className="agri-pill agri-pill-muted font-semibold">
                 Cultivated Crop: {selectedCrop}
               </span>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
-              <span className="font-bold text-white">{farmTitle}</span>
-              <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1 text-emerald-300">
+            <p className="text-xs text-[#94A3B8] flex items-center gap-2 font-normal">
+              <span className="font-semibold text-white">{farmTitle}</span>
+              <span className="text-slate-700">•</span>
+              <span className="flex items-center gap-1 text-slate-300">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
-              <span className="text-emerald-800">•</span>
-              <span className="text-slate-300 font-mono text-[11px]">Reorder Flags: <strong className={alerts.length > 0 ? 'text-amber-400' : 'text-emerald-400'}>{alerts.length} items</strong></span>
+              <span className="text-slate-700">•</span>
+              <span className="text-slate-300 font-mono text-[11px]">Reorder Flags: <strong className={alerts.length > 0 ? 'text-amber-400' : 'text-emerald-400'}><AnimatedCounter value={alerts.length} suffix=" items" /></strong></span>
             </p>
           </div>
 
@@ -282,15 +284,15 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
             <button
               type="button"
               onClick={() => handleOpenAddModal('Fertilizer')}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="w-3.5 h-3.5 text-slate-950" />
               Add Input Item
             </button>
             <button
               type="button"
               onClick={loadData}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#070D0A]/70 hover:bg-emerald-950/40 border border-emerald-900/40 text-[#D1DED6] text-xs font-semibold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
             >
               Refresh
             </button>
@@ -298,18 +300,18 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
         </div>
       </motion.div>
 
-      {/* 2. Asymmetric Stock Management Bento Grid */}
-      <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      {/* 2. Apple-Style Stock Management Bento Grid */}
+      <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Primary Stock Readiness Core (7 Cols) */}
-        <div className="lg:col-span-7 agri-bento-card p-6 flex flex-col justify-between space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
+        <div className="lg:col-span-7 apple-glass-card flex flex-col justify-between space-y-6">
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">
               <Package className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 Warehouse Input Reserve
               </span>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 font-medium">
+            <span className="text-[11px] font-mono text-emerald-400 font-semibold">
               Ledger Health: {alerts.length === 0 ? 'Optimal Reserve' : 'Replenishment Needed'}
             </span>
           </div>

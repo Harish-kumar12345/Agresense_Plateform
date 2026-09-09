@@ -90,10 +90,10 @@ export function Signup({ role, onChangeRole, onSignup, onSwitchToLogin }: Signup
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 agri-canvas relative overflow-hidden select-none">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#070D0A] relative overflow-hidden select-none">
       {/* Aurora ambient */}
-      <div className="aurora-glow -top-24 -right-24 bg-emerald-600/30" />
-      <div className="aurora-glow -bottom-24 -left-24 bg-teal-600/20" />
+      <div className="aurora-glow -top-24 -right-24 bg-emerald-600/20" />
+      <div className="aurora-glow -bottom-24 -left-24 bg-teal-600/15" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -101,7 +101,7 @@ export function Signup({ role, onChangeRole, onSignup, onSwitchToLogin }: Signup
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-md relative z-10"
       >
-        <div className="glass-action-card p-8 sm:p-9 shadow-2xl">
+        <div className="apple-glass-card p-8 sm:p-9 shadow-2xl">
 
           {/* Officer pending screen */}
           {officerPending ? (

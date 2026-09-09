@@ -233,4 +233,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.inMemoryFarms = inMemoryFarms;
 module.exports = router;

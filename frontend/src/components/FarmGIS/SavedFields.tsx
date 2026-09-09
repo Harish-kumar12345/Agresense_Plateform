@@ -4,6 +4,7 @@ import { FarmData } from '../../services/farmService';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import { AnimatedCounter } from '../Common/AnimatedCounter';
 
 interface SavedFieldsProps {
   farms: FarmData[];
@@ -22,27 +23,29 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
 }) => {
   if (!farms || farms.length === 0) {
     return (
-      <Card variant="elevated" className="p-8 text-center space-y-3">
-        <div className="p-3 bg-emerald-500/15 text-emerald-400 rounded-2xl w-12 h-12 mx-auto flex items-center justify-center border border-emerald-500/20">
+      <div className="apple-glass-card p-8 text-center space-y-3">
+        <div className="p-3 bg-emerald-500/15 text-emerald-400 rounded-2xl w-12 h-12 mx-auto flex items-center justify-center border border-emerald-500/20 shadow-md shadow-emerald-500/10">
           <Layers className="w-6 h-6" />
         </div>
         <h4 className="font-bold text-white text-sm font-display">No Saved Farm Fields Yet</h4>
         <p className="text-xs text-slate-400 max-w-sm mx-auto">
           Draw your farm boundary above and click "Save Farm" to start managing multiple fields.
         </p>
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card variant="elevated" className="p-6 space-y-4">
+    <div className="apple-glass-card p-6 space-y-4">
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
             <Layers className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-base font-display">My Farm Fields ({farms.length})</h3>
+            <h3 className="font-bold text-white text-base font-display flex items-center gap-2">
+              My Farm Fields (<AnimatedCounter value={farms.length} />)
+            </h3>
             <p className="text-xs text-slate-400">Select a field to run AgriSense predictive telemetry</p>
           </div>
         </div>
@@ -130,6 +133,6 @@ export const SavedFields: React.FC<SavedFieldsProps> = ({
           );
         })}
       </div>
-    </Card>
+    </div>
   );
 };
