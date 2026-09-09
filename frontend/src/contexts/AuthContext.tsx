@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import type { Role } from '../components/RoleContext'
 
 const API_URL = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001'
 
@@ -8,20 +9,27 @@ interface User {
   name?: string
   role?: string
   isGuest?: boolean
+  isVerified?: boolean
 }
 
 interface AuthContextType {
   user: User | null
   loading: boolean
   isGuest: boolean
-  login: (email: string, password: string) => Promise<void>
-  signup: (email: string, password: string, name: string) => Promise<void>
+  login: (email: string, password: string, role?: Role) => Promise<void>
+  signup: (
+    email: string,
+    password: string,
+    name: string,
+    role?: Role,
+    extraFields?: Record<string, string>
+  ) => Promise<void>
   logout: () => Promise<void>
   continueAsGuest: () => void
   getAuthHeaders: () => Record<string, string>
 }
 
-const AuthContext = createContext(undefined)
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 /** Helper: return auth headers if a token exists */
 function getAuthHeaders(): Record<string, string> {
@@ -71,7 +79,8 @@ export function AuthProvider({ children }: { children: any }) {
             id: data.user.id,
             email: data.user.email,
             name: data.user.name,
-            role: data.user.role
+            role: data.user.role,
+            isVerified: data.user.isVerified
           });
         } else {
           // Token expired or invalid — clear it
@@ -100,13 +109,13 @@ export function AuthProvider({ children }: { children: any }) {
     }
   }, [user]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, role?: Role) => {
     let res: Response;
     try {
       res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password, ...(role ? { role } : {}) })
       });
     } catch (networkErr) {
       throw new Error('Cannot reach server. Please check if the backend is running.');
@@ -115,6 +124,10 @@ export function AuthProvider({ children }: { children: any }) {
     const data = await res.json();
 
     if (!res.ok) {
+      // Handle officer pending verification (403)
+      if (res.status === 403 && data.code === 'OFFICER_PENDING') {
+        throw new Error('Your officer account is pending admin approval. Please wait for verification.');
+      }
       throw new Error(data.error || 'Login failed');
     }
 
@@ -124,17 +137,24 @@ export function AuthProvider({ children }: { children: any }) {
       id: data.user.id,
       email: data.user.email,
       name: data.user.name,
-      role: data.user.role
+      role: data.user.role,
+      isVerified: data.user.isVerified
     });
   };
 
-  const signup = async (email: string, password: string, name: string) => {
+  const signup = async (
+    email: string,
+    password: string,
+    name: string,
+    role: Role = 'farmer',
+    extraFields: Record<string, string> = {}
+  ) => {
     let res: Response;
     try {
       res = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ name, email, password, role, ...extraFields })
       });
     } catch (networkErr) {
       throw new Error('Cannot reach server. Please check if the backend is running.');
@@ -146,13 +166,19 @@ export function AuthProvider({ children }: { children: any }) {
       throw new Error(data.error || 'Signup failed');
     }
 
+    // Officer signups are pending — do NOT set user/token (they can't log in yet)
+    if (role === 'officer') {
+      return; // Signup component shows the pending message
+    }
+
     localStorage.setItem('agrisense_token', data.token);
 
     setUser({
       id: data.user.id,
       email: data.user.email,
       name: data.user.name,
-      role: data.user.role
+      role: data.user.role,
+      isVerified: data.user.isVerified
     });
   };
 
@@ -176,7 +202,7 @@ export function AuthProvider({ children }: { children: any }) {
 
   const isGuest = user?.isGuest || false;
 
-  const value = {
+  const value: AuthContextType = {
     user,
     loading,
     isGuest,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   IndianRupee,
   TrendingUp,
@@ -84,6 +84,8 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   const [pricesList, setPricesList] = useState<CropPriceRecord[]>([]);
   const [currentCropRecord, setCurrentCropRecord] = useState<CropPriceRecord | null>(null);
   const [mandiComparisons, setMandiComparisons] = useState<MandiComparison[]>([]);
+  const [mandiLoading, setMandiLoading] = useState<boolean>(true);
+  const [mandiLastUpdated, setMandiLastUpdated] = useState<string>('');
   const [priceHistory, setPriceHistory] = useState<PriceHistoryPoint[]>([]);
   const [yieldResult, setYieldResult] = useState<YieldPredictionResult | null>(null);
   const [revenueEstimate, setRevenueEstimate] = useState<RevenueEstimate | null>(null);
@@ -96,22 +98,33 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   const [alertCondition, setAlertCondition] = useState<'above' | 'below'>('above');
   const [isStrategyDrawerOpen, setIsStrategyDrawerOpen] = useState<boolean>(false);
 
+  // ── Mandi radius & sort controls ───────────────────────────────────────────
+  const [mandiRadius, setMandiRadius] = useState<number>(150);
+  type MandiSortMode = 'nearest' | 'highest' | 'lowest';
+  const [mandiSort, setMandiSort] = useState<MandiSortMode>('nearest');
+
+  // Detect if we are on fallback/default coordinates (no real location selected)
+  const isDefaultLocation =
+    Math.abs(safeLat - 28.6692) < 0.001 && Math.abs(safeLon - 77.4538) < 0.001 && !farm && !location;
+
   const loadMarketData = async () => {
     setLoading(true);
     setError('');
 
     try {
-      const [soilRes, weatherRes, pricesRes, mandis, history] = await Promise.all([
+      const [soilRes, weatherRes, pricesRes, mandiRes, history] = await Promise.all([
         soilService.getSoilAnalysis(safeLat, safeLon, farm?.farm_id || 'default_farm', selectedCrop),
         weatherService.getLiveWeatherData(safeLat, safeLon, selectedCrop),
         cropPriceService.getCropPrices(userState, userDistrict, selectedCrop),
-        cropPriceService.getMandiComparisons(selectedCrop, userState),
+        cropPriceService.getMandiComparisons(selectedCrop, userState, userDistrict, safeLat, safeLon),
         cropPriceService.getPriceHistory(selectedCrop, 30)
       ]);
 
       setPricesList(pricesRes.prices);
       setLastUpdated(pricesRes.lastUpdated);
-      setMandiComparisons(mandis);
+      setMandiComparisons(mandiRes.mandis);
+      setMandiLastUpdated(mandiRes.lastUpdated);
+      setMandiLoading(false);
       setPriceHistory(history);
 
       const matched = pricesRes.prices.find(p => p.crop.toLowerCase() === selectedCrop.toLowerCase()) || pricesRes.prices[0];
@@ -178,6 +191,35 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
     item.crop.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.market.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // ── Derived mandi list: radius-filtered + sorted ────────────────────────────
+  // Strategy:
+  //  1. Prefer mandis that have real coordinates AND are within the radius.
+  //  2. If none pass (e.g. coordinates not yet in mandi_coordinates.json),
+  //     fall back gracefully to ALL available mandis so the screen is never blank.
+  //  3. Sort the resulting list by the chosen sort mode.
+  const { filteredMandis, isRadiusFallback } = useMemo(() => {
+    const withDist    = mandiComparisons.filter(m => m.distanceKm != null && m.distanceKm <= mandiRadius);
+    const withoutDist = mandiComparisons.filter(m => m.distanceKm == null);
+
+    // Use radius-filtered list if any exist; otherwise show everything
+    let list = withDist.length > 0 ? withDist : mandiComparisons;
+    const isFallback = withDist.length === 0 && mandiComparisons.length > 0;
+
+    const sortList = (arr: MandiComparison[]) => {
+      if (mandiSort === 'nearest')
+        return [...arr].sort((a, b) => (a.distanceKm ?? 99999) - (b.distanceKm ?? 99999));
+      if (mandiSort === 'highest')
+        return [...arr].sort((a, b) => b.modalPrice - a.modalPrice);
+      return [...arr].sort((a, b) => a.modalPrice - b.modalPrice);
+    };
+
+    return { filteredMandis: sortList(list), isRadiusFallback: isFallback };
+  }, [mandiComparisons, mandiRadius, mandiSort]);
+
+  const RADIUS_OPTIONS: number[] = [25, 50, 100, 150];
+
+
 
   if (loading) {
     return (
@@ -459,90 +501,257 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
 
       {/* SEGMENT 2: MANDI COMPARISON */}
       {activeSegment === 'compare' && (
-        <div className="space-y-6">
-          <Card variant="elevated" tone="price" className="p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-white/10">
+        <div className="space-y-4">
+
+          {/* ── Geolocation fallback banner ─────────────────────────────────── */}
+          {isDefaultLocation && (
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-xs text-amber-300 font-medium">
+              <MapPin className="w-4 h-4 shrink-0 text-amber-400" />
+              <span>
+                Showing distances from a <strong>default location</strong> (Ghaziabad, UP). Select your farm or enable location for accurate mandi distances.
+              </span>
+            </div>
+          )}
+
+          {/* ── Header card: title + radius + sort ─────────────────────────── */}
+          <Card variant="elevated" tone="price" className="p-5 space-y-4">
+            {/* Row 1: title & dynamic badge */}
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Market Rate Disparity</span>
                 <h3 className="text-base font-bold text-white mt-0.5 font-display">Nearby Mandi Comparison for {selectedCrop}</h3>
               </div>
-              <Badge variant="emerald" size="sm">
-                Hubs within 50 km
-              </Badge>
+              <div className="flex flex-col items-end gap-1 shrink-0">
+                <Badge variant="emerald" size="sm">
+                  {isRadiusFallback
+                    ? `📍 ${filteredMandis.length} Markets (all available)`
+                    : `📍 ${filteredMandis.length} Hub${filteredMandis.length !== 1 ? 's' : ''} within ${mandiRadius} km`}
+                </Badge>
+                {mandiLastUpdated && (
+                  <span className="text-[10px] text-slate-500 font-medium">Last updated: {mandiLastUpdated}</span>
+                )}
+              </div>
             </div>
 
-            {/* Recharts Mandi Comparison Bar Chart */}
+            {/* Row 2: Radius filter pills + Sort selector */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-1 border-t border-white/8">
+              {/* Radius label + pills */}
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Radius:</span>
+                <div className="flex gap-1">
+                  {RADIUS_OPTIONS.map(r => (
+                    <button
+                      key={r}
+                      onClick={() => setMandiRadius(r)}
+                      className={`px-3 py-1 rounded-lg text-[11px] font-bold transition-all border ${
+                        mandiRadius === r
+                          ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/25'
+                          : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      {r} km
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sort selector */}
+              <div className="flex items-center gap-2 sm:ml-auto">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Sort:</span>
+                <select
+                  value={mandiSort}
+                  onChange={e => setMandiSort(e.target.value as MandiSortMode)}
+                  className="bg-slate-800 border border-white/10 text-slate-200 text-[11px] font-semibold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 cursor-pointer"
+                >
+                  <option value="nearest">📍 Nearest First</option>
+                  <option value="highest">⬆️ Highest Modal Rate</option>
+                  <option value="lowest">⬇️ Lowest Modal Rate</option>
+                </select>
+              </div>
+            </div>
+
+            {/* ── Recharts Mandi Comparison Bar Chart ── */}
             <div className="h-60 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={mandiComparisons} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
-                  <XAxis dataKey="mandiName" tick={{ fill: '#cbd5e1', fontSize: 11, fontWeight: 600 }} axisLine={false} tickLine={false} />
-                  <YAxis unit=" ₹" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        const item = payload[0].payload;
-                        return (
-                          <div className="saas-card p-3 shadow-xl border border-white/15 text-xs space-y-1 bg-slate-900/95 backdrop-blur-md">
-                            <p className="font-bold text-white">{item.mandiName}</p>
-                            <p className="text-emerald-400 font-semibold">Modal: ₹{item.modalPrice}/qtl</p>
-                            <p className="text-slate-400 text-[11px]">Distance: {item.distanceKm} km • Arrivals: {item.arrivalTons}t</p>
-                          </div>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
-                  <Bar dataKey="modalPrice" radius={[6, 6, 0, 0]} maxBarSize={48}>
-                    {mandiComparisons.map((_, idx) => (
-                      <Cell key={`cell-${idx}`} fill={idx === 0 ? '#10b981' : idx === 1 ? '#059669' : '#f59e0b'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+              {mandiLoading ? (
+                <div className="h-full flex flex-col justify-end gap-2 px-2">
+                  {[60, 80, 45, 70].map((h, i) => (
+                    <div key={i} className="flex items-end gap-3">
+                      <div className="w-24 h-3 bg-slate-700/60 rounded animate-pulse" />
+                      <div className="flex-1 bg-slate-700/60 rounded-t animate-pulse" style={{ height: `${h}%` }} />
+                    </div>
+                  ))}
+                </div>
+              ) : filteredMandis.length === 0 ? (
+                <div className="h-full flex flex-col items-center justify-center gap-2">
+                  <span className="text-2xl">🔍</span>
+                  <p className="text-slate-400 font-semibold text-sm">No mandi data available yet</p>
+                  <p className="text-slate-500 text-xs">Try refreshing or check back after Agmarknet updates.</p>
+                </div>
+              ) : (() => {
+                const avg = filteredMandis.reduce((s, m) => s + m.modalPrice, 0) / filteredMandis.length;
+                return (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={filteredMandis} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
+                      <XAxis
+                        dataKey="mandiName"
+                        tick={{ fill: '#cbd5e1', fontSize: 10, fontWeight: 600 }}
+                        axisLine={false}
+                        tickLine={false}
+                        interval={0}
+                        tickFormatter={v => v.length > 14 ? v.slice(0, 13) + '…' : v}
+                      />
+                      <YAxis unit=" ₹" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <Tooltip
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            const item = payload[0].payload;
+                            return (
+                              <div className="saas-card p-3 shadow-xl border border-white/15 text-xs space-y-1 bg-slate-900/95 backdrop-blur-md">
+                                <p className="font-bold text-white">{item.mandiName}</p>
+                                <p className="text-emerald-400 font-semibold">Modal: ₹{item.modalPrice.toLocaleString('en-IN')}/qtl</p>
+                                <p className="text-slate-400 text-[11px]">
+                                  📍 {item.distanceKm != null ? `${item.distanceKm} km away` : 'Location unavailable'}
+                                  {item.arrivalTons > 0 ? ` • ${item.arrivalTons}t arrivals` : ''}
+                                </p>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
+                      <Bar dataKey="modalPrice" radius={[6, 6, 0, 0]} maxBarSize={52}>
+                        {filteredMandis.map((m, idx) => (
+                          <Cell key={`cell-${idx}`} fill={m.modalPrice >= avg ? '#10b981' : '#f59e0b'} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                );
+              })()}
             </div>
           </Card>
 
-          {/* Mandi Table */}
-          <Card variant="elevated" className="overflow-hidden space-y-0">
+          {/* ── Mandi Detail Table ──────────────────────────────────────────── */}
+          <Card variant="elevated" className="overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-900/60 text-slate-400 font-semibold border-b border-white/10">
-                    <th className="py-3 px-4">Mandi Name</th>
-                    <th className="py-3 px-4">Distance</th>
-                    <th className="py-3 px-4 text-right">Modal Rate</th>
-                    <th className="py-3 px-4 text-right">Min – Max Range</th>
-                    <th className="py-3 px-4 text-right">Arrivals</th>
-                    <th className="py-3 px-4 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {mandiComparisons.map((mandi, idx) => (
-                    <tr key={idx} className="hover:bg-white/5 transition-colors">
-                      <td className="py-3.5 px-4 font-bold text-white">{mandi.mandiName}</td>
-                      <td className="py-3.5 px-4 text-slate-400">{mandi.distanceKm} km away</td>
-                      <td className="py-3.5 px-4 text-right font-black text-emerald-400">₹{mandi.modalPrice.toLocaleString('en-IN')} / qtl</td>
-                      <td className="py-3.5 px-4 text-right text-slate-400">₹{mandi.minPrice} – ₹{mandi.maxPrice}</td>
-                      <td className="py-3.5 px-4 text-right font-medium text-slate-300">{mandi.arrivalTons} Tons</td>
-                      <td className="py-3.5 px-4 text-right">
-                        <Button
-                          size="sm"
-                          variant="primary"
-                          onClick={() => {
-                            if (currentCropRecord) {
-                              setCurrentCropRecord({ ...currentCropRecord, market: mandi.mandiName, modalPrice: mandi.modalPrice });
-                              setActiveSegment('prices');
-                            }
-                          }}
-                        >
-                          Target Mandi
-                        </Button>
-                      </td>
+              {mandiLoading ? (
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-slate-900/60 text-slate-400 font-semibold border-b border-white/10">
+                      <th className="py-3 px-4">Mandi Name</th>
+                      <th className="py-3 px-4">Distance</th>
+                      <th className="py-3 px-4 text-right">Modal Rate</th>
+                      <th className="py-3 px-4 text-right">Min – Max Range</th>
+                      <th className="py-3 px-4 text-right">Arrivals</th>
+                      <th className="py-3 px-4 text-right">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {[1, 2, 3, 4].map(i => (
+                      <tr key={i}>
+                        <td className="py-3.5 px-4"><div className="h-3 w-36 bg-slate-700/60 rounded animate-pulse" /></td>
+                        <td className="py-3.5 px-4"><div className="h-3 w-16 bg-slate-700/60 rounded animate-pulse" /></td>
+                        <td className="py-3.5 px-4 text-right"><div className="h-3 w-20 bg-slate-700/60 rounded animate-pulse ml-auto" /></td>
+                        <td className="py-3.5 px-4 text-right"><div className="h-3 w-24 bg-slate-700/60 rounded animate-pulse ml-auto" /></td>
+                        <td className="py-3.5 px-4 text-right"><div className="h-3 w-14 bg-slate-700/60 rounded animate-pulse ml-auto" /></td>
+                        <td className="py-3.5 px-4 text-right"><div className="h-6 w-20 bg-slate-700/60 rounded animate-pulse ml-auto" /></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : filteredMandis.length === 0 && !mandiLoading ? (
+                <div className="py-12 px-6 text-center space-y-2">
+                  <p className="text-3xl">🔍</p>
+                  <p className="text-slate-300 font-semibold text-sm">No mandi data available</p>
+                  <p className="text-slate-500 text-xs">Try refreshing or check back when Agmarknet updates its records.</p>
+                </div>
+              ) : (
+                <>
+                  {/* Radius-fallback notice */}
+                  {isRadiusFallback && (
+                    <div className="flex items-center gap-2 mx-4 mt-3 mb-1 px-3 py-2 rounded-lg bg-sky-500/10 border border-sky-500/20 text-[11px] text-sky-300 font-medium">
+                      <span>💡</span>
+                      <span>
+                        No mandis with mapped coordinates found within <strong>{mandiRadius} km</strong>.
+                        Showing all <strong>{filteredMandis.length}</strong> available markets.
+                        Distances may show as “unknown” until coordinates are mapped.
+                      </span>
+                    </div>
+                  )}
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-slate-900/60 text-slate-400 font-semibold border-b border-white/10">
+                      <th className="py-3 px-4">Mandi Name</th>
+                      <th className="py-3 px-4">Distance</th>
+                      <th className="py-3 px-4 text-right">Modal Rate</th>
+                      <th className="py-3 px-4 text-right">Min – Max Range</th>
+                      <th className="py-3 px-4 text-right">Arrivals</th>
+                      <th className="py-3 px-4 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {filteredMandis.map((mandi, idx) => (
+                      <tr key={idx} className="hover:bg-white/5 transition-colors">
+                        {/* Mandi Name */}
+                        <td className="py-3.5 px-4">
+                          <span className="font-bold text-white block">{mandi.mandiName}</span>
+                          <span className="text-slate-500 text-[10px]">{mandi.district}{mandi.state ? `, ${mandi.state}` : ''}</span>
+                        </td>
+
+                        {/* Distance — show real distance or 'Unknown' */}
+                        <td className="py-3.5 px-4">
+                          {mandi.distanceKm != null ? (
+                            <>
+                              <span className="text-emerald-300 font-bold">{mandi.distanceKm} km</span>
+                              <span className="text-slate-500 text-[10px] block">away</span>
+                            </>
+                          ) : (
+                            <span className="text-slate-500 text-[10px] italic">Unknown</span>
+                          )}
+                        </td>
+
+                        {/* Modal Rate */}
+                        <td className="py-3.5 px-4 text-right">
+                          <span className="font-black text-emerald-400 text-sm">₹{mandi.modalPrice.toLocaleString('en-IN')}</span>
+                          <span className="text-slate-500 text-[10px] block">/ quintal</span>
+                        </td>
+
+                        {/* Price Range */}
+                        <td className="py-3.5 px-4 text-right text-slate-400">
+                          ₹{mandi.minPrice.toLocaleString('en-IN')} – ₹{mandi.maxPrice.toLocaleString('en-IN')}
+                        </td>
+
+                        {/* Arrivals */}
+                        <td className="py-3.5 px-4 text-right font-medium text-slate-300">
+                          {mandi.arrivalTons > 0 ? `${mandi.arrivalTons} T` : '—'}
+                        </td>
+
+                        {/* Action */}
+                        <td className="py-3.5 px-4 text-right">
+                          <Button
+                            size="sm"
+                            variant="primary"
+                            onClick={() => {
+                              if (currentCropRecord) {
+                                setCurrentCropRecord({
+                                  ...currentCropRecord,
+                                  market: mandi.mandiName,
+                                  modalPrice: mandi.modalPrice
+                                });
+                                setActiveSegment('prices');
+                              }
+                            }}
+                          >
+                            Target Mandi
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                </>
+              )}
             </div>
           </Card>
         </div>

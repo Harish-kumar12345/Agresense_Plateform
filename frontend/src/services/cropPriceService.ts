@@ -246,75 +246,123 @@ export const cropPriceService = {
     };
   },
 
-  // GET Mandi comparisons for crop
-  async getMandiComparisons(crop: string = 'Rice', state: string = 'Kerala'): Promise<MandiComparison[]> {
+  // GET Mandi comparisons for crop — fetches from /api/mandi/comparison (Agmarknet-backed)
+  async getMandiComparisons(
+    crop: string = 'Rice',
+    state: string = 'Kerala',
+    district?: string,
+    lat?: number,
+    lon?: number
+  ): Promise<{ mandis: MandiComparison[]; lastUpdated: string; source?: string }> {
     try {
-      const response = await axios.get(`${API_BASE}/crop-prices/compare/mandis`, {
-        params: { crop, state },
-        timeout: 4000
-      });
-      if (response.data && response.data.success && Array.isArray(response.data.mandis)) {
-        return response.data.mandis;
-      }
-    } catch (e) {}
+      const params: Record<string, string | number> = { crop, state, maxKm: 500, limit: 100 };
+      if (district) params.district = district;
+      if (lat != null && !isNaN(lat)) params.lat = lat;
+      if (lon != null && !isNaN(lon)) params.lon = lon;
 
-    // Fallback comparison data
-    const baseModal = crop.toLowerCase().includes('pepper') ? 58500 : crop.toLowerCase().includes('rubber') ? 17500 : 3000;
-    return [
-      {
-        mandiName: 'Kochi Central APMC Yard',
-        distanceKm: 12,
-        district: 'Ernakulam',
-        state: 'Kerala',
-        modalPrice: baseModal,
-        minPrice: Math.round(baseModal * 0.92),
-        maxPrice: Math.round(baseModal * 1.06),
-        unit: 'Quintal',
-        arrivalTons: 120,
-        trend: 'up',
-        lastUpdated: 'Today, 08:30 AM'
-      },
-      {
-        mandiName: 'Thrissur Primary Agri Market',
-        distanceKm: 45,
-        district: 'Thrissur',
-        state: 'Kerala',
-        modalPrice: Math.round(baseModal * 1.03),
-        minPrice: Math.round(baseModal * 0.95),
-        maxPrice: Math.round(baseModal * 1.08),
-        unit: 'Quintal',
-        arrivalTons: 85,
-        trend: 'up',
-        lastUpdated: 'Today, 09:15 AM'
-      },
-      {
-        mandiName: 'Palakkad Paddy Trade Hub',
-        distanceKm: 78,
-        district: 'Palakkad',
-        state: 'Kerala',
-        modalPrice: Math.round(baseModal * 0.97),
-        minPrice: Math.round(baseModal * 0.90),
-        maxPrice: Math.round(baseModal * 1.02),
-        unit: 'Quintal',
-        arrivalTons: 210,
-        trend: 'stable',
-        lastUpdated: 'Today, 07:45 AM'
-      },
-      {
-        mandiName: 'Kottayam Commodity Exchange',
-        distanceKm: 62,
-        district: 'Kottayam',
-        state: 'Kerala',
-        modalPrice: Math.round(baseModal * 1.01),
-        minPrice: Math.round(baseModal * 0.94),
-        maxPrice: Math.round(baseModal * 1.05),
-        unit: 'Quintal',
-        arrivalTons: 95,
-        trend: 'down',
-        lastUpdated: 'Today, 10:00 AM'
+      const response = await axios.get(`${API_BASE}/mandi/comparison`, {
+        params,
+        timeout: 8000
+      });
+
+      if (response.data?.success && Array.isArray(response.data.mandis) && response.data.mandis.length > 0) {
+        return {
+          mandis: response.data.mandis,
+          lastUpdated: response.data.lastUpdated || new Date().toISOString().split('T')[0],
+          source: response.data.source,
+        };
       }
-    ];
+    } catch (e) {
+      console.warn('Mandi comparison endpoint unavailable, using local fallback:', e);
+    }
+
+    // ── State-aware local fallback (only if backend is unreachable) ────────────
+    const cropLC  = crop.toLowerCase();
+    const stateLC = (state || '').toLowerCase();
+    const today = new Date().toISOString().split('T')[0];
+
+    const baseModal =
+      cropLC.includes('pepper')   ? 58500 :
+      cropLC.includes('rubber')   ? 17500 :
+      cropLC.includes('coconut')  ? 13500 :
+      cropLC.includes('cardamom') ? 130000 :
+      cropLC.includes('wheat')    ? 2600 :
+      cropLC.includes('maize')    ? 2100 :
+      cropLC.includes('onion')    ? 2200 :
+      cropLC.includes('tomato')   ? 1500 :
+      cropLC.includes('potato')   ? 1800 :
+      2950;
+
+    type FallbackMandi = { name: string; dist: string; state: string; distKm: number };
+    let fallbackMandis: FallbackMandi[];
+
+    if (stateLC.includes('kerala')) {
+      fallbackMandis = [
+        { name: 'Kochi APMC Yard',             dist: 'Ernakulam', state: 'Kerala',     distKm: 12 },
+        { name: 'Thrissur Primary Agri Market', dist: 'Thrissur',  state: 'Kerala',     distKm: 45 },
+        { name: 'Palakkad Paddy Trade Hub',     dist: 'Palakkad',  state: 'Kerala',     distKm: 78 },
+        { name: 'Kottayam Commodity Exchange',  dist: 'Kottayam',  state: 'Kerala',     distKm: 62 },
+      ];
+    } else if (stateLC.includes('punjab') || stateLC.includes('haryana')) {
+      fallbackMandis = [
+        { name: 'Ludhiana APMC',   dist: 'Ludhiana',   state: 'Punjab',   distKm: 50  },
+        { name: 'Amritsar APMC',   dist: 'Amritsar',   state: 'Punjab',   distKm: 90  },
+        { name: 'Chandigarh APMC', dist: 'Chandigarh', state: 'Punjab',   distKm: 65  },
+        { name: 'Bathinda APMC',   dist: 'Bathinda',   state: 'Punjab',   distKm: 145 },
+      ];
+    } else if (stateLC.includes('uttar pradesh') || stateLC.includes(' up')) {
+      fallbackMandis = [
+        { name: 'Azadpur Mandi',   dist: 'Ghaziabad', state: 'Delhi',         distKm: 30  },
+        { name: 'Agra APMC',       dist: 'Agra',       state: 'Uttar Pradesh', distKm: 120 },
+        { name: 'Meerut APMC',     dist: 'Meerut',     state: 'Uttar Pradesh', distKm: 38  },
+        { name: 'Bareilly APMC',   dist: 'Bareilly',   state: 'Uttar Pradesh', distKm: 118 },
+      ];
+    } else if (stateLC.includes('maharashtra')) {
+      fallbackMandis = [
+        { name: 'Mumbai APMC',  dist: 'Mumbai',  state: 'Maharashtra', distKm: 25  },
+        { name: 'Pune APMC',    dist: 'Pune',    state: 'Maharashtra', distKm: 48  },
+        { name: 'Nashik APMC',  dist: 'Nashik',  state: 'Maharashtra', distKm: 95  },
+        { name: 'Nagpur APMC',  dist: 'Nagpur',  state: 'Maharashtra', distKm: 145 },
+      ];
+    } else if (stateLC.includes('karnataka')) {
+      fallbackMandis = [
+        { name: 'Bengaluru APMC',   dist: 'Bengaluru',  state: 'Karnataka', distKm: 20  },
+        { name: 'Mysuru APMC',      dist: 'Mysuru',     state: 'Karnataka', distKm: 48  },
+        { name: 'Hubli APMC',       dist: 'Hubli',      state: 'Karnataka', distKm: 110 },
+        { name: 'Mangaluru APMC',   dist: 'Mangaluru',  state: 'Karnataka', distKm: 140 },
+      ];
+    } else {
+      fallbackMandis = [
+        { name: 'Azadpur Mandi',   dist: 'Delhi',     state: 'Delhi',          distKm: 30  },
+        { name: 'Mumbai APMC',     dist: 'Mumbai',    state: 'Maharashtra',     distKm: 280 },
+        { name: 'Bengaluru APMC',  dist: 'Bengaluru', state: 'Karnataka',      distKm: 380 },
+        { name: 'Hyderabad APMC',  dist: 'Hyderabad', state: 'Telangana',      distKm: 430 },
+      ];
+    }
+
+    return {
+      lastUpdated: today,
+      mandis: fallbackMandis.map((m, i) => {
+        const factor = [1.0, 1.03, 0.97, 1.01][i];
+        const modal  = Math.round(baseModal * factor);
+        return {
+          mandiName:   m.name,
+          distanceKm:  m.distKm,
+          district:    m.dist,
+          state:       m.state,
+          modalPrice:  modal,
+          minPrice:    Math.round(modal * 0.92),
+          maxPrice:    Math.round(modal * 1.07),
+          unit:        'Quintal',
+          arrivalTons: [120, 85, 210, 95][i],
+          trend:       ['up', 'up', 'stable', 'down'][i],
+          lastUpdated: today,
+        };
+      })
+    };
   },
+
+
 
   // GET Price History for trend chart
   async getPriceHistory(crop: string = 'Rice', days: number = 30): Promise<PriceHistoryPoint[]> {

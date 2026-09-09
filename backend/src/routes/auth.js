@@ -15,10 +15,11 @@ router.get('/me', requireAuth, async (req, res) => {
     }
     res.json({
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
+        id:         user._id,
+        name:       user.name,
+        email:      user.email,
+        role:       user.role,
+        isVerified: user.isVerified
       }
     });
   } catch (err) {
@@ -31,10 +32,22 @@ router.get('/me', requireAuth, async (req, res) => {
 // POST /api/auth/signup
 router.post('/signup', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const {
+      name, email, password,
+      // role — 'farmer' (default) or 'officer'
+      role = 'farmer',
+      // Farmer-specific
+      phone, district,
+      // Officer-specific
+      officerId, department
+    } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'Name, email, and password are required' });
+    }
+
+    if (!['farmer', 'officer'].includes(role)) {
+      return res.status(400).json({ error: 'Invalid role. Must be farmer or officer.' });
     }
 
     if (password.length < 6) {
@@ -47,18 +60,38 @@ router.post('/signup', async (req, res) => {
       return res.status(409).json({ error: 'An account with this email already exists' });
     }
 
-    // Hash password and create user
+    // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
+
+    // Officers start unverified; farmers are verified immediately
+    const isVerified = role !== 'officer';
+
     const user = await User.create({
       name,
       email,
       passwordHash,
-      role: 'farmer'
+      role,
+      isVerified,
+      // Farmer fields
+      phone:    phone    || '',
+      district: district || '',
+      // Officer fields
+      officerId:  officerId  || '',
+      department: department || '',
     });
 
-    // Generate JWT
+    // For officers: return success but NO JWT (they can't log in until verified)
+    if (!isVerified) {
+      console.log('✅ Officer registration submitted (pending approval):', email);
+      return res.status(201).json({
+        message: 'Officer account created. Pending admin verification.',
+        pending: true
+      });
+    }
+
+    // Farmer: generate JWT and return immediately
     const token = jwt.sign(
-      { sub: user._id, role: user.role },
+      { sub: user._id, role: user.role, isVerified: user.isVerified },
       process.env.JWT_SECRET || 'dev_secret',
       { expiresIn: '7d' }
     );
@@ -67,10 +100,11 @@ router.post('/signup', async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
+        id:         user._id,
+        name:       user.name,
+        email:      user.email,
+        role:       user.role,
+        isVerified: user.isVerified
       }
     });
   } catch (err) {
@@ -82,7 +116,7 @@ router.post('/signup', async (req, res) => {
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password are required' });
@@ -93,25 +127,42 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
+    // Optional role mismatch guard
+    if (role && user.role !== role) {
+      return res.status(403).json({
+        error: `This account is registered as a ${user.role}, not ${role}.`,
+        code: 'ROLE_MISMATCH'
+      });
+    }
+
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
+    // Block officer login if not yet verified by admin
+    if (user.role === 'officer' && !user.isVerified) {
+      return res.status(403).json({
+        error: 'Your officer account is pending admin approval.',
+        code: 'OFFICER_PENDING'
+      });
+    }
+
     const token = jwt.sign(
-      { sub: user._id, role: user.role },
+      { sub: user._id, role: user.role, isVerified: user.isVerified },
       process.env.JWT_SECRET || 'dev_secret',
       { expiresIn: '7d' }
     );
 
-    console.log('✅ User logged in:', email);
+    console.log('✅ User logged in:', email, '| role:', user.role);
     res.json({
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
+        id:         user._id,
+        name:       user.name,
+        email:      user.email,
+        role:       user.role,
+        isVerified: user.isVerified
       }
     });
   } catch (err) {
