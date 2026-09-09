@@ -140,35 +140,29 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. VerdaAgro Epidemiology Context Bar */}
-      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-farm">
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-farm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
               <span>Epidemiology</span>
               <span className="text-emerald-700">/</span>
               <span>Fungal & Pathogen Vector Intelligence</span>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 ACTIVE VECTOR RADAR
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
                 Pathogen Spore & Crop Disease Telemetry
               </h1>
               {riskData && (
-                <span className={`agri-pill ${
-                  riskData.riskLevel === 'Critical' || riskData.riskLevel === 'High' 
-                    ? 'agri-pill-amber' 
-                    : riskData.riskLevel === 'Medium'
-                    ? 'agri-pill-amber'
-                    : 'agri-pill-emerald'
-                }`}>
+                <span className="verda-glow-pill">
                   {riskData.riskLevel} Pressure ({riskData.overallRiskScore}%)
                 </span>
               )}
-              <span className="agri-pill agri-pill-muted">
+              <span className="agri-pill agri-pill-muted font-bold">
                 Host Crop: {selectedCrop}
               </span>
             </div>
