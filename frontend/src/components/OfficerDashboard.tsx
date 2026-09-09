@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import {
   LogOut,
@@ -38,7 +38,7 @@ import {
   Compass
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapContainer, TileLayer, Marker, Popup, Polygon, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polygon, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { InsightCard } from './ui/InsightCard';
@@ -78,12 +78,34 @@ const riskIcons = {
   CRITICAL: createRiskIcon('#ef4444')
 };
 
-// Leaflet map controller to smoothly pan/fit bounds
-const MapViewUpdater = ({ center, zoom }: { center: [number, number]; zoom?: number }) => {
+// Risk configuration — colors, labels, glow for dotted boundary layers
+const RISK_CONFIG: Record<string, { stroke: string; glow: string; fill: string; label: string; emoji: string }> = {
+  LOW:      { stroke: '#10b981', glow: 'rgba(16,185,129,0.22)',  fill: 'rgba(16,185,129,0.07)',  label: 'Healthy / Low Risk',       emoji: '🟢' },
+  MEDIUM:   { stroke: '#eab308', glow: 'rgba(234,179,8,0.22)',   fill: 'rgba(234,179,8,0.07)',   label: 'Moderate Risk',            emoji: '🟡' },
+  HIGH:     { stroke: '#f97316', glow: 'rgba(249,115,22,0.22)',  fill: 'rgba(249,115,22,0.07)',  label: 'Attention Required',       emoji: '🟠' },
+  CRITICAL: { stroke: '#ef4444', glow: 'rgba(239,68,68,0.22)',   fill: 'rgba(239,68,68,0.07)',   label: 'Critical Pest/Disease Risk', emoji: '🔴' },
+};
+
+// Auto-fits map view to encompass all visible farm boundaries/markers on load
+const MapBoundsFitter = ({ farms }: { farms: { latitude: number; longitude: number; boundary_coordinates?: { lat: number; lng: number }[] }[] }) => {
   const map = useMap();
+  const fittedRef = useRef(false);
   useEffect(() => {
-    map.setView(center, zoom || map.getZoom());
-  }, [center, zoom, map]);
+    if (fittedRef.current || farms.length === 0) return;
+    const latLngs: L.LatLngExpression[] = [];
+    farms.forEach(f => {
+      if (f.boundary_coordinates && f.boundary_coordinates.length > 0) {
+        f.boundary_coordinates.forEach(c => latLngs.push([c.lat, c.lng]));
+      } else if (f.latitude && f.longitude) {
+        latLngs.push([f.latitude, f.longitude]);
+      }
+    });
+    if (latLngs.length > 0) {
+      const bounds = L.latLngBounds(latLngs);
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+      fittedRef.current = true;
+    }
+  }, [farms, map]);
   return null;
 };
 
@@ -162,6 +184,9 @@ const INSPECTION_ADVISORY_TEMPLATES = [
 export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout: () => void }) => {
   // Navigation tabs within Officer Portal
   const [activeTab, setActiveTab] = useState<'gis_farms' | 'queries' | 'audit_log' | 'alert_preferences'>('gis_farms');
+
+  // GIS map field selection state — tracks which farm polygon is highlighted
+  const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
 
   const [farms, setFarms] = useState<OfficerFarm[]>([]);
   const [metrics, setMetrics] = useState<any>(null);
@@ -809,62 +834,157 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
             </div>
 
             {/* Leaflet Map Frame */}
-            <div className="h-[420px] w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl z-0 relative">
+            <div className="h-[480px] w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl z-0 relative">
               <MapContainer
                 center={mapCenter}
                 zoom={8}
-                scrollWheelZoom={false}
+                scrollWheelZoom={true}
                 className="h-full w-full"
               >
-                <MapViewUpdater center={mapCenter} />
+                {/* Auto-fit map to all visible farm boundaries on mount */}
+                <MapBoundsFitter farms={filteredFarms} />
+
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
                 {filteredFarms.map((f) => {
+                  const cfg = RISK_CONFIG[f.risk_level] || RISK_CONFIG.LOW;
                   const icon = riskIcons[f.risk_level] || riskIcons.LOW;
+                  const isSelected = selectedFieldId === f.farm_id;
                   const boundary = f.boundary_coordinates?.map((c) => [c.lat, c.lng] as [number, number]) || [];
-                  const strokeColor =
-                    f.risk_level === 'CRITICAL' ? '#ef4444' :
-                    f.risk_level === 'HIGH' ? '#f97316' :
-                    f.risk_level === 'MEDIUM' ? '#f59e0b' : '#10b981';
+                  const closedBoundary = boundary.length > 2 ? [...boundary, boundary[0]] : [];
 
                   return (
                     <React.Fragment key={f.farm_id}>
-                      {boundary.length > 2 && (
-                        <Polygon
-                          positions={boundary}
-                          pathOptions={{
-                            color: strokeColor,
-                            fillColor: strokeColor,
-                            fillOpacity: 0.25,
-                            weight: 2
-                          }}
-                        />
+                      {closedBoundary.length > 2 && (
+                        <>
+                          {/* Layer 1 — Glow fill: wide, semi-transparent solid polygon for subtle area glow */}
+                          <Polygon
+                            positions={boundary}
+                            pathOptions={{
+                              color: 'transparent',
+                              fillColor: cfg.stroke,
+                              fillOpacity: isSelected ? 0.18 : 0.08,
+                              weight: 0,
+                              interactive: false,
+                            }}
+                          />
+
+                          {/* Layer 2 — Outer glow stroke: wide blurred-looking stroke */}
+                          <Polyline
+                            positions={closedBoundary}
+                            pathOptions={{
+                              color: cfg.stroke,
+                              weight: isSelected ? 14 : 8,
+                              opacity: isSelected ? 0.28 : 0.18,
+                              dashArray: undefined,
+                              lineCap: 'round',
+                              lineJoin: 'round',
+                              interactive: false,
+                            }}
+                          />
+
+                          {/* Layer 3 — Dotted boundary outline: main visible dashed/dotted stroke */}
+                          <Polyline
+                            positions={closedBoundary}
+                            pathOptions={{
+                              color: cfg.stroke,
+                              weight: isSelected ? 4 : 2.5,
+                              opacity: isSelected ? 1 : 0.9,
+                              dashArray: isSelected ? '10 6' : '7 5',
+                              lineCap: 'round',
+                              lineJoin: 'round',
+                            }}
+                            eventHandlers={{
+                              click: () => setSelectedFieldId(isSelected ? null : f.farm_id),
+                              mouseover: (e) => { e.target.setStyle({ opacity: 1, weight: isSelected ? 4 : 3.5 }); },
+                              mouseout: (e) => { e.target.setStyle({ opacity: isSelected ? 1 : 0.9, weight: isSelected ? 4 : 2.5 }); },
+                            }}
+                          >
+                            <Popup>
+                              <div style={{ fontFamily: 'sans-serif', fontSize: 12, minWidth: 220 }}>
+                                {/* Popup header */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: 6, marginBottom: 6, gap: 8 }}>
+                                  <strong style={{ color: '#0f172a', fontSize: 13 }}>{f.farm_name}</strong>
+                                  <span style={{
+                                    background: f.risk_level === 'CRITICAL' ? '#fef2f2' : f.risk_level === 'HIGH' ? '#fff7ed' : f.risk_level === 'MEDIUM' ? '#fefce8' : '#f0fdf4',
+                                    color: f.risk_level === 'CRITICAL' ? '#dc2626' : f.risk_level === 'HIGH' ? '#ea580c' : f.risk_level === 'MEDIUM' ? '#ca8a04' : '#16a34a',
+                                    border: `1px solid ${cfg.stroke}55`,
+                                    borderRadius: 6, padding: '2px 7px', fontSize: 10, fontWeight: 700, whiteSpace: 'nowrap'
+                                  }}>{cfg.emoji} {f.risk_level}</span>
+                                </div>
+                                {/* Popup fields */}
+                                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11.5 }}>
+                                  <tbody>
+                                    {[
+                                      ['👨‍🌾 Farmer', f.farmer_name],
+                                      ['🪪 Field ID', f.farm_id],
+                                      ['🌾 Crop', `${f.crop}`],
+                                      ['📐 Area', `${f.area_hectares} Ha`],
+                                      ['📍 Location', `${f.district}, ${f.state}`],
+                                    ].map(([label, val]) => (
+                                      <tr key={label as string}>
+                                        <td style={{ color: '#64748b', fontWeight: 600, paddingBottom: 3, paddingRight: 6, whiteSpace: 'nowrap' }}>{label}</td>
+                                        <td style={{ color: '#1e293b', paddingBottom: 3 }}>{val}</td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                                <button
+                                  type="button"
+                                  onClick={() => setInspectingFarm(f)}
+                                  style={{ marginTop: 8, width: '100%', padding: '6px 0', background: '#059669', color: 'white', fontWeight: 700, fontSize: 11, borderRadius: 7, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
+                                >
+                                  🔍 Inspect Farm Telemetry
+                                </button>
+                              </div>
+                            </Popup>
+                          </Polyline>
+                        </>
                       )}
 
-                      <Marker position={[f.latitude, f.longitude]} icon={icon}>
+                      {/* Risk-colored marker pin — always shown */}
+                      <Marker
+                        position={[f.latitude, f.longitude]}
+                        icon={isSelected ? createRiskIcon(cfg.stroke) : (riskIcons[f.risk_level] || riskIcons.LOW)}
+                        eventHandlers={{ click: () => setSelectedFieldId(isSelected ? null : f.farm_id) }}
+                      >
                         <Popup>
-                          <div className="p-1 space-y-2 max-w-xs font-sans text-xs">
-                            <div className="flex items-center justify-between border-b pb-1 gap-1">
-                              <span className="font-bold text-slate-900 truncate">{f.farm_name}</span>
-                              <div className="flex items-center gap-1 shrink-0">
-                                {getOriginBadge(f.is_live)}
-                                {getRiskBadge(f.risk_level)}
-                              </div>
+                          <div style={{ fontFamily: 'sans-serif', fontSize: 12, minWidth: 220 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: 6, marginBottom: 6, gap: 8 }}>
+                              <strong style={{ color: '#0f172a', fontSize: 13 }}>{f.farm_name}</strong>
+                              <span style={{
+                                background: f.risk_level === 'CRITICAL' ? '#fef2f2' : f.risk_level === 'HIGH' ? '#fff7ed' : f.risk_level === 'MEDIUM' ? '#fefce8' : '#f0fdf4',
+                                color: f.risk_level === 'CRITICAL' ? '#dc2626' : f.risk_level === 'HIGH' ? '#ea580c' : f.risk_level === 'MEDIUM' ? '#ca8a04' : '#16a34a',
+                                border: `1px solid ${cfg.stroke}55`,
+                                borderRadius: 6, padding: '2px 7px', fontSize: 10, fontWeight: 700, whiteSpace: 'nowrap'
+                              }}>{cfg.emoji} {f.risk_level}</span>
                             </div>
-                            <p><span className="font-semibold text-slate-600">Farmer:</span> {f.farmer_name}</p>
-                            <p><span className="font-semibold text-slate-600">Crop:</span> {f.crop} ({f.area_hectares} Ha)</p>
-                            <p><span className="font-semibold text-slate-600">Predicted Yield:</span> {f.predicted_yield_tha} t/ha</p>
-                            <p><span className="font-semibold text-slate-600">Accumulated GDD:</span> {f.current_gdd}</p>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11.5 }}>
+                              <tbody>
+                                {[
+                                  ['👨‍🌾 Farmer', f.farmer_name],
+                                  ['🪪 Field ID', f.farm_id],
+                                  ['🌾 Crop', `${f.crop}`],
+                                  ['📐 Area', `${f.area_hectares} Ha`],
+                                  ['⚠️ Risk Level', `${f.risk_level} (${f.risk_score}%)`],
+                                  ['📍 Location', `${f.district}, ${f.state}`],
+                                ].map(([label, val]) => (
+                                  <tr key={label as string}>
+                                    <td style={{ color: '#64748b', fontWeight: 600, paddingBottom: 3, paddingRight: 6, whiteSpace: 'nowrap' }}>{label}</td>
+                                    <td style={{ color: '#1e293b', paddingBottom: 3 }}>{val}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
                             <button
                               type="button"
                               onClick={() => setInspectingFarm(f)}
-                              className="w-full mt-2 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer"
+                              style={{ marginTop: 8, width: '100%', padding: '6px 0', background: '#059669', color: 'white', fontWeight: 700, fontSize: 11, borderRadius: 7, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
                             >
-                              <Eye className="w-3.5 h-3.5" />
-                              <span>Inspect Farm Telemetry</span>
+                              🔍 Inspect Farm Telemetry
                             </button>
                           </div>
                         </Popup>
@@ -873,6 +993,55 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
                   );
                 })}
               </MapContainer>
+
+              {/* GIS Field Boundary Legend — positioned bottom-right over map */}
+              <div style={{
+                position: 'absolute', bottom: 16, right: 16, zIndex: 1000,
+                background: 'rgba(2,8,23,0.82)', backdropFilter: 'blur(10px)',
+                borderRadius: 12, border: '1px solid rgba(255,255,255,0.12)',
+                padding: '10px 14px', minWidth: 190,
+                boxShadow: '0 4px 24px rgba(0,0,0,0.45)'
+              }}>
+                <div style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
+                  Field Boundary Legend
+                </div>
+                {Object.entries(RISK_CONFIG).map(([level, cfg]) => (
+                  <div key={level} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+                    {/* Dashed line swatch */}
+                    <svg width="28" height="12" viewBox="0 0 28 12">
+                      <rect x="0" y="4" width="28" height="4" fill={cfg.stroke} fillOpacity="0.15" rx="2" />
+                      <line x1="0" y1="6" x2="28" y2="6"
+                        stroke={cfg.stroke} strokeWidth="2.5" strokeDasharray="6 4"
+                        strokeLinecap="round" />
+                    </svg>
+                    <span style={{ fontSize: 10.5, color: '#e2e8f0', fontWeight: 500 }}>
+                      {cfg.emoji} {cfg.label}
+                    </span>
+                  </div>
+                ))}
+                <div style={{ marginTop: 8, paddingTop: 7, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 9.5, color: '#64748b' }}>
+                  Click boundary or pin to select field
+                </div>
+              </div>
+
+              {/* Selected field indicator chip */}
+              {selectedFieldId && (
+                <div style={{
+                  position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)', zIndex: 1000,
+                  background: 'rgba(16,185,129,0.15)', backdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(16,185,129,0.4)', borderRadius: 20,
+                  padding: '4px 14px', fontSize: 11, fontWeight: 700, color: '#34d399',
+                  display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 2px 12px rgba(16,185,129,0.18)'
+                }}>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+                  Field selected: {filteredFarms.find(f => f.farm_id === selectedFieldId)?.farm_name || selectedFieldId}
+                  <button
+                    onClick={() => setSelectedFieldId(null)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6ee7b7', fontSize: 13, lineHeight: 1, padding: 0, marginLeft: 2 }}
+                    title="Deselect field"
+                  >×</button>
+                </div>
+              )}
             </div>
           </Card>
 
