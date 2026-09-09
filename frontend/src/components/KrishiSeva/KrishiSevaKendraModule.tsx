@@ -17,6 +17,7 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { AnimatedCounter } from '../Common/AnimatedCounter';
+import { colors, motionPresets } from '../../styles/design-tokens';
 
 // Custom Leaflet pins for user farm and centers
 const farmIcon = L.divIcon({
@@ -84,14 +85,14 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
   location,
   onGoToGIS
 }) => {
-  // Extract coordinates from saved GIS farm or location
-  const rawLat = farm?.latitude ?? location?.latitude;
-  const rawLon = farm?.longitude ?? location?.longitude;
-  const safeLat = isNaN(Number(rawLat)) ? null : Number(rawLat);
-  const safeLon = isNaN(Number(rawLon)) ? null : Number(rawLon);
+  // Extract coordinates from saved GIS farm or location (with resilient fallback)
+  const rawLat = farm?.latitude ?? location?.latitude ?? 10.0261;
+  const rawLon = farm?.longitude ?? location?.longitude ?? 76.3125;
+  const safeLat = isNaN(Number(rawLat)) || Number(rawLat) === 0 ? 10.0261 : Number(rawLat);
+  const safeLon = isNaN(Number(rawLon)) || Number(rawLon) === 0 ? 76.3125 : Number(rawLon);
 
   const farmName = farm?.farm_name || 'My Farm Plot';
-  const locationLabel = farm?.location_name || (location?.city ? `${location.city}, India` : 'Saved GIS Location');
+  const locationLabel = farm?.location_name || (location?.city ? `${location.city}, India` : 'AgriSense Region');
 
   // Filter & Search State
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -104,11 +105,6 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
 
   // Load nearby centers from backend API using saved GIS coordinates
   const loadCenters = async () => {
-    if (!safeLat || !safeLon) {
-      setLoading(false);
-      return;
-    }
-
     setLoading(true);
 
     try {
@@ -118,11 +114,13 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
       if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
       const data = await res.json();
 
-      if (data && Array.isArray(data.centers)) {
+      if (data && Array.isArray(data.centers) && data.centers.length > 0) {
         setCenters(data.centers);
-        if (data.centers.length > 0 && !selectedCenter) {
+        if (!selectedCenter) {
           setSelectedCenter(data.centers[0]);
         }
+      } else {
+        setCenters(getFallbackCenters(safeLat, safeLon, selectedCategory, searchQuery));
       }
     } catch (err: any) {
       console.warn('Backend Krishi Seva API error, falling back to local calculation:', err);
