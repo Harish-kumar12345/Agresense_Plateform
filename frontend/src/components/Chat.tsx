@@ -219,19 +219,19 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-white tracking-tight font-display">
-                Agronomic Field Specialist Console
+              <h2 className="text-xl font-black text-white tracking-tight font-display">
+                <span className="apple-title-gradient">Agronomic AI Specialist</span> Console
               </h2>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                <ShieldCheck className="w-2.5 h-2.5 text-emerald-400" />
+              <span className="apple-segmented-item active text-[10px]">
+                <ShieldCheck className="w-3 h-3 text-emerald-400 inline-block mr-1" />
                 ICAR Agronomy Verified
               </span>
             </div>
-            <p className="text-xs text-[#D1DED6] flex items-center gap-1.5 mt-0.5">
+            <p className="text-xs text-[#94A3B8] flex items-center gap-2 mt-1">
               <span>{activeFarm?.farm_name || location?.city || 'Indian Precision Farm'}</span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-slate-700">•</span>
               <span>Crop: <strong className="text-white">{crop || activeFarm?.crop || 'Rice'}</strong></span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-slate-700">•</span>
               <span className="text-emerald-400 font-mono text-[11px]">Telemetry Active</span>
             </p>
           </div>
@@ -239,7 +239,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
 
         {/* Console Mode Badge */}
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-semibold">
+          <span className="apple-segmented-item active">
             English Mode
           </span>
         </div>
