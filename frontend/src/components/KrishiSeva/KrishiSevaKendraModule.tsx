@@ -16,7 +16,7 @@ import { FarmData } from '../../services/farmService';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
-import { motionPresets } from '../../styles/design-tokens';
+import { AnimatedCounter } from '../Common/AnimatedCounter';
 
 // Custom Leaflet pins for user farm and centers
 const farmIcon = L.divIcon({
@@ -200,18 +200,18 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. Category Aurora Hero Banner */}
-      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
-        <div className="hero-banner-content flex flex-col md:flex-row md:items-center justify-between gap-5">
+      {/* 1. Apple-Style Pristine Category Hero Banner */}
+      <motion.div variants={motionPresets.item} className="apple-hero-header">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold backdrop-blur-md border border-emerald-400/30">
-              <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="apple-segmented-item active">
+              <Building2 className="w-3.5 h-3.5 text-emerald-400 inline-block mr-1.5" />
               <span>Krishi Seva Kendra & Agri Business Telemetry</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
-              Nearest Agricultural Support Centers
+            <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight font-display">
+              <span className="apple-title-gradient">Agricultural Support</span> Centers
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#94A3B8] max-w-2xl leading-relaxed">
               Locate government-certified input dealers, soil testing laboratories, Krishi Vigyan Kendras (KVK), and fertilizer supply depots near your field.
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-300">
@@ -219,29 +219,29 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
                 <MapPin className="w-3.5 h-3.5" />
                 Plot Origin: {locationLabel} ({safeLat.toFixed(4)}, {safeLon.toFixed(4)})
               </span>
-              <span className="text-slate-500">•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/15 text-white font-semibold text-[11px]">
-                {centers.length} Centers Found Nearby
+              <span className="text-slate-700">•</span>
+              <span className="agri-pill agri-pill-emerald font-semibold">
+                <AnimatedCounter value={centers.length} suffix=" Centers Found Nearby" />
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <Button
+            <button
+              type="button"
               onClick={loadCenters}
-              variant="secondary"
-              size="sm"
-              icon={<RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
             >
+              <RefreshCw className={`w-3.5 h-3.5 text-emerald-400 ${loading ? 'animate-spin' : ''}`} />
               Refresh
-            </Button>
+            </button>
           </div>
         </div>
       </motion.div>
 
       {/* Controls Bar: Search & Category Filters */}
       <motion.div variants={motionPresets.item}>
-        <Card variant="elevated" tone="farm" className="p-5 space-y-4">
+        <div className="apple-glass-card p-5 space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Search bar */}
           <div className="relative w-full sm:w-80">
@@ -251,12 +251,12 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, address, or service..."
-              className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-white/10 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all text-white placeholder:text-slate-500"
+              className="w-full pl-9 pr-4 py-2 bg-white/[0.04] border border-white/10 rounded-full text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all text-white placeholder:text-slate-500"
             />
           </div>
 
           {/* Active Radius / Sort Badge */}
-          <Badge variant="sky" size="md">
+          <Badge variant="emerald" size="md">
             Sorted by Nearest Distance (Haversine Formula)
           </Badge>
         </div>
@@ -275,18 +275,14 @@ export const KrishiSevaKendraModule: React.FC<KrishiSevaKendraModuleProps> = ({
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
-                selectedCategory === cat.id
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                  : 'bg-slate-900/80 border border-white/10 text-slate-300 hover:text-white hover:bg-white/5'
-              }`}
+              className={`apple-segmented-item ${selectedCategory === cat.id ? 'active' : ''}`}
             >
-              <span>{cat.icon}</span>
+              <span className="mr-1">{cat.icon}</span>
               <span>{cat.label}</span>
             </button>
           ))}
         </div>
-      </Card>
+      </div>
       </motion.div>
 
       {/* Main Layout: Leaflet Map (Left) + Centers List (Right) */}

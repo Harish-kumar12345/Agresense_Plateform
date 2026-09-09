@@ -28,7 +28,7 @@ import { InsightCard } from './ui/InsightCard';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
 import { Badge } from './ui/Badge';
-import { colors, motionPresets } from '../styles/design-tokens';
+import { AnimatedCounter } from './Common/AnimatedCounter';
 
 const backendUrl = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001';
 
@@ -187,31 +187,31 @@ export const OfficerDashboard = ({ token, onLogout }: { token: string; onLogout:
       className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* Officer Command Center Header Bar */}
-      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
-        <div className="hero-banner-content flex flex-col sm:flex-row items-center justify-between gap-4">
+      <motion.div variants={motionPresets.item} className="apple-hero-header">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
           <div className="flex items-center gap-3.5">
             <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl border border-emerald-400/30 flex items-center justify-center text-emerald-400 shadow-md">
               <Shield className="w-6 h-6" />
             </div>
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-bold uppercase tracking-wider border border-emerald-500/30 mb-1">
-                <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
+              <div className="apple-segmented-item active text-[10px] inline-block mb-1">
+                <Sparkles className="w-3 h-3 text-emerald-400 inline-block mr-1" />
                 Administrative Command Center
               </div>
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight font-display text-white">
-                Regional Farm Administration & GIS Telemetry
+              <h1 className="text-xl sm:text-3xl font-black tracking-tight text-white font-display">
+                <span className="apple-title-gradient">Regional Farm Administration</span> & GIS
               </h1>
             </div>
           </div>
 
-          <Button
-            variant="destructive"
-            size="sm"
-            icon={<LogOut className="w-4 h-4" />}
+          <button
+            type="button"
             onClick={onLogout}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/30 text-rose-300 text-xs font-semibold transition-all cursor-pointer"
           >
+            <LogOut className="w-4 h-4 text-rose-400" />
             Exit Officer Console
-          </Button>
+          </button>
         </div>
       </motion.div>
 

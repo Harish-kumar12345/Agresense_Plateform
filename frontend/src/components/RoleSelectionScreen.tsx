@@ -94,10 +94,10 @@ export default function RoleSelectionScreen({ onSelectRole }: RoleSelectionScree
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-display mb-2">
-            Welcome to AgriSense
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight font-display mb-2">
+            <span className="apple-title-gradient">Welcome to AgriSense</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-400 max-w-sm mx-auto">
+          <p className="text-sm sm:text-base text-[#94A3B8] max-w-sm mx-auto font-medium">
             Choose how you'd like to continue
           </p>
         </motion.div>
@@ -107,7 +107,7 @@ export default function RoleSelectionScreen({ onSelectRole }: RoleSelectionScree
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-5"
         >
           {ROLE_CARDS.map((card) => (
             <motion.button
@@ -115,21 +115,13 @@ export default function RoleSelectionScreen({ onSelectRole }: RoleSelectionScree
               variants={cardVariants}
               type="button"
               onClick={() => onSelectRole(card.role)}
-              whileHover={{ scale: 1.04 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className={`
-                group relative flex flex-col items-center text-center p-7 rounded-2xl cursor-pointer
-                bg-[#0D1612]/80 backdrop-blur-xl
-                border border-emerald-900/30
-                shadow-lg
-                transition-all duration-200
-                ${card.borderHover}
-                ${card.glowColor}
-                hover:shadow-xl hover:bg-[#0D1612]/95
+                group relative flex flex-col items-center text-center p-8 rounded-3xl cursor-pointer
+                apple-glass-card
+                transition-all duration-300
               `}
-              style={{
-                boxShadow: '0 8px 32px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)',
-              }}
             >
               {/* Glow ring on hover */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"

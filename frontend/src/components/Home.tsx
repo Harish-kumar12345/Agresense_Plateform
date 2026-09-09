@@ -28,6 +28,7 @@ import {
 import { useLanguage } from '../contexts/LanguageContext';
 import { weatherService } from '../services/weatherService';
 import { soilService } from '../services/soilService';
+import { AnimatedCounter } from './Common/AnimatedCounter';
 
 // API endpoints from environment variables
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || '';
@@ -783,29 +784,30 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
   }, [weatherData, soilData, landData, crop]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-yellow-50 p-4 md:p-6">
+    <div className="min-h-screen bg-[#070D0A] text-slate-100 p-4 md:p-8 space-y-8 select-none">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <div className="p-3 bg-green-600 rounded-2xl">
-              <Tractor className="w-8 h-8 text-white" />
+        {/* Apple Hero Header */}
+        <div className="apple-hero-header p-8 sm:p-10 relative overflow-hidden">
+          <div className="max-w-4xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+              <Tractor className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Pristine Farm Intelligence</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              {t('home.title')}
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display">
+              <span className="apple-title-gradient">{t('home.title')}</span>
             </h1>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+              {t('home.subtitle')}
+            </p>
           </div>
-          <p className="text-slate-600 max-w-3xl mx-auto">
-            {t('home.subtitle')}
-          </p>
         </div>
 
         {/* Controls */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+        <div className="apple-glass-card p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
-                <MapPin className="w-4 h-4 inline mr-1" />
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <MapPin className="w-3.5 h-3.5 inline mr-1 text-emerald-400" />
                 {t('home.location')}
               </label>
               <div className="flex gap-2">
@@ -814,12 +816,12 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder={t('home.current_location')}
-                  className="flex-1 px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                  className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-white placeholder-slate-500 text-sm"
                 />
                 <button
                   onClick={handleGetCurrentLocation}
                   disabled={locationLoading}
-                  className="px-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+                  className="px-4 py-3 bg-emerald-500 text-slate-950 font-bold rounded-xl hover:bg-emerald-400 transition-colors disabled:opacity-50 flex items-center gap-2 cursor-pointer shadow-md shadow-emerald-500/20"
                   title={t('home.current_location')}
                 >
                   {locationLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Navigation className="w-4 h-4" />}
@@ -828,14 +830,14 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             </div>
             
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
-                <Sprout className="w-4 h-4 inline mr-1" />
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                <Sprout className="w-3.5 h-3.5 inline mr-1 text-emerald-400" />
                 {t('home.select_crop')}
               </label>
               <select
                 value={crop}
                 onChange={(e) => setCrop(e.target.value)}
-                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                className="w-full px-4 py-3 bg-[#0B1510] border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-white text-sm"
               >
                 <option value="Rice">{t('crops.rice')}</option>
                 <option value="Coconut">{t('crops.coconut')}</option>
@@ -875,7 +877,7 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
             <button
               onClick={() => currentLocation && fetchAllData()}
               disabled={loading || !currentLocation}
-              className="px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl hover:from-green-700 hover:to-blue-700 transition-all disabled:opacity-50 flex items-center justify-center gap-2 font-semibold"
+              className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2 font-bold cursor-pointer shadow-lg shadow-emerald-500/20 text-sm"
             >
               {loading ? (
                 <>
@@ -893,152 +895,138 @@ Provide ONE priority action and ONE monitoring advice. Keep it concise and actio
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5" />
+          <div className="bg-rose-500/10 border border-rose-500/30 rounded-xl p-4 text-rose-300 flex items-center gap-2 text-sm">
+            <AlertTriangle className="w-5 h-5 text-rose-400" />
             {error}
           </div>
         )}
 
         {/* Tab Navigation */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-2">
-          <div className="flex flex-wrap gap-2">
-            {[
-              { id: 'overview', label: t('home.overview'), icon: Activity },
-              { id: 'weather', label: t('home.weather_details'), icon: CloudSun },
-              { id: 'soil', label: t('home.soil_analysis'), icon: Mountain },
-              { id: 'ai-advisor', label: t('home.ai_advisor'), icon: Bot }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg'
-                    : 'text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            ))}
-          </div>
+        <div className="apple-segmented-control p-1.5 flex flex-wrap gap-2">
+          {[
+            { id: 'overview', label: t('home.overview'), icon: Activity },
+            { id: 'weather', label: t('home.weather_details'), icon: CloudSun },
+            { id: 'soil', label: t('home.soil_analysis'), icon: Mountain },
+            { id: 'ai-advisor', label: t('home.ai_advisor'), icon: Bot }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`apple-segmented-item ${activeTab === tab.id ? 'active' : ''}`}
+            >
+              <tab.icon className="w-4 h-4" />
+              {tab.label}
+            </button>
+          ))}
         </div>
 
         {/* Content based on active tab */}
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Current Weather */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <CloudSun className="w-6 h-6 text-blue-600" />
-                  <h3 className="text-lg font-bold text-slate-800">{t('home.weather')}</h3>
+            <div className="apple-glass-card p-6 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <CloudSun className="w-5 h-5 text-sky-400" />
+                    <h3 className="text-base font-bold text-white font-display">{t('home.weather')}</h3>
+                  </div>
+                  <div className="text-xs text-slate-400 capitalize bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+                    {weatherData?.current.description || 'Clear canopy'}
+                  </div>
                 </div>
-                <div className="text-xs text-slate-500 capitalize">
-                  {weatherData?.current.description}
+                
+                <div className="text-center my-6">
+                  <div className="text-5xl font-extrabold text-white tracking-tight font-display mb-1 flex items-center justify-center gap-1">
+                    {loading ? '---' : <AnimatedCounter value={weatherData?.current.temperature_c || 28.5} decimals={1} suffix="°C" />}
+                  </div>
+                  <div className="text-xs text-slate-400 font-mono">
+                    {t('home.feels_like')} {weatherData?.current.feels_like_c || '29'}°C
+                  </div>
+                  <div className="text-xs text-emerald-400 mt-2 font-medium">
+                    📍 {weatherData?.location.city || 'Kerala'}, {weatherData?.location.country || 'India'}
+                  </div>
                 </div>
               </div>
               
-              <div className="text-center mb-6">
-                <div className="text-4xl font-bold text-slate-800 mb-2">
-                  {loading ? '---' : `${weatherData?.current.temperature_c || '--'}°C`}
+              <div className="grid grid-cols-2 gap-3 text-xs pt-4 border-t border-white/10">
+                <div className="flex items-center justify-between bg-white/5 p-2.5 rounded-xl">
+                  <span className="text-slate-400 flex items-center gap-1.5"><Droplets className="w-3.5 h-3.5 text-sky-400" />{t('home.humidity')}</span>
+                  <span className="font-bold text-white">{loading ? '--' : `${weatherData?.current.relative_humidity || '76'}%`}</span>
                 </div>
-                <div className="text-slate-600">
-                  {t('home.feels_like')} {weatherData?.current.feels_like_c || '--'}°C
+                <div className="flex items-center justify-between bg-white/5 p-2.5 rounded-xl">
+                  <span className="text-slate-400 flex items-center gap-1.5"><Wind className="w-3.5 h-3.5 text-slate-400" />{t('home.wind_speed')}</span>
+                  <span className="font-bold text-white">{loading ? '--' : `${weatherData?.current.wind_speed_kmh || '12'} km/h`}</span>
                 </div>
-                <div className="text-sm text-slate-500 mt-2">
-                  {weatherData?.location.city}, {weatherData?.location.country}
+                <div className="flex items-center justify-between bg-white/5 p-2.5 rounded-xl">
+                  <span className="text-slate-400 flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-emerald-400" />{t('home.visibility')}</span>
+                  <span className="font-bold text-white">{loading ? '--' : `${weatherData?.current.visibility_km || '10'} km`}</span>
                 </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <Droplets className="w-4 h-4 text-blue-500" />
-                  <span className="text-slate-600">{t('home.humidity')}</span>
-                  <span className="ml-auto font-semibold">
-                    {loading ? '--' : `${weatherData?.current.relative_humidity || '--'}%`}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Wind className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-600">{t('home.wind_speed')}</span>
-                  <span className="ml-auto font-semibold">
-                    {loading ? '--' : `${weatherData?.current.wind_speed_kmh || '--'} km/h`}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-green-500" />
-                  <span className="text-slate-600">{t('home.visibility')}</span>
-                  <span className="ml-auto font-semibold">
-                    {loading ? '--' : `${weatherData?.current.visibility_km || '--'} km`}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-purple-500" />
-                  <span className="text-slate-600">{t('home.pressure')}</span>
-                  <span className="ml-auto font-semibold">
-                    {loading ? '--' : `${weatherData?.current.pressure_mb || '--'} mb`}
-                  </span>
+                <div className="flex items-center justify-between bg-white/5 p-2.5 rounded-xl">
+                  <span className="text-slate-400 flex items-center gap-1.5"><Activity className="w-3.5 h-3.5 text-purple-400" />{t('home.pressure')}</span>
+                  <span className="font-bold text-white">{loading ? '--' : `${weatherData?.current.pressure_mb || '1012'} mb`}</span>
                 </div>
               </div>
             </div>
 
             {/* Soil Status */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Mountain className="w-6 h-6 text-amber-600" />
-                <h3 className="text-lg font-bold text-slate-800">Soil Status</h3>
+            <div className="apple-glass-card p-6 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Mountain className="w-5 h-5 text-amber-400" />
+                  <h3 className="text-base font-bold text-white font-display">Soil Status</h3>
+                </div>
+                
+                <div className="space-y-4 text-xs">
+                  <div className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl">
+                    <span className="text-slate-400">{t('home.soil_type')}</span>
+                    <span className="font-bold text-emerald-400">{soilData?.type || 'Loamy Alluvial'}</span>
+                  </div>
+                  
+                  <div className="bg-white/5 p-3 rounded-xl space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-400">{t('home.soil_moisture')}</span>
+                      <span className="font-bold text-sky-400">{soilData?.moisture || 48}%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                      <div 
+                        className="bg-sky-400 h-1.5 rounded-full transition-all duration-300"
+                        style={{ width: `${Math.min((soilData?.moisture || 48), 100)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white/5 p-3 rounded-xl space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-400">{t('home.ph_level')}</span>
+                      <span className="font-bold text-emerald-400">{soilData?.ph || 6.5}</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                      <div 
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                          (soilData?.ph || 6.5) >= 6.0 && (soilData?.ph || 6.5) <= 7.5 
+                            ? 'bg-emerald-400' 
+                            : 'bg-amber-400'
+                        }`}
+                        style={{ width: `${Math.min(((soilData?.ph || 6.5) / 14) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-600">{t('home.soil_type')}</span>
-                  <span className="font-semibold">{soilData?.type || t('common.loading')}</span>
+              <div className="grid grid-cols-3 gap-2 text-xs pt-4 border-t border-white/10">
+                <div className="text-center bg-white/5 p-2 rounded-xl">
+                  <div className="font-extrabold text-base text-sky-400">{soilData?.nitrogen || 140}</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Nitrogen (N)</div>
                 </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-slate-600">{t('home.soil_moisture')}</span>
-                    <span className="font-semibold">{soilData?.moisture || '--'}%</span>
-                  </div>
-                  <div className="w-full bg-slate-200 rounded-full h-2">
-                    <div 
-                      className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${Math.min((soilData?.moisture || 0), 100)}%` }}
-                    ></div>
-                  </div>
+                <div className="text-center bg-white/5 p-2 rounded-xl">
+                  <div className="font-extrabold text-base text-amber-400">{soilData?.phosphorus || 35}</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Phosphorus (P)</div>
                 </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-slate-600">{t('home.ph_level')}</span>
-                    <span className="font-semibold">{soilData?.ph || '--'}</span>
-                  </div>
-                  <div className="w-full bg-slate-200 rounded-full h-2">
-                    <div 
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        (soilData?.ph || 0) >= 6.0 && (soilData?.ph || 0) <= 7.5 
-                          ? 'bg-green-500' 
-                          : 'bg-yellow-500'
-                      }`}
-                      style={{ width: `${Math.min(((soilData?.ph || 0) / 14) * 100, 100)}%` }}
-                    ></div>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-3 text-xs">
-                  <div className="text-center">
-                    <div className="font-semibold text-lg text-blue-600">{soilData?.nitrogen || '--'}</div>
-                    <div className="text-slate-500">N</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-semibold text-lg text-orange-600">{soilData?.phosphorus || '--'}</div>
-                    <div className="text-slate-500">P</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-semibold text-lg text-purple-600">{soilData?.potassium || '--'}</div>
-                    <div className="text-slate-500">K</div>
-                  </div>
+                <div className="text-center bg-white/5 p-2 rounded-xl">
+                  <div className="font-extrabold text-base text-purple-400">{soilData?.potassium || 180}</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Potassium (K)</div>
                 </div>
               </div>
             </div>

@@ -33,13 +33,13 @@ export const OfficerLogin = ({ onToken }: { onToken: (t: string) => void }) => {
   }
 
   return (
-    <div className="glass-action-card p-8 sm:p-9 shadow-2xl space-y-6">
+    <div className="apple-glass-card p-8 sm:p-9 shadow-2xl space-y-6">
       <div className="text-center">
         <div className="w-13 h-13 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-600/30 border border-emerald-300/40 text-slate-950">
           <ShieldCheck className="w-7 h-7" />
         </div>
         <h3 className="text-2xl font-bold text-white tracking-tight font-display mb-1.5">
-          Agricultural Officer Portal
+          <span className="apple-title-gradient">Agricultural Officer Portal</span>
         </h3>
         <p className="text-xs text-slate-400 leading-relaxed">
           Access the regional administrative dashboard to verify field telemetry and resolve farmer inquiries.
