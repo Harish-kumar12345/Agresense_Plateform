@@ -196,18 +196,18 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. Sleek Agronomic Context Bar (VerdaAgro Style - Zero Wasted Space) */}
-      <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-harvest flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="space-y-1">
+      <motion.div variants={motionPresets.item} className="verda-hero-header flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-2 relative z-10">
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
             <span>Intelligence</span>
             <span className="text-slate-600">/</span>
             <span className="text-white">Mandi Market Rates & Commodity Terminal</span>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white font-display">
-              APMC Market Telemetry
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white font-display">
+              <span className="verda-gradient-title">APMC Market Telemetry</span>
             </h1>
-            <span className="agri-pill">
+            <span className="verda-glow-pill">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
               Live Agmarknet Sync
             </span>
@@ -215,12 +215,12 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               🌾 {selectedCrop}
             </Badge>
           </div>
-          <p className="text-xs text-slate-300 flex items-center gap-2">
+          <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
             <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            <span className="font-medium text-white">{farmName}</span>
-            <span className="text-slate-500">•</span>
+            <span className="font-semibold text-white">{farmName}</span>
+            <span className="text-emerald-800">•</span>
             <span>{locationLabel}</span>
-            <span className="text-slate-500">•</span>
+            <span className="text-emerald-800">•</span>
             <span className="text-emerald-300 font-semibold">{farmArea} Hectares Cultivated</span>
           </p>
         </div>

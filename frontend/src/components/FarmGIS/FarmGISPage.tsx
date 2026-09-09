@@ -243,16 +243,16 @@ export const FarmGISPage: React.FC<FarmGISPageProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* Header Banner */}
-      <motion.div variants={motionPresets.item} className="hero-banner-aurora hero-aurora-emerald">
-        <div className="hero-banner-content space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold backdrop-blur-md border border-emerald-400/30">
+      <motion.div variants={motionPresets.item} className="verda-hero-header">
+        <div className="space-y-2 relative z-10">
+          <div className="verda-glow-pill">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
             <span>GIS & Precision Cadastral Intelligence</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-display text-white">
-            Farm Boundary & Geodesic Mapping
+            <span className="verda-gradient-title">Farm Boundary</span> & Geodesic Mapping
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#D1DED6] max-w-2xl leading-relaxed">
             Locate your field on live satellite maps, draw precision polygon boundaries, automatically calculate geodesic land area, and synchronize plots with AgriSense predictive models.
           </p>
         </div>
