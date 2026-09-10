@@ -1,0 +1,400 @@
+{
+  "Rice": [
+    {
+      "market": "Azadpur Mandi",
+      "district": "Delhi",
+      "state": "Delhi",
+      "variety": "Basmati 1121",
+      "minPrice": 3600,
+      "maxPrice": 4200,
+      "modalPrice": 3950,
+      "lat": 28.71,
+      "lon": 77.17
+    },
+    {
+      "market": "Ghaziabad Mandi",
+      "district": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "variety": "Common Paddy",
+      "minPrice": 2250,
+      "maxPrice": 2450,
+      "modalPrice": 2380,
+      "lat": 28.6692,
+      "lon": 77.4538
+    },
+    {
+      "market": "Meerut Mandi",
+      "district": "Meerut",
+      "state": "Uttar Pradesh",
+      "variety": "Sharbati",
+      "minPrice": 2500,
+      "maxPrice": 2750,
+      "modalPrice": 2680,
+      "lat": 28.9845,
+      "lon": 77.7064
+    },
+    {
+      "market": "Kochi APMC",
+      "district": "Ernakulam",
+      "state": "Kerala",
+      "variety": "Jyothi / Ponni",
+      "minPrice": 2900,
+      "maxPrice": 3200,
+      "modalPrice": 3050,
+      "lat": 9.9312,
+      "lon": 76.2673
+    },
+    {
+      "market": "Palakkad Mandi",
+      "district": "Palakkad",
+      "state": "Kerala",
+      "variety": "Matta Rice",
+      "minPrice": 3100,
+      "maxPrice": 3400,
+      "modalPrice": 3280,
+      "lat": 10.7867,
+      "lon": 76.6548
+    },
+    {
+      "market": "Karnal Mandi",
+      "district": "Karnal",
+      "state": "Haryana",
+      "variety": "Basmati Pusa",
+      "minPrice": 3800,
+      "maxPrice": 4350,
+      "modalPrice": 4120,
+      "lat": 29.6857,
+      "lon": 76.9905
+    },
+    {
+      "market": "Ludhiana Mandi",
+      "district": "Ludhiana",
+      "state": "Punjab",
+      "variety": "PR 126",
+      "minPrice": 2200,
+      "maxPrice": 2350,
+      "modalPrice": 2310,
+      "lat": 30.901,
+      "lon": 75.8573
+    },
+    {
+      "market": "Burdwan Mandi",
+      "district": "Purba Bardhaman",
+      "state": "West Bengal",
+      "variety": "Minikit",
+      "minPrice": 2400,
+      "maxPrice": 2650,
+      "modalPrice": 2540,
+      "lat": 23.2324,
+      "lon": 87.8615
+    }
+  ],
+  "Wheat": [
+    {
+      "market": "Azadpur Mandi",
+      "district": "Delhi",
+      "state": "Delhi",
+      "variety": "Dara",
+      "minPrice": 2400,
+      "maxPrice": 2600,
+      "modalPrice": 2520,
+      "lat": 28.71,
+      "lon": 77.17
+    },
+    {
+      "market": "Ghaziabad Mandi",
+      "district": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "variety": "Deshi",
+      "minPrice": 2380,
+      "maxPrice": 2520,
+      "modalPrice": 2460,
+      "lat": 28.6692,
+      "lon": 77.4538
+    },
+    {
+      "market": "Khanna Mandi",
+      "district": "Ludhiana",
+      "state": "Punjab",
+      "variety": "HD 3086",
+      "minPrice": 2275,
+      "maxPrice": 2400,
+      "modalPrice": 2350,
+      "lat": 30.7068,
+      "lon": 76.2166
+    },
+    {
+      "market": "Indore Mandi",
+      "district": "Indore",
+      "state": "Madhya Pradesh",
+      "variety": "Sharbati",
+      "minPrice": 2800,
+      "maxPrice": 3400,
+      "modalPrice": 3150,
+      "lat": 22.7196,
+      "lon": 75.8577
+    }
+  ],
+  "Maize": [
+    {
+      "market": "Chhindwara Mandi",
+      "district": "Chhindwara",
+      "state": "Madhya Pradesh",
+      "variety": "Yellow Maize",
+      "minPrice": 1950,
+      "maxPrice": 2250,
+      "modalPrice": 2120,
+      "lat": 22.0574,
+      "lon": 78.9382
+    },
+    {
+      "market": "Davangere Mandi",
+      "district": "Davangere",
+      "state": "Karnataka",
+      "variety": "Hybrid Corn",
+      "minPrice": 2050,
+      "maxPrice": 2300,
+      "modalPrice": 2180,
+      "lat": 14.4644,
+      "lon": 75.9218
+    },
+    {
+      "market": "Gulabbagh Mandi",
+      "district": "Purnia",
+      "state": "Bihar",
+      "variety": "Commercial Maize",
+      "minPrice": 1850,
+      "maxPrice": 2150,
+      "modalPrice": 2040,
+      "lat": 25.7771,
+      "lon": 87.4753
+    }
+  ],
+  "Cotton": [
+    {
+      "market": "Rajkot Mandi",
+      "district": "Rajkot",
+      "state": "Gujarat",
+      "variety": "Shankar-6",
+      "minPrice": 6800,
+      "maxPrice": 7500,
+      "modalPrice": 7250,
+      "lat": 22.3039,
+      "lon": 70.8022
+    },
+    {
+      "market": "Adilabad Mandi",
+      "district": "Adilabad",
+      "state": "Telangana",
+      "variety": "Medium Staple",
+      "minPrice": 6700,
+      "maxPrice": 7300,
+      "modalPrice": 7080,
+      "lat": 19.6641,
+      "lon": 78.532
+    },
+    {
+      "market": "Yavatmal Mandi",
+      "district": "Yavatmal",
+      "state": "Maharashtra",
+      "variety": "Long Staple",
+      "minPrice": 6900,
+      "maxPrice": 7450,
+      "modalPrice": 7190,
+      "lat": 20.3888,
+      "lon": 78.1204
+    }
+  ],
+  "Sugarcane": [
+    {
+      "market": "Muzaffarnagar Mandi",
+      "district": "Muzaffarnagar",
+      "state": "Uttar Pradesh",
+      "variety": "Co 0238",
+      "minPrice": 360,
+      "maxPrice": 390,
+      "modalPrice": 375,
+      "lat": 29.4727,
+      "lon": 77.7085
+    },
+    {
+      "market": "Kolhapur Mandi",
+      "district": "Kolhapur",
+      "state": "Maharashtra",
+      "variety": "Co 86032",
+      "minPrice": 330,
+      "maxPrice": 365,
+      "modalPrice": 350,
+      "lat": 16.705,
+      "lon": 74.2433
+    }
+  ],
+  "Black Pepper": [
+    {
+      "market": "Kochi Spices Board",
+      "district": "Ernakulam",
+      "state": "Kerala",
+      "variety": "Garbled MG1",
+      "minPrice": 57000,
+      "maxPrice": 61000,
+      "modalPrice": 59200,
+      "lat": 9.9312,
+      "lon": 76.2673
+    },
+    {
+      "market": "Kottayam Mandi",
+      "district": "Kottayam",
+      "state": "Kerala",
+      "variety": "Ungarbled",
+      "minPrice": 55000,
+      "maxPrice": 58500,
+      "modalPrice": 57400,
+      "lat": 9.5916,
+      "lon": 76.5222
+    }
+  ],
+  "Cardamom": [
+    {
+      "market": "Kumily Spices Auction",
+      "district": "Idukki",
+      "state": "Kerala",
+      "variety": "Small 8mm Bold",
+      "minPrice": 125000,
+      "maxPrice": 142000,
+      "modalPrice": 134000,
+      "lat": 9.608,
+      "lon": 77.1643
+    },
+    {
+      "market": "Bodinayakanur Mandi",
+      "district": "Theni",
+      "state": "Tamil Nadu",
+      "variety": "Green Cardamom",
+      "minPrice": 120000,
+      "maxPrice": 138000,
+      "modalPrice": 131500,
+      "lat": 10.0104,
+      "lon": 77.3486
+    }
+  ],
+  "Rubber": [
+    {
+      "market": "Kottayam Rubber Market",
+      "district": "Kottayam",
+      "state": "Kerala",
+      "variety": "RSS-4",
+      "minPrice": 17200,
+      "maxPrice": 18400,
+      "modalPrice": 17850,
+      "lat": 9.5916,
+      "lon": 76.5222
+    },
+    {
+      "market": "Kochi Auction",
+      "district": "Ernakulam",
+      "state": "Kerala",
+      "variety": "ISNR-20",
+      "minPrice": 16500,
+      "maxPrice": 17600,
+      "modalPrice": 17100,
+      "lat": 9.9312,
+      "lon": 76.2673
+    }
+  ],
+  "Coconut": [
+    {
+      "market": "Pollachi Mandi",
+      "district": "Coimbatore",
+      "state": "Tamil Nadu",
+      "variety": "Dehusked Nut",
+      "minPrice": 12800,
+      "maxPrice": 14200,
+      "modalPrice": 13600,
+      "lat": 10.6609,
+      "lon": 77.0048
+    },
+    {
+      "market": "Kozhikode Mandi",
+      "district": "Kozhikode",
+      "state": "Kerala",
+      "variety": "Milling Copra",
+      "minPrice": 9800,
+      "maxPrice": 11200,
+      "modalPrice": 10600,
+      "lat": 11.2588,
+      "lon": 75.7804
+    }
+  ],
+  "Potato": [
+    {
+      "market": "Agra Mandi",
+      "district": "Agra",
+      "state": "Uttar Pradesh",
+      "variety": "Kufri Bahar",
+      "minPrice": 1150,
+      "maxPrice": 1400,
+      "modalPrice": 1280,
+      "lat": 27.1767,
+      "lon": 78.0081
+    },
+    {
+      "market": "Azadpur Mandi",
+      "district": "Delhi",
+      "state": "Delhi",
+      "variety": "Jyoti",
+      "minPrice": 1300,
+      "maxPrice": 1550,
+      "modalPrice": 1420,
+      "lat": 28.71,
+      "lon": 77.17
+    }
+  ],
+  "Tomato": [
+    {
+      "market": "Kolar Mandi",
+      "district": "Kolar",
+      "state": "Karnataka",
+      "variety": "Hybrid Tomato",
+      "minPrice": 1400,
+      "maxPrice": 1850,
+      "modalPrice": 1650,
+      "lat": 13.1367,
+      "lon": 78.1292
+    },
+    {
+      "market": "Nashik Mandi",
+      "district": "Nashik",
+      "state": "Maharashtra",
+      "variety": "Local Red",
+      "minPrice": 1350,
+      "maxPrice": 1750,
+      "modalPrice": 1580,
+      "lat": 19.9975,
+      "lon": 73.7898
+    }
+  ],
+  "Onion": [
+    {
+      "market": "Lasalgaon APMC",
+      "district": "Nashik",
+      "state": "Maharashtra",
+      "variety": "Red Onion",
+      "minPrice": 1700,
+      "maxPrice": 2300,
+      "modalPrice": 2050,
+      "lat": 20.1472,
+      "lon": 74.2259
+    },
+    {
+      "market": "Azadpur Mandi",
+      "district": "Delhi",
+      "state": "Delhi",
+      "variety": "Nasik Red",
+      "minPrice": 2100,
+      "maxPrice": 2650,
+      "modalPrice": 2420,
+      "lat": 28.71,
+      "lon": 77.17
+    }
+  ]
+}

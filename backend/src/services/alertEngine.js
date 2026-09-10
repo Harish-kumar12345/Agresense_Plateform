@@ -34,29 +34,34 @@ const evaluateTelemetry = async (telemetry = {}) => {
   const farmName = farm.name || 'AgriSense Farm';
   const crop = farm.crop || 'Rice';
 
-  // ----------------------------------------------------
-  // 1. WEATHER ALERTS (Rain, Temp, Wind, Humidity)
-  // ----------------------------------------------------
-  const temp = weather.temperature_c ?? weather.temperature ?? 28;
-  const humidity = weather.humidity ?? weather.relative_humidity ?? 65;
-  const wind = weather.wind_speed_kmh ?? weather.wind_speed ?? 12;
-  const rain = weather.rain_mm ?? weather.precipitation_probability ?? 0;
+// Load Empirical Data-Driven Alert Thresholds (Module 6)
+const alertThresholds = require('../config/alertThresholds.json');
 
-  if (temp >= 38) {
-    const key = generateDedupKey(farmId, 'weather', 'extreme_heat');
+  // ----------------------------------------------------
+  // 1. WEATHER ALERTS (Heatwave, Frost, Heavy Rain)
+  // ----------------------------------------------------
+  const temp = weather.temperature_c ?? 28;
+  const humidity = weather.humidity_pct ?? 65;
+  const rain = weather.rainfall_mm ?? 0;
+
+  const heatLimit = alertThresholds?.global_limits?.temperature?.heat_stress ?? 34;
+  const frostLimit = alertThresholds?.global_limits?.temperature?.frost_risk ?? 14;
+
+  if (temp >= heatLimit) {
+    const key = generateDedupKey(farmId, 'weather', 'heat_stress');
     alertsToInsert.push({
       farm_id: farmId,
       farm_name: farmName,
       crop,
       alert_type: 'weather',
-      severity: temp >= 42 ? 'Critical' : 'High',
-      title: '🌡️ Extreme Heat Stress Alert',
-      reason: `Current temperature reached ${temp}°C with ${humidity}% humidity. High risk of crop moisture loss and heat stress.`,
+      severity: temp >= (alertThresholds?.global_limits?.temperature?.extreme_heat ?? 39) ? 'Critical' : 'High',
+      title: '🌡️ Data-Driven Heat Stress Alert',
+      reason: `Current temperature reached ${temp}°C (exceeds empirical 90th percentile threshold of ${heatLimit}°C) with ${humidity}% humidity.`,
       recommended_action: 'Increase drip irrigation frequency and apply shade net protection or mulch cover to reduce evapotranspiration.',
       dedup_key: key,
       target_module: 'weather'
     });
-  } else if (temp <= 10) {
+  } else if (temp <= frostLimit) {
     const key = generateDedupKey(farmId, 'weather', 'frost_risk');
     alertsToInsert.push({
       farm_id: farmId,
@@ -64,8 +69,8 @@ const evaluateTelemetry = async (telemetry = {}) => {
       crop,
       alert_type: 'weather',
       severity: 'Warning',
-      title: '❄️ Frost / Low Temperature Risk',
-      reason: `Air temperature dropped to ${temp}°C, approaching frost threshold for ${crop}.`,
+      title: '❄️ Frost / Thermal Stress Risk',
+      reason: `Air temperature dropped to ${temp}°C (below comfort threshold of ${frostLimit}°C for ${crop}).`,
       recommended_action: 'Provide light evening irrigation to maintain soil heat and protect young seedlings from cold shock.',
       dedup_key: key,
       target_module: 'weather'
@@ -88,29 +93,17 @@ const evaluateTelemetry = async (telemetry = {}) => {
     });
   }
 
-  if (wind >= 25) {
-    const key = generateDedupKey(farmId, 'weather', 'strong_wind');
-    alertsToInsert.push({
-      farm_id: farmId,
-      farm_name: farmName,
-      crop,
-      alert_type: 'weather',
-      severity: 'Warning',
-      title: '💨 Strong Wind Alert',
-      reason: `Wind speeds elevated to ${wind} km/h. Risk of crop lodging and spray drift.`,
-      recommended_action: 'Postpone foliar pesticide spraying and reinforce support stakes for tall crops.',
-      dedup_key: key,
-      target_module: 'weather'
-    });
-  }
+  // ----------------------------------------------------
+  // 2. SOIL ALERTS (Empirical Moisture, pH, Salinity)
+  // ----------------------------------------------------
+  const moistureCrit = alertThresholds?.global_limits?.moisture?.critical_low ?? 22;
+  const phAcidic = alertThresholds?.global_limits?.soil_ph?.strongly_acidic ?? 5.4;
+  const phAlkaline = alertThresholds?.global_limits?.soil_ph?.alkaline_stress ?? 7.8;
 
-  // ----------------------------------------------------
-  // 2. SOIL ALERTS (Moisture, pH, Salinity)
-  // ----------------------------------------------------
-  const moisture = soil.moisture ?? 35;
+  const moisture = soil.moisture ?? (alertThresholds?.global_limits?.moisture?.optimal_min ?? 35);
   const ph = soil.ph ?? 6.8;
 
-  if (moisture < 25) {
+  if (moisture < moistureCrit) {
     const key = generateDedupKey(farmId, 'soil', 'low_moisture');
     alertsToInsert.push({
       farm_id: farmId,
@@ -119,14 +112,14 @@ const evaluateTelemetry = async (telemetry = {}) => {
       alert_type: 'soil',
       severity: 'High',
       title: '💧 Critical Soil Moisture Deficit',
-      reason: `Soil moisture level dropped to ${moisture}% (Optimal range: 35-50%). Crop root zone experiencing moisture deficit.`,
+      reason: `Soil moisture level dropped to ${moisture}% (below data-driven deficit threshold of ${moistureCrit}%). Crop root zone experiencing moisture deficit.`,
       recommended_action: 'Schedule immediate drip or furrow irrigation cycle for 2-3 hours.',
       dedup_key: key,
       target_module: 'soil'
     });
   }
 
-  if (ph < 5.5 || ph > 8.0) {
+  if (ph < phAcidic || ph > phAlkaline) {
     const key = generateDedupKey(farmId, 'soil', 'abnormal_ph');
     alertsToInsert.push({
       farm_id: farmId,
@@ -134,9 +127,9 @@ const evaluateTelemetry = async (telemetry = {}) => {
       crop,
       alert_type: 'soil',
       severity: 'Warning',
-      title: ph < 5.5 ? '🧪 Acidic Soil Warning' : '🧪 Alkaline Soil Warning',
-      reason: `Soil pH level measured at ${ph} (${ph < 5.5 ? 'Acidic' : 'Alkaline'}). Nutrient availability is impaired.`,
-      recommended_action: ph < 5.5 ? 'Apply agricultural lime (CaCO₃) @ 300 kg/ha to raise pH.' : 'Apply gypsum or elemental sulfur to lower pH.',
+      title: ph < phAcidic ? '🧪 Strongly Acidic Soil Warning' : '🧪 Alkaline Soil Warning',
+      reason: `Soil pH level measured at ${ph} (thresholds: < ${phAcidic} acidic, > ${phAlkaline} alkaline). Nutrient availability is impaired.`,
+      recommended_action: ph < phAcidic ? 'Apply agricultural lime (CaCO₃) @ 300 kg/ha to raise pH.' : 'Apply gypsum or elemental sulfur to lower pH.',
       dedup_key: key,
       target_module: 'soil'
     });

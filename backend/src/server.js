@@ -62,6 +62,7 @@ const harvestManagementRoutes = require('./routes/harvestManagement');
 const alertRoutes = require('./routes/alerts');
 const authRoutes = require('./routes/auth');
 const mandiRoutes = require('./routes/mandi');
+const soilRoutes = require('./routes/soil');
 
 // Routes
 app.use('/api/query', queryRoutes);
@@ -72,12 +73,14 @@ app.use('/api/crop-prices', cropPricesRoutes);
 app.use('/api/farms', farmRoutes);
 app.use('/api/ml', yieldPredictionRoutes);
 app.use('/api/ml', diseaseRiskRoutes);
+app.use('/api', diseaseRiskRoutes);
 app.use('/api', inventoryRoutes);
 app.use('/api/farm-activities', farmActivityRoutes);
 app.use('/api/harvest-management', harvestManagementRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/mandi', mandiRoutes);
+app.use('/api/soil', soilRoutes);
 
 // Socket.io
 initChatSockets(io);

@@ -54,7 +54,31 @@ async function fetchLiveWeather(lat, lon) {
  * SoilGrids provides: nitrogen (g/kg), phh2o, soc (g/kg)
  * P and K are estimated from organic carbon using pedotransfer ratios
  */
-async function fetchSoilData(lat, lon) {
+// Load Indian Soil Health Card District Benchmarks
+const soilDistrictAverages = require('../data/soilDistrictAverages.json');
+
+function getDistrictSoilFallback(lat, lon, state, district) {
+  if (state && district && soilDistrictAverages[state] && soilDistrictAverages[state][district]) {
+    return { ...soilDistrictAverages[state][district], source: `Soil Health Card (${district}, ${state})` };
+  }
+  if (state && soilDistrictAverages[state] && soilDistrictAverages[state].default) {
+    return { ...soilDistrictAverages[state].default, source: `Soil Health Card Regional Benchmark (${state})` };
+  }
+  if (lat && lon) {
+    if (lat >= 27.5 && lon <= 78.5) {
+      return { ...soilDistrictAverages["Uttar Pradesh"]["Ghaziabad"], source: "Soil Health Card (Western UP / NCR)" };
+    }
+    if (lat < 12) {
+      return { ...soilDistrictAverages["Kerala"]["default"], source: "Soil Health Card (Kerala Laterite)" };
+    }
+    if (lat >= 18 && lat < 22 && lon >= 72 && lon <= 76) {
+      return { ...soilDistrictAverages["Maharashtra"]["default"], source: "Soil Health Card (Maharashtra Vertisol)" };
+    }
+  }
+  return { ...soilDistrictAverages["_all_india_average"], source: "Soil Health Card National Agro-Climatic Benchmark" };
+}
+
+async function fetchSoilData(lat, lon, state, district) {
   try {
     const url = `https://rest.isric.org/soilgrids/v2.0/properties/query?lat=${lat}&lon=${lon}&property=nitrogen&property=phh2o&property=soc&depth=0-5cm&value=mean`;
     const res = await axios.get(url, { timeout: 12000 });
@@ -67,39 +91,41 @@ async function fetchSoilData(lat, lon) {
       const val = depth0_5?.values?.mean;
 
       if (layer.name === 'nitrogen' && val != null) {
-        nitrogen_gkg = val / 10; // cg/kg → g/kg
+        nitrogen_gkg = val / 10;
       }
       if (layer.name === 'phh2o' && val != null) {
-        ph = val / 10; // stored as pH×10
+        ph = val / 10;
       }
       if (layer.name === 'soc' && val != null) {
-        soc_gkg = val / 10; // dg/kg → g/kg
+        soc_gkg = val / 10;
       }
     }
 
-    // Convert to kg/ha (top 15cm, bulk density ~1.3 t/m³)
-    // N (kg/ha) = N(g/kg) × bulk_density(1.3) × depth(0.15m) × 10000m²/ha ÷ 1000
     const soil_n = nitrogen_gkg != null ? Math.round(nitrogen_gkg * 1.3 * 0.15 * 10) : null;
-    
-    // P and K estimated from SOC using pedotransfer functions
-    // Typical C:N:P:K ratio in tropical soils ~100:10:1.3:0.8
     const soil_p = soc_gkg != null ? Math.round(soc_gkg * 0.013 * 1.3 * 0.15 * 10) : null;
     const soil_k = soc_gkg != null ? Math.round(soc_gkg * 0.008 * 1.3 * 0.15 * 10) : null;
     const soil_ph = ph != null ? Math.round(ph * 10) / 10 : null;
 
+    const fallback = getDistrictSoilFallback(lat, lon, state, district);
+
     return {
-      soil_n: soil_n || 40,
-      soil_p: soil_p || 25,
-      soil_k: soil_k || 30,
-      soil_ph: soil_ph || 6.5,
+      soil_n: soil_n || fallback.soil_n,
+      soil_p: soil_p || fallback.soil_p,
+      soil_k: soil_k || fallback.soil_k,
+      soil_ph: soil_ph || fallback.soil_ph,
+      soil_type: fallback.soil_type,
       nitrogen_gkg,
       soc_gkg,
-      source: 'ISRIC SoilGrids v2.0',
+      source: soil_n ? 'ISRIC SoilGrids v2.0' : fallback.source,
       fetched_at: new Date().toISOString()
     };
   } catch (err) {
-    console.warn('⚠️ SoilGrids API fetch failed:', err.message);
-    return null;
+    console.warn('⚠️ SoilGrids API fetch failed, utilizing District Soil Health Card Profile:', err.message);
+    const fallback = getDistrictSoilFallback(lat, lon, state, district);
+    return {
+      ...fallback,
+      fetched_at: new Date().toISOString()
+    };
   }
 }
 
@@ -164,38 +190,40 @@ async function calculateRealGDD(lat, lon, sowingDate, cropName) {
  * Fetch ALL real data in parallel for a given farm location
  * Returns a complete 12-feature payload ready for the yield prediction engine
  */
-async function fetchAllRealData(lat, lon, crop, farmAreaHa, sowingDate) {
+async function fetchAllRealData(lat, lon, crop, farmAreaHa, sowingDate, state, district) {
   console.log(`🌍 Fetching real data for [${lat}, ${lon}] crop=${crop}...`);
+
+  const fallbackSoil = getDistrictSoilFallback(lat, lon, state, district);
 
   const [weather, soil, gddResult] = await Promise.all([
     fetchLiveWeather(lat, lon),
-    fetchSoilData(lat, lon),
+    fetchSoilData(lat, lon, state, district),
     calculateRealGDD(lat, lon, sowingDate || getDefaultSowingDate(), crop)
   ]);
 
   console.log('  ✅ Weather:', weather ? 'Live' : 'Fallback');
-  console.log('  ✅ Soil:', soil ? 'SoilGrids' : 'Fallback');
+  console.log('  ✅ Soil:', soil ? soil.source : fallbackSoil.source);
   console.log('  ✅ GDD:', gddResult ? `${gddResult.gdd} (${gddResult.days_since_sowing} days)` : 'Fallback');
 
-  // Build the 12-feature payload using real data with safe fallbacks
+  // Build the 12-feature payload using real data with genuine Soil Health Card district fallbacks
   const payload = {
     crop: crop || 'Rice',
     farm_area_ha: farmAreaHa || 1.5,
     temperature_c: weather?.temperature_c ?? 28,
     rainfall_mm: weather?.rainfall_mm ?? 5,
     humidity_pct: weather?.humidity_pct ?? 70,
-    soil_moisture_pct: weather?.soil_moisture_pct ?? 35,
-    soil_ph: soil?.soil_ph ?? 6.5,
-    soil_n: soil?.soil_n ?? 40,
-    soil_p: soil?.soil_p ?? 25,
-    soil_k: soil?.soil_k ?? 30,
+    soil_moisture_pct: weather?.soil_moisture_pct ?? fallbackSoil.soil_moisture_pct,
+    soil_ph: soil?.soil_ph ?? fallbackSoil.soil_ph,
+    soil_n: soil?.soil_n ?? fallbackSoil.soil_n,
+    soil_p: soil?.soil_p ?? fallbackSoil.soil_p,
+    soil_k: soil?.soil_k ?? fallbackSoil.soil_k,
     gdd: gddResult?.gdd ?? 1200,
-    historical_yield_tha: 0  // 0 → will use crop baseline
+    historical_yield_tha: 0
   };
 
   const dataSources = {
     weather: weather ? weather.source : 'Fallback defaults',
-    soil: soil ? soil.source : 'Fallback defaults',
+    soil: soil ? soil.source : fallbackSoil.source,
     gdd: gddResult ? gddResult.source : 'Fallback defaults',
     raw: { weather, soil, gdd: gddResult }
   };
@@ -227,5 +255,6 @@ module.exports = {
   fetchLiveWeather,
   fetchSoilData,
   calculateRealGDD,
-  fetchAllRealData
+  fetchAllRealData,
+  getDistrictSoilFallback
 };

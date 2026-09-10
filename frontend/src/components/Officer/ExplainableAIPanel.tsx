@@ -67,7 +67,7 @@ export const ExplainableAIPanel: React.FC<ExplainableAIPanelProps> = ({
             <span className="font-semibold text-emerald-300 text-[11px] uppercase tracking-wider">
               Yield Forecast Drivers
             </span>
-            <span className="text-[10px] text-slate-400 font-mono">LightGBM / XGBoost</span>
+            <span className="text-[10px] text-slate-400 font-mono">LightGBM Regressor (R²=0.92)</span>
           </div>
 
           {yieldFactors.length === 0 ? (

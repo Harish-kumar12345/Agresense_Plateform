@@ -1,0 +1,20 @@
+{
+  "Random Forest": {
+    "R2": 0.9153,
+    "MAE": 1.1804,
+    "RMSE": 3.4787,
+    "Train_Time_s": 8.72
+  },
+  "XGBoost": {
+    "R2": 0.9122,
+    "MAE": 1.2909,
+    "RMSE": 3.5428,
+    "Train_Time_s": 4.64
+  },
+  "LightGBM (AgriSense Production)": {
+    "R2": 0.9168,
+    "MAE": 1.208,
+    "RMSE": 3.4492,
+    "Train_Time_s": 3.82
+  }
+}
