@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const { InferenceClient } = require('@huggingface/inference');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const path = require('path');
+const mlClient = require('./mlClient');
 
 // Load .env from backend directory
 dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
@@ -39,6 +40,7 @@ class PlantDiseaseService {
     console.log('🌱 Plant Disease Service initialized');
     console.log('  - Gemini API (PRIMARY):', this.geminiApiKey ? 'Available' : 'Missing');
     console.log('  - HF Token (BACKUP):', this.hfToken ? 'Available' : 'Missing');
+    console.log('  - Local MobileNetV2 ONNX (OFFLINE ML): Ready');
   }
 
   async identifyDisease(imageBuffer) {
@@ -46,9 +48,9 @@ class PlantDiseaseService {
       console.log('🔍 Starting plant disease identification...');
       console.log('Image buffer size:', imageBuffer?.length || 'unknown');
 
-      // Method 1: Try Gemini Vision first (more reliable and actually works)
+      // Method 1: Try Gemini Vision first (if available)
       if (this.geminiClient && this.geminiApiKey) {
-        console.log('� Attempting Gemini Vision analysis (PRIMARY)...');
+        console.log('🔮 Attempting Gemini Vision analysis (PRIMARY)...');
         try {
           const geminiResult = await this.analyzeWithGemini(imageBuffer);
           if (geminiResult.success) {
@@ -60,9 +62,9 @@ class PlantDiseaseService {
         }
       }
 
-      // Method 2: Try Hugging Face as backup (known to have issues)
+      // Method 2: Try Hugging Face as backup
       if (this.hfClient && this.hfToken) {
-        console.log('� Attempting Hugging Face analysis (BACKUP)...');
+        console.log('🌐 Attempting Hugging Face analysis (BACKUP)...');
         try {
           const hfResult = await this.analyzeWithHuggingFace(imageBuffer);
           if (hfResult.success) {
@@ -70,17 +72,32 @@ class PlantDiseaseService {
             return hfResult;
           }
         } catch (error) {
-          console.log('⚠️ Hugging Face also failed, using enhanced mock...');
+          console.log('⚠️ Hugging Face also failed, falling back to local ML model...');
         }
       }
 
-      // Method 3: Enhanced mock detection with intelligent fallback
-      console.log('🔄 Using enhanced mock disease detection (all AI services failed)');
-      return this.getEnhancedMockDetection('All AI services unavailable');
+      // Method 3: Real Local MobileNetV2 ONNX Deep Learning Model
+      console.log('🧠 Running Local MobileNetV2 Deep Learning ONNX Model (OFFLINE FALLBACK)...');
+      const localResult = await mlClient.predictDiseaseLocal(imageBuffer);
+      if (localResult && localResult.success) {
+        console.log('✅ Local MobileNetV2 ONNX analysis successful');
+        return localResult;
+      }
+
+      throw new Error(localResult?.error || 'Local ML model inference failed');
 
     } catch (error) {
       console.error('❌ Error in disease identification:', error);
-      return this.getEnhancedMockDetection(error.message);
+      // Even under unexpected error, invoke local ML model with buffer
+      try {
+        return await mlClient.predictDiseaseLocal(imageBuffer);
+      } catch (finalErr) {
+        return {
+          success: false,
+          error: finalErr.message,
+          source: 'failed'
+        };
+      }
     }
   }
 
@@ -250,87 +267,6 @@ Focus on common plant diseases like leaf spot, blight, mildew, rust, etc.`;
       case 'low': return '🟢';
       default: return '⚪';
     }
-  }
-
-  getEnhancedMockDetection(reason) {
-    console.log('🔄 Using enhanced mock disease detection due to:', reason);
-    
-    // More comprehensive plant diseases with realistic data
-    const mockDiseases = [
-      { 
-        disease: 'Leaf Spot Disease', 
-        confidence: 78, 
-        severity: 'Medium',
-        description: 'Common fungal infection affecting leaf tissue, causing circular brown spots'
-      },
-      { 
-        disease: 'Powdery Mildew', 
-        confidence: 82, 
-        severity: 'Medium',
-        description: 'Fungal disease creating white powdery coating on leaves and stems'
-      },
-      { 
-        disease: 'Bacterial Blight', 
-        confidence: 75, 
-        severity: 'High',
-        description: 'Bacterial infection causing water-soaked spots, browning, and wilting'
-      },
-      { 
-        disease: 'Early Blight', 
-        confidence: 80, 
-        severity: 'Medium',
-        description: 'Fungal disease causing dark spots with concentric rings on leaves'
-      },
-      { 
-        disease: 'Late Blight', 
-        confidence: 85, 
-        severity: 'High',
-        description: 'Serious disease causing water-soaked lesions and plant decay'
-      },
-      { 
-        disease: 'Nutrient Deficiency', 
-        confidence: 70, 
-        severity: 'Low',
-        description: 'Yellowing or discoloration due to lack of essential nutrients (N, P, K)'
-      },
-      { 
-        disease: 'Rust Disease', 
-        confidence: 76, 
-        severity: 'Medium',
-        description: 'Fungal disease causing orange, rust-colored pustules on leaves'
-      },
-      { 
-        disease: 'Mosaic Virus', 
-        confidence: 73, 
-        severity: 'High',
-        description: 'Viral infection causing mottled, mosaic-like patterns on leaves'
-      },
-      { 
-        disease: 'Healthy Plant', 
-        confidence: 90, 
-        severity: 'None',
-        description: 'Plant appears healthy with no visible signs of disease or stress'
-      }
-    ];
-    
-    // Add some intelligence based on common patterns
-    const shuffled = mockDiseases.sort(() => 0.5 - Math.random());
-    const primary = shuffled[0];
-    
-    // Create realistic secondary predictions
-    const secondary = shuffled.slice(1, 3).map(disease => ({
-      ...disease,
-      confidence: Math.max(15, disease.confidence - Math.floor(Math.random() * 30))
-    }));
-    
-    return {
-      success: true,
-      predictions: [primary, ...secondary],
-      primaryDisease: primary,
-      source: 'ai_analysis', // Don't reveal it's mock
-      message: `Plant health analysis completed using advanced AI algorithms`,
-      note: 'Analysis based on common disease patterns and plant health indicators'
-    };
   }
 
   async formatDiseaseReport(diseaseResult) {

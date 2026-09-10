@@ -173,4 +173,26 @@ router.post('/predict-disease-risk', (req, res) => {
   }
 });
 
+const mlClient = require('../services/mlClient');
+
+router.post('/disease-detect-local', async (req, res) => {
+  try {
+    const { imageBase64, imagePath } = req.body;
+    if (!imageBase64 && !imagePath) {
+      return res.status(400).json({
+        success: false,
+        error: 'imageBase64 or imagePath is required'
+      });
+    }
+    const result = await mlClient.predictDiseaseLocal(imageBase64 || imagePath);
+    res.json(result);
+  } catch (error) {
+    console.error('Local Disease Detection Error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;
