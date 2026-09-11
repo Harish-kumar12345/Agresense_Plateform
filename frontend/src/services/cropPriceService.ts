@@ -69,14 +69,14 @@ const STORAGE_ALERTS_KEY = 'agrisense_crop_price_alerts';
 
 export const cropPriceService = {
   // GET crop prices
-  async getCropPrices(state: string = 'Kerala', district?: string, crop?: string): Promise<{
+  async getCropPrices(state: string = 'Uttar Pradesh', district?: string, crop?: string, lat?: number, lon?: number): Promise<{
     prices: CropPriceRecord[];
     lastUpdated: string;
     dataSource: string;
   }> {
     try {
       const response = await axios.get(`${API_BASE}/crop-prices`, {
-        params: { state, district, crop },
+        params: { state, district, crop, lat, lon },
         timeout: 5000
       });
 
@@ -94,9 +94,29 @@ export const cropPriceService = {
     // Comprehensive realistic mandi fallback data
     const fallbackPrices: CropPriceRecord[] = [
       {
+        crop: 'Sugarcane',
+        cropLocal: 'गन्ना',
+        variety: 'Co 0238 (Early)',
+        unit: 'Quintal',
+        minPrice: 355,
+        maxPrice: 385,
+        modalPrice: 370,
+        previousPrice: 365,
+        change: 5,
+        changePercent: 1.37,
+        market: 'Sahibabad APMC',
+        district: district || 'Ghaziabad',
+        state: state || 'Uttar Pradesh',
+        priceDate: new Date().toISOString().split('T')[0],
+        quality: 'SAP Grade A',
+        trend: 'up',
+        season: 'Crushing Season',
+        remarks: 'Active procurement from NCR sugar mills'
+      },
+      {
         crop: 'Rice',
-        cropLocal: 'അരി (നെല്ല്)',
-        variety: 'Ponni / Paddy',
+        cropLocal: state?.toLowerCase().includes('kerala') ? 'അരി (നെല്ല്)' : 'चावल (धान)',
+        variety: state?.toLowerCase().includes('kerala') ? 'Ponni / Paddy' : 'Basmati 1509 / Common',
         unit: 'Quintal',
         minPrice: 2800,
         maxPrice: 3200,
@@ -249,7 +269,7 @@ export const cropPriceService = {
   // GET Mandi comparisons for crop — fetches from /api/mandi/comparison (Agmarknet-backed)
   async getMandiComparisons(
     crop: string = 'Rice',
-    state: string = 'Kerala',
+    state: string = 'Uttar Pradesh',
     district?: string,
     lat?: number,
     lon?: number
@@ -282,16 +302,18 @@ export const cropPriceService = {
     const today = new Date().toISOString().split('T')[0];
 
     const baseModal =
+      cropLC.includes('sugar')    ? 370 :
       cropLC.includes('pepper')   ? 58500 :
       cropLC.includes('rubber')   ? 17500 :
       cropLC.includes('coconut')  ? 13500 :
       cropLC.includes('cardamom') ? 130000 :
-      cropLC.includes('wheat')    ? 2600 :
+      cropLC.includes('wheat')    ? 2460 :
       cropLC.includes('maize')    ? 2100 :
-      cropLC.includes('onion')    ? 2200 :
-      cropLC.includes('tomato')   ? 1500 :
-      cropLC.includes('potato')   ? 1800 :
-      2950;
+      cropLC.includes('onion')    ? 2150 :
+      cropLC.includes('tomato')   ? 1650 :
+      cropLC.includes('potato')   ? 1320 :
+      cropLC.includes('rice') || cropLC.includes('paddy') ? 2380 :
+      2450;
 
     type FallbackMandi = { name: string; dist: string; state: string; distKm: number };
     let fallbackMandis: FallbackMandi[];
@@ -310,12 +332,12 @@ export const cropPriceService = {
         { name: 'Chandigarh APMC', dist: 'Chandigarh', state: 'Punjab',   distKm: 65  },
         { name: 'Bathinda APMC',   dist: 'Bathinda',   state: 'Punjab',   distKm: 145 },
       ];
-    } else if (stateLC.includes('uttar pradesh') || stateLC.includes(' up')) {
+    } else if (stateLC.includes('uttar pradesh') || stateLC.includes(' up') || stateLC.includes('delhi') || (lat && lat > 26 && lat < 31)) {
       fallbackMandis = [
-        { name: 'Azadpur Mandi',   dist: 'Ghaziabad', state: 'Delhi',         distKm: 30  },
-        { name: 'Agra APMC',       dist: 'Agra',       state: 'Uttar Pradesh', distKm: 120 },
-        { name: 'Meerut APMC',     dist: 'Meerut',     state: 'Uttar Pradesh', distKm: 38  },
-        { name: 'Bareilly APMC',   dist: 'Bareilly',   state: 'Uttar Pradesh', distKm: 118 },
+        { name: 'Sahibabad Mandi', dist: 'Ghaziabad', state: 'Uttar Pradesh', distKm: 10  },
+        { name: 'Azadpur Mandi',   dist: 'Delhi',     state: 'Delhi',         distKm: 27  },
+        { name: 'Hapur APMC',      dist: 'Hapur',     state: 'Uttar Pradesh', distKm: 33  },
+        { name: 'Meerut APMC',     dist: 'Meerut',    state: 'Uttar Pradesh', distKm: 43  },
       ];
     } else if (stateLC.includes('maharashtra')) {
       fallbackMandis = [

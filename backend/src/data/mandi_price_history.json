@@ -207,6 +207,50 @@
   ],
   "Sugarcane": [
     {
+      "market": "Sahibabad Mandi",
+      "district": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "variety": "Co 0238 (Early)",
+      "minPrice": 355,
+      "maxPrice": 385,
+      "modalPrice": 370,
+      "lat": 28.6738,
+      "lon": 77.3486
+    },
+    {
+      "market": "Hapur APMC",
+      "district": "Hapur",
+      "state": "Uttar Pradesh",
+      "variety": "Co 0238",
+      "minPrice": 350,
+      "maxPrice": 380,
+      "modalPrice": 365,
+      "lat": 28.7306,
+      "lon": 77.7807
+    },
+    {
+      "market": "Meerut APMC",
+      "district": "Meerut",
+      "state": "Uttar Pradesh",
+      "variety": "Co 0118",
+      "minPrice": 360,
+      "maxPrice": 392,
+      "modalPrice": 378,
+      "lat": 28.9845,
+      "lon": 77.7064
+    },
+    {
+      "market": "Azadpur Mandi",
+      "district": "Delhi",
+      "state": "Delhi",
+      "variety": "Gur & Cane Trade",
+      "minPrice": 348,
+      "maxPrice": 375,
+      "modalPrice": 360,
+      "lat": 28.7139,
+      "lon": 77.1783
+    },
+    {
       "market": "Muzaffarnagar Mandi",
       "district": "Muzaffarnagar",
       "state": "Uttar Pradesh",

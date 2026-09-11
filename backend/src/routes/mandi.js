@@ -27,6 +27,7 @@ const router  = express.Router();
 
 // ─── Static mandi coordinate lookup (for Haversine) ──────────────────────────
 const MANDI_COORDS = require('../data/mandi_coordinates.json');
+const MANDI_PRICE_HISTORY = require('../data/mandi_price_history.json');
 
 // ─── Commodity alias map: normalise user crop name → Agmarknet commodity name ─
 const COMMODITY_ALIASES = {
