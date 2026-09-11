@@ -84,8 +84,38 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   const selectedCrop = farm?.crop || crop || 'Rice';
   const farmName = farm?.farm_name || 'Green Valley Rice Farm';
   const locationLabel = farm?.location_name || (location?.city ? `${location.city}, India` : 'Ghaziabad, Uttar Pradesh');
-  const userState = farm?.location_name ? 'Kerala' : (location?.state || 'Kerala');
-  const userDistrict = location?.city || 'Ernakulam';
+
+  const resolvedState = useMemo(() => {
+    if (location?.state && location.state !== 'India') return location.state;
+    if ((farm as any)?.state) return (farm as any).state;
+    const locText = `${locationLabel} ${farmName}`.toLowerCase();
+    if (locText.includes('kerala') || locText.includes('kochi') || locText.includes('ernakulam') || locText.includes('thrissur') || locText.includes('palakkad')) {
+      return 'Kerala';
+    }
+    if (locText.includes('ghaziabad') || locText.includes('meerut') || locText.includes('hapur') || locText.includes('delhi') || locText.includes('uttar pradesh') || locText.includes('up')) {
+      return 'Uttar Pradesh';
+    }
+    // Geolocation coordinate bounds check
+    if (safeLat >= 8.0 && safeLat <= 13.0 && safeLon >= 75.0 && safeLon <= 77.8) {
+      return 'Kerala';
+    }
+    return 'Uttar Pradesh';
+  }, [location?.state, farm, locationLabel, farmName, safeLat, safeLon]);
+
+  const resolvedDistrict = useMemo(() => {
+    if (location?.district) return location.district;
+    if (location?.city && !['unknown location', 'india', 'default'].includes(location.city.toLowerCase())) {
+      return location.city;
+    }
+    if ((farm as any)?.district) return (farm as any).district;
+    const locText = `${locationLabel}`.toLowerCase();
+    if (locText.includes('ghaziabad')) return 'Ghaziabad';
+    if (locText.includes('ernakulam') || locText.includes('kochi')) return 'Ernakulam';
+    return resolvedState === 'Kerala' ? 'Ernakulam' : 'Ghaziabad';
+  }, [location?.district, location?.city, farm, locationLabel, resolvedState]);
+
+  const userState = resolvedState;
+  const userDistrict = resolvedDistrict;
 
   const [activeSegment, setActiveSegment] = useState<'prices' | 'compare' | 'history' | 'revenue' | 'alerts'>('prices');
   const [searchQuery, setSearchQuery] = useState('');
@@ -126,7 +156,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       const [soilRes, weatherRes, pricesRes, mandiRes, history] = await Promise.all([
         soilService.getSoilAnalysis(safeLat, safeLon, farm?.farm_id || 'default_farm', selectedCrop),
         weatherService.getLiveWeatherData(safeLat, safeLon, selectedCrop),
-        cropPriceService.getCropPrices(userState, userDistrict, selectedCrop),
+        cropPriceService.getCropPrices(userState, userDistrict, selectedCrop, safeLat, safeLon),
         cropPriceService.getMandiComparisons(selectedCrop, userState, userDistrict, safeLat, safeLon),
         cropPriceService.getPriceHistory(selectedCrop, 30)
       ]);
@@ -182,7 +212,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
 
   useEffect(() => {
     loadMarketData();
-  }, [safeLat, safeLon, farmArea, selectedCrop]);
+  }, [safeLat, safeLon, farmArea, selectedCrop, userState, userDistrict]);
 
   const scenarioRevenue = Number(((yieldResult?.totalProductionTons || 12.0) * 10 * customPriceScenario).toFixed(0));
 
