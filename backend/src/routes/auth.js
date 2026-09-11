@@ -54,8 +54,14 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ error: 'Password must be at least 6 characters' });
     }
 
-    // Check if user already exists
-    const existing = await User.findOne({ email });
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanName = (name || '').trim();
+
+    // Check if user already exists (case-insensitive)
+    const escapedEmail = cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const existing = await User.findOne({ 
+      email: { $regex: new RegExp(`^${escapedEmail}$`, 'i') } 
+    });
     if (existing) {
       return res.status(409).json({ error: 'An account with this email already exists' });
     }
@@ -67,8 +73,8 @@ router.post('/signup', async (req, res) => {
     const isVerified = role !== 'officer';
 
     const user = await User.create({
-      name,
-      email,
+      name: cleanName,
+      email: cleanEmail,
       passwordHash,
       role,
       isVerified,
@@ -82,7 +88,7 @@ router.post('/signup', async (req, res) => {
 
     // For officers: return success but NO JWT (they can't log in until verified)
     if (!isVerified) {
-      console.log('✅ Officer registration submitted (pending approval):', email);
+      console.log('✅ Officer registration submitted (pending approval):', cleanEmail);
       return res.status(201).json({
         message: 'Officer account created. Pending admin verification.',
         pending: true
@@ -96,7 +102,7 @@ router.post('/signup', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    console.log('✅ New farmer registered:', email);
+    console.log('✅ New farmer registered:', cleanEmail);
     res.status(201).json({
       token,
       user: {
@@ -122,22 +128,43 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    const user = await User.findOne({ email });
+    const cleanEmail = String(email).trim().toLowerCase();
+    const cleanPassword = String(password);
+
+    console.log(`🔑 Login attempt for: "${cleanEmail}" (role requested: ${role || 'any'})`);
+
+    // Case-insensitive user lookup
+    const escapedEmail = cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const user = await User.findOne({ 
+      email: { $regex: new RegExp(`^${escapedEmail}$`, 'i') } 
+    });
+
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      console.warn(`⚠️ Login failed: User "${cleanEmail}" not found in database.`);
+      return res.status(401).json({ 
+        error: `No account found with email "${cleanEmail}". Please check your email address or click Sign Up to create an account.` 
+      });
     }
 
     // Optional role mismatch guard
     if (role && user.role !== role) {
       return res.status(403).json({
-        error: `This account is registered as a ${user.role}, not ${role}.`,
+        error: `This account is registered as a ${user.role}, not ${role}. Please select the ${user.role} portal to log in.`,
         code: 'ROLE_MISMATCH'
       });
     }
 
-    const valid = await bcrypt.compare(password, user.passwordHash);
+    // Check password (also test trimmed in case accidental trailing space was submitted)
+    let valid = await bcrypt.compare(cleanPassword, user.passwordHash);
+    if (!valid && cleanPassword.trim() !== cleanPassword) {
+      valid = await bcrypt.compare(cleanPassword.trim(), user.passwordHash);
+    }
+
     if (!valid) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      console.warn(`⚠️ Login failed: Incorrect password for user "${cleanEmail}".`);
+      return res.status(401).json({ 
+        error: 'Incorrect password. Please verify your password or use "Reset Password".' 
+      });
     }
 
     // Block officer login if not yet verified by admin
@@ -154,7 +181,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    console.log('✅ User logged in:', email, '| role:', user.role);
+    console.log('✅ User logged in successfully:', user.email, '| role:', user.role);
     res.json({
       token,
       user: {
@@ -168,6 +195,43 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.error('❌ Login error:', err);
     res.status(500).json({ error: 'Login failed. Please try again.' });
+  }
+});
+
+// POST /api/auth/reset-password — allows user to reset password with email
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    if (!email || !newPassword) {
+      return res.status(400).json({ error: 'Email and new password are required' });
+    }
+
+    if (String(newPassword).length < 6) {
+      return res.status(400).json({ error: 'New password must be at least 6 characters' });
+    }
+
+    const cleanEmail = String(email).trim().toLowerCase();
+    const escapedEmail = cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const user = await User.findOne({ 
+      email: { $regex: new RegExp(`^${escapedEmail}$`, 'i') } 
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: `No account found with email "${cleanEmail}".` });
+    }
+
+    user.passwordHash = await bcrypt.hash(String(newPassword).trim(), 10);
+    await user.save();
+
+    console.log('✅ Password successfully reset for:', user.email);
+    res.json({
+      success: true,
+      message: `Password has been reset successfully for ${user.email}. You can now log in!`
+    });
+  } catch (err) {
+    console.error('❌ Reset password error:', err);
+    res.status(500).json({ error: 'Failed to reset password. Please try again.' });
   }
 });
 
