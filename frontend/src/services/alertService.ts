@@ -27,6 +27,12 @@ const LOCAL_STORAGE_KEY = 'agrisense_smart_alerts_cache';
 const DISMISSED_STORAGE_KEY = 'agrisense_dismissed_alerts_cache';
 const SOUND_MUTED_KEY = 'agrisense_alerts_sound_muted';
 
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('agrisense_token');
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
 const getLocalCache = (): SmartAlert[] => {
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -119,7 +125,10 @@ export const alertService = {
     const currentCache = getLocalCache();
 
     try {
-      const response = await axios.post(`${backendUrl}/api/alerts/evaluate`, telemetry, { timeout: 3500 });
+      const response = await axios.post(`${backendUrl}/api/alerts/evaluate`, telemetry, {
+        headers: getAuthHeaders(),
+        timeout: 3500
+      });
       if (response.data && response.data.alerts) {
         const rawAlerts: SmartAlert[] = response.data.alerts;
         
@@ -153,7 +162,11 @@ export const alertService = {
     const dismissed = getDismissedKeys();
 
     try {
-      const response = await axios.get(`${backendUrl}/api/alerts`, { params: filter, timeout: 3500 });
+      const response = await axios.get(`${backendUrl}/api/alerts`, {
+        params: filter,
+        headers: getAuthHeaders(),
+        timeout: 3500
+      });
       if (response.data && response.data.alerts) {
         const activeList = (response.data.alerts as SmartAlert[]).filter(a => {
           const k = a.dedup_key || a._id || a.id || '';
@@ -186,7 +199,10 @@ export const alertService = {
   // Mark single alert as read
   async markAsRead(alertId: string): Promise<boolean> {
     try {
-      await axios.patch(`${backendUrl}/api/alerts/${alertId}/read`, {}, { timeout: 3000 });
+      await axios.patch(`${backendUrl}/api/alerts/${alertId}/read`, {}, {
+        headers: getAuthHeaders(),
+        timeout: 3000
+      });
     } catch (e) {}
 
     const cache = getLocalCache();
@@ -199,7 +215,10 @@ export const alertService = {
   // Mark all alerts as read
   async markAllAsRead(farmId?: string): Promise<boolean> {
     try {
-      await axios.patch(`${backendUrl}/api/alerts/read-all`, { farm_id: farmId }, { timeout: 3000 });
+      await axios.patch(`${backendUrl}/api/alerts/read-all`, { farm_id: farmId }, {
+        headers: getAuthHeaders(),
+        timeout: 3000
+      });
     } catch (e) {}
 
     const cache = getLocalCache();
@@ -220,7 +239,10 @@ export const alertService = {
     }
 
     try {
-      await axios.delete(`${backendUrl}/api/alerts/${alertId}`, { timeout: 3000 });
+      await axios.delete(`${backendUrl}/api/alerts/${alertId}`, {
+        headers: getAuthHeaders(),
+        timeout: 3000
+      });
     } catch (e) {}
 
     const updated = cache.filter(a => a._id !== alertId && a.id !== alertId);

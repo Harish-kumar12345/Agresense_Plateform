@@ -35,6 +35,7 @@ import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
 import { AnimatedCounter } from '../Common/AnimatedCounter';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 
 interface YieldPredictionModuleProps {
   farm?: FarmData | null;
@@ -155,69 +156,69 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. VerdaAgro Yield Intelligence Context Bar */}
-      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-harvest">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 1. VerdaAgro Yield Intelligence Context Bar - Harvest Theme */}
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-harvest rounded-3xl rounded-tr-xl relative overflow-hidden">
+        <AgronomicMotif variant="wheat" className="right-0 top-0 text-amber-400" opacity={0.08} />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-amber-300 uppercase">
               <span>Intelligence</span>
-              <span className="text-emerald-700">/</span>
+              <span className="text-amber-700">/</span>
               <span>Agronomic ML Predictive Forecast</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                PREDICTION PIPELINE ACTIVE
-              </span>
+              <Badge variant="harvest" shape="live" size="sm" className="ml-1">
+                PIPELINE ACTIVE
+              </Badge>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-display">
                 Crop Yield ML Prediction Model
               </h1>
               {prediction && (
-                <span className="verda-glow-pill">
+                <Badge variant="harvest" size="md">
                   {prediction.confidenceLevel} Confidence ({prediction.confidenceScore}%)
-                </span>
+                </Badge>
               )}
-              <span className="agri-pill agri-pill-muted font-bold">
+              <Badge variant="emerald" size="md">
                 Cultivated Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
+            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
               <span className="font-bold text-white">{farmTitle}</span>
-              <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1 text-emerald-300">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-amber-800">•</span>
+              <span className="flex items-center gap-1 text-amber-300">
+                <MapPin className="w-3.5 h-3.5 text-amber-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-amber-800">•</span>
               <span className="text-slate-300 font-mono text-[11px]">Harvest Window: {prediction?.harvestWindow || 'Approaching'}</span>
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="harvest"
+              size="sm"
               onClick={() => setIsDetailModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+              icon={<Sliders className="w-3.5 h-3.5" />}
             >
-              <Sliders className="w-3.5 h-3.5 text-emerald-400" />
               Sensitivity Simulator
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={runAutomatedPipeline}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#070D0A]/70 hover:bg-emerald-950/40 border border-emerald-900/40 text-[#D1DED6] text-xs font-semibold transition-colors cursor-pointer"
+              icon={<RefreshCw className="w-3.5 h-3.5" />}
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
               Re-predict
-            </button>
+            </Button>
           </div>
         </div>
       </motion.div>
 
       {error && (
-        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center justify-between">
+        <div className="p-4 bg-rose-950/50 border border-rose-500/40 rounded-2xl text-xs text-rose-300 flex items-center justify-between">
           <span>{error}</span>
           <button type="button" onClick={runAutomatedPipeline} className="font-bold underline cursor-pointer hover:text-rose-200">Retry</button>
         </div>
@@ -226,50 +227,54 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
       {/* 2. Asymmetric Yield Bento Grid */}
       {prediction && (
         <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          {/* Primary Yield Output Spotlight (7 Cols) */}
-          <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-harvest p-6 flex flex-col justify-between space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
-              <div className="flex items-center gap-2">
-                <Sprout className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+          {/* Primary Yield Output Spotlight (7 Cols) - Asymmetric Harvest Styling */}
+          <div className="lg:col-span-7 p-6 flex flex-col gap-6 rounded-3xl rounded-tr-xl bg-[#17130a]/92 border border-amber-900/40 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)] backdrop-blur-xl relative overflow-hidden">
+            <AgronomicMotif variant="wheat" className="right-1 bottom-1 text-amber-500" opacity={0.06} />
+            
+            <div className="flex items-center justify-between pb-3 border-b border-amber-950/60 relative z-10">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-500/20 to-amber-950/40 border border-amber-500/35 flex items-center justify-center shadow-inner">
+                  <Sprout className="w-4 h-4 text-amber-300" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                   Phenological Yield Projection
                 </span>
               </div>
-              <span className="text-[11px] font-mono text-emerald-400 font-medium">
+              <span className="text-[11px] font-mono text-amber-300 font-semibold bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
                 Model: GDD + NPK + Microclimate
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 relative z-10">
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+                <div className="text-[11px] font-semibold text-amber-300/90 mb-1">
                   Expected Yield Rate
                 </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
+                <div className="flex items-baseline gap-2.5 flex-wrap">
+                  <span className="text-5xl sm:text-6xl font-black tracking-tight text-white font-display">
                     <AnimatedCounter value={prediction.predictedYieldPerHectare} decimals={2} />
                   </span>
-                  <span className="text-xl text-[#D1DED6] font-medium">t/ha</span>
-                  <span className="agri-pill agri-pill-emerald ml-2">
+                  <span className="text-xl text-amber-300 font-medium">t/ha</span>
+                  <Badge variant="emerald" size="sm" className="ml-1">
                     {((prediction.predictedYieldPerHectare / prediction.regionalAvg - 1) * 100) >= 0 ? '+' : ''}
                     {((prediction.predictedYieldPerHectare / prediction.regionalAvg - 1) * 100).toFixed(1)}% vs District
-                  </span>
+                  </Badge>
                 </div>
               </div>
 
-              <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
-                <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Total Field Production</div>
-                <div className="text-xl font-mono font-bold text-white mt-0.5"><AnimatedCounter value={prediction.totalProductionTons} decimals={1} /> <span className="text-xs text-emerald-400 font-normal">Tons</span></div>
-                <div className="text-[10px] text-[#D1DED6] mt-0.5">Calculated over {farmArea} hectares</div>
+              <div className="bg-[#070D0A]/75 border border-amber-900/40 rounded-xl p-3 text-right shadow-sm">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-300">Total Field Production</div>
+                <div className="text-xl font-mono font-black text-white mt-0.5"><AnimatedCounter value={prediction.totalProductionTons} decimals={1} /> <span className="text-xs text-amber-400 font-normal">Tons</span></div>
+                <div className="text-[10px] text-amber-300/80 mt-0.5">Calculated over {farmArea} hectares</div>
               </div>
             </div>
 
             {/* Sub-telemetry 3-gauge strip */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-              <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-                <div className="text-[11px] text-[#D1DED6] mb-1">Growing Degree Days</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10 mt-auto">
+              <div className="bg-[#070D0A]/80 border border-amber-900/40 rounded-xl p-3.5 shadow-sm">
+                <div className="text-[11px] font-semibold text-slate-300 mb-1">Growing Degree Days</div>
                 <div className="text-xl font-bold text-white font-display">1,450 GDD</div>
-                <p className="text-[10px] text-emerald-400 mt-1">Thermal accumulation on track</p>
+                <p className="text-[10px] text-amber-400 font-medium mt-1">Thermal accumulation on track</p>
               </div>
 
               <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">

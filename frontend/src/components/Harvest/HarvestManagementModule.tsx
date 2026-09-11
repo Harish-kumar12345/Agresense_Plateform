@@ -45,6 +45,7 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
 import { AnimatedCounter } from '../Common/AnimatedCounter';
@@ -303,93 +304,94 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. Apple-Style Pristine Clean Harvest Logistics Context Bar */}
-      <motion.div variants={motionPresets.item} className="apple-hero-header">
+      {/* 1. Harvest Operations Context Bar */}
+      <motion.div variants={motionPresets.item} className="verda-hero-header">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-amber-400 uppercase">
               <span>Operations</span>
               <span className="text-slate-600">/</span>
               <span>Harvest Maturation & Post-Harvest Logistics</span>
-              <span className="apple-segmented-item active ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1.5"></span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 border border-amber-400/30 text-amber-300 ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block"></span>
                 MATURATION ACTIVE
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white font-display">
-                <span className="apple-title-gradient">Harvest Operations</span> & Maturation
+                <span className="bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent">Harvest Operations</span> & Maturation
               </h1>
-              <span className="agri-pill agri-pill-emerald font-semibold">
+              <Badge variant="harvest" size="sm">
                 {computedStatus.status}
-              </span>
-              <span className="agri-pill agri-pill-muted font-semibold">
+              </Badge>
+              <Badge variant="outline" size="sm">
                 Host Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#94A3B8] flex items-center gap-2 font-normal">
+            <p className="text-xs text-slate-300 flex items-center gap-2 font-normal">
               <span className="font-semibold text-white">{farmName}</span>
               <span className="text-slate-700">•</span>
               <span className="flex items-center gap-1 text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                <MapPin className="w-3.5 h-3.5 text-amber-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
               <span className="text-slate-700">•</span>
-              <span className="text-slate-300 font-mono text-[11px]">Days to Harvest: <strong className="text-emerald-400">{computedStatus.daysToHarvest}d remaining</strong></span>
+              <span className="text-slate-300 font-mono text-[11px]">Days to Harvest: <strong className="text-amber-400">{computedStatus.daysToHarvest}d remaining</strong></span>
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="outline"
+              size="sm"
+              icon={<Sliders className="w-3.5 h-3.5 text-amber-400" />}
               onClick={() => {
                 setTempManualDate(manualHarvestDate || new Date().toISOString().split('T')[0]);
                 setIsAdjustDateModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-semibold transition-all cursor-pointer shadow-sm"
             >
-              <Sliders className="w-3.5 h-3.5 text-emerald-400" />
               Adjust Date
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="harvest"
+              size="sm"
+              icon={<Plus className="w-3.5 h-3.5" />}
               onClick={handleOpenAddModal}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
             >
-              <Plus className="w-3.5 h-3.5 text-slate-950" />
               Log Activity
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="glass"
+              size="sm"
+              icon={<RefreshCw className="w-3.5 h-3.5 text-amber-400" />}
               onClick={loadData}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
               Refresh
-            </button>
+            </Button>
           </div>
         </div>
       </motion.div>
 
-      {/* 2. Apple-Style Pristine Clean Bento Grid */}
+      {/* 2. Pristine Asymmetric Bento Grid */}
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Primary Maturation Readiness Desk (7 Cols) */}
-        <div className="lg:col-span-7 apple-glass-card flex flex-col justify-between space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+        <div className="lg:col-span-7 rounded-3xl rounded-tr-xl relative overflow-hidden border border-amber-500/30 bg-gradient-to-br from-slate-900/95 via-amber-950/20 to-slate-900/90 shadow-xl p-6 sm:p-7 flex flex-col justify-between space-y-6 backdrop-blur-md">
+          <AgronomicMotif motif="wheat" className="w-64 h-64 -bottom-12 -right-8" opacity={0.12} />
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] relative z-10">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <Calendar className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
                 Target Harvest Maturation Window
               </span>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 font-semibold">
+            <span className="text-[11px] font-mono text-amber-300 font-semibold">
               GDD: <AnimatedCounter value={computedStatus.gddPercentage} suffix="%" /> Maturation
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 relative z-10">
             <div>
               <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
                 Estimated Combine Readiness
@@ -398,55 +400,55 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
                 <span className="text-3xl sm:text-4xl font-black tracking-tight text-white font-display">
                   {computedStatus.manualHarvestDate ? computedStatus.manualHarvestDate : computedStatus.expectedHarvestDate}
                 </span>
-                <span className="agri-pill agri-pill-emerald ml-2">
+                <Badge variant="harvest" className="ml-2">
                   <AnimatedCounter value={computedStatus.daysToHarvest} suffix="d Remaining" />
-                </span>
+                </Badge>
               </div>
-              <p className="text-xs text-slate-400 mt-2">
+              <p className="text-xs text-slate-300 mt-2">
                 Recommended Window: <strong className="text-white font-semibold">{computedStatus.harvestWindow}</strong>
               </p>
             </div>
 
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-4 text-right backdrop-blur-md">
               <div className="text-[10px] uppercase tracking-wider text-slate-400">Target Grain Moisture</div>
-              <div className="text-xl font-mono font-bold text-white mt-0.5"><AnimatedCounter value={computedStatus.storageMoistureTargetPct} suffix="%" /> <span className="text-xs text-emerald-400 font-normal">RH</span></div>
+              <div className="text-xl font-mono font-bold text-white mt-0.5"><AnimatedCounter value={computedStatus.storageMoistureTargetPct} suffix="%" /> <span className="text-xs text-amber-400 font-normal">RH</span></div>
               <div className="text-[10px] text-slate-400 mt-0.5">Safe moisture for storage</div>
             </div>
           </div>
 
           {/* Sub-telemetry 3-gauge strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10">
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-4 backdrop-blur-md">
               <div className="text-[11px] text-slate-400 mb-1 font-medium">Phenological Stage</div>
               <div className="text-base font-bold text-white font-display truncate">{computedStatus.growthStage}</div>
-              <p className="text-[10px] text-emerald-400 mt-1 font-medium">Starch filling optimal</p>
+              <p className="text-[10px] text-amber-400 mt-1 font-medium">Starch filling optimal</p>
             </div>
 
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-4 backdrop-blur-md">
               <div className="text-[11px] text-slate-400 mb-1 font-medium">Thermal Units</div>
               <div className="text-base font-bold text-white font-display">{computedStatus.gddAccumulated} / {computedStatus.gddThreshold}</div>
-              <p className="text-[10px] text-emerald-400 mt-1 font-medium">Growing Degree Days</p>
+              <p className="text-[10px] text-amber-400 mt-1 font-medium">Growing Degree Days</p>
             </div>
 
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-4 backdrop-blur-md">
               <div className="text-[11px] text-slate-400 mb-1 font-medium">Harvest Window</div>
               <div className="text-base font-bold text-white font-display truncate">{computedStatus.harvestWindow.split('-')[0]}</div>
-              <p className="text-[10px] text-emerald-400 mt-1 font-medium">Weather clear forecast</p>
+              <p className="text-[10px] text-amber-400 mt-1 font-medium">Weather clear forecast</p>
             </div>
           </div>
         </div>
 
         {/* Logistics & Post-Harvest Storage Desk (5 Cols) */}
         <div className="lg:col-span-5 flex flex-col justify-between gap-5">
-          <div className="apple-glass-card flex-1 flex flex-col justify-between">
+          <div className="rounded-2xl bg-slate-900/80 border border-white/10 p-5 backdrop-blur-md flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                <Tractor className="w-4 h-4 text-emerald-400" />
+                <Tractor className="w-4 h-4 text-amber-400" />
                 Expected Bulk Output
               </span>
-              <span className="agri-pill agri-pill-emerald font-semibold">
+              <Badge variant="harvest">
                 <AnimatedCounter value={yieldResult ? yieldResult.totalProductionTons : 12.0} decimals={1} suffix=" Tons" />
-              </span>
+              </Badge>
             </div>
 
             <div className="my-3">
@@ -460,33 +462,33 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
 
             <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between text-xs">
               <span className="text-slate-400">Grain Bagging Spec:</span>
-              <span className="text-emerald-400 font-semibold font-mono">50kg HDPE / Jute</span>
+              <span className="text-amber-400 font-semibold font-mono">50kg HDPE / Jute</span>
             </div>
           </div>
 
-          <div className="apple-glass-card flex-1 flex flex-col justify-between">
+          <div className="rounded-2xl bg-slate-900/80 border border-white/10 p-5 backdrop-blur-md flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-emerald-400" />
+                <Users className="w-4 h-4 text-amber-400" />
                 Workforce & Machinery
               </span>
-              <span className="agri-pill agri-pill-muted font-semibold">
+              <Badge variant="outline">
                 <AnimatedCounter value={computedStatus.requiredLabour} suffix=" Workers Required" />
-              </span>
+              </Badge>
             </div>
 
             <div className="my-3">
-              <div className="text-lg font-bold text-white font-display">
-                Harvest Field Operations Plan
+              <div className="text-2xl font-extrabold text-white font-display">
+                {computedStatus.machineryRecommendation.split(',')[0]}
               </div>
-              <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                Combine harvester + 2 tractor trolleys required for rapid transit from field partition to storage shed.
+              <p className="text-xs text-slate-300 mt-1.5">
+                {computedStatus.machineryRecommendation}
               </p>
             </div>
 
             <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between text-xs">
               <span className="text-slate-400">Checklist Readiness:</span>
-              <span className="text-emerald-400 font-semibold font-mono">
+              <span className="text-amber-400 font-semibold font-mono">
                 {checklist.filter(c => c.done).length} / {checklist.length} Completed
               </span>
             </div>
@@ -495,7 +497,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
       </motion.div>
 
       {/* 3. Segment Controls */}
-      <div className="flex items-center gap-1.5 bg-[#0D1612] border border-emerald-900/40 p-1.5 rounded-xl w-fit">
+      <div className="flex items-center gap-1.5 bg-slate-900/90 border border-white/10 p-1.5 rounded-xl w-fit backdrop-blur-md">
         {[
           { key: 'harvest', label: 'Harvest Schedule' },
           { key: 'planning', label: 'Labour & Storage' },
@@ -508,8 +510,8 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
             onClick={() => setActiveSegment(tab.key as any)}
             className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
               activeSegment === tab.key
-                ? 'bg-emerald-600 text-white shadow-md'
-                : 'text-[#D1DED6] hover:text-white hover:bg-white/5'
+                ? 'bg-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
             }`}
           >
             {tab.label}
@@ -519,13 +521,13 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
 
       {/* SEGMENT 1: HARVEST SCHEDULE */}
       {activeSegment === 'harvest' && (
-        <div className="agri-bento-card p-6 space-y-6">
+        <Card variant="elevated" tone="harvest" className="p-6 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/10">
             <div>
               <h3 className="text-base font-bold text-white font-display">Growth Stage Timeline & GDD Maturation</h3>
               <p className="text-xs text-slate-400">Cumulative Thermal Unit Tracking</p>
             </div>
-            <Badge variant="emerald" size="md">
+            <Badge variant="harvest" size="md">
               GDD Progress: {computedStatus.gddPercentage}%
             </Badge>
           </div>
@@ -534,7 +536,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
           <div className="space-y-3">
             <div className="w-full h-3.5 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-white/10">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-700 shadow-xs"
+                className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-700 shadow-xs"
                 style={{ width: `${computedStatus.gddPercentage}%` }}
               />
             </div>
@@ -595,7 +597,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
               View Harvest Strategy →
             </Button>
           </div>
-        </div>
+        </Card>
       )}
 
       {/* SEGMENT 2: LABOUR & STORAGE */}

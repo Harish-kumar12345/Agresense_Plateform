@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const alertEngine = require('../services/alertEngine');
+const { requireAuth, optionalAuth } = require('../middleware/auth');
 
 /**
  * POST /api/alerts/evaluate
  * Evaluates live telemetry and generates deduplicated smart alerts
  */
-router.post('/evaluate', async (req, res) => {
+router.post('/evaluate', optionalAuth, async (req, res) => {
   try {
     const telemetry = req.body || {};
     const alerts = await alertEngine.evaluateTelemetry(telemetry);
@@ -25,7 +26,7 @@ router.post('/evaluate', async (req, res) => {
  * GET /api/alerts
  * Retrieves active smart alerts
  */
-router.get('/', async (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
   try {
     const filter = {
       farm_id: req.query.farm_id,
@@ -52,7 +53,7 @@ router.get('/', async (req, res) => {
  * PATCH /api/alerts/:id/read
  * Marks single alert as read
  */
-router.patch('/:id/read', async (req, res) => {
+router.patch('/:id/read', requireAuth, async (req, res) => {
   try {
     const updated = await alertEngine.markAsRead(req.params.id);
     res.json({ success: true, alert: updated });
@@ -65,7 +66,7 @@ router.patch('/:id/read', async (req, res) => {
  * PATCH /api/alerts/read-all
  * Marks all alerts as read
  */
-router.patch('/read-all', async (req, res) => {
+router.patch('/read-all', requireAuth, async (req, res) => {
   try {
     const farmId = req.body?.farm_id || req.query.farm_id;
     await alertEngine.markAllAsRead(farmId);
@@ -79,7 +80,7 @@ router.patch('/read-all', async (req, res) => {
  * DELETE /api/alerts/:id
  * Dismisses / deletes an alert
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAuth, async (req, res) => {
   try {
     await alertEngine.deleteAlert(req.params.id);
     res.json({ success: true, message: 'Alert dismissed successfully' });

@@ -60,6 +60,13 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 const STORAGE_ACTIVITIES_KEY = 'agrisense_farm_activities';
 const STORAGE_HARVEST_KEY = 'agrisense_harvest_records';
 
+// Helper: get auth headers if a token exists
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('agrisense_token');
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
 // Baseline maturity GDD & duration guidelines per crop
 export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number }> = {
   Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5 },
@@ -76,6 +83,7 @@ export const farmActivityService = {
     try {
       const response = await axios.get(`${API_BASE}/farm-activities`, {
         params: { farm_id: farmId, crop },
+        headers: getAuthHeaders(),
         timeout: 5000
       });
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
@@ -164,7 +172,10 @@ export const farmActivityService = {
     };
 
     try {
-      const response = await axios.post(`${API_BASE}/farm-activities`, newAct, { timeout: 5000 });
+      const response = await axios.post(`${API_BASE}/farm-activities`, newAct, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (response.data && response.data.success && response.data.data) {
         const existing = await this.getActivities(activity.farm_id);
         const updated = [response.data.data, ...existing.filter(a => a.activity_id !== response.data.data.activity_id)];
@@ -188,7 +199,10 @@ export const farmActivityService = {
   // PUT Update activity
   async updateActivity(activityId: string, payload: Partial<FarmActivity>): Promise<FarmActivity> {
     try {
-      const response = await axios.put(`${API_BASE}/farm-activities/${activityId}`, payload, { timeout: 5000 });
+      const response = await axios.put(`${API_BASE}/farm-activities/${activityId}`, payload, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       }
@@ -213,7 +227,10 @@ export const farmActivityService = {
   // DELETE Activity
   async deleteActivity(activityId: string): Promise<boolean> {
     try {
-      await axios.delete(`${API_BASE}/farm-activities/${activityId}`, { timeout: 5000 });
+      await axios.delete(`${API_BASE}/farm-activities/${activityId}`, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
     } catch (error) {
       console.warn('Backend API delete error, removing from local storage:', error);
     }
@@ -234,6 +251,7 @@ export const farmActivityService = {
     try {
       const response = await axios.get(`${API_BASE}/harvest-management`, {
         params: { farm_id: farmId, crop },
+        headers: getAuthHeaders(),
         timeout: 5000
       });
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
@@ -256,7 +274,10 @@ export const farmActivityService = {
   // POST Save Harvest Record
   async saveHarvestRecord(record: Omit<HarvestRecord, 'harvest_id'> & { harvest_id?: string }): Promise<HarvestRecord> {
     try {
-      const response = await axios.post(`${API_BASE}/harvest-management`, record, { timeout: 5000 });
+      const response = await axios.post(`${API_BASE}/harvest-management`, record, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       }

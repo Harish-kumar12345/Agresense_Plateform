@@ -186,14 +186,19 @@ class AnalyticsService {
     const savedHistorical = localStorage.getItem(`agrisense_history_${farm?.farm_id || 'default'}`);
     const hasHistoricalData = !!savedHistorical;
 
-    const historicalSeasons = savedHistorical
-      ? JSON.parse(savedHistorical)
-      : [
-          { season: 'Kharif 2024', year: 2024, actualYield: 4.2, predictedYield: 4.3 },
-          { season: 'Rabi 2024', year: 2024, actualYield: 4.5, predictedYield: 4.6 },
-          { season: 'Kharif 2025', year: 2025, actualYield: 4.6, predictedYield: 4.7 },
-          { season: 'Current Season', year: 2026, actualYield: predictedYield, predictedYield: predictedYield }
-        ];
+    let historicalSeasons = [
+      { season: 'Kharif 2024', year: 2024, actualYield: 4.2, predictedYield: 4.3 },
+      { season: 'Rabi 2024', year: 2024, actualYield: 4.5, predictedYield: 4.6 },
+      { season: 'Kharif 2025', year: 2025, actualYield: 4.6, predictedYield: 4.7 },
+      { season: 'Current Season', year: 2026, actualYield: predictedYield, predictedYield: predictedYield }
+    ];
+
+    if (savedHistorical) {
+      try {
+        const parsed = JSON.parse(savedHistorical);
+        if (Array.isArray(parsed)) historicalSeasons = parsed;
+      } catch (e) {}
+    }
 
     // 7. Weather Trend Data (6-day progression)
     const weatherTrendData = [

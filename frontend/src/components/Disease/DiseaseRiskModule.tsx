@@ -31,6 +31,7 @@ import {
   CartesianGrid
 } from 'recharts';
 import { colors, motionPresets } from '../../styles/design-tokens';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 
 interface DiseaseRiskModuleProps {
   farm?: FarmData | null;
@@ -139,61 +140,61 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. VerdaAgro Epidemiology Context Bar */}
-      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-farm">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 1. VerdaAgro Epidemiology Context Bar - Pathogen Rose Theme */}
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-farm rounded-3xl rounded-tr-xl relative overflow-hidden">
+        <AgronomicMotif variant="contour" className="right-0 top-0 text-rose-500" opacity={0.08} />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-rose-300 uppercase">
               <span>Epidemiology</span>
-              <span className="text-emerald-700">/</span>
+              <span className="text-rose-700">/</span>
               <span>Fungal & Pathogen Vector Intelligence</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                ACTIVE VECTOR RADAR
-              </span>
+              <Badge variant="rose" shape="live" size="sm" className="ml-1">
+                RADAR ACTIVE
+              </Badge>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-display">
                 Pathogen Spore & Crop Disease Telemetry
               </h1>
               {riskData && (
-                <span className="verda-glow-pill">
+                <Badge variant="rose" size="md">
                   {riskData.riskLevel} Pressure ({riskData.overallRiskScore}%)
-                </span>
+                </Badge>
               )}
-              <span className="agri-pill agri-pill-muted font-bold">
+              <Badge variant="emerald" size="md">
                 Host Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
-              <span className="font-semibold text-white">{farmTitle}</span>
-              <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
+              <span className="font-bold text-white">{farmTitle}</span>
+              <span className="text-rose-800">•</span>
+              <span className="flex items-center gap-1 text-slate-300">
+                <MapPin className="w-3.5 h-3.5 text-rose-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-rose-800">•</span>
               <span className="text-slate-300 font-mono text-[11px]">Coord: {safeLat.toFixed(3)}°N, {safeLon.toFixed(3)}°E</span>
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="destructive"
+              size="sm"
               onClick={runAutomatedDiseasePipeline}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+              icon={<RefreshCw className="w-3.5 h-3.5" />}
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
               Re-evaluate Vectors
-            </button>
+            </Button>
           </div>
         </div>
       </motion.div>
 
       {error && (
-        <div className="p-4 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center justify-between">
+        <div className="p-4 bg-rose-950/50 border border-rose-500/40 rounded-2xl text-xs text-rose-300 flex items-center justify-between">
           <span>{error}</span>
           <button type="button" onClick={runAutomatedDiseasePipeline} className="font-bold underline cursor-pointer hover:text-rose-200">Retry</button>
         </div>
@@ -202,20 +203,22 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
       {/* 2. Top Asymmetric Pathogen Pressure Bento Grid */}
       {riskData && (
         <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          {/* Pathogen Pressure Dial (5 Cols) */}
-          <div className="lg:col-span-5 agri-bento-card agri-photo-card agri-photo-card-farm p-6 flex flex-col items-center justify-between text-center space-y-4">
-            <div className="w-full flex items-center justify-between pb-3 border-b border-emerald-950/40">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">Pathogen Inoculum Pressure</span>
-              <span className="text-[11px] font-mono text-emerald-400 font-medium">Model: GDD + RH</span>
+          {/* Pathogen Pressure Dial (5 Cols) - Rose Asymmetric Theme */}
+          <div className="lg:col-span-5 p-6 flex flex-col items-center justify-between text-center space-y-4 rounded-3xl rounded-tr-xl bg-[#170a0d]/92 border border-rose-900/40 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)] backdrop-blur-xl relative overflow-hidden">
+            <AgronomicMotif variant="leaf" className="right-1 bottom-1 text-rose-500" opacity={0.06} />
+            
+            <div className="w-full flex items-center justify-between pb-3 border-b border-rose-950/60 relative z-10">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-200">Pathogen Inoculum Pressure</span>
+              <span className="text-[11px] font-mono text-rose-300 font-semibold bg-rose-950/60 px-2.5 py-0.5 rounded-full border border-rose-500/30">Model: GDD + RH</span>
             </div>
 
-            <div className="relative w-full max-w-[240px] h-32 flex items-center justify-center my-2">
+            <div className="relative w-full max-w-[240px] h-32 flex items-center justify-center my-2 relative z-10">
               <svg className="w-56 h-32" viewBox="0 0 220 120">
                 {/* Background arc */}
                 <path
                   d="M 30 110 A 80 80 0 0 1 190 110"
                   fill="none"
-                  stroke="#13231B"
+                  stroke="#1F1115"
                   strokeWidth="14"
                   strokeLinecap="round"
                 />
@@ -234,24 +237,24 @@ export const DiseaseRiskModule: React.FC<DiseaseRiskModuleProps> = ({
                 <text x="110" y="78" textAnchor="middle" fill="#FFFFFF" style={{ fontSize: '34px', fontWeight: 900, fontFamily: 'Outfit, sans-serif' }}>
                   {riskData.overallRiskScore}%
                 </text>
-                <text x="110" y="98" textAnchor="middle" fill="#34D399" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px' }}>
+                <text x="110" y="98" textAnchor="middle" fill="#FB7185" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px' }}>
                   OUTBREAK PROBABILITY
                 </text>
               </svg>
             </div>
 
-            <div className="w-full pt-3 border-t border-emerald-950/40 text-center">
+            <div className="w-full pt-3 border-t border-rose-950/60 text-center relative z-10">
               <div className="text-xs font-bold text-white mb-1">
                 {riskData.riskLevel} Spore Pressure Index
               </div>
-              <p className="text-[11px] text-[#D1DED6] leading-relaxed max-w-xs mx-auto">
+              <p className="text-[11px] text-slate-300 leading-relaxed max-w-xs mx-auto">
                 Microclimate leaf wetness and canopy humidity currently dictate active fungal incubation risk.
               </p>
             </div>
           </div>
 
           {/* Actionable Advice & Inspection Protocol (7 Cols) */}
-          <div className="lg:col-span-7 agri-bento-card p-6 flex flex-col justify-between space-y-4">
+          <div className="lg:col-span-7 p-6 flex flex-col justify-between space-y-4 rounded-2xl bg-[#0D1612]/92 border border-slate-800/60 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(0,0,0,0.65)]">
             <div className="space-y-3">
               <div className="flex items-center gap-2 pb-2 border-b border-emerald-950/40">
                 <ShieldAlert className="w-4 h-4 text-emerald-400" />

@@ -14,9 +14,11 @@ dotenv.config({ path: path.join(__dirname, '../../.env') });
 let genAI = null;
 let model = null;
 
+const exhaustedModels = new Map();
+
 const PREFERRED_MODELS = [
-  'gemini-3.5-flash',
   'gemini-3.5-flash-lite',
+  'gemini-3.5-flash',
   'gemini-3.7-flash',
   'gemini-3.1-flash-lite'
 ];
@@ -25,8 +27,8 @@ console.log('🔑 Checking Gemini API Key...');
 if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here') {
   try {
     genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
-    console.log('✅ Gemini AI initialized successfully (Model: gemini-3.5-flash)');
+    model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
+    console.log('✅ Gemini AI initialized successfully (Model: gemini-3.5-flash-lite)');
   } catch (error) {
     console.error('❌ Failed to initialize Gemini AI:', error.message);
   }
@@ -34,36 +36,47 @@ if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_ap
   console.warn('⚠️ Gemini API Key not found or not configured');
 }
 
-// Retry mechanism with exponential backoff
-async function callWithRetry(fn, maxRetries = 3, baseDelay = 1000) {
+// Retry mechanism with exponential backoff and quota fail-fast
+async function callWithRetry(fn, maxRetries = 2, baseDelay = 800) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await fn();
     } catch (error) {
       console.log(`🔄 Attempt ${attempt}/${maxRetries} failed:`, error.message);
       
-      // If it's a 503 (service unavailable) or rate limit error, retry
+      // If daily quota or project free-tier quota is exhausted, fail immediately to try candidate model
+      const isQuotaExhausted = error.message?.includes('QuotaFailure') || 
+                               error.message?.includes('PerDay') || 
+                               error.message?.includes('RESOURCE_EXHAUSTED');
+      if (isQuotaExhausted) {
+        console.warn(`🛑 Quota exhausted for this model. Failing fast to candidate model.`);
+        throw error;
+      }
+
+      // If it's a 503 (service unavailable) or transient 429 rate limit error, retry briefly
       if ((error.status === 503 || error.status === 429 || error.message.includes('overloaded')) && attempt < maxRetries) {
-        const delay = baseDelay * Math.pow(2, attempt - 1); // Exponential backoff
+        const delay = baseDelay * Math.pow(2, attempt - 1);
         console.log(`⏳ Waiting ${delay}ms before retry...`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
       
-      // If it's the last attempt or non-retryable error, throw
       throw error;
     }
   }
 }
 
-async function retrieveContext(userText) {
+async function retrieveContext(userText, farmContext = null) {
   try {
     let contextSnippets = [];
+    const fcCrop = farmContext?.crop && farmContext.crop !== 'Not specified' ? farmContext.crop : null;
+    const fcFarm = farmContext?.farm_name && farmContext.farm_name !== 'Unnamed Farm' && farmContext.farm_name !== 'My Farm' ? farmContext.farm_name : null;
 
     // 1. Knowledge base search
     if (mongoose.connection.readyState === 1) {
       try {
         const terms = userText.split(/\s+/).filter(Boolean).slice(0, 5);
+        if (fcCrop) terms.push(fcCrop);
         const found = await KnowledgeBase.find({ tags: { $in: terms } }).limit(3).lean();
         if (found.length > 0) {
           contextSnippets.push(found.map((d) => `${d.title}: ${d.content}`).join('\n\n'));
@@ -72,41 +85,56 @@ async function retrieveContext(userText) {
         console.warn('KnowledgeBase query fallback:', kbErr.message);
       }
 
-      // 2. Farm Activity Logs
+      // 2. Farm Activity Logs (strictly filtered by crop or farm to prevent false context)
       try {
         const { FarmActivity } = require('../models/FarmActivity');
-        const recentActs = await FarmActivity.find().sort({ date: -1 }).limit(4).lean();
-        if (recentActs.length > 0) {
-          const actSummary = recentActs.map(a => `- ${new Date(a.date).toLocaleDateString()}: ${a.activity_type} for ${a.crop} (${a.field_name}) - ${a.quantity_details} (${a.notes})`).join('\n');
-          contextSnippets.push(`Recent Farm Activity Timeline:\n${actSummary}`);
+        const actQuery = {};
+        if (fcCrop) {
+          actQuery.crop = new RegExp(`^${fcCrop}$`, 'i');
+        }
+        if (fcFarm) {
+          actQuery.field_name = new RegExp(fcFarm, 'i');
+        }
+
+        if (fcCrop || fcFarm) {
+          const recentActs = await FarmActivity.find(actQuery).sort({ date: -1 }).limit(4).lean();
+          if (recentActs.length > 0) {
+            const actSummary = recentActs.map(a => `- ${new Date(a.date).toLocaleDateString()}: ${a.activity_type} for ${a.crop} (${a.field_name}) - ${a.quantity_details} (${a.notes})`).join('\n');
+            contextSnippets.push(`Recent Farm Activity Timeline for ${fcCrop || fcFarm}:\n${actSummary}`);
+          }
         }
       } catch (actErr) {
         console.warn('FarmActivity context query fallback:', actErr.message);
       }
 
-      // 3. Harvest Management Status
+      // 3. Harvest Management Status (strictly filtered by crop or farm)
       try {
         const { HarvestRecord } = require('../models/HarvestRecord');
-        const harvestRecs = await HarvestRecord.find().sort({ updated_at: -1 }).limit(2).lean();
-        if (harvestRecs.length > 0) {
-          const harvSummary = harvestRecs.map(h => `- Crop: ${h.crop} (${h.field_name}), Stage: ${h.growth_stage}, Current GDD: ${h.current_gdd}, Status: ${h.status}, Expected Harvest Date: ${new Date(h.expected_harvest_date).toLocaleDateString()}, Harvest Window: ${h.harvest_window}, Yield Estimate: ${h.predicted_yield_tha} t/ha (${h.expected_production_tons} tons total)`).join('\n');
-          contextSnippets.push(`Harvest Management & Growth Status:\n${harvSummary}`);
+        const harvQuery = {};
+        if (fcCrop) {
+          harvQuery.crop = new RegExp(`^${fcCrop}$`, 'i');
+        }
+        if (fcFarm) {
+          harvQuery.field_name = new RegExp(fcFarm, 'i');
+        }
+
+        if (fcCrop || fcFarm) {
+          const harvestRecs = await HarvestRecord.find(harvQuery).sort({ updated_at: -1 }).limit(2).lean();
+          if (harvestRecs.length > 0) {
+            const harvSummary = harvestRecs.map(h => `- Crop: ${h.crop} (${h.field_name}), Stage: ${h.growth_stage}, Current GDD: ${h.current_gdd}, Status: ${h.status}, Expected Harvest Date: ${new Date(h.expected_harvest_date).toLocaleDateString()}, Harvest Window: ${h.harvest_window}, Yield Estimate: ${h.predicted_yield_tha} t/ha (${h.expected_production_tons} tons total)`).join('\n');
+            contextSnippets.push(`Harvest Management & Growth Status for ${fcCrop || fcFarm}:\n${harvSummary}`);
+          }
         }
       } catch (harvErr) {
         console.warn('HarvestRecord context query fallback:', harvErr.message);
       }
 
-      // 4. Crop Market Prices Context
+      // 4. Crop Market Prices Context (only when asking about price/mandi/rates)
       try {
-        contextSnippets.push(`Current Agricultural Market Mandi Telemetry (Kerala & Regional APMC):\n- Rice (Ponni): ₹3,000 / Quintal (Trend: Rising +1.69%, Kochi APMC)\n- Coconut: ₹13,500 / 1000 Nuts (Trend: Rising +2.27%, Pollachi)\n- Black Pepper: ₹58,500 / Quintal (Trend: Rising +1.21%, Kochi Spice Board)\n- Cardamom: ₹1,30,000 / Quintal (Trend: Falling -1.52%, Kumily Auction)\n- Rubber (RSS-4): ₹17,500 / Quintal (Trend: Rising +1.74%, Kottayam)`);
+        if (/price|mandi|rate|cost|market|apmc|sell|msp/i.test(userText)) {
+          contextSnippets.push(`Current Agricultural Market Mandi Telemetry (Regional APMC Benchmarks):\n- Rice (Ponni): ₹3,000 / Quintal (Trend: Rising +1.69%)\n- Wheat: ₹2,450 / Quintal (Trend: Stable)\n- Maize: ₹2,150 / Quintal (Trend: Rising +0.8%)\n- Cotton: ₹7,200 / Quintal (Trend: Rising +2.1%)\n- Coconut: ₹13,500 / 1000 Nuts (Trend: Rising +2.27%)\n- Black Pepper: ₹58,500 / Quintal (Trend: Rising +1.21%)\n- Cardamom: ₹1,30,000 / Quintal (Trend: Falling -1.52%)\n- Rubber: ₹17,500 / Quintal (Trend: Rising +1.74%)`);
+        }
       } catch (priceErr) {}
-    }
-
-    if (contextSnippets.length === 0) {
-      // Fallback context summary
-      contextSnippets.push(
-        `Recent Farm Activity Timeline:\n- Rice crop sown 65 days ago (Green Valley Rice Farm). Fertilizated with Urea 50 kg/ha 30 days ago. Disease inspection conducted 15 days ago.\nHarvest Status:\n- Rice crop at Ripening/Grain Filling stage. Current GDD: 1,450. Status: Approaching Harvest. Expected Harvest Window: Oct 28 - Nov 10, 2026. Predicted yield: 4.80 tons/ha.`
-      );
     }
 
     return contextSnippets.join('\n\n');
@@ -119,7 +147,7 @@ async function generateAIResponse({ queryId, text, roomId, farmContext }) {
   try {
     console.log(`🤖 Generating AI response for query: ${text.substring(0, 50)}...`);
     
-    const context = await retrieveContext(text);
+    const context = await retrieveContext(text, farmContext);
     const prompt = buildComprehensiveFarmPrompt(text, farmContext, context);
 
     let answer = '';
@@ -132,10 +160,21 @@ async function generateAIResponse({ queryId, text, roomId, farmContext }) {
 
     if (genAI) {
       for (const mName of PREFERRED_MODELS) {
+        const cooldownUntil = exhaustedModels.get(mName);
+        if (cooldownUntil && Date.now() < cooldownUntil) {
+          continue;
+        }
+
         try {
           const m = genAI.getGenerativeModel({ model: mName });
           answer = await callWithRetry(async () => {
-            const result = await m.generateContent(prompt);
+            const result = await m.generateContent({
+              contents: [{ role: 'user', parts: [{ text: prompt }] }],
+              generationConfig: {
+                maxOutputTokens: 1024,
+                temperature: 0.35
+              }
+            });
             const response = await result.response;
             return response.text();
           });
@@ -145,6 +184,9 @@ async function generateAIResponse({ queryId, text, roomId, farmContext }) {
           }
         } catch (mErr) {
           console.warn(`Model "${mName}" failed in generateAIResponse:`, mErr.message);
+          if (mErr.message?.includes('QuotaFailure') || mErr.message?.includes('PerDay') || mErr.message?.includes('RESOURCE_EXHAUSTED')) {
+            exhaustedModels.set(mName, Date.now() + 180000); // 3 minute cooldown
+          }
         }
       }
     }
@@ -295,7 +337,7 @@ async function generateChatResponse(text, farmContext = null) {
   try {
     console.log(`🤖 Generating chat response for: ${text.substring(0, 50)}...`);
     
-    const context = await retrieveContext(text);
+    const context = await retrieveContext(text, farmContext);
     const prompt = buildComprehensiveFarmPrompt(text, farmContext, context);
 
     let answer = '';
@@ -309,11 +351,22 @@ async function generateChatResponse(text, farmContext = null) {
     if (genAI) {
       // Try candidate models
       for (const mName of PREFERRED_MODELS) {
+        const cooldownUntil = exhaustedModels.get(mName);
+        if (cooldownUntil && Date.now() < cooldownUntil) {
+          continue;
+        }
+
         try {
           console.log(`Attempting generation with model "${mName}"...`);
           const m = genAI.getGenerativeModel({ model: mName });
           answer = await callWithRetry(async () => {
-            const result = await m.generateContent(prompt);
+            const result = await m.generateContent({
+              contents: [{ role: 'user', parts: [{ text: prompt }] }],
+              generationConfig: {
+                maxOutputTokens: 1024,
+                temperature: 0.35
+              }
+            });
             const response = await result.response;
             return response.text();
           });
@@ -323,6 +376,9 @@ async function generateChatResponse(text, farmContext = null) {
           }
         } catch (mErr) {
           console.warn(`Model "${mName}" failed:`, mErr.message);
+          if (mErr.message?.includes('QuotaFailure') || mErr.message?.includes('PerDay') || mErr.message?.includes('RESOURCE_EXHAUSTED')) {
+            exhaustedModels.set(mName, Date.now() + 180000); // 3 minute cooldown
+          }
         }
       }
     }
@@ -364,21 +420,37 @@ Please provide a well-formatted treatment plan with the following structure:
 Make it practical for Indian farmers. Use emojis and clear formatting. Focus on cost-effective, locally available solutions. Keep each section concise but actionable.`;
 
     let recommendation = '';
-    if (model) {
-      try {
-        recommendation = await callWithRetry(async () => {
-          const result = await model.generateContent(prompt);
-          const response = await result.response;
-          return response.text();
-        });
-        console.log(`✅ Disease treatment recommendation generated successfully`);
-      } catch (genErr) {
-        console.error('❌ AI Generation Error for disease recommendation:', genErr);
-        recommendation = await getFallbackDiseaseRecommendation(primaryDisease.disease);
+    if (genAI) {
+      for (const mName of PREFERRED_MODELS) {
+        const cooldownUntil = exhaustedModels.get(mName);
+        if (cooldownUntil && Date.now() < cooldownUntil) {
+          continue;
+        }
+
+        try {
+          const m = genAI.getGenerativeModel({ model: mName });
+          recommendation = await callWithRetry(async () => {
+            const result = await m.generateContent({
+              contents: [{ role: 'user', parts: [{ text: prompt }] }],
+              generationConfig: {
+                maxOutputTokens: 1024,
+                temperature: 0.35
+              }
+            });
+            const response = await result.response;
+            return response.text();
+          });
+          if (recommendation) {
+            console.log(`✅ Disease treatment recommendation generated successfully with model "${mName}"`);
+            break;
+          }
+        } catch (genErr) {
+          console.error(`❌ Model "${mName}" error for disease recommendation:`, genErr.message);
+          if (genErr.message?.includes('QuotaFailure') || genErr.message?.includes('PerDay') || genErr.message?.includes('RESOURCE_EXHAUSTED')) {
+            exhaustedModels.set(mName, Date.now() + 180000);
+          }
+        }
       }
-    } else {
-      console.log('⚠️ Gemini API not configured - using fallback disease recommendation');
-      recommendation = await getFallbackDiseaseRecommendation(primaryDisease.disease);
     }
 
     if (!recommendation) {

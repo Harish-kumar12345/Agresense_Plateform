@@ -31,6 +31,13 @@ export type ApplicationLog = {
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+// Helper: get auth headers if a token exists
+function getAuthHeaders(): Record<string, string> {
+  const token = localStorage.getItem('agrisense_token');
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
 const INITIAL_LOCAL_ITEMS: InventoryItem[] = [
   {
     _id: 'local_f1',
@@ -157,7 +164,11 @@ export const inventoryService = {
       if (status) params.status = status;
       if (search) params.search = search;
 
-      const res = await axios.get(`${API_BASE}/api/inventory`, { params, timeout: 5000 });
+      const res = await axios.get(`${API_BASE}/api/inventory`, {
+        params,
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return res.data.items;
       }
@@ -178,7 +189,10 @@ export const inventoryService = {
     const status = calcStatus(qty, item.expiry_date);
 
     try {
-      const res = await axios.post(`${API_BASE}/api/inventory`, item, { timeout: 5000 });
+      const res = await axios.post(`${API_BASE}/api/inventory`, item, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return res.data.item;
       }
@@ -202,7 +216,10 @@ export const inventoryService = {
 
   async updateItem(id: string, updateData: Partial<InventoryItem>): Promise<InventoryItem> {
     try {
-      const res = await axios.put(`${API_BASE}/api/inventory/${id}`, updateData, { timeout: 5000 });
+      const res = await axios.put(`${API_BASE}/api/inventory/${id}`, updateData, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return res.data.item;
       }
@@ -230,7 +247,10 @@ export const inventoryService = {
 
   async deleteItem(id: string): Promise<boolean> {
     try {
-      const res = await axios.delete(`${API_BASE}/api/inventory/${id}`, { timeout: 5000 });
+      const res = await axios.delete(`${API_BASE}/api/inventory/${id}`, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return true;
       }
@@ -254,7 +274,10 @@ export const inventoryService = {
     notes?: string;
   }): Promise<{ updatedItem: InventoryItem; log: ApplicationLog }> {
     try {
-      const res = await axios.post(`${API_BASE}/api/inventory/apply`, payload, { timeout: 5000 });
+      const res = await axios.post(`${API_BASE}/api/inventory/apply`, payload, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return { updatedItem: res.data.updatedItem, log: res.data.log };
       }
@@ -270,7 +293,15 @@ export const inventoryService = {
     }
 
     const used = Number(payload.quantity_used);
-    const newQty = Math.max(0, items[idx].quantity - used);
+    if (isNaN(used) || used <= 0) {
+      throw new Error('Quantity used must be a positive number greater than 0.');
+    }
+
+    if (items[idx].quantity < used) {
+      throw new Error(`Insufficient stock: requested ${used} ${items[idx].unit || 'units'}, but only ${items[idx].quantity} remaining.`);
+    }
+
+    const newQty = items[idx].quantity - used;
     const newStatus = calcStatus(newQty, items[idx].expiry_date);
 
     items[idx].quantity = newQty;
@@ -300,7 +331,10 @@ export const inventoryService = {
 
   async getApplicationLogs(): Promise<ApplicationLog[]> {
     try {
-      const res = await axios.get(`${API_BASE}/api/inventory/logs`, { timeout: 5000 });
+      const res = await axios.get(`${API_BASE}/api/inventory/logs`, {
+        headers: getAuthHeaders(),
+        timeout: 5000
+      });
       if (res.data && res.data.success) {
         return res.data.logs;
       }

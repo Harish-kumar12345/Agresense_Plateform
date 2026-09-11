@@ -89,10 +89,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <Sprout className="w-4 h-4" />,
       isActive: isFarmActive,
       items: [
-        { id: 'home', label: 'Field Setup & Entry', sub: 'Coordinates & crop parameters', icon: <Activity className="w-4 h-4 text-emerald-400" /> },
-        { id: 'dashboard', label: 'Agronomic Overview', sub: 'Telemetry & operations summary', icon: <BarChart3 className="w-4 h-4 text-emerald-400" /> },
-        { id: 'gis', label: 'GIS Boundary Map', sub: 'Boundary polygons & coordinates', icon: <MapPin className="w-4 h-4 text-emerald-400" /> },
-        { id: 'analytics', label: 'Farm Analytics', sub: 'Historical & sensory performance', icon: <Layers className="w-4 h-4 text-emerald-400" /> },
+        { id: 'home', label: 'Field Setup & Entry', sub: 'Coordinates & crop parameters', icon: <Activity className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
+        { id: 'dashboard', label: 'Agronomic Overview', sub: 'Telemetry & operations summary', icon: <BarChart3 className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
+        { id: 'gis', label: 'GIS Boundary Map', sub: 'Boundary polygons & coordinates', icon: <MapPin className="w-4 h-4 text-emerald-300" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
+        { id: 'analytics', label: 'Farm Analytics', sub: 'Historical & sensory performance', icon: <Layers className="w-4 h-4 text-teal-400" />, iconBox: 'bg-teal-950/70 border-teal-500/30' },
       ]
     },
     {
@@ -101,9 +101,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <CloudSun className="w-4 h-4" />,
       isActive: isMonitorActive,
       items: [
-        { id: 'weather', label: 'Weather Telemetry', sub: 'Hyperlocal forecast & precip', icon: <CloudSun className="w-4 h-4 text-emerald-400" /> },
-        { id: 'soil', label: 'Soil Horizon & NPK', sub: 'Moisture, pH & nutrients', icon: <FlaskConical className="w-4 h-4 text-emerald-400" /> },
-        { id: 'disease', label: 'Pathogen & Pest Risk', sub: 'Random Forest risk classifier', icon: <Bug className="w-4 h-4 text-emerald-400" /> },
+        { id: 'weather', label: 'Weather Telemetry', sub: 'Hyperlocal forecast & precip', icon: <CloudSun className="w-4 h-4 text-sky-400" />, iconBox: 'bg-sky-950/70 border-sky-500/30' },
+        { id: 'soil', label: 'Soil Horizon & NPK', sub: 'Moisture, pH & nutrients', icon: <FlaskConical className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
+        { id: 'disease', label: 'Pathogen & Pest Risk', sub: 'Random Forest risk classifier', icon: <Bug className="w-4 h-4 text-rose-400" />, iconBox: 'bg-rose-950/70 border-rose-500/30' },
       ]
     },
     {
@@ -112,8 +112,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <Wrench className="w-4 h-4" />,
       isActive: isOpsActive,
       items: [
-        { id: 'inventory', label: 'Inventory Tracker', sub: 'Stock, fertilizers & pesticides', icon: <Pill className="w-4 h-4 text-emerald-400" /> },
-        { id: 'harvest', label: 'Harvest Planning', sub: 'Schedules, logistics & storage', icon: <Tractor className="w-4 h-4 text-emerald-400" /> },
+        { id: 'inventory', label: 'Inventory Tracker', sub: 'Stock, fertilizers & pesticides', icon: <Pill className="w-4 h-4 text-indigo-400" />, iconBox: 'bg-indigo-950/70 border-indigo-500/30' },
+        { id: 'harvest', label: 'Harvest Planning', sub: 'Schedules, logistics & storage', icon: <Tractor className="w-4 h-4 text-amber-400" />, iconBox: 'bg-amber-950/70 border-amber-500/30' },
       ]
     },
     {
@@ -122,9 +122,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <Brain className="w-4 h-4" />,
       isActive: isIntelActive,
       items: [
-        { id: 'yield', label: 'Yield Prediction ML', sub: 'Multi-variable tonnage forecast', icon: <Brain className="w-4 h-4 text-emerald-400" /> },
-        { id: 'prices', label: 'Mandi Market Rates', sub: 'Live commodity price tracking', icon: <IndianRupee className="w-4 h-4 text-emerald-400" /> },
-        { id: 'chat', label: 'Agronomist Advisor', sub: 'Bilingual AI voice & chat assistant', icon: <MessageSquare className="w-4 h-4 text-emerald-400" /> },
+        { id: 'yield', label: 'Yield Prediction ML', sub: 'Multi-variable tonnage forecast', icon: <Brain className="w-4 h-4 text-amber-300" />, iconBox: 'bg-amber-950/70 border-amber-500/30' },
+        { id: 'prices', label: 'Mandi Market Rates', sub: 'Live commodity price tracking', icon: <IndianRupee className="w-4 h-4 text-amber-400" />, iconBox: 'bg-amber-950/70 border-amber-500/30' },
+        { id: 'chat', label: 'Agronomist Advisor', sub: 'Bilingual AI voice & chat assistant', icon: <MessageSquare className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
       ]
     }
   ];
@@ -208,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                   : 'text-white hover:bg-[#13231B] hover:text-white'
                               }`}
                             >
-                              <div className="p-1.5 rounded-lg bg-[#070D0A] border border-emerald-900/40 shrink-0 mt-0.5">
+                              <div className={`p-1.5 rounded-lg border shrink-0 mt-0.5 ${(item as any).iconBox || 'bg-[#070D0A] border-emerald-900/40'}`}>
                                 {item.icon}
                               </div>
                               <div className="flex-1 min-w-0">

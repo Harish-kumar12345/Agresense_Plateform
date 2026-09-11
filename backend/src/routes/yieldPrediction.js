@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { fetchAllRealData } = require('../services/realDataService');
 const { predictCropYield, recommendCrop } = require('../services/mlClient');
+const { optionalAuth } = require('../middleware/auth');
 
 const MODEL_NAME = 'LightGBM Regressor (Production Model trained on 345,000+ Indian Crop Records, R²=0.92)';
 
@@ -9,7 +10,7 @@ const MODEL_NAME = 'LightGBM Regressor (Production Model trained on 345,000+ Ind
  * POST /api/ml/predict-yield
  * Strict ML Data Pipeline Endpoint powered by trained LightGBM Regressor
  */
-router.post('/predict-yield', async (req, res) => {
+router.post('/predict-yield', optionalAuth, async (req, res) => {
   try {
     const payload = req.body || {};
 
@@ -27,6 +28,14 @@ router.post('/predict-yield', async (req, res) => {
         message: `Prediction halted: ${missingFeatures.length} required pipeline feature(s) missing.`,
         missingFeatures,
         requiredFeatures
+      });
+    }
+
+    const areaNum = Number(payload.farm_area_ha);
+    if (isNaN(areaNum) || areaNum <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'farm_area_ha must be a positive number greater than 0'
       });
     }
 
@@ -56,24 +65,37 @@ router.post('/predict-yield', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to compute ML yield prediction pipeline',
-      error: error.message
+      ...(process.env.NODE_ENV === 'production' ? {} : { error: error.message })
     });
   }
 });
 
 /**
- * POST /api/ml/predict-yield-auto
+ * POST /api/ml/auto-predict
  * Auto-enriched endpoint: fetches LIVE weather, soil, and GDD from real APIs & Soil Health Card databases,
  * then runs the real LightGBM model.
  */
-router.post('/predict-yield-auto', async (req, res) => {
+router.post('/auto-predict', optionalAuth, async (req, res) => {
   try {
-    const { crop, farm_area_ha, latitude, longitude, sowing_date, historical_yield_tha, state, district } = req.body || {};
+    const {
+      latitude = 28.6692,
+      longitude = 77.4538,
+      crop = 'Rice',
+      farm_area_ha = 2.5,
+      sowing_date,
+      state,
+      district,
+      historical_yield_tha
+    } = req.body || {};
 
-    if (!crop || !farm_area_ha || latitude == null || longitude == null) {
+    const area = Number(farm_area_ha);
+    const lat = Number(latitude);
+    const lon = Number(longitude);
+
+    if (!crop || isNaN(area) || area <= 0 || isNaN(lat) || isNaN(lon)) {
       return res.status(400).json({
         success: false,
-        message: 'Required fields: crop, farm_area_ha, latitude, longitude'
+        message: 'Required valid fields: crop, positive farm_area_ha (> 0), numeric latitude, numeric longitude'
       });
     }
 
@@ -118,7 +140,7 @@ router.post('/predict-yield-auto', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Auto yield prediction failed',
-      error: error.message
+      ...(process.env.NODE_ENV === 'production' ? {} : { error: error.message })
     });
   }
 });
@@ -127,7 +149,7 @@ router.post('/predict-yield-auto', async (req, res) => {
  * POST /api/ml/crop-recommend
  * Module 1: ML Crop Recommendation Endpoint (RandomForestClassifier, 99.32% Accuracy)
  */
-router.post('/crop-recommend', async (req, res) => {
+router.post('/crop-recommend', optionalAuth, async (req, res) => {
   try {
     const payload = req.body || {};
     const recommendation = await recommendCrop(payload);
@@ -137,7 +159,7 @@ router.post('/crop-recommend', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Crop recommendation failed',
-      error: error.message
+      ...(process.env.NODE_ENV === 'production' ? {} : { error: error.message })
     });
   }
 });

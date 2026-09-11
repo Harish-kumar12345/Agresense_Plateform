@@ -310,6 +310,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
 
   const speak = (text: string) => {
     try {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window) || !window.speechSynthesis) return;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
@@ -317,7 +318,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       utterance.pitch = 1;
       window.speechSynthesis.speak(utterance);
     } catch (error) {
-      console.error('Text-to-speech error:', error);
+      console.warn('Text-to-speech error:', error);
     }
   };
 

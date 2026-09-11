@@ -12,7 +12,7 @@ import { FertilizerPesticideModule } from './components/Inventory/FertilizerPest
 import { HarvestManagementModule } from './components/Harvest/HarvestManagementModule';
 import { CropPriceModule } from './components/CropPrice/CropPriceModule';
 import { FarmAnalyticsDashboard } from './components/Analytics/FarmAnalyticsDashboard';
-import { FarmData } from './services/farmService';
+import { FarmData, farmService } from './services/farmService';
 import { OfficerLogin } from './components/OfficerLogin';
 import { OfficerDashboard } from './components/OfficerDashboard';
 import { AuthWrapper } from './components/AuthWrapper';
@@ -55,7 +55,18 @@ function AppContent() {
   });
   const [view, setView] = useState('home');
   const [gisInitialTab, setGisInitialTab] = useState<'saved-fields' | 'new-field' | undefined>(undefined);
-  const [activeFarm, setActiveFarm] = useState<FarmData | null>(null);
+  const [activeFarm, setActiveFarm] = useState<FarmData | null>(() => {
+    try {
+      const active = localStorage.getItem('agrisense_active_farm');
+      if (active) return JSON.parse(active);
+      const saved = localStorage.getItem('agrisense_saved_farms');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed[0];
+      }
+    } catch {}
+    return null;
+  });
   const [dashboardData, setDashboardData] = useState<{
     location: LocationData;
     crop: string;
@@ -63,6 +74,21 @@ function AppContent() {
   } | null>(null);
   const { user, logout, isGuest } = useAuth();
   const { t } = useLanguage();
+
+  // Load user farms if activeFarm is not set
+  React.useEffect(() => {
+    farmService.getFarms(user?.id || 'default_farmer').then(farms => {
+      if (Array.isArray(farms) && farms.length > 0) {
+        setActiveFarm(prev => {
+          if (prev) return prev;
+          try {
+            localStorage.setItem('agrisense_active_farm', JSON.stringify(farms[0]));
+          } catch {}
+          return farms[0];
+        });
+      }
+    }).catch(err => console.warn('Could not auto-load farms in App:', err));
+  }, [user]);
 
   // On first load after auth, redirect authenticated farmers to field-chooser and officers to officer portal
   React.useEffect(() => {
@@ -135,6 +161,9 @@ function AppContent() {
 
   const handleSelectFarmFromGIS = (farm: FarmData) => {
     setActiveFarm(farm);
+    try {
+      localStorage.setItem('agrisense_active_farm', JSON.stringify(farm));
+    } catch {}
     setDashboardData({
       location: {
         latitude: farm.latitude,

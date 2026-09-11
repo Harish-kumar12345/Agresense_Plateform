@@ -23,7 +23,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ImageUpload } from './ImageUpload';
-import { FarmData } from '../services/farmService';
+import { FarmData, farmService } from '../services/farmService';
+import { Badge } from './ui/Badge';
 
 const backendUrl = (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001';
 
@@ -51,6 +52,29 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
+
+  // Farm selection & context management
+  const [savedFarms, setSavedFarms] = useState<FarmData[]>([]);
+  const [selectedFarm, setSelectedFarm] = useState<FarmData | null>(activeFarm || null);
+
+  useEffect(() => {
+    if (activeFarm) {
+      setSelectedFarm(activeFarm);
+    }
+  }, [activeFarm]);
+
+  useEffect(() => {
+    farmService.getFarms().then(farms => {
+      if (Array.isArray(farms) && farms.length > 0) {
+        setSavedFarms(farms);
+        setSelectedFarm(prev => prev || farms[0]);
+      }
+    }).catch(err => console.warn('Could not load saved farms in Chat:', err));
+  }, []);
+
+  const currentFarm = selectedFarm || activeFarm;
+  const currentCrop = currentFarm?.crop || crop || 'Rice';
+  const currentLocationName = currentFarm?.location_name || location?.city || 'Indian Precision Farm';
   
   const recognitionRef = useRef<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -88,6 +112,16 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       setIsTyping(false);
       setMessages((m) => [...m, { role: 'assistant', text: t, ts: Date.now() }]);
     });
+
+    socket.on('error', (err: any) => {
+      setIsTyping(false);
+      console.warn('Chat socket error:', err);
+    });
+
+    socket.on('connect_error', (err: any) => {
+      setIsTyping(false);
+      console.warn('Chat connection error:', err);
+    });
     
     return () => { 
       socket.disconnect(); 
@@ -102,23 +136,28 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     setIsTyping(true);
     
     const farmContext = {
-      location: activeFarm?.location_name || location?.city || 'India',
-      crop: activeFarm?.crop || crop || 'Not specified',
-      area_hectares: activeFarm?.area_hectares || 0,
-      soil_type: activeFarm?.soil_type || 'Unknown',
-      irrigation_type: activeFarm?.irrigation_type || 'Unknown',
-      season: activeFarm?.season || 'Not specified',
-      latitude: activeFarm?.latitude || location?.latitude || 0,
-      longitude: activeFarm?.longitude || location?.longitude || 0,
-      farm_name: activeFarm?.farm_name || 'My Farm',
+      farm_id: currentFarm?.farm_id || '',
+      farm_name: currentFarm?.farm_name || 'My Farm',
+      location: currentLocationName,
+      crop: currentCrop,
+      area_hectares: currentFarm?.area_hectares || 2.5,
+      soil_type: currentFarm?.soil_type || 'Loamy',
+      irrigation_type: currentFarm?.irrigation_type || 'Canal / Borewell',
+      season: currentFarm?.season || 'Kharif',
+      latitude: currentFarm?.latitude || location?.latitude || 28.6692,
+      longitude: currentFarm?.longitude || location?.longitude || 77.4538,
       state: location?.state || '',
-      district: location?.district || ''
+      district: location?.district || '',
+      temperature_c: 30,
+      humidity: 72,
+      soil_moisture: 35,
+      ph: 6.8
     };
 
     socket.emit('user_message', {
       roomId,
       text,
-      userId: 'user-' + Math.random().toString(36).slice(2),
+      userId: currentFarm?.farmer_id || 'default_farmer',
       language,
       farmContext
     });
@@ -185,34 +224,34 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
     } catch {}
   }
 
-  const agronomicCategories = [
+  const agronomicCategories = useMemo(() => [
     {
       icon: <Bug className="w-4 h-4 text-rose-400" />,
       title: 'Pathology & Pest Control',
-      prompt: 'Identify symptoms and remedy for Rice Blast & fungal sheath rot'
+      prompt: `Identify common pest symptoms and disease remedies for ${currentCrop}`
     },
     {
       icon: <FlaskConical className="w-4 h-4 text-emerald-400" />,
       title: 'NPK & Soil Nutrition',
-      prompt: 'Recommend exact NPK micro-dosing and foliar spray schedule for this soil'
+      prompt: `Recommend exact NPK micro-dosing and foliar spray schedule for ${currentCrop} in ${currentFarm?.soil_type || 'this'} soil`
     },
     {
       icon: <Droplets className="w-4 h-4 text-sky-400" />,
       title: 'Irrigation & Moisture',
-      prompt: 'Calculate optimal irrigation schedule based on canopy humidity and forecasted rain'
+      prompt: `Calculate optimal irrigation schedule for ${currentCrop} based on current soil moisture and weather`
     },
     {
       icon: <IndianRupee className="w-4 h-4 text-amber-400" />,
       title: 'Mandi Price & Arbitrage',
-      prompt: 'Analyze regional APMC mandi price arrivals versus minimum support prices'
+      prompt: `Analyze regional APMC mandi prices and market trends for selling ${currentCrop}`
     }
-  ];
+  ], [currentCrop, currentFarm]);
 
   return (
     <div className="flex flex-col h-[calc(100vh-6rem)] max-w-5xl mx-auto rounded-3xl overflow-hidden bg-[#0D1612]/95 border border-emerald-900/40 shadow-2xl relative">
       
       {/* Header Bar - Agronomic Specialist Console */}
-      <div className="p-4 px-6 bg-[#070D0A]/95 border-b border-emerald-900/40 flex items-center justify-between shrink-0 z-20 backdrop-blur-xl">
+      <div className="p-4 px-6 bg-[#070D0A]/95 border-b border-emerald-900/40 flex flex-wrap items-center justify-between gap-3 shrink-0 z-20 backdrop-blur-xl">
         <div className="flex items-center gap-3.5">
           <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-600/25 border border-emerald-300/40 shrink-0">
             <Sprout className="w-6 h-6 text-slate-950" />
@@ -220,28 +259,58 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-black text-white tracking-tight font-display">
-                <span className="apple-title-gradient">Agronomic AI Specialist</span> Console
+                <span className="bg-gradient-to-r from-white via-emerald-100 to-emerald-300 bg-clip-text text-transparent">Agronomic AI Specialist</span> Console
               </h2>
-              <span className="apple-segmented-item active text-[10px]">
-                <ShieldCheck className="w-3 h-3 text-emerald-400 inline-block mr-1" />
+              <Badge variant="forest" size="sm">
+                <ShieldCheck className="w-3 h-3 text-emerald-400 mr-1" />
                 ICAR Agronomy Verified
+              </Badge>
+            </div>
+            <div className="text-xs text-slate-300 flex flex-wrap items-center gap-2 mt-1">
+              {savedFarms.length > 1 ? (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-slate-400">Farm:</span>
+                  <select
+                    aria-label="Select Farm"
+                    value={currentFarm?.farm_id || ''}
+                    onChange={(e) => {
+                      const f = savedFarms.find(farm => farm.farm_id === e.target.value);
+                      if (f) setSelectedFarm(f);
+                    }}
+                    className="bg-[#13231B] border border-emerald-500/40 text-emerald-300 text-xs rounded-lg px-2 py-0.5 outline-none cursor-pointer hover:border-emerald-400 font-medium"
+                  >
+                    {savedFarms.map(f => (
+                      <option key={f.farm_id} value={f.farm_id} className="bg-slate-900 text-white">
+                        {f.farm_name} ({f.crop})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <span className="font-medium text-emerald-100">{currentFarm?.farm_name || currentLocationName}</span>
+              )}
+              <span className="text-slate-700">•</span>
+              <span>Crop: <strong className="text-white">{currentCrop}</strong></span>
+              {currentFarm?.soil_type && (
+                <>
+                  <span className="text-slate-700">•</span>
+                  <span className="text-slate-400">Soil: <span className="text-emerald-300 font-medium">{currentFarm.soil_type}</span></span>
+                </>
+              )}
+              <span className="text-slate-700">•</span>
+              <span className="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Telemetry Live
               </span>
             </div>
-            <p className="text-xs text-[#94A3B8] flex items-center gap-2 mt-1">
-              <span>{activeFarm?.farm_name || location?.city || 'Indian Precision Farm'}</span>
-              <span className="text-slate-700">•</span>
-              <span>Crop: <strong className="text-white">{crop || activeFarm?.crop || 'Rice'}</strong></span>
-              <span className="text-slate-700">•</span>
-              <span className="text-emerald-400 font-mono text-[11px]">Telemetry Active</span>
-            </p>
           </div>
         </div>
 
         {/* Console Mode Badge */}
         <div className="flex items-center gap-2">
-          <span className="apple-segmented-item active">
+          <Badge variant="outline" size="sm">
             English Mode
-          </span>
+          </Badge>
         </div>
       </div>
 
@@ -308,7 +377,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
                 className={`max-w-[85%] sm:max-w-[78%] rounded-2xl p-4 text-sm leading-relaxed shadow-lg ${
                   m.role === 'user'
                     ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-br-xs border border-emerald-500/40 shadow-emerald-950/40'
-                    : 'bg-[#0D1612]/95 text-slate-100 rounded-bl-xs border border-emerald-900/40 shadow-black/40'
+                    : 'bg-slate-900/90 text-slate-100 rounded-bl-xs border border-white/10 shadow-black/40'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{m.text}</div>
@@ -432,7 +501,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={language === 'ml' ? 'ഇവിടെ ടൈപ്പ് ചെയ്യുക...' : 'Ask about crop health, pest diagnosis, or irrigation...'}
-              className="w-full px-4 py-3 bg-[#0D1612] border border-emerald-900/40 rounded-xl text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+              className="w-full px-4 py-3 bg-slate-900 border border-white/10 rounded-xl text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
             />
           </div>
 
@@ -441,7 +510,7 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
             type="button"
             onClick={() => sendMessage(input)}
             disabled={!input.trim() || isTyping}
-            className="p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-700/30 transition-all disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0"
+            className="p-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20 transition-all disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0"
             title="Send query"
           >
             <Send className="w-4 h-4" />

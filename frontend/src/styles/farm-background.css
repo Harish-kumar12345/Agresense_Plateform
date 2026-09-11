@@ -139,9 +139,15 @@
   opacity: 0.22;
 }
 
-.agri-photo-card > * {
+.agri-photo-card > *:not(.pointer-events-none):not(.absolute):not([class*="absolute"]) {
   position: relative;
   z-index: 1;
+}
+
+.agri-photo-card > .absolute,
+.agri-photo-card > [class*="absolute"],
+.agri-photo-card > svg.absolute {
+  position: absolute !important;
 }
 
 /* Data Table with Pristine Contrast */

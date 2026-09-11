@@ -34,6 +34,7 @@ import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
 import { AnimatedCounter } from '../Common/AnimatedCounter';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 
 interface WeatherDashboardProps {
   farm?: FarmData | null;
@@ -139,109 +140,113 @@ export const WeatherDashboard: React.FC<WeatherDashboardProps> = ({
       animate="show"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. VerdaAgro Agronomic Context Bar */}
-      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-weather">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 1. VerdaAgro Agronomic Context Bar - Atmospheric Sky/Teal Theme */}
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-weather rounded-3xl rounded-tr-xl relative overflow-hidden">
+        <AgronomicMotif variant="contour" className="right-0 top-0 text-sky-400" opacity={0.08} />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-sky-300 uppercase">
               <span>Telemetry</span>
-              <span className="text-emerald-700">/</span>
+              <span className="text-sky-700">/</span>
               <span>Atmospheric & Canopy Station</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                LIVE SENSOR STREAM
-              </span>
+              <Badge variant="sky" shape="live" size="sm" className="ml-1">
+                LIVE SENSORS
+              </Badge>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-display">
                 Microclimate & Canopy Intelligence
               </h1>
-              <span className="verda-glow-pill">
+              <Badge variant="sky" size="md">
                 {current.description}
-              </span>
-              <span className="agri-pill agri-pill-muted font-bold">
+              </Badge>
+              <Badge variant="harvest" size="md">
                 Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
+            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
               <span className="font-bold text-white">{farmTitle}</span>
-              <span className="text-emerald-800">•</span>
-              <span className="flex items-center gap-1 text-emerald-300">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-sky-800">•</span>
+              <span className="flex items-center gap-1 text-sky-300">
+                <MapPin className="w-3.5 h-3.5 text-sky-400" />
                 {locationLabel}
               </span>
-              <span className="text-emerald-800">•</span>
+              <span className="text-sky-800">•</span>
               <span className="text-slate-300 font-mono text-[11px]">Coord: {lat.toFixed(3)}°N, {lon.toFixed(3)}°E</span>
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="sky"
+              size="sm"
               onClick={loadWeather}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+              icon={<RefreshCw className="w-3.5 h-3.5" />}
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
-              Sync Sensors
-            </button>
+              Sync Weather Sensors
+            </Button>
           </div>
         </div>
       </motion.div>
 
       {/* 2. Asymmetric VerdaAgro Telemetry Bento Grid */}
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        {/* Primary Atmospheric Core Station (7 Cols) */}
-        <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-weather p-6 flex flex-col justify-between space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
-            <div className="flex items-center gap-2">
-              <Thermometer className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+        {/* Primary Atmospheric Core Station (7 Cols) - Asymmetric Radius & Signature Motif */}
+        <div className="lg:col-span-7 p-6 flex flex-col gap-6 rounded-3xl rounded-tr-xl bg-[#0a1520]/92 border border-sky-900/40 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)] backdrop-blur-xl relative overflow-hidden">
+          <AgronomicMotif variant="contour" className="right-1 bottom-1 text-sky-500" opacity={0.06} />
+          
+          <div className="flex items-center justify-between pb-3 border-b border-sky-950/60 relative z-10">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-sky-500/20 to-sky-950/40 border border-sky-500/35 flex items-center justify-center shadow-inner">
+                <Thermometer className="w-4 h-4 text-sky-300" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                 Canopy Ambient Thermal Core
               </span>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400/90 font-medium">
+            <span className="text-[11px] font-mono text-sky-300 font-semibold bg-sky-950/60 px-2.5 py-0.5 rounded-full border border-sky-500/30">
               Thermal Index: {current.temperature_c > 32 ? 'High Heat Risk' : 'Optimal Metabolic Range'}
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 relative z-10">
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
-                Real-Time Canopy Temp
+              <div className="text-[11px] font-semibold text-sky-300/90 mb-1">
+                Real-Time Field Temperature
               </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
+              <div className="flex items-baseline gap-2.5 flex-wrap">
+                <span className="text-5xl sm:text-6xl font-black tracking-tight text-white font-display">
                   <AnimatedCounter value={current.temperature_c} decimals={1} suffix="°C" />
                 </span>
-                <span className="text-sm text-[#D1DED6] font-medium">
+                <span className="text-sm text-slate-300 font-medium">
                   (Feels like {current.feels_like_c}°C)
                 </span>
               </div>
             </div>
 
-            <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
-              <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Barometric Pressure</div>
-              <div className="text-base font-mono font-bold text-white mt-0.5">{current.pressure_mb} <span className="text-xs text-[#D1DED6] font-normal">hPa</span></div>
-              <div className="text-[10px] text-emerald-400 mt-0.5">Atmospheric equilibrium stable</div>
+            <div className="bg-[#070D0A]/75 border border-sky-900/40 rounded-xl p-3 text-right shadow-sm">
+              <div className="text-[10px] uppercase font-bold tracking-wider text-slate-300">Barometric Pressure</div>
+              <div className="text-base font-mono font-black text-white mt-0.5">{current.pressure_mb} <span className="text-xs text-sky-300 font-normal">hPa</span></div>
+              <div className="text-[10px] text-sky-300 font-medium mt-0.5">Atmospheric equilibrium stable</div>
             </div>
           </div>
 
           {/* Sub-telemetry 3-gauge strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10 mt-auto">
+            <div className="bg-[#070D0A]/80 border border-sky-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-sky-200">
                   <Droplets className="w-3.5 h-3.5 text-sky-400" />
-                  Air Humidity
+                  Canopy Air Moisture
                 </span>
-                <span className="text-[10px] font-semibold text-emerald-400">{current.relative_humidity > 75 ? 'Saturated' : 'Optimal'}</span>
+                <span className="text-[10px] font-bold text-sky-300">{current.relative_humidity > 75 ? 'Saturated' : 'Optimal'}</span>
               </div>
               <div className="text-2xl font-bold text-white font-display">
                 {current.relative_humidity}%
               </div>
-              <div className="w-full bg-slate-800/80 rounded-full h-1.5 mt-2 overflow-hidden">
+              <div className="w-full bg-slate-800/90 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div 
                   className="bg-sky-400 h-1.5 rounded-full transition-all"
                   style={{ width: `${Math.min(100, current.relative_humidity)}%` }}
@@ -249,106 +254,109 @@ export const WeatherDashboard: React.FC<WeatherDashboardProps> = ({
               </div>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
-                  <CloudRain className="w-3.5 h-3.5 text-emerald-400" />
-                  Precipitation
+            <div className="bg-[#070D0A]/80 border border-sky-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-sky-200">
+                  <CloudRain className="w-3.5 h-3.5 text-sky-400" />
+                  Precipitation Risk
                 </span>
-                <span className="text-[10px] font-semibold text-sky-400">{current.precipitation_probability}% prob</span>
+                <span className="text-[10px] font-bold text-sky-300">{current.precipitation_probability}% prob</span>
               </div>
               <div className="text-2xl font-bold text-white font-display">
-                {current.precipitation_mm} <span className="text-sm font-normal text-[#D1DED6]">mm</span>
+                {current.precipitation_probability}%
               </div>
-              <p className="text-[10px] text-[#D1DED6] mt-2 truncate">
-                {current.precipitation_probability > 40 ? 'Rain expected today' : 'Negligible rain risk'}
-              </p>
+              <div className="w-full bg-slate-800/90 rounded-full h-1.5 mt-2 overflow-hidden">
+                <div 
+                  className="bg-sky-400 h-1.5 rounded-full transition-all"
+                  style={{ width: `${Math.min(100, current.precipitation_probability)}%` }}
+                />
+              </div>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
+            <div className="bg-[#070D0A]/80 border border-sky-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-teal-200">
                   <Wind className="w-3.5 h-3.5 text-teal-400" />
-                  Wind Dynamics
+                  Spray-Zone Wind
                 </span>
-                <span className="text-[10px] font-semibold text-[#D1DED6] font-mono">{current.wind_direction}</span>
+                <span className="text-[10px] font-bold text-teal-300 font-mono">{current.wind_direction}</span>
               </div>
               <div className="text-2xl font-bold text-white font-display">
-                {current.wind_speed_kmh} <span className="text-sm font-normal text-[#D1DED6]">km/h</span>
+                {current.wind_speed_kmh} <span className="text-xs font-normal text-slate-300">km/h</span>
               </div>
-              <p className="text-[10px] text-[#D1DED6] mt-2 truncate">
+              <p className="text-[10px] text-slate-300 font-medium mt-2 truncate">
                 {current.wind_speed_kmh > 20 ? 'Advisory: High spray drift' : 'Favorable for canopy spraying'}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Agronomic Operation Readiness Station (5 Cols) */}
+        {/* Agronomic Operation Readiness Station (5 Cols) - Sky & Field Operations */}
         <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-          {/* Irrigation Need */}
-          <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+          {/* Irrigation Need - Sky Palette */}
+          <div className="p-5 flex-1 flex flex-col justify-between rounded-2xl bg-[#0c1824]/92 border border-sky-900/40 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(0,0,0,0.65)] hover:border-sky-500/40 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
-                <Droplets className="w-4 h-4 text-sky-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-300 flex items-center gap-2">
+                <div className="w-6 h-6 rounded-md bg-sky-500/20 border border-sky-500/35 flex items-center justify-center">
+                  <Droplets className="w-3.5 h-3.5 text-sky-400" />
+                </div>
                 Root-Zone Irrigation Demand
               </span>
-              <span className={`agri-pill ${
-                microClimate.irrigationNeed.level === 'High' 
-                  ? 'agri-pill-amber' 
-                  : microClimate.irrigationNeed.level === 'Low'
-                  ? 'agri-pill-emerald'
-                  : 'agri-pill-muted'
-              }`}>
+              <Badge 
+                variant={microClimate.irrigationNeed.level === 'High' ? 'amber' : microClimate.irrigationNeed.level === 'Low' ? 'emerald' : 'sky'} 
+                size="sm"
+              >
                 {microClimate.irrigationNeed.level} Demand
-              </span>
+              </Badge>
             </div>
 
             <div className="my-3">
               <div className="text-xl font-bold text-white font-display">
                 {microClimate.irrigationNeed.level === 'High' ? 'Irrigation Recommended Today' : 'Moisture Retention Adequate'}
               </div>
-              <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
+              <p className="text-xs text-slate-200 mt-1.5 leading-relaxed">
                 {microClimate.irrigationNeed.description}
               </p>
             </div>
 
-            <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
-              <span className="text-[#D1DED6]">Canopy Transpiration:</span>
-              <span className="text-emerald-400 font-semibold font-mono">
+            <div className="pt-2 border-t border-sky-950/60 flex items-center justify-between text-xs">
+              <span className="text-slate-300 font-medium">Canopy Transpiration:</span>
+              <span className="text-sky-300 font-bold font-mono">
                 {current.relative_humidity < 40 ? 'High Loss Rate' : 'Balanced Vapor Pressure'}
               </span>
             </div>
           </div>
 
           {/* Spraying & Field Operations */}
-          <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+          <div className="p-5 flex-1 flex flex-col justify-between rounded-2xl bg-[#0D1612]/92 border border-emerald-900/40 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(0,0,0,0.65)] hover:border-emerald-500/40 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                Field Operations Suitability
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-2">
+                <div className="w-6 h-6 rounded-md bg-emerald-500/20 border border-emerald-500/35 flex items-center justify-center">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                </div>
+                Field Spray Window
               </span>
-              <span className={`agri-pill ${
-                microClimate.fieldOperations.level.toLowerCase().includes('good') || microClimate.fieldOperations.level.toLowerCase().includes('optimal')
-                  ? 'agri-pill-emerald'
-                  : 'agri-pill-amber'
-              }`}>
+              <Badge 
+                variant={microClimate.fieldOperations.level.toLowerCase().includes('good') || microClimate.fieldOperations.level.toLowerCase().includes('optimal') ? 'emerald' : 'amber'} 
+                size="sm"
+              >
                 {microClimate.fieldOperations.level}
-              </span>
+              </Badge>
             </div>
 
             <div className="my-3">
               <div className="text-xl font-bold text-white font-display">
-                Fertilizer & Pesticide Spray Window
+                Foliar Spray & Treatment Suitability
               </div>
-              <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
+              <p className="text-xs text-slate-200 mt-1.5 leading-relaxed">
                 {microClimate.fieldOperations.description}
               </p>
             </div>
 
-            <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
-              <span className="text-[#D1DED6]">Drift Risk Index:</span>
-              <span className="text-emerald-400 font-semibold font-mono">
-                {current.wind_speed_kmh < 15 ? 'Safe (Under 15 km/h)' : 'Cautionary (High drift)'}
+            <div className="pt-2 border-t border-emerald-950/60 flex items-center justify-between text-xs">
+              <span className="text-slate-300 font-medium">Drift Risk Index:</span>
+              <span className="text-emerald-300 font-bold font-mono">
+                {current.wind_speed_kmh < 15 ? 'Safe (< 15 km/h)' : 'Cautionary (High drift)'}
               </span>
             </div>
           </div>
@@ -458,12 +466,12 @@ export const WeatherDashboard: React.FC<WeatherDashboardProps> = ({
                     key={idx}
                     className={`p-3.5 rounded-xl text-center flex flex-col items-center justify-between space-y-2 transition-all ${
                       isToday
-                        ? 'border border-emerald-500/50 bg-emerald-950/30 shadow-md ring-1 ring-emerald-500/30'
-                        : 'border border-emerald-950/40 bg-[#070D0A]/50 hover:border-emerald-800/50'
+                        ? 'border border-sky-500/50 bg-sky-950/40 shadow-md ring-1 ring-sky-500/30'
+                        : 'border border-sky-950/40 bg-[#070D0A]/60 hover:border-sky-800/50'
                     }`}
                   >
                     <div className="space-y-0.5">
-                      <span className={`text-xs font-bold block ${isToday ? 'text-emerald-400 font-display' : 'text-white'}`}>
+                      <span className={`text-xs font-bold block ${isToday ? 'text-sky-300 font-display' : 'text-white'}`}>
                         {isToday ? 'Today' : d.day_name}
                       </span>
                       <span className="text-[10px] text-[#D1DED6] font-medium block">

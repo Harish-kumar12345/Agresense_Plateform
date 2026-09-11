@@ -177,15 +177,15 @@ export const yieldService = {
     const base = payload.historical_yield_tha || baselines[cropKey];
     const safeArea = Math.max(0.1, Number(payload.farm_area_ha) || 2.5);
 
-    const N = Number(payload.soil_n);
-    const P = Number(payload.soil_p);
-    const K = Number(payload.soil_k);
-    const ph = Number(payload.soil_ph);
-    const soilMoisture = Number(payload.soil_moisture_pct);
-    const temp = Number(payload.temperature_c);
-    const rain = Number(payload.rainfall_mm);
-    const humidity = Number(payload.humidity_pct);
-    const gdd = Number(payload.gdd);
+    const N = Number.isFinite(Number(payload.soil_n)) ? Number(payload.soil_n) : 40;
+    const P = Number.isFinite(Number(payload.soil_p)) ? Number(payload.soil_p) : 25;
+    const K = Number.isFinite(Number(payload.soil_k)) ? Number(payload.soil_k) : 30;
+    const ph = Number.isFinite(Number(payload.soil_ph)) ? Number(payload.soil_ph) : 6.5;
+    const soilMoisture = Number.isFinite(Number(payload.soil_moisture_pct)) ? Number(payload.soil_moisture_pct) : 35;
+    const temp = Number.isFinite(Number(payload.temperature_c)) ? Number(payload.temperature_c) : 28;
+    const rain = Number.isFinite(Number(payload.rainfall_mm)) ? Number(payload.rainfall_mm) : 5;
+    const humidity = Number.isFinite(Number(payload.humidity_pct)) ? Number(payload.humidity_pct) : 70;
+    const gdd = Number.isFinite(Number(payload.gdd)) ? Number(payload.gdd) : 1200;
 
     const npkRatio = (Math.min(1.25, N / 70) + Math.min(1.25, P / 50) + Math.min(1.25, K / 80)) / 3;
     const phPen = ph < 6.0 || ph > 7.5 ? 0.92 : 1.04;

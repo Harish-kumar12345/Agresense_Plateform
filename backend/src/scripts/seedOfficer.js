@@ -14,7 +14,7 @@ async function main() {
     process.exit(0);
   }
   const passwordHash = await bcrypt.hash(password, 10);
-  await User.create({ name: 'Officer', email, passwordHash, role: 'officer' });
+  await User.create({ name: 'Officer', email, passwordHash, role: 'officer', isVerified: true });
   console.log('Created officer user:', email);
   process.exit(0);
 }
