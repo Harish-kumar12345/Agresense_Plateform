@@ -37,6 +37,9 @@ import { soilService } from '../services/soilService';
 import { FarmData } from '../services/farmService';
 import { InsightCard } from './ui/InsightCard';
 import { Badge } from './ui/Badge';
+import { Card } from './ui/Card';
+import { Button } from './ui/Button';
+import { AgronomicMotif } from './Common/AgronomicMotif';
 import { motion } from 'framer-motion';
 import { motionPresets } from '../styles/design-tokens';
 
@@ -382,105 +385,112 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
             animate="visible"
             className="space-y-6"
           >
-            {/* 1. VerdaAgro Agro-Ecosystem Context Bar */}
-            <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-farm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {/* 1. VerdaAgro Agro-Ecosystem Context Bar with Asymmetric Geometry & Motif */}
+            <motion.div variants={motionPresets.item} className="agri-context-header agri-context-header-farm rounded-3xl rounded-tr-xl relative overflow-hidden">
+              <AgronomicMotif variant="contour" className="right-0 top-0 text-emerald-400" opacity={0.07} />
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
-                    <span>Workspace</span>
+                  <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-300 uppercase">
+                    <span>Precision Workspace</span>
                     <span className="text-emerald-700">/</span>
-                    <span>Holistic Agro-Ecosystem Command</span>
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-300 font-mono font-medium ml-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                      ACTIVE TELEMETRY SYNC
-                    </span>
+                    <span>Agro-Ecosystem Command</span>
+                    <Badge variant="emerald" shape="live" size="sm" className="ml-1">
+                      LIVE TELEMETRY
+                    </Badge>
                   </div>
 
                   <div className="flex items-center gap-3 flex-wrap">
-                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-display">
-                      Agro-Ecosystem Operations Overview
+                    <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white font-display">
+                      Agro-Ecosystem Operations Center
                     </h2>
-                    <span className="agri-pill agri-pill-emerald">
-                      Active Monitoring
-                    </span>
-                    <span className="agri-pill agri-pill-muted">
+                    <Badge variant="emerald" size="sm">
+                      Active Telemetry
+                    </Badge>
+                    <Badge variant="harvest" size="sm">
                       Target Crop: {crop}
-                    </span>
+                    </Badge>
                   </div>
 
-                  <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
-                    <span className="font-semibold text-white">{farmDetails?.farm_name || 'Green Valley Farm'}</span>
+                  <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
+                    <span className="font-bold text-white">{farmDetails?.farm_name || 'Green Valley Farm'}</span>
                     <span className="text-emerald-800">•</span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 text-slate-300">
                       <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                       {location.city || 'Ghaziabad'}, {location.country || 'India'}
                     </span>
                     <span className="text-emerald-800">•</span>
-                    <span className="text-slate-300 font-mono text-[11px]">Area: {farmDetails?.area_hectares || 2.5} ha</span>
+                    <span className="text-emerald-300 font-mono text-[11px] font-semibold">Area: {farmDetails?.area_hectares || 2.5} ha</span>
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2.5 shrink-0">
-                  <div className="px-3.5 py-2 rounded-xl bg-[#070D0A]/70 border border-emerald-900/40 text-center">
-                    <span className="text-[10px] font-semibold text-[#D1DED6] uppercase tracking-wider block">Seasonal Output</span>
-                    <span className="text-sm font-extrabold text-emerald-400 font-display">4.8 t/ha</span>
+                  <div className="px-4 py-2 rounded-xl bg-[#070D0A]/85 border border-emerald-900/50 text-center shadow-inner">
+                    <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider block">Seasonal Output</span>
+                    <span className="text-base font-black text-amber-400 font-display">4.8 t/ha</span>
                   </div>
+                  <Button variant="hero" size="sm" onClick={() => setActiveTab('yield')}>
+                    Run Prediction
+                  </Button>
                 </div>
               </div>
             </motion.div>
 
             {/* 2. Asymmetric Agro-Ecosystem Bento Grid */}
             <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              {/* Primary Atmospheric & Soil Core (7 Cols) */}
-              <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-farm p-6 flex flex-col justify-between space-y-6">
-                <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
-                  <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+              {/* Primary Atmospheric & Soil Core (7 Cols) - Asymmetric Radius & Signature Motif */}
+              <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-farm p-6 flex flex-col gap-6 rounded-3xl rounded-tr-lg border border-emerald-900/40 relative overflow-hidden shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)]">
+                <AgronomicMotif variant="wheat" className="right-1 bottom-1 text-emerald-500" opacity={0.06} />
+                
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-950/50 relative z-10">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-950/40 border border-emerald-500/35 flex items-center justify-center shadow-inner">
+                      <Activity className="w-4 h-4 text-emerald-300" />
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                       Environmental Vitality Index
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-emerald-400 font-medium">
-                    Status: Favorable Metabolic Range
+                  <span className="text-[11px] font-mono text-emerald-300 font-semibold bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                    Favorable Metabolic Range
                   </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 relative z-10">
                   <div>
-                    <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
-                      Canopy Microclimate Temp
+                    <div className="text-[11px] font-semibold text-emerald-300/90 mb-1">
+                      Canopy Microclimate Temperature
                     </div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
+                    <div className="flex items-baseline gap-2.5 flex-wrap">
+                      <span className="text-5xl sm:text-6xl font-black tracking-tight text-white font-display">
                         {weatherData.current.temperature_c}°C
                       </span>
-                      <span className="text-sm text-[#D1DED6] font-medium">
+                      <span className="text-sm text-slate-300 font-medium">
                         (Feels like {weatherData.current.feels_like_c}°C • {weatherData.current.description})
                       </span>
                     </div>
                   </div>
 
-                  <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
-                    <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Soil Reaction</div>
-                    <div className="text-base font-mono font-bold text-white mt-0.5">{soilData.ph} <span className="text-xs text-emerald-400 font-normal">pH</span></div>
-                    <div className="text-[10px] text-[#D1DED6] mt-0.5">{soilData.type}</div>
+                  <div className="bg-[#070D0A]/75 border border-emerald-900/40 rounded-xl p-3.5 text-right shadow-sm">
+                    <div className="text-[10px] uppercase font-bold tracking-wider text-slate-300">Soil Reaction</div>
+                    <div className="text-base font-mono font-black text-white mt-0.5">{soilData.ph} <span className="text-xs text-emerald-300 font-semibold">pH</span></div>
+                    <div className="text-[11px] text-emerald-300 font-medium mt-0.5">{soilData.type}</div>
                   </div>
                 </div>
 
                 {/* Sub-telemetry 3-gauge strip */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-                    <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                      <span className="text-[11px] font-medium flex items-center gap-1">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10 mt-auto">
+                  <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+                    <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                      <span className="text-[11px] font-semibold flex items-center gap-1.5 text-sky-200">
                         <Droplets className="w-3.5 h-3.5 text-sky-400" />
-                        Relative Humidity
+                        Canopy Air Moisture
                       </span>
-                      <span className="text-[10px] font-semibold text-emerald-400">{weatherData.current.relative_humidity}%</span>
+                      <span className="text-[10px] font-bold text-sky-300">{weatherData.current.relative_humidity}%</span>
                     </div>
                     <div className="text-xl font-bold text-white font-display">
                       {weatherData.current.relative_humidity}%
                     </div>
-                    <div className="w-full bg-slate-800/80 rounded-full h-1.5 mt-2 overflow-hidden">
+                    <div className="w-full bg-slate-800/90 rounded-full h-1.5 mt-2 overflow-hidden">
                       <div 
                         className="bg-sky-400 h-1.5 rounded-full transition-all"
                         style={{ width: `${Math.min(100, weatherData.current.relative_humidity)}%` }}
@@ -488,18 +498,18 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
                     </div>
                   </div>
 
-                  <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-                    <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                      <span className="text-[11px] font-medium flex items-center gap-1">
+                  <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+                    <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                      <span className="text-[11px] font-semibold flex items-center gap-1.5 text-emerald-200">
                         <Droplets className="w-3.5 h-3.5 text-emerald-400" />
-                        Soil Moisture
+                        Root-Zone Hydration
                       </span>
-                      <span className="text-[10px] font-semibold text-emerald-400">{soilData.moisture}% vol</span>
+                      <span className="text-[10px] font-bold text-emerald-300">{soilData.moisture}% vol</span>
                     </div>
                     <div className="text-xl font-bold text-white font-display">
                       Field Capacity
                     </div>
-                    <div className="w-full bg-slate-800/80 rounded-full h-1.5 mt-2 overflow-hidden">
+                    <div className="w-full bg-slate-800/90 rounded-full h-1.5 mt-2 overflow-hidden">
                       <div 
                         className="bg-emerald-400 h-1.5 rounded-full transition-all"
                         style={{ width: `${Math.min(100, soilData.moisture * 2)}%` }}
@@ -507,77 +517,83 @@ export default function Dashboard({ location, crop, farmDetails, onBack }: Dashb
                     </div>
                   </div>
 
-                  <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-                    <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                      <span className="text-[11px] font-medium flex items-center gap-1">
+                  <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+                    <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                      <span className="text-[11px] font-semibold flex items-center gap-1.5 text-teal-200">
                         <Wind className="w-3.5 h-3.5 text-teal-400" />
-                        Wind Velocity
+                        Canopy Wind Flow
                       </span>
-                      <span className="text-[10px] font-semibold text-[#D1DED6] font-mono">{weatherData.current.wind_direction}</span>
+                      <span className="text-[10px] font-bold text-teal-300 font-mono">{weatherData.current.wind_direction}</span>
                     </div>
                     <div className="text-xl font-bold text-white font-display">
-                      {weatherData.current.wind_speed_kmh} <span className="text-sm font-normal text-[#D1DED6]">km/h</span>
+                      {weatherData.current.wind_speed_kmh} <span className="text-xs font-normal text-slate-300">km/h</span>
                     </div>
-                    <p className="text-[10px] text-[#D1DED6] mt-2">
-                      Favorable for canopy spraying
+                    <p className="text-[10px] text-emerald-300 font-medium mt-2">
+                      Optimal for foliar applications
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Agro-Ecological Operations Summary (5 Cols) */}
+              {/* Agro-Ecological Operations Summary (5 Cols) - Domain Themed (Harvest & Pathogen) */}
               <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-                <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+                {/* Yield Forecast Bento (Harvest Amber Palette) */}
+                <div className="p-5 flex-1 flex flex-col justify-between rounded-2xl bg-[#17130a]/92 border border-amber-900/40 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(0,0,0,0.65)] hover:border-amber-500/40 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
-                      <Sprout className="w-4 h-4 text-emerald-400" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-amber-500/20 border border-amber-500/35 flex items-center justify-center">
+                        <Sprout className="w-3.5 h-3.5 text-amber-400" />
+                      </div>
                       Yield Expectation Model
                     </span>
-                    <span className="agri-pill agri-pill-emerald">
-                      Optimal
-                    </span>
+                    <Badge variant="harvest" size="sm">
+                      Optimal Output
+                    </Badge>
                   </div>
 
                   <div className="my-3">
-                    <div className="text-3xl font-extrabold text-white font-display">
-                      4.8 <span className="text-lg text-[#D1DED6] font-normal">t/ha</span>
+                    <div className="text-3xl font-black text-white font-display">
+                      4.8 <span className="text-base text-amber-300/80 font-normal">t/ha</span>
                     </div>
-                    <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
-                      Baseline projected yield calculated for <strong className="text-white">{crop}</strong> on {farmDetails?.area_hectares || 2.5} hectares.
+                    <p className="text-xs text-slate-200 mt-1.5 leading-relaxed">
+                      Baseline projected yield calculated for <strong className="text-amber-300">{crop}</strong> on {farmDetails?.area_hectares || 2.5} hectares.
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
-                    <span className="text-[#D1DED6]">Total Field Harvest:</span>
-                    <span className="text-emerald-400 font-semibold font-mono">
+                  <div className="pt-2 border-t border-amber-950/60 flex items-center justify-between text-xs">
+                    <span className="text-slate-300 font-medium">Total Field Harvest:</span>
+                    <span className="text-amber-300 font-bold font-mono">
                       ~{((farmDetails?.area_hectares || 2.5) * 4.8).toFixed(1)} Metric Tonnes
                     </span>
                   </div>
                 </div>
 
-                <div className="agri-bento-card p-5 flex-1 flex flex-col justify-between">
+                {/* Pathogen Exposure Bento (Rose/Pathogen Palette) */}
+                <div className="p-5 flex-1 flex flex-col justify-between rounded-2xl bg-[#170a0d]/92 border border-rose-900/40 backdrop-blur-xl shadow-[0_8px_24px_-4px_rgba(0,0,0,0.65)] hover:border-rose-500/40 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D1DED6] flex items-center gap-1.5">
-                      <Bug className="w-4 h-4 text-emerald-400" />
-                      Epidemiological Exposure
+                    <span className="text-xs font-bold uppercase tracking-wider text-rose-300 flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-rose-500/20 border border-rose-500/35 flex items-center justify-center">
+                        <Bug className="w-3.5 h-3.5 text-rose-400" />
+                      </div>
+                      Pathogen Defense Index
                     </span>
-                    <span className="agri-pill agri-pill-emerald">
-                      Low Pathogen Risk
-                    </span>
+                    <Badge variant="rose" size="sm">
+                      Low Risk Profile
+                    </Badge>
                   </div>
 
                   <div className="my-3">
                     <div className="text-lg font-bold text-white font-display">
-                      Favorable Growth Conditions
+                      Favorable Canopy Environment
                     </div>
-                    <p className="text-xs text-[#D1DED6] mt-1.5 leading-relaxed">
+                    <p className="text-xs text-slate-200 mt-1.5 leading-relaxed">
                       Relative humidity and canopy transpiration remain below critical fungal incubation limits.
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-emerald-950/40 flex items-center justify-between text-xs">
-                    <span className="text-[#D1DED6]">Next Field Inspection:</span>
-                    <span className="text-emerald-400 font-semibold font-mono">48 Hours</span>
+                  <div className="pt-2 border-t border-rose-950/60 flex items-center justify-between text-xs">
+                    <span className="text-slate-300 font-medium">Next Scouting Run:</span>
+                    <span className="text-rose-300 font-bold font-mono">48 Hours</span>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('FATAL: JWT_SECRET environment variable is missing.');
+  }
+  return secret;
+}
+
 /**
  * requireAuth — Verify JWT from Authorization header.
  * Attaches decoded payload to req.user ({ sub, role, isVerified }).
@@ -8,18 +16,36 @@ function requireAuth(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Authentication required' });
+    return res.status(401).json({ error: 'Authentication required', code: 'UNAUTHORIZED' });
   }
 
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'dev_secret');
+    const decoded = jwt.verify(token, getJwtSecret());
     req.user = decoded; // { sub, role, isVerified, iat, exp }
     next();
   } catch (err) {
-    return res.status(401).json({ error: 'Invalid or expired token' });
+    return res.status(401).json({ error: 'Invalid or expired token', code: 'UNAUTHORIZED' });
   }
+}
+
+/**
+ * optionalAuth — extracts user from JWT if present, but doesn't reject unauthenticated requests.
+ * Used for endpoints that provide personalized data when logged in, or fallback data for guests.
+ */
+function optionalAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = jwt.verify(token, getJwtSecret());
+      req.user = decoded;
+    } catch (err) {
+      // Invalid/expired token: proceed as guest
+    }
+  }
+  next();
 }
 
 /**
@@ -57,4 +83,4 @@ function requireRole(...roles) {
   };
 }
 
-module.exports = { requireAuth, requireRole };
+module.exports = { requireAuth, optionalAuth, requireRole, getJwtSecret };

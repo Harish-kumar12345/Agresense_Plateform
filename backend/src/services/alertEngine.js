@@ -339,7 +339,7 @@ const markAsRead = async (alertId) => {
   const isDbConnected = mongoose.connection && mongoose.connection.readyState === 1;
 
   try {
-    if (isDbConnected && Alert && Alert.findByIdAndUpdate) {
+    if (isDbConnected && mongoose.Types.ObjectId.isValid(alertId) && Alert && Alert.findByIdAndUpdate) {
       const doc = await Alert.findByIdAndUpdate(alertId, { status: 'read' }, { new: true });
       if (doc) return doc;
     }
@@ -380,7 +380,7 @@ const deleteAlert = async (alertId) => {
   const isDbConnected = mongoose.connection && mongoose.connection.readyState === 1;
 
   try {
-    if (isDbConnected && Alert && Alert.findByIdAndDelete) {
+    if (isDbConnected && mongoose.Types.ObjectId.isValid(alertId) && Alert && Alert.findByIdAndDelete) {
       await Alert.findByIdAndDelete(alertId);
     }
   } catch (e) {}

@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/User');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, getJwtSecret } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -98,7 +98,7 @@ router.post('/signup', async (req, res) => {
     // Farmer: generate JWT and return immediately
     const token = jwt.sign(
       { sub: user._id, role: user.role, isVerified: user.isVerified },
-      process.env.JWT_SECRET || 'dev_secret',
+      getJwtSecret(),
       { expiresIn: '7d' }
     );
 
@@ -177,7 +177,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign(
       { sub: user._id, role: user.role, isVerified: user.isVerified },
-      process.env.JWT_SECRET || 'dev_secret',
+      getJwtSecret(),
       { expiresIn: '7d' }
     );
 

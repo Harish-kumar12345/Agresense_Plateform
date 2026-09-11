@@ -22,8 +22,6 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/farm-background.css';
 
-const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || '';
-
 type LocationData = {
   latitude: number;
   longitude: number;
@@ -55,23 +53,6 @@ const reverseGeocodeCoords = async (lat: number, lon: number): Promise<{ city: s
     }
   } catch (e) {
     console.warn('Nominatim reverse geocoding error:', e);
-  }
-
-  // 2. OpenWeather API fallback
-  if (OPENWEATHER_API_KEY) {
-    try {
-      const res = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${OPENWEATHER_API_KEY}`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.length > 0) {
-          return {
-            city: data[0].name,
-            country: data[0].country || 'India',
-            state: data[0].state || ''
-          };
-        }
-      }
-    } catch (e) {}
   }
 
   // 3. Fallback based on coordinate region bounds

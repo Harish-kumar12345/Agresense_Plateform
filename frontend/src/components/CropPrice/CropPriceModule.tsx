@@ -56,6 +56,7 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
 interface CropPriceModuleProps {
@@ -247,33 +248,33 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       animate="show"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. Sleek Agronomic Context Bar (VerdaAgro Style - Zero Wasted Space) */}
+      {/* 1. Sleek Agronomic Context Bar (Harvest & Mandi Telemetry) */}
       <motion.div variants={motionPresets.item} className="verda-hero-header flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-2 relative z-10">
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
+          <div className="flex items-center gap-2 text-xs font-semibold text-amber-400">
             <span>Intelligence</span>
             <span className="text-slate-600">/</span>
-            <span className="text-white">Mandi Market Rates & Commodity Terminal</span>
+            <span className="text-white">Mandi Market Rates & Spot Settlement</span>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white font-display">
-              <span className="verda-gradient-title">APMC Market Telemetry</span>
+              <span className="bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent">APMC Market Telemetry</span>
             </h1>
-            <span className="verda-glow-pill">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-400/30 text-amber-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
               Live Agmarknet Sync
             </span>
-            <Badge variant="emerald" size="sm">
+            <Badge variant="harvest" size="sm">
               🌾 {selectedCrop}
             </Badge>
           </div>
-          <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-normal">
-            <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <p className="text-xs text-slate-300 flex items-center gap-2 font-normal">
+            <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span className="font-semibold text-white">{farmName}</span>
-            <span className="text-emerald-800">•</span>
+            <span className="text-amber-800">•</span>
             <span>{locationLabel}</span>
-            <span className="text-emerald-800">•</span>
-            <span className="text-emerald-300 font-semibold">{farmArea} Hectares Cultivated</span>
+            <span className="text-amber-800">•</span>
+            <span className="text-amber-300 font-semibold">{farmArea} Hectares Cultivated</span>
           </p>
         </div>
 
@@ -281,7 +282,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
           <Button
             variant="outline"
             size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-emerald-400" />}
+            icon={<Sparkles className="w-3.5 h-3.5 text-amber-400" />}
             onClick={() => setIsStrategyDrawerOpen(true)}
             className="border-white/10 text-white hover:bg-white/5 font-semibold text-xs"
           >
@@ -289,7 +290,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
           </Button>
 
           <Button
-            variant="primary"
+            variant="harvest"
             size="sm"
             icon={<BellPlus className="w-3.5 h-3.5" />}
             onClick={() => setIsAlertModalOpen(true)}
@@ -300,7 +301,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
           <Button
             variant="glass"
             size="sm"
-            icon={<RefreshCw className="w-3.5 h-3.5 text-emerald-300" />}
+            icon={<RefreshCw className="w-3.5 h-3.5 text-amber-300" />}
             onClick={loadMarketData}
             title="Refresh prices"
           >
@@ -315,11 +316,11 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
           {[...tickerCommodities, ...tickerCommodities].map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
               <span className="text-white font-medium">{item.name}:</span>
-              <span className="text-emerald-300 font-mono font-bold">₹{item.price.toLocaleString()}/q</span>
-              <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${item.isUp ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
+              <span className="text-amber-300 font-mono font-bold">₹{item.price.toLocaleString()}/q</span>
+              <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${item.isUp ? 'bg-amber-500/20 text-amber-300' : 'bg-rose-500/20 text-rose-400'}`}>
                 {item.change}
               </span>
-              <span className="text-emerald-900 mx-1">•</span>
+              <span className="text-amber-900 mx-1">•</span>
             </div>
           ))}
         </div>
@@ -329,10 +330,12 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         
         {/* Left Bento: Primary Spotlight Mandi Commodity Card (7 Cols) */}
-        <div className="lg:col-span-7 agri-spotlight-card agri-photo-card agri-photo-card-harvest flex flex-col justify-between space-y-5">
-          <div className="flex items-start justify-between gap-3">
+        <div className="lg:col-span-7 rounded-3xl rounded-tr-xl relative overflow-hidden border border-amber-500/30 bg-gradient-to-br from-slate-900/95 via-amber-950/20 to-slate-900/90 shadow-xl p-6 sm:p-7 flex flex-col justify-between space-y-5 backdrop-blur-md">
+          <AgronomicMotif motif="wheat" className="w-56 h-56 -bottom-10 -right-8" opacity={0.12} />
+          
+          <div className="flex items-start justify-between gap-3 relative z-10">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-300 block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-amber-300 block mb-1">
                 Primary Trading Desk • {currentCropRecord?.market || 'Local APMC'}
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-white font-display">
@@ -342,24 +345,24 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
                 Official modal settlement rate registered today
               </p>
             </div>
-            <div className="p-3 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 shadow-md">
+            <div className="p-3 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-300 shadow-md">
               <IndianRupee className="w-7 h-7" />
             </div>
           </div>
 
           {/* Huge Crisp Modal Price & Trend */}
-          <div className="flex items-baseline gap-4">
+          <div className="flex items-baseline gap-4 relative z-10">
             <span className="text-4xl sm:text-5xl font-black text-white tracking-tight font-display">
               <AnimatedCounter value={currentCropRecord?.modalPrice || 3000} prefix="₹" />
             </span>
             <span className="text-xs font-semibold text-slate-400">/ Quintal</span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold">
               <TrendingUp className="w-3.5 h-3.5" /> +1.8% vs Yesterday
             </span>
           </div>
 
           {/* Visual Min-Max APMC Spread Bar */}
-          <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2">
+          <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2 relative z-10">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-400 font-medium">Daily APMC Spread Range</span>
               <span className="font-bold text-white">
@@ -369,13 +372,13 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
             {/* Visual Spread Bar */}
             <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden p-0.5 relative">
               <div 
-                className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-300 h-full rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 h-full rounded-full transition-all duration-500"
                 style={{ width: '68%' }}
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
               <span>Lowest: ₹{(currentCropRecord?.minPrice || 2800).toLocaleString('en-IN')}</span>
-              <span className="text-emerald-400 font-semibold">Modal Settled: ₹{(currentCropRecord?.modalPrice || 3000).toLocaleString('en-IN')}</span>
+              <span className="text-amber-300 font-semibold">Modal Settled: ₹{(currentCropRecord?.modalPrice || 3000).toLocaleString('en-IN')}</span>
               <span>Highest: ₹{(currentCropRecord?.maxPrice || 3200).toLocaleString('en-IN')}</span>
             </div>
           </div>
@@ -445,8 +448,8 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               onClick={() => setActiveSegment(tab.key as any)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 ${
                 activeSegment === tab.key
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-amber-500 text-slate-950 font-black shadow-lg shadow-amber-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-white/5'
               }`}
             >
               {tab.label}
@@ -462,7 +465,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               placeholder="Search commodity or mandi..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-900 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none placeholder:text-slate-500"
+              className="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-900 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none placeholder:text-slate-500"
             />
           </div>
         )}
@@ -785,13 +788,13 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
 
       {/* SEGMENT 3: PRICE HISTORY */}
       {activeSegment === 'history' && (
-        <Card variant="elevated" className="p-6 space-y-4">
+        <Card variant="elevated" tone="price" className="p-6 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Market Evolution</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">Market Evolution</span>
               <h3 className="text-base font-bold text-white mt-0.5 font-display">30-Day APMC Price Trajectory</h3>
             </div>
-            <Badge variant="emerald" size="md">
+            <Badge variant="harvest" size="md">
               Current: ₹{(currentCropRecord?.modalPrice || 3000).toLocaleString('en-IN')} / qtl
             </Badge>
           </div>
@@ -801,8 +804,8 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               <AreaChart data={priceHistory} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
@@ -814,7 +817,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
                       return (
                         <div className="saas-card p-3 shadow-xl border border-white/15 text-xs space-y-1 bg-slate-900/95 backdrop-blur-md">
                           <p className="font-bold text-white">Date: {label}</p>
-                          <p className="text-emerald-400 font-semibold">Rate: ₹{payload[0].value}/quintal</p>
+                          <p className="text-amber-400 font-semibold">Rate: ₹{payload[0].value}/quintal</p>
                         </div>
                       );
                     }
@@ -824,7 +827,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
                 <Area
                   type="monotone"
                   dataKey="price"
-                  stroke="#10b981"
+                  stroke="#f59e0b"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#priceGradient)"

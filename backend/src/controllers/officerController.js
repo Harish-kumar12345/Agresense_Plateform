@@ -5,6 +5,7 @@ const { User } = require('../models/User');
 const { Query } = require('../models/Query');
 const { AuditLog } = require('../models/AuditLog');
 const { OfficerAlertPreferences } = require('../models/OfficerAlertPreferences');
+const { getJwtSecret } = require('../middleware/auth');
 
 // In-memory fallback stores when MongoDB is disconnected
 let inMemoryAuditLogs = [
@@ -207,12 +208,21 @@ async function validateOfficer(req, res) {
       }
     }
 
+    if (user.isVerified === false) {
+      return res.status(403).json({
+        error: 'Your officer account is pending admin approval.',
+        code: 'OFFICER_PENDING'
+      });
+    }
+
+    const isOfficerVerified = user.isVerified !== undefined ? user.isVerified : true;
+
     const token = jwt.sign(
-      { sub: user._id, role: 'officer', name: user.name || 'Agricultural Officer', email: user.email },
-      process.env.JWT_SECRET || 'dev_secret',
+      { sub: user._id, role: 'officer', isVerified: isOfficerVerified, name: user.name || 'Agricultural Officer', email: user.email },
+      getJwtSecret(),
       { expiresIn: '7d' }
     );
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: 'officer' } });
+    res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: 'officer', isVerified: isOfficerVerified } });
   } catch (err) {
     console.error('❌ Officer login error:', err);
     res.status(500).json({ error: 'login failed' });
@@ -252,6 +262,9 @@ async function resolveOfficerQuery(req, res) {
     const ipAddress = req.ip || req.connection?.remoteAddress || '127.0.0.1';
 
     if (mongoose.connection.readyState === 1) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, error: 'Invalid query ID format' });
+      }
       const query = await Query.findByIdAndUpdate(
         id,
         {

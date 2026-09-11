@@ -24,6 +24,7 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 import {
   ResponsiveContainer,
   BarChart,
@@ -242,107 +243,108 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
       animate="visible"
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
-      {/* 1. Apple-Style Pristine Inventory Context Bar */}
-      <motion.div variants={motionPresets.item} className="apple-hero-header">
+      {/* 1. Inventory & Supply Chain Context Bar */}
+      <motion.div variants={motionPresets.item} className="verda-hero-header">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-indigo-400 uppercase">
               <span>Inventory</span>
               <span className="text-slate-600">/</span>
               <span>Input Supply Chain & Warehouse Stock Ledger</span>
-              <span className="apple-segmented-item active ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block mr-1.5"></span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse inline-block"></span>
                 ACTIVE WAREHOUSE AUDIT
               </span>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white font-display">
-                <span className="apple-title-gradient">Inventory & Application</span> Tracker
+                <span className="bg-gradient-to-r from-white via-indigo-100 to-indigo-300 bg-clip-text text-transparent">Inventory & Application</span> Tracker
               </h1>
-              <span className="agri-pill agri-pill-emerald font-semibold">
+              <Badge variant="indigo" size="sm">
                 <AnimatedCounter value={items.length} suffix=" Tracked Batches" />
-              </span>
-              <span className="agri-pill agri-pill-muted font-semibold">
+              </Badge>
+              <Badge variant="outline" size="sm">
                 Cultivated Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#94A3B8] flex items-center gap-2 font-normal">
+            <p className="text-xs text-slate-300 flex items-center gap-2 font-normal">
               <span className="font-semibold text-white">{farmTitle}</span>
               <span className="text-slate-700">•</span>
               <span className="flex items-center gap-1 text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                <MapPin className="w-3.5 h-3.5 text-indigo-400" />
                 {locationLabel} ({farmArea} ha)
               </span>
               <span className="text-slate-700">•</span>
-              <span className="text-slate-300 font-mono text-[11px]">Reorder Flags: <strong className={alerts.length > 0 ? 'text-amber-400' : 'text-emerald-400'}><AnimatedCounter value={alerts.length} suffix=" items" /></strong></span>
+              <span className="text-slate-300 font-mono text-[11px]">Reorder Flags: <strong className={alerts.length > 0 ? 'text-amber-400' : 'text-indigo-400'}><AnimatedCounter value={alerts.length} suffix=" items" /></strong></span>
             </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="indigo"
+              size="sm"
+              icon={<Plus className="w-3.5 h-3.5" />}
               onClick={() => handleOpenAddModal('Fertilizer')}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
             >
-              <Plus className="w-3.5 h-3.5 text-slate-950" />
               Add Input Item
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="glass"
+              size="sm"
               onClick={loadData}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
             >
               Refresh
-            </button>
+            </Button>
           </div>
         </div>
       </motion.div>
 
-      {/* 2. Apple-Style Stock Management Bento Grid */}
+      {/* 2. Warehouse Stock Management Bento Grid */}
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Primary Stock Readiness Core (7 Cols) */}
-        <div className="lg:col-span-7 apple-glass-card flex flex-col justify-between space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+        <div className="lg:col-span-7 rounded-3xl rounded-tr-xl relative overflow-hidden border border-indigo-500/30 bg-gradient-to-br from-slate-900/95 via-indigo-950/20 to-slate-900/90 shadow-xl p-6 sm:p-7 flex flex-col justify-between space-y-6 backdrop-blur-md">
+          <AgronomicMotif motif="contour" className="w-64 h-64 -bottom-12 -right-8" opacity={0.08} />
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] relative z-10">
             <div className="flex items-center gap-2">
-              <Package className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <Package className="w-4 h-4 text-indigo-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
                 Warehouse Input Reserve
               </span>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 font-semibold">
+            <span className="text-[11px] font-mono text-indigo-300 font-semibold">
               Ledger Health: {alerts.length === 0 ? 'Optimal Reserve' : 'Replenishment Needed'}
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 relative z-10">
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-indigo-300 mb-1">
                 Active Chemical & Bio Stock
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-white font-display">
                   {items.length}
                 </span>
-                <span className="text-xl text-[#D1DED6] font-medium">SKUs in Store</span>
-                <span className={`agri-pill ml-2 ${alerts.length === 0 ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+                <span className="text-xl text-slate-300 font-medium">SKUs in Store</span>
+                <Badge variant={alerts.length === 0 ? 'indigo' : 'amber'} className="ml-2">
                   {alerts.length === 0 ? 'Supply Healthy' : `${alerts.length} Alerts`}
-                </span>
+                </Badge>
               </div>
             </div>
 
-            <div className="bg-[#070D0A]/60 border border-emerald-900/30 rounded-xl p-3 text-right">
-              <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Application Logs</div>
-              <div className="text-xl font-mono font-bold text-white mt-0.5">{logs.length} <span className="text-xs text-emerald-400 font-normal">Entries</span></div>
-              <div className="text-[10px] text-[#D1DED6] mt-0.5">Historical field doses</div>
+            <div className="bg-slate-900/80 border border-white/10 rounded-xl p-3 text-right backdrop-blur-md">
+              <div className="text-[10px] uppercase tracking-wider text-slate-400">Application Logs</div>
+              <div className="text-xl font-mono font-bold text-white mt-0.5">{logs.length} <span className="text-xs text-indigo-400 font-normal">Entries</span></div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Historical field doses</div>
             </div>
           </div>
 
           {/* Sub-telemetry 3-gauge strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10">
+            <div className="bg-slate-900/80 border border-white/10 rounded-xl p-3.5 backdrop-blur-md">
+              <div className="flex items-center justify-between text-slate-300 mb-1">
                 <span className="text-[11px] font-medium flex items-center gap-1">
                   <Sprout className="w-3.5 h-3.5 text-emerald-400" />
                   Fertilizers
@@ -350,11 +352,11 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
                 <span className="text-[10px] font-semibold text-emerald-400 font-mono">{fertilizerCount}</span>
               </div>
               <div className="text-xl font-bold text-white font-display">Nutrients</div>
-              <p className="text-[10px] text-[#D1DED6] mt-1">Urea, DAP, Potash formulations</p>
+              <p className="text-[10px] text-slate-400 mt-1">Urea, DAP, Potash formulations</p>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1">
+            <div className="bg-slate-900/80 border border-white/10 rounded-xl p-3.5 backdrop-blur-md">
+              <div className="flex items-center justify-between text-slate-300 mb-1">
                 <span className="text-[11px] font-medium flex items-center gap-1">
                   <Shield className="w-3.5 h-3.5 text-sky-400" />
                   Crop Protection
@@ -362,11 +364,11 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
                 <span className="text-[10px] font-semibold text-sky-400 font-mono">{pesticideCount}</span>
               </div>
               <div className="text-xl font-bold text-white font-display">Pesticides</div>
-              <p className="text-[10px] text-[#D1DED6] mt-1">Fungicide & biological sprays</p>
+              <p className="text-[10px] text-slate-400 mt-1">Fungicide & biological sprays</p>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1">
+            <div className="bg-slate-900/80 border border-white/10 rounded-xl p-3.5 backdrop-blur-md">
+              <div className="flex items-center justify-between text-slate-300 mb-1">
                 <span className="text-[11px] font-medium flex items-center gap-1">
                   <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
                   Reorder Queue
@@ -374,7 +376,7 @@ export const FertilizerPesticideModule: React.FC<FertilizerPesticideModuleProps>
                 <span className="text-[10px] font-semibold text-amber-400 font-mono">{alerts.length}</span>
               </div>
               <div className="text-xl font-bold text-white font-display">{alerts.length > 0 ? 'Restock' : 'Zero Deficit'}</div>
-              <p className="text-[10px] text-[#D1DED6] mt-1">Low threshold alarms</p>
+              <p className="text-[10px] text-slate-400 mt-1">Low threshold alarms</p>
             </div>
           </div>
         </div>

@@ -206,7 +206,7 @@ router.get('/', async (req, res) => {
       ...center,
       district: center.district || locationInfo.district,
       state: center.state || locationInfo.state,
-      distance: Math.round(calculateDistance(userLat, userLon, center.coordinates.latitude, center.coordinates.longitude) * 10) / 10,
+      distance: Math.round(calculateDistance(userLat, userLon, center.coordinates?.latitude || 0, center.coordinates?.longitude || 0) * 10) / 10,
       isOpenNow: checkIsOpenNow(center.workingHours)
     }));
 
@@ -252,7 +252,7 @@ router.get('/', async (req, res) => {
     return res.status(500).json({
       success: false,
       error: 'Failed to fetch agricultural centers',
-      message: error.message
+      ...(process.env.NODE_ENV === 'production' ? {} : { message: error.message })
     });
   }
 });

@@ -172,9 +172,10 @@ export const soilService = {
   // Calculate Soil Health Score (0-100), Suitability, Nutrient Statuses, and ML Impacts
   calculateAnalysis(
     farmId: string,
-    crop: string,
+    crop: string = 'Crop',
     soil: SoilData
   ): ComprehensiveSoilAnalysis {
+    const targetCrop = crop || 'Crop';
     const { ph, moisture, nitrogen: N, phosphorus: P, potassium: K, organic_matter: OC } = soil;
 
     // 1. Nutrient Status Classifications
@@ -206,21 +207,21 @@ export const soilService = {
     const healthScore = Math.max(20, Math.min(100, score));
 
     // 3. Crop Soil Suitability Rating
-    let suitabilityRating = `Highly Suitable for ${crop} Cultivation`;
+    let suitabilityRating = `Highly Suitable for ${targetCrop} Cultivation`;
     let suitabilityStatus: 'success' | 'warning' | 'danger' | 'info' = 'success';
 
     if (healthScore < 50) {
-      suitabilityRating = `Suboptimal Soil Conditions for ${crop} - Major Nutrient & pH Corrections Required`;
+      suitabilityRating = `Suboptimal Soil Conditions for ${targetCrop} - Major Nutrient & pH Corrections Required`;
       suitabilityStatus = 'danger';
     } else if (healthScore < 75) {
       if (phStatus === 'Acidic') {
-        suitabilityRating = `Moderate Suitability for ${crop} - Acidic Soil Requires Lime Correction`;
+        suitabilityRating = `Moderate Suitability for ${targetCrop} - Acidic Soil Requires Lime Correction`;
         suitabilityStatus = 'warning';
       } else if (nitrogenStatus === 'Low') {
-        suitabilityRating = `Moderate Suitability for ${crop} - Nitrogen Boost Recommended`;
+        suitabilityRating = `Moderate Suitability for ${targetCrop} - Nitrogen Boost Recommended`;
         suitabilityStatus = 'warning';
       } else {
-        suitabilityRating = `Moderately Suitable for ${crop} - Follow Balanced Fertilizer Plan`;
+        suitabilityRating = `Moderately Suitable for ${targetCrop} - Follow Balanced Fertilizer Plan`;
         suitabilityStatus = 'warning';
       }
     }

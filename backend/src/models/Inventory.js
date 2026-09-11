@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 
 const inventorySchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    index: true,
+    default: 'default_farmer'
+  },
+  farmId: {
+    type: String,
+    index: true
+  },
   name: {
     type: String,
     required: true,

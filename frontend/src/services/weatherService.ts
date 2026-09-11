@@ -73,8 +73,6 @@ export type ComprehensiveWeatherData = {
   fetchedAt: string;
 };
 
-const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || '';
-
 function getWindDirection(deg: number): string {
   const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
   return directions[Math.round(deg / 45) % 8];
@@ -122,99 +120,7 @@ export const weatherService = {
       console.warn('Reverse geocoding warning:', e);
     }
 
-    let current: CurrentWeather;
-    let hourly: HourlyForecast[] = [];
-    let daily: DailyForecast[] = [];
-
-    // Try OpenWeather API if API key exists
-    if (OPENWEATHER_API_KEY && OPENWEATHER_API_KEY !== 'your_openweather_api_key') {
-      try {
-        const [currentRes, forecastRes] = await Promise.all([
-          axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric`),
-          axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric`)
-        ]);
-
-        const cData = currentRes.data;
-        const fData = forecastRes.data;
-
-        locationInfo.city = cData.name || locationInfo.city;
-        locationInfo.country = cData.sys?.country || locationInfo.country;
-
-        current = {
-          temperature_c: Math.round(cData.main.temp),
-          feels_like_c: Math.round(cData.main.feels_like),
-          relative_humidity: cData.main.humidity,
-          precipitation_mm: cData.rain ? (cData.rain['1h'] || cData.rain['3h'] || 0) : 0,
-          precipitation_probability: Math.round((fData.list[0]?.pop || 0) * 100),
-          wind_speed_kmh: Math.round(cData.wind.speed * 3.6),
-          wind_direction: getWindDirection(cData.wind.deg || 0),
-          pressure_mb: cData.main.pressure,
-          visibility_km: Math.round((cData.visibility || 10000) / 1000),
-          cloud_cover: cData.clouds.all,
-          description: cData.weather[0]?.description || 'Clear',
-          weather_code: cData.weather[0]?.id || 800
-        };
-
-        // Process hourly
-        fData.list.slice(0, 8).forEach((item: any) => {
-          const dt = new Date(item.dt * 1000);
-          hourly.push({
-            time: dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            temperature_c: Math.round(item.main.temp),
-            humidity: item.main.humidity,
-            precip_probability: Math.round((item.pop || 0) * 100),
-            wind_speed_kmh: Math.round(item.wind.speed * 3.6),
-            description: item.weather[0]?.description || 'Clear'
-          });
-        });
-
-        // Process 7-day daily forecast
-        const groupedByDay: Record<string, any[]> = {};
-        fData.list.forEach((item: any) => {
-          const dayKey = new Date(item.dt * 1000).toISOString().split('T')[0];
-          if (!groupedByDay[dayKey]) groupedByDay[dayKey] = [];
-          groupedByDay[dayKey].push(item);
-        });
-
-        Object.keys(groupedByDay).slice(0, 7).forEach(dateStr => {
-          const items = groupedByDay[dateStr];
-          const temps = items.map(i => i.main.temp);
-          const pops = items.map(i => i.pop || 0);
-          const hums = items.map(i => i.main.humidity);
-          const winds = items.map(i => i.wind.speed * 3.6);
-          const dObj = new Date(dateStr);
-
-          daily.push({
-            date: dateStr,
-            day_name: dObj.toLocaleDateString('en-US', { weekday: 'short' }),
-            temp_max_c: Math.round(Math.max(...temps)),
-            temp_min_c: Math.round(Math.min(...temps)),
-            precip_probability_max: Math.round(Math.max(...pops) * 100),
-            humidity: Math.round(hums.reduce((a, b) => a + b, 0) / hums.length),
-            wind_speed_kmh: Math.round(winds.reduce((a, b) => a + b, 0) / winds.length),
-            description: items[0].weather[0]?.description || 'Clear'
-          });
-        });
-
-      } catch (e) {
-        console.warn('OpenWeather API failed, switching to Open-Meteo WGS84 live API:', e);
-        return this.fetchOpenMeteoWeatherData(lat, lon, crop, locationInfo);
-      }
-    } else {
-      // Use Open-Meteo free API natively
-      return this.fetchOpenMeteoWeatherData(lat, lon, crop, locationInfo);
-    }
-
-    const microClimate = this.calculateMicroClimateInsights(current, daily, crop);
-
-    return {
-      location: locationInfo,
-      current,
-      hourly,
-      daily,
-      microClimate,
-      fetchedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
+    return this.fetchOpenMeteoWeatherData(lat, lon, crop, locationInfo);
   },
 
   async fetchOpenMeteoWeatherData(

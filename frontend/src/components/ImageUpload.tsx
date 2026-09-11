@@ -15,12 +15,27 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, isUploa
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const [showCameraError, setShowCameraError] = useState(false);
   const [showCameraModal, setShowCameraModal] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUploadError(null);
     const file = event.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      processImage(file);
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setUploadError('Please select a valid image file (JPEG, PNG, WEBP).');
+      event.target.value = '';
+      return;
     }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadError('Image size exceeds 10MB limit. Please upload a smaller photo.');
+      event.target.value = '';
+      return;
+    }
+
+    processImage(file);
+    event.target.value = '';
   };
 
   const processImage = (file: File) => {
@@ -131,6 +146,18 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload, isUploa
           >
             <AlertCircle className="w-3.5 h-3.5" />
             <span>{t('chat.camera_error')}</span>
+          </motion.div>
+        )}
+
+        {uploadError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-0 mt-2 p-2.5 bg-rose-500/15 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center gap-1.5 whitespace-nowrap z-10 shadow-lg"
+          >
+            <AlertCircle className="w-3.5 h-3.5" />
+            <span>{uploadError}</span>
           </motion.div>
         )}
       </div>

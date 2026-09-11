@@ -40,6 +40,7 @@ import { InsightCard } from '../ui/InsightCard';
 import { colors, motionPresets } from '../../styles/design-tokens';
 
 import { AnimatedCounter } from '../Common/AnimatedCounter';
+import { AgronomicMotif } from '../Common/AgronomicMotif';
 
 interface SoilAnalysisModuleProps {
   farm?: FarmData | null;
@@ -112,13 +113,37 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
     e.preventDefault();
     setSaveSuccess('');
 
+    const n = Number(inputN);
+    const p = Number(inputP);
+    const k = Number(inputK);
+    const ph = Number(inputPh);
+    const m = Number(inputMoisture);
+    const oc = Number(inputOrganic);
+
+    if (isNaN(ph) || ph < 0 || ph > 14) {
+      setError('Soil pH must be between 0 and 14.');
+      return;
+    }
+    if (isNaN(m) || m < 0 || m > 100) {
+      setError('Soil moisture percentage must be between 0% and 100%.');
+      return;
+    }
+    if (isNaN(n) || n < 0 || isNaN(p) || p < 0 || isNaN(k) || k < 0) {
+      setError('NPK nutrient values must be non-negative numbers.');
+      return;
+    }
+    if (isNaN(oc) || oc < 0) {
+      setError('Organic carbon percentage must be non-negative.');
+      return;
+    }
+
     const updatedSoil: Partial<SoilData> = {
-      nitrogen: Number(inputN),
-      phosphorus: Number(inputP),
-      potassium: Number(inputK),
-      ph: Number(inputPh),
-      moisture: Number(inputMoisture),
-      organic_matter: Number(inputOrganic),
+      nitrogen: n,
+      phosphorus: p,
+      potassium: k,
+      ph,
+      moisture: m,
+      organic_matter: oc,
       type: inputSoilType
     };
 
@@ -160,12 +185,12 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
   const getStatusBg = (statusText: string) => {
     const s = (statusText || '').toLowerCase();
     if (s.includes('low') || s.includes('deficient')) {
-      return 'bg-rose-50 text-rose-600 border-rose-200/60';
+      return 'bg-rose-950/70 text-rose-300 border border-rose-500/40';
     }
     if (s.includes('high') || s.includes('excess')) {
-      return 'bg-amber-50 text-amber-600 border-amber-200/60';
+      return 'bg-amber-950/70 text-amber-300 border border-amber-500/40';
     }
-    return 'bg-emerald-50 text-emerald-600 border-emerald-200/60';
+    return 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/40';
   };
 
   const getStatusBadgeVariant = (statusText: string): 'emerald' | 'amber' | 'rose' => {
@@ -218,32 +243,32 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. VerdaAgro Pedology Context Bar */}
-      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-soil">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <motion.div variants={motionPresets.item} className="verda-hero-header agri-context-header-soil rounded-3xl rounded-tr-xl relative overflow-hidden">
+        <AgronomicMotif variant="leaf" className="right-0 top-0 text-emerald-400" opacity={0.08} />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-400 uppercase">
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-wider text-emerald-300 uppercase">
               <span>Pedology</span>
               <span className="text-emerald-700">/</span>
               <span>Subterranean NPK & Horizon Diagnostics</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono font-bold ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                ACTIVE SENSOR CALIBRATION
-              </span>
+              <Badge variant="emerald" shape="live" size="sm" className="ml-1">
+                CALIBRATED
+              </Badge>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight verda-gradient-title font-display">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-display">
                 Subterranean Soil Health & Chemistry
               </h1>
-              <span className="verda-glow-pill">
+              <Badge variant="emerald" size="md">
                 <AnimatedCounter value={healthScore} prefix="Health Score: " suffix="/100" />
-              </span>
-              <span className="agri-pill agri-pill-muted font-bold">
+              </Badge>
+              <Badge variant="harvest" size="md">
                 Target Crop: {selectedCrop}
-              </span>
+              </Badge>
             </div>
 
-            <p className="text-xs text-[#D1DED6] flex items-center gap-2 font-medium">
+            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
               <span className="font-bold text-white">{farmTitle}</span>
               <span className="text-emerald-800">•</span>
               <span className="flex items-center gap-1 text-emerald-300">
@@ -256,22 +281,22 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
+            <Button
+              variant="forest"
+              size="sm"
               onClick={() => setShowEditForm(!showEditForm)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors cursor-pointer"
+              icon={<Edit3 className="w-3.5 h-3.5" />}
             >
-              <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
               {showEditForm ? 'Close Lab Form' : 'Update Soil Test'}
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={loadSoil}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#070D0A]/70 hover:bg-emerald-950/40 border border-emerald-900/40 text-[#D1DED6] text-xs font-semibold transition-colors cursor-pointer"
+              icon={<RefreshCw className="w-3.5 h-3.5" />}
             >
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
               Refresh
-            </button>
+            </Button>
           </div>
         </div>
       </motion.div>
@@ -372,21 +397,25 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
 
       {/* 2. Asymmetric VerdaAgro Pedology Bento Grid */}
       <motion.div variants={motionPresets.item} className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        {/* Subterranean Vitality Core (7 Cols) */}
-        <div className="lg:col-span-7 agri-bento-card agri-photo-card agri-photo-card-soil p-6 flex flex-col justify-between space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-emerald-950/40">
-            <div className="flex items-center gap-2">
-              <Sprout className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D1DED6]">
+        {/* Subterranean Vitality Core (7 Cols) - Asymmetric Radius & Leaf Motif */}
+        <div className="lg:col-span-7 p-6 flex flex-col gap-6 rounded-3xl rounded-tr-xl bg-[#0D1612]/92 border border-emerald-900/40 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)] backdrop-blur-xl relative overflow-hidden">
+          <AgronomicMotif variant="leaf" className="right-2 bottom-1 text-emerald-500" opacity={0.06} />
+          
+          <div className="flex items-center justify-between pb-3 border-b border-emerald-950/50 relative z-10">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-950/40 border border-emerald-500/35 flex items-center justify-center shadow-inner">
+                <Sprout className="w-4 h-4 text-emerald-300" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
                 Root-Zone Vitality & Chemistry Horizon
               </span>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 font-medium">
+            <span className="text-[11px] font-mono text-emerald-300 font-semibold bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
               Suitability: {suitabilityRating}
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
             <div className="flex items-center gap-5">
               {/* Circular Health Meter */}
               <div className="relative w-28 h-28 shrink-0 flex items-center justify-center">
@@ -419,39 +448,39 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
               </div>
 
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+                <div className="text-[11px] font-semibold text-emerald-300/90 mb-1">
                   Soil Fertility Score
                 </div>
-                <div className="text-2xl font-extrabold text-white font-display">
+                <div className="text-2xl font-black text-white font-display">
                   {suitabilityRating || 'Optimal Crop Condition'}
                 </div>
-                <p className="text-xs text-[#D1DED6] mt-1 leading-relaxed">
-                  Subterranean nutrients calibrated for high-yield <span className="font-semibold text-white">{selectedCrop}</span> cultivation.
+                <p className="text-xs text-slate-200 mt-1 leading-relaxed">
+                  Subterranean nutrients calibrated for high-yield <span className="font-bold text-emerald-300">{selectedCrop}</span> cultivation.
                 </p>
               </div>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3 text-right shrink-0">
-              <div className="text-[10px] uppercase tracking-wider text-[#D1DED6]/70">Soil Reaction (pH)</div>
-              <div className="text-xl font-mono font-bold text-white mt-0.5">{soilData.ph} <span className="text-xs text-emerald-400 font-normal">pH</span></div>
-              <div className="text-[10px] text-[#D1DED6] mt-0.5">{soilData.ph >= 6.0 && soilData.ph <= 7.5 ? 'Neutral (Optimal)' : 'Needs amendment'}</div>
+            <div className="bg-[#070D0A]/75 border border-emerald-900/40 rounded-xl p-3.5 text-right shrink-0 shadow-sm">
+              <div className="text-[10px] uppercase font-bold tracking-wider text-slate-300">Soil Reaction (pH)</div>
+              <div className="text-xl font-mono font-black text-white mt-0.5">{soilData.ph} <span className="text-xs text-emerald-300 font-semibold">pH</span></div>
+              <div className="text-[10px] text-emerald-300 font-medium mt-0.5">{soilData.ph >= 6.0 && soilData.ph <= 7.5 ? 'Neutral (Optimal)' : 'Needs amendment'}</div>
             </div>
           </div>
 
           {/* Subterranean 3-horizon metadata strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 relative z-10 mt-auto">
+            <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-sky-200">
                   <Droplets className="w-3.5 h-3.5 text-sky-400" />
                   Root Moisture
                 </span>
-                <span className="text-[10px] font-semibold text-emerald-400">{soilData.moisture}% vol</span>
+                <span className="text-[10px] font-bold text-emerald-300">{soilData.moisture}% vol</span>
               </div>
               <div className="text-xl font-bold text-white font-display">
                 {soilData.moisture >= 30 ? 'Field Capacity' : 'Low Moisture'}
               </div>
-              <div className="w-full bg-slate-800/80 rounded-full h-1.5 mt-2 overflow-hidden">
+              <div className="w-full bg-slate-800/90 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div 
                   className="bg-sky-400 h-1.5 rounded-full transition-all"
                   style={{ width: `${Math.min(100, soilData.moisture * 2)}%` }}
@@ -459,34 +488,34 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
               </div>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
+            <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-emerald-200">
                   <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-                  Organic Carbon
+                  Organic Humus
                 </span>
-                <span className="text-[10px] font-semibold text-emerald-400">Horizon A</span>
+                <span className="text-[10px] font-bold text-emerald-300">Horizon A</span>
               </div>
               <div className="text-xl font-bold text-white font-display">
-                {inputOrganic}% <span className="text-xs font-normal text-[#D1DED6]">OM</span>
+                {inputOrganic}% <span className="text-xs font-normal text-slate-300">OM</span>
               </div>
-              <p className="text-[10px] text-[#D1DED6] mt-2">
+              <p className="text-[10px] text-emerald-300 font-medium mt-2">
                 {inputOrganic >= 1.5 ? 'High microbial activity' : 'Incorporate compost'}
               </p>
             </div>
 
-            <div className="bg-[#070D0A]/70 border border-emerald-900/30 rounded-xl p-3.5">
-              <div className="flex items-center justify-between text-[#D1DED6] mb-1.5">
-                <span className="text-[11px] font-medium flex items-center gap-1">
+            <div className="bg-[#070D0A]/80 border border-emerald-900/40 rounded-xl p-3.5 shadow-sm">
+              <div className="flex items-center justify-between text-slate-300 mb-1.5">
+                <span className="text-[11px] font-semibold flex items-center gap-1.5 text-teal-200">
                   <Layers className="w-3.5 h-3.5 text-teal-400" />
-                  Soil Texture
+                  Pedology Type
                 </span>
-                <span className="text-[10px] font-semibold text-[#D1DED6] font-mono">Profile</span>
+                <span className="text-[10px] font-bold text-teal-300 font-mono">Profile</span>
               </div>
-              <div className="text-xl font-bold text-white font-display">
+              <div className="text-xl font-bold text-white font-display truncate">
                 {soilData.type}
               </div>
-              <p className="text-[10px] text-[#D1DED6] mt-2">
+              <p className="text-[10px] text-slate-300 mt-2 truncate">
                 High cation exchange capacity
               </p>
             </div>
@@ -496,54 +525,54 @@ export const SoilAnalysisModule: React.FC<SoilAnalysisModuleProps> = ({
         {/* NPK Macro-Nutrient Triad Desk (5 Cols) */}
         <div className="lg:col-span-5 flex flex-col justify-between gap-3">
           {/* Nitrogen Tile */}
-          <div className="agri-bento-card p-4 flex items-center justify-between">
+          <div className="p-4 flex items-center justify-between rounded-xl bg-[#0D1612]/92 border border-emerald-900/40 backdrop-blur-xl shadow-sm hover:border-emerald-500/40 transition-colors">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center justify-center font-mono">N</span>
+                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/35 text-emerald-300 text-xs font-bold flex items-center justify-center font-mono">N</span>
                 <span className="text-xs font-bold text-white font-display">Available Nitrogen</span>
               </div>
-              <div className="text-lg font-bold text-white font-mono">
-                {soilData.nitrogen} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              <div className="text-lg font-black text-white font-mono">
+                {soilData.nitrogen} <span className="text-xs text-slate-300 font-normal">kg/ha</span>
               </div>
-              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 90 kg/ha</p>
+              <p className="text-[11px] text-slate-300">Target benchmark: 90 kg/ha</p>
             </div>
-            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.nitrogenStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+            <Badge variant={getStatusBadgeVariant(nutrientStatus.nitrogenStatus)} size="sm">
               {nutrientStatus.nitrogenStatus}
-            </span>
+            </Badge>
           </div>
 
           {/* Phosphorus Tile */}
-          <div className="agri-bento-card p-4 flex items-center justify-between">
+          <div className="p-4 flex items-center justify-between rounded-xl bg-[#0D1612]/92 border border-emerald-900/40 backdrop-blur-xl shadow-sm hover:border-emerald-500/40 transition-colors">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-sky-500/20 border border-sky-500/30 text-sky-300 text-xs font-bold flex items-center justify-center font-mono">P</span>
+                <span className="w-6 h-6 rounded-lg bg-sky-500/20 border border-sky-500/35 text-sky-300 text-xs font-bold flex items-center justify-center font-mono">P</span>
                 <span className="text-xs font-bold text-white font-display">Available Phosphorus</span>
               </div>
-              <div className="text-lg font-bold text-white font-mono">
-                {soilData.phosphorus} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              <div className="text-lg font-black text-white font-mono">
+                {soilData.phosphorus} <span className="text-xs text-slate-300 font-normal">kg/ha</span>
               </div>
-              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 50 kg/ha</p>
+              <p className="text-[11px] text-slate-300">Target benchmark: 50 kg/ha</p>
             </div>
-            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.phosphorusStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+            <Badge variant={getStatusBadgeVariant(nutrientStatus.phosphorusStatus)} size="sm">
               {nutrientStatus.phosphorusStatus}
-            </span>
+            </Badge>
           </div>
 
           {/* Potassium Tile */}
-          <div className="agri-bento-card p-4 flex items-center justify-between">
+          <div className="p-4 flex items-center justify-between rounded-xl bg-[#0D1612]/92 border border-emerald-900/40 backdrop-blur-xl shadow-sm hover:border-emerald-500/40 transition-colors">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center justify-center font-mono">K</span>
+                <span className="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-500/35 text-amber-300 text-xs font-bold flex items-center justify-center font-mono">K</span>
                 <span className="text-xs font-bold text-white font-display">Available Potassium</span>
               </div>
-              <div className="text-lg font-bold text-white font-mono">
-                {soilData.potassium} <span className="text-xs text-[#D1DED6] font-normal">kg/ha</span>
+              <div className="text-lg font-black text-white font-mono">
+                {soilData.potassium} <span className="text-xs text-slate-300 font-normal">kg/ha</span>
               </div>
-              <p className="text-[11px] text-[#D1DED6]">Ideal benchmark: 85 kg/ha</p>
+              <p className="text-[11px] text-slate-300">Target benchmark: 85 kg/ha</p>
             </div>
-            <span className={`agri-pill ${getStatusBadgeVariant(nutrientStatus.potassiumStatus) === 'emerald' ? 'agri-pill-emerald' : 'agri-pill-amber'}`}>
+            <Badge variant={getStatusBadgeVariant(nutrientStatus.potassiumStatus)} size="sm">
               {nutrientStatus.potassiumStatus}
-            </span>
+            </Badge>
           </div>
         </div>
       </motion.div>

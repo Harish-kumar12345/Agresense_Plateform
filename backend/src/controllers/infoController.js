@@ -15,18 +15,15 @@ async function getWeather(req, res) {
     const latitude = place.latitude;
     const longitude = place.longitude;
 
-    // Fetch forecast: hourly and daily, include humidity and precip probability
-    const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=auto&hourly=temperature_2m,relative_humidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=7`;
+    // Fetch forecast: current snapshot, hourly and daily
+    const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=auto&current=temperature_2m,relative_humidity_2m,precipitation&hourly=temperature_2m,relative_humidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=7`;
     const { data: wx } = await axios.get(forecastUrl, { timeout: 12000 });
 
-    // Build current snapshot from nearest hour
-    const nowIso = new Date().toISOString().slice(0, 13) + ':00';
-    const hTimes = wx?.hourly?.time || [];
-    const idx = hTimes.indexOf(nowIso);
+    const currData = wx?.current;
     const current = {
-      temperature_c: idx >= 0 ? wx?.hourly?.temperature_2m?.[idx] : null,
-      relative_humidity: idx >= 0 ? wx?.hourly?.relative_humidity_2m?.[idx] : null,
-      precipitation_probability: idx >= 0 ? wx?.hourly?.precipitation_probability?.[idx] : null
+      temperature_c: currData?.temperature_2m ?? null,
+      relative_humidity: currData?.relative_humidity_2m ?? null,
+      precipitation_probability: wx?.hourly?.precipitation_probability?.[0] ?? null
     };
 
     const daily = (wx?.daily?.time || []).map((t, i) => ({
@@ -52,6 +49,36 @@ async function getWeather(req, res) {
   }
 }
 
+const fallbackSchemes = [
+  {
+    name: 'PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)',
+    title: 'PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)',
+    description: 'Income support of ₹6,000 per year in three equal installments to all landholding farmer families.',
+    eligibility: 'All landholding farmers families with cultivable land',
+    benefit: '₹6,000 / year direct transfer',
+    link: 'https://pmkisan.gov.in',
+    active: true
+  },
+  {
+    name: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
+    title: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
+    description: 'Comprehensive risk insurance covering yield losses due to non-preventable natural risks.',
+    eligibility: 'All farmers growing notified crops in notified areas',
+    benefit: 'Subsidized crop insurance (1.5% - 2% premium)',
+    link: 'https://pmfby.gov.in',
+    active: true
+  },
+  {
+    name: 'Kisan Credit Card (KCC) Scheme',
+    title: 'Kisan Credit Card (KCC) Scheme',
+    description: 'Adequate and timely credit support from the banking system for agricultural operations.',
+    eligibility: 'Small & marginal farmers, sharecroppers, tenant farmers',
+    benefit: 'Concessional interest rate at 4% p.a.',
+    link: 'https://myscheme.gov.in/schemes/kcc',
+    active: true
+  }
+];
+
 async function getMarketPrices(req, res) {
   try {
     const { crop } = req.params;
@@ -64,8 +91,14 @@ async function getMarketPrices(req, res) {
 
 async function getSchemes(req, res) {
   try {
-    const schemes = await Scheme.find({ active: true }).lean();
-    res.json({ schemes });
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      const schemes = await Scheme.find({ active: true }).lean();
+      if (schemes && schemes.length > 0) {
+        return res.json({ schemes });
+      }
+    }
+    return res.json({ schemes: fallbackSchemes, fallback: true });
   } catch (err) {
     res.status(500).json({ error: 'failed to fetch schemes' });
   }

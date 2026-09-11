@@ -45,18 +45,21 @@ export const FarmAreaCalculator: React.FC<FarmAreaCalculatorProps> = ({
 }) => {
   let areaSqm = 0;
 
-  if (polygonPoints.length >= 3) {
+  if (polygonPoints && polygonPoints.length >= 3) {
     try {
       // Turf requires [lng, lat] coordinates closed polygon
-      const coords = polygonPoints.map(p => [p[1], p[0]]);
-      coords.push([polygonPoints[0][1], polygonPoints[0][0]]); // Close loop
+      const coords = polygonPoints.map(p => [Number(p[1]), Number(p[0])]);
+      coords.push([Number(polygonPoints[0][1]), Number(polygonPoints[0][0])]); // Close loop
       const polygon = turf.polygon([coords]);
-      areaSqm = turf.area(polygon);
+      const calculated = turf.area(polygon);
+      areaSqm = Number.isFinite(calculated) && calculated >= 0 ? calculated : 0;
     } catch (e) {
-      areaSqm = calculateGeodesicArea(polygonPoints);
+      const fallback = calculateGeodesicArea(polygonPoints);
+      areaSqm = Number.isFinite(fallback) && fallback >= 0 ? fallback : 0;
     }
   }
 
+  areaSqm = Number.isFinite(areaSqm) && areaSqm >= 0 ? areaSqm : 0;
   const areaHectares = areaSqm / 10000;
   const areaAcres = areaSqm / 4046.8564224;
   // Standard Pucca Bigha conversion (~2508.38 sq meters per Bigha)

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { FarmActivity } = require('../models/FarmActivity');
+const { requireAuth, optionalAuth } = require('../middleware/auth');
 
 // In-memory fallback storage for farm activities
 const inMemoryActivities = [
@@ -75,8 +76,8 @@ const formatActivity = (act) => ({
   createdAt: act.createdAt ? new Date(act.createdAt).toISOString() : new Date().toISOString()
 });
 
-// GET /api/farm-activities - Get all activities (filterable by farm_id, crop, activity_type)
-router.get('/', async (req, res) => {
+// GET /api/farm-activities - Get activity history
+router.get('/', optionalAuth, async (req, res) => {
   try {
     const { farm_id, crop, activity_type } = req.query;
 
@@ -106,7 +107,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/farm-activities - Add a new activity
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   try {
     const {
       farm_id = 'default_farm',
@@ -116,7 +117,7 @@ router.post('/', async (req, res) => {
       date,
       quantity_details = '',
       notes = ''
-    } = req.body;
+    } = req.body || {};
 
     const validTypes = ['Sowing', 'Irrigation', 'Fertilization', 'Pesticide Application', 'Weeding', 'Disease Inspection', 'Harvesting'];
 
@@ -135,15 +136,18 @@ router.post('/', async (req, res) => {
     }
 
     const activityId = 'act_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+    const parsedDate = date ? new Date(date) : new Date();
+    const validDate = isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+
     const newRecord = {
       activity_id: activityId,
-      farm_id,
-      field_name: field_name.trim(),
-      crop: crop.trim(),
+      farm_id: String(farm_id),
+      field_name: String(field_name).trim(),
+      crop: String(crop).trim(),
       activity_type,
-      date: date ? new Date(date) : new Date(),
-      quantity_details: quantity_details.trim(),
-      notes: notes.trim(),
+      date: validDate,
+      quantity_details: String(quantity_details).trim(),
+      notes: String(notes).trim(),
       createdAt: new Date()
     };
 
@@ -160,20 +164,29 @@ router.post('/', async (req, res) => {
 
   } catch (error) {
     console.error('Error creating farm activity:', error);
-    return res.status(500).json({ success: false, error: 'Failed to save farm activity: ' + error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to save farm activity' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
+    });
   }
 });
 
 // PUT /api/farm-activities/:id - Update an activity
-router.put('/:id', async (req, res) => {
+router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { field_name, crop, activity_type, date, quantity_details, notes } = req.body;
+    const { field_name, crop, activity_type, date, quantity_details, notes } = req.body || {};
+
+    let validDate = undefined;
+    if (date) {
+      const d = new Date(date);
+      if (!isNaN(d.getTime())) validDate = d;
+    }
 
     if (mongoose.connection.readyState === 1) {
       const updated = await FarmActivity.findOneAndUpdate(
         { $or: [{ activity_id: id }, { _id: mongoose.Types.ObjectId.isValid(id) ? id : null }] },
-        { $set: { ...(field_name && { field_name }), ...(crop && { crop }), ...(activity_type && { activity_type }), ...(date && { date: new Date(date) }), ...(quantity_details !== undefined && { quantity_details }), ...(notes !== undefined && { notes }) } },
+        { $set: { ...(field_name && { field_name }), ...(crop && { crop }), ...(activity_type && { activity_type }), ...(validDate && { date: validDate }), ...(quantity_details !== undefined && { quantity_details }), ...(notes !== undefined && { notes }) } },
         { new: true }
       );
       if (!updated) {
@@ -192,7 +205,7 @@ router.put('/:id', async (req, res) => {
       ...(field_name && { field_name }),
       ...(crop && { crop }),
       ...(activity_type && { activity_type }),
-      ...(date && { date: new Date(date).toISOString() }),
+      ...(validDate && { date: validDate.toISOString() }),
       ...(quantity_details !== undefined && { quantity_details }),
       ...(notes !== undefined && { notes })
     };
@@ -200,12 +213,15 @@ router.put('/:id', async (req, res) => {
 
   } catch (error) {
     console.error('Error updating farm activity:', error);
-    return res.status(500).json({ success: false, error: 'Failed to update activity: ' + error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to update activity' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
+    });
   }
 });
 
 // DELETE /api/farm-activities/:id - Delete an activity
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -229,7 +245,10 @@ router.delete('/:id', async (req, res) => {
 
   } catch (error) {
     console.error('Error deleting activity:', error);
-    return res.status(500).json({ success: false, error: 'Failed to delete activity: ' + error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to delete activity' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
+    });
   }
 });
 

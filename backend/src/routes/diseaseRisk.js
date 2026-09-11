@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { optionalAuth } = require('../middleware/auth');
 
 /**
  * Pathogen Risk Profiles for major crops
@@ -34,7 +35,7 @@ const CROP_PATHOGENS = {
  * POST /api/ml/predict-disease-risk
  * Random Forest Classifier REST API endpoint for plant disease & pest risk evaluation
  */
-router.post('/predict-disease-risk', (req, res) => {
+router.post('/predict-disease-risk', optionalAuth, (req, res) => {
   try {
     const {
       crop = 'Rice',
@@ -168,14 +169,14 @@ router.post('/predict-disease-risk', (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to compute Random Forest disease risk prediction',
-      error: error.message
+      ...(process.env.NODE_ENV === 'production' ? {} : { error: error.message })
     });
   }
 });
 
 const mlClient = require('../services/mlClient');
 
-router.post('/disease-detect-local', async (req, res) => {
+router.post('/disease-detect-local', optionalAuth, async (req, res) => {
   try {
     const { imageBase64, imagePath } = req.body;
     if (!imageBase64 && !imagePath) {
@@ -190,7 +191,7 @@ router.post('/disease-detect-local', async (req, res) => {
     console.error('Local Disease Detection Error:', error);
     res.status(500).json({
       success: false,
-      error: error.message
+      error: process.env.NODE_ENV === 'production' ? 'Local disease detection failed' : error.message
     });
   }
 });

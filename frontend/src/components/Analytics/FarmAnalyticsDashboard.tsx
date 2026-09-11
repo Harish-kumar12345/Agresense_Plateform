@@ -177,22 +177,23 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
       className="max-w-6xl mx-auto px-4 py-6 space-y-6 text-slate-100 font-sans"
     >
       {/* 1. Header Banner */}
-      <div className="apple-hero-header">
+      <div className="verda-hero-header">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-2">
-            <div className="apple-segmented-item active">
-              <BarChart3 className="w-3.5 h-3.5 text-emerald-400 inline-block mr-1.5" /> AgriSense Consolidated Farm Intelligence
+            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400">
+              <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Consolidated Farm Intelligence & Executive Telemetry</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black tracking-tight font-display text-white">
-              <span className="apple-title-gradient">{farmInfo.farmName}</span> Analytics & Telemetry
+              <span className="bg-gradient-to-r from-white via-emerald-100 to-emerald-300 bg-clip-text text-transparent">{farmInfo.farmName}</span> Analytics
             </h2>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#94A3B8] font-medium">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 font-medium">
               <span className="flex items-center gap-1 font-semibold text-slate-300">
                 <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {farmInfo.locationName} ({farmInfo.coordinates.latitude.toFixed(4)}, {farmInfo.coordinates.longitude.toFixed(4)})
               </span>
               <span className="text-slate-700">•</span>
-              <Badge variant="emerald" size="sm">
+              <Badge variant="forest" size="sm">
                 🌾 {farmInfo.crop} • {farmInfo.areaHectares} ha
               </Badge>
             </div>
@@ -228,7 +229,7 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
             </select>
 
             <Button
-              variant="primary"
+              variant="hero"
               size="sm"
               icon={generatingPdf ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FileText className="w-3.5 h-3.5" />}
               disabled={generatingPdf}
@@ -243,24 +244,27 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
       {/* 2. Primary KPI Insight Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <InsightCard
+          tone="yield"
           title="AI Predicted Yield"
           value={`${yieldAnalytics.currentPredictedYield} t/ha`}
           subtitle={`Total Production: ${yieldAnalytics.expectedProductionTons} Tons`}
           badge="AI Forecast"
-          icon={<TrendingUp className="w-5 h-5 text-emerald-400" />}
-          iconBg="bg-emerald-500/15 text-emerald-400 border-emerald-500/20"
+          icon={<TrendingUp className="w-5 h-5 text-amber-400" />}
+          iconBg="bg-amber-500/15 text-amber-400 border-amber-500/20"
         />
 
         <InsightCard
+          tone="price"
           title="Estimated Revenue"
           value={`₹${marketAndRevenue.estimatedRevenueLakhs} Lakhs`}
           subtitle={`Mandi Modal Rate: ₹${marketAndRevenue.currentMarketPrice}/qtl`}
           badge="Valuation"
-          icon={<IndianRupee className="w-5 h-5 text-teal-400" />}
-          iconBg="bg-teal-500/15 text-teal-400 border-teal-500/20"
+          icon={<IndianRupee className="w-5 h-5 text-amber-300" />}
+          iconBg="bg-amber-500/15 text-amber-300 border-amber-500/20"
         />
 
         <InsightCard
+          tone="harvest"
           title="Growth Stage & GDD"
           value={gddProgress.growthStage}
           subtitle={`Accumulated: ${gddProgress.accumulatedGdd} GDD (${gddProgress.progressPct}%)`}
@@ -270,6 +274,7 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
         />
 
         <InsightCard
+          tone="disease"
           title="Pathogen Risk Level"
           value={`${diseaseRiskTrajectory.overallRiskScore}%`}
           subtitle={`${diseaseRiskTrajectory.riskLevel} • ${diseaseRiskTrajectory.activeRisksCount} Active Flags`}

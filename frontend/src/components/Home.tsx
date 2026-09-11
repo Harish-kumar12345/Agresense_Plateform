@@ -30,9 +30,7 @@ import { weatherService } from '../services/weatherService';
 import { soilService } from '../services/soilService';
 import { AnimatedCounter } from './Common/AnimatedCounter';
 
-// API endpoints from environment variables
-const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || '';
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+
 
 type LocationData = {
   latitude: number;
@@ -630,7 +628,7 @@ function Home() {
     
     try {
       const [weather, soil, land] = await Promise.all([
-        fetchWeatherData(latitude, longitude, selectedLocation, crop),
+        fetchWeatherData(latitude, longitude, currentLocation || undefined, crop),
         fetchSoilData(latitude, longitude),
         fetchLandData(latitude, longitude)
       ]);

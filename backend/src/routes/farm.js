@@ -1,23 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 const { Farm } = require('../models/Farm');
-
-// Optional auth: extracts user from JWT if present, but doesn't reject unauthenticated requests
-function optionalAuth(req, res, next) {
-  const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.split(' ')[1];
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'dev_secret');
-      req.user = decoded; // { sub: userId, role, iat, exp }
-    } catch (err) {
-      // Token invalid/expired — proceed as unauthenticated
-    }
-  }
-  next();
-}
+const { requireAuth, optionalAuth } = require('../middleware/auth');
 
 // In-memory fallback storage when MongoDB is disconnected
 const inMemoryFarms = [
@@ -104,7 +89,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/farms - Save a new farm
-router.post('/', optionalAuth, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   try {
     const {
       farm_name,
@@ -121,7 +106,7 @@ router.post('/', optionalAuth, async (req, res) => {
       location_name = 'Custom Location',
       soil_type = 'Loamy',
       irrigation_type = 'Canal'
-    } = req.body;
+    } = req.body || {};
 
     // Use authenticated user's ID if available; otherwise fall back to client-supplied value
     const farmer_id = req.user?.sub || clientFarmerId;
@@ -133,20 +118,32 @@ router.post('/', optionalAuth, async (req, res) => {
       });
     }
 
+    const lat = Number(latitude);
+    const lon = Number(longitude);
+    const areaHa = Number(area_hectares);
+
+    if (!Number.isFinite(lat) || lat < -90 || lat > 90 || !Number.isFinite(lon) || lon < -180 || lon > 180) {
+      return res.status(400).json({ success: false, error: 'Valid latitude (-90 to 90) and longitude (-180 to 180) are required' });
+    }
+
+    if (!Number.isFinite(areaHa) || areaHa <= 0) {
+      return res.status(400).json({ success: false, error: 'area_hectares must be a positive number greater than 0' });
+    }
+
     const farmId = 'farm_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
 
     const farmData = {
       farm_id: farmId,
-      farm_name: farm_name.trim(),
-      farmer_id,
-      crop: crop.trim(),
+      farm_name: String(farm_name).trim(),
+      farmer_id: String(farmer_id),
+      crop: String(crop).trim(),
       season,
-      latitude: Number(latitude),
-      longitude: Number(longitude),
-      area_hectares: Number(area_hectares),
-      area_acres: Number(area_acres || (area_hectares * 2.47105).toFixed(2)),
-      area_sqm: Number(area_sqm || (area_hectares * 10000).toFixed(2)),
-      area_bigha: Number(area_bigha || (area_hectares * 3.9866).toFixed(2)),
+      latitude: lat,
+      longitude: lon,
+      area_hectares: areaHa,
+      area_acres: Number(area_acres || (areaHa * 2.47105).toFixed(2)),
+      area_sqm: Number(area_sqm || (areaHa * 10000).toFixed(2)),
+      area_bigha: Number(area_bigha || (areaHa * 3.9866).toFixed(2)),
       boundary_geojson,
       location_name,
       soil_type,
@@ -168,24 +165,32 @@ router.post('/', optionalAuth, async (req, res) => {
 
   } catch (error) {
     console.error('Error saving farm:', error);
-    return res.status(500).json({ success: false, error: 'Failed to save farm: ' + error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to save farm' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
+    });
   }
 });
 
 // PUT /api/farms/:id - Update an existing farm
-router.put('/:id', async (req, res) => {
+router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
+    const isOfficer = req.user.role === 'officer';
 
     if (mongoose.connection.readyState === 1) {
+      const query = { $or: [{ farm_id: id }, { _id: mongoose.Types.ObjectId.isValid(id) ? id : null }] };
+      if (!isOfficer) {
+        query.farmer_id = req.user.sub;
+      }
       const updatedFarm = await Farm.findOneAndUpdate(
-        { $or: [{ farm_id: id }, { _id: mongoose.Types.ObjectId.isValid(id) ? id : null }] },
+        query,
         { $set: updateData },
         { new: true }
       );
       if (!updatedFarm) {
-        return res.status(404).json({ success: false, error: 'Farm not found' });
+        return res.status(404).json({ success: false, error: 'Farm not found or access denied' });
       }
       return res.json({ success: true, message: 'Farm updated successfully', data: updatedFarm });
     }
@@ -194,6 +199,9 @@ router.put('/:id', async (req, res) => {
     const index = inMemoryFarms.findIndex(f => f.farm_id === id);
     if (index === -1) {
       return res.status(404).json({ success: false, error: 'Farm not found' });
+    }
+    if (!isOfficer && inMemoryFarms[index].farmer_id !== req.user.sub && inMemoryFarms[index].farmer_id !== 'default_farmer') {
+      return res.status(403).json({ success: false, error: 'Access denied to update this farm' });
     }
     inMemoryFarms[index] = { ...inMemoryFarms[index], ...updateData };
     return res.json({ success: true, message: 'Farm updated successfully', data: inMemoryFarms[index], fallback: true });
@@ -205,16 +213,21 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /api/farms/:id - Delete a farm
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
+    const isOfficer = req.user.role === 'officer';
 
     if (mongoose.connection.readyState === 1) {
-      const deletedFarm = await Farm.findOneAndDelete({
+      const query = {
         $or: [{ farm_id: id }, { _id: mongoose.Types.ObjectId.isValid(id) ? id : null }]
-      });
+      };
+      if (!isOfficer) {
+        query.farmer_id = req.user.sub;
+      }
+      const deletedFarm = await Farm.findOneAndDelete(query);
       if (!deletedFarm) {
-        return res.status(404).json({ success: false, error: 'Farm not found' });
+        return res.status(404).json({ success: false, error: 'Farm not found or access denied' });
       }
       return res.json({ success: true, message: 'Farm deleted successfully' });
     }
@@ -223,6 +236,9 @@ router.delete('/:id', async (req, res) => {
     const index = inMemoryFarms.findIndex(f => f.farm_id === id);
     if (index === -1) {
       return res.status(404).json({ success: false, error: 'Farm not found' });
+    }
+    if (!isOfficer && inMemoryFarms[index].farmer_id !== req.user.sub && inMemoryFarms[index].farmer_id !== 'default_farmer') {
+      return res.status(403).json({ success: false, error: 'Access denied to delete this farm' });
     }
     inMemoryFarms.splice(index, 1);
     return res.json({ success: true, message: 'Farm deleted successfully', fallback: true });

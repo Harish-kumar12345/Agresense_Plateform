@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { HarvestRecord } = require('../models/HarvestRecord');
+const { requireAuth, optionalAuth } = require('../middleware/auth');
 
 // In-memory fallback storage for Harvest Records
 const inMemoryHarvestRecords = [
@@ -25,7 +26,7 @@ const inMemoryHarvestRecords = [
 ];
 
 // GET /api/harvest-management - Get harvest tracking record(s)
-router.get('/', async (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
   try {
     const { farm_id, crop } = req.query;
 
@@ -52,7 +53,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/harvest-management - Save or update harvest tracking record
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   try {
     const {
       farm_id = 'default_farm',
@@ -82,8 +83,17 @@ router.post('/', async (req, res) => {
       });
     }
 
-    const area = Number(area_hectares) || 2.5;
+    const area = Number(area_hectares);
     const yieldPerHa = Number(predicted_yield_tha);
+
+    if (isNaN(area) || area <= 0) {
+      return res.status(400).json({ success: false, error: 'area_hectares must be a positive number' });
+    }
+
+    if (isNaN(yieldPerHa) || yieldPerHa < 0) {
+      return res.status(400).json({ success: false, error: 'predicted_yield_tha must be a non-negative number' });
+    }
+
     const totalProd = Number(expected_production_tons) || Number((yieldPerHa * area).toFixed(2));
     const harvestId = 'harv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
 
@@ -139,7 +149,10 @@ router.post('/', async (req, res) => {
 
   } catch (error) {
     console.error('Error saving harvest record:', error);
-    return res.status(500).json({ success: false, error: 'Failed to save harvest record: ' + error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to save harvest record' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
+    });
   }
 });
 

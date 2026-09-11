@@ -188,11 +188,11 @@ export const SmartAlertsCenter: React.FC<SmartAlertsCenterProps> = ({
       case 'crop_gdd':
         return <Sprout className="w-4 h-4 text-emerald-400" />;
       case 'yield':
-        return <BarChart3 className="w-4 h-4 text-purple-400" />;
+        return <BarChart3 className="w-4 h-4 text-amber-400" />;
       case 'inventory':
-        return <Package className="w-4 h-4 text-amber-400" />;
+        return <Package className="w-4 h-4 text-indigo-400" />;
       case 'market':
-        return <IndianRupee className="w-4 h-4 text-emerald-400" />;
+        return <IndianRupee className="w-4 h-4 text-amber-300" />;
       default:
         return <Bell className="w-4 h-4 text-emerald-400" />;
     }
