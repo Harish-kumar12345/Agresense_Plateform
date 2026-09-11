@@ -73,7 +73,7 @@ export function Signup({ role, onChangeRole, onSignup, onSwitchToLogin }: Signup
       }
 
       if (onSignup) {
-        await onSignup(email, password, name, role, extraFields);
+        await onSignup(email.trim().toLowerCase(), password, name.trim(), role, extraFields);
       }
 
       if (isOfficer) {
@@ -303,6 +303,9 @@ export function Signup({ role, onChangeRole, onSignup, onSwitchToLogin }: Signup
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                       className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
                       placeholder={isOfficer ? 'officer@gov.in' : 'name@agrisense.farm'}
                       required

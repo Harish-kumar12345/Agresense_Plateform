@@ -24,6 +24,7 @@ interface AuthContextType {
     role?: Role,
     extraFields?: Record<string, string>
   ) => Promise<void>
+  resetPassword: (email: string, newPassword: string) => Promise<{ success: boolean; message: string }>
   logout: () => Promise<void>
   continueAsGuest: () => void
   getAuthHeaders: () => Record<string, string>
@@ -111,11 +112,12 @@ export function AuthProvider({ children }: { children: any }) {
 
   const login = async (email: string, password: string, role?: Role) => {
     let res: Response;
+    const cleanEmail = (email || '').trim().toLowerCase();
     try {
       res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, ...(role ? { role } : {}) })
+        body: JSON.stringify({ email: cleanEmail, password, ...(role ? { role } : {}) })
       });
     } catch (networkErr) {
       throw new Error('Cannot reach server. Please check if the backend is running.');
@@ -150,11 +152,13 @@ export function AuthProvider({ children }: { children: any }) {
     extraFields: Record<string, string> = {}
   ) => {
     let res: Response;
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanName = (name || '').trim();
     try {
       res = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, role, ...extraFields })
+        body: JSON.stringify({ name: cleanName, email: cleanEmail, password, role, ...extraFields })
       });
     } catch (networkErr) {
       throw new Error('Cannot reach server. Please check if the backend is running.');
@@ -180,6 +184,26 @@ export function AuthProvider({ children }: { children: any }) {
       role: data.user.role,
       isVerified: data.user.isVerified
     });
+  };
+
+  const resetPassword = async (email: string, newPassword: string) => {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    let res: Response;
+    try {
+      res = await fetch(`${API_URL}/api/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, newPassword })
+      });
+    } catch (networkErr) {
+      throw new Error('Cannot reach server. Please check if the backend is running.');
+    }
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Failed to reset password');
+    }
+    return data;
   };
 
   const logout = async () => {
@@ -208,6 +232,7 @@ export function AuthProvider({ children }: { children: any }) {
     isGuest,
     login,
     signup,
+    resetPassword,
     logout,
     continueAsGuest,
     getAuthHeaders

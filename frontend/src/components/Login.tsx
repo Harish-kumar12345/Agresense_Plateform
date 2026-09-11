@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sprout, Shield, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sprout, Shield, ChevronDown, KeyRound, X, CheckCircle2 } from 'lucide-react';
 import type { Role } from './RoleContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface LoginProps {
   role: Role;
@@ -51,6 +52,16 @@ export default function Login({ role, onChangeRole, onLogin, onSwitchToSignup }:
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Forgot / Reset Password state
+  const { resetPassword } = useAuth();
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmResetPassword, setConfirmResetPassword] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetError, setResetError] = useState("");
+  const [resetSuccess, setResetSuccess] = useState("");
+
   const meta = ROLE_META[role];
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -58,11 +69,60 @@ export default function Login({ role, onChangeRole, onLogin, onSwitchToSignup }:
     setLoading(true);
     setError("");
     try {
-      if (onLogin) await onLogin(email, password);
+      const cleanEmail = email.trim().toLowerCase();
+      if (onLogin) await onLogin(cleanEmail, password);
     } catch (err: any) {
       setError(err.message || "Login failed. Please check credentials.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleOpenResetModal = () => {
+    setResetEmail(email.trim().toLowerCase());
+    setNewPassword("");
+    setConfirmResetPassword("");
+    setResetError("");
+    setResetSuccess("");
+    setShowResetModal(true);
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetLoading(true);
+    setResetError("");
+    setResetSuccess("");
+
+    if (!resetEmail) {
+      setResetError("Please enter your registered email address.");
+      setResetLoading(false);
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setResetError("Password must be at least 6 characters.");
+      setResetLoading(false);
+      return;
+    }
+
+    if (newPassword !== confirmResetPassword) {
+      setResetError("Passwords do not match.");
+      setResetLoading(false);
+      return;
+    }
+
+    try {
+      const res = await resetPassword(resetEmail.trim().toLowerCase(), newPassword);
+      setResetSuccess(res.message || "Password reset successfully! You can now log in.");
+      setEmail(resetEmail.trim().toLowerCase());
+      setPassword(newPassword);
+      setTimeout(() => {
+        setShowResetModal(false);
+      }, 1500);
+    } catch (err: any) {
+      setResetError(err.message || "Failed to reset password.");
+    } finally {
+      setResetLoading(false);
     }
   };
 
@@ -136,6 +196,9 @@ export default function Login({ role, onChangeRole, onLogin, onSwitchToSignup }:
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck={false}
                   className="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
                   placeholder={role === 'officer' ? 'officer@gov.in' : 'name@agrisense.farm'}
                   required
@@ -144,9 +207,18 @@ export default function Login({ role, onChangeRole, onLogin, onSwitchToSignup }:
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Password
+                </label>
+                <button
+                  type="button"
+                  onClick={handleOpenResetModal}
+                  className="text-[11px] text-emerald-400 hover:text-emerald-300 font-medium cursor-pointer transition-colors"
+                >
+                  Forgot password?
+                </button>
+              </div>
               <div className="relative flex items-center">
                 <Lock className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
                 <input
@@ -229,6 +301,109 @@ export default function Login({ role, onChangeRole, onLogin, onSwitchToSignup }:
           </div>
         </div>
       </motion.div>
+
+      {/* Forgot / Reset Password Modal */}
+      <AnimatePresence>
+        {showResetModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="w-full max-w-md bg-[#0e1612] border border-emerald-500/30 rounded-2xl p-6 sm:p-7 shadow-2xl relative text-white"
+            >
+              <button
+                type="button"
+                onClick={() => setShowResetModal(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                  <KeyRound className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-white">Reset Password</h2>
+                  <p className="text-xs text-slate-400">Set a new password for your account</p>
+                </div>
+              </div>
+
+              {resetError && (
+                <div className="bg-rose-500/15 border border-rose-500/30 text-rose-300 px-3.5 py-2 rounded-xl mb-4 text-xs">
+                  {resetError}
+                </div>
+              )}
+
+              {resetSuccess && (
+                <div className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 px-3.5 py-2 rounded-xl mb-4 text-xs flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>{resetSuccess}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleResetPassword} className="space-y-3.5">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Registered Email</label>
+                  <input
+                    type="email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    className="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white focus:border-emerald-500 outline-none"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">New Password</label>
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white focus:border-emerald-500 outline-none"
+                    placeholder="At least 6 characters"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Confirm New Password</label>
+                  <input
+                    type="password"
+                    value={confirmResetPassword}
+                    onChange={(e) => setConfirmResetPassword(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-sm text-white focus:border-emerald-500 outline-none"
+                    placeholder="Re-enter new password"
+                    required
+                  />
+                </div>
+
+                <div className="flex gap-2.5 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowResetModal(false)}
+                    className="flex-1 py-2.5 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={resetLoading}
+                    className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition-colors disabled:opacity-50"
+                  >
+                    {resetLoading ? "Updating..." : "Update Password"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
