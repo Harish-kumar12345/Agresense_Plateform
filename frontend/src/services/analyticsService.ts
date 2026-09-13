@@ -100,7 +100,7 @@ class AnalyticsService {
       console.warn('Yield prediction fallback for analytics:', err);
     }
 
-    const predictedYield = yieldResult?.predictedYieldPerHectare || yieldResult?.predicted_yield_tha || 4.8;
+    const predictedYield = yieldResult?.predictedYieldPerHectare || yieldResult?.predicted_yield_tha || 2.8;
     const totalProduction = yieldResult?.totalProductionTons || yieldResult?.expected_production_tons || Math.round(predictedYield * areaHa * 10) / 10;
 
     // 3. Fetch Disease Risk Telemetry
@@ -187,9 +187,9 @@ class AnalyticsService {
     const hasHistoricalData = !!savedHistorical;
 
     let historicalSeasons = [
-      { season: 'Kharif 2024', year: 2024, actualYield: 4.2, predictedYield: 4.3 },
-      { season: 'Rabi 2024', year: 2024, actualYield: 4.5, predictedYield: 4.6 },
-      { season: 'Kharif 2025', year: 2025, actualYield: 4.6, predictedYield: 4.7 },
+      { season: 'Kharif 2024', year: 2024, actualYield: 2.65, predictedYield: 2.70 },
+      { season: 'Rabi 2024', year: 2024, actualYield: 2.80, predictedYield: 2.85 },
+      { season: 'Kharif 2025', year: 2025, actualYield: 2.75, predictedYield: 2.80 },
       { season: 'Current Season', year: 2026, actualYield: predictedYield, predictedYield: predictedYield }
     ];
 

@@ -71,11 +71,11 @@ router.post('/predict-yield', optionalAuth, async (req, res) => {
 });
 
 /**
- * POST /api/ml/auto-predict
+ * POST /api/ml/auto-predict and /api/ml/predict-yield-auto
  * Auto-enriched endpoint: fetches LIVE weather, soil, and GDD from real APIs & Soil Health Card databases,
  * then runs the real LightGBM model.
  */
-router.post('/auto-predict', optionalAuth, async (req, res) => {
+router.post(['/auto-predict', '/predict-yield-auto'], optionalAuth, async (req, res) => {
   try {
     const {
       latitude = 28.6692,
@@ -104,8 +104,9 @@ router.post('/auto-predict', optionalAuth, async (req, res) => {
       latitude, longitude, crop, farm_area_ha, sowing_date, state, district
     );
 
-    if (historical_yield_tha && historical_yield_tha > 0) {
-      payload.historical_yield_tha = historical_yield_tha;
+    const histNum = Number(historical_yield_tha);
+    if (!isNaN(histNum) && histNum > 0 && histNum <= 8.0) {
+      payload.historical_yield_tha = histNum;
     }
 
     // Run prediction using trained LightGBM model

@@ -118,9 +118,14 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   const userDistrict = resolvedDistrict;
 
   const [activeSegment, setActiveSegment] = useState<'prices' | 'compare' | 'history' | 'revenue' | 'alerts'>('prices');
+  const [activeCrop, setActiveCrop] = useState<string>(selectedCrop);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    setActiveCrop(farm?.crop || crop || 'Rice');
+  }, [farm?.crop, crop]);
 
   const [pricesList, setPricesList] = useState<CropPriceRecord[]>([]);
   const [currentCropRecord, setCurrentCropRecord] = useState<CropPriceRecord | null>(null);
@@ -154,11 +159,11 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
 
     try {
       const [soilRes, weatherRes, pricesRes, mandiRes, history] = await Promise.all([
-        soilService.getSoilAnalysis(safeLat, safeLon, farm?.farm_id || 'default_farm', selectedCrop),
-        weatherService.getLiveWeatherData(safeLat, safeLon, selectedCrop),
-        cropPriceService.getCropPrices(userState, userDistrict, selectedCrop, safeLat, safeLon),
-        cropPriceService.getMandiComparisons(selectedCrop, userState, userDistrict, safeLat, safeLon),
-        cropPriceService.getPriceHistory(selectedCrop, 30)
+        soilService.getSoilAnalysis(safeLat, safeLon, farm?.farm_id || 'default_farm', activeCrop),
+        weatherService.getLiveWeatherData(safeLat, safeLon, activeCrop),
+        cropPriceService.getCropPrices(userState, userDistrict, undefined, safeLat, safeLon),
+        cropPriceService.getMandiComparisons(activeCrop, userState, userDistrict, safeLat, safeLon),
+        cropPriceService.getPriceHistory(activeCrop, 30)
       ]);
 
       setPricesList(pricesRes.prices);
@@ -168,7 +173,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       setMandiLoading(false);
       setPriceHistory(history);
 
-      const matched = pricesRes.prices.find(p => p.crop.toLowerCase() === selectedCrop.toLowerCase()) || pricesRes.prices[0];
+      const matched = pricesRes.prices.find(p => p.crop.toLowerCase() === activeCrop.toLowerCase()) || pricesRes.prices[0];
       setCurrentCropRecord(matched);
       setCustomPriceScenario(matched ? matched.modalPrice : 3000);
 
@@ -176,7 +181,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       const weather = weatherRes.current;
 
       const featurePayload = {
-        crop: selectedCrop,
+        crop: activeCrop,
         farm_area_ha: Number(farmArea) || 2.5,
         temperature_c: weather.temperature_c,
         rainfall_mm: weather.precipitation_mm,
@@ -187,14 +192,14 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
         soil_p: soil.phosphorus,
         soil_k: soil.potassium,
         gdd: 1450,
-        historical_yield_tha: 4.2
+        historical_yield_tha: 0
       };
 
       const yResult = await yieldService.predictYield(featurePayload);
       setYieldResult(yResult);
 
       const revenue = cropPriceService.calculateRevenue(
-        selectedCrop,
+        activeCrop,
         yResult.totalProductionTons,
         matched ? matched.modalPrice : 3000
       );
@@ -212,9 +217,10 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
 
   useEffect(() => {
     loadMarketData();
-  }, [safeLat, safeLon, farmArea, selectedCrop, userState, userDistrict]);
+  }, [safeLat, safeLon, farmArea, activeCrop, userState, userDistrict]);
 
-  const scenarioRevenue = Number(((yieldResult?.totalProductionTons || 12.0) * 10 * customPriceScenario).toFixed(0));
+  const defaultTons = Number(((Number(farmArea) || 2.5) * 2.8).toFixed(1));
+  const scenarioRevenue = Number(((yieldResult?.totalProductionTons || defaultTons) * 10 * customPriceScenario).toFixed(0));
 
   const handleSaveAlert = (e: React.FormEvent) => {
     e.preventDefault();
@@ -445,7 +451,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
             <div className="p-3 rounded-xl bg-white/5 border border-white/5">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Model Tonnage</span>
               <span className="text-lg font-bold text-white font-display">
-                {yieldResult?.totalProductionTons || 12.68} Tons
+                {yieldResult?.totalProductionTons ?? defaultTons} Tons
               </span>
               <span className="text-[10px] text-emerald-400 block font-medium">From {farmArea} ha field</span>
             </div>
@@ -453,9 +459,11 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
             <div className="p-3 rounded-xl bg-white/5 border border-white/5">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">Net Yield Rate</span>
               <span className="text-lg font-bold text-white font-display">
-                {yieldResult?.predictedYieldPerHectare || 5.07} t/ha
+                {yieldResult?.predictedYieldPerHectare ?? 2.8} t/ha
               </span>
-              <span className="text-[10px] text-slate-400 block font-medium">Regional Avg: 4.6 t/ha</span>
+              <span className="text-[10px] text-slate-400 block font-medium">
+                Regional Avg: {yieldResult?.regionalAvg ? `${yieldResult.regionalAvg} t/ha` : '2.7 t/ha'}
+              </span>
             </div>
           </div>
         </div>
@@ -542,6 +550,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
                         size="sm"
                         variant="outline"
                         onClick={() => {
+                          setActiveCrop(item.crop);
                           setCurrentCropRecord(item);
                           setCustomPriceScenario(item.modalPrice);
                         }}
@@ -578,7 +587,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Market Rate Disparity</span>
-                <h3 className="text-base font-bold text-white mt-0.5 font-display">Nearby Mandi Comparison for {selectedCrop}</h3>
+                <h3 className="text-base font-bold text-white mt-0.5 font-display">Nearby Mandi Comparison for {activeCrop}</h3>
               </div>
               <div className="flex flex-col items-end gap-1 shrink-0">
                 <Badge variant="emerald" size="sm">
@@ -592,8 +601,22 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
               </div>
             </div>
 
-            {/* Row 2: Radius filter pills + Sort selector */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-1 border-t border-white/8">
+            {/* Row 2: Commodity selector + Radius filter pills + Sort selector */}
+            <div className="flex flex-wrap items-center gap-3 pt-1 border-t border-white/8">
+              {/* Commodity selector */}
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Commodity:</span>
+                <select
+                  value={activeCrop}
+                  onChange={e => setActiveCrop(e.target.value)}
+                  className="bg-slate-800 border border-emerald-500/30 text-emerald-300 font-bold text-[11px] rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500 cursor-pointer"
+                >
+                  {Array.from(new Set([activeCrop, ...pricesList.map(p => p.crop), 'Rice', 'Wheat', 'Sugarcane', 'Cotton', 'Maize', 'Tomato', 'Potato', 'Onion', 'Mustard', 'Soybean', 'Groundnut'])).map(c => (
+                    <option key={c} value={c}>🌾 {c}</option>
+                  ))}
+                </select>
+              </div>
+
               {/* Radius label + pills */}
               <div className="flex items-center gap-2">
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Radius:</span>
@@ -910,7 +933,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
             </div>
             <div className="text-right">
               <span className="text-xs text-slate-300 font-semibold block">Production Output</span>
-              <span className="text-base font-bold text-white">{yieldResult?.totalProductionTons || 12.0} Tons</span>
+              <span className="text-base font-bold text-white">{yieldResult?.totalProductionTons || defaultTons} Tons</span>
             </div>
           </div>
         </Card>

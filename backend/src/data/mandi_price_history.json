@@ -440,5 +440,239 @@
       "lat": 28.71,
       "lon": 77.17
     }
+  ],
+  "Soyabean": [
+    {
+      "market": "Indore Mandi",
+      "district": "Indore",
+      "state": "Madhya Pradesh",
+      "variety": "Yellow",
+      "minPrice": 4200,
+      "maxPrice": 4800,
+      "modalPrice": 4550,
+      "lat": 22.7196,
+      "lon": 75.8577
+    },
+    {
+      "market": "Ujjain Mandi",
+      "district": "Ujjain",
+      "state": "Madhya Pradesh",
+      "variety": "JS 9560",
+      "minPrice": 4300,
+      "maxPrice": 4750,
+      "modalPrice": 4500,
+      "lat": 23.1765,
+      "lon": 75.7885
+    },
+    {
+      "market": "Latur Mandi",
+      "district": "Latur",
+      "state": "Maharashtra",
+      "variety": "Local",
+      "minPrice": 4400,
+      "maxPrice": 4900,
+      "modalPrice": 4680,
+      "lat": 18.4088,
+      "lon": 76.5604
+    }
+  ],
+  "Mustard": [
+    {
+      "market": "Alwar Mandi",
+      "district": "Alwar",
+      "state": "Rajasthan",
+      "variety": "Black Sarson",
+      "minPrice": 5200,
+      "maxPrice": 5650,
+      "modalPrice": 5450,
+      "lat": 27.553,
+      "lon": 76.6346
+    },
+    {
+      "market": "Bharatpur Mandi",
+      "district": "Bharatpur",
+      "state": "Rajasthan",
+      "variety": "Mustard Bold",
+      "minPrice": 5300,
+      "maxPrice": 5700,
+      "modalPrice": 5520,
+      "lat": 27.2152,
+      "lon": 77.503
+    },
+    {
+      "market": "Hapur APMC",
+      "district": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "variety": "Desi Yellow",
+      "minPrice": 5100,
+      "maxPrice": 5500,
+      "modalPrice": 5350,
+      "lat": 28.7306,
+      "lon": 77.7807
+    },
+    {
+      "market": "Agra Mandi",
+      "district": "Agra",
+      "state": "Uttar Pradesh",
+      "variety": "Local",
+      "minPrice": 5250,
+      "maxPrice": 5600,
+      "modalPrice": 5420,
+      "lat": 27.1767,
+      "lon": 78.0081
+    }
+  ],
+  "Bajra": [
+    {
+      "market": "Jaipur Mandi",
+      "district": "Jaipur",
+      "state": "Rajasthan",
+      "variety": "Hybrid Bajra",
+      "minPrice": 2150,
+      "maxPrice": 2400,
+      "modalPrice": 2280,
+      "lat": 26.9124,
+      "lon": 75.7873
+    },
+    {
+      "market": "Agra Mandi",
+      "district": "Agra",
+      "state": "Uttar Pradesh",
+      "variety": "Desi Pearl",
+      "minPrice": 2100,
+      "maxPrice": 2350,
+      "modalPrice": 2240,
+      "lat": 27.1767,
+      "lon": 78.0081
+    },
+    {
+      "market": "Aligarh Mandi",
+      "district": "Aligarh",
+      "state": "Uttar Pradesh",
+      "variety": "Common",
+      "minPrice": 2180,
+      "maxPrice": 2380,
+      "modalPrice": 2260,
+      "lat": 27.8974,
+      "lon": 78.088
+    }
+  ],
+  "Jowar": [
+    {
+      "market": "Solapur Mandi",
+      "district": "Solapur",
+      "state": "Maharashtra",
+      "variety": "Maldandi",
+      "minPrice": 3200,
+      "maxPrice": 3800,
+      "modalPrice": 3500,
+      "lat": 17.6599,
+      "lon": 75.9064
+    },
+    {
+      "market": "Latur Mandi",
+      "district": "Latur",
+      "state": "Maharashtra",
+      "variety": "White Sorghum",
+      "minPrice": 3100,
+      "maxPrice": 3600,
+      "modalPrice": 3380,
+      "lat": 18.4088,
+      "lon": 76.5604
+    }
+  ],
+  "Groundnut": [
+    {
+      "market": "Rajkot Mandi",
+      "district": "Rajkot",
+      "state": "Gujarat",
+      "variety": "GG-20",
+      "minPrice": 6200,
+      "maxPrice": 6800,
+      "modalPrice": 6500,
+      "lat": 22.3039,
+      "lon": 70.8022
+    },
+    {
+      "market": "Gondal Mandi",
+      "district": "Rajkot",
+      "state": "Gujarat",
+      "variety": "Bold",
+      "minPrice": 6300,
+      "maxPrice": 6900,
+      "modalPrice": 6620,
+      "lat": 21.9619,
+      "lon": 70.7923
+    },
+    {
+      "market": "Bikaner Mandi",
+      "district": "Bikaner",
+      "state": "Rajasthan",
+      "variety": "Local Pods",
+      "minPrice": 5900,
+      "maxPrice": 6500,
+      "modalPrice": 6250,
+      "lat": 28.0229,
+      "lon": 73.3119
+    }
+  ],
+  "Turmeric": [
+    {
+      "market": "Erode Mandi",
+      "district": "Erode",
+      "state": "Tamil Nadu",
+      "variety": "Finger Turmeric",
+      "minPrice": 13500,
+      "maxPrice": 16200,
+      "modalPrice": 14800,
+      "lat": 11.341,
+      "lon": 77.7172
+    },
+    {
+      "market": "Nizamabad Mandi",
+      "district": "Nizamabad",
+      "state": "Telangana",
+      "variety": "Salem Bulb",
+      "minPrice": 12800,
+      "maxPrice": 15400,
+      "modalPrice": 14100,
+      "lat": 18.6725,
+      "lon": 78.0941
+    },
+    {
+      "market": "Sangli Mandi",
+      "district": "Sangli",
+      "state": "Maharashtra",
+      "variety": "Rajapore",
+      "minPrice": 14000,
+      "maxPrice": 16800,
+      "modalPrice": 15300,
+      "lat": 16.8524,
+      "lon": 74.5815
+    }
+  ],
+  "Ginger": [
+    {
+      "market": "Wayanad Mandi",
+      "district": "Wayanad",
+      "state": "Kerala",
+      "variety": "Fresh Green",
+      "minPrice": 7500,
+      "maxPrice": 9200,
+      "modalPrice": 8400,
+      "lat": 11.6854,
+      "lon": 76.132
+    },
+    {
+      "market": "Shimoga Mandi",
+      "district": "Shivamogga",
+      "state": "Karnataka",
+      "variety": "Dry Cochin",
+      "minPrice": 8200,
+      "maxPrice": 9800,
+      "modalPrice": 9100,
+      "lat": 13.9299,
+      "lon": 75.5681
+    }
   ]
 }

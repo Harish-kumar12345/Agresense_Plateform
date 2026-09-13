@@ -164,17 +164,22 @@ export const yieldService = {
    */
   calculateLocalYieldPrediction(payload: Record<string, any>): YieldPredictionResult {
     const baselines: Record<string, number> = {
-      Rice: 4.2,
-      Wheat: 3.8,
-      Maize: 5.5,
-      Cotton: 2.4,
-      Sugarcane: 72.0,
-      Pulses: 1.8
+      Rice: 2.8,
+      Wheat: 3.2,
+      Maize: 3.0,
+      Cotton: 1.4,
+      Sugarcane: 70.0,
+      Pulses: 0.85,
+      Mustard: 1.3,
+      Soybean: 1.2,
+      Potato: 22.0
     };
 
     const crop = String(payload.crop || 'Rice');
     const cropKey = Object.keys(baselines).find(c => c.toLowerCase() === crop.toLowerCase()) || 'Rice';
-    const base = payload.historical_yield_tha || baselines[cropKey];
+    const baseStandard = baselines[cropKey] || 2.8;
+    const hist = Number(payload.historical_yield_tha);
+    const base = (hist > 0 && hist <= baseStandard * 1.5) ? hist : baseStandard;
     const safeArea = Math.max(0.1, Number(payload.farm_area_ha) || 2.5);
 
     const N = Number.isFinite(Number(payload.soil_n)) ? Number(payload.soil_n) : 40;
@@ -187,14 +192,32 @@ export const yieldService = {
     const humidity = Number.isFinite(Number(payload.humidity_pct)) ? Number(payload.humidity_pct) : 70;
     const gdd = Number.isFinite(Number(payload.gdd)) ? Number(payload.gdd) : 1200;
 
-    const npkRatio = (Math.min(1.25, N / 70) + Math.min(1.25, P / 50) + Math.min(1.25, K / 80)) / 3;
-    const phPen = ph < 6.0 || ph > 7.5 ? 0.92 : 1.04;
-    const moistMod = soilMoisture >= 25 && soilMoisture <= 45 ? 1.05 : 0.95;
+    const npkRatio = (Math.min(1.15, Math.max(0.85, N / 70)) + Math.min(1.15, Math.max(0.85, P / 50)) + Math.min(1.15, Math.max(0.85, K / 80))) / 3;
+    const phPen = ph < 6.0 || ph > 7.5 ? 0.94 : 1.02;
+    const moistMod = soilMoisture >= 25 && soilMoisture <= 45 ? 1.02 : 0.96;
 
     const soilMod = npkRatio * phPen * moistMod;
-    const climateMod = temp >= 20 && temp <= 32 ? 1.05 : 0.94;
+    const climateMod = temp >= 20 && temp <= 32 ? 1.02 : 0.95;
 
-    const predictedYieldPerHectare = Number((base * soilMod * climateMod).toFixed(2));
+    let rawYield = base * soilMod * climateMod;
+
+    // Agronomic clamping per crop category
+    const cropLower = crop.toLowerCase();
+    if (cropLower.includes('sugarcane')) {
+      rawYield = Math.max(35.0, Math.min(95.0, rawYield));
+    } else if (['potato', 'onion', 'tuber', 'tomato'].some(t => cropLower.includes(t))) {
+      rawYield = Math.max(8.0, Math.min(35.0, rawYield));
+    } else if (['pulse', 'gram', 'moong', 'urad', 'arhar', 'tur', 'lentil'].some(p => cropLower.includes(p))) {
+      rawYield = Math.max(0.5, Math.min(1.8, rawYield));
+    } else if (cropLower.includes('cotton')) {
+      rawYield = Math.max(0.7, Math.min(2.5, rawYield));
+    } else if (['mustard', 'soybean', 'groundnut', 'sunflower'].some(o => cropLower.includes(o))) {
+      rawYield = Math.max(0.7, Math.min(2.8, rawYield));
+    } else {
+      rawYield = Math.max(1.0, Math.min(5.2, rawYield));
+    }
+
+    const predictedYieldPerHectare = Number(rawYield.toFixed(2));
     const totalProductionTons = Number((predictedYieldPerHectare * safeArea).toFixed(2));
     const confidenceScore = Math.round(92 + Math.min(4, soilMod));
 
