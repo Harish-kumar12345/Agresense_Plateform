@@ -25,12 +25,16 @@ interface FarmFieldChooserProps {
   onViewSavedFields: () => void;
   onOpenGISMap: () => void;
   onSelectFarm: (farm: FarmData) => void;
+  onGoToDashboard?: () => void;
+  activeFarmId?: string;
 }
 
 export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
   onViewSavedFields,
   onOpenGISMap,
-  onSelectFarm
+  onSelectFarm,
+  onGoToDashboard,
+  activeFarmId
 }) => {
   const { user } = useAuth();
   const farmerId = user?.id || 'default_farmer';
@@ -173,8 +177,21 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
           Welcome back, <span className="text-gradient-emerald">{farmerName}</span>
         </h1>
         <p className="text-sm text-[#D1DED6] max-w-lg mx-auto">
-          Currently managing <strong className="text-white font-semibold">{savedFarms.length} registered field plot{savedFarms.length > 1 ? 's' : ''}</strong>. Select an action to proceed:
+          Currently managing <strong className="text-white font-semibold">{savedFarms.length} registered field plot{savedFarms.length > 1 ? 's' : ''}</strong>. Select a field to enter Dashboard or digitize a new parcel:
         </p>
+        {onGoToDashboard && (
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={onGoToDashboard}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-semibold shadow-sm transition-all"
+            >
+              <Activity className="w-4 h-4 text-emerald-400" />
+              <span>Launch Live Dashboard</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Two-Card Decision Layout */}
@@ -202,27 +219,46 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
                 Monitored Farm Fields
               </h2>
               <p className="mt-1 text-xs text-[#D1DED6] leading-relaxed">
-                Inspect agronomic telemetry, soil horizons, and pathogen risk across saved plots.
+                Click any saved plot to load its live sensory telemetry, or inspect GIS boundaries.
               </p>
             </div>
 
-            {/* Preview of saved plots */}
+            {/* Preview of saved plots - directly clickable */}
             <div className="space-y-2 pt-1">
-              {savedFarms.slice(0, 3).map((farm) => (
-                <div
-                  key={farm.farm_id}
-                  className="flex items-center gap-3 p-2.5 rounded-xl bg-[#070D0A]/70 border border-emerald-900/40"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-xs font-bold text-emerald-400 shrink-0">
-                    <Wheat className="w-4 h-4" />
+              {savedFarms.slice(0, 3).map((farm) => {
+                const isActive = activeFarmId === farm.farm_id;
+                return (
+                  <div
+                    key={farm.farm_id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectFarm(farm);
+                    }}
+                    className={`flex items-center gap-3 p-2.5 rounded-xl border transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-emerald-950/60 border-emerald-400/60 shadow-md shadow-emerald-950/50'
+                        : 'bg-[#070D0A]/70 border-emerald-900/40 hover:border-emerald-500/40 hover:bg-emerald-950/30'
+                    }`}
+                  >
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
+                      isActive
+                        ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                        : 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-400'
+                    }`}>
+                      <Wheat className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <span className="text-xs font-semibold text-white block truncate">{farm.farm_name}</span>
+                      <span className="text-[11px] text-[#D1DED6]">{farm.crop} • {farm.area_hectares} ha</span>
+                    </div>
+                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                      isActive ? 'bg-emerald-500/20 text-emerald-300 font-bold' : 'text-emerald-400'
+                    }`}>
+                      {isActive ? 'Active Field' : 'Select'}
+                    </span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs font-semibold text-white block truncate">{farm.farm_name}</span>
-                    <span className="text-[11px] text-[#D1DED6]">{farm.crop} • {farm.area_hectares} ha</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-400 font-mono">Sync Active</span>
-                </div>
-              ))}
+                );
+              })}
               {savedFarms.length > 3 && (
                 <p className="text-xs text-emerald-400/80 font-medium pl-1">
                   + {savedFarms.length - 3} more registered plot{savedFarms.length - 3 > 1 ? 's' : ''}...
@@ -233,7 +269,7 @@ export const FarmFieldChooser: React.FC<FarmFieldChooserProps> = ({
             <div className="pt-2">
               <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all group-hover:gap-2.5">
                 <Eye className="w-4 h-4" />
-                <span>View All Saved Plots</span>
+                <span>Manage All Plots in GIS</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </span>
             </div>

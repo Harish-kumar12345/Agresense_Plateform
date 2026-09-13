@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Chat } from './components/Chat';
-import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import { FarmGISPage } from './components/FarmGIS/FarmGISPage';
 import { FarmFieldChooser } from './components/FarmGIS/FarmFieldChooser';
@@ -45,6 +44,21 @@ const DEFAULT_LOCATION: LocationData = {
 
 const DEFAULT_CROP = 'Rice';
 
+const DEMO_FARM: FarmData = {
+  farm_id: 'farm_demo_ghaziabad',
+  farm_name: 'Ghaziabad Model Rice Field',
+  farmer_id: 'demo_farmer',
+  crop: 'Rice',
+  season: 'Kharif',
+  latitude: 28.6692,
+  longitude: 77.4538,
+  area_hectares: 2.4,
+  area_acres: 5.93,
+  location_name: 'Ghaziabad, Uttar Pradesh, India',
+  soil_type: 'Clay Loam',
+  irrigation_type: 'Canal & Tube Well'
+};
+
 function AppContent() {
   const [token, setToken] = useState<string | null>(() => {
     try {
@@ -53,7 +67,15 @@ function AppContent() {
       return null;
     }
   });
-  const [view, setView] = useState('home');
+  const [view, setView] = useState<string>(() => {
+    try {
+      const active = localStorage.getItem('agrisense_active_farm');
+      if (active) return 'dashboard';
+      const saved = localStorage.getItem('agrisense_saved_farms');
+      if (saved && JSON.parse(saved).length > 0) return 'dashboard';
+    } catch {}
+    return 'field-chooser';
+  });
   const [gisInitialTab, setGisInitialTab] = useState<'saved-fields' | 'new-field' | undefined>(undefined);
   const [activeFarm, setActiveFarm] = useState<FarmData | null>(() => {
     try {
@@ -77,6 +99,12 @@ function AppContent() {
 
   // Load user farms if activeFarm is not set
   React.useEffect(() => {
+    if (isGuest) {
+      if (!activeFarm) {
+        setActiveFarm(DEMO_FARM);
+      }
+      return;
+    }
     farmService.getFarms(user?.id || 'default_farmer').then(farms => {
       if (Array.isArray(farms) && farms.length > 0) {
         setActiveFarm(prev => {
@@ -88,17 +116,27 @@ function AppContent() {
         });
       }
     }).catch(err => console.warn('Could not auto-load farms in App:', err));
-  }, [user]);
+  }, [user, isGuest]);
 
-  // On first load after auth, redirect authenticated farmers to field-chooser and officers to officer portal
+  // Role-based direct routing on authentication
   React.useEffect(() => {
-    if (user && !isGuest) {
-      if (user.role === 'officer' && view === 'home') {
+    if (user) {
+      if (user.role === 'officer') {
         const storedToken = localStorage.getItem('agrisense_token');
         if (storedToken) setToken(storedToken);
         setView('officer');
-      } else if (user.role !== 'officer' && view === 'home') {
-        setView('field-chooser');
+      } else if (isGuest) {
+        if (!activeFarm) {
+          setActiveFarm(DEMO_FARM);
+        }
+        if (view === 'home' || view === 'officer') {
+          setView('dashboard');
+        }
+      } else {
+        // Authenticated Farmer: land on dashboard if farm exists, else field-chooser
+        if (view === 'home' || view === 'officer') {
+          setView(activeFarm ? 'dashboard' : 'field-chooser');
+        }
       }
     }
   }, [user, isGuest]);
@@ -154,11 +192,6 @@ function AppContent() {
     }
   };
 
-  const handleDashboardSubmit = (location: LocationData, crop: string) => {
-    setDashboardData({ location, crop, farmDetails: activeFarm || undefined });
-    setView('dashboard');
-  };
-
   const handleSelectFarmFromGIS = (farm: FarmData) => {
     setActiveFarm(farm);
     try {
@@ -177,9 +210,8 @@ function AppContent() {
     setView('dashboard');
   };
 
-  const handleBackToLanding = () => {
-    setDashboardData(null);
-    setView('home');
+  const handleBackToChooser = () => {
+    setView('field-chooser');
   };
 
   return (
@@ -199,7 +231,7 @@ function AppContent() {
       />
       <main className="flex-1">
         <ErrorBoundary>
-          {view === 'field-chooser' && (
+          {(view === 'field-chooser' || view === 'home') && (
             <FarmFieldChooser
               onViewSavedFields={() => {
                 setGisInitialTab('saved-fields');
@@ -210,10 +242,9 @@ function AppContent() {
                 setView('gis');
               }}
               onSelectFarm={handleSelectFarmFromGIS}
+              activeFarmId={activeFarm?.farm_id}
+              onGoToDashboard={() => setView('dashboard')}
             />
-          )}
-          {view === 'home' && (
-            <LandingPage onSubmit={handleDashboardSubmit} />
           )}
           {view === 'gis' && (
             <FarmGISPage
@@ -283,7 +314,7 @@ function AppContent() {
               location={currentLocation}
               crop={currentCrop}
               farmDetails={dashboardData?.farmDetails || activeFarm || undefined}
-              onBack={handleBackToLanding}
+              onBack={handleBackToChooser}
             />
           )}
           {view === 'chat' && (

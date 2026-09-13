@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isFarmActive = ['home', 'dashboard', 'gis', 'analytics'].includes(currentView);
+  const isFarmActive = ['field-chooser', 'dashboard', 'gis', 'analytics'].includes(currentView);
   const isMonitorActive = ['weather', 'soil', 'disease'].includes(currentView);
   const isOpsActive = ['inventory', 'harvest'].includes(currentView);
   const isIntelActive = ['yield', 'prices', 'chat'].includes(currentView);
@@ -89,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       icon: <Sprout className="w-4 h-4" />,
       isActive: isFarmActive,
       items: [
-        { id: 'home', label: 'Field Setup & Entry', sub: 'Coordinates & crop parameters', icon: <Activity className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
+        { id: 'field-chooser', label: 'My Fields & Cadastre', sub: 'Switch or manage farm plots', icon: <Layers className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
         { id: 'dashboard', label: 'Agronomic Overview', sub: 'Telemetry & operations summary', icon: <BarChart3 className="w-4 h-4 text-emerald-400" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
         { id: 'gis', label: 'GIS Boundary Map', sub: 'Boundary polygons & coordinates', icon: <MapPin className="w-4 h-4 text-emerald-300" />, iconBox: 'bg-emerald-950/70 border-emerald-500/30' },
         { id: 'analytics', label: 'Farm Analytics', sub: 'Historical & sensory performance', icon: <Layers className="w-4 h-4 text-teal-400" />, iconBox: 'bg-teal-950/70 border-teal-500/30' },
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Brand Logo & Wordmark */}
           <div
             className="flex items-center gap-3 cursor-pointer group select-none"
-            onClick={() => onSelectView('home')}
+            onClick={() => onSelectView('dashboard')}
           >
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 border border-emerald-300/30 group-hover:scale-105 transition-transform duration-200">
               <Sprout className="w-5 h-5 text-slate-950" />
@@ -330,8 +330,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="lg:hidden bg-[#070D0A]/98 backdrop-blur-2xl border-b border-emerald-900/40 px-4 py-4 space-y-3 overflow-hidden"
           >
             <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-              <button type="button" onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
-                <Sprout className="w-4 h-4 text-emerald-400" /> Setup & Entry
+              <button type="button" onClick={() => { onSelectView('field-chooser'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
+                <Layers className="w-4 h-4 text-emerald-400" /> My Fields
               </button>
               <button type="button" onClick={() => { onSelectView('dashboard'); setMobileMenuOpen(false); }} className="p-2.5 bg-[#0D1612] border border-emerald-900/30 rounded-xl text-left flex items-center gap-2 text-white">
                 <BarChart3 className="w-4 h-4 text-emerald-400" /> Dashboard
