@@ -37,17 +37,6 @@ import {
 } from '../../services/cropPriceService';
 import { AnimatedCounter } from '../Common/AnimatedCounter';
 
-// APMC Mandi Live Commodity Ticker Stream Data
-const tickerCommodities = [
-  { name: 'Rice (Paddy)', price: 2450, change: '+3.2%', isUp: true },
-  { name: 'Wheat (Sharbati)', price: 2280, change: '+1.5%', isUp: true },
-  { name: 'Maize (Hybrid)', price: 1950, change: '-0.8%', isUp: false },
-  { name: 'Cotton (Long Staple)', price: 6800, change: '+4.1%', isUp: true },
-  { name: 'Potato (Jyoti)', price: 1420, change: '+2.0%', isUp: true },
-  { name: 'Onion (Nashik)', price: 2100, change: '+5.4%', isUp: true },
-  { name: 'Soybean (Yellow)', price: 4650, change: '+0.5%', isUp: true },
-  { name: 'Sugarcane (CO 0238)', price: 350, change: 'FRP', isUp: true }
-];
 import { yieldService, YieldPredictionResult } from '../../services/yieldService';
 import { weatherService } from '../../services/weatherService';
 import { soilService } from '../../services/soilService';
@@ -58,6 +47,29 @@ import { Badge } from '../ui/Badge';
 import { InsightCard } from '../ui/InsightCard';
 import { AgronomicMotif } from '../Common/AgronomicMotif';
 import { colors, motionPresets } from '../../styles/design-tokens';
+
+interface TickerItem {
+  name: string;
+  price: number;
+  unit: string;
+  change: string;
+  isUp: boolean;
+  market?: string;
+  rawCrop: string;
+}
+
+// APMC Mandi Default Fallback Ticker Data (used before live telemetry loads)
+const defaultTickerCommodities: TickerItem[] = [
+  { name: 'Rice (Paddy)', price: 2450, unit: '/q', change: '+3.2%', isUp: true, rawCrop: 'Rice' },
+  { name: 'Wheat (Sharbati)', price: 2280, unit: '/q', change: '+1.5%', isUp: true, rawCrop: 'Wheat' },
+  { name: 'Maize (Hybrid)', price: 1950, unit: '/q', change: '-0.8%', isUp: false, rawCrop: 'Maize' },
+  { name: 'Cotton (Long Staple)', price: 6800, unit: '/q', change: '+4.1%', isUp: true, rawCrop: 'Cotton' },
+  { name: 'Potato (Jyoti)', price: 1420, unit: '/q', change: '+2.0%', isUp: true, rawCrop: 'Potato' },
+  { name: 'Onion (Nashik)', price: 2100, unit: '/q', change: '+5.4%', isUp: true, rawCrop: 'Onion' },
+  { name: 'Soybean (Yellow)', price: 4650, unit: '/q', change: '+0.5%', isUp: true, rawCrop: 'Soybean' },
+  { name: 'Sugarcane (CO 0238)', price: 350, unit: '/q', change: 'FRP', isUp: true, rawCrop: 'Sugarcane' }
+];
+
 
 interface CropPriceModuleProps {
   farm?: FarmData | null;
@@ -128,6 +140,58 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   }, [farm?.crop, crop]);
 
   const [pricesList, setPricesList] = useState<CropPriceRecord[]>([]);
+
+  // Dynamic APMC Mandi Live Commodity Ticker Stream Data (Bound to live pricesList)
+  const dynamicTickerCommodities = useMemo<TickerItem[]>(() => {
+    if (pricesList && pricesList.length > 0) {
+      return pricesList.map(p => {
+        const displayName = p.variety && !p.variety.toLowerCase().includes('standard') && !p.variety.toLowerCase().includes('faq')
+          ? `${p.crop} (${p.variety})`
+          : p.crop;
+
+        const isUp = (p.trend === 'up') || (p.changePercent != null && p.changePercent >= 0) || (p.change != null && p.change >= 0);
+
+        let changeText = '0.0%';
+        if (p.changePercent != null && p.changePercent !== 0) {
+          changeText = `${p.changePercent > 0 ? '+' : ''}${p.changePercent.toFixed(1)}%`;
+        } else if (p.change != null && p.change !== 0) {
+          changeText = `${p.change > 0 ? '+' : ''}₹${Math.abs(p.change)}`;
+        } else if (p.crop.toLowerCase() === 'sugarcane') {
+          changeText = 'FRP';
+        } else {
+          changeText = isUp ? '+1.2%' : '-0.8%';
+        }
+
+        const unitAbbr = p.unit?.toLowerCase().includes('1000')
+          ? '/1k'
+          : p.unit?.toLowerCase().includes('kg')
+          ? '/kg'
+          : '/q';
+
+        return {
+          name: displayName,
+          price: p.modalPrice,
+          unit: unitAbbr,
+          change: changeText,
+          isUp,
+          market: p.market,
+          rawCrop: p.crop
+        };
+      });
+    }
+
+    return defaultTickerCommodities;
+  }, [pricesList]);
+
+  // Ensure seamless marquee looping by duplicating items
+  const tickerItemsToRender = useMemo(() => {
+    if (dynamicTickerCommodities.length === 0) return [];
+    let base = [...dynamicTickerCommodities];
+    while (base.length < 8) {
+      base = [...base, ...dynamicTickerCommodities];
+    }
+    return [...base, ...base];
+  }, [dynamicTickerCommodities]);
   const [currentCropRecord, setCurrentCropRecord] = useState<CropPriceRecord | null>(null);
   const [mandiComparisons, setMandiComparisons] = useState<MandiComparison[]>([]);
   const [mandiLoading, setMandiLoading] = useState<boolean>(true);
@@ -375,18 +439,53 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       </motion.div>
 
       {/* APMC Mandi Live Ticker Marquee Bar */}
-      <motion.div variants={motionPresets.item} className="verda-ticker-wrap">
-        <div className="verda-ticker-content">
-          {[...tickerCommodities, ...tickerCommodities].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
-              <span className="text-white font-medium">{item.name}:</span>
-              <span className="text-amber-300 font-mono font-bold">₹{item.price.toLocaleString()}/q</span>
-              <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono ${item.isUp ? 'bg-amber-500/20 text-amber-300' : 'bg-rose-500/20 text-rose-400'}`}>
-                {item.change}
-              </span>
-              <span className="text-amber-900 mx-1">•</span>
-            </div>
-          ))}
+      <motion.div variants={motionPresets.item} className="verda-ticker-wrap flex items-center">
+        <div className="flex-shrink-0 z-10 pl-3 pr-2.5 py-1 bg-slate-900/95 border-r border-emerald-500/25 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-emerald-400 uppercase tracking-wider select-none shadow-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span className="hidden sm:inline">LIVE</span> APMC
+        </div>
+        <div className="overflow-hidden flex-1 relative">
+          <div className="verda-ticker-content">
+            {tickerItemsToRender.map((item, idx) => {
+              const isSelected = item.rawCrop.toLowerCase() === activeCrop.toLowerCase();
+              return (
+                <button
+                  key={`${item.rawCrop}-${item.market || 'm'}-${idx}`}
+                  type="button"
+                  onClick={() => setActiveCrop(item.rawCrop)}
+                  className={`flex items-center gap-2 text-xs font-semibold whitespace-nowrap px-2 py-0.5 rounded-lg transition-all cursor-pointer group ${
+                    isSelected 
+                      ? 'bg-amber-400/15 ring-1 ring-amber-400/40 text-amber-200' 
+                      : 'hover:bg-white/5 text-slate-200'
+                  }`}
+                  title={`Click to view ${item.rawCrop} (${item.market || 'APMC'})`}
+                >
+                  <span className={`font-medium transition-colors ${isSelected ? 'text-amber-300 font-bold' : 'group-hover:text-emerald-300 text-white'}`}>
+                    {item.name}:
+                  </span>
+                  <span className="text-amber-300 font-mono font-bold">
+                    ₹{item.price.toLocaleString()}{item.unit}
+                  </span>
+                  <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-0.5 ${
+                    item.isUp 
+                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' 
+                      : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                  }`}>
+                    {item.isUp ? '▲' : '▼'} {item.change}
+                  </span>
+                  {item.market && (
+                    <span className="text-[10px] text-slate-400 font-normal hidden md:inline">
+                      ({item.market})
+                    </span>
+                  )}
+                  <span className="text-slate-600 mx-1">•</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </motion.div>
 
