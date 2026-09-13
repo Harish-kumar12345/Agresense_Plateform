@@ -107,51 +107,130 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return parseFloat((R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))).toFixed(1));
 }
 
+// ─── Indian State Geographic Bounding Boxes (for cross-state mismatch prevention) ──
+const STATE_BOUNDS = {
+  'kerala':                  { minLat: 8.0,  maxLat: 13.0, minLon: 74.8, maxLon: 77.8 },
+  'tamil nadu':              { minLat: 8.0,  maxLat: 13.8, minLon: 76.2, maxLon: 80.5 },
+  'karnataka':               { minLat: 11.5, maxLat: 18.6, minLon: 74.0, maxLon: 78.7 },
+  'maharashtra':             { minLat: 15.6, maxLat: 22.2, minLon: 72.6, maxLon: 81.0 },
+  'andhra pradesh':          { minLat: 12.6, maxLat: 19.3, minLon: 76.7, maxLon: 84.9 },
+  'telangana':               { minLat: 15.8, maxLat: 19.9, minLon: 77.2, maxLon: 81.9 },
+  'gujarat':                 { minLat: 20.0, maxLat: 24.8, minLon: 68.1, maxLon: 74.5 },
+  'rajasthan':               { minLat: 23.0, maxLat: 30.3, minLon: 69.5, maxLon: 78.3 },
+  'madhya pradesh':          { minLat: 21.0, maxLat: 27.0, minLon: 74.0, maxLon: 82.9 },
+  'uttar pradesh':           { minLat: 23.8, maxLat: 30.5, minLon: 77.0, maxLon: 84.7 },
+  'delhi':                   { minLat: 28.3, maxLat: 28.9, minLon: 76.8, maxLon: 77.4 },
+  'haryana':                 { minLat: 27.6, maxLat: 31.0, minLon: 74.4, maxLon: 77.6 },
+  'punjab':                  { minLat: 29.5, maxLat: 32.6, minLon: 73.8, maxLon: 77.0 },
+  'bihar':                   { minLat: 24.3, maxLat: 27.6, minLon: 83.3, maxLon: 88.3 },
+  'west bengal':             { minLat: 21.5, maxLat: 27.4, minLon: 85.8, maxLon: 89.9 },
+  'odisha':                  { minLat: 17.8, maxLat: 22.6, minLon: 81.4, maxLon: 87.5 },
+  'tripura':                 { minLat: 22.9, maxLat: 24.6, minLon: 91.1, maxLon: 92.4 },
+  'assam':                   { minLat: 24.1, maxLat: 28.0, minLon: 89.7, maxLon: 96.1 }
+};
+
+const DISTRICT_ALIASES = {
+  'raebarelli': 'Raebareli',
+  'puruliya': 'Purulia',
+  'purba bardhaman': 'Purba Bardhaman',
+  'bardhaman': 'Burdwan',
+  'kannuj': 'Kannauj',
+  'ananthapuramu': 'Anantapur',
+  'sant kabir nagar': 'Khalilabad',
+  'siddharth nagar': 'Naugarh',
+  'alibagh': 'Alibag',
+  'maunathbhanjan': 'Mau',
+  'ahilyanagar': 'Ahmednagar',
+  'chhatrapati sambhajinagar': 'Aurangabad',
+  'dharashiv': 'Osmanabad',
+  'bangalore': 'Bengaluru',
+  'mysore': 'Mysuru',
+  'gurugram': 'Gurgaon',
+  'trichy': 'Tiruchirappalli',
+  'calicut': 'Kozhikode',
+  'trivandrum': 'Thiruvananthapuram',
+  'alleppey': 'Alappuzha',
+  'trichur': 'Thrissur',
+  'vizag': 'Visakhapatnam'
+};
+
+function cleanMarketName(str) {
+  if (!str) return '';
+  return str
+    .replace(/\b(apmc|mandi|market|yard|sub-yard|sub yard|main yard|grain|veg|vegetable|fruit|commercial|hub|bazar|bazaar|krishi upaj mandi samiti|kums|uzhavar sandhai)\b/gi, ' ')
+    .replace(/[()[\]{}.,\/\\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Pre-sort coordinate keys by length descending (longer specific names match first)
+const sortedCoordKeys = Object.keys(MANDI_COORDS).sort((a, b) => b.length - a.length);
+
+function isStateValid(c, state) {
+  if (!state || !c) return true;
+  const b = STATE_BOUNDS[state.toLowerCase().trim()];
+  if (!b) return true;
+  return c.lat >= b.minLat && c.lat <= b.maxLat && c.lon >= b.minLon && c.lon <= b.maxLon;
+}
+
 // ─── Resolve mandi distance from coords lookup ────────────────────────────────
-// Tries: exact market name → exact district → partial match on either
-function resolveDistance(mandiName, district, farmLat, farmLon) {
+// Clean names, verify state boundaries, and match using whole words to prevent substring collisions
+function resolveDistance(mandiName, district, state, farmLat, farmLon) {
   if (!farmLat || !farmLon || isNaN(farmLat) || isNaN(farmLon)) return null;
 
-  const candidates = [
-    mandiName?.trim(),
+  const cleanedMandi = cleanMarketName(mandiName);
+  const cleanedDist  = cleanMarketName(district);
+
+  const rawCandidates = [
+    cleanedMandi,
+    cleanedDist,
     district?.trim(),
+    mandiName?.trim(),
+    DISTRICT_ALIASES[cleanedDist.toLowerCase()],
+    DISTRICT_ALIASES[district?.toLowerCase()?.trim()],
+    DISTRICT_ALIASES[cleanedMandi.toLowerCase()]
   ].filter(Boolean);
 
-  for (const name of candidates) {
-    // 1. Exact key match
-    if (MANDI_COORDS[name]) {
+  const words = [];
+  for (const c of [cleanedMandi, cleanedDist]) {
+    c.split(/\s+/).forEach(w => {
+      if (w.length >= 4 && !words.includes(w)) words.push(w);
+    });
+  }
+
+  const allCandidates = [...new Set([...rawCandidates, ...words])];
+
+  // Pass 1: Exact match against coordinate keys
+  for (const name of allCandidates) {
+    if (MANDI_COORDS[name] && isStateValid(MANDI_COORDS[name], state)) {
       const c = MANDI_COORDS[name];
       return haversineKm(farmLat, farmLon, c.lat, c.lon);
     }
-    // 2. Case-insensitive exact match
-    const exactKey = Object.keys(MANDI_COORDS).find(
-      k => k.toLowerCase() === name.toLowerCase()
-    );
-    if (exactKey) {
+    const exactKey = sortedCoordKeys.find(k => k.toLowerCase() === name.toLowerCase());
+    if (exactKey && isStateValid(MANDI_COORDS[exactKey], state)) {
       const c = MANDI_COORDS[exactKey];
       return haversineKm(farmLat, farmLon, c.lat, c.lon);
     }
-    // 3. The coord key is a substring of the mandi/district name
-    //    e.g. "Asansol APMC" → matches "Asansol"
-    const containsKey = Object.keys(MANDI_COORDS).find(k =>
-      name.toLowerCase().includes(k.toLowerCase())
-    );
-    if (containsKey) {
-      const c = MANDI_COORDS[containsKey];
-      return haversineKm(farmLat, farmLon, c.lat, c.lon);
-    }
-    // 4. First word of the name matches a coord key prefix
-    const firstWord = name.split(/[\s,(-]+/)[0].toLowerCase();
-    if (firstWord.length >= 4) {
-      const prefixKey = Object.keys(MANDI_COORDS).find(k =>
-        k.toLowerCase().startsWith(firstWord) || firstWord.startsWith(k.toLowerCase().split(' ')[0])
-      );
-      if (prefixKey) {
-        const c = MANDI_COORDS[prefixKey];
-        return haversineKm(farmLat, farmLon, c.lat, c.lon);
+  }
+
+  // Pass 2: Whole-word boundary match with state bounds verification
+  for (const name of allCandidates) {
+    for (const k of sortedCoordKeys) {
+      if (k.length < 4) continue;
+      const re = new RegExp('\\b' + escapeRegExp(k) + '\\b', 'i');
+      if (re.test(name)) {
+        const c = MANDI_COORDS[k];
+        if (isStateValid(c, state)) {
+          return haversineKm(farmLat, farmLon, c.lat, c.lon);
+        }
       }
     }
   }
+
   return null;
 }
 
@@ -167,7 +246,7 @@ function transformRecord(rec, farmLat, farmLon) {
   const arrivalDate = rec.arrival_date || rec.Arrival_Date || new Date().toISOString().split('T')[0];
   const arrivalTons = Number(rec.arrivals || rec.Arrivals || 0);
 
-  const distanceKm = resolveDistance(mandiName, district, farmLat, farmLon);
+  const distanceKm = resolveDistance(mandiName, district, state, farmLat, farmLon);
 
   return {
     mandiName,
@@ -224,7 +303,7 @@ function staticFallback(crop, state, district, farmLat, farmLon) {
   const mapped = historyRecords.map(r => {
     const dist = (farmLat && farmLon && r.lat && r.lon)
       ? haversineKm(farmLat, farmLon, r.lat, r.lon)
-      : resolveDistance(r.market, r.district, farmLat, farmLon);
+      : resolveDistance(r.market, r.district, r.state, farmLat, farmLon);
 
     return {
       mandiName:   r.market,
@@ -283,7 +362,7 @@ router.get('/comparison', async (req, res) => {
       // Re-compute distances (coords may have shifted slightly)
       const withDist = cached.map(m => ({
         ...m,
-        distanceKm: resolveDistance(m.mandiName, m.district, farmLat, farmLon) ?? m.distanceKm,
+        distanceKm: resolveDistance(m.mandiName, m.district, m.state, farmLat, farmLon) ?? m.distanceKm,
       }));
       // Sort nearest first
       withDist.sort((a, b) => (a.distanceKm ?? 9999) - (b.distanceKm ?? 9999));

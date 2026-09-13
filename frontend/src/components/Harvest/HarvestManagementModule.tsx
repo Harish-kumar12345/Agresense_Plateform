@@ -181,7 +181,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
           soil_p: soil.soilData.phosphorus,
           soil_k: soil.soilData.potassium,
           gdd: 1450,
-          historical_yield_tha: 4.2
+          historical_yield_tha: 0
         });
         setYieldResult(yPred);
       } catch (err) {}

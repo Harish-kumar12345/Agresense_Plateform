@@ -80,7 +80,7 @@ export const cropPriceService = {
         timeout: 5000
       });
 
-      if (response.data && Array.isArray(response.data.prices)) {
+      if (response.data && Array.isArray(response.data.prices) && response.data.prices.length > 0) {
         return {
           prices: response.data.prices,
           lastUpdated: response.data.marketSummary?.lastUpdated || new Date().toISOString(),

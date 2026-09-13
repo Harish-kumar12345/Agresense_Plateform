@@ -57,19 +57,52 @@ function calculateAgronomicYieldFallback(payload) {
   const histYield = Number(payload.historical_yield_tha || 0);
 
   const CROP_BASELINES = {
-    Rice: 4.2, Wheat: 3.8, Maize: 5.5, Cotton: 2.4, Sugarcane: 72.0, Pulses: 1.8
+    Rice: 2.8,
+    Wheat: 3.2,
+    Maize: 3.0,
+    Cotton: 1.4,
+    Sugarcane: 70.0,
+    Pulses: 0.85,
+    Mustard: 1.3,
+    Soybean: 1.2,
+    Groundnut: 1.5,
+    Potato: 22.0,
+    Onion: 18.0,
+    Tomato: 25.0
   };
-  const baseTarget = histYield > 0 ? histYield : (CROP_BASELINES[crop] || 4.2);
 
-  const npkAvg = (Math.min(1.25, N / 70) + Math.min(1.25, P / 50) + Math.min(1.25, K / 80)) / 3;
-  let soilMultiplier = 0.7 + npkAvg * 0.3;
-  if (ph < 5.5 || ph > 8.0) soilMultiplier *= 0.92;
+  const cropBase = CROP_BASELINES[crop] || 2.8;
+  // If historical yield is supplied, only accept it if within a credible range (not > 1.5x baseline)
+  const baseTarget = (histYield > 0 && histYield <= cropBase * 1.5) ? histYield : cropBase;
 
-  let climateMultiplier = (temp >= 20 && temp <= 35) ? 1.05 : 0.92;
-  if (humidity >= 60 && humidity <= 85) climateMultiplier *= 1.03;
-  if (soilMoisture >= 25 && soilMoisture <= 45) climateMultiplier *= 1.04;
+  const npkAvg = (Math.min(1.15, Math.max(0.85, N / 70)) + Math.min(1.15, Math.max(0.85, P / 50)) + Math.min(1.15, Math.max(0.85, K / 80))) / 3;
+  let soilMultiplier = 0.88 + npkAvg * 0.12; // ranges ~0.98 to 1.02
+  if (ph < 5.5 || ph > 8.0) soilMultiplier *= 0.94;
 
-  const predictedYieldPerHectare = Number((baseTarget * soilMultiplier * climateMultiplier).toFixed(2));
+  let climateMultiplier = (temp >= 20 && temp <= 35) ? 1.02 : 0.94;
+  if (humidity >= 60 && humidity <= 85) climateMultiplier *= 1.02;
+  if (soilMoisture >= 25 && soilMoisture <= 45) climateMultiplier *= 1.02;
+
+  let rawPredicted = baseTarget * soilMultiplier * climateMultiplier;
+
+  // Category-specific sanity clamping (ICAR agricultural bounds)
+  const cropLower = crop.toLowerCase();
+  if (cropLower.includes('sugarcane')) {
+    rawPredicted = Math.max(35.0, Math.min(95.0, rawPredicted));
+  } else if (['potato', 'onion', 'tomato', 'tuber'].some(t => cropLower.includes(t))) {
+    rawPredicted = Math.max(8.0, Math.min(35.0, rawPredicted));
+  } else if (['pulse', 'gram', 'moong', 'urad', 'tur', 'arhar', 'lentil'].some(p => cropLower.includes(p))) {
+    rawPredicted = Math.max(0.5, Math.min(1.8, rawPredicted));
+  } else if (cropLower.includes('cotton')) {
+    rawPredicted = Math.max(0.7, Math.min(2.5, rawPredicted));
+  } else if (['mustard', 'soybean', 'groundnut', 'sunflower'].some(o => cropLower.includes(o))) {
+    rawPredicted = Math.max(0.7, Math.min(2.8, rawPredicted));
+  } else {
+    // Cereals / Grains (Rice, Wheat, Maize, etc.)
+    rawPredicted = Math.max(1.0, Math.min(5.2, rawPredicted));
+  }
+
+  const predictedYieldPerHectare = Number(rawPredicted.toFixed(2));
   const totalProductionTons = Number((predictedYieldPerHectare * area).toFixed(2));
 
   return {

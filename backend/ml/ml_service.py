@@ -175,7 +175,22 @@ def predict_yield(req: YieldPredictRequest):
     features = np.array([[crop_code, state_code, season_code, area_ha]])
 
     raw_yield = float(yield_model.predict(features)[0])
-    raw_yield = max(0.5, min(120.0, raw_yield))
+
+    # Crop-category specific agronomic clamping (ICAR & Ministry of Agriculture standards)
+    crop_lower = crop_clean.lower()
+    if 'sugarcane' in crop_lower:
+        raw_yield = max(35.0, min(95.0, raw_yield))
+    elif any(t in crop_lower for t in ['potato', 'onion', 'tuber', 'tomato']):
+        raw_yield = max(8.0, min(35.0, raw_yield))
+    elif any(p in crop_lower for p in ['pulse', 'gram', 'moong', 'urad', 'arhar', 'tur', 'lentil', 'pea']):
+        raw_yield = max(0.5, min(1.8, raw_yield))
+    elif 'cotton' in crop_lower:
+        raw_yield = max(0.7, min(2.5, raw_yield))
+    elif any(o in crop_lower for o in ['mustard', 'soybean', 'groundnut', 'sunflower', 'sesamum']):
+        raw_yield = max(0.7, min(2.8, raw_yield))
+    else:
+        # Cereals / Grains (Rice, Wheat, Maize, Bajra, Jowar, Barley)
+        raw_yield = max(1.0, min(5.2, raw_yield))
 
     # Fine dynamic modulation by real-time sensor/weather telemetry if available
     mod = 1.0

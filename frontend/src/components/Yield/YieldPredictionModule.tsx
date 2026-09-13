@@ -99,7 +99,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
         soil_p: soil.phosphorus,
         soil_k: soil.potassium,
         gdd: 1450,
-        historical_yield_tha: 4.2
+        historical_yield_tha: 0
       };
 
       const validation = yieldService.validatePipelineFeatures(featurePayload);
