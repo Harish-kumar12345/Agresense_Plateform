@@ -151,7 +151,8 @@ const DISTRICT_ALIASES = {
   'trivandrum': 'Thiruvananthapuram',
   'alleppey': 'Alappuzha',
   'trichur': 'Thrissur',
-  'vizag': 'Visakhapatnam'
+  'vizag': 'Visakhapatnam',
+  'bulandshahar': 'Bulandshahr'
 };
 
 function cleanMarketName(str) {
@@ -462,5 +463,8 @@ router.get('/comparison', async (req, res) => {
     });
   }
 });
+
+router.resolveDistance = resolveDistance;
+router.cleanMarketName = cleanMarketName;
 
 module.exports = router;
