@@ -1678,5 +1678,145 @@
   "Kalyanpur": {
     "lat": 23.9,
     "lon": 91.5667
+  },
+  "Bulandshahar": {
+    "lat": 28.4069,
+    "lon": 77.8498
+  },
+  "Sikanderabad": {
+    "lat": 28.4526,
+    "lon": 77.6974
+  },
+  "Gulavati": {
+    "lat": 28.5956,
+    "lon": 77.7885
+  },
+  "Gulaothi": {
+    "lat": 28.5956,
+    "lon": 77.7885
+  },
+  "Khurja": {
+    "lat": 28.256,
+    "lon": 77.8573
+  },
+  "Sikarpur": {
+    "lat": 28.2867,
+    "lon": 78.0167
+  },
+  "Siyana": {
+    "lat": 28.6253,
+    "lon": 78.0645
+  },
+  "Jahangirabad": {
+    "lat": 28.4057,
+    "lon": 78.1062
+  },
+  "Charra": {
+    "lat": 27.94,
+    "lon": 78.36
+  },
+  "Atrauli": {
+    "lat": 28.03,
+    "lon": 78.29
+  },
+  "Khair": {
+    "lat": 27.9472,
+    "lon": 77.8417
+  },
+  "Farukhabad": {
+    "lat": 27.3826,
+    "lon": 79.5807
+  },
+  "Farrukhabad": {
+    "lat": 27.3826,
+    "lon": 79.5807
+  },
+  "Kayamganj": {
+    "lat": 27.5516,
+    "lon": 79.1764
+  },
+  "Mohamadabad": {
+    "lat": 27.3103,
+    "lon": 79.4312
+  },
+  "Kamlaganj": {
+    "lat": 27.26,
+    "lon": 79.65
+  },
+  "Badaun": {
+    "lat": 28.0339,
+    "lon": 79.1272
+  },
+  "Badayoun": {
+    "lat": 28.0339,
+    "lon": 79.1272
+  },
+  "Ujhani": {
+    "lat": 28.0125,
+    "lon": 79.0142
+  },
+  "Bilsi": {
+    "lat": 28.1367,
+    "lon": 78.9036
+  },
+  "Bisoli": {
+    "lat": 28.3075,
+    "lon": 78.9242
+  },
+  "Babrala": {
+    "lat": 28.2742,
+    "lon": 78.3967
+  },
+  "Wazirganj": {
+    "lat": 28.2258,
+    "lon": 79.0531
+  },
+  "Dataganj": {
+    "lat": 27.9392,
+    "lon": 79.4008
+  },
+  "Shahaswan": {
+    "lat": 28.0772,
+    "lon": 78.7553
+  },
+  "Islam Nagar": {
+    "lat": 28.3283,
+    "lon": 78.7239
+  },
+  "Auraiya": {
+    "lat": 26.4673,
+    "lon": 79.5165
+  },
+  "Dibiapur": {
+    "lat": 26.6347,
+    "lon": 79.5702
+  },
+  "Achalda": {
+    "lat": 26.7128,
+    "lon": 79.4184
+  },
+  "Barabanki": {
+    "lat": 26.9272,
+    "lon": 81.1843
+  },
+  "Golagokarnath": {
+    "lat": 28.0825,
+    "lon": 80.4708
+  },
+  "Lakhimpur": {
+    "lat": 27.9472,
+    "lon": 80.7786
+  },
+  "Sonbhadra": {
+    "lat": 24.6854,
+    "lon": 83.0664
+  },
+  "Robertsganj": {
+    "lat": 24.6854,
+    "lon": 83.0664
+  },
+  "Dudhi": {
+    "lat": 24.2144,
+    "lon": 83.2427
   }
 }

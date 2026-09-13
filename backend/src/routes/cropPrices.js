@@ -4,6 +4,7 @@ const router = express.Router();
 
 const MANDI_COORDS = require('../data/mandi_coordinates.json');
 const MANDI_PRICE_HISTORY = require('../data/mandi_price_history.json');
+const { resolveDistance } = require('./mandi');
 
 function haversineKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -574,10 +575,7 @@ async function fetchLiveAgmarknetPrices(state, district, farmLat, farmLon) {
 
       let dist = null;
       if (farmLat && farmLon) {
-        const mCoord = MANDI_COORDS[r.market] || MANDI_COORDS[r.district];
-        if (mCoord) {
-          dist = haversineKm(farmLat, farmLon, mCoord.lat, mCoord.lon);
-        }
+        dist = resolveDistance(r.market, r.district, r.state || stNorm, farmLat, farmLon);
       }
 
       const existing = byCommodity.get(comm);
