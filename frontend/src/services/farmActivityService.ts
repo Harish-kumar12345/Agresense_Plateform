@@ -68,7 +68,7 @@ function getAuthHeaders(): Record<string, string> {
 }
 
 // Baseline maturity GDD & duration guidelines per crop (FAO-56 & ICAR Standards)
-export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number }> = {
+export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number; machineryRecommendation?: string }> = {
   Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5 },
   Wheat: { maturityDays: 110, gddThreshold: 1400, baseTemp: 5, baseYield: 3.8, moistureTarget: 12.0, workersPerHa: 4 },
   Maize: { maturityDays: 100, gddThreshold: 1500, baseTemp: 10, baseYield: 5.5, moistureTarget: 14.0, workersPerHa: 4 },
@@ -399,6 +399,7 @@ export const farmActivityService = {
     storageBagsCount: number;
     storageMoistureTargetPct: number;
     totalProductionTons: number;
+    machineryRecommendation: string;
   } {
     const cropKey = Object.keys(CROP_HARVEST_SPECS).find(c => c.toLowerCase() === cropName.toLowerCase()) || 'Rice';
     const spec = CROP_HARVEST_SPECS[cropKey];
@@ -468,7 +469,8 @@ export const farmActivityService = {
       storageRequirementSqft,
       storageBagsCount,
       storageMoistureTargetPct,
-      totalProductionTons
+      totalProductionTons,
+      machineryRecommendation: spec.machineryRecommendation || 'Combine Harvester, Tractor Trolley, Moisture Meter'
     };
   }
 };
