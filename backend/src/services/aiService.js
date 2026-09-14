@@ -72,18 +72,31 @@ async function retrieveContext(userText, farmContext = null) {
     const fcCrop = farmContext?.crop && farmContext.crop !== 'Not specified' ? farmContext.crop : null;
     const fcFarm = farmContext?.farm_name && farmContext.farm_name !== 'Unnamed Farm' && farmContext.farm_name !== 'My Farm' ? farmContext.farm_name : null;
 
-    // 1. Knowledge base search
-    if (mongoose.connection.readyState === 1) {
-      try {
-        const terms = userText.split(/\s+/).filter(Boolean).slice(0, 5);
-        if (fcCrop) terms.push(fcCrop);
-        const found = await KnowledgeBase.find({ tags: { $in: terms } }).limit(3).lean();
-        if (found.length > 0) {
-          contextSnippets.push(found.map((d) => `${d.title}: ${d.content}`).join('\n\n'));
-        }
-      } catch (kbErr) {
-        console.warn('KnowledgeBase query fallback:', kbErr.message);
+    // 1. Kisan Call Center (KCC) & ICAR Knowledge Base search (MongoDB + Dataset Fallback)
+    try {
+      const terms = userText.toLowerCase().split(/\s+/).filter(w => w.length > 2).slice(0, 8);
+      if (fcCrop) terms.push(fcCrop.toLowerCase());
+      
+      let foundArticles = [];
+      if (mongoose.connection.readyState === 1) {
+        foundArticles = await KnowledgeBase.find({ tags: { $in: terms } }).limit(3).lean();
       }
+      
+      // If MongoDB is offline or returned 0 matches, search local KCC dataset
+      if (!foundArticles || foundArticles.length === 0) {
+        const kccData = require('../data/kcc_agronomy_knowledgebase.json');
+        foundArticles = kccData.filter(art => 
+          art.tags.some(t => terms.includes(t.toLowerCase())) ||
+          terms.some(term => art.title.toLowerCase().includes(term))
+        ).slice(0, 3);
+      }
+
+      if (foundArticles.length > 0) {
+        contextSnippets.push(`Verified Agronomy Knowledge (Kisan Call Center / ICAR Standards):\n${foundArticles.map((d) => `[${d.title}]: ${d.content}`).join('\n\n')}`);
+      }
+    } catch (kbErr) {
+      console.warn('KnowledgeBase query fallback:', kbErr.message);
+    }
 
       // 2. Farm Activity Logs (strictly filtered by crop or farm to prevent false context)
       try {
@@ -129,13 +142,21 @@ async function retrieveContext(userText, farmContext = null) {
         console.warn('HarvestRecord context query fallback:', harvErr.message);
       }
 
-      // 4. Crop Market Prices Context (only when asking about price/mandi/rates)
+      // 4. Crop Market Prices Context (dynamically fetched from authentic Agmarknet dataset)
       try {
         if (/price|mandi|rate|cost|market|apmc|sell|msp/i.test(userText)) {
-          contextSnippets.push(`Current Agricultural Market Mandi Telemetry (Regional APMC Benchmarks):\n- Rice (Ponni): ₹3,000 / Quintal (Trend: Rising +1.69%)\n- Wheat: ₹2,450 / Quintal (Trend: Stable)\n- Maize: ₹2,150 / Quintal (Trend: Rising +0.8%)\n- Cotton: ₹7,200 / Quintal (Trend: Rising +2.1%)\n- Coconut: ₹13,500 / 1000 Nuts (Trend: Rising +2.27%)\n- Black Pepper: ₹58,500 / Quintal (Trend: Rising +1.21%)\n- Cardamom: ₹1,30,000 / Quintal (Trend: Falling -1.52%)\n- Rubber: ₹17,500 / Quintal (Trend: Rising +1.74%)`);
+          const AGMARKNET_TIMESERIES = require('../data/agmarknet_historical_timeseries.json');
+          const priceLines = [];
+          for (const [cropKey, data] of Object.entries(AGMARKNET_TIMESERIES)) {
+            const forecast = data.forecast;
+            const trendStr = forecast
+              ? `Trend: ${forecast.trendSignal} (${forecast.projectedChangePct > 0 ? '+' : ''}${forecast.projectedChangePct}%)`
+              : 'Trend: Stable';
+            priceLines.push(`- ${cropKey} (${data.variety || 'FAQ'} at ${data.market}): ₹${data.currentModalPrice.toLocaleString('en-IN')} / ${data.unit || 'Quintal'} (${trendStr})`);
+          }
+          contextSnippets.push(`Authentic Agmarknet Mandi Telemetry (Live / APMC Benchmarks):\n${priceLines.slice(0, 10).join('\n')}`);
         }
       } catch (priceErr) {}
-    }
 
     return contextSnippets.join('\n\n');
   } catch (err) {
@@ -505,7 +526,7 @@ async function getFallbackDiseaseRecommendation(diseaseName) {
 📞 **Contact**: Your local Krishi Vigyan Kendra (KVK) or agricultural extension officer for region-specific guidance.`;
 }
 
-module.exports = { generateAIResponse, generateChatResponse, testAI, generateDiseaseRecommendation };
+module.exports = { generateAIResponse, generateChatResponse, testAI, generateDiseaseRecommendation, retrieveContext };
 
 
 

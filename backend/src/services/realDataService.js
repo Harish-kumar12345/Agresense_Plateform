@@ -101,22 +101,27 @@ async function fetchSoilData(lat, lon, state, district) {
       }
     }
 
-    const soil_n = nitrogen_gkg != null ? Math.round(nitrogen_gkg * 1.3 * 0.15 * 10) : null;
-    const soil_p = soc_gkg != null ? Math.round(soc_gkg * 0.013 * 1.3 * 0.15 * 10) : null;
-    const soil_k = soc_gkg != null ? Math.round(soc_gkg * 0.008 * 1.3 * 0.15 * 10) : null;
-    const soil_ph = ph != null ? Math.round(ph * 10) / 10 : null;
+    // SoilGrids natively provides measured topsoil Nitrogen (g/kg) and pH.
+    // For Available Phosphorus (P) and Potassium (K), SoilGrids does NOT measure Olsen/Bray P or NH4OAc K.
+    // Grounded directly in genuine Indian Soil Health Card laboratory test district averages:
+    const districtSoil = getDistrictSoilFallback(lat, lon, state, district);
 
-    const fallback = getDistrictSoilFallback(lat, lon, state, district);
+    const soil_n = nitrogen_gkg != null ? Math.round(nitrogen_gkg * 1.3 * 0.15 * 10) : districtSoil.soil_n;
+    const soil_p = districtSoil.soil_p;
+    const soil_k = districtSoil.soil_k;
+    const soil_ph = ph != null ? Math.round(ph * 10) / 10 : districtSoil.soil_ph;
 
     return {
-      soil_n: soil_n || fallback.soil_n,
-      soil_p: soil_p || fallback.soil_p,
-      soil_k: soil_k || fallback.soil_k,
-      soil_ph: soil_ph || fallback.soil_ph,
-      soil_type: fallback.soil_type,
+      soil_n,
+      soil_p,
+      soil_k,
+      soil_ph,
+      soil_type: districtSoil.soil_type,
       nitrogen_gkg,
       soc_gkg,
-      source: soil_n ? 'ISRIC SoilGrids v2.0' : fallback.source,
+      source: nitrogen_gkg != null
+        ? `ISRIC SoilGrids v2.0 (N, pH) + Soil Health Card (${districtSoil.source} for P, K)`
+        : districtSoil.source,
       fetched_at: new Date().toISOString()
     };
   } catch (err) {
