@@ -5,3 +5,5 @@ node_modules
 *Devesh*
 *cv*
 *CV*
+__pycache__/
+*.pyc

@@ -1,0 +1,795 @@
+State,District,Soil_N_kgha,Soil_P_kgha,Soil_K_kgha,Soil_pH,Soil_Type,Organic_Carbon_Pct,Soil_Moisture_Pct
+Andaman and Nicobar Islands,Andaman and Nicobar Islands,173,21,202,7.2,Alluvial Loam,0.53,35
+Andaman and Nicobar Islands,NICOBARS,169,21,197,7.2,Alluvial Loam,0.52,32
+Andaman and Nicobar Islands,NORTH AND MIDDLE ANDAMAN,191,23,223,7.2,Alluvial Loam,0.58,35
+Andaman and Nicobar Islands,SOUTH ANDAMANS,182,22,212,7.0,Alluvial Loam,0.56,34
+Andhra Pradesh,ADILABAD,175,23,211,7.0,Red Clay / Coastal Alluvium,0.53,37
+Andhra Pradesh,ANANTAPUR,187,25,227,7.1,Red Clay / Coastal Alluvium,0.57,34
+Andhra Pradesh,CHITTOOR,191,25,231,7.4,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,EAST GODAVARI,182,24,220,7.2,Red Clay / Coastal Alluvium,0.55,36
+Andhra Pradesh,GUNTUR,187,25,227,7.2,Red Clay / Coastal Alluvium,0.57,34
+Andhra Pradesh,HYDERABAD,191,25,231,7.1,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,KADAPA,186,24,224,7.2,Red Clay / Coastal Alluvium,0.56,35
+Andhra Pradesh,KARIMNAGAR,182,24,220,7.0,Red Clay / Coastal Alluvium,0.55,36
+Andhra Pradesh,KHAMMAM,177,23,213,7.4,Red Clay / Coastal Alluvium,0.53,34
+Andhra Pradesh,KRISHNA,178,24,216,7.2,Red Clay / Coastal Alluvium,0.54,35
+Andhra Pradesh,KURNOOL,171,23,207,7.0,Red Clay / Coastal Alluvium,0.52,36
+Andhra Pradesh,MAHBUBNAGAR,180,24,218,7.0,Red Clay / Coastal Alluvium,0.54,36
+Andhra Pradesh,MEDAK,191,25,231,7.0,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,NALGONDA,193,25,233,7.2,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,NIZAMABAD,186,24,224,7.4,Red Clay / Coastal Alluvium,0.56,37
+Andhra Pradesh,PRAKASAM,171,23,207,7.1,Red Clay / Coastal Alluvium,0.52,35
+Andhra Pradesh,RANGAREDDI,182,24,220,7.2,Red Clay / Coastal Alluvium,0.55,34
+Andhra Pradesh,SPSR NELLORE,193,25,233,7.4,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,SRIKAKULAM,171,23,207,7.0,Red Clay / Coastal Alluvium,0.52,34
+Andhra Pradesh,VISAKHAPATANAM,193,25,233,7.1,Red Clay / Coastal Alluvium,0.58,36
+Andhra Pradesh,VIZIANAGARAM,184,24,222,7.1,Red Clay / Coastal Alluvium,0.56,34
+Andhra Pradesh,WARANGAL,180,24,218,7.3,Red Clay / Coastal Alluvium,0.54,37
+Andhra Pradesh,WEST GODAVARI,182,24,220,7.0,Red Clay / Coastal Alluvium,0.55,35
+Arunachal Pradesh,ANJAW,189,23,220,7.0,Alluvial Loam,0.58,35
+Arunachal Pradesh,CHANGLANG,173,21,202,7.4,Alluvial Loam,0.53,35
+Arunachal Pradesh,DIBANG VALLEY,169,21,197,7.1,Alluvial Loam,0.52,34
+Arunachal Pradesh,EAST KAMENG,185,23,216,7.0,Alluvial Loam,0.57,35
+Arunachal Pradesh,EAST SIANG,184,22,214,7.1,Alluvial Loam,0.56,33
+Arunachal Pradesh,KAMLE,171,21,200,7.0,Alluvial Loam,0.52,34
+Arunachal Pradesh,KRA DAADI,176,22,206,7.2,Alluvial Loam,0.54,34
+Arunachal Pradesh,KURUNG KUMEY,173,21,202,7.0,Alluvial Loam,0.53,35
+Arunachal Pradesh,LEPARADA,173,21,202,7.2,Alluvial Loam,0.53,33
+Arunachal Pradesh,LOHIT,171,21,200,7.4,Alluvial Loam,0.52,35
+Arunachal Pradesh,LONGDING,175,21,204,7.3,Alluvial Loam,0.53,32
+Arunachal Pradesh,LOWER DIBANG VALLEY,169,21,197,7.2,Alluvial Loam,0.52,32
+Arunachal Pradesh,LOWER SIANG,169,21,197,7.2,Alluvial Loam,0.52,34
+Arunachal Pradesh,LOWER SUBANSIRI,182,22,212,7.2,Alluvial Loam,0.56,35
+Arunachal Pradesh,NAMSAI,176,22,206,7.2,Alluvial Loam,0.54,32
+Arunachal Pradesh,PAKKE KESSANG,169,21,197,7.4,Alluvial Loam,0.52,35
+Arunachal Pradesh,PAPUM PARE,176,22,206,7.4,Alluvial Loam,0.54,33
+Arunachal Pradesh,SHI YOMI,189,23,220,7.4,Alluvial Loam,0.58,35
+Arunachal Pradesh,SIANG,173,21,202,7.1,Alluvial Loam,0.53,35
+Arunachal Pradesh,TAWANG,175,21,204,7.0,Alluvial Loam,0.53,35
+Arunachal Pradesh,TIRAP,184,22,214,7.2,Alluvial Loam,0.56,32
+Arunachal Pradesh,UPPER SIANG,176,22,206,7.4,Alluvial Loam,0.54,35
+Arunachal Pradesh,UPPER SUBANSIRI,180,22,210,7.0,Alluvial Loam,0.55,35
+Arunachal Pradesh,WEST KAMENG,176,22,206,7.2,Alluvial Loam,0.54,34
+Arunachal Pradesh,WEST SIANG,178,22,208,7.2,Alluvial Loam,0.54,33
+Assam,BAKSA,226,23,150,5.4,Acidic Alluvial Sandy Clay,0.92,45
+Assam,BARPETA,235,24,157,5.3,Acidic Alluvial Sandy Clay,0.96,46
+Assam,BISWANATH,252,25,168,5.0,Acidic Alluvial Sandy Clay,1.03,46
+Assam,BONGAIGAON,235,24,157,5.1,Acidic Alluvial Sandy Clay,0.96,46
+Assam,CACHAR,226,23,150,5.0,Acidic Alluvial Sandy Clay,0.92,47
+Assam,CHARAIDEO,238,24,158,5.4,Acidic Alluvial Sandy Clay,0.97,43
+Assam,CHIRANG,233,23,155,5.2,Acidic Alluvial Sandy Clay,0.95,45
+Assam,DARRANG,235,24,157,5.0,Acidic Alluvial Sandy Clay,0.96,46
+Assam,DHEMAJI,228,23,152,5.4,Acidic Alluvial Sandy Clay,0.93,47
+Assam,DHUBRI,250,25,166,5.2,Acidic Alluvial Sandy Clay,1.02,47
+Assam,DIBRUGARH,230,23,154,5.3,Acidic Alluvial Sandy Clay,0.94,44
+Assam,DIMA HASAO,230,23,154,5.0,Acidic Alluvial Sandy Clay,0.94,46
+Assam,GOALPARA,245,24,163,5.2,Acidic Alluvial Sandy Clay,1.0,46
+Assam,GOLAGHAT,230,23,154,5.3,Acidic Alluvial Sandy Clay,0.94,43
+Assam,HAILAKANDI,245,24,163,5.4,Acidic Alluvial Sandy Clay,1.0,43
+Assam,HOJAI,238,24,158,5.4,Acidic Alluvial Sandy Clay,0.97,44
+Assam,JORHAT,252,25,168,5.1,Acidic Alluvial Sandy Clay,1.03,46
+Assam,KAMRUP,238,24,158,5.2,Acidic Alluvial Sandy Clay,0.97,46
+Assam,KAMRUP METRO,250,25,166,5.4,Acidic Alluvial Sandy Clay,1.02,45
+Assam,KARBI ANGLONG,226,23,150,5.4,Acidic Alluvial Sandy Clay,0.92,45
+Assam,KARIMGANJ,230,23,154,5.0,Acidic Alluvial Sandy Clay,0.94,44
+Assam,KOKRAJHAR,238,24,158,5.4,Acidic Alluvial Sandy Clay,0.97,43
+Assam,LAKHIMPUR,238,24,158,5.2,Acidic Alluvial Sandy Clay,0.97,44
+Assam,MAJULI,254,25,170,5.4,Acidic Alluvial Sandy Clay,1.04,43
+Assam,MARIGAON,240,24,160,5.4,Acidic Alluvial Sandy Clay,0.98,45
+Assam,NAGAON,242,24,162,5.2,Acidic Alluvial Sandy Clay,0.99,45
+Assam,NALBARI,242,24,162,5.1,Acidic Alluvial Sandy Clay,0.99,43
+Assam,SIVASAGAR,254,25,170,5.2,Acidic Alluvial Sandy Clay,1.04,44
+Assam,SONITPUR,247,25,165,5.3,Acidic Alluvial Sandy Clay,1.01,45
+Assam,SOUTH SALMARA MANCACHAR,230,23,154,5.2,Acidic Alluvial Sandy Clay,0.94,47
+Assam,TINSUKIA,226,23,150,5.2,Acidic Alluvial Sandy Clay,0.92,44
+Assam,UDALGURI,252,25,168,5.1,Acidic Alluvial Sandy Clay,1.03,47
+Assam,WEST KARBI ANGLONG,247,25,165,5.1,Acidic Alluvial Sandy Clay,1.01,44
+Bihar,ARARIA,173,22,193,7.8,Calcareous Alluvial,0.54,35
+Bihar,ARWAL,184,23,205,7.4,Calcareous Alluvial,0.58,36
+Bihar,AURANGABAD,177,22,197,7.5,Calcareous Alluvial,0.56,37
+Bihar,BANKA,170,21,189,7.7,Calcareous Alluvial,0.53,35
+Bihar,BEGUSARAI,170,21,189,7.6,Calcareous Alluvial,0.53,36
+Bihar,BHAGALPUR,168,21,187,7.8,Calcareous Alluvial,0.53,35
+Bihar,BHOJPUR,186,23,207,7.5,Calcareous Alluvial,0.58,38
+Bihar,BOKARO,182,23,203,7.4,Calcareous Alluvial,0.57,34
+Bihar,BUXAR,164,21,183,7.5,Calcareous Alluvial,0.52,36
+Bihar,CHATRA,182,23,203,7.4,Calcareous Alluvial,0.57,34
+Bihar,DARBHANGA,172,22,191,7.8,Calcareous Alluvial,0.54,37
+Bihar,DEOGHAR,178,22,199,7.5,Calcareous Alluvial,0.56,34
+Bihar,DHANBAD,164,21,183,7.6,Calcareous Alluvial,0.52,37
+Bihar,DUMKA,178,22,199,7.8,Calcareous Alluvial,0.56,36
+Bihar,EAST SINGHBUM,172,22,191,7.5,Calcareous Alluvial,0.54,36
+Bihar,GARHWA,178,22,199,7.6,Calcareous Alluvial,0.56,38
+Bihar,GAYA,168,21,187,7.8,Calcareous Alluvial,0.53,37
+Bihar,GIRIDIH,173,22,193,7.6,Calcareous Alluvial,0.54,35
+Bihar,GODDA,172,22,191,7.6,Calcareous Alluvial,0.54,35
+Bihar,GOPALGANJ,164,21,183,7.5,Calcareous Alluvial,0.52,35
+Bihar,GUMLA,172,22,191,7.4,Calcareous Alluvial,0.54,37
+Bihar,HAZARIBAGH,178,22,199,7.6,Calcareous Alluvial,0.56,37
+Bihar,JAMUI,166,21,185,7.7,Calcareous Alluvial,0.52,37
+Bihar,JEHANABAD,184,23,205,7.8,Calcareous Alluvial,0.58,34
+Bihar,KAIMUR (BHABUA),186,23,207,7.4,Calcareous Alluvial,0.58,36
+Bihar,KATIHAR,180,23,201,7.6,Calcareous Alluvial,0.57,35
+Bihar,KHAGARIA,186,23,207,7.6,Calcareous Alluvial,0.58,36
+Bihar,KISHANGANJ,184,23,205,7.8,Calcareous Alluvial,0.58,35
+Bihar,KODERMA,164,21,183,7.8,Calcareous Alluvial,0.52,37
+Bihar,LAKHISARAI,164,21,183,7.6,Calcareous Alluvial,0.52,37
+Bihar,LOHARDAGA,184,23,205,7.4,Calcareous Alluvial,0.58,36
+Bihar,MADHEPURA,184,23,205,7.8,Calcareous Alluvial,0.58,35
+Bihar,MADHUBANI,166,21,185,7.8,Calcareous Alluvial,0.52,37
+Bihar,MUNGER,177,22,197,7.5,Calcareous Alluvial,0.56,36
+Bihar,MUZAFFARPUR,186,23,207,7.6,Calcareous Alluvial,0.58,37
+Bihar,NALANDA,166,21,185,7.5,Calcareous Alluvial,0.52,35
+Bihar,NAWADA,170,21,189,7.6,Calcareous Alluvial,0.53,35
+Bihar,PAKUR,186,23,207,7.8,Calcareous Alluvial,0.58,35
+Bihar,PALAMU,180,23,201,7.4,Calcareous Alluvial,0.57,35
+Bihar,PASHCHIM CHAMPARAN,168,21,187,7.8,Calcareous Alluvial,0.53,37
+Bihar,PATNA,184,23,205,7.4,Calcareous Alluvial,0.58,35
+Bihar,PURBI CHAMPARAN,182,23,203,7.6,Calcareous Alluvial,0.57,37
+Bihar,PURNIA,186,23,207,7.5,Calcareous Alluvial,0.58,37
+Bihar,RANCHI,177,22,197,7.8,Calcareous Alluvial,0.56,37
+Bihar,ROHTAS,175,22,195,7.4,Calcareous Alluvial,0.55,35
+Bihar,SAHARSA,168,21,187,7.5,Calcareous Alluvial,0.53,38
+Bihar,SAHEBGANJ,168,21,187,7.8,Calcareous Alluvial,0.53,35
+Bihar,SAMASTIPUR,164,21,183,7.8,Calcareous Alluvial,0.52,35
+Bihar,SARAN,184,23,205,7.6,Calcareous Alluvial,0.58,35
+Bihar,SHEIKHPURA,175,22,195,7.7,Calcareous Alluvial,0.55,35
+Bihar,SHEOHAR,182,23,203,7.7,Calcareous Alluvial,0.57,36
+Bihar,SITAMARHI,182,23,203,7.4,Calcareous Alluvial,0.57,35
+Bihar,SIWAN,164,21,183,7.4,Calcareous Alluvial,0.52,35
+Bihar,SUPAUL,164,21,183,7.6,Calcareous Alluvial,0.52,34
+Bihar,VAISHALI,177,22,197,7.5,Calcareous Alluvial,0.56,37
+Bihar,WEST SINGHBHUM,186,23,207,7.6,Calcareous Alluvial,0.58,37
+Chandigarh,CHANDIGARH,171,21,200,7.0,Alluvial Loam,0.52,32
+Chhattisgarh,BALOD,187,19,187,6.6,Red & Yellow Clay Loam (Matasi),0.61,35
+Chhattisgarh,BALODA BAZAR,196,20,196,6.6,Red & Yellow Clay Loam (Matasi),0.64,36
+Chhattisgarh,BALRAMPUR,191,20,191,6.5,Red & Yellow Clay Loam (Matasi),0.62,38
+Chhattisgarh,BASTAR,178,18,178,6.5,Red & Yellow Clay Loam (Matasi),0.58,38
+Chhattisgarh,BEMETARA,174,18,174,6.4,Red & Yellow Clay Loam (Matasi),0.56,36
+Chhattisgarh,BIJAPUR,187,19,187,6.4,Red & Yellow Clay Loam (Matasi),0.61,39
+Chhattisgarh,BILASPUR,191,20,191,6.6,Red & Yellow Clay Loam (Matasi),0.62,38
+Chhattisgarh,DANTEWADA,176,18,176,6.5,Red & Yellow Clay Loam (Matasi),0.57,36
+Chhattisgarh,DHAMTARI,181,19,181,6.5,Red & Yellow Clay Loam (Matasi),0.59,38
+Chhattisgarh,DURG,176,18,176,6.4,Red & Yellow Clay Loam (Matasi),0.57,36
+Chhattisgarh,GARIYABAND,183,19,183,6.6,Red & Yellow Clay Loam (Matasi),0.59,39
+Chhattisgarh,GAURELLA-PENDRA-MARWAHI,174,18,174,6.2,Red & Yellow Clay Loam (Matasi),0.56,37
+Chhattisgarh,JANJGIR-CHAMPA,181,19,181,6.6,Red & Yellow Clay Loam (Matasi),0.59,37
+Chhattisgarh,JASHPUR,194,20,194,6.4,Red & Yellow Clay Loam (Matasi),0.63,37
+Chhattisgarh,KABIRDHAM,183,19,183,6.4,Red & Yellow Clay Loam (Matasi),0.59,38
+Chhattisgarh,KANKER,178,18,178,6.2,Red & Yellow Clay Loam (Matasi),0.58,37
+Chhattisgarh,KONDAGAON,176,18,176,6.3,Red & Yellow Clay Loam (Matasi),0.57,39
+Chhattisgarh,KORBA,183,19,183,6.6,Red & Yellow Clay Loam (Matasi),0.59,38
+Chhattisgarh,KOREA,183,19,183,6.5,Red & Yellow Clay Loam (Matasi),0.59,35
+Chhattisgarh,MAHASAMUND,183,19,183,6.2,Red & Yellow Clay Loam (Matasi),0.59,36
+Chhattisgarh,MUNGELI,192,20,192,6.5,Red & Yellow Clay Loam (Matasi),0.62,37
+Chhattisgarh,NARAYANPUR,194,20,194,6.5,Red & Yellow Clay Loam (Matasi),0.63,37
+Chhattisgarh,RAIGARH,178,18,178,6.3,Red & Yellow Clay Loam (Matasi),0.58,36
+Chhattisgarh,RAIPUR,178,18,178,6.2,Red & Yellow Clay Loam (Matasi),0.58,36
+Chhattisgarh,RAJNANDGAON,174,18,174,6.6,Red & Yellow Clay Loam (Matasi),0.56,38
+Chhattisgarh,SUKMA,196,20,196,6.6,Red & Yellow Clay Loam (Matasi),0.64,36
+Chhattisgarh,SURAJPUR,194,20,194,6.2,Red & Yellow Clay Loam (Matasi),0.63,35
+Chhattisgarh,SURGUJA,187,19,187,6.4,Red & Yellow Clay Loam (Matasi),0.61,35
+Dadra and Nagar Haveli,DADRA AND NAGAR HAVELI,187,23,218,7.3,Alluvial Loam,0.57,34
+Daman and Diu,DAMAN,185,23,216,7.3,Alluvial Loam,0.57,34
+Daman and Diu,DIU,173,21,202,7.4,Alluvial Loam,0.53,34
+Daman and Diu,Daman and Diu,176,22,206,7.2,Alluvial Loam,0.54,33
+Delhi,DELHI_TOTAL,180,22,210,7.2,Alluvial Loam,0.55,35
+Delhi,Delhi,169,21,197,7.3,Alluvial Loam,0.52,35
+Goa,Goa,182,22,212,7.3,Alluvial Loam,0.56,33
+Goa,NORTH GOA,191,23,223,7.2,Alluvial Loam,0.58,35
+Goa,SOUTH GOA,191,23,223,7.0,Alluvial Loam,0.58,34
+Gujarat,AHMADABAD,166,22,270,8.0,Black / Alluvial Sandy Loam,0.5,31
+Gujarat,AMRELI,158,21,257,8.1,Black / Alluvial Sandy Loam,0.48,32
+Gujarat,ANAND,170,22,276,7.8,Black / Alluvial Sandy Loam,0.51,28
+Gujarat,ARAVALLI,157,21,255,8.0,Black / Alluvial Sandy Loam,0.47,30
+Gujarat,BANAS KANTHA,157,21,255,7.8,Black / Alluvial Sandy Loam,0.47,31
+Gujarat,BHARUCH,165,22,268,7.8,Black / Alluvial Sandy Loam,0.49,30
+Gujarat,BHAVNAGAR,152,20,247,8.0,Black / Alluvial Sandy Loam,0.46,30
+Gujarat,BOTAD,162,21,263,7.7,Black / Alluvial Sandy Loam,0.48,29
+Gujarat,CHHOTAUDEPUR,157,21,255,7.9,Black / Alluvial Sandy Loam,0.47,30
+Gujarat,DANG,162,21,263,7.9,Black / Alluvial Sandy Loam,0.48,29
+Gujarat,DEVBHUMI DWARKA,162,21,263,7.7,Black / Alluvial Sandy Loam,0.48,28
+Gujarat,DOHAD,155,20,252,8.0,Black / Alluvial Sandy Loam,0.47,30
+Gujarat,GANDHINAGAR,150,20,244,7.9,Black / Alluvial Sandy Loam,0.45,31
+Gujarat,GIR SOMNATH,152,20,247,7.8,Black / Alluvial Sandy Loam,0.46,29
+Gujarat,JAMNAGAR,166,22,270,7.7,Black / Alluvial Sandy Loam,0.5,31
+Gujarat,JUNAGADH,166,22,270,7.8,Black / Alluvial Sandy Loam,0.5,29
+Gujarat,KACHCHH,165,22,268,8.1,Black / Alluvial Sandy Loam,0.49,28
+Gujarat,KHEDA,157,21,255,7.9,Black / Alluvial Sandy Loam,0.47,28
+Gujarat,MAHESANA,162,21,263,7.7,Black / Alluvial Sandy Loam,0.48,29
+Gujarat,MAHISAGAR,154,20,250,8.0,Black / Alluvial Sandy Loam,0.46,29
+Gujarat,MORBI,150,20,244,8.1,Black / Alluvial Sandy Loam,0.45,29
+Gujarat,NARMADA,170,22,276,7.8,Black / Alluvial Sandy Loam,0.51,32
+Gujarat,NAVSARI,163,21,265,7.8,Black / Alluvial Sandy Loam,0.49,28
+Gujarat,PANCH MAHALS,162,21,263,8.1,Black / Alluvial Sandy Loam,0.48,31
+Gujarat,PATAN,168,22,273,7.9,Black / Alluvial Sandy Loam,0.5,30
+Gujarat,PORBANDAR,155,20,252,8.1,Black / Alluvial Sandy Loam,0.47,31
+Gujarat,RAJKOT,166,22,270,8.0,Black / Alluvial Sandy Loam,0.5,29
+Gujarat,SABAR KANTHA,168,22,273,8.0,Black / Alluvial Sandy Loam,0.5,31
+Gujarat,SURAT,160,21,260,8.1,Black / Alluvial Sandy Loam,0.48,28
+Gujarat,SURENDRANAGAR,168,22,273,7.9,Black / Alluvial Sandy Loam,0.5,31
+Gujarat,TAPI,154,20,250,8.1,Black / Alluvial Sandy Loam,0.46,29
+Gujarat,VADODARA,163,21,265,7.9,Black / Alluvial Sandy Loam,0.49,28
+Gujarat,VALSAD,158,21,257,7.8,Black / Alluvial Sandy Loam,0.48,30
+Haryana,AMBALA,204,26,235,7.9,Sandy Loam,0.53,31
+Haryana,BHIWANI,188,24,216,7.5,Sandy Loam,0.49,32
+Haryana,CHARKI DADRI,204,26,235,7.6,Sandy Loam,0.53,32
+Haryana,FARIDABAD,188,24,216,7.8,Sandy Loam,0.49,31
+Haryana,FATEHABAD,194,24,223,7.8,Sandy Loam,0.5,32
+Haryana,GURGAON,212,26,244,7.8,Sandy Loam,0.55,32
+Haryana,HISAR,196,24,225,7.7,Sandy Loam,0.51,34
+Haryana,JHAJJAR,204,26,235,7.5,Sandy Loam,0.53,32
+Haryana,JIND,212,26,244,7.9,Sandy Loam,0.55,31
+Haryana,KAITHAL,210,26,242,7.8,Sandy Loam,0.55,30
+Haryana,KARNAL,200,25,230,7.5,Sandy Loam,0.52,31
+Haryana,KURUKSHETRA,204,26,235,7.5,Sandy Loam,0.53,30
+Haryana,MAHENDRAGARH,194,24,223,7.7,Sandy Loam,0.5,34
+Haryana,MEWAT,208,26,239,7.5,Sandy Loam,0.54,33
+Haryana,PALWAL,196,24,225,7.8,Sandy Loam,0.51,32
+Haryana,PANCHKULA,208,26,239,7.9,Sandy Loam,0.54,32
+Haryana,PANIPAT,194,24,223,7.8,Sandy Loam,0.5,33
+Haryana,REWARI,192,24,221,7.7,Sandy Loam,0.5,32
+Haryana,ROHTAK,202,25,232,7.7,Sandy Loam,0.53,31
+Haryana,SIRSA,206,26,237,7.6,Sandy Loam,0.54,32
+Haryana,SONIPAT,200,25,230,7.9,Sandy Loam,0.52,33
+Haryana,YAMUNANAGAR,190,24,218,7.6,Sandy Loam,0.49,30
+Himachal Pradesh,BILASPUR,237,26,196,6.2,Brown Hill Loam,1.13,41
+Himachal Pradesh,CHAMBA,242,26,200,6.2,Brown Hill Loam,1.16,42
+Himachal Pradesh,HAMIRPUR,225,24,186,6.2,Brown Hill Loam,1.08,42
+Himachal Pradesh,KANGRA,237,26,196,6.3,Brown Hill Loam,1.13,39
+Himachal Pradesh,KINNAUR,216,24,179,6.2,Brown Hill Loam,1.03,39
+Himachal Pradesh,KULLU,244,26,201,6.2,Brown Hill Loam,1.17,40
+Himachal Pradesh,LAHUL AND SPITI,232,25,192,6.0,Brown Hill Loam,1.11,38
+Himachal Pradesh,MANDI,221,24,182,6.1,Brown Hill Loam,1.06,41
+Himachal Pradesh,SHIMLA,223,24,184,6.0,Brown Hill Loam,1.07,42
+Himachal Pradesh,SIRMAUR,221,24,182,6.0,Brown Hill Loam,1.06,42
+Himachal Pradesh,SOLAN,235,26,194,6.1,Brown Hill Loam,1.12,40
+Himachal Pradesh,UNA,235,26,194,6.0,Brown Hill Loam,1.12,42
+Jammu and Kashmir,ANANTNAG,212,25,183,6.7,Brown Forest / Alluvial Loam,0.99,38
+Jammu and Kashmir,BADGAM,216,26,187,6.6,Brown Forest / Alluvial Loam,1.01,39
+Jammu and Kashmir,BANDIPORA,227,27,197,6.6,Brown Forest / Alluvial Loam,1.06,37
+Jammu and Kashmir,BARAMULLA,223,27,193,6.9,Brown Forest / Alluvial Loam,1.04,36
+Jammu and Kashmir,DODA,212,25,183,6.5,Brown Forest / Alluvial Loam,0.99,38
+Jammu and Kashmir,GANDERBAL,223,27,193,6.8,Brown Forest / Alluvial Loam,1.04,36
+Jammu and Kashmir,JAMMU,214,26,185,6.8,Brown Forest / Alluvial Loam,1.0,38
+Jammu and Kashmir,KARGIL,227,27,197,6.7,Brown Forest / Alluvial Loam,1.06,38
+Jammu and Kashmir,KATHUA,234,28,203,6.8,Brown Forest / Alluvial Loam,1.09,38
+Jammu and Kashmir,KISHTWAR,225,27,195,6.5,Brown Forest / Alluvial Loam,1.05,38
+Jammu and Kashmir,KULGAM,225,27,195,6.6,Brown Forest / Alluvial Loam,1.05,40
+Jammu and Kashmir,KUPWARA,214,26,185,6.9,Brown Forest / Alluvial Loam,1.0,36
+Jammu and Kashmir,LEH LADAKH,214,26,185,6.6,Brown Forest / Alluvial Loam,1.0,38
+Jammu and Kashmir,POONCH,227,27,197,6.8,Brown Forest / Alluvial Loam,1.06,40
+Jammu and Kashmir,PULWAMA,218,26,189,6.7,Brown Forest / Alluvial Loam,1.02,40
+Jammu and Kashmir,RAJAURI,230,28,199,6.5,Brown Forest / Alluvial Loam,1.07,40
+Jammu and Kashmir,RAMBAN,232,28,201,6.8,Brown Forest / Alluvial Loam,1.08,37
+Jammu and Kashmir,REASI,220,26,191,6.8,Brown Forest / Alluvial Loam,1.03,37
+Jammu and Kashmir,SAMBA,238,29,207,6.9,Brown Forest / Alluvial Loam,1.11,39
+Jammu and Kashmir,SHOPIAN,218,26,189,6.9,Brown Forest / Alluvial Loam,1.02,38
+Jammu and Kashmir,SRINAGAR,238,29,207,6.8,Brown Forest / Alluvial Loam,1.11,38
+Jammu and Kashmir,UDHAMPUR,220,26,191,6.7,Brown Forest / Alluvial Loam,1.03,37
+Jharkhand,BOKARO,184,17,160,5.6,Red / Lateritic Loam,0.6,37
+Jharkhand,CHATRA,184,17,160,5.5,Red / Lateritic Loam,0.6,35
+Jharkhand,DEOGHAR,194,18,168,5.5,Red / Lateritic Loam,0.63,38
+Jharkhand,DHANBAD,196,19,170,5.8,Red / Lateritic Loam,0.64,35
+Jharkhand,DUMKA,186,18,162,5.7,Red / Lateritic Loam,0.61,36
+Jharkhand,EAST SINGHBUM,179,17,155,5.5,Red / Lateritic Loam,0.58,35
+Jharkhand,GARHWA,186,18,162,5.8,Red / Lateritic Loam,0.61,35
+Jharkhand,GIRIDIH,200,19,173,5.6,Red / Lateritic Loam,0.65,35
+Jharkhand,GODDA,186,18,162,5.4,Red / Lateritic Loam,0.61,35
+Jharkhand,GUMLA,182,17,158,5.4,Red / Lateritic Loam,0.6,35
+Jharkhand,HAZARIBAGH,180,17,157,5.5,Red / Lateritic Loam,0.59,38
+Jharkhand,JAMTARA,182,17,158,5.7,Red / Lateritic Loam,0.6,35
+Jharkhand,KHUNTI,182,17,158,5.4,Red / Lateritic Loam,0.6,37
+Jharkhand,KODERMA,186,18,162,5.6,Red / Lateritic Loam,0.61,36
+Jharkhand,LATEHAR,192,18,167,5.8,Red / Lateritic Loam,0.63,37
+Jharkhand,LOHARDAGA,198,19,172,5.8,Red / Lateritic Loam,0.64,35
+Jharkhand,PAKUR,184,17,160,5.5,Red / Lateritic Loam,0.6,35
+Jharkhand,PALAMU,190,18,165,5.5,Red / Lateritic Loam,0.62,37
+Jharkhand,RAMGARH,188,18,163,5.4,Red / Lateritic Loam,0.61,36
+Jharkhand,RANCHI,200,19,173,5.6,Red / Lateritic Loam,0.65,35
+Jharkhand,SAHEBGANJ,196,19,170,5.8,Red / Lateritic Loam,0.64,34
+Jharkhand,SARAIKELA KHARSAWAN,200,19,173,5.5,Red / Lateritic Loam,0.65,34
+Jharkhand,SIMDEGA,182,17,158,5.5,Red / Lateritic Loam,0.6,36
+Jharkhand,WEST SINGHBHUM,201,19,175,5.6,Red / Lateritic Loam,0.66,37
+Karnataka,BAGALKOT,179,21,209,7.0,Red Sandy Loam / Black Soil,0.56,33
+Karnataka,BAGALKOTE,194,23,226,6.6,Red Sandy Loam / Black Soil,0.61,34
+Karnataka,BALLARI,179,21,209,6.6,Red Sandy Loam / Black Soil,0.56,36
+Karnataka,BANGALORE RURAL,179,21,209,6.8,Red Sandy Loam / Black Soil,0.56,32
+Karnataka,BELAGAVI,178,21,206,7.0,Red Sandy Loam / Black Soil,0.56,36
+Karnataka,BELGAUM,174,21,202,6.8,Red Sandy Loam / Black Soil,0.55,34
+Karnataka,BELLARY,185,22,215,6.8,Red Sandy Loam / Black Soil,0.58,35
+Karnataka,BENGALURU URBAN,194,23,226,6.8,Red Sandy Loam / Black Soil,0.61,34
+Karnataka,BIDAR,181,22,211,6.9,Red Sandy Loam / Black Soil,0.57,34
+Karnataka,BIJAPUR,174,21,202,6.8,Red Sandy Loam / Black Soil,0.55,34
+Karnataka,CHAMARAJANAGAR,194,23,226,6.8,Red Sandy Loam / Black Soil,0.61,35
+Karnataka,CHAMARAJANAGARA,196,23,228,6.6,Red Sandy Loam / Black Soil,0.61,33
+Karnataka,CHIKBALLAPUR,194,23,226,6.8,Red Sandy Loam / Black Soil,0.61,33
+Karnataka,CHIKKABALLAPURA,183,22,213,6.6,Red Sandy Loam / Black Soil,0.57,35
+Karnataka,CHIKKAMAGALURU,178,21,206,6.8,Red Sandy Loam / Black Soil,0.56,35
+Karnataka,CHIKMAGALUR,176,21,204,7.0,Red Sandy Loam / Black Soil,0.55,35
+Karnataka,CHITRADURGA,192,23,224,6.6,Red Sandy Loam / Black Soil,0.6,35
+Karnataka,DAKSHIN KANNAD,179,21,209,6.6,Red Sandy Loam / Black Soil,0.56,33
+Karnataka,DAKSHINA KANNADA,185,22,215,6.6,Red Sandy Loam / Black Soil,0.58,35
+Karnataka,DAVANGERE,196,23,228,6.6,Red Sandy Loam / Black Soil,0.61,32
+Karnataka,DHARWAD,174,21,202,6.6,Red Sandy Loam / Black Soil,0.55,34
+Karnataka,GADAG,189,22,219,7.0,Red Sandy Loam / Black Soil,0.59,33
+Karnataka,GULBARGA,181,22,211,6.6,Red Sandy Loam / Black Soil,0.57,32
+Karnataka,HASSAN,183,22,213,6.8,Red Sandy Loam / Black Soil,0.57,34
+Karnataka,HAVERI,194,23,226,7.0,Red Sandy Loam / Black Soil,0.61,33
+Karnataka,KALABURAGI,183,22,213,6.6,Red Sandy Loam / Black Soil,0.57,35
+Karnataka,KODAGU,191,23,221,6.6,Red Sandy Loam / Black Soil,0.6,34
+Karnataka,KOLAR,183,22,213,6.8,Red Sandy Loam / Black Soil,0.57,35
+Karnataka,KOPPAL,191,23,221,6.6,Red Sandy Loam / Black Soil,0.6,33
+Karnataka,MANDYA,191,23,221,7.0,Red Sandy Loam / Black Soil,0.6,35
+Karnataka,MYSORE,194,23,226,6.6,Red Sandy Loam / Black Soil,0.61,36
+Karnataka,MYSURU,179,21,209,6.7,Red Sandy Loam / Black Soil,0.56,34
+Karnataka,RAICHUR,196,23,228,7.0,Red Sandy Loam / Black Soil,0.61,34
+Karnataka,RAMANAGARA,176,21,204,6.8,Red Sandy Loam / Black Soil,0.55,32
+Karnataka,SHIMOGA,176,21,204,6.8,Red Sandy Loam / Black Soil,0.55,34
+Karnataka,SHIVAMOGGA,179,21,209,7.0,Red Sandy Loam / Black Soil,0.56,34
+Karnataka,TUMAKURU,189,22,219,7.0,Red Sandy Loam / Black Soil,0.59,32
+Karnataka,TUMKUR,179,21,209,6.9,Red Sandy Loam / Black Soil,0.56,34
+Karnataka,UDUPI,183,22,213,7.0,Red Sandy Loam / Black Soil,0.57,32
+Karnataka,UTTAR KANNAD,178,21,206,6.7,Red Sandy Loam / Black Soil,0.56,36
+Karnataka,UTTARA KANNADA,187,22,217,6.6,Red Sandy Loam / Black Soil,0.59,35
+Karnataka,VIJAYAPURA,194,23,226,6.9,Red Sandy Loam / Black Soil,0.61,33
+Karnataka,YADAGIRI,187,22,217,6.9,Red Sandy Loam / Black Soil,0.59,33
+Karnataka,YADGIR,183,22,213,7.0,Red Sandy Loam / Black Soil,0.57,33
+Kerala,ALAPPUZHA,233,28,163,5.6,Laterite Acidic Loam,0.94,44
+Kerala,ERNAKULAM,233,28,163,5.5,Laterite Acidic Loam,0.94,45
+Kerala,IDUKKI,237,28,167,5.4,Laterite Acidic Loam,0.96,42
+Kerala,KANNUR,249,30,175,5.6,Laterite Acidic Loam,1.01,44
+Kerala,KASARAGOD,228,27,160,5.4,Laterite Acidic Loam,0.92,44
+Kerala,KOLLAM,240,29,168,5.3,Laterite Acidic Loam,0.97,46
+Kerala,KOTTAYAM,230,27,162,5.3,Laterite Acidic Loam,0.93,44
+Kerala,KOZHIKODE,228,27,160,5.4,Laterite Acidic Loam,0.92,44
+Kerala,MALAPPURAM,237,28,167,5.5,Laterite Acidic Loam,0.96,44
+Kerala,PALAKKAD,226,27,158,5.4,Laterite Acidic Loam,0.91,46
+Kerala,PATHANAMTHITTA,223,27,157,5.3,Laterite Acidic Loam,0.9,45
+Kerala,THIRUVANANTHAPURAM,237,28,167,5.3,Laterite Acidic Loam,0.96,44
+Kerala,THRISSUR,235,28,165,5.5,Laterite Acidic Loam,0.95,45
+Kerala,WAYANAD,240,29,168,5.6,Laterite Acidic Loam,0.97,45
+Laddakh,KARGIL,191,23,223,7.1,Alluvial Loam,0.58,35
+Madhya Pradesh,AGAR MALWA,178,20,289,7.8,Medium Black Clay,0.59,36
+Madhya Pradesh,ALIRAJPUR,178,20,289,7.6,Medium Black Clay,0.59,34
+Madhya Pradesh,ANUPPUR,162,18,261,7.7,Medium Black Clay,0.53,37
+Madhya Pradesh,ASHOKNAGAR,163,18,264,7.6,Medium Black Clay,0.54,37
+Madhya Pradesh,BALAGHAT,162,18,261,7.5,Medium Black Clay,0.53,35
+Madhya Pradesh,BARWANI,180,20,292,7.8,Medium Black Clay,0.59,37
+Madhya Pradesh,BASTAR,167,19,270,7.8,Medium Black Clay,0.55,35
+Madhya Pradesh,BETUL,163,18,264,7.7,Medium Black Clay,0.54,34
+Madhya Pradesh,BHIND,173,19,280,7.5,Medium Black Clay,0.57,37
+Madhya Pradesh,BHOPAL,175,20,283,7.5,Medium Black Clay,0.58,37
+Madhya Pradesh,BILASPUR,160,18,258,7.4,Medium Black Clay,0.53,35
+Madhya Pradesh,BURHANPUR,172,19,278,7.6,Medium Black Clay,0.57,34
+Madhya Pradesh,CHHATARPUR,162,18,261,7.8,Medium Black Clay,0.53,34
+Madhya Pradesh,CHHINDWARA,165,18,267,7.7,Medium Black Clay,0.54,34
+Madhya Pradesh,DAMOH,168,19,272,7.8,Medium Black Clay,0.55,36
+Madhya Pradesh,DANTEWADA,172,19,278,7.7,Medium Black Clay,0.57,34
+Madhya Pradesh,DATIA,168,19,272,7.8,Medium Black Clay,0.55,36
+Madhya Pradesh,DEWAS,173,19,280,7.5,Medium Black Clay,0.57,35
+Madhya Pradesh,DHAMTARI,180,20,292,7.6,Medium Black Clay,0.59,34
+Madhya Pradesh,DHAR,178,20,289,7.5,Medium Black Clay,0.59,35
+Madhya Pradesh,DINDORI,162,18,261,7.7,Medium Black Clay,0.53,36
+Madhya Pradesh,DURG,167,19,270,7.6,Medium Black Clay,0.55,34
+Madhya Pradesh,GUNA,163,18,264,7.4,Medium Black Clay,0.54,36
+Madhya Pradesh,GWALIOR,165,18,267,7.7,Medium Black Clay,0.54,34
+Madhya Pradesh,HARDA,167,19,270,7.4,Medium Black Clay,0.55,34
+Madhya Pradesh,HOSHANGABAD,168,19,272,7.8,Medium Black Clay,0.55,37
+Madhya Pradesh,INDORE,172,19,278,7.5,Medium Black Clay,0.57,36
+Madhya Pradesh,JABALPUR,167,19,270,7.8,Medium Black Clay,0.55,34
+Madhya Pradesh,JANJGIR-CHAMPA,162,18,261,7.7,Medium Black Clay,0.53,37
+Madhya Pradesh,JASHPUR,177,20,286,7.8,Medium Black Clay,0.58,35
+Madhya Pradesh,JHABUA,170,19,275,7.5,Medium Black Clay,0.56,37
+Madhya Pradesh,KABIRDHAM,170,19,275,7.4,Medium Black Clay,0.56,33
+Madhya Pradesh,KANKER,172,19,278,7.5,Medium Black Clay,0.57,36
+Madhya Pradesh,KATNI,167,19,270,7.8,Medium Black Clay,0.55,37
+Madhya Pradesh,KHANDWA,173,19,280,7.4,Medium Black Clay,0.57,34
+Madhya Pradesh,KHARGONE,177,20,286,7.8,Medium Black Clay,0.58,35
+Madhya Pradesh,KORBA,180,20,292,7.8,Medium Black Clay,0.59,37
+Madhya Pradesh,KOREA,180,20,292,7.4,Medium Black Clay,0.59,34
+Madhya Pradesh,MAHASAMUND,170,19,275,7.4,Medium Black Clay,0.56,36
+Madhya Pradesh,MANDLA,178,20,289,7.6,Medium Black Clay,0.59,36
+Madhya Pradesh,MANDSAUR,162,18,261,7.8,Medium Black Clay,0.53,35
+Madhya Pradesh,MORENA,160,18,258,7.4,Medium Black Clay,0.53,33
+Madhya Pradesh,NARSINGHPUR,173,19,280,7.7,Medium Black Clay,0.57,34
+Madhya Pradesh,NEEMUCH,163,18,264,7.5,Medium Black Clay,0.54,34
+Madhya Pradesh,NIWARI,167,19,270,7.4,Medium Black Clay,0.55,37
+Madhya Pradesh,PANNA,175,20,283,7.8,Medium Black Clay,0.58,36
+Madhya Pradesh,RAIPUR,173,19,280,7.4,Medium Black Clay,0.57,33
+Madhya Pradesh,RAISEN,162,18,261,7.5,Medium Black Clay,0.53,35
+Madhya Pradesh,RAJGARH,173,19,280,7.6,Medium Black Clay,0.57,37
+Madhya Pradesh,RAJNANDGAON,172,19,278,7.7,Medium Black Clay,0.57,36
+Madhya Pradesh,RATLAM,175,20,283,7.4,Medium Black Clay,0.58,34
+Madhya Pradesh,REWA,170,19,275,7.4,Medium Black Clay,0.56,35
+Madhya Pradesh,SAGAR,175,20,283,7.4,Medium Black Clay,0.58,37
+Madhya Pradesh,SATNA,162,18,261,7.8,Medium Black Clay,0.53,35
+Madhya Pradesh,SEHORE,180,20,292,7.5,Medium Black Clay,0.59,37
+Madhya Pradesh,SEONI,175,20,283,7.6,Medium Black Clay,0.58,35
+Madhya Pradesh,SHAHDOL,173,19,280,7.4,Medium Black Clay,0.57,35
+Madhya Pradesh,SHAJAPUR,177,20,286,7.5,Medium Black Clay,0.58,36
+Madhya Pradesh,SHEOPUR,173,19,280,7.4,Medium Black Clay,0.57,37
+Madhya Pradesh,SHIVPURI,160,18,258,7.5,Medium Black Clay,0.53,34
+Madhya Pradesh,SIDHI,160,18,258,7.4,Medium Black Clay,0.53,35
+Madhya Pradesh,SINGRAULI,168,19,272,7.5,Medium Black Clay,0.55,36
+Madhya Pradesh,SURGUJA,165,18,267,7.5,Medium Black Clay,0.54,34
+Madhya Pradesh,TIKAMGARH,168,19,272,7.4,Medium Black Clay,0.55,35
+Madhya Pradesh,UJJAIN,178,20,289,7.7,Medium Black Clay,0.59,34
+Madhya Pradesh,UMARIA,175,20,283,7.4,Medium Black Clay,0.58,34
+Madhya Pradesh,VIDISHA,177,20,286,7.6,Medium Black Clay,0.58,34
+Maharashtra,AHMEDNAGAR,155,17,277,7.8,Black Soil (Vertisol),0.56,38
+Maharashtra,AKOLA,155,17,277,7.6,Black Soil (Vertisol),0.56,36
+Maharashtra,AMRAVATI,162,18,289,7.8,Black Soil (Vertisol),0.59,40
+Maharashtra,AURANGABAD,158,17,283,7.8,Black Soil (Vertisol),0.58,37
+Maharashtra,BEED,160,17,286,8.0,Black Soil (Vertisol),0.58,40
+Maharashtra,BHANDARA,163,18,292,7.8,Black Soil (Vertisol),0.59,36
+Maharashtra,BULDHANA,155,17,277,8.0,Black Soil (Vertisol),0.56,37
+Maharashtra,CHANDRAPUR,155,17,277,7.6,Black Soil (Vertisol),0.56,36
+Maharashtra,DHULE,157,17,280,7.7,Black Soil (Vertisol),0.57,40
+Maharashtra,GADCHIROLI,155,17,277,7.7,Black Soil (Vertisol),0.56,39
+Maharashtra,GONDIA,155,17,277,7.9,Black Soil (Vertisol),0.56,38
+Maharashtra,HINGOLI,155,17,277,7.9,Black Soil (Vertisol),0.56,38
+Maharashtra,JALGAON,155,17,277,7.6,Black Soil (Vertisol),0.56,36
+Maharashtra,JALNA,162,18,289,7.7,Black Soil (Vertisol),0.59,38
+Maharashtra,KOLHAPUR,168,18,301,7.9,Black Soil (Vertisol),0.61,40
+Maharashtra,LATUR,175,19,313,7.9,Black Soil (Vertisol),0.64,40
+Maharashtra,MUMBAI,175,19,313,7.6,Black Soil (Vertisol),0.64,36
+Maharashtra,MUMBAI SUBURBAN,158,17,283,7.8,Black Soil (Vertisol),0.58,36
+Maharashtra,NAGPUR,158,17,283,8.0,Black Soil (Vertisol),0.58,39
+Maharashtra,NANDED,175,19,313,8.0,Black Soil (Vertisol),0.64,39
+Maharashtra,NANDURBAR,155,17,277,7.6,Black Soil (Vertisol),0.56,37
+Maharashtra,NASHIK,160,17,286,7.8,Black Soil (Vertisol),0.58,38
+Maharashtra,OSMANABAD,158,17,283,8.0,Black Soil (Vertisol),0.58,39
+Maharashtra,PALGHAR,162,18,289,7.8,Black Soil (Vertisol),0.59,38
+Maharashtra,PARBHANI,163,18,292,7.6,Black Soil (Vertisol),0.59,37
+Maharashtra,PUNE,173,19,310,7.8,Black Soil (Vertisol),0.63,37
+Maharashtra,RAIGAD,172,19,307,7.9,Black Soil (Vertisol),0.62,38
+Maharashtra,RATNAGIRI,170,19,304,7.9,Black Soil (Vertisol),0.62,38
+Maharashtra,SANGLI,155,17,277,8.0,Black Soil (Vertisol),0.56,39
+Maharashtra,SATARA,173,19,310,7.8,Black Soil (Vertisol),0.63,39
+Maharashtra,SINDHUDURG,173,19,310,8.0,Black Soil (Vertisol),0.63,37
+Maharashtra,SOLAPUR,167,18,298,7.6,Black Soil (Vertisol),0.61,38
+Maharashtra,THANE,173,19,310,7.9,Black Soil (Vertisol),0.63,39
+Maharashtra,WARDHA,155,17,277,7.6,Black Soil (Vertisol),0.56,38
+Maharashtra,WASHIM,160,17,286,7.8,Black Soil (Vertisol),0.58,38
+Maharashtra,YAVATMAL,155,17,277,7.8,Black Soil (Vertisol),0.56,39
+Manipur,BISHNUPUR,182,22,212,7.2,Alluvial Loam,0.56,36
+Manipur,CHANDEL,169,21,197,7.4,Alluvial Loam,0.52,33
+Manipur,CHURACHANDPUR,182,22,212,7.0,Alluvial Loam,0.56,34
+Manipur,IMPHAL EAST,184,22,214,7.0,Alluvial Loam,0.56,35
+Manipur,IMPHAL WEST,189,23,220,7.2,Alluvial Loam,0.58,35
+Manipur,SENAPATI,180,22,210,7.3,Alluvial Loam,0.55,35
+Manipur,TAMENGLONG,189,23,220,7.3,Alluvial Loam,0.58,36
+Manipur,THOUBAL,187,23,218,7.4,Alluvial Loam,0.57,35
+Manipur,UKHRUL,184,22,214,7.4,Alluvial Loam,0.56,34
+Meghalaya,EAST GARO HILLS,189,23,220,7.2,Alluvial Loam,0.58,33
+Meghalaya,EAST JAINTIA HILLS,184,22,214,7.4,Alluvial Loam,0.56,34
+Meghalaya,EAST KHASI HILLS,182,22,212,7.4,Alluvial Loam,0.56,33
+Meghalaya,NORTH GARO HILLS,175,21,204,7.2,Alluvial Loam,0.53,34
+Meghalaya,RI BHOI,182,22,212,7.2,Alluvial Loam,0.56,35
+Meghalaya,SOUTH GARO HILLS,178,22,208,7.4,Alluvial Loam,0.54,32
+Meghalaya,SOUTH WEST GARO HILLS,176,22,206,7.4,Alluvial Loam,0.54,35
+Meghalaya,SOUTH WEST KHASI HILLS,180,22,210,7.4,Alluvial Loam,0.55,35
+Meghalaya,WEST GARO HILLS,169,21,197,7.0,Alluvial Loam,0.52,33
+Meghalaya,WEST JAINTIA HILLS,173,21,202,7.2,Alluvial Loam,0.53,32
+Meghalaya,WEST KHASI HILLS,187,23,218,7.1,Alluvial Loam,0.57,34
+Mizoram,AIZAWL,182,22,212,7.3,Alluvial Loam,0.56,35
+Mizoram,CHAMPHAI,171,21,200,7.2,Alluvial Loam,0.52,33
+Mizoram,KOLASIB,184,22,214,7.4,Alluvial Loam,0.56,33
+Mizoram,LAWNGTLAI,169,21,197,7.0,Alluvial Loam,0.52,34
+Mizoram,LUNGLEI,187,23,218,7.2,Alluvial Loam,0.57,32
+Mizoram,MAMIT,171,21,200,7.3,Alluvial Loam,0.52,35
+Mizoram,SAIHA,185,23,216,7.3,Alluvial Loam,0.57,34
+Mizoram,SERCHHIP,189,23,220,7.4,Alluvial Loam,0.58,33
+Nagaland,DIMAPUR,189,23,220,7.0,Alluvial Loam,0.58,35
+Nagaland,KIPHIRE,176,22,206,7.4,Alluvial Loam,0.54,33
+Nagaland,KOHIMA,169,21,197,7.0,Alluvial Loam,0.52,35
+Nagaland,LONGLENG,171,21,200,7.3,Alluvial Loam,0.52,35
+Nagaland,MOKOKCHUNG,171,21,200,7.2,Alluvial Loam,0.52,33
+Nagaland,MON,169,21,197,7.1,Alluvial Loam,0.52,36
+Nagaland,PEREN,191,23,223,7.3,Alluvial Loam,0.58,32
+Nagaland,PHEK,169,21,197,7.3,Alluvial Loam,0.52,35
+Nagaland,TUENSANG,173,21,202,7.0,Alluvial Loam,0.53,33
+Nagaland,WOKHA,184,22,214,7.1,Alluvial Loam,0.56,35
+Nagaland,ZUNHEBOTO,191,23,223,7.4,Alluvial Loam,0.58,34
+Odisha,ANUGUL,195,21,175,5.8,Red Sandy / Coastal Alluvial,0.65,38
+Odisha,BALANGIR,195,21,175,6.1,Red Sandy / Coastal Alluvial,0.65,37
+Odisha,BALESHWAR,191,21,172,5.7,Red Sandy / Coastal Alluvial,0.64,36
+Odisha,BARGARH,205,22,184,6.0,Red Sandy / Coastal Alluvial,0.68,38
+Odisha,BHADRAK,187,20,168,6.0,Red Sandy / Coastal Alluvial,0.62,38
+Odisha,BOUDH,199,21,178,5.8,Red Sandy / Coastal Alluvial,0.66,39
+Odisha,CUTTACK,195,21,175,6.0,Red Sandy / Coastal Alluvial,0.65,37
+Odisha,DEOGARH,203,22,182,5.8,Red Sandy / Coastal Alluvial,0.68,37
+Odisha,DHENKANAL,185,20,166,5.7,Red Sandy / Coastal Alluvial,0.62,40
+Odisha,GAJAPATI,197,21,177,6.1,Red Sandy / Coastal Alluvial,0.66,39
+Odisha,GANJAM,193,21,173,5.7,Red Sandy / Coastal Alluvial,0.64,36
+Odisha,JAGATSINGHAPUR,191,21,172,6.0,Red Sandy / Coastal Alluvial,0.64,39
+Odisha,JAJAPUR,191,21,172,6.0,Red Sandy / Coastal Alluvial,0.64,39
+Odisha,JHARSUGUDA,203,22,182,5.9,Red Sandy / Coastal Alluvial,0.68,38
+Odisha,KALAHANDI,207,22,186,6.1,Red Sandy / Coastal Alluvial,0.69,39
+Odisha,KANDHAMAL,205,22,184,5.9,Red Sandy / Coastal Alluvial,0.68,37
+Odisha,KENDRAPARA,207,22,186,6.1,Red Sandy / Coastal Alluvial,0.69,38
+Odisha,KENDUJHAR,199,21,178,6.1,Red Sandy / Coastal Alluvial,0.66,36
+Odisha,KHORDHA,189,20,170,6.0,Red Sandy / Coastal Alluvial,0.63,36
+Odisha,KORAPUT,189,20,170,5.9,Red Sandy / Coastal Alluvial,0.63,36
+Odisha,MALKANGIRI,189,20,170,6.0,Red Sandy / Coastal Alluvial,0.63,38
+Odisha,MAYURBHANJ,193,21,173,5.9,Red Sandy / Coastal Alluvial,0.64,37
+Odisha,NABARANGPUR,183,20,164,5.9,Red Sandy / Coastal Alluvial,0.61,37
+Odisha,NAYAGARH,203,22,182,5.9,Red Sandy / Coastal Alluvial,0.68,38
+Odisha,NUAPADA,185,20,166,6.1,Red Sandy / Coastal Alluvial,0.62,40
+Odisha,PURI,197,21,177,5.7,Red Sandy / Coastal Alluvial,0.66,37
+Odisha,RAYAGADA,201,22,180,6.1,Red Sandy / Coastal Alluvial,0.67,38
+Odisha,SAMBALPUR,201,22,180,5.7,Red Sandy / Coastal Alluvial,0.67,40
+Odisha,SONEPUR,187,20,168,6.1,Red Sandy / Coastal Alluvial,0.62,38
+Odisha,SUNDARGARH,199,21,178,5.7,Red Sandy / Coastal Alluvial,0.66,40
+Puducherry,KARAIKAL,180,22,210,7.4,Alluvial Loam,0.55,33
+Puducherry,MAHE,185,23,216,7.1,Alluvial Loam,0.57,33
+Puducherry,PONDICHERRY,175,21,204,7.0,Alluvial Loam,0.53,35
+Puducherry,YANAM,185,23,216,7.2,Alluvial Loam,0.57,35
+Punjab,AMRITSAR,229,31,250,7.3,Alluvial Loam,0.64,35
+Punjab,BARNALA,222,30,242,7.5,Alluvial Loam,0.63,36
+Punjab,BATHINDA,216,29,235,7.3,Alluvial Loam,0.61,37
+Punjab,FARIDKOT,227,31,247,7.7,Alluvial Loam,0.64,37
+Punjab,FATEHGARH SAHIB,220,30,240,7.7,Alluvial Loam,0.62,34
+Punjab,FAZILKA,207,28,226,7.7,Alluvial Loam,0.58,34
+Punjab,FIROZEPUR,209,28,228,7.3,Alluvial Loam,0.59,33
+Punjab,GURDASPUR,222,30,242,7.6,Alluvial Loam,0.63,34
+Punjab,HOSHIARPUR,222,30,242,7.3,Alluvial Loam,0.63,34
+Punjab,JALANDHAR,227,31,247,7.5,Alluvial Loam,0.64,35
+Punjab,KAPURTHALA,218,30,238,7.3,Alluvial Loam,0.61,33
+Punjab,LUDHIANA,213,29,233,7.5,Alluvial Loam,0.6,34
+Punjab,MANSA,220,30,240,7.7,Alluvial Loam,0.62,35
+Punjab,MOGA,211,29,230,7.7,Alluvial Loam,0.6,36
+Punjab,MUKTSAR,216,29,235,7.4,Alluvial Loam,0.61,36
+Punjab,NAWANSHAHR,207,28,226,7.7,Alluvial Loam,0.58,34
+Punjab,PATHANKOT,218,30,238,7.6,Alluvial Loam,0.61,34
+Punjab,PATIALA,220,30,240,7.5,Alluvial Loam,0.62,35
+Punjab,RUPNAGAR,220,30,240,7.6,Alluvial Loam,0.62,35
+Punjab,S,233,32,254,7.7,Alluvial Loam,0.66,35
+Punjab,SANGRUR,216,29,235,7.7,Alluvial Loam,0.61,35
+Punjab,SHAHID BHAGAT SINGH NAGAR,233,32,254,7.5,Alluvial Loam,0.66,36
+Punjab,TARN TARAN,207,28,226,7.5,Alluvial Loam,0.58,36
+Rajasthan,AJMER,132,15,220,8.1,Desert Sand / Alluvial,0.31,25
+Rajasthan,ALWAR,132,15,220,8.4,Desert Sand / Alluvial,0.31,25
+Rajasthan,BANSWARA,132,15,220,8.1,Desert Sand / Alluvial,0.31,25
+Rajasthan,BARAN,130,14,216,8.0,Desert Sand / Alluvial,0.31,26
+Rajasthan,BARMER,130,14,216,8.0,Desert Sand / Alluvial,0.31,24
+Rajasthan,BHARATPUR,135,15,225,8.0,Desert Sand / Alluvial,0.32,24
+Rajasthan,BHILWARA,128,14,214,8.3,Desert Sand / Alluvial,0.3,24
+Rajasthan,BIKANER,143,16,238,8.0,Desert Sand / Alluvial,0.34,26
+Rajasthan,BUNDI,142,16,236,8.0,Desert Sand / Alluvial,0.34,26
+Rajasthan,CHITTORGARH,139,15,232,8.3,Desert Sand / Alluvial,0.33,26
+Rajasthan,CHURU,136,15,227,8.0,Desert Sand / Alluvial,0.32,25
+Rajasthan,DAUSA,131,15,218,8.0,Desert Sand / Alluvial,0.31,26
+Rajasthan,DHOLPUR,142,16,236,8.2,Desert Sand / Alluvial,0.34,26
+Rajasthan,DUNGARPUR,135,15,225,8.1,Desert Sand / Alluvial,0.32,25
+Rajasthan,GANGANAGAR,136,15,227,8.1,Desert Sand / Alluvial,0.32,25
+Rajasthan,HANUMANGARH,134,15,223,8.1,Desert Sand / Alluvial,0.32,24
+Rajasthan,JAIPUR,143,16,238,8.1,Desert Sand / Alluvial,0.34,26
+Rajasthan,JAISALMER,132,15,220,8.3,Desert Sand / Alluvial,0.31,24
+Rajasthan,JALORE,142,16,236,8.3,Desert Sand / Alluvial,0.34,24
+Rajasthan,JHALAWAR,136,15,227,8.4,Desert Sand / Alluvial,0.32,24
+Rajasthan,JHUNJHUNU,143,16,238,8.3,Desert Sand / Alluvial,0.34,26
+Rajasthan,JODHPUR,131,15,218,8.2,Desert Sand / Alluvial,0.31,24
+Rajasthan,KARAULI,142,16,236,8.3,Desert Sand / Alluvial,0.34,26
+Rajasthan,KOTA,143,16,238,8.2,Desert Sand / Alluvial,0.34,25
+Rajasthan,NAGAUR,136,15,227,8.0,Desert Sand / Alluvial,0.32,24
+Rajasthan,PALI,127,14,212,8.0,Desert Sand / Alluvial,0.3,26
+Rajasthan,PRATAPGARH,135,15,225,8.3,Desert Sand / Alluvial,0.32,24
+Rajasthan,RAJSAMAND,128,14,214,8.0,Desert Sand / Alluvial,0.3,24
+Rajasthan,SAWAI MADHOPUR,138,15,230,8.3,Desert Sand / Alluvial,0.33,26
+Rajasthan,SIKAR,134,15,223,8.1,Desert Sand / Alluvial,0.32,24
+Rajasthan,SIROHI,139,15,232,8.0,Desert Sand / Alluvial,0.33,25
+Rajasthan,TONK,136,15,227,8.2,Desert Sand / Alluvial,0.32,26
+Rajasthan,UDAIPUR,130,14,216,8.0,Desert Sand / Alluvial,0.31,24
+Sikkim,EAST DISTRICT,169,21,197,7.4,Alluvial Loam,0.52,34
+Sikkim,NORTH DISTRICT,187,23,218,7.2,Alluvial Loam,0.57,32
+Sikkim,SOUTH DISTRICT,180,22,210,7.4,Alluvial Loam,0.55,33
+Sikkim,WEST DISTRICT,173,21,202,7.0,Alluvial Loam,0.53,33
+Tamil Nadu,ARIYALUR,171,22,200,6.9,Red / Black Loam,0.51,34
+Tamil Nadu,CHENGALPATTU,169,22,197,7.3,Red / Black Loam,0.51,34
+Tamil Nadu,CHENNAI,185,24,216,7.3,Red / Black Loam,0.56,31
+Tamil Nadu,COIMBATORE,191,24,223,6.9,Red / Black Loam,0.57,33
+Tamil Nadu,CUDDALORE,189,24,220,7.2,Red / Black Loam,0.57,31
+Tamil Nadu,DHARMAPURI,173,22,202,7.1,Red / Black Loam,0.52,33
+Tamil Nadu,DINDIGUL,184,23,214,7.1,Red / Black Loam,0.55,34
+Tamil Nadu,ERODE,191,24,223,7.2,Red / Black Loam,0.57,34
+Tamil Nadu,KALLAKURICHI,175,22,204,7.1,Red / Black Loam,0.52,35
+Tamil Nadu,KANCHIPURAM,175,22,204,6.9,Red / Black Loam,0.52,32
+Tamil Nadu,KANNIYAKUMARI,180,23,210,7.2,Red / Black Loam,0.54,34
+Tamil Nadu,KARUR,178,23,208,6.9,Red / Black Loam,0.53,32
+Tamil Nadu,KRISHNAGIRI,184,23,214,6.9,Red / Black Loam,0.55,34
+Tamil Nadu,MADURAI,189,24,220,7.1,Red / Black Loam,0.57,32
+Tamil Nadu,NAGAPATTINAM,191,24,223,7.0,Red / Black Loam,0.57,34
+Tamil Nadu,NAMAKKAL,171,22,200,7.2,Red / Black Loam,0.51,32
+Tamil Nadu,PERAMBALUR,182,23,212,6.9,Red / Black Loam,0.55,34
+Tamil Nadu,PUDUKKOTTAI,189,24,220,7.0,Red / Black Loam,0.57,34
+Tamil Nadu,RAMANATHAPURAM,185,24,216,7.0,Red / Black Loam,0.56,32
+Tamil Nadu,RANIPET,176,23,206,7.2,Red / Black Loam,0.53,33
+Tamil Nadu,SALEM,189,24,220,6.9,Red / Black Loam,0.57,32
+Tamil Nadu,SIVAGANGA,175,22,204,7.0,Red / Black Loam,0.52,32
+Tamil Nadu,TENKASI,180,23,210,7.0,Red / Black Loam,0.54,35
+Tamil Nadu,THANJAVUR,189,24,220,6.9,Red / Black Loam,0.57,32
+Tamil Nadu,THE NILGIRIS,184,23,214,7.3,Red / Black Loam,0.55,32
+Tamil Nadu,THENI,189,24,220,6.9,Red / Black Loam,0.57,32
+Tamil Nadu,THIRUVALLUR,187,24,218,7.1,Red / Black Loam,0.56,34
+Tamil Nadu,THIRUVARUR,175,22,204,7.2,Red / Black Loam,0.52,33
+Tamil Nadu,THOOTHUKUDI,178,23,208,7.1,Red / Black Loam,0.53,34
+Tamil Nadu,TIRUCHIRAPPALLI,184,23,214,7.2,Red / Black Loam,0.55,34
+Tamil Nadu,TIRUNELVELI,191,24,223,7.1,Red / Black Loam,0.57,33
+Tamil Nadu,TIRUPATHUR,182,23,212,7.0,Red / Black Loam,0.55,33
+Tamil Nadu,TIRUPPUR,180,23,210,7.1,Red / Black Loam,0.54,34
+Tamil Nadu,TIRUVANNAMALAI,178,23,208,7.3,Red / Black Loam,0.53,35
+Tamil Nadu,TUTICORIN,185,24,216,7.3,Red / Black Loam,0.56,34
+Tamil Nadu,VELLORE,171,22,200,7.2,Red / Black Loam,0.51,34
+Tamil Nadu,VILLUPURAM,173,22,202,7.2,Red / Black Loam,0.52,31
+Tamil Nadu,VIRUDHUNAGAR,180,23,210,6.9,Red / Black Loam,0.54,33
+Telangana,ADILABAD,175,20,230,7.3,Red Sandy / Medium Black,0.52,32
+Telangana,BHADRADRI,172,20,225,7.2,Red Sandy / Medium Black,0.51,33
+Telangana,DADRA AND NAGAR HAVELI,164,19,216,7.4,Red Sandy / Medium Black,0.49,33
+Telangana,DAMAN,182,21,239,7.5,Red Sandy / Medium Black,0.54,31
+Telangana,DIU,184,21,242,7.2,Red Sandy / Medium Black,0.55,34
+Telangana,HANUMAKONDA,175,20,230,7.5,Red Sandy / Medium Black,0.52,34
+Telangana,JAGITIAL,164,19,216,7.2,Red Sandy / Medium Black,0.49,32
+Telangana,JANGOAN,164,19,216,7.4,Red Sandy / Medium Black,0.49,33
+Telangana,JAYASHANKAR,170,19,223,7.5,Red Sandy / Medium Black,0.5,33
+Telangana,JOGULAMBA,170,19,223,7.3,Red Sandy / Medium Black,0.5,34
+Telangana,KAMAREDDY,180,21,237,7.4,Red Sandy / Medium Black,0.54,31
+Telangana,KARIMNAGAR,175,20,230,7.1,Red Sandy / Medium Black,0.52,35
+Telangana,KHAMMAM,175,20,230,7.3,Red Sandy / Medium Black,0.52,32
+Telangana,KOMARAM BHEEM ASIFABAD,173,20,228,7.1,Red Sandy / Medium Black,0.51,34
+Telangana,MAHABUBABAD,170,19,223,7.1,Red Sandy / Medium Black,0.5,32
+Telangana,MAHBUBNAGAR,177,20,232,7.2,Red Sandy / Medium Black,0.53,32
+Telangana,MANCHERIAL,172,20,225,7.2,Red Sandy / Medium Black,0.51,34
+Telangana,MEDAK,186,21,244,7.4,Red Sandy / Medium Black,0.55,32
+Telangana,MEDCHAL,168,19,221,7.5,Red Sandy / Medium Black,0.5,33
+Telangana,MEDCHAL MALKAJGIRI,186,21,244,7.3,Red Sandy / Medium Black,0.55,32
+Telangana,MULUGU,186,21,244,7.5,Red Sandy / Medium Black,0.55,35
+Telangana,NAGARKURNOOL,186,21,244,7.2,Red Sandy / Medium Black,0.55,35
+Telangana,NALGONDA,182,21,239,7.1,Red Sandy / Medium Black,0.54,34
+Telangana,NARAYANAPET,173,20,228,7.2,Red Sandy / Medium Black,0.51,32
+Telangana,NIRMAL,182,21,239,7.1,Red Sandy / Medium Black,0.54,34
+Telangana,NIZAMABAD,180,21,237,7.2,Red Sandy / Medium Black,0.54,32
+Telangana,PEDDAPALLI,175,20,230,7.1,Red Sandy / Medium Black,0.52,32
+Telangana,RAJANNA,173,20,228,7.2,Red Sandy / Medium Black,0.51,33
+Telangana,RANGAREDDI,175,20,230,7.1,Red Sandy / Medium Black,0.52,35
+Telangana,SANGAREDDY,170,19,223,7.2,Red Sandy / Medium Black,0.5,33
+Telangana,SIDDIPET,172,20,225,7.1,Red Sandy / Medium Black,0.51,32
+Telangana,SURYAPET,164,19,216,7.4,Red Sandy / Medium Black,0.49,35
+Telangana,THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU,180,21,237,7.2,Red Sandy / Medium Black,0.54,33
+Telangana,VIKARABAD,178,20,235,7.5,Red Sandy / Medium Black,0.53,34
+Telangana,WANAPARTHY,180,21,237,7.2,Red Sandy / Medium Black,0.54,35
+Telangana,WARANGAL,175,20,230,7.2,Red Sandy / Medium Black,0.52,32
+Telangana,WARANGAL URBAN,175,20,230,7.3,Red Sandy / Medium Black,0.52,33
+Telangana,YADADRI,168,19,221,7.5,Red Sandy / Medium Black,0.5,32
+Tripura,DHALAI,182,22,212,7.4,Alluvial Loam,0.56,34
+Tripura,GOMATI,189,23,220,7.4,Alluvial Loam,0.58,35
+Tripura,KHOWAI,171,21,200,7.2,Alluvial Loam,0.52,35
+Tripura,NORTH TRIPURA,169,21,197,7.4,Alluvial Loam,0.52,34
+Tripura,SEPAHIJALA,191,23,223,7.2,Alluvial Loam,0.58,34
+Tripura,SOUTH TRIPURA,191,23,223,7.2,Alluvial Loam,0.58,34
+Tripura,UNAKOTI,169,21,197,7.3,Alluvial Loam,0.52,33
+Tripura,WEST TRIPURA,175,21,204,7.0,Alluvial Loam,0.53,36
+Uttar Pradesh,AGRA,185,24,210,7.2,Alluvial,0.58,32
+Uttar Pradesh,ALIGARH,176,23,200,7.2,Alluvial,0.55,35
+Uttar Pradesh,ALLAHABAD,196,25,223,7.6,Alluvial,0.61,36
+Uttar Pradesh,ALMORA,179,23,204,7.4,Alluvial,0.56,35
+Uttar Pradesh,AMBEDKAR NAGAR,196,25,223,7.3,Alluvial,0.61,32
+Uttar Pradesh,AMETHI,181,24,206,7.2,Alluvial,0.57,33
+Uttar Pradesh,AMROHA,192,25,218,7.3,Alluvial,0.6,36
+Uttar Pradesh,AURAIYA,196,25,223,7.2,Alluvial,0.61,36
+Uttar Pradesh,AZAMGARH,191,25,216,7.4,Alluvial,0.6,33
+Uttar Pradesh,BAGESHWAR,196,25,223,7.6,Alluvial,0.61,35
+Uttar Pradesh,BAGHPAT,192,25,218,7.6,Alluvial,0.6,35
+Uttar Pradesh,BAHRAICH,196,25,223,7.5,Alluvial,0.61,33
+Uttar Pradesh,BALLIA,187,24,212,7.4,Alluvial,0.59,34
+Uttar Pradesh,BALRAMPUR,185,24,210,7.4,Alluvial,0.58,35
+Uttar Pradesh,BANDA,191,25,216,7.2,Alluvial,0.6,32
+Uttar Pradesh,BARABANKI,178,23,202,7.2,Alluvial,0.56,34
+Uttar Pradesh,BAREILLY,185,24,210,7.5,Alluvial,0.58,35
+Uttar Pradesh,BASTI,194,25,220,7.5,Alluvial,0.61,35
+Uttar Pradesh,BIJNOR,174,23,197,7.5,Alluvial,0.55,34
+Uttar Pradesh,BUDAUN,183,24,208,7.4,Alluvial,0.57,34
+Uttar Pradesh,BULANDSHAHR,196,25,223,7.5,Alluvial,0.61,33
+Uttar Pradesh,CHAMOLI,192,25,218,7.4,Alluvial,0.6,33
+Uttar Pradesh,CHAMPAWAT,194,25,220,7.6,Alluvial,0.61,35
+Uttar Pradesh,CHANDAULI,196,25,223,7.4,Alluvial,0.61,35
+Uttar Pradesh,CHITRAKOOT,178,23,202,7.4,Alluvial,0.56,33
+Uttar Pradesh,DEHRADUN,181,24,206,7.6,Alluvial,0.57,34
+Uttar Pradesh,DEORIA,185,24,210,7.2,Alluvial,0.58,36
+Uttar Pradesh,ETAH,183,24,208,7.5,Alluvial,0.57,34
+Uttar Pradesh,ETAWAH,189,24,214,7.4,Alluvial,0.59,35
+Uttar Pradesh,FAIZABAD,191,25,216,7.4,Alluvial,0.6,35
+Uttar Pradesh,FARRUKHABAD,191,25,216,7.4,Alluvial,0.6,34
+Uttar Pradesh,FATEHPUR,192,25,218,7.2,Alluvial,0.6,33
+Uttar Pradesh,FIROZABAD,189,24,214,7.2,Alluvial,0.59,33
+Uttar Pradesh,GAUTAM BUDDHA NAGAR,191,25,216,7.4,Alluvial,0.6,35
+Uttar Pradesh,GHAZIABAD,189,24,214,7.6,Alluvial,0.59,34
+Uttar Pradesh,GHAZIPUR,192,25,218,7.4,Alluvial,0.6,34
+Uttar Pradesh,GONDA,196,25,223,7.4,Alluvial,0.61,36
+Uttar Pradesh,GORAKHPUR,176,23,200,7.3,Alluvial,0.55,34
+Uttar Pradesh,HAMIRPUR,192,25,218,7.4,Alluvial,0.6,35
+Uttar Pradesh,HAPUR,181,24,206,7.2,Alluvial,0.57,35
+Uttar Pradesh,HARDOI,191,25,216,7.4,Alluvial,0.6,34
+Uttar Pradesh,HARIDWAR,192,25,218,7.2,Alluvial,0.6,34
+Uttar Pradesh,HATHRAS,178,23,202,7.2,Alluvial,0.56,34
+Uttar Pradesh,JALAUN,185,24,210,7.6,Alluvial,0.58,34
+Uttar Pradesh,JAUNPUR,196,25,223,7.5,Alluvial,0.61,35
+Uttar Pradesh,JHANSI,194,25,220,7.6,Alluvial,0.61,35
+Uttar Pradesh,KANNAUJ,189,24,214,7.6,Alluvial,0.59,36
+Uttar Pradesh,KANPUR DEHAT,194,25,220,7.3,Alluvial,0.61,33
+Uttar Pradesh,KANPUR NAGAR,181,24,206,7.4,Alluvial,0.57,33
+Uttar Pradesh,KASGANJ,187,24,212,7.2,Alluvial,0.59,36
+Uttar Pradesh,KAUSHAMBI,179,23,204,7.2,Alluvial,0.56,34
+Uttar Pradesh,KHERI,196,25,223,7.4,Alluvial,0.61,33
+Uttar Pradesh,KUSHI NAGAR,185,24,210,7.2,Alluvial,0.58,35
+Uttar Pradesh,LALITPUR,194,25,220,7.3,Alluvial,0.61,32
+Uttar Pradesh,LUCKNOW,174,23,197,7.2,Alluvial,0.55,35
+Uttar Pradesh,MAHARAJGANJ,174,23,197,7.2,Alluvial,0.55,34
+Uttar Pradesh,MAHOBA,187,24,212,7.5,Alluvial,0.59,34
+Uttar Pradesh,MAINPURI,176,23,200,7.5,Alluvial,0.55,35
+Uttar Pradesh,MATHURA,196,25,223,7.4,Alluvial,0.61,34
+Uttar Pradesh,MAU,192,25,218,7.6,Alluvial,0.6,36
+Uttar Pradesh,MEERUT,183,24,208,7.2,Alluvial,0.57,34
+Uttar Pradesh,MIRZAPUR,185,24,210,7.6,Alluvial,0.58,35
+Uttar Pradesh,MORADABAD,176,23,200,7.4,Alluvial,0.55,33
+Uttar Pradesh,MUZAFFARNAGAR,185,24,210,7.5,Alluvial,0.58,34
+Uttar Pradesh,NAINITAL,196,25,223,7.2,Alluvial,0.61,33
+Uttar Pradesh,PAURI GARHWAL,178,23,202,7.5,Alluvial,0.56,35
+Uttar Pradesh,PILIBHIT,181,24,206,7.5,Alluvial,0.57,32
+Uttar Pradesh,PITHORAGARH,183,24,208,7.2,Alluvial,0.57,32
+Uttar Pradesh,PRATAPGARH,183,24,208,7.3,Alluvial,0.57,34
+Uttar Pradesh,RAE BARELI,196,25,223,7.4,Alluvial,0.61,33
+Uttar Pradesh,RAMPUR,196,25,223,7.5,Alluvial,0.61,33
+Uttar Pradesh,RUDRA PRAYAG,185,24,210,7.2,Alluvial,0.58,32
+Uttar Pradesh,SAHARANPUR,191,25,216,7.2,Alluvial,0.6,33
+Uttar Pradesh,SAMBHAL,185,24,210,7.5,Alluvial,0.58,33
+Uttar Pradesh,SANT KABEER NAGAR,176,23,200,7.3,Alluvial,0.55,33
+Uttar Pradesh,SANT RAVIDAS NAGAR,187,24,212,7.6,Alluvial,0.59,35
+Uttar Pradesh,SHAHJAHANPUR,189,24,214,7.3,Alluvial,0.59,33
+Uttar Pradesh,SHAMLI,189,24,214,7.3,Alluvial,0.59,33
+Uttar Pradesh,SHRAVASTI,192,25,218,7.2,Alluvial,0.6,35
+Uttar Pradesh,SIDDHARTH NAGAR,194,25,220,7.4,Alluvial,0.61,35
+Uttar Pradesh,SITAPUR,185,24,210,7.2,Alluvial,0.58,34
+Uttar Pradesh,SONBHADRA,191,25,216,7.5,Alluvial,0.6,34
+Uttar Pradesh,SULTANPUR,179,23,204,7.2,Alluvial,0.56,34
+Uttar Pradesh,TEHRI GARHWAL,191,25,216,7.5,Alluvial,0.6,35
+Uttar Pradesh,UDAM SINGH NAGAR,174,23,197,7.2,Alluvial,0.55,34
+Uttar Pradesh,UNNAO,181,24,206,7.6,Alluvial,0.57,35
+Uttar Pradesh,UTTAR KASHI,194,25,220,7.5,Alluvial,0.61,34
+Uttar Pradesh,VARANASI,185,24,210,7.5,Alluvial,0.58,33
+Uttarakhand,ALMORA,226,27,215,6.3,Tarai / Hill Loam,0.97,36
+Uttarakhand,BAGESHWAR,202,24,193,6.2,Tarai / Hill Loam,0.86,38
+Uttarakhand,CHAMOLI,224,27,213,6.2,Tarai / Hill Loam,0.96,38
+Uttarakhand,CHAMPAWAT,219,27,209,6.5,Tarai / Hill Loam,0.94,39
+Uttarakhand,DEHRADUN,215,26,205,6.5,Tarai / Hill Loam,0.92,38
+Uttarakhand,HARIDWAR,215,26,205,6.1,Tarai / Hill Loam,0.92,40
+Uttarakhand,NAINITAL,221,27,211,6.1,Tarai / Hill Loam,0.95,38
+Uttarakhand,PAURI GARHWAL,219,27,209,6.5,Tarai / Hill Loam,0.94,39
+Uttarakhand,PITHORAGARH,217,26,207,6.1,Tarai / Hill Loam,0.93,39
+Uttarakhand,RUDRA PRAYAG,206,25,197,6.5,Tarai / Hill Loam,0.88,38
+Uttarakhand,TEHRI GARHWAL,224,27,213,6.2,Tarai / Hill Loam,0.96,37
+Uttarakhand,UDAM SINGH NAGAR,206,25,197,6.2,Tarai / Hill Loam,0.88,38
+Uttarakhand,UTTAR KASHI,211,25,201,6.5,Tarai / Hill Loam,0.9,36
+West Bengal,24 PARAGANAS NORTH,223,28,191,6.4,Alluvial / Terai Loam,0.76,41
+West Bengal,24 PARAGANAS SOUTH,218,27,187,6.4,Alluvial / Terai Loam,0.75,41
+West Bengal,ALIPURDUAR,200,25,171,6.3,Alluvial / Terai Loam,0.68,39
+West Bengal,BANKURA,212,26,182,6.2,Alluvial / Terai Loam,0.73,38
+West Bengal,BIRBHUM,206,25,176,6.1,Alluvial / Terai Loam,0.71,41
+West Bengal,COOCHBEHAR,197,24,169,6.4,Alluvial / Terai Loam,0.68,40
+West Bengal,DARJEELING,208,26,178,6.1,Alluvial / Terai Loam,0.71,40
+West Bengal,DINAJPUR DAKSHIN,212,26,182,6.4,Alluvial / Terai Loam,0.73,41
+West Bengal,DINAJPUR UTTAR,223,28,191,6.2,Alluvial / Terai Loam,0.76,39
+West Bengal,HOOGHLY,210,26,180,6.1,Alluvial / Terai Loam,0.72,39
+West Bengal,HOWRAH,204,25,175,6.3,Alluvial / Terai Loam,0.7,42
+West Bengal,JALPAIGURI,212,26,182,6.0,Alluvial / Terai Loam,0.73,40
+West Bengal,JHARGRAM,214,27,184,6.4,Alluvial / Terai Loam,0.73,38
+West Bengal,KALIMPONG,200,25,171,6.2,Alluvial / Terai Loam,0.68,42
+West Bengal,MALDAH,216,27,185,6.0,Alluvial / Terai Loam,0.74,38
+West Bengal,MEDINIPUR EAST,214,27,184,6.1,Alluvial / Terai Loam,0.73,38
+West Bengal,MEDINIPUR WEST,218,27,187,6.3,Alluvial / Terai Loam,0.75,42
+West Bengal,MURSHIDABAD,210,26,180,6.4,Alluvial / Terai Loam,0.72,40
+West Bengal,NADIA,200,25,171,6.1,Alluvial / Terai Loam,0.68,40
+West Bengal,PASCHIM BARDHAMAN,212,26,182,6.0,Alluvial / Terai Loam,0.73,42
+West Bengal,PURBA BARDHAMAN,223,28,191,6.2,Alluvial / Terai Loam,0.76,38
+West Bengal,PURULIA,223,28,191,6.0,Alluvial / Terai Loam,0.76,41

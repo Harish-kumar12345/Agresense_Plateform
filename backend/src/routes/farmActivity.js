@@ -4,7 +4,22 @@ const mongoose = require('mongoose');
 const { FarmActivity } = require('../models/FarmActivity');
 const { requireAuth, optionalAuth } = require('../middleware/auth');
 
-// In-memory fallback storage for farm activities
+const path = require('path');
+const fs = require('fs');
+
+// ICAR Package of Practices (PoP) Master Agronomic Guidelines
+let icarGuidelines = {};
+try {
+  const popPath = path.join(__dirname, '../data/icar_package_of_practices.json');
+  if (fs.existsSync(popPath)) {
+    const raw = JSON.parse(fs.readFileSync(popPath, 'utf8'));
+    icarGuidelines = raw.crops || {};
+  }
+} catch (e) {
+  console.warn('Could not load ICAR Package of Practices:', e.message);
+}
+
+// In-memory fallback storage for farm activities (Clearly marked as DEMO_SEED)
 const inMemoryActivities = [
   {
     activity_id: 'act_demo_1',
@@ -13,9 +28,11 @@ const inMemoryActivities = [
     crop: 'Rice',
     activity_type: 'Sowing',
     date: new Date(Date.now() - 65 * 86400000).toISOString(),
-    quantity_details: 'Seed rate: 40 kg/ha (PR-126 paddy variety)',
-    notes: 'Sown in nursery bed with moist soil preparation',
-    createdAt: new Date(Date.now() - 65 * 86400000).toISOString()
+    quantity_details: 'Seed rate: 35 kg/ha (ICAR PoP Transplanted Paddy guideline)',
+    notes: 'Sown in nursery bed with moist soil preparation and carbendazim seed treatment',
+    createdAt: new Date(Date.now() - 65 * 86400000).toISOString(),
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     activity_id: 'act_demo_2',
@@ -24,9 +41,11 @@ const inMemoryActivities = [
     crop: 'Rice',
     activity_type: 'Irrigation',
     date: new Date(Date.now() - 45 * 86400000).toISOString(),
-    quantity_details: 'Canal water flow: 5cm field submergence',
-    notes: 'Maintained 5 cm standing water level during tillering',
-    createdAt: new Date(Date.now() - 45 * 86400000).toISOString()
+    quantity_details: 'Canal water flow: 4-5cm field submergence (ICAR water regime)',
+    notes: 'Maintained standing water level during active tillering stage',
+    createdAt: new Date(Date.now() - 45 * 86400000).toISOString(),
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     activity_id: 'act_demo_3',
@@ -35,9 +54,11 @@ const inMemoryActivities = [
     crop: 'Rice',
     activity_type: 'Fertilization',
     date: new Date(Date.now() - 30 * 86400000).toISOString(),
-    quantity_details: 'Urea: 50 kg/ha, NPK 19:19:19: 25 kg/ha',
-    notes: 'Applied top dressing fertilizer before panicle initiation',
-    createdAt: new Date(Date.now() - 30 * 86400000).toISOString()
+    quantity_details: 'Urea: 32.5 kg/ha (25% top dressing split at tillering), DAP: 100 kg/ha basal',
+    notes: 'Applied top dressing fertilizer before panicle initiation per ICAR 3-split schedule',
+    createdAt: new Date(Date.now() - 30 * 86400000).toISOString(),
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     activity_id: 'act_demo_4',
@@ -46,9 +67,11 @@ const inMemoryActivities = [
     crop: 'Rice',
     activity_type: 'Disease Inspection',
     date: new Date(Date.now() - 15 * 86400000).toISOString(),
-    quantity_details: 'Inspected 10 sample spots across field',
-    notes: 'Mild bacterial leaf blight risk detected; neem oil recommended',
-    createdAt: new Date(Date.now() - 15 * 86400000).toISOString()
+    quantity_details: 'Inspected 10 sample spots across field (ICAR-NCIPM economic threshold scouting)',
+    notes: 'Bacterial leaf blight scouting below economic threshold; prophylactic bio-control recommended',
+    createdAt: new Date(Date.now() - 15 * 86400000).toISOString(),
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     activity_id: 'act_demo_5',
@@ -57,9 +80,11 @@ const inMemoryActivities = [
     crop: 'Rice',
     activity_type: 'Pesticide Application',
     date: new Date(Date.now() - 10 * 86400000).toISOString(),
-    quantity_details: 'Neem Oil 1500ppm: 2.5 L/ha + Sticker',
-    notes: 'Preventative bio-pesticide spray during evening hours',
-    createdAt: new Date(Date.now() - 10 * 86400000).toISOString()
+    quantity_details: 'Azadirachtin 10,000 ppm (Neem Oil): 1.5 L/ha (CIBRC / ICAR calibrated dose)',
+    notes: 'Preventative bio-pesticide spray during evening hours; PHI = 0 days',
+    createdAt: new Date(Date.now() - 10 * 86400000).toISOString(),
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   }
 ];
 
@@ -249,6 +274,42 @@ router.delete('/:id', optionalAuth, async (req, res) => {
       success: false, 
       error: 'Failed to delete activity' + (process.env.NODE_ENV === 'production' ? '' : ': ' + error.message) 
     });
+  }
+});
+
+/**
+ * GET /api/farm-activities/guidelines
+ * Fetch official ICAR Package of Practices agronomic guidelines (seed rates, fertilizer schedules, irrigation)
+ */
+router.get('/guidelines', (req, res) => {
+  try {
+    const { crop } = req.query;
+    if (crop) {
+      const matchedKey = Object.keys(icarGuidelines).find(k => k.toLowerCase() === crop.toLowerCase());
+      if (matchedKey) {
+        return res.json({
+          success: true,
+          crop: matchedKey,
+          authority: 'Indian Council of Agricultural Research (ICAR)',
+          guidelines: icarGuidelines[matchedKey]
+        });
+      }
+      return res.status(404).json({
+        success: false,
+        message: `No specific ICAR guidelines found for crop: ${crop}`,
+        availableCrops: Object.keys(icarGuidelines)
+      });
+    }
+
+    return res.json({
+      success: true,
+      authority: 'Indian Council of Agricultural Research (ICAR)',
+      availableCrops: Object.keys(icarGuidelines),
+      guidelines: icarGuidelines
+    });
+  } catch (error) {
+    console.error('Error fetching ICAR guidelines:', error);
+    return res.status(500).json({ success: false, message: error.message });
   }
 });
 

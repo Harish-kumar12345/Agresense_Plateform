@@ -1,0 +1,110 @@
+{
+  "dataset_name": "ICAR Package of Practices (PoP) Master Agronomic Guidelines",
+  "authority": "Indian Council of Agricultural Research (ICAR) & State Agricultural Universities (SAUs)",
+  "portal": "https://icar.org.in/",
+  "crops": {
+    "Rice": {
+      "seed_rate_kg_per_ha": {
+        "transplanted": 35,
+        "direct_seeded": 20,
+        "sri_method": 5
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 130,
+        "dap": 100,
+        "mop": 67,
+        "split_schedule": "Urea in 3 splits: 50% basal, 25% active tillering, 25% panicle initiation"
+      },
+      "irrigation_guideline": "Maintain 2-5 cm standing water from tillering to milk stage. Drain field 10-15 days prior to harvest.",
+      "pest_management": {
+        "bio_pesticide": "Azadirachtin 10000 ppm @ 1.5 L/ha at 15-20 days after transplanting",
+        "chemical_threshold": "BPH: 5-10 insects/hill; Stem Borer: 1 egg mass/m2 or 5% dead hearts"
+      }
+    },
+    "Wheat": {
+      "seed_rate_kg_per_ha": {
+        "timely_sown": 100,
+        "late_sown": 125
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 150,
+        "dap": 125,
+        "mop": 50,
+        "split_schedule": "Urea in 2 splits: 50% basal with DAP/MOP, 50% at first irrigation (CRI stage ~21 days)"
+      },
+      "irrigation_guideline": "4-6 irrigations; critical stages: Crown Root Initiation (CRI at 21 DAS), Tillering (42 DAS), Jointing (65 DAS), Flowering (85 DAS), Milk (105 DAS).",
+      "pest_management": {
+        "bio_pesticide": "Trichoderma viride seed treatment @ 4-5 g/kg seed",
+        "chemical_threshold": "Yellow Rust: 1 pustule/plant in vulnerable spots requires immediate spray"
+      }
+    },
+    "Maize": {
+      "seed_rate_kg_per_ha": {
+        "hybrid": 20,
+        "composite": 18
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 180,
+        "dap": 130,
+        "mop": 60,
+        "split_schedule": "Urea in 3 splits: 33% basal, 33% knee-high stage (V6), 33% tasseling"
+      },
+      "irrigation_guideline": "Critical irrigation at knee-high, tasseling, silking, and grain filling stages.",
+      "pest_management": {
+        "bio_pesticide": "Neem oil @ 2 L/ha or Metarhizium anisopliae @ 2.5 kg/ha against FAW",
+        "chemical_threshold": "Fall Armyworm: 10% damaged plants in whorl stage"
+      }
+    },
+    "Cotton": {
+      "seed_rate_kg_per_ha": {
+        "bt_hybrid": 2.5,
+        "non_bt": 15
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 160,
+        "dap": 110,
+        "mop": 70,
+        "split_schedule": "Urea in 3 equal splits: basal, square formation, and peak boll development"
+      },
+      "irrigation_guideline": "Avoid waterlogging; irrigate at vegetative, squaring, flowering, and boll development stages.",
+      "pest_management": {
+        "bio_pesticide": "Beauveria bassiana @ 2.5 kg/ha or Neem oil 1500 ppm @ 2.5 L/ha",
+        "chemical_threshold": "Whitefly: 6-8 adults/leaf; Pink Bollworm: 10% infested green bolls"
+      }
+    },
+    "Sugarcane": {
+      "seed_rate_kg_per_ha": {
+        "three_budded_setts": 75000,
+        "two_budded_setts": 100000
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 350,
+        "dap": 150,
+        "mop": 120,
+        "split_schedule": "Urea applied in 3 splits: at planting, 45 days, and 90 days after planting"
+      },
+      "irrigation_guideline": "Light frequent irrigation during germination and tillering (every 7-10 days).",
+      "pest_management": {
+        "bio_pesticide": "Trichogramma chilonis egg parasitoids @ 50,000/ha for early shoot borer",
+        "chemical_threshold": "Early shoot borer: 15% dead hearts"
+      }
+    },
+    "Potato": {
+      "seed_rate_kg_per_ha": {
+        "tubers": 2500,
+        "true_potato_seed": 100
+      },
+      "fertilizer_recommendation_kg_per_ha": {
+        "urea": 200,
+        "dap": 150,
+        "mop": 100,
+        "split_schedule": "50% N + full P & K at planting; remaining 50% N during earthing up at 30-35 DAS"
+      },
+      "irrigation_guideline": "First irrigation 5-7 days after planting; subsequent irrigations at 7-10 day intervals. Stop 10 days before dehaulming.",
+      "pest_management": {
+        "bio_pesticide": "Mancozeb 75% WP prophylactic spray followed by Trichoderma soil treatment",
+        "chemical_threshold": "Late Blight: any blighted leaflet reported under humid weather requires immediate contact spray"
+      }
+    }
+  }
+}

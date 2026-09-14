@@ -9,6 +9,7 @@ const {
   getOfficerFarmsOverview,
   listAuditLogs,
   createAuditLogEntry,
+  getAgrarianCensus,
   getOfficerAlertPreferences,
   updateOfficerAlertPreferences
 } = require('../controllers/officerController');
@@ -26,6 +27,9 @@ router.post('/broadcast-alert', requireAuth, requireRole('officer'), broadcastDi
 
 // GET /api/officer/farms-overview — officer-only: aggregated farm data
 router.get('/farms-overview', requireAuth, requireRole('officer'), getOfficerFarmsOverview);
+
+// GET /api/officer/agrarian-census — officer-only: DES Agricultural Census district crop sowing acreage & benchmarks
+router.get('/agrarian-census', requireAuth, requireRole('officer'), getAgrarianCensus);
 
 // GET & POST /api/officer/audit-logs — officer-only append-only audit trail
 router.get('/audit-logs', requireAuth, requireRole('officer'), listAuditLogs);

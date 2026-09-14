@@ -58,17 +58,8 @@ interface TickerItem {
   rawCrop: string;
 }
 
-// APMC Mandi Default Fallback Ticker Data (used before live telemetry loads)
-const defaultTickerCommodities: TickerItem[] = [
-  { name: 'Rice (Paddy)', price: 2450, unit: '/q', change: '+3.2%', isUp: true, rawCrop: 'Rice' },
-  { name: 'Wheat (Sharbati)', price: 2280, unit: '/q', change: '+1.5%', isUp: true, rawCrop: 'Wheat' },
-  { name: 'Maize (Hybrid)', price: 1950, unit: '/q', change: '-0.8%', isUp: false, rawCrop: 'Maize' },
-  { name: 'Cotton (Long Staple)', price: 6800, unit: '/q', change: '+4.1%', isUp: true, rawCrop: 'Cotton' },
-  { name: 'Potato (Jyoti)', price: 1420, unit: '/q', change: '+2.0%', isUp: true, rawCrop: 'Potato' },
-  { name: 'Onion (Nashik)', price: 2100, unit: '/q', change: '+5.4%', isUp: true, rawCrop: 'Onion' },
-  { name: 'Soybean (Yellow)', price: 4650, unit: '/q', change: '+0.5%', isUp: true, rawCrop: 'Soybean' },
-  { name: 'Sugarcane (CO 0238)', price: 350, unit: '/q', change: 'FRP', isUp: true, rawCrop: 'Sugarcane' }
-];
+// APMC Mandi Ticker Data: dynamically derived from real Agmarknet dataset records
+const defaultTickerCommodities: TickerItem[] = [];
 
 
 interface CropPriceModuleProps {
@@ -188,7 +179,7 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
       });
     }
 
-    return defaultTickerCommodities;
+    return [];
   }, [pricesList]);
 
   // Ensure seamless marquee looping by duplicating items

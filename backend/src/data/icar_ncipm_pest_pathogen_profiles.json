@@ -1,0 +1,649 @@
+{
+  "source": "ICAR-NCIPM National Pest Surveillance System",
+  "crops": {
+    "Rice": [
+      {
+        "name": "Rice Blast (Magnaporthe oryzae)",
+        "type": "Fungal",
+        "optTemp": [
+          22,
+          28
+        ],
+        "optHumid": 85,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Tricyclazole 75% WP @ 0.6 g/L or Kasugamycin 3% SL @ 2 ml/L"
+      },
+      {
+        "name": "Sheath Blight (Rhizoctonia solani)",
+        "type": "Fungal",
+        "optTemp": [
+          28,
+          33
+        ],
+        "optHumid": 85,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Validamycin 3% L @ 2.5 ml/L or Hexaconazole 5% EC @ 2 ml/L"
+      },
+      {
+        "name": "Brown Planthopper (Nilaparvata lugens)",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          31
+        ],
+        "optHumid": 75,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Pymetrozine 50% WDG @ 0.6 g/L or Triflumezopyrim 10% SC @ 0.5 ml/L"
+      },
+      {
+        "name": "Bacterial Leaf Blight (Xanthomonas oryzae)",
+        "type": "Bacterial",
+        "optTemp": [
+          25,
+          34
+        ],
+        "optHumid": 78,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Copper Oxychloride 50% WP @ 2.5 g/L + Streptocycline @ 0.1 g/L"
+      }
+    ],
+    "Wheat": [
+      {
+        "name": "Yellow / Stripe Rust (Puccinia striiformis)",
+        "type": "Fungal",
+        "optTemp": [
+          10,
+          18
+        ],
+        "optHumid": 75,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Propiconazole 25% EC (Tilt) @ 1 ml/L at first notice"
+      },
+      {
+        "name": "Brown / Leaf Rust (Puccinia triticina)",
+        "type": "Fungal",
+        "optTemp": [
+          16,
+          25
+        ],
+        "optHumid": 70,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Propiconazole 25% EC @ 1 ml/L or Tebuconazole 25.9% EC @ 1 ml/L"
+      },
+      {
+        "name": "Powdery Mildew (Blumeria graminis)",
+        "type": "Fungal",
+        "optTemp": [
+          15,
+          22
+        ],
+        "optHumid": 65,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Wettable Sulphur 80% WP @ 3 g/L or Propiconazole @ 1 ml/L"
+      },
+      {
+        "name": "Wheat Aphids (Sitobion avenae)",
+        "type": "Pest",
+        "optTemp": [
+          18,
+          26
+        ],
+        "optHumid": 50,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Thiamethoxam 25% WG @ 0.2 g/L or Imidacloprid 17.8% SL @ 0.3 ml/L"
+      }
+    ],
+    "Cotton": [
+      {
+        "name": "Pink Bollworm (Pectinophora gossypiella)",
+        "type": "Pest",
+        "optTemp": [
+          24,
+          33
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Pheromone traps (8/ha) + Profenofos 50% EC @ 2 ml/L or Emamectin Benzoate 5% SG @ 0.5 g/L"
+      },
+      {
+        "name": "Whitefly & Leaf Curl Vector (Bemisia tabaci)",
+        "type": "Pest",
+        "optTemp": [
+          26,
+          36
+        ],
+        "optHumid": 55,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Diafenthiuron 50% WP @ 1.2 g/L or Pyriproxyfen 10% EC @ 2 ml/L"
+      },
+      {
+        "name": "Bacterial Blight (Xanthomonas citri pv. malvacearum)",
+        "type": "Bacterial",
+        "optTemp": [
+          28,
+          34
+        ],
+        "optHumid": 80,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Copper Oxychloride 50% WP @ 2.5 g/L + Streptocycline 100 ppm"
+      },
+      {
+        "name": "Fusarium Wilt (Fusarium oxysporum)",
+        "type": "Fungal",
+        "optTemp": [
+          22,
+          29
+        ],
+        "optHumid": 70,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Trichoderma viride soil application @ 2.5 kg/ha in FYM"
+      }
+    ],
+    "Maize": [
+      {
+        "name": "Fall Armyworm (Spodoptera frugiperda)",
+        "type": "Pest",
+        "optTemp": [
+          24,
+          32
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Spinetoram 11.7% SC @ 0.5 ml/L or Chlorantraniliprole 18.5% SC @ 0.4 ml/L"
+      },
+      {
+        "name": "Maydis Leaf Blight (Bipolaris maydis)",
+        "type": "Fungal",
+        "optTemp": [
+          20,
+          30
+        ],
+        "optHumid": 80,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Mancozeb 75% WP @ 2.5 g/L or Azoxystrobin @ 1 ml/L"
+      },
+      {
+        "name": "Stem Borer (Chilo partellus)",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          33
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Carbofuran 3G granules @ 7.5 kg/ha or Chlorantraniliprole @ 0.4 ml/L"
+      }
+    ],
+    "Sugarcane": [
+      {
+        "name": "Red Rot (Colletotrichum falcatum)",
+        "type": "Fungal",
+        "optTemp": [
+          27,
+          34
+        ],
+        "optHumid": 85,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Use healthy seed setts treated with Carbendazim 50% WP @ 2 g/L; ensure drainage"
+      },
+      {
+        "name": "Top Borer (Scirpophaga excerptalis)",
+        "type": "Pest",
+        "optTemp": [
+          26,
+          33
+        ],
+        "optHumid": 70,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Chlorantraniliprole 0.4% G @ 18 kg/ha at shoot emergence"
+      },
+      {
+        "name": "Sugarcane Smut (Sporisorium scitamineum)",
+        "type": "Fungal",
+        "optTemp": [
+          25,
+          35
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Rogue out infected whips; spray Propiconazole 25% EC @ 1 ml/L"
+      }
+    ],
+    "Potato": [
+      {
+        "name": "Late Blight (Phytophthora infestans)",
+        "type": "Fungal",
+        "optTemp": [
+          12,
+          22
+        ],
+        "optHumid": 85,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Prophylactic Mancozeb 75% WP @ 2.5 g/L; post-outbreak Cymoxanil 8% + Mancozeb 64% WP @ 3 g/L"
+      },
+      {
+        "name": "Early Blight (Alternaria solani)",
+        "type": "Fungal",
+        "optTemp": [
+          24,
+          30
+        ],
+        "optHumid": 75,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Chlorothalonil 75% WP @ 2 g/L or Mancozeb @ 2.5 g/L"
+      },
+      {
+        "name": "Potato Aphids (Myzus persicae)",
+        "type": "Pest",
+        "optTemp": [
+          18,
+          25
+        ],
+        "optHumid": 55,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Imidacloprid 17.8% SL @ 0.3 ml/L or Acetamiprid 20% SP @ 0.2 g/L"
+      }
+    ],
+    "Tomato": [
+      {
+        "name": "Early Blight (Alternaria solani)",
+        "type": "Fungal",
+        "optTemp": [
+          24,
+          30
+        ],
+        "optHumid": 75,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Mancozeb 75% WP @ 2.5 g/L or Azoxystrobin @ 1 ml/L"
+      },
+      {
+        "name": "Tomato Leaf Curl Virus (Whitefly vector)",
+        "type": "Viral",
+        "optTemp": [
+          26,
+          35
+        ],
+        "optHumid": 55,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Yellow sticky traps + Diafenthiuron 50% WP @ 1.2 g/L"
+      },
+      {
+        "name": "Fruit Borer (Helicoverpa armigera)",
+        "type": "Pest",
+        "optTemp": [
+          24,
+          32
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Emamectin Benzoate 5% SG @ 0.5 g/L or Chlorantraniliprole @ 0.4 ml/L"
+      }
+    ],
+    "Mustard": [
+      {
+        "name": "White Rust (Albugo candida)",
+        "type": "Fungal",
+        "optTemp": [
+          12,
+          20
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Metalaxyl 8% + Mancozeb 64% WP (Ridomil MZ) @ 2 g/L"
+      },
+      {
+        "name": "Mustard Aphid (Lipaphis erysimi)",
+        "type": "Pest",
+        "optTemp": [
+          14,
+          22
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Dimethoate 30% EC @ 1.5 ml/L or Thiamethoxam 25% WG @ 0.2 g/L"
+      },
+      {
+        "name": "Alternaria Blight (Alternaria brassicae)",
+        "type": "Fungal",
+        "optTemp": [
+          18,
+          26
+        ],
+        "optHumid": 75,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Iprodione 50% WP @ 2 g/L or Mancozeb @ 2.5 g/L"
+      }
+    ],
+    "Soybean": [
+      {
+        "name": "Soybean Rust (Phakopsora pachyrhizi)",
+        "type": "Fungal",
+        "optTemp": [
+          18,
+          26
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Hexaconazole 5% EC @ 2 ml/L or Propiconazole 25% EC @ 1 ml/L"
+      },
+      {
+        "name": "Girdle Beetle (Obereopsis brevis)",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          33
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Thiamethoxam 12.6% + Lambda-cyhalothrin 9.5% ZC @ 0.3 ml/L"
+      },
+      {
+        "name": "Yellow Mosaic Virus (Whitefly vector)",
+        "type": "Viral",
+        "optTemp": [
+          26,
+          35
+        ],
+        "optHumid": 60,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Acetamiprid 20% SP @ 0.2 g/L or Thiamethoxam @ 0.2 g/L"
+      }
+    ],
+    "Groundnut": [
+      {
+        "name": "Tikka Leaf Spot (Cercospora arachidicola)",
+        "type": "Fungal",
+        "optTemp": [
+          24,
+          30
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Carbendazim 50% WP @ 1 g/L or Chlorothalonil @ 2 g/L"
+      },
+      {
+        "name": "Groundnut Rust (Puccinia arachidis)",
+        "type": "Fungal",
+        "optTemp": [
+          22,
+          28
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Mancozeb @ 2.5 g/L or Hexaconazole @ 1.5 ml/L"
+      },
+      {
+        "name": "Spodoptera Defoliator (Spodoptera litura)",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          34
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Chlorantraniliprole 18.5% SC @ 0.3 ml/L"
+      }
+    ],
+    "Gram": [
+      {
+        "name": "Ascochyta Blight (Ascochyta rabiei)",
+        "type": "Fungal",
+        "optTemp": [
+          15,
+          23
+        ],
+        "optHumid": 75,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Chlorothalonil 75% WP @ 2 g/L or Carbendazim @ 1 g/L"
+      },
+      {
+        "name": "Fusarium Wilt (Fusarium oxysporum f. sp. ciceris)",
+        "type": "Fungal",
+        "optTemp": [
+          23,
+          28
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Seed treatment with Trichoderma viride @ 4 g/kg seed"
+      },
+      {
+        "name": "Gram Pod Borer (Helicoverpa armigera)",
+        "type": "Pest",
+        "optTemp": [
+          22,
+          32
+        ],
+        "optHumid": 55,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Pheromone traps (5/ha) + Indoxacarb 14.5% SC @ 1 ml/L or Emamectin Benzoate @ 0.5 g/L"
+      }
+    ],
+    "Pulses": [
+      {
+        "name": "Yellow Mosaic Virus (Mungbean YMV)",
+        "type": "Viral",
+        "optTemp": [
+          26,
+          35
+        ],
+        "optHumid": 60,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Imidacloprid 17.8% SL @ 0.3 ml/L to control whiteflies"
+      },
+      {
+        "name": "Powdery Mildew (Erysiphe polygoni)",
+        "type": "Fungal",
+        "optTemp": [
+          20,
+          27
+        ],
+        "optHumid": 65,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Wettable Sulphur 80% WP @ 3 g/L or Hexaconazole @ 1.5 ml/L"
+      },
+      {
+        "name": "Pod Borer Complex",
+        "type": "Pest",
+        "optTemp": [
+          24,
+          32
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Chlorantraniliprole @ 0.3 ml/L or Flubendiamide 39.35% SC @ 0.2 ml/L"
+      }
+    ],
+    "Onion": [
+      {
+        "name": "Purple Blotch (Alternaria porri)",
+        "type": "Fungal",
+        "optTemp": [
+          22,
+          29
+        ],
+        "optHumid": 85,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Mancozeb 75% WP @ 2.5 g/L or Tebuconazole @ 1 ml/L"
+      },
+      {
+        "name": "Stemphylium Leaf Blight",
+        "type": "Fungal",
+        "optTemp": [
+          20,
+          27
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Difenoconazole 25% EC @ 1 ml/L"
+      },
+      {
+        "name": "Onion Thrips (Thrips tabaci)",
+        "type": "Pest",
+        "optTemp": [
+          20,
+          30
+        ],
+        "optHumid": 50,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Fipronil 5% SC @ 1.5 ml/L or Spinosad 45% SC @ 0.3 ml/L"
+      }
+    ],
+    "Chilli": [
+      {
+        "name": "Anthracnose / Die-back (Colletotrichum capsici)",
+        "type": "Fungal",
+        "optTemp": [
+          25,
+          30
+        ],
+        "optHumid": 80,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Azoxystrobin 23% SC @ 1 ml/L or Copper Oxychloride @ 2.5 g/L"
+      },
+      {
+        "name": "Chilli Thrips & Yellow Mite",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          34
+        ],
+        "optHumid": 55,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Diafenthiuron 50% WP @ 1.2 g/L or Spiromesifen 22.9% SC @ 1 ml/L"
+      },
+      {
+        "name": "Bacterial Leaf Spot (Xanthomonas)",
+        "type": "Bacterial",
+        "optTemp": [
+          25,
+          33
+        ],
+        "optHumid": 80,
+        "highNPenalty": true,
+        "moistPenalty": true,
+        "control": "Streptocycline 100 ppm + Copper Oxychloride @ 2 g/L"
+      }
+    ],
+    "Apple": [
+      {
+        "name": "Apple Scab (Venturia inaequalis)",
+        "type": "Fungal",
+        "optTemp": [
+          14,
+          21
+        ],
+        "optHumid": 85,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Difenoconazole 25% EC @ 0.3 ml/L or Captan 50% WP @ 2.5 g/L"
+      },
+      {
+        "name": "Powdery Mildew (Podosphaera leucotricha)",
+        "type": "Fungal",
+        "optTemp": [
+          18,
+          25
+        ],
+        "optHumid": 65,
+        "highNPenalty": true,
+        "moistPenalty": false,
+        "control": "Hexaconazole 5% EC @ 0.5 ml/L or Wettable Sulphur @ 2.5 g/L"
+      },
+      {
+        "name": "San Jose Scale (Diaspidiotus perniciosus)",
+        "type": "Pest",
+        "optTemp": [
+          20,
+          29
+        ],
+        "optHumid": 60,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Dormant spray with Horticultural Mineral Oil (HMO) @ 20 ml/L"
+      }
+    ],
+    "Coconut": [
+      {
+        "name": "Rhinoceros Beetle (Oryctes rhinoceros)",
+        "type": "Pest",
+        "optTemp": [
+          24,
+          33
+        ],
+        "optHumid": 70,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Hook extraction from crown; apply Phorate 10G or neem cake mixture to leaf axils"
+      },
+      {
+        "name": "Red Palm Weevil (Rhynchophorus ferrugineus)",
+        "type": "Pest",
+        "optTemp": [
+          25,
+          34
+        ],
+        "optHumid": 70,
+        "highNPenalty": false,
+        "moistPenalty": false,
+        "control": "Pheromone lures (Ferrolure+) + crown stem injection with Imidacloprid @ 3 ml/tree"
+      },
+      {
+        "name": "Bud Rot (Phytophthora palmivora)",
+        "type": "Fungal",
+        "optTemp": [
+          22,
+          28
+        ],
+        "optHumid": 85,
+        "highNPenalty": false,
+        "moistPenalty": true,
+        "control": "Bordeaux paste application on crown; spray Bordeaux mixture 1% before monsoon"
+      }
+    ]
+  }
+}

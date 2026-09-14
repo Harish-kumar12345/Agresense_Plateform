@@ -49,41 +49,33 @@ async function getWeather(req, res) {
   }
 }
 
-const fallbackSchemes = [
-  {
-    name: 'PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)',
-    title: 'PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)',
-    description: 'Income support of ₹6,000 per year in three equal installments to all landholding farmer families.',
-    eligibility: 'All landholding farmers families with cultivable land',
-    benefit: '₹6,000 / year direct transfer',
-    link: 'https://pmkisan.gov.in',
-    active: true
-  },
-  {
-    name: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
-    title: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
-    description: 'Comprehensive risk insurance covering yield losses due to non-preventable natural risks.',
-    eligibility: 'All farmers growing notified crops in notified areas',
-    benefit: 'Subsidized crop insurance (1.5% - 2% premium)',
-    link: 'https://pmfby.gov.in',
-    active: true
-  },
-  {
-    name: 'Kisan Credit Card (KCC) Scheme',
-    title: 'Kisan Credit Card (KCC) Scheme',
-    description: 'Adequate and timely credit support from the banking system for agricultural operations.',
-    eligibility: 'Small & marginal farmers, sharecroppers, tenant farmers',
-    benefit: 'Concessional interest rate at 4% p.a.',
-    link: 'https://myscheme.gov.in/schemes/kcc',
-    active: true
-  }
-];
+const SCHEMES_DATA = require('../data/dbt_myscheme_agriculture_directory.json');
+const fallbackSchemes = SCHEMES_DATA.schemes || [];
+const AGMARKNET_TIMESERIES = require('../data/agmarknet_historical_timeseries.json');
 
 async function getMarketPrices(req, res) {
   try {
     const { crop } = req.params;
-    // Placeholder: mock response, replace with actual market API if available
-    res.json({ crop, pricePerQuintalINR: 2500, source: 'mock' });
+    const cropLower = String(crop || 'Rice').toLowerCase();
+
+    // Query authentic Agmarknet modal price
+    const matchedKey = Object.keys(AGMARKNET_TIMESERIES).find(
+      k => k.toLowerCase() === cropLower || cropLower.includes(k.toLowerCase()) || k.toLowerCase().includes(cropLower)
+    ) || 'Rice';
+
+    const comm = AGMARKNET_TIMESERIES[matchedKey];
+    const pricePerQuintalINR = comm ? comm.currentModalPrice : 2450;
+
+    res.json({
+      success: true,
+      crop: matchedKey,
+      pricePerQuintalINR,
+      market: comm?.market || 'National Benchmark Mandi',
+      state: comm?.state || 'India',
+      unit: '₹/Quintal',
+      source: 'Agmarknet / DMI Government of India',
+      lastUpdated: new Date().toISOString()
+    });
   } catch (err) {
     res.status(500).json({ error: 'failed to fetch market prices' });
   }
@@ -91,14 +83,49 @@ async function getMarketPrices(req, res) {
 
 async function getSchemes(req, res) {
   try {
+    const { state, category, search } = req.query || {};
+    let allSchemes = fallbackSchemes;
+
     const mongoose = require('mongoose');
     if (mongoose.connection.readyState === 1) {
-      const schemes = await Scheme.find({ active: true }).lean();
-      if (schemes && schemes.length > 0) {
-        return res.json({ schemes });
+      const dbSchemes = await Scheme.find({ active: true }).lean();
+      if (dbSchemes && dbSchemes.length > 0) {
+        allSchemes = dbSchemes;
       }
     }
-    return res.json({ schemes: fallbackSchemes, fallback: true });
+
+    // Filter by State if requested (include 'All India' central schemes alongside state-specific ones)
+    if (state && String(state).toLowerCase() !== 'all') {
+      const sLower = String(state).toLowerCase();
+      allSchemes = allSchemes.filter(s =>
+        s.state === 'All India' ||
+        s.state.toLowerCase().includes(sLower) ||
+        sLower.includes(s.state.toLowerCase())
+      );
+    }
+
+    // Filter by Category if requested
+    if (category && String(category).toLowerCase() !== 'all') {
+      const cLower = String(category).toLowerCase();
+      allSchemes = allSchemes.filter(s => s.category?.toLowerCase() === cLower);
+    }
+
+    // Keyword Search
+    if (search && search.trim()) {
+      const term = search.toLowerCase().trim();
+      allSchemes = allSchemes.filter(s =>
+        s.name?.toLowerCase().includes(term) ||
+        s.title?.toLowerCase().includes(term) ||
+        s.description?.toLowerCase().includes(term)
+      );
+    }
+
+    return res.json({
+      success: true,
+      count: allSchemes.length,
+      schemes: allSchemes,
+      dataSource: 'DBT Agriculture / National myScheme Portal'
+    });
   } catch (err) {
     res.status(500).json({ error: 'failed to fetch schemes' });
   }

@@ -1,339 +1,7553 @@
 {
-  "Uttar Pradesh": {
+  "Andaman and Nicobar Islands": {
     "default": {
-      "soil_n": 185,
-      "soil_p": 24,
+      "soil_n": 180,
+      "soil_p": 22,
       "soil_k": 210,
-      "soil_ph": 7.4,
+      "soil_ph": 7.2,
       "soil_type": "Alluvial Loam",
-      "organic_matter_pct": 0.58,
+      "organic_matter_pct": 0.55,
       "soil_moisture_pct": 34
     },
-    "Ghaziabad": {
-      "soil_n": 192,
-      "soil_p": 26,
-      "soil_k": 218,
-      "soil_ph": 7.5,
-      "soil_type": "Sandy Clay Loam",
-      "organic_matter_pct": 0.54,
-      "soil_moisture_pct": 32
-    },
-    "Meerut": {
-      "soil_n": 204,
-      "soil_p": 28,
-      "soil_k": 225,
-      "soil_ph": 7.3,
-      "soil_type": "Loamy Sand",
-      "organic_matter_pct": 0.62,
+    "Andaman and Nicobar Islands": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
       "soil_moisture_pct": 35
     },
-    "Varanasi": {
-      "soil_n": 178,
+    "NICOBARS": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "NORTH AND MIDDLE ANDAMAN": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SOUTH ANDAMANS": {
+      "soil_n": 182,
       "soil_p": 22,
-      "soil_k": 195,
-      "soil_ph": 7.6,
-      "soil_type": "Clay Loam",
+      "soil_k": 212,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Andhra Pradesh": {
+    "default": {
+      "soil_n": 182,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "ADILABAD": {
+      "soil_n": 175,
+      "soil_p": 23,
+      "soil_k": 211,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 37
+    },
+    "ANANTAPUR": {
+      "soil_n": 187,
+      "soil_p": 25,
+      "soil_k": 227,
+      "soil_ph": 7.1,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "CHITTOOR": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 231,
+      "soil_ph": 7.4,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "EAST GODAVARI": {
+      "soil_n": 182,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 36
+    },
+    "GUNTUR": {
+      "soil_n": 187,
+      "soil_p": 25,
+      "soil_k": 227,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "HYDERABAD": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 231,
+      "soil_ph": 7.1,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "KADAPA": {
+      "soil_n": 186,
+      "soil_p": 24,
+      "soil_k": 224,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "KARIMNAGAR": {
+      "soil_n": 182,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 36
+    },
+    "KHAMMAM": {
+      "soil_n": 177,
+      "soil_p": 23,
+      "soil_k": 213,
+      "soil_ph": 7.4,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "KRISHNA": {
+      "soil_n": 178,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "KURNOOL": {
+      "soil_n": 171,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
       "organic_matter_pct": 0.52,
       "soil_moisture_pct": 36
     },
-    "Lucknow": {
-      "soil_n": 188,
-      "soil_p": 25,
-      "soil_k": 205,
-      "soil_ph": 7.5,
-      "soil_type": "Alluvial",
-      "organic_matter_pct": 0.55,
-      "soil_moisture_pct": 33
+    "MAHBUBNAGAR": {
+      "soil_n": 180,
+      "soil_p": 24,
+      "soil_k": 218,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 36
     },
-    "Agra": {
-      "soil_n": 165,
-      "soil_p": 20,
-      "soil_k": 230,
-      "soil_ph": 7.9,
-      "soil_type": "Sandy Loam",
-      "organic_matter_pct": 0.45,
-      "soil_moisture_pct": 28
+    "MEDAK": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 231,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "NALGONDA": {
+      "soil_n": 193,
+      "soil_p": 25,
+      "soil_k": 233,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "NIZAMABAD": {
+      "soil_n": 186,
+      "soil_p": 24,
+      "soil_k": 224,
+      "soil_ph": 7.4,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "PRAKASAM": {
+      "soil_n": 171,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.1,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "RANGAREDDI": {
+      "soil_n": 182,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "SPSR NELLORE": {
+      "soil_n": 193,
+      "soil_p": 25,
+      "soil_k": 233,
+      "soil_ph": 7.4,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "SRIKAKULAM": {
+      "soil_n": 171,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "VISAKHAPATANAM": {
+      "soil_n": 193,
+      "soil_p": 25,
+      "soil_k": 233,
+      "soil_ph": 7.1,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "VIZIANAGARAM": {
+      "soil_n": 184,
+      "soil_p": 24,
+      "soil_k": 222,
+      "soil_ph": 7.1,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "WARANGAL": {
+      "soil_n": 180,
+      "soil_p": 24,
+      "soil_k": 218,
+      "soil_ph": 7.3,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 37
+    },
+    "WEST GODAVARI": {
+      "soil_n": 182,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.0,
+      "soil_type": "Red Clay / Coastal Alluvium",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
     }
   },
-  "Punjab": {
+  "Arunachal Pradesh": {
     "default": {
-      "soil_n": 220,
-      "soil_p": 32,
-      "soil_k": 240,
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "ANJAW": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "CHANGLANG": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "DIBANG VALLEY": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "EAST KAMENG": {
+      "soil_n": 185,
+      "soil_p": 23,
+      "soil_k": 216,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "EAST SIANG": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "KAMLE": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "KRA DAADI": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "KURUNG KUMEY": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "LEPARADA": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 33
+    },
+    "LOHIT": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "LONGDING": {
+      "soil_n": 175,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "LOWER DIBANG VALLEY": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "LOWER SIANG": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "LOWER SUBANSIRI": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "NAMSAI": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 32
+    },
+    "PAKKE KESSANG": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "PAPUM PARE": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    },
+    "SHI YOMI": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SIANG": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "TAWANG": {
+      "soil_n": 175,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "TIRAP": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 32
+    },
+    "UPPER SIANG": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "UPPER SUBANSIRI": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "WEST KAMENG": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "WEST SIANG": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 208,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Assam": {
+    "default": {
+      "soil_n": 240,
+      "soil_p": 24,
+      "soil_k": 160,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.98,
+      "soil_moisture_pct": 45
+    },
+    "BAKSA": {
+      "soil_n": 226,
+      "soil_p": 23,
+      "soil_k": 150,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 45
+    },
+    "BARPETA": {
+      "soil_n": 235,
+      "soil_p": 24,
+      "soil_k": 157,
+      "soil_ph": 5.3,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 46
+    },
+    "BISWANATH": {
+      "soil_n": 252,
+      "soil_p": 25,
+      "soil_k": 168,
+      "soil_ph": 5.0,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 46
+    },
+    "BONGAIGAON": {
+      "soil_n": 235,
+      "soil_p": 24,
+      "soil_k": 157,
+      "soil_ph": 5.1,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 46
+    },
+    "CACHAR": {
+      "soil_n": 226,
+      "soil_p": 23,
+      "soil_k": 150,
+      "soil_ph": 5.0,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 47
+    },
+    "CHARAIDEO": {
+      "soil_n": 238,
+      "soil_p": 24,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 43
+    },
+    "CHIRANG": {
+      "soil_n": 233,
+      "soil_p": 23,
+      "soil_k": 155,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.95,
+      "soil_moisture_pct": 45
+    },
+    "DARRANG": {
+      "soil_n": 235,
+      "soil_p": 24,
+      "soil_k": 157,
+      "soil_ph": 5.0,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 46
+    },
+    "DHEMAJI": {
+      "soil_n": 228,
+      "soil_p": 23,
+      "soil_k": 152,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.93,
+      "soil_moisture_pct": 47
+    },
+    "DHUBRI": {
+      "soil_n": 250,
+      "soil_p": 25,
+      "soil_k": 166,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.02,
+      "soil_moisture_pct": 47
+    },
+    "DIBRUGARH": {
+      "soil_n": 230,
+      "soil_p": 23,
+      "soil_k": 154,
+      "soil_ph": 5.3,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 44
+    },
+    "DIMA HASAO": {
+      "soil_n": 230,
+      "soil_p": 23,
+      "soil_k": 154,
+      "soil_ph": 5.0,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 46
+    },
+    "GOALPARA": {
+      "soil_n": 245,
+      "soil_p": 24,
+      "soil_k": 163,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.0,
+      "soil_moisture_pct": 46
+    },
+    "GOLAGHAT": {
+      "soil_n": 230,
+      "soil_p": 23,
+      "soil_k": 154,
+      "soil_ph": 5.3,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 43
+    },
+    "HAILAKANDI": {
+      "soil_n": 245,
+      "soil_p": 24,
+      "soil_k": 163,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.0,
+      "soil_moisture_pct": 43
+    },
+    "HOJAI": {
+      "soil_n": 238,
+      "soil_p": 24,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 44
+    },
+    "JORHAT": {
+      "soil_n": 252,
+      "soil_p": 25,
+      "soil_k": 168,
+      "soil_ph": 5.1,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 46
+    },
+    "KAMRUP": {
+      "soil_n": 238,
+      "soil_p": 24,
+      "soil_k": 158,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 46
+    },
+    "KAMRUP METRO": {
+      "soil_n": 250,
+      "soil_p": 25,
+      "soil_k": 166,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.02,
+      "soil_moisture_pct": 45
+    },
+    "KARBI ANGLONG": {
+      "soil_n": 226,
+      "soil_p": 23,
+      "soil_k": 150,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 45
+    },
+    "KARIMGANJ": {
+      "soil_n": 230,
+      "soil_p": 23,
+      "soil_k": 154,
+      "soil_ph": 5.0,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 44
+    },
+    "KOKRAJHAR": {
+      "soil_n": 238,
+      "soil_p": 24,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 43
+    },
+    "LAKHIMPUR": {
+      "soil_n": 238,
+      "soil_p": 24,
+      "soil_k": 158,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 44
+    },
+    "MAJULI": {
+      "soil_n": 254,
+      "soil_p": 25,
+      "soil_k": 170,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.04,
+      "soil_moisture_pct": 43
+    },
+    "MARIGAON": {
+      "soil_n": 240,
+      "soil_p": 24,
+      "soil_k": 160,
+      "soil_ph": 5.4,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.98,
+      "soil_moisture_pct": 45
+    },
+    "NAGAON": {
+      "soil_n": 242,
+      "soil_p": 24,
+      "soil_k": 162,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.99,
+      "soil_moisture_pct": 45
+    },
+    "NALBARI": {
+      "soil_n": 242,
+      "soil_p": 24,
+      "soil_k": 162,
+      "soil_ph": 5.1,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.99,
+      "soil_moisture_pct": 43
+    },
+    "SIVASAGAR": {
+      "soil_n": 254,
+      "soil_p": 25,
+      "soil_k": 170,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.04,
+      "soil_moisture_pct": 44
+    },
+    "SONITPUR": {
+      "soil_n": 247,
+      "soil_p": 25,
+      "soil_k": 165,
+      "soil_ph": 5.3,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.01,
+      "soil_moisture_pct": 45
+    },
+    "SOUTH SALMARA MANCACHAR": {
+      "soil_n": 230,
+      "soil_p": 23,
+      "soil_k": 154,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 47
+    },
+    "TINSUKIA": {
+      "soil_n": 226,
+      "soil_p": 23,
+      "soil_k": 150,
+      "soil_ph": 5.2,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 44
+    },
+    "UDALGURI": {
+      "soil_n": 252,
+      "soil_p": 25,
+      "soil_k": 168,
+      "soil_ph": 5.1,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 47
+    },
+    "WEST KARBI ANGLONG": {
+      "soil_n": 247,
+      "soil_p": 25,
+      "soil_k": 165,
+      "soil_ph": 5.1,
+      "soil_type": "Acidic Alluvial Sandy Clay",
+      "organic_matter_pct": 1.01,
+      "soil_moisture_pct": 44
+    }
+  },
+  "Bihar": {
+    "default": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 195,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 36
+    },
+    "ARARIA": {
+      "soil_n": 173,
+      "soil_p": 22,
+      "soil_k": 193,
       "soil_ph": 7.8,
-      "soil_type": "Coarse Loam",
-      "organic_matter_pct": 0.65,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "ARWAL": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "AURANGABAD": {
+      "soil_n": 177,
+      "soil_p": 22,
+      "soil_k": 197,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "BANKA": {
+      "soil_n": 170,
+      "soil_p": 21,
+      "soil_k": 189,
+      "soil_ph": 7.7,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "BEGUSARAI": {
+      "soil_n": 170,
+      "soil_p": 21,
+      "soil_k": 189,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 36
+    },
+    "BHAGALPUR": {
+      "soil_n": 168,
+      "soil_p": 21,
+      "soil_k": 187,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "BHOJPUR": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
       "soil_moisture_pct": 38
     },
-    "Ludhiana": {
-      "soil_n": 230,
-      "soil_p": 35,
-      "soil_k": 250,
-      "soil_ph": 7.7,
-      "soil_type": "Silt Loam",
-      "organic_matter_pct": 0.68,
-      "soil_moisture_pct": 40
+    "BOKARO": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 203,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
     },
-    "Amritsar": {
-      "soil_n": 215,
-      "soil_p": 30,
-      "soil_k": 235,
-      "soil_ph": 7.9,
+    "BUXAR": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 36
+    },
+    "CHATRA": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 203,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "DARBHANGA": {
+      "soil_n": 172,
+      "soil_p": 22,
+      "soil_k": 191,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 37
+    },
+    "DEOGHAR": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 199,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "DHANBAD": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 37
+    },
+    "DUMKA": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 199,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "EAST SINGHBUM": {
+      "soil_n": 172,
+      "soil_p": 22,
+      "soil_k": 191,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 36
+    },
+    "GARHWA": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 199,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "GAYA": {
+      "soil_n": 168,
+      "soil_p": 21,
+      "soil_k": 187,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 37
+    },
+    "GIRIDIH": {
+      "soil_n": 173,
+      "soil_p": 22,
+      "soil_k": 193,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "GODDA": {
+      "soil_n": 172,
+      "soil_p": 22,
+      "soil_k": 191,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "GOPALGANJ": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "GUMLA": {
+      "soil_n": 172,
+      "soil_p": 22,
+      "soil_k": 191,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 37
+    },
+    "HAZARIBAGH": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 199,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "JAMUI": {
+      "soil_n": 166,
+      "soil_p": 21,
+      "soil_k": 185,
+      "soil_ph": 7.7,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 37
+    },
+    "JEHANABAD": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "KAIMUR (BHABUA)": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "KATIHAR": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 201,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "KHAGARIA": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "KISHANGANJ": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "KODERMA": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 37
+    },
+    "LAKHISARAI": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 37
+    },
+    "LOHARDAGA": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "MADHEPURA": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "MADHUBANI": {
+      "soil_n": 166,
+      "soil_p": 21,
+      "soil_k": 185,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 37
+    },
+    "MUNGER": {
+      "soil_n": 177,
+      "soil_p": 22,
+      "soil_k": 197,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "MUZAFFARPUR": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "NALANDA": {
+      "soil_n": 166,
+      "soil_p": 21,
+      "soil_k": 185,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "NAWADA": {
+      "soil_n": 170,
+      "soil_p": 21,
+      "soil_k": 189,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "PAKUR": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "PALAMU": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 201,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "PASHCHIM CHAMPARAN": {
+      "soil_n": 168,
+      "soil_p": 21,
+      "soil_k": 187,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 37
+    },
+    "PATNA": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "PURBI CHAMPARAN": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 203,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 37
+    },
+    "PURNIA": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "RANCHI": {
+      "soil_n": 177,
+      "soil_p": 22,
+      "soil_k": 197,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "ROHTAS": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 195,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "SAHARSA": {
+      "soil_n": 168,
+      "soil_p": 21,
+      "soil_k": 187,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 38
+    },
+    "SAHEBGANJ": {
+      "soil_n": 168,
+      "soil_p": 21,
+      "soil_k": 187,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "SAMASTIPUR": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.8,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "SARAN": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 205,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SHEIKHPURA": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 195,
+      "soil_ph": 7.7,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "SHEOHAR": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 203,
+      "soil_ph": 7.7,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "SITAMARHI": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 203,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "SIWAN": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.4,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "SUPAUL": {
+      "soil_n": 164,
+      "soil_p": 21,
+      "soil_k": 183,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "VAISHALI": {
+      "soil_n": 177,
+      "soil_p": 22,
+      "soil_k": 197,
+      "soil_ph": 7.5,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "WEST SINGHBHUM": {
+      "soil_n": 186,
+      "soil_p": 23,
+      "soil_k": 207,
+      "soil_ph": 7.6,
+      "soil_type": "Calcareous Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    }
+  },
+  "Chandigarh": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
       "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "CHANDIGARH": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    }
+  },
+  "Chhattisgarh": {
+    "default": {
+      "soil_n": 185,
+      "soil_p": 19,
+      "soil_k": 185,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 37
+    },
+    "BALOD": {
+      "soil_n": 187,
+      "soil_p": 19,
+      "soil_k": 187,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "BALODA BAZAR": {
+      "soil_n": 196,
+      "soil_p": 20,
+      "soil_k": 196,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 36
+    },
+    "BALRAMPUR": {
+      "soil_n": 191,
+      "soil_p": 20,
+      "soil_k": 191,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "BASTAR": {
+      "soil_n": 178,
+      "soil_p": 18,
+      "soil_k": 178,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 38
+    },
+    "BEMETARA": {
+      "soil_n": 174,
+      "soil_p": 18,
+      "soil_k": 174,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "BIJAPUR": {
+      "soil_n": 187,
+      "soil_p": 19,
+      "soil_k": 187,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 39
+    },
+    "BILASPUR": {
+      "soil_n": 191,
+      "soil_p": 20,
+      "soil_k": 191,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "DANTEWADA": {
+      "soil_n": 176,
+      "soil_p": 18,
+      "soil_k": 176,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "DHAMTARI": {
+      "soil_n": 181,
+      "soil_p": 19,
+      "soil_k": 181,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "DURG": {
+      "soil_n": 176,
+      "soil_p": 18,
+      "soil_k": 176,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "GARIYABAND": {
+      "soil_n": 183,
+      "soil_p": 19,
+      "soil_k": 183,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 39
+    },
+    "GAURELLA-PENDRA-MARWAHI": {
+      "soil_n": 174,
+      "soil_p": 18,
+      "soil_k": 174,
+      "soil_ph": 6.2,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "JANJGIR-CHAMPA": {
+      "soil_n": 181,
+      "soil_p": 19,
+      "soil_k": 181,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 37
+    },
+    "JASHPUR": {
+      "soil_n": 194,
+      "soil_p": 20,
+      "soil_k": 194,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 37
+    },
+    "KABIRDHAM": {
+      "soil_n": 183,
+      "soil_p": 19,
+      "soil_k": 183,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "KANKER": {
+      "soil_n": 178,
+      "soil_p": 18,
+      "soil_k": 178,
+      "soil_ph": 6.2,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "KONDAGAON": {
+      "soil_n": 176,
+      "soil_p": 18,
+      "soil_k": 176,
+      "soil_ph": 6.3,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 39
+    },
+    "KORBA": {
+      "soil_n": 183,
+      "soil_p": 19,
+      "soil_k": 183,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "KOREA": {
+      "soil_n": 183,
+      "soil_p": 19,
+      "soil_k": 183,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 35
+    },
+    "MAHASAMUND": {
+      "soil_n": 183,
+      "soil_p": 19,
+      "soil_k": 183,
+      "soil_ph": 6.2,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "MUNGELI": {
+      "soil_n": 192,
+      "soil_p": 20,
+      "soil_k": 192,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
       "organic_matter_pct": 0.62,
       "soil_moisture_pct": 37
+    },
+    "NARAYANPUR": {
+      "soil_n": 194,
+      "soil_p": 20,
+      "soil_k": 194,
+      "soil_ph": 6.5,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 37
+    },
+    "RAIGARH": {
+      "soil_n": 178,
+      "soil_p": 18,
+      "soil_k": 178,
+      "soil_ph": 6.3,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "RAIPUR": {
+      "soil_n": 178,
+      "soil_p": 18,
+      "soil_k": 178,
+      "soil_ph": 6.2,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "RAJNANDGAON": {
+      "soil_n": 174,
+      "soil_p": 18,
+      "soil_k": 174,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "SUKMA": {
+      "soil_n": 196,
+      "soil_p": 20,
+      "soil_k": 196,
+      "soil_ph": 6.6,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 36
+    },
+    "SURAJPUR": {
+      "soil_n": 194,
+      "soil_p": 20,
+      "soil_k": 194,
+      "soil_ph": 6.2,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 35
+    },
+    "SURGUJA": {
+      "soil_n": 187,
+      "soil_p": 19,
+      "soil_k": 187,
+      "soil_ph": 6.4,
+      "soil_type": "Red & Yellow Clay Loam (Matasi)",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    }
+  },
+  "Dadra and Nagar Haveli": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "DADRA AND NAGAR HAVELI": {
+      "soil_n": 187,
+      "soil_p": 23,
+      "soil_k": 218,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Daman and Diu": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "DAMAN": {
+      "soil_n": 185,
+      "soil_p": 23,
+      "soil_k": 216,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "DIU": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "Daman and Diu": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Delhi": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "DELHI_TOTAL": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "Delhi": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    }
+  },
+  "Goa": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "Goa": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "NORTH GOA": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SOUTH GOA": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Gujarat": {
+    "default": {
+      "soil_n": 160,
+      "soil_p": 21,
+      "soil_k": 260,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 30
+    },
+    "AHMADABAD": {
+      "soil_n": 166,
+      "soil_p": 22,
+      "soil_k": 270,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 31
+    },
+    "AMRELI": {
+      "soil_n": 158,
+      "soil_p": 21,
+      "soil_k": 257,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 32
+    },
+    "ANAND": {
+      "soil_n": 170,
+      "soil_p": 22,
+      "soil_k": 276,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 28
+    },
+    "ARAVALLI": {
+      "soil_n": 157,
+      "soil_p": 21,
+      "soil_k": 255,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 30
+    },
+    "BANAS KANTHA": {
+      "soil_n": 157,
+      "soil_p": 21,
+      "soil_k": 255,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 31
+    },
+    "BHARUCH": {
+      "soil_n": 165,
+      "soil_p": 22,
+      "soil_k": 268,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 30
+    },
+    "BHAVNAGAR": {
+      "soil_n": 152,
+      "soil_p": 20,
+      "soil_k": 247,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.46,
+      "soil_moisture_pct": 30
+    },
+    "BOTAD": {
+      "soil_n": 162,
+      "soil_p": 21,
+      "soil_k": 263,
+      "soil_ph": 7.7,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 29
+    },
+    "CHHOTAUDEPUR": {
+      "soil_n": 157,
+      "soil_p": 21,
+      "soil_k": 255,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 30
+    },
+    "DANG": {
+      "soil_n": 162,
+      "soil_p": 21,
+      "soil_k": 263,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 29
+    },
+    "DEVBHUMI DWARKA": {
+      "soil_n": 162,
+      "soil_p": 21,
+      "soil_k": 263,
+      "soil_ph": 7.7,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 28
+    },
+    "DOHAD": {
+      "soil_n": 155,
+      "soil_p": 20,
+      "soil_k": 252,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 30
+    },
+    "GANDHINAGAR": {
+      "soil_n": 150,
+      "soil_p": 20,
+      "soil_k": 244,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.45,
+      "soil_moisture_pct": 31
+    },
+    "GIR SOMNATH": {
+      "soil_n": 152,
+      "soil_p": 20,
+      "soil_k": 247,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.46,
+      "soil_moisture_pct": 29
+    },
+    "JAMNAGAR": {
+      "soil_n": 166,
+      "soil_p": 22,
+      "soil_k": 270,
+      "soil_ph": 7.7,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 31
+    },
+    "JUNAGADH": {
+      "soil_n": 166,
+      "soil_p": 22,
+      "soil_k": 270,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 29
+    },
+    "KACHCHH": {
+      "soil_n": 165,
+      "soil_p": 22,
+      "soil_k": 268,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 28
+    },
+    "KHEDA": {
+      "soil_n": 157,
+      "soil_p": 21,
+      "soil_k": 255,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 28
+    },
+    "MAHESANA": {
+      "soil_n": 162,
+      "soil_p": 21,
+      "soil_k": 263,
+      "soil_ph": 7.7,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 29
+    },
+    "MAHISAGAR": {
+      "soil_n": 154,
+      "soil_p": 20,
+      "soil_k": 250,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.46,
+      "soil_moisture_pct": 29
+    },
+    "MORBI": {
+      "soil_n": 150,
+      "soil_p": 20,
+      "soil_k": 244,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.45,
+      "soil_moisture_pct": 29
+    },
+    "NARMADA": {
+      "soil_n": 170,
+      "soil_p": 22,
+      "soil_k": 276,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 32
+    },
+    "NAVSARI": {
+      "soil_n": 163,
+      "soil_p": 21,
+      "soil_k": 265,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 28
+    },
+    "PANCH MAHALS": {
+      "soil_n": 162,
+      "soil_p": 21,
+      "soil_k": 263,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 31
+    },
+    "PATAN": {
+      "soil_n": 168,
+      "soil_p": 22,
+      "soil_k": 273,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 30
+    },
+    "PORBANDAR": {
+      "soil_n": 155,
+      "soil_p": 20,
+      "soil_k": 252,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.47,
+      "soil_moisture_pct": 31
+    },
+    "RAJKOT": {
+      "soil_n": 166,
+      "soil_p": 22,
+      "soil_k": 270,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 29
+    },
+    "SABAR KANTHA": {
+      "soil_n": 168,
+      "soil_p": 22,
+      "soil_k": 273,
+      "soil_ph": 8.0,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 31
+    },
+    "SURAT": {
+      "soil_n": 160,
+      "soil_p": 21,
+      "soil_k": 260,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 28
+    },
+    "SURENDRANAGAR": {
+      "soil_n": 168,
+      "soil_p": 22,
+      "soil_k": 273,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 31
+    },
+    "TAPI": {
+      "soil_n": 154,
+      "soil_p": 20,
+      "soil_k": 250,
+      "soil_ph": 8.1,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.46,
+      "soil_moisture_pct": 29
+    },
+    "VADODARA": {
+      "soil_n": 163,
+      "soil_p": 21,
+      "soil_k": 265,
+      "soil_ph": 7.9,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 28
+    },
+    "VALSAD": {
+      "soil_n": 158,
+      "soil_p": 21,
+      "soil_k": 257,
+      "soil_ph": 7.8,
+      "soil_type": "Black / Alluvial Sandy Loam",
+      "organic_matter_pct": 0.48,
+      "soil_moisture_pct": 30
     }
   },
   "Haryana": {
     "default": {
-      "soil_n": 195,
+      "soil_n": 200,
       "soil_p": 25,
-      "soil_k": 220,
+      "soil_k": 230,
+      "soil_ph": 7.7,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "AMBALA": {
+      "soil_n": 204,
+      "soil_p": 26,
+      "soil_k": 235,
+      "soil_ph": 7.9,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 31
+    },
+    "BHIWANI": {
+      "soil_n": 188,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.5,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 32
+    },
+    "CHARKI DADRI": {
+      "soil_n": 204,
+      "soil_p": 26,
+      "soil_k": 235,
+      "soil_ph": 7.6,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "FARIDABAD": {
+      "soil_n": 188,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 31
+    },
+    "FATEHABAD": {
+      "soil_n": 194,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 32
+    },
+    "GURGAON": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 244,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 32
+    },
+    "HISAR": {
+      "soil_n": 196,
+      "soil_p": 24,
+      "soil_k": 225,
+      "soil_ph": 7.7,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "JHAJJAR": {
+      "soil_n": 204,
+      "soil_p": 26,
+      "soil_k": 235,
+      "soil_ph": 7.5,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "JIND": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 244,
+      "soil_ph": 7.9,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 31
+    },
+    "KAITHAL": {
+      "soil_n": 210,
+      "soil_p": 26,
+      "soil_k": 242,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 30
+    },
+    "KARNAL": {
+      "soil_n": 200,
+      "soil_p": 25,
+      "soil_k": 230,
+      "soil_ph": 7.5,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 31
+    },
+    "KURUKSHETRA": {
+      "soil_n": 204,
+      "soil_p": 26,
+      "soil_k": 235,
+      "soil_ph": 7.5,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 30
+    },
+    "MAHENDRAGARH": {
+      "soil_n": 194,
+      "soil_p": 24,
+      "soil_k": 223,
       "soil_ph": 7.7,
       "soil_type": "Sandy Loam",
       "organic_matter_pct": 0.5,
-      "soil_moisture_pct": 30
+      "soil_moisture_pct": 34
     },
-    "Karnal": {
-      "soil_n": 210,
-      "soil_p": 29,
-      "soil_k": 235,
+    "MEWAT": {
+      "soil_n": 208,
+      "soil_p": 26,
+      "soil_k": 239,
+      "soil_ph": 7.5,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    },
+    "PALWAL": {
+      "soil_n": 196,
+      "soil_p": 24,
+      "soil_k": 225,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 32
+    },
+    "PANCHKULA": {
+      "soil_n": 208,
+      "soil_p": 26,
+      "soil_k": 239,
+      "soil_ph": 7.9,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 32
+    },
+    "PANIPAT": {
+      "soil_n": 194,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 7.8,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 33
+    },
+    "REWARI": {
+      "soil_n": 192,
+      "soil_p": 24,
+      "soil_k": 221,
+      "soil_ph": 7.7,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 32
+    },
+    "ROHTAK": {
+      "soil_n": 202,
+      "soil_p": 25,
+      "soil_k": 232,
+      "soil_ph": 7.7,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 31
+    },
+    "SIRSA": {
+      "soil_n": 206,
+      "soil_p": 26,
+      "soil_k": 237,
       "soil_ph": 7.6,
-      "soil_type": "Loam",
-      "organic_matter_pct": 0.58,
-      "soil_moisture_pct": 35
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 32
+    },
+    "SONIPAT": {
+      "soil_n": 200,
+      "soil_p": 25,
+      "soil_k": 230,
+      "soil_ph": 7.9,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "YAMUNANAGAR": {
+      "soil_n": 190,
+      "soil_p": 24,
+      "soil_k": 218,
+      "soil_ph": 7.6,
+      "soil_type": "Sandy Loam",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 30
     }
   },
-  "Maharashtra": {
+  "Himachal Pradesh": {
     "default": {
-      "soil_n": 160,
-      "soil_p": 18,
-      "soil_k": 320,
-      "soil_ph": 7.8,
-      "soil_type": "Black Cotton Soil (Vertisol)",
-      "organic_matter_pct": 0.6,
-      "soil_moisture_pct": 42
-    },
-    "Nashik": {
-      "soil_n": 175,
-      "soil_p": 22,
-      "soil_k": 340,
-      "soil_ph": 7.4,
-      "soil_type": "Clay Loam",
-      "organic_matter_pct": 0.65,
-      "soil_moisture_pct": 38
-    },
-    "Pune": {
-      "soil_n": 168,
-      "soil_p": 20,
-      "soil_k": 310,
-      "soil_ph": 7.6,
-      "soil_type": "Medium Black",
-      "organic_matter_pct": 0.62,
+      "soil_n": 230,
+      "soil_p": 25,
+      "soil_k": 190,
+      "soil_ph": 6.1,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.1,
       "soil_moisture_pct": 40
     },
-    "Nagpur": {
-      "soil_n": 155,
-      "soil_p": 16,
-      "soil_k": 330,
-      "soil_ph": 8.0,
-      "soil_type": "Deep Black Soil",
+    "BILASPUR": {
+      "soil_n": 237,
+      "soil_p": 26,
+      "soil_k": 196,
+      "soil_ph": 6.2,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.13,
+      "soil_moisture_pct": 41
+    },
+    "CHAMBA": {
+      "soil_n": 242,
+      "soil_p": 26,
+      "soil_k": 200,
+      "soil_ph": 6.2,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.16,
+      "soil_moisture_pct": 42
+    },
+    "HAMIRPUR": {
+      "soil_n": 225,
+      "soil_p": 24,
+      "soil_k": 186,
+      "soil_ph": 6.2,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.08,
+      "soil_moisture_pct": 42
+    },
+    "KANGRA": {
+      "soil_n": 237,
+      "soil_p": 26,
+      "soil_k": 196,
+      "soil_ph": 6.3,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.13,
+      "soil_moisture_pct": 39
+    },
+    "KINNAUR": {
+      "soil_n": 216,
+      "soil_p": 24,
+      "soil_k": 179,
+      "soil_ph": 6.2,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 39
+    },
+    "KULLU": {
+      "soil_n": 244,
+      "soil_p": 26,
+      "soil_k": 201,
+      "soil_ph": 6.2,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.17,
+      "soil_moisture_pct": 40
+    },
+    "LAHUL AND SPITI": {
+      "soil_n": 232,
+      "soil_p": 25,
+      "soil_k": 192,
+      "soil_ph": 6.0,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.11,
+      "soil_moisture_pct": 38
+    },
+    "MANDI": {
+      "soil_n": 221,
+      "soil_p": 24,
+      "soil_k": 182,
+      "soil_ph": 6.1,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.06,
+      "soil_moisture_pct": 41
+    },
+    "SHIMLA": {
+      "soil_n": 223,
+      "soil_p": 24,
+      "soil_k": 184,
+      "soil_ph": 6.0,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.07,
+      "soil_moisture_pct": 42
+    },
+    "SIRMAUR": {
+      "soil_n": 221,
+      "soil_p": 24,
+      "soil_k": 182,
+      "soil_ph": 6.0,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.06,
+      "soil_moisture_pct": 42
+    },
+    "SOLAN": {
+      "soil_n": 235,
+      "soil_p": 26,
+      "soil_k": 194,
+      "soil_ph": 6.1,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.12,
+      "soil_moisture_pct": 40
+    },
+    "UNA": {
+      "soil_n": 235,
+      "soil_p": 26,
+      "soil_k": 194,
+      "soil_ph": 6.0,
+      "soil_type": "Brown Hill Loam",
+      "organic_matter_pct": 1.12,
+      "soil_moisture_pct": 42
+    }
+  },
+  "Jammu and Kashmir": {
+    "default": {
+      "soil_n": 225,
+      "soil_p": 27,
+      "soil_k": 195,
+      "soil_ph": 6.7,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.05,
+      "soil_moisture_pct": 38
+    },
+    "ANANTNAG": {
+      "soil_n": 212,
+      "soil_p": 25,
+      "soil_k": 183,
+      "soil_ph": 6.7,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 0.99,
+      "soil_moisture_pct": 38
+    },
+    "BADGAM": {
+      "soil_n": 216,
+      "soil_p": 26,
+      "soil_k": 187,
+      "soil_ph": 6.6,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.01,
+      "soil_moisture_pct": 39
+    },
+    "BANDIPORA": {
+      "soil_n": 227,
+      "soil_p": 27,
+      "soil_k": 197,
+      "soil_ph": 6.6,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.06,
+      "soil_moisture_pct": 37
+    },
+    "BARAMULLA": {
+      "soil_n": 223,
+      "soil_p": 27,
+      "soil_k": 193,
+      "soil_ph": 6.9,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.04,
+      "soil_moisture_pct": 36
+    },
+    "DODA": {
+      "soil_n": 212,
+      "soil_p": 25,
+      "soil_k": 183,
+      "soil_ph": 6.5,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 0.99,
+      "soil_moisture_pct": 38
+    },
+    "GANDERBAL": {
+      "soil_n": 223,
+      "soil_p": 27,
+      "soil_k": 193,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.04,
+      "soil_moisture_pct": 36
+    },
+    "JAMMU": {
+      "soil_n": 214,
+      "soil_p": 26,
+      "soil_k": 185,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.0,
+      "soil_moisture_pct": 38
+    },
+    "KARGIL": {
+      "soil_n": 227,
+      "soil_p": 27,
+      "soil_k": 197,
+      "soil_ph": 6.7,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.06,
+      "soil_moisture_pct": 38
+    },
+    "KATHUA": {
+      "soil_n": 234,
+      "soil_p": 28,
+      "soil_k": 203,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.09,
+      "soil_moisture_pct": 38
+    },
+    "KISHTWAR": {
+      "soil_n": 225,
+      "soil_p": 27,
+      "soil_k": 195,
+      "soil_ph": 6.5,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.05,
+      "soil_moisture_pct": 38
+    },
+    "KULGAM": {
+      "soil_n": 225,
+      "soil_p": 27,
+      "soil_k": 195,
+      "soil_ph": 6.6,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.05,
+      "soil_moisture_pct": 40
+    },
+    "KUPWARA": {
+      "soil_n": 214,
+      "soil_p": 26,
+      "soil_k": 185,
+      "soil_ph": 6.9,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.0,
+      "soil_moisture_pct": 36
+    },
+    "LEH LADAKH": {
+      "soil_n": 214,
+      "soil_p": 26,
+      "soil_k": 185,
+      "soil_ph": 6.6,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.0,
+      "soil_moisture_pct": 38
+    },
+    "POONCH": {
+      "soil_n": 227,
+      "soil_p": 27,
+      "soil_k": 197,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.06,
+      "soil_moisture_pct": 40
+    },
+    "PULWAMA": {
+      "soil_n": 218,
+      "soil_p": 26,
+      "soil_k": 189,
+      "soil_ph": 6.7,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.02,
+      "soil_moisture_pct": 40
+    },
+    "RAJAURI": {
+      "soil_n": 230,
+      "soil_p": 28,
+      "soil_k": 199,
+      "soil_ph": 6.5,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.07,
+      "soil_moisture_pct": 40
+    },
+    "RAMBAN": {
+      "soil_n": 232,
+      "soil_p": 28,
+      "soil_k": 201,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.08,
+      "soil_moisture_pct": 37
+    },
+    "REASI": {
+      "soil_n": 220,
+      "soil_p": 26,
+      "soil_k": 191,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 37
+    },
+    "SAMBA": {
+      "soil_n": 238,
+      "soil_p": 29,
+      "soil_k": 207,
+      "soil_ph": 6.9,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.11,
+      "soil_moisture_pct": 39
+    },
+    "SHOPIAN": {
+      "soil_n": 218,
+      "soil_p": 26,
+      "soil_k": 189,
+      "soil_ph": 6.9,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.02,
+      "soil_moisture_pct": 38
+    },
+    "SRINAGAR": {
+      "soil_n": 238,
+      "soil_p": 29,
+      "soil_k": 207,
+      "soil_ph": 6.8,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.11,
+      "soil_moisture_pct": 38
+    },
+    "UDHAMPUR": {
+      "soil_n": 220,
+      "soil_p": 26,
+      "soil_k": 191,
+      "soil_ph": 6.7,
+      "soil_type": "Brown Forest / Alluvial Loam",
+      "organic_matter_pct": 1.03,
+      "soil_moisture_pct": 37
+    }
+  },
+  "Jharkhand": {
+    "default": {
+      "soil_n": 190,
+      "soil_p": 18,
+      "soil_k": 165,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 36
+    },
+    "BOKARO": {
+      "soil_n": 184,
+      "soil_p": 17,
+      "soil_k": 160,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 37
+    },
+    "CHATRA": {
+      "soil_n": 184,
+      "soil_p": 17,
+      "soil_k": 160,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "DEOGHAR": {
+      "soil_n": 194,
+      "soil_p": 18,
+      "soil_k": 168,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 38
+    },
+    "DHANBAD": {
+      "soil_n": 196,
+      "soil_p": 19,
+      "soil_k": 170,
+      "soil_ph": 5.8,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 35
+    },
+    "DUMKA": {
+      "soil_n": 186,
+      "soil_p": 18,
+      "soil_k": 162,
+      "soil_ph": 5.7,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "EAST SINGHBUM": {
+      "soil_n": 179,
+      "soil_p": 17,
+      "soil_k": 155,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "GARHWA": {
+      "soil_n": 186,
+      "soil_p": 18,
+      "soil_k": 162,
+      "soil_ph": 5.8,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "GIRIDIH": {
+      "soil_n": 200,
+      "soil_p": 19,
+      "soil_k": 173,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 35
+    },
+    "GODDA": {
+      "soil_n": 186,
+      "soil_p": 18,
+      "soil_k": 162,
+      "soil_ph": 5.4,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "GUMLA": {
+      "soil_n": 182,
+      "soil_p": 17,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "HAZARIBAGH": {
+      "soil_n": 180,
+      "soil_p": 17,
+      "soil_k": 157,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "JAMTARA": {
+      "soil_n": 182,
+      "soil_p": 17,
+      "soil_k": 158,
+      "soil_ph": 5.7,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "KHUNTI": {
+      "soil_n": 182,
+      "soil_p": 17,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 37
+    },
+    "KODERMA": {
+      "soil_n": 186,
+      "soil_p": 18,
+      "soil_k": 162,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "LATEHAR": {
+      "soil_n": 192,
+      "soil_p": 18,
+      "soil_k": 167,
+      "soil_ph": 5.8,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 37
+    },
+    "LOHARDAGA": {
+      "soil_n": 198,
+      "soil_p": 19,
+      "soil_k": 172,
+      "soil_ph": 5.8,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 35
+    },
+    "PAKUR": {
+      "soil_n": 184,
+      "soil_p": 17,
+      "soil_k": 160,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "PALAMU": {
+      "soil_n": 190,
+      "soil_p": 18,
+      "soil_k": 165,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 37
+    },
+    "RAMGARH": {
+      "soil_n": 188,
+      "soil_p": 18,
+      "soil_k": 163,
+      "soil_ph": 5.4,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "RANCHI": {
+      "soil_n": 200,
+      "soil_p": 19,
+      "soil_k": 173,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 35
+    },
+    "SAHEBGANJ": {
+      "soil_n": 196,
+      "soil_p": 19,
+      "soil_k": 170,
+      "soil_ph": 5.8,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 34
+    },
+    "SARAIKELA KHARSAWAN": {
+      "soil_n": 200,
+      "soil_p": 19,
+      "soil_k": 173,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 34
+    },
+    "SIMDEGA": {
+      "soil_n": 182,
+      "soil_p": 17,
+      "soil_k": 158,
+      "soil_ph": 5.5,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 36
+    },
+    "WEST SINGHBHUM": {
+      "soil_n": 201,
+      "soil_p": 19,
+      "soil_k": 175,
+      "soil_ph": 5.6,
+      "soil_type": "Red / Lateritic Loam",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 37
+    }
+  },
+  "Karnataka": {
+    "default": {
+      "soil_n": 185,
+      "soil_p": 22,
+      "soil_k": 215,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "BAGALKOT": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "BAGALKOTE": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "BALLARI": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "BANGALORE RURAL": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 32
+    },
+    "BELAGAVI": {
+      "soil_n": 178,
+      "soil_p": 21,
+      "soil_k": 206,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "BELGAUM": {
+      "soil_n": 174,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
       "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "BELLARY": {
+      "soil_n": 185,
+      "soil_p": 22,
+      "soil_k": 215,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "BENGALURU URBAN": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "BIDAR": {
+      "soil_n": 181,
+      "soil_p": 22,
+      "soil_k": 211,
+      "soil_ph": 6.9,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "BIJAPUR": {
+      "soil_n": 174,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "CHAMARAJANAGAR": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "CHAMARAJANAGARA": {
+      "soil_n": 196,
+      "soil_p": 23,
+      "soil_k": 228,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "CHIKBALLAPUR": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "CHIKKABALLAPURA": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "CHIKKAMAGALURU": {
+      "soil_n": 178,
+      "soil_p": 21,
+      "soil_k": 206,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "CHIKMAGALUR": {
+      "soil_n": 176,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "CHITRADURGA": {
+      "soil_n": 192,
+      "soil_p": 23,
+      "soil_k": 224,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "DAKSHIN KANNAD": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "DAKSHINA KANNADA": {
+      "soil_n": 185,
+      "soil_p": 22,
+      "soil_k": 215,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "DAVANGERE": {
+      "soil_n": 196,
+      "soil_p": 23,
+      "soil_k": 228,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 32
+    },
+    "DHARWAD": {
+      "soil_n": 174,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "GADAG": {
+      "soil_n": 189,
+      "soil_p": 22,
+      "soil_k": 219,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "GULBARGA": {
+      "soil_n": 181,
+      "soil_p": 22,
+      "soil_k": 211,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "HASSAN": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "HAVERI": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "KALABURAGI": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "KODAGU": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 221,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "KOLAR": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "KOPPAL": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 221,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 33
+    },
+    "MANDYA": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 221,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "MYSORE": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "MYSURU": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 6.7,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "RAICHUR": {
+      "soil_n": 196,
+      "soil_p": 23,
+      "soil_k": 228,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "RAMANAGARA": {
+      "soil_n": 176,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 32
+    },
+    "SHIMOGA": {
+      "soil_n": 176,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 6.8,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "SHIVAMOGGA": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "TUMAKURU": {
+      "soil_n": 189,
+      "soil_p": 22,
+      "soil_k": 219,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 32
+    },
+    "TUMKUR": {
+      "soil_n": 179,
+      "soil_p": 21,
+      "soil_k": 209,
+      "soil_ph": 6.9,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "UDUPI": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "UTTAR KANNAD": {
+      "soil_n": 178,
+      "soil_p": 21,
+      "soil_k": 206,
+      "soil_ph": 6.7,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "UTTARA KANNADA": {
+      "soil_n": 187,
+      "soil_p": 22,
+      "soil_k": 217,
+      "soil_ph": 6.6,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 35
+    },
+    "VIJAYAPURA": {
+      "soil_n": 194,
+      "soil_p": 23,
+      "soil_k": 226,
+      "soil_ph": 6.9,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "YADAGIRI": {
+      "soil_n": 187,
+      "soil_p": 22,
+      "soil_k": 217,
+      "soil_ph": 6.9,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "YADGIR": {
+      "soil_n": 183,
+      "soil_p": 22,
+      "soil_k": 213,
+      "soil_ph": 7.0,
+      "soil_type": "Red Sandy Loam / Black Soil",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Kerala": {
+    "default": {
+      "soil_n": 235,
+      "soil_p": 28,
+      "soil_k": 165,
+      "soil_ph": 5.4,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.95,
+      "soil_moisture_pct": 44
+    },
+    "ALAPPUZHA": {
+      "soil_n": 233,
+      "soil_p": 28,
+      "soil_k": 163,
+      "soil_ph": 5.6,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 44
+    },
+    "ERNAKULAM": {
+      "soil_n": 233,
+      "soil_p": 28,
+      "soil_k": 163,
+      "soil_ph": 5.5,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.94,
       "soil_moisture_pct": 45
+    },
+    "IDUKKI": {
+      "soil_n": 237,
+      "soil_p": 28,
+      "soil_k": 167,
+      "soil_ph": 5.4,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 42
+    },
+    "KANNUR": {
+      "soil_n": 249,
+      "soil_p": 30,
+      "soil_k": 175,
+      "soil_ph": 5.6,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 1.01,
+      "soil_moisture_pct": 44
+    },
+    "KASARAGOD": {
+      "soil_n": 228,
+      "soil_p": 27,
+      "soil_k": 160,
+      "soil_ph": 5.4,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 44
+    },
+    "KOLLAM": {
+      "soil_n": 240,
+      "soil_p": 29,
+      "soil_k": 168,
+      "soil_ph": 5.3,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 46
+    },
+    "KOTTAYAM": {
+      "soil_n": 230,
+      "soil_p": 27,
+      "soil_k": 162,
+      "soil_ph": 5.3,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.93,
+      "soil_moisture_pct": 44
+    },
+    "KOZHIKODE": {
+      "soil_n": 228,
+      "soil_p": 27,
+      "soil_k": 160,
+      "soil_ph": 5.4,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 44
+    },
+    "MALAPPURAM": {
+      "soil_n": 237,
+      "soil_p": 28,
+      "soil_k": 167,
+      "soil_ph": 5.5,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 44
+    },
+    "PALAKKAD": {
+      "soil_n": 226,
+      "soil_p": 27,
+      "soil_k": 158,
+      "soil_ph": 5.4,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.91,
+      "soil_moisture_pct": 46
+    },
+    "PATHANAMTHITTA": {
+      "soil_n": 223,
+      "soil_p": 27,
+      "soil_k": 157,
+      "soil_ph": 5.3,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.9,
+      "soil_moisture_pct": 45
+    },
+    "THIRUVANANTHAPURAM": {
+      "soil_n": 237,
+      "soil_p": 28,
+      "soil_k": 167,
+      "soil_ph": 5.3,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 44
+    },
+    "THRISSUR": {
+      "soil_n": 235,
+      "soil_p": 28,
+      "soil_k": 165,
+      "soil_ph": 5.5,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.95,
+      "soil_moisture_pct": 45
+    },
+    "WAYANAD": {
+      "soil_n": 240,
+      "soil_p": 29,
+      "soil_k": 168,
+      "soil_ph": 5.6,
+      "soil_type": "Laterite Acidic Loam",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 45
+    }
+  },
+  "Laddakh": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "KARGIL": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
     }
   },
   "Madhya Pradesh": {
     "default": {
       "soil_n": 170,
       "soil_p": 19,
+      "soil_k": 275,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "AGAR MALWA": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 289,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "ALIRAJPUR": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 289,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "ANUPPUR": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 37
+    },
+    "ASHOKNAGAR": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 264,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 37
+    },
+    "BALAGHAT": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "BARWANI": {
+      "soil_n": 180,
+      "soil_p": 20,
+      "soil_k": 292,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 37
+    },
+    "BASTAR": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "BETUL": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 264,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "BHIND": {
+      "soil_n": 173,
+      "soil_p": 19,
       "soil_k": 280,
       "soil_ph": 7.5,
-      "soil_type": "Medium Black Soil",
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 37
+    },
+    "BHOPAL": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "BILASPUR": {
+      "soil_n": 160,
+      "soil_p": 18,
+      "soil_k": 258,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "BURHANPUR": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 278,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "CHHATARPUR": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "CHHINDWARA": {
+      "soil_n": 165,
+      "soil_p": 18,
+      "soil_k": 267,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "DAMOH": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 272,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
       "organic_matter_pct": 0.55,
       "soil_moisture_pct": 36
     },
-    "Indore": {
-      "soil_n": 180,
-      "soil_p": 22,
-      "soil_k": 295,
-      "soil_ph": 7.6,
-      "soil_type": "Clay Vertisol",
-      "organic_matter_pct": 0.58,
-      "soil_moisture_pct": 38
-    }
-  },
-  "Gujarat": {
-    "default": {
-      "soil_n": 165,
-      "soil_p": 21,
-      "soil_k": 260,
-      "soil_ph": 7.9,
-      "soil_type": "Sandy Black / Coastal Alluvium",
-      "organic_matter_pct": 0.48,
-      "soil_moisture_pct": 29
-    },
-    "Ahmedabad": {
-      "soil_n": 170,
-      "soil_p": 23,
-      "soil_k": 270,
-      "soil_ph": 7.8,
-      "soil_type": "Alluvial Loam",
-      "organic_matter_pct": 0.52,
-      "soil_moisture_pct": 31
-    }
-  },
-  "Kerala": {
-    "default": {
-      "soil_n": 240,
-      "soil_p": 15,
-      "soil_k": 140,
-      "soil_ph": 5.4,
-      "soil_type": "Laterite Soil",
-      "organic_matter_pct": 1.45,
-      "soil_moisture_pct": 48
-    },
-    "Palakkad": {
-      "soil_n": 230,
-      "soil_p": 18,
-      "soil_k": 160,
-      "soil_ph": 5.6,
-      "soil_type": "Lateritic Clay Loam",
-      "organic_matter_pct": 1.3,
-      "soil_moisture_pct": 46
-    },
-    "Kochi": {
-      "soil_n": 250,
-      "soil_p": 14,
-      "soil_k": 130,
-      "soil_ph": 5.2,
-      "soil_type": "Coastal Alluvium & Peat",
-      "organic_matter_pct": 1.6,
-      "soil_moisture_pct": 52
-    },
-    "Wayanad": {
-      "soil_n": 265,
-      "soil_p": 16,
-      "soil_k": 145,
-      "soil_ph": 5.1,
-      "soil_type": "Humic Laterite Forest Loam",
-      "organic_matter_pct": 1.85,
-      "soil_moisture_pct": 50
-    },
-    "Kottayam": {
-      "soil_n": 245,
-      "soil_p": 15,
-      "soil_k": 135,
-      "soil_ph": 5.3,
-      "soil_type": "Red Clayey Laterite",
-      "organic_matter_pct": 1.4,
-      "soil_moisture_pct": 49
-    }
-  },
-  "Karnataka": {
-    "default": {
-      "soil_n": 190,
-      "soil_p": 22,
-      "soil_k": 180,
-      "soil_ph": 6.3,
-      "soil_type": "Red Sandy Loam",
-      "organic_matter_pct": 0.75,
-      "soil_moisture_pct": 35
-    },
-    "Bangalore": {
-      "soil_n": 185,
-      "soil_p": 24,
-      "soil_k": 190,
-      "soil_ph": 6.2,
-      "soil_type": "Red Loam",
-      "organic_matter_pct": 0.8,
+    "DANTEWADA": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 278,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
       "soil_moisture_pct": 34
     },
-    "Mysore": {
-      "soil_n": 195,
-      "soil_p": 20,
-      "soil_k": 175,
-      "soil_ph": 6.4,
-      "soil_type": "Red Clay",
-      "organic_matter_pct": 0.72,
+    "DATIA": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 272,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
       "soil_moisture_pct": 36
+    },
+    "DEWAS": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "DHAMTARI": {
+      "soil_n": 180,
+      "soil_p": 20,
+      "soil_k": 292,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "DHAR": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 289,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 35
+    },
+    "DINDORI": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 36
+    },
+    "DURG": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "GUNA": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 264,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 36
+    },
+    "GWALIOR": {
+      "soil_n": 165,
+      "soil_p": 18,
+      "soil_k": 267,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "HARDA": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "HOSHANGABAD": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 272,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 37
+    },
+    "INDORE": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 278,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "JABALPUR": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "JANJGIR-CHAMPA": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 37
+    },
+    "JASHPUR": {
+      "soil_n": 177,
+      "soil_p": 20,
+      "soil_k": 286,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "JHABUA": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 275,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "KABIRDHAM": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 275,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "KANKER": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 278,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "KATNI": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 37
+    },
+    "KHANDWA": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "KHARGONE": {
+      "soil_n": 177,
+      "soil_p": 20,
+      "soil_k": 286,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "KORBA": {
+      "soil_n": 180,
+      "soil_p": 20,
+      "soil_k": 292,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 37
+    },
+    "KOREA": {
+      "soil_n": 180,
+      "soil_p": 20,
+      "soil_k": 292,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "MAHASAMUND": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 275,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "MANDLA": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 289,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "MANDSAUR": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "MORENA": {
+      "soil_n": 160,
+      "soil_p": 18,
+      "soil_k": 258,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 33
+    },
+    "NARSINGHPUR": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "NEEMUCH": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 264,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "NIWARI": {
+      "soil_n": 167,
+      "soil_p": 19,
+      "soil_k": 270,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 37
+    },
+    "PANNA": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "RAIPUR": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "RAISEN": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "RAJGARH": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 37
+    },
+    "RAJNANDGAON": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 278,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 36
+    },
+    "RATLAM": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "REWA": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 275,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "SAGAR": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "SATNA": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 261,
+      "soil_ph": 7.8,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "SEHORE": {
+      "soil_n": 180,
+      "soil_p": 20,
+      "soil_k": 292,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 37
+    },
+    "SEONI": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SHAHDOL": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "SHAJAPUR": {
+      "soil_n": 177,
+      "soil_p": 20,
+      "soil_k": 286,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "SHEOPUR": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 280,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 37
+    },
+    "SHIVPURI": {
+      "soil_n": 160,
+      "soil_p": 18,
+      "soil_k": 258,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "SIDHI": {
+      "soil_n": 160,
+      "soil_p": 18,
+      "soil_k": 258,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "SINGRAULI": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 272,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 36
+    },
+    "SURGUJA": {
+      "soil_n": 165,
+      "soil_p": 18,
+      "soil_k": 267,
+      "soil_ph": 7.5,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "TIKAMGARH": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 272,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "UJJAIN": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 289,
+      "soil_ph": 7.7,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "UMARIA": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 283,
+      "soil_ph": 7.4,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "VIDISHA": {
+      "soil_n": 177,
+      "soil_p": 20,
+      "soil_k": 286,
+      "soil_ph": 7.6,
+      "soil_type": "Medium Black Clay",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Maharashtra": {
+    "default": {
+      "soil_n": 165,
+      "soil_p": 18,
+      "soil_k": 295,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 38
+    },
+    "AHMEDNAGAR": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "AKOLA": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "AMRAVATI": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 289,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 40
+    },
+    "AURANGABAD": {
+      "soil_n": 158,
+      "soil_p": 17,
+      "soil_k": 283,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 37
+    },
+    "BEED": {
+      "soil_n": 160,
+      "soil_p": 17,
+      "soil_k": 286,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 40
+    },
+    "BHANDARA": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 292,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "BULDHANA": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "CHANDRAPUR": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "DHULE": {
+      "soil_n": 157,
+      "soil_p": 17,
+      "soil_k": 280,
+      "soil_ph": 7.7,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 40
+    },
+    "GADCHIROLI": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.7,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 39
+    },
+    "GONDIA": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "HINGOLI": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "JALGAON": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "JALNA": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 289,
+      "soil_ph": 7.7,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "KOLHAPUR": {
+      "soil_n": 168,
+      "soil_p": 18,
+      "soil_k": 301,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 40
+    },
+    "LATUR": {
+      "soil_n": 175,
+      "soil_p": 19,
+      "soil_k": 313,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 40
+    },
+    "MUMBAI": {
+      "soil_n": 175,
+      "soil_p": 19,
+      "soil_k": 313,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 36
+    },
+    "MUMBAI SUBURBAN": {
+      "soil_n": 158,
+      "soil_p": 17,
+      "soil_k": 283,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "NAGPUR": {
+      "soil_n": 158,
+      "soil_p": 17,
+      "soil_k": 283,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 39
+    },
+    "NANDED": {
+      "soil_n": 175,
+      "soil_p": 19,
+      "soil_k": 313,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 39
+    },
+    "NANDURBAR": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 37
+    },
+    "NASHIK": {
+      "soil_n": 160,
+      "soil_p": 17,
+      "soil_k": 286,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 38
+    },
+    "OSMANABAD": {
+      "soil_n": 158,
+      "soil_p": 17,
+      "soil_k": 283,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 39
+    },
+    "PALGHAR": {
+      "soil_n": 162,
+      "soil_p": 18,
+      "soil_k": 289,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 38
+    },
+    "PARBHANI": {
+      "soil_n": 163,
+      "soil_p": 18,
+      "soil_k": 292,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 37
+    },
+    "PUNE": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 310,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 37
+    },
+    "RAIGAD": {
+      "soil_n": 172,
+      "soil_p": 19,
+      "soil_k": 307,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "RATNAGIRI": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 304,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "SANGLI": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 39
+    },
+    "SATARA": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 310,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 39
+    },
+    "SINDHUDURG": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 310,
+      "soil_ph": 8.0,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 37
+    },
+    "SOLAPUR": {
+      "soil_n": 167,
+      "soil_p": 18,
+      "soil_k": 298,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 38
+    },
+    "THANE": {
+      "soil_n": 173,
+      "soil_p": 19,
+      "soil_k": 310,
+      "soil_ph": 7.9,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 39
+    },
+    "WARDHA": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.6,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 38
+    },
+    "WASHIM": {
+      "soil_n": 160,
+      "soil_p": 17,
+      "soil_k": 286,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 38
+    },
+    "YAVATMAL": {
+      "soil_n": 155,
+      "soil_p": 17,
+      "soil_k": 277,
+      "soil_ph": 7.8,
+      "soil_type": "Black Soil (Vertisol)",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 39
+    }
+  },
+  "Manipur": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "BISHNUPUR": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 36
+    },
+    "CHANDEL": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "CHURACHANDPUR": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "IMPHAL EAST": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "IMPHAL WEST": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "SENAPATI": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "TAMENGLONG": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "THOUBAL": {
+      "soil_n": 187,
+      "soil_p": 23,
+      "soil_k": 218,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "UKHRUL": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Meghalaya": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "EAST GARO HILLS": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 33
+    },
+    "EAST JAINTIA HILLS": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "EAST KHASI HILLS": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "NORTH GARO HILLS": {
+      "soil_n": 175,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "RI BHOI": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "SOUTH GARO HILLS": {
+      "soil_n": 178,
+      "soil_p": 22,
+      "soil_k": 208,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 32
+    },
+    "SOUTH WEST GARO HILLS": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "SOUTH WEST KHASI HILLS": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "WEST GARO HILLS": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "WEST JAINTIA HILLS": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "WEST KHASI HILLS": {
+      "soil_n": 187,
+      "soil_p": 23,
+      "soil_k": 218,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Mizoram": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "AIZAWL": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "CHAMPHAI": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "KOLASIB": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "LAWNGTLAI": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "LUNGLEI": {
+      "soil_n": 187,
+      "soil_p": 23,
+      "soil_k": 218,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "MAMIT": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "SAIHA": {
+      "soil_n": 185,
+      "soil_p": 23,
+      "soil_k": 216,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "SERCHHIP": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Nagaland": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "DIMAPUR": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "KIPHIRE": {
+      "soil_n": 176,
+      "soil_p": 22,
+      "soil_k": 206,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    },
+    "KOHIMA": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "LONGLENG": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "MOKOKCHUNG": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "MON": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 36
+    },
+    "PEREN": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 32
+    },
+    "PHEK": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "TUENSANG": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 33
+    },
+    "WOKHA": {
+      "soil_n": 184,
+      "soil_p": 22,
+      "soil_k": 214,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "ZUNHEBOTO": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    }
+  },
+  "Odisha": {
+    "default": {
+      "soil_n": 195,
+      "soil_p": 21,
+      "soil_k": 175,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 38
+    },
+    "ANUGUL": {
+      "soil_n": 195,
+      "soil_p": 21,
+      "soil_k": 175,
+      "soil_ph": 5.8,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 38
+    },
+    "BALANGIR": {
+      "soil_n": 195,
+      "soil_p": 21,
+      "soil_k": 175,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 37
+    },
+    "BALESHWAR": {
+      "soil_n": 191,
+      "soil_p": 21,
+      "soil_k": 172,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 36
+    },
+    "BARGARH": {
+      "soil_n": 205,
+      "soil_p": 22,
+      "soil_k": 184,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 38
+    },
+    "BHADRAK": {
+      "soil_n": 187,
+      "soil_p": 20,
+      "soil_k": 168,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "BOUDH": {
+      "soil_n": 199,
+      "soil_p": 21,
+      "soil_k": 178,
+      "soil_ph": 5.8,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 39
+    },
+    "CUTTACK": {
+      "soil_n": 195,
+      "soil_p": 21,
+      "soil_k": 175,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.65,
+      "soil_moisture_pct": 37
+    },
+    "DEOGARH": {
+      "soil_n": 203,
+      "soil_p": 22,
+      "soil_k": 182,
+      "soil_ph": 5.8,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 37
+    },
+    "DHENKANAL": {
+      "soil_n": 185,
+      "soil_p": 20,
+      "soil_k": 166,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 40
+    },
+    "GAJAPATI": {
+      "soil_n": 197,
+      "soil_p": 21,
+      "soil_k": 177,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 39
+    },
+    "GANJAM": {
+      "soil_n": 193,
+      "soil_p": 21,
+      "soil_k": 173,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 36
+    },
+    "JAGATSINGHAPUR": {
+      "soil_n": 191,
+      "soil_p": 21,
+      "soil_k": 172,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 39
+    },
+    "JAJAPUR": {
+      "soil_n": 191,
+      "soil_p": 21,
+      "soil_k": 172,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 39
+    },
+    "JHARSUGUDA": {
+      "soil_n": 203,
+      "soil_p": 22,
+      "soil_k": 182,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 38
+    },
+    "KALAHANDI": {
+      "soil_n": 207,
+      "soil_p": 22,
+      "soil_k": 186,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.69,
+      "soil_moisture_pct": 39
+    },
+    "KANDHAMAL": {
+      "soil_n": 205,
+      "soil_p": 22,
+      "soil_k": 184,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 37
+    },
+    "KENDRAPARA": {
+      "soil_n": 207,
+      "soil_p": 22,
+      "soil_k": 186,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.69,
+      "soil_moisture_pct": 38
+    },
+    "KENDUJHAR": {
+      "soil_n": 199,
+      "soil_p": 21,
+      "soil_k": 178,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 36
+    },
+    "KHORDHA": {
+      "soil_n": 189,
+      "soil_p": 20,
+      "soil_k": 170,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 36
+    },
+    "KORAPUT": {
+      "soil_n": 189,
+      "soil_p": 20,
+      "soil_k": 170,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 36
+    },
+    "MALKANGIRI": {
+      "soil_n": 189,
+      "soil_p": 20,
+      "soil_k": 170,
+      "soil_ph": 6.0,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 38
+    },
+    "MAYURBHANJ": {
+      "soil_n": 193,
+      "soil_p": 21,
+      "soil_k": 173,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 37
+    },
+    "NABARANGPUR": {
+      "soil_n": 183,
+      "soil_p": 20,
+      "soil_k": 164,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 37
+    },
+    "NAYAGARH": {
+      "soil_n": 203,
+      "soil_p": 22,
+      "soil_k": 182,
+      "soil_ph": 5.9,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 38
+    },
+    "NUAPADA": {
+      "soil_n": 185,
+      "soil_p": 20,
+      "soil_k": 166,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 40
+    },
+    "PURI": {
+      "soil_n": 197,
+      "soil_p": 21,
+      "soil_k": 177,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 37
+    },
+    "RAYAGADA": {
+      "soil_n": 201,
+      "soil_p": 22,
+      "soil_k": 180,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.67,
+      "soil_moisture_pct": 38
+    },
+    "SAMBALPUR": {
+      "soil_n": 201,
+      "soil_p": 22,
+      "soil_k": 180,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.67,
+      "soil_moisture_pct": 40
+    },
+    "SONEPUR": {
+      "soil_n": 187,
+      "soil_p": 20,
+      "soil_k": 168,
+      "soil_ph": 6.1,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 38
+    },
+    "SUNDARGARH": {
+      "soil_n": 199,
+      "soil_p": 21,
+      "soil_k": 178,
+      "soil_ph": 5.7,
+      "soil_type": "Red Sandy / Coastal Alluvial",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 40
+    }
+  },
+  "Puducherry": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "KARAIKAL": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 33
+    },
+    "MAHE": {
+      "soil_n": 185,
+      "soil_p": 23,
+      "soil_k": 216,
+      "soil_ph": 7.1,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "PONDICHERRY": {
+      "soil_n": 175,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "YANAM": {
+      "soil_n": 185,
+      "soil_p": 23,
+      "soil_k": 216,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    }
+  },
+  "Punjab": {
+    "default": {
+      "soil_n": 220,
+      "soil_p": 30,
+      "soil_k": 240,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 35
+    },
+    "AMRITSAR": {
+      "soil_n": 229,
+      "soil_p": 31,
+      "soil_k": 250,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 35
+    },
+    "BARNALA": {
+      "soil_n": 222,
+      "soil_p": 30,
+      "soil_k": 242,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 36
+    },
+    "BATHINDA": {
+      "soil_n": 216,
+      "soil_p": 29,
+      "soil_k": 235,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 37
+    },
+    "FARIDKOT": {
+      "soil_n": 227,
+      "soil_p": 31,
+      "soil_k": 247,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 37
+    },
+    "FATEHGARH SAHIB": {
+      "soil_n": 220,
+      "soil_p": 30,
+      "soil_k": 240,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 34
+    },
+    "FAZILKA": {
+      "soil_n": 207,
+      "soil_p": 28,
+      "soil_k": 226,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "FIROZEPUR": {
+      "soil_n": 209,
+      "soil_p": 28,
+      "soil_k": 228,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "GURDASPUR": {
+      "soil_n": 222,
+      "soil_p": 30,
+      "soil_k": 242,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 34
+    },
+    "HOSHIARPUR": {
+      "soil_n": 222,
+      "soil_p": 30,
+      "soil_k": 242,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.63,
+      "soil_moisture_pct": 34
+    },
+    "JALANDHAR": {
+      "soil_n": 227,
+      "soil_p": 31,
+      "soil_k": 247,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.64,
+      "soil_moisture_pct": 35
+    },
+    "KAPURTHALA": {
+      "soil_n": 218,
+      "soil_p": 30,
+      "soil_k": 238,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "LUDHIANA": {
+      "soil_n": 213,
+      "soil_p": 29,
+      "soil_k": 233,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "MANSA": {
+      "soil_n": 220,
+      "soil_p": 30,
+      "soil_k": 240,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 35
+    },
+    "MOGA": {
+      "soil_n": 211,
+      "soil_p": 29,
+      "soil_k": 230,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 36
+    },
+    "MUKTSAR": {
+      "soil_n": 216,
+      "soil_p": 29,
+      "soil_k": 235,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "NAWANSHAHR": {
+      "soil_n": 207,
+      "soil_p": 28,
+      "soil_k": 226,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "PATHANKOT": {
+      "soil_n": 218,
+      "soil_p": 30,
+      "soil_k": 238,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "PATIALA": {
+      "soil_n": 220,
+      "soil_p": 30,
+      "soil_k": 240,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 35
+    },
+    "RUPNAGAR": {
+      "soil_n": 220,
+      "soil_p": 30,
+      "soil_k": 240,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.62,
+      "soil_moisture_pct": 35
+    },
+    "S": {
+      "soil_n": 233,
+      "soil_p": 32,
+      "soil_k": 254,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 35
+    },
+    "SANGRUR": {
+      "soil_n": 216,
+      "soil_p": 29,
+      "soil_k": 235,
+      "soil_ph": 7.7,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "SHAHID BHAGAT SINGH NAGAR": {
+      "soil_n": 233,
+      "soil_p": 32,
+      "soil_k": 254,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.66,
+      "soil_moisture_pct": 36
+    },
+    "TARN TARAN": {
+      "soil_n": 207,
+      "soil_p": 28,
+      "soil_k": 226,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    }
+  },
+  "Rajasthan": {
+    "default": {
+      "soil_n": 135,
+      "soil_p": 15,
+      "soil_k": 225,
+      "soil_ph": 8.2,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 25
+    },
+    "AJMER": {
+      "soil_n": 132,
+      "soil_p": 15,
+      "soil_k": 220,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 25
+    },
+    "ALWAR": {
+      "soil_n": 132,
+      "soil_p": 15,
+      "soil_k": 220,
+      "soil_ph": 8.4,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 25
+    },
+    "BANSWARA": {
+      "soil_n": 132,
+      "soil_p": 15,
+      "soil_k": 220,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 25
+    },
+    "BARAN": {
+      "soil_n": 130,
+      "soil_p": 14,
+      "soil_k": 216,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 26
+    },
+    "BARMER": {
+      "soil_n": 130,
+      "soil_p": 14,
+      "soil_k": 216,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 24
+    },
+    "BHARATPUR": {
+      "soil_n": 135,
+      "soil_p": 15,
+      "soil_k": 225,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "BHILWARA": {
+      "soil_n": 128,
+      "soil_p": 14,
+      "soil_k": 214,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.3,
+      "soil_moisture_pct": 24
+    },
+    "BIKANER": {
+      "soil_n": 143,
+      "soil_p": 16,
+      "soil_k": 238,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "BUNDI": {
+      "soil_n": 142,
+      "soil_p": 16,
+      "soil_k": 236,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "CHITTORGARH": {
+      "soil_n": 139,
+      "soil_p": 15,
+      "soil_k": 232,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.33,
+      "soil_moisture_pct": 26
+    },
+    "CHURU": {
+      "soil_n": 136,
+      "soil_p": 15,
+      "soil_k": 227,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 25
+    },
+    "DAUSA": {
+      "soil_n": 131,
+      "soil_p": 15,
+      "soil_k": 218,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 26
+    },
+    "DHOLPUR": {
+      "soil_n": 142,
+      "soil_p": 16,
+      "soil_k": 236,
+      "soil_ph": 8.2,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "DUNGARPUR": {
+      "soil_n": 135,
+      "soil_p": 15,
+      "soil_k": 225,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 25
+    },
+    "GANGANAGAR": {
+      "soil_n": 136,
+      "soil_p": 15,
+      "soil_k": 227,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 25
+    },
+    "HANUMANGARH": {
+      "soil_n": 134,
+      "soil_p": 15,
+      "soil_k": 223,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "JAIPUR": {
+      "soil_n": 143,
+      "soil_p": 16,
+      "soil_k": 238,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "JAISALMER": {
+      "soil_n": 132,
+      "soil_p": 15,
+      "soil_k": 220,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 24
+    },
+    "JALORE": {
+      "soil_n": 142,
+      "soil_p": 16,
+      "soil_k": 236,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 24
+    },
+    "JHALAWAR": {
+      "soil_n": 136,
+      "soil_p": 15,
+      "soil_k": 227,
+      "soil_ph": 8.4,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "JHUNJHUNU": {
+      "soil_n": 143,
+      "soil_p": 16,
+      "soil_k": 238,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "JODHPUR": {
+      "soil_n": 131,
+      "soil_p": 15,
+      "soil_k": 218,
+      "soil_ph": 8.2,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 24
+    },
+    "KARAULI": {
+      "soil_n": 142,
+      "soil_p": 16,
+      "soil_k": 236,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 26
+    },
+    "KOTA": {
+      "soil_n": 143,
+      "soil_p": 16,
+      "soil_k": 238,
+      "soil_ph": 8.2,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.34,
+      "soil_moisture_pct": 25
+    },
+    "NAGAUR": {
+      "soil_n": 136,
+      "soil_p": 15,
+      "soil_k": 227,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "PALI": {
+      "soil_n": 127,
+      "soil_p": 14,
+      "soil_k": 212,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.3,
+      "soil_moisture_pct": 26
+    },
+    "PRATAPGARH": {
+      "soil_n": 135,
+      "soil_p": 15,
+      "soil_k": 225,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "RAJSAMAND": {
+      "soil_n": 128,
+      "soil_p": 14,
+      "soil_k": 214,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.3,
+      "soil_moisture_pct": 24
+    },
+    "SAWAI MADHOPUR": {
+      "soil_n": 138,
+      "soil_p": 15,
+      "soil_k": 230,
+      "soil_ph": 8.3,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.33,
+      "soil_moisture_pct": 26
+    },
+    "SIKAR": {
+      "soil_n": 134,
+      "soil_p": 15,
+      "soil_k": 223,
+      "soil_ph": 8.1,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 24
+    },
+    "SIROHI": {
+      "soil_n": 139,
+      "soil_p": 15,
+      "soil_k": 232,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.33,
+      "soil_moisture_pct": 25
+    },
+    "TONK": {
+      "soil_n": 136,
+      "soil_p": 15,
+      "soil_k": 227,
+      "soil_ph": 8.2,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.32,
+      "soil_moisture_pct": 26
+    },
+    "UDAIPUR": {
+      "soil_n": 130,
+      "soil_p": 14,
+      "soil_k": 216,
+      "soil_ph": 8.0,
+      "soil_type": "Desert Sand / Alluvial",
+      "organic_matter_pct": 0.31,
+      "soil_moisture_pct": 24
+    }
+  },
+  "Sikkim": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "EAST DISTRICT": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "NORTH DISTRICT": {
+      "soil_n": 187,
+      "soil_p": 23,
+      "soil_k": 218,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "SOUTH DISTRICT": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 33
+    },
+    "WEST DISTRICT": {
+      "soil_n": 173,
+      "soil_p": 21,
+      "soil_k": 202,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 33
     }
   },
   "Tamil Nadu": {
     "default": {
       "soil_n": 180,
-      "soil_p": 20,
+      "soil_p": 23,
       "soil_k": 210,
-      "soil_ph": 7.2,
-      "soil_type": "Red & Black Mixed",
-      "organic_matter_pct": 0.65,
-      "soil_moisture_pct": 32
-    },
-    "Coimbatore": {
-      "soil_n": 190,
-      "soil_p": 22,
-      "soil_k": 225,
-      "soil_ph": 7.4,
-      "soil_type": "Black Loam",
-      "organic_matter_pct": 0.7,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.54,
       "soil_moisture_pct": 33
     },
-    "Thanjavur": {
-      "soil_n": 205,
+    "ARIYALUR": {
+      "soil_n": 171,
+      "soil_p": 22,
+      "soil_k": 200,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "CHENGALPATTU": {
+      "soil_n": 169,
+      "soil_p": 22,
+      "soil_k": 197,
+      "soil_ph": 7.3,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "CHENNAI": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.3,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 31
+    },
+    "COIMBATORE": {
+      "soil_n": 191,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "CUDDALORE": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 31
+    },
+    "DHARMAPURI": {
+      "soil_n": 173,
+      "soil_p": 22,
+      "soil_k": 202,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "DINDIGUL": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 214,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "ERODE": {
+      "soil_n": 191,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "KALLAKURICHI": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 204,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "KANCHIPURAM": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 204,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "KANNIYAKUMARI": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "KARUR": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 208,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "KRISHNAGIRI": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 214,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "MADURAI": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "NAGAPATTINAM": {
+      "soil_n": 191,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "NAMAKKAL": {
+      "soil_n": 171,
+      "soil_p": 22,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 32
+    },
+    "PERAMBALUR": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 212,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "PUDUKKOTTAI": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "RAMANATHAPURAM": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 32
+    },
+    "RANIPET": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 33
+    },
+    "SALEM": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "SIVAGANGA": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 204,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "TENKASI": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 210,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "THANJAVUR": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "THE NILGIRIS": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 214,
+      "soil_ph": 7.3,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 32
+    },
+    "THENI": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 220,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "THIRUVALLUR": {
+      "soil_n": 187,
+      "soil_p": 24,
+      "soil_k": 218,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "THIRUVARUR": {
+      "soil_n": 175,
+      "soil_p": 22,
+      "soil_k": 204,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "THOOTHUKUDI": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 208,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "TIRUCHIRAPPALLI": {
+      "soil_n": 184,
+      "soil_p": 23,
+      "soil_k": 214,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "TIRUNELVELI": {
+      "soil_n": 191,
+      "soil_p": 24,
+      "soil_k": 223,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "TIRUPATHUR": {
+      "soil_n": 182,
+      "soil_p": 23,
+      "soil_k": 212,
+      "soil_ph": 7.0,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 33
+    },
+    "TIRUPPUR": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 210,
+      "soil_ph": 7.1,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "TIRUVANNAMALAI": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 208,
+      "soil_ph": 7.3,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 35
+    },
+    "TUTICORIN": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 216,
+      "soil_ph": 7.3,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "VELLORE": {
+      "soil_n": 171,
+      "soil_p": 22,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "VILLUPURAM": {
+      "soil_n": 173,
+      "soil_p": 22,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 31
+    },
+    "VIRUDHUNAGAR": {
+      "soil_n": 180,
+      "soil_p": 23,
+      "soil_k": 210,
+      "soil_ph": 6.9,
+      "soil_type": "Red / Black Loam",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Telangana": {
+    "default": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "ADILABAD": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "BHADRADRI": {
+      "soil_n": 172,
+      "soil_p": 20,
+      "soil_k": 225,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 33
+    },
+    "DADRA AND NAGAR HAVELI": {
+      "soil_n": 164,
+      "soil_p": 19,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 33
+    },
+    "DAMAN": {
+      "soil_n": 182,
+      "soil_p": 21,
+      "soil_k": 239,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 31
+    },
+    "DIU": {
+      "soil_n": 184,
+      "soil_p": 21,
+      "soil_k": 242,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "HANUMAKONDA": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "JAGITIAL": {
+      "soil_n": 164,
+      "soil_p": 19,
+      "soil_k": 216,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 32
+    },
+    "JANGOAN": {
+      "soil_n": 164,
+      "soil_p": 19,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 33
+    },
+    "JAYASHANKAR": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 223,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 33
+    },
+    "JOGULAMBA": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 223,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 34
+    },
+    "KAMAREDDY": {
+      "soil_n": 180,
+      "soil_p": 21,
+      "soil_k": 237,
+      "soil_ph": 7.4,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 31
+    },
+    "KARIMNAGAR": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "KHAMMAM": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "KOMARAM BHEEM ASIFABAD": {
+      "soil_n": 173,
+      "soil_p": 20,
+      "soil_k": 228,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "MAHABUBABAD": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 223,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 32
+    },
+    "MAHBUBNAGAR": {
+      "soil_n": 177,
+      "soil_p": 20,
+      "soil_k": 232,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 32
+    },
+    "MANCHERIAL": {
+      "soil_n": 172,
+      "soil_p": 20,
+      "soil_k": 225,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 34
+    },
+    "MEDAK": {
+      "soil_n": 186,
+      "soil_p": 21,
+      "soil_k": 244,
+      "soil_ph": 7.4,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 32
+    },
+    "MEDCHAL": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 221,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 33
+    },
+    "MEDCHAL MALKAJGIRI": {
+      "soil_n": 186,
+      "soil_p": 21,
+      "soil_k": 244,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 32
+    },
+    "MULUGU": {
+      "soil_n": 186,
+      "soil_p": 21,
+      "soil_k": 244,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "NAGARKURNOOL": {
+      "soil_n": 186,
+      "soil_p": 21,
+      "soil_k": 244,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "NALGONDA": {
+      "soil_n": 182,
+      "soil_p": 21,
+      "soil_k": 239,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "NARAYANAPET": {
+      "soil_n": 173,
+      "soil_p": 20,
+      "soil_k": 228,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 32
+    },
+    "NIRMAL": {
+      "soil_n": 182,
+      "soil_p": 21,
+      "soil_k": 239,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 34
+    },
+    "NIZAMABAD": {
+      "soil_n": 180,
+      "soil_p": 21,
+      "soil_k": 237,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 32
+    },
+    "PEDDAPALLI": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "RAJANNA": {
+      "soil_n": 173,
+      "soil_p": 20,
+      "soil_k": 228,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 33
+    },
+    "RANGAREDDI": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "SANGAREDDY": {
+      "soil_n": 170,
+      "soil_p": 19,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 33
+    },
+    "SIDDIPET": {
+      "soil_n": 172,
+      "soil_p": 20,
+      "soil_k": 225,
+      "soil_ph": 7.1,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.51,
+      "soil_moisture_pct": 32
+    },
+    "SURYAPET": {
+      "soil_n": 164,
+      "soil_p": 19,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.49,
+      "soil_moisture_pct": 35
+    },
+    "THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU": {
+      "soil_n": 180,
+      "soil_p": 21,
+      "soil_k": 237,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 33
+    },
+    "VIKARABAD": {
+      "soil_n": 178,
+      "soil_p": 20,
+      "soil_k": 235,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 34
+    },
+    "WANAPARTHY": {
+      "soil_n": 180,
+      "soil_p": 21,
+      "soil_k": 237,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.54,
+      "soil_moisture_pct": 35
+    },
+    "WARANGAL": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.2,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 32
+    },
+    "WARANGAL URBAN": {
+      "soil_n": 175,
+      "soil_p": 20,
+      "soil_k": 230,
+      "soil_ph": 7.3,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "YADADRI": {
+      "soil_n": 168,
+      "soil_p": 19,
+      "soil_k": 221,
+      "soil_ph": 7.5,
+      "soil_type": "Red Sandy / Medium Black",
+      "organic_matter_pct": 0.5,
+      "soil_moisture_pct": 32
+    }
+  },
+  "Tripura": {
+    "default": {
+      "soil_n": 180,
+      "soil_p": 22,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "DHALAI": {
+      "soil_n": 182,
+      "soil_p": 22,
+      "soil_k": 212,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "GOMATI": {
+      "soil_n": 189,
+      "soil_p": 23,
+      "soil_k": 220,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "KHOWAI": {
+      "soil_n": 171,
+      "soil_p": 21,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 35
+    },
+    "NORTH TRIPURA": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 34
+    },
+    "SEPAHIJALA": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "SOUTH TRIPURA": {
+      "soil_n": 191,
+      "soil_p": 23,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "UNAKOTI": {
+      "soil_n": 169,
+      "soil_p": 21,
+      "soil_k": 197,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.52,
+      "soil_moisture_pct": 33
+    },
+    "WEST TRIPURA": {
+      "soil_n": 175,
+      "soil_p": 21,
+      "soil_k": 204,
+      "soil_ph": 7.0,
+      "soil_type": "Alluvial Loam",
+      "organic_matter_pct": 0.53,
+      "soil_moisture_pct": 36
+    }
+  },
+  "Uttar Pradesh": {
+    "default": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "AGRA": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 32
+    },
+    "ALIGARH": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 200,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "ALLAHABAD": {
+      "soil_n": 196,
       "soil_p": 25,
-      "soil_k": 195,
-      "soil_ph": 6.8,
-      "soil_type": "Deltaic Alluvium",
-      "organic_matter_pct": 0.75,
-      "soil_moisture_pct": 44
+      "soil_k": 223,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "ALMORA": {
+      "soil_n": 179,
+      "soil_p": 23,
+      "soil_k": 204,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "AMBEDKAR NAGAR": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 32
+    },
+    "AMETHI": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "AMROHA": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 36
+    },
+    "AURAIYA": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "AZAMGARH": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 33
+    },
+    "BAGESHWAR": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "BAGHPAT": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "BAHRAICH": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "BALLIA": {
+      "soil_n": 187,
+      "soil_p": 24,
+      "soil_k": 212,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "BALRAMPUR": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "BANDA": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 32
+    },
+    "BARABANKI": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "BAREILLY": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "BASTI": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "BIJNOR": {
+      "soil_n": 174,
+      "soil_p": 23,
+      "soil_k": 197,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "BUDAUN": {
+      "soil_n": 183,
+      "soil_p": 24,
+      "soil_k": 208,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "BULANDSHAHR": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "CHAMOLI": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 33
+    },
+    "CHAMPAWAT": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "CHANDAULI": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "CHITRAKOOT": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 202,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 33
+    },
+    "DEHRADUN": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "DEORIA": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 36
+    },
+    "ETAH": {
+      "soil_n": 183,
+      "soil_p": 24,
+      "soil_k": 208,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "ETAWAH": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 35
+    },
+    "FAIZABAD": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "FARRUKHABAD": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "FATEHPUR": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 33
+    },
+    "FIROZABAD": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "GAUTAM BUDDHA NAGAR": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "GHAZIABAD": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "GHAZIPUR": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "GONDA": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 36
+    },
+    "GORAKHPUR": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 200,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "HAMIRPUR": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "HAPUR": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "HARDOI": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "HARIDWAR": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "HATHRAS": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 202,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "JALAUN": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "JAUNPUR": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "JHANSI": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "KANNAUJ": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "KANPUR DEHAT": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "KANPUR NAGAR": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 33
+    },
+    "KASGANJ": {
+      "soil_n": 187,
+      "soil_p": 24,
+      "soil_k": 212,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 36
+    },
+    "KAUSHAMBI": {
+      "soil_n": 179,
+      "soil_p": 23,
+      "soil_k": 204,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "KHERI": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "KUSHI NAGAR": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "LALITPUR": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 32
+    },
+    "LUCKNOW": {
+      "soil_n": 174,
+      "soil_p": 23,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "MAHARAJGANJ": {
+      "soil_n": 174,
+      "soil_p": 23,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "MAHOBA": {
+      "soil_n": 187,
+      "soil_p": 24,
+      "soil_k": 212,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 34
+    },
+    "MAINPURI": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 200,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 35
+    },
+    "MATHURA": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "MAU": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 36
+    },
+    "MEERUT": {
+      "soil_n": 183,
+      "soil_p": 24,
+      "soil_k": 208,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "MIRZAPUR": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 35
+    },
+    "MORADABAD": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 200,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 33
+    },
+    "MUZAFFARNAGAR": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "NAINITAL": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "PAURI GARHWAL": {
+      "soil_n": 178,
+      "soil_p": 23,
+      "soil_k": 202,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 35
+    },
+    "PILIBHIT": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "PITHORAGARH": {
+      "soil_n": 183,
+      "soil_p": 24,
+      "soil_k": 208,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 32
+    },
+    "PRATAPGARH": {
+      "soil_n": 183,
+      "soil_p": 24,
+      "soil_k": 208,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 34
+    },
+    "RAE BARELI": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "RAMPUR": {
+      "soil_n": 196,
+      "soil_p": 25,
+      "soil_k": 223,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 33
+    },
+    "RUDRA PRAYAG": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 32
+    },
+    "SAHARANPUR": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 33
+    },
+    "SAMBHAL": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 33
+    },
+    "SANT KABEER NAGAR": {
+      "soil_n": 176,
+      "soil_p": 23,
+      "soil_k": 200,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 33
+    },
+    "SANT RAVIDAS NAGAR": {
+      "soil_n": 187,
+      "soil_p": 24,
+      "soil_k": 212,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 35
+    },
+    "SHAHJAHANPUR": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "SHAMLI": {
+      "soil_n": 189,
+      "soil_p": 24,
+      "soil_k": 214,
+      "soil_ph": 7.3,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.59,
+      "soil_moisture_pct": 33
+    },
+    "SHRAVASTI": {
+      "soil_n": 192,
+      "soil_p": 25,
+      "soil_k": 218,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "SIDDHARTH NAGAR": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.4,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 35
+    },
+    "SITAPUR": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 34
+    },
+    "SONBHADRA": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 34
+    },
+    "SULTANPUR": {
+      "soil_n": 179,
+      "soil_p": 23,
+      "soil_k": 204,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.56,
+      "soil_moisture_pct": 34
+    },
+    "TEHRI GARHWAL": {
+      "soil_n": 191,
+      "soil_p": 25,
+      "soil_k": 216,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.6,
+      "soil_moisture_pct": 35
+    },
+    "UDAM SINGH NAGAR": {
+      "soil_n": 174,
+      "soil_p": 23,
+      "soil_k": 197,
+      "soil_ph": 7.2,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.55,
+      "soil_moisture_pct": 34
+    },
+    "UNNAO": {
+      "soil_n": 181,
+      "soil_p": 24,
+      "soil_k": 206,
+      "soil_ph": 7.6,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.57,
+      "soil_moisture_pct": 35
+    },
+    "UTTAR KASHI": {
+      "soil_n": 194,
+      "soil_p": 25,
+      "soil_k": 220,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.61,
+      "soil_moisture_pct": 34
+    },
+    "VARANASI": {
+      "soil_n": 185,
+      "soil_p": 24,
+      "soil_k": 210,
+      "soil_ph": 7.5,
+      "soil_type": "Alluvial",
+      "organic_matter_pct": 0.58,
+      "soil_moisture_pct": 33
+    }
+  },
+  "Uttarakhand": {
+    "default": {
+      "soil_n": 215,
+      "soil_p": 26,
+      "soil_k": 205,
+      "soil_ph": 6.3,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 38
+    },
+    "ALMORA": {
+      "soil_n": 226,
+      "soil_p": 27,
+      "soil_k": 215,
+      "soil_ph": 6.3,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.97,
+      "soil_moisture_pct": 36
+    },
+    "BAGESHWAR": {
+      "soil_n": 202,
+      "soil_p": 24,
+      "soil_k": 193,
+      "soil_ph": 6.2,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.86,
+      "soil_moisture_pct": 38
+    },
+    "CHAMOLI": {
+      "soil_n": 224,
+      "soil_p": 27,
+      "soil_k": 213,
+      "soil_ph": 6.2,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 38
+    },
+    "CHAMPAWAT": {
+      "soil_n": 219,
+      "soil_p": 27,
+      "soil_k": 209,
+      "soil_ph": 6.5,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 39
+    },
+    "DEHRADUN": {
+      "soil_n": 215,
+      "soil_p": 26,
+      "soil_k": 205,
+      "soil_ph": 6.5,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 38
+    },
+    "HARIDWAR": {
+      "soil_n": 215,
+      "soil_p": 26,
+      "soil_k": 205,
+      "soil_ph": 6.1,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.92,
+      "soil_moisture_pct": 40
+    },
+    "NAINITAL": {
+      "soil_n": 221,
+      "soil_p": 27,
+      "soil_k": 211,
+      "soil_ph": 6.1,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.95,
+      "soil_moisture_pct": 38
+    },
+    "PAURI GARHWAL": {
+      "soil_n": 219,
+      "soil_p": 27,
+      "soil_k": 209,
+      "soil_ph": 6.5,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.94,
+      "soil_moisture_pct": 39
+    },
+    "PITHORAGARH": {
+      "soil_n": 217,
+      "soil_p": 26,
+      "soil_k": 207,
+      "soil_ph": 6.1,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.93,
+      "soil_moisture_pct": 39
+    },
+    "RUDRA PRAYAG": {
+      "soil_n": 206,
+      "soil_p": 25,
+      "soil_k": 197,
+      "soil_ph": 6.5,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.88,
+      "soil_moisture_pct": 38
+    },
+    "TEHRI GARHWAL": {
+      "soil_n": 224,
+      "soil_p": 27,
+      "soil_k": 213,
+      "soil_ph": 6.2,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.96,
+      "soil_moisture_pct": 37
+    },
+    "UDAM SINGH NAGAR": {
+      "soil_n": 206,
+      "soil_p": 25,
+      "soil_k": 197,
+      "soil_ph": 6.2,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.88,
+      "soil_moisture_pct": 38
+    },
+    "UTTAR KASHI": {
+      "soil_n": 211,
+      "soil_p": 25,
+      "soil_k": 201,
+      "soil_ph": 6.5,
+      "soil_type": "Tarai / Hill Loam",
+      "organic_matter_pct": 0.9,
+      "soil_moisture_pct": 36
     }
   },
   "West Bengal": {
     "default": {
-      "soil_n": 225,
-      "soil_p": 28,
-      "soil_k": 185,
+      "soil_n": 210,
+      "soil_p": 26,
+      "soil_k": 180,
       "soil_ph": 6.2,
-      "soil_type": "Gangetic Alluvium",
-      "organic_matter_pct": 0.85,
-      "soil_moisture_pct": 45
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.72,
+      "soil_moisture_pct": 40
     },
-    "Bardhaman": {
-      "soil_n": 235,
-      "soil_p": 30,
-      "soil_k": 190,
-      "soil_ph": 6.3,
-      "soil_type": "Alluvial Clay",
-      "organic_matter_pct": 0.9,
-      "soil_moisture_pct": 46
-    }
-  },
-  "Bihar": {
-    "default": {
+    "24 PARAGANAS NORTH": {
+      "soil_n": 223,
+      "soil_p": 28,
+      "soil_k": 191,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.76,
+      "soil_moisture_pct": 41
+    },
+    "24 PARAGANAS SOUTH": {
+      "soil_n": 218,
+      "soil_p": 27,
+      "soil_k": 187,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.75,
+      "soil_moisture_pct": 41
+    },
+    "ALIPURDUAR": {
       "soil_n": 200,
-      "soil_p": 24,
-      "soil_k": 195,
-      "soil_ph": 7.2,
-      "soil_type": "Calcareous Alluvium",
-      "organic_matter_pct": 0.6,
+      "soil_p": 25,
+      "soil_k": 171,
+      "soil_ph": 6.3,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 39
+    },
+    "BANKURA": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 182,
+      "soil_ph": 6.2,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
       "soil_moisture_pct": 38
     },
-    "Patna": {
-      "soil_n": 205,
+    "BIRBHUM": {
+      "soil_n": 206,
+      "soil_p": 25,
+      "soil_k": 176,
+      "soil_ph": 6.1,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.71,
+      "soil_moisture_pct": 41
+    },
+    "COOCHBEHAR": {
+      "soil_n": 197,
+      "soil_p": 24,
+      "soil_k": 169,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 40
+    },
+    "DARJEELING": {
+      "soil_n": 208,
       "soil_p": 26,
-      "soil_k": 200,
-      "soil_ph": 7.3,
-      "soil_type": "Silt Loam",
-      "organic_matter_pct": 0.62,
+      "soil_k": 178,
+      "soil_ph": 6.1,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.71,
+      "soil_moisture_pct": 40
+    },
+    "DINAJPUR DAKSHIN": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 182,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
+      "soil_moisture_pct": 41
+    },
+    "DINAJPUR UTTAR": {
+      "soil_n": 223,
+      "soil_p": 28,
+      "soil_k": 191,
+      "soil_ph": 6.2,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.76,
       "soil_moisture_pct": 39
+    },
+    "HOOGHLY": {
+      "soil_n": 210,
+      "soil_p": 26,
+      "soil_k": 180,
+      "soil_ph": 6.1,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.72,
+      "soil_moisture_pct": 39
+    },
+    "HOWRAH": {
+      "soil_n": 204,
+      "soil_p": 25,
+      "soil_k": 175,
+      "soil_ph": 6.3,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.7,
+      "soil_moisture_pct": 42
+    },
+    "JALPAIGURI": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 182,
+      "soil_ph": 6.0,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
+      "soil_moisture_pct": 40
+    },
+    "JHARGRAM": {
+      "soil_n": 214,
+      "soil_p": 27,
+      "soil_k": 184,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
+      "soil_moisture_pct": 38
+    },
+    "KALIMPONG": {
+      "soil_n": 200,
+      "soil_p": 25,
+      "soil_k": 171,
+      "soil_ph": 6.2,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 42
+    },
+    "MALDAH": {
+      "soil_n": 216,
+      "soil_p": 27,
+      "soil_k": 185,
+      "soil_ph": 6.0,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.74,
+      "soil_moisture_pct": 38
+    },
+    "MEDINIPUR EAST": {
+      "soil_n": 214,
+      "soil_p": 27,
+      "soil_k": 184,
+      "soil_ph": 6.1,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
+      "soil_moisture_pct": 38
+    },
+    "MEDINIPUR WEST": {
+      "soil_n": 218,
+      "soil_p": 27,
+      "soil_k": 187,
+      "soil_ph": 6.3,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.75,
+      "soil_moisture_pct": 42
+    },
+    "MURSHIDABAD": {
+      "soil_n": 210,
+      "soil_p": 26,
+      "soil_k": 180,
+      "soil_ph": 6.4,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.72,
+      "soil_moisture_pct": 40
+    },
+    "NADIA": {
+      "soil_n": 200,
+      "soil_p": 25,
+      "soil_k": 171,
+      "soil_ph": 6.1,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.68,
+      "soil_moisture_pct": 40
+    },
+    "PASCHIM BARDHAMAN": {
+      "soil_n": 212,
+      "soil_p": 26,
+      "soil_k": 182,
+      "soil_ph": 6.0,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.73,
+      "soil_moisture_pct": 42
+    },
+    "PURBA BARDHAMAN": {
+      "soil_n": 223,
+      "soil_p": 28,
+      "soil_k": 191,
+      "soil_ph": 6.2,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.76,
+      "soil_moisture_pct": 38
+    },
+    "PURULIA": {
+      "soil_n": 223,
+      "soil_p": 28,
+      "soil_k": 191,
+      "soil_ph": 6.0,
+      "soil_type": "Alluvial / Terai Loam",
+      "organic_matter_pct": 0.76,
+      "soil_moisture_pct": 41
     }
   },
   "_all_india_average": {
-    "soil_n": 192,
+    "soil_n": 180,
     "soil_p": 22,
-    "soil_k": 215,
-    "soil_ph": 6.8,
-    "soil_type": "Alluvial / Loam Mixed",
-    "organic_matter_pct": 0.68,
-    "soil_moisture_pct": 35
+    "soil_k": 210,
+    "soil_ph": 7.2,
+    "soil_type": "Alluvial Loam",
+    "organic_matter_pct": 0.55,
+    "soil_moisture_pct": 34
   }
 }

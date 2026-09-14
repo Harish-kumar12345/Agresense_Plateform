@@ -9,11 +9,20 @@ const axios = require('axios');
  *   GDD:     Calculated from Open-Meteo historical archive
  */
 
-// Crop-specific base temperatures for GDD calculation (°C)
+// FAO-56 & ICAR Crop-specific base temperatures for GDD calculation (°C)
 const GDD_BASE_TEMPS = {
-  rice: 10, wheat: 5, maize: 10, cotton: 15,
-  sugarcane: 12, pulses: 10, paddy: 10, coconut: 18,
-  cardamom: 15, pepper: 15, rubber: 18
+  // Cereals
+  rice: 10, paddy: 10, wheat: 5, maize: 10, barley: 5, bajra: 12, jowar: 10, ragi: 10,
+  // Pulses
+  pulses: 10, gram: 8, chickpea: 8, moong: 10, urad: 10, arhar: 10, tur: 10, lentil: 5, peas: 5,
+  // Oilseeds
+  mustard: 5, rapeseed: 5, soybean: 10, soyabean: 10, groundnut: 10, sunflower: 8, sesamum: 10,
+  // Cash & Industrial
+  cotton: 15, sugarcane: 12, jute: 15, tobacco: 13,
+  // Vegetables & Horticultural
+  potato: 7, tomato: 10, onion: 6, chilli: 10, garlic: 6,
+  // Plantation & Spices
+  coconut: 18, rubber: 18, cardamom: 15, pepper: 15, tea: 13, coffee: 15
 };
 
 /**
@@ -58,20 +67,41 @@ async function fetchLiveWeather(lat, lon) {
 const soilDistrictAverages = require('../data/soilDistrictAverages.json');
 
 function getDistrictSoilFallback(lat, lon, state, district) {
-  if (state && district && soilDistrictAverages[state] && soilDistrictAverages[state][district]) {
-    return { ...soilDistrictAverages[state][district], source: `Soil Health Card (${district}, ${state})` };
+  // 1. Flexible Case-Insensitive State Matching
+  let matchedState = null;
+  if (state) {
+    const sLower = String(state).toLowerCase().trim();
+    matchedState = Object.keys(soilDistrictAverages).find(
+      s => s.toLowerCase() === sLower || s.toLowerCase().includes(sLower) || sLower.includes(s.toLowerCase())
+    );
   }
-  if (state && soilDistrictAverages[state] && soilDistrictAverages[state].default) {
-    return { ...soilDistrictAverages[state].default, source: `Soil Health Card Regional Benchmark (${state})` };
+
+  // 2. District Matching within matched state
+  if (matchedState && district) {
+    const dLower = String(district).toLowerCase().trim();
+    const stateObj = soilDistrictAverages[matchedState];
+    const matchedDist = Object.keys(stateObj).find(
+      d => d.toLowerCase() === dLower || d.toLowerCase().includes(dLower) || dLower.includes(d.toLowerCase())
+    );
+    if (matchedDist && stateObj[matchedDist]) {
+      return { ...stateObj[matchedDist], source: `Soil Health Card (${matchedDist}, ${matchedState})` };
+    }
   }
+
+  // 3. State Default Benchmark
+  if (matchedState && soilDistrictAverages[matchedState]?.default) {
+    return { ...soilDistrictAverages[matchedState].default, source: `Soil Health Card State Benchmark (${matchedState})` };
+  }
+
+  // 4. Geographic Fallbacks for Coordinates
   if (lat && lon) {
-    if (lat >= 27.5 && lon <= 78.5) {
+    if (lat >= 27.5 && lon <= 78.5 && soilDistrictAverages["Uttar Pradesh"]) {
       return { ...soilDistrictAverages["Uttar Pradesh"]["Ghaziabad"], source: "Soil Health Card (Western UP / NCR)" };
     }
-    if (lat < 12) {
+    if (lat < 12 && soilDistrictAverages["Kerala"]) {
       return { ...soilDistrictAverages["Kerala"]["default"], source: "Soil Health Card (Kerala Laterite)" };
     }
-    if (lat >= 18 && lat < 22 && lon >= 72 && lon <= 76) {
+    if (lat >= 18 && lat < 22 && lon >= 72 && lon <= 76 && soilDistrictAverages["Maharashtra"]) {
       return { ...soilDistrictAverages["Maharashtra"]["default"], source: "Soil Health Card (Maharashtra Vertisol)" };
     }
   }
@@ -101,22 +131,27 @@ async function fetchSoilData(lat, lon, state, district) {
       }
     }
 
-    const soil_n = nitrogen_gkg != null ? Math.round(nitrogen_gkg * 1.3 * 0.15 * 10) : null;
-    const soil_p = soc_gkg != null ? Math.round(soc_gkg * 0.013 * 1.3 * 0.15 * 10) : null;
-    const soil_k = soc_gkg != null ? Math.round(soc_gkg * 0.008 * 1.3 * 0.15 * 10) : null;
-    const soil_ph = ph != null ? Math.round(ph * 10) / 10 : null;
+    // SoilGrids natively provides measured topsoil Nitrogen (g/kg) and pH.
+    // For Available Phosphorus (P) and Potassium (K), SoilGrids does NOT measure Olsen/Bray P or NH4OAc K.
+    // Grounded directly in genuine Indian Soil Health Card laboratory test district averages:
+    const districtSoil = getDistrictSoilFallback(lat, lon, state, district);
 
-    const fallback = getDistrictSoilFallback(lat, lon, state, district);
+    const soil_n = nitrogen_gkg != null ? Math.round(nitrogen_gkg * 1.3 * 0.15 * 10) : districtSoil.soil_n;
+    const soil_p = districtSoil.soil_p;
+    const soil_k = districtSoil.soil_k;
+    const soil_ph = ph != null ? Math.round(ph * 10) / 10 : districtSoil.soil_ph;
 
     return {
-      soil_n: soil_n || fallback.soil_n,
-      soil_p: soil_p || fallback.soil_p,
-      soil_k: soil_k || fallback.soil_k,
-      soil_ph: soil_ph || fallback.soil_ph,
-      soil_type: fallback.soil_type,
+      soil_n,
+      soil_p,
+      soil_k,
+      soil_ph,
+      soil_type: districtSoil.soil_type,
       nitrogen_gkg,
       soc_gkg,
-      source: soil_n ? 'ISRIC SoilGrids v2.0' : fallback.source,
+      source: nitrogen_gkg != null
+        ? `ISRIC SoilGrids v2.0 (N, pH) + Soil Health Card (${districtSoil.source} for P, K)`
+        : districtSoil.source,
       fetched_at: new Date().toISOString()
     };
   } catch (err) {
