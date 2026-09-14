@@ -210,26 +210,88 @@ export const weatherService = {
     const rainMm = current.precipitation_mm;
     const maxRainProb = Math.max(...daily.map(d => d.precip_probability_max), 0);
 
-    // 1. Crop Weather Suitability
-    let statusMessage = `Suitable for ${crop} Cultivation`;
+    // 1. Comprehensive Crop Weather Suitability (FAO-56 & ICAR Standards)
+    let statusMessage = `Conditions are within optimal physiological range for ${crop}`;
     let statusType: 'success' | 'warning' | 'info' | 'danger' = 'success';
 
-    if (crop.toLowerCase() === 'rice') {
+    const cLower = crop.toLowerCase();
+
+    if (cLower.includes('rice') || cLower.includes('paddy')) {
       if (temp > 38) {
-        statusMessage = `Heat Stress Alert for Rice - Temperature is ${temp}°C`;
+        statusMessage = `Heat Stress Alert for Rice (${temp}°C) — Risk of spikelet sterility. Maintain 5cm water level in field.`;
         statusType = 'danger';
+      } else if (temp < 18) {
+        statusMessage = `Cold Stress for Rice (${temp}°C) — Retarded tillering. Delay cold irrigation water.`;
+        statusType = 'warning';
       } else if (humidity > 80 && maxRainProb > 60) {
-        statusMessage = `High Humidity & Rain Suitable for Rice Transplanting`;
+        statusMessage = `High Humidity & Precipitation Favorable for Rice Transplanting & Tillering`;
         statusType = 'success';
       }
-    } else if (crop.toLowerCase() === 'wheat') {
+    } else if (cLower.includes('wheat')) {
       if (temp > 30) {
-        statusMessage = `Heat Stress Warning for Wheat - Temperature above 30°C may reduce grain fill`;
+        statusMessage = `Terminal Heat Stress Warning for Wheat (${temp}°C) — Accelerated maturity reduces 1000-grain weight.`;
+        statusType = 'warning';
+      } else if (rainMm > 25 || maxRainProb > 75) {
+        statusMessage = `Unseasonal Rainfall Warning for Wheat — Risk of waterlogging and lodging during grain-filling.`;
+        statusType = 'warning';
+      } else if (temp >= 15 && temp <= 25) {
+        statusMessage = `Optimal Cool Weather (${temp}°C) Supporting Wheat Crown Root Initiation & Tillering`;
+        statusType = 'success';
+      }
+    } else if (cLower.includes('cotton')) {
+      if (rainMm > 25 || maxRainProb > 70) {
+        statusMessage = `Excessive Rainfall for Cotton — Waterlogging causes square and boll shedding. Ensure prompt furrow drainage.`;
+        statusType = 'warning';
+      } else if (temp > 40) {
+        statusMessage = `Severe Thermal Stress for Cotton (${temp}°C) — Pollen desiccation and boll drop hazard.`;
+        statusType = 'danger';
+      }
+    } else if (cLower.includes('maize')) {
+      if (temp > 36) {
+        statusMessage = `Heat Stress for Maize (${temp}°C) — Tassel blast and poor silk receptivity. Provide light irrigation.`;
+        statusType = 'warning';
+      } else if (rainMm > 30) {
+        statusMessage = `Waterlogging Alert for Maize — High sensitivity at knee-high to tasseling stages. Drain field immediately.`;
+        statusType = 'danger';
+      }
+    } else if (cLower.includes('sugarcane')) {
+      if (temp > 40) {
+        statusMessage = `Elevated Evapotranspiration for Sugarcane (${temp}°C) — Shorten irrigation cycle.`;
+        statusType = 'warning';
+      } else if (temp >= 28 && temp <= 38) {
+        statusMessage = `Warm Humid Conditions (${temp}°C, ${humidity}%) Highly Favorable for Cane Elongation`;
+        statusType = 'success';
+      }
+    } else if (cLower.includes('potato')) {
+      if (temp > 28) {
+        statusMessage = `Heat Warning for Potato (${temp}°C) — Tuberization significantly inhibited above 22°C night temperature.`;
+        statusType = 'danger';
+      } else if (humidity > 85 && temp >= 15 && temp <= 22) {
+        statusMessage = `Late Blight Favorable Weather (High RH ${humidity}%, Temp ${temp}°C) — Apply protective fungicide spray.`;
         statusType = 'warning';
       }
-    } else if (crop.toLowerCase() === 'cotton' || crop.toLowerCase() === 'maize') {
-      if (rainMm > 20 || maxRainProb > 70) {
-        statusMessage = `Heavy Rainfall Warning for ${crop} - Ensure Field Drainage`;
+    } else if (cLower.includes('tomato') || cLower.includes('chilli')) {
+      if (temp > 35) {
+        statusMessage = `High Temperature (${temp}°C) — Blossom drop and reduced fruit set risk for ${crop}.`;
+        statusType = 'warning';
+      } else if (rainMm > 20) {
+        statusMessage = `Excess Moisture Alert — Heavy rainfall promotes bacterial wilt and collar rot in solanaceous crops.`;
+        statusType = 'warning';
+      }
+    } else if (cLower.includes('mustard') || cLower.includes('rapeseed')) {
+      if (humidity > 80 && temp < 20) {
+        statusMessage = `Foggy / High Humidity Alert for Mustard — High risk of aphid outbreak and white rust spore release.`;
+        statusType = 'warning';
+      } else if (temp > 28) {
+        statusMessage = `High Temperature Warning for Mustard — Premature pod drying and shriveled seeds.`;
+        statusType = 'warning';
+      }
+    } else if (cLower.includes('soybean') || cLower.includes('groundnut') || cLower.includes('pulse') || cLower.includes('gram')) {
+      if (rainMm > 25 || maxRainProb > 75) {
+        statusMessage = `Waterlogging Alert for Legume / Pulse Crop — Stagnant water damages Rhizobium root nodules. Ensure rapid runoff.`;
+        statusType = 'warning';
+      } else if (temp > 38) {
+        statusMessage = `Extreme Thermal Stress (${temp}°C) — Flower abortion and poor pod filling.`;
         statusType = 'warning';
       }
     }

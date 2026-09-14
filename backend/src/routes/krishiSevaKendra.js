@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const KVK_DATA = require('../data/icar_kvk_master_directory.json');
+const KVK_DIRECTORY = KVK_DATA.kvks || [];
 
 // ---------------------------------------------------------------------------
 // Haversine distance (km)
@@ -37,31 +39,28 @@ async function reverseGeocode(lat, lon) {
 
 // ---------------------------------------------------------------------------
 // Nominatim search — search for agri centers by keyword near coordinates
-// Returns real geocoded places
 // ---------------------------------------------------------------------------
 async function searchNominatim(keyword, lat, lon, radiusKm) {
   try {
-    // viewbox: bounding box around the user location
-    const delta = radiusKm / 111; // roughly 1 degree ≈ 111 km
+    const delta = radiusKm / 111;
     const viewbox = `${lon - delta},${lat + delta},${lon + delta},${lat - delta}`;
 
     const res = await axios.get('https://nominatim.openstreetmap.org/search', {
       params: {
         q: keyword,
         format: 'json',
-        limit: 20,
+        limit: 15,
         viewbox,
         bounded: 1,
         addressdetails: 1,
         countrycodes: 'in'
       },
-      timeout: 8000,
+      timeout: 6000,
       headers: { 'User-Agent': 'AgriSense/1.0' }
     });
 
     return res.data || [];
   } catch (e) {
-    console.warn(`  ⚠️ Nominatim search failed for "${keyword}":`, e.message);
     return [];
   }
 }
@@ -79,12 +78,9 @@ function resolveCategory(name = '', type = '', classTag = '') {
   return { category: 'KSK', categoryLabel: 'Krishi Seva Kendra' };
 }
 
-// ---------------------------------------------------------------------------
-// Build services from category
-// ---------------------------------------------------------------------------
 function servicesFor(category) {
   switch (category) {
-    case 'KVK': return ['Farmer Training', 'Frontline Demonstrations', 'Soil Testing', 'High Yield Seedlings'];
+    case 'KVK': return ['Farmer Training', 'Frontline Demonstrations', 'Soil Testing', 'High Yield Seedlings', 'PM-KSK Advisory'];
     case 'FERTILIZER': return ['Urea & NPK Fertilizers', 'Organic Bio-fertilizers', 'Micronutrients'];
     case 'SEEDS': return ['Certified Seeds', 'Hybrid Varieties', 'Seedlings'];
     case 'PESTICIDES': return ['Bio-pesticides', 'Fungicides', 'Insecticides', 'Sprayers'];
@@ -93,9 +89,6 @@ function servicesFor(category) {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Convert a Nominatim result to our center format
-// ---------------------------------------------------------------------------
 function nominatimToCenter(place, idPrefix) {
   const name = place.display_name.split(',')[0].trim();
   const addr = place.address || {};
@@ -131,15 +124,13 @@ function nominatimToCenter(place, idPrefix) {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Is center open right now?
-// ---------------------------------------------------------------------------
 function checkIsOpenNow(workingHoursStr) {
   if (!workingHoursStr) return true;
   const now = new Date();
   const day = now.getDay();
   const hour = now.getHours();
   if (workingHoursStr.includes('Mon-Fri') && (day === 0 || day === 6)) return false;
+  if (workingHoursStr.includes('Mon-Sat') && day === 0) return false;
   return hour >= 9 && hour < 17;
 }
 
@@ -162,59 +153,59 @@ router.get('/', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Invalid coordinates' });
     }
 
-    console.log(`🌾 Fetching nearby agri centers [${userLat}, ${userLon}] radius=${radiusKm}km`);
-
-    // 1. Reverse geocode to get location context
+    // 1. Reverse geocode to get administrative district and state
     const locationInfo = await reverseGeocode(userLat, userLon);
-    console.log(`  📍 Location: ${locationInfo.district}, ${locationInfo.state}`);
 
-    // 2. Search Nominatim with multiple agricultural keywords in parallel
-    const keywords = [
-      'Krishi Bhavan',
-      'Krishi Seva Kendra',
-      'Krishi Vigyan Kendra',
-      'Agriculture office',
-      `${locationInfo.district} agricultural office`,
-      'IFFCO fertilizer',
-      'agri supply store',
-      'seed shop',
-      'kisan seva kendra'
-    ];
+    // 2. Query Verified ICAR KVK Directory
+    const kvkMatches = KVK_DIRECTORY.map(kvk => {
+      const distKm = calculateDistance(userLat, userLon, kvk.coordinates.latitude, kvk.coordinates.longitude);
+      return {
+        ...kvk,
+        distance: Math.round(distKm * 10) / 10,
+        isOpenNow: checkIsOpenNow(kvk.workingHours)
+      };
+    });
 
+    // Filter KVKs within search radius
+    let nearbyKvks = kvkMatches.filter(k => k.distance <= radiusKm);
+    if (nearbyKvks.length === 0) {
+      // If none within tight radius, include the 3 nearest KVKs
+      kvkMatches.sort((a, b) => a.distance - b.distance);
+      nearbyKvks = kvkMatches.slice(0, 3);
+    }
+
+    // 3. Optional auxiliary search via Nominatim
+    const keywords = ['Krishi Seva Kendra', 'IFFCO fertilizer', 'seed shop'];
     const searchResults = await Promise.allSettled(
-      keywords.map((kw, i) => searchNominatim(kw, userLat, userLon, radiusKm))
+      keywords.map(kw => searchNominatim(kw, userLat, userLon, radiusKm))
     );
 
-    // 3. Merge all results, deduplicate by place_id
-    const seenIds = new Set();
-    const rawCenters = [];
+    const seenIds = new Set(nearbyKvks.map(k => k.id));
+    const rawCenters = [...nearbyKvks];
+
     for (const result of searchResults) {
       if (result.status === 'fulfilled') {
         for (const place of result.value) {
-          if (!seenIds.has(place.place_id)) {
-            seenIds.add(place.place_id);
-            rawCenters.push(nominatimToCenter(place, 'nom'));
+          if (!seenIds.has(`nom_${place.place_id}`)) {
+            seenIds.add(`nom_${place.place_id}`);
+            const center = nominatimToCenter(place, 'nom');
+            const distKm = Math.round(calculateDistance(userLat, userLon, center.coordinates.latitude, center.coordinates.longitude) * 10) / 10;
+            if (distKm <= radiusKm) {
+              rawCenters.push({
+                ...center,
+                district: center.district || locationInfo.district,
+                state: center.state || locationInfo.state,
+                distance: distKm,
+                isOpenNow: checkIsOpenNow(center.workingHours)
+              });
+            }
           }
         }
       }
     }
 
-    console.log(`  ✅ Nominatim returned ${rawCenters.length} unique centers`);
-
-    // 4. Compute distance + open status
-    let processed = rawCenters.map(center => ({
-      ...center,
-      district: center.district || locationInfo.district,
-      state: center.state || locationInfo.state,
-      distance: Math.round(calculateDistance(userLat, userLon, center.coordinates?.latitude || 0, center.coordinates?.longitude || 0) * 10) / 10,
-      isOpenNow: checkIsOpenNow(center.workingHours)
-    }));
-
-    // 5. Sort by distance
-    processed.sort((a, b) => a.distance - b.distance);
-
-    // 6. Filter by radius
-    processed = processed.filter(c => c.distance <= radiusKm);
+    // 4. Sort combined list by distance
+    let processed = rawCenters.sort((a, b) => a.distance - b.distance);
 
     // 7. Category filter
     if (category && category !== 'ALL') {

@@ -1,0 +1,304 @@
+[
+  {
+    "farm_id": "farm_up_01",
+    "farm_name": "Kisan Kalyan Wheat & Mustard Farm",
+    "farmer_name": "Ramesh Kumar Sharma",
+    "farmer_phone": "+91-98712-34567",
+    "farmer_email": "ramesh.sharma@agrisense.in",
+    "location_name": "Muradnagar Tehsil, Ghaziabad",
+    "district": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "latitude": 28.7758,
+    "longitude": 77.5024,
+    "boundary_coordinates": [
+      { "lat": 28.7765, "lng": 77.5015 },
+      { "lat": 28.7770, "lng": 77.5035 },
+      { "lat": 28.7750, "lng": 77.5040 },
+      { "lat": 28.7745, "lng": 77.5020 }
+    ],
+    "crop": "Wheat",
+    "area_hectares": 3.2,
+    "soil_type": "Alluvial Soil",
+    "soil_moisture": 56,
+    "ph": 7.2,
+    "nitrogen": 54,
+    "phosphorus": 32,
+    "potassium": 38,
+    "predicted_yield_tha": 4.6,
+    "expected_production_tons": 14.7,
+    "risk_level": "LOW",
+    "risk_score": 18,
+    "growth_stage": "Milking / Grain Filling",
+    "current_gdd": 1580,
+    "expected_harvest_date": "2026-04-12",
+    "harvest_window": "Apr 10 - Apr 25, 2026",
+    "weather_temp_c": 27,
+    "weather_humidity": 58,
+    "weather_description": "Clear Sky",
+    "last_updated": "2026-03-14T10:00:00.000Z",
+    "is_live": true,
+    "data_origin": "REGISTERED",
+    "model_calibration": {
+      "calibrated_region": "Indo-Gangetic Alluvial Plain",
+      "calibrated_soil": "Alluvial Soil",
+      "is_calibrated": true,
+      "notes": "Model fully calibrated on ICAR Indo-Gangetic Wheat yield baseline."
+    },
+    "gdd_agronomic": {
+      "current_gdd": 1580,
+      "base_temp_c": 5,
+      "target_harvest_gdd": 1900,
+      "progress_pct": 83,
+      "methodology": "Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)"
+    },
+    "explainability": {
+      "yield_factors": [
+        { "factor": "Timely First Irrigation at CRI Stage", "impact": 15, "direction": "increase", "description": "Crown root initiation moisture ensured strong tiller density" },
+        { "factor": "Balanced NPK Basal Dressing", "impact": 10, "direction": "increase", "description": "120:60:40 NPK ratio applied per Soil Health Card recommendations" }
+      ],
+      "disease_factors": [
+        { "factor": "Low Canopy Humidity", "impact": -8, "direction": "decrease", "description": "Dry canopy prevents yellow rust spore germination" }
+      ]
+    }
+  },
+  {
+    "farm_id": "farm_pb_01",
+    "farm_name": "Sardar Jaspal Singh Granary Farm",
+    "farmer_name": "Jaspal Singh",
+    "farmer_phone": "+91-98140-55667",
+    "farmer_email": "jaspal.singh@agrisense.in",
+    "location_name": "Samrala Block, Ludhiana",
+    "district": "Ludhiana",
+    "state": "Punjab",
+    "latitude": 30.8385,
+    "longitude": 76.1912,
+    "boundary_coordinates": [
+      { "lat": 30.8390, "lng": 76.1905 },
+      { "lat": 30.8398, "lng": 76.1925 },
+      { "lat": 30.8378, "lng": 76.1930 },
+      { "lat": 30.8372, "lng": 76.1910 }
+    ],
+    "crop": "Wheat",
+    "area_hectares": 6.5,
+    "soil_type": "Clay Loam",
+    "soil_moisture": 62,
+    "ph": 7.4,
+    "nitrogen": 60,
+    "phosphorus": 35,
+    "potassium": 42,
+    "predicted_yield_tha": 5.2,
+    "expected_production_tons": 33.8,
+    "risk_level": "LOW",
+    "risk_score": 15,
+    "growth_stage": "Dough Stage",
+    "current_gdd": 1640,
+    "expected_harvest_date": "2026-04-18",
+    "harvest_window": "Apr 15 - Apr 30, 2026",
+    "weather_temp_c": 28,
+    "weather_humidity": 52,
+    "weather_description": "Sunny & Breezy",
+    "last_updated": "2026-03-14T09:45:00.000Z",
+    "is_live": true,
+    "data_origin": "REGISTERED",
+    "model_calibration": {
+      "calibrated_region": "Punjab-Haryana Plain",
+      "calibrated_soil": "Clay Loam",
+      "is_calibrated": true,
+      "notes": "Model calibrated on high-yielding PBW-826 variety agronomy."
+    },
+    "gdd_agronomic": {
+      "current_gdd": 1640,
+      "base_temp_c": 5,
+      "target_harvest_gdd": 1950,
+      "progress_pct": 84,
+      "methodology": "Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)"
+    },
+    "explainability": {
+      "yield_factors": [
+        { "factor": "Laser Levelled Precision Field", "impact": 12, "direction": "increase", "description": "Uniform water infiltration without ponding" }
+      ],
+      "disease_factors": []
+    }
+  },
+  {
+    "farm_id": "farm_mp_01",
+    "farm_name": "Malwa Plateau Soybean & Gram Plot",
+    "farmer_name": "Deepak Patidar",
+    "farmer_phone": "+91-94250-77889",
+    "farmer_email": "deepak.patidar@agrisense.in",
+    "location_name": "Sanwer Road, Indore",
+    "district": "Indore",
+    "state": "Madhya Pradesh",
+    "latitude": 22.8465,
+    "longitude": 75.8242,
+    "boundary_coordinates": [
+      { "lat": 22.8470, "lng": 75.8235 },
+      { "lat": 22.8478, "lng": 75.8255 },
+      { "lat": 22.8458, "lng": 75.8260 },
+      { "lat": 22.8452, "lng": 75.8240 }
+    ],
+    "crop": "Gram (Chickpea)",
+    "area_hectares": 4.0,
+    "soil_type": "Black Cotton Soil (Regur)",
+    "soil_moisture": 48,
+    "ph": 7.8,
+    "nitrogen": 38,
+    "phosphorus": 45,
+    "potassium": 35,
+    "predicted_yield_tha": 2.1,
+    "expected_production_tons": 8.4,
+    "risk_level": "MEDIUM",
+    "risk_score": 42,
+    "growth_stage": "Pod Development",
+    "current_gdd": 1320,
+    "expected_harvest_date": "2026-03-28",
+    "harvest_window": "Mar 25 - Apr 10, 2026",
+    "weather_temp_c": 31,
+    "weather_humidity": 45,
+    "weather_description": "Warm & Dry",
+    "last_updated": "2026-03-14T08:30:00.000Z",
+    "is_live": true,
+    "data_origin": "REGISTERED",
+    "model_calibration": {
+      "calibrated_region": "Central Black Soil Zone",
+      "calibrated_soil": "Black Cotton Soil (Regur)",
+      "is_calibrated": true,
+      "notes": "Model calibrated for Vertisol high clay water retention."
+    },
+    "gdd_agronomic": {
+      "current_gdd": 1320,
+      "base_temp_c": 8,
+      "target_harvest_gdd": 1550,
+      "progress_pct": 85,
+      "methodology": "Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)"
+    },
+    "explainability": {
+      "yield_factors": [
+        { "factor": "High Available Phosphorus in Black Soil", "impact": 8, "direction": "increase", "description": "Good nodulation and pod setting" }
+      ],
+      "disease_factors": [
+        { "factor": "Pod Borer (Helicoverpa) Pressure", "impact": 14, "direction": "increase", "description": "Pheromone traps recorded 6 moths/trap/day; spray threshold reached" }
+      ]
+    }
+  },
+  {
+    "farm_id": "farm_kl_01",
+    "farm_name": "Green Valley Paddy Field",
+    "farmer_name": "Raman Nair",
+    "farmer_phone": "+91-94471-88234",
+    "farmer_email": "raman.nair@agrisense.in",
+    "location_name": "Kochi APMC Region, Kakkanad",
+    "district": "Ernakulam",
+    "state": "Kerala",
+    "latitude": 10.0261,
+    "longitude": 76.3105,
+    "boundary_coordinates": [
+      { "lat": 10.0265, "lng": 76.3100 },
+      { "lat": 10.0268, "lng": 76.3112 },
+      { "lat": 10.0255, "lng": 76.3115 },
+      { "lat": 10.0252, "lng": 76.3102 }
+    ],
+    "crop": "Rice",
+    "area_hectares": 2.5,
+    "soil_type": "Clay Loam",
+    "soil_moisture": 58,
+    "ph": 6.5,
+    "nitrogen": 45,
+    "phosphorus": 30,
+    "potassium": 25,
+    "predicted_yield_tha": 4.8,
+    "expected_production_tons": 12.0,
+    "risk_level": "LOW",
+    "risk_score": 22,
+    "growth_stage": "Ripening / Grain Filling",
+    "current_gdd": 1450,
+    "expected_harvest_date": "2026-10-28",
+    "harvest_window": "Oct 28 - Nov 10, 2026",
+    "weather_temp_c": 28,
+    "weather_humidity": 78,
+    "weather_description": "Light Rain",
+    "last_updated": "2026-03-14T07:15:00.000Z",
+    "is_live": true,
+    "data_origin": "REGISTERED",
+    "model_calibration": {
+      "calibrated_region": "Coastal Alluvial Plains",
+      "calibrated_soil": "Clay Loam",
+      "is_calibrated": true,
+      "notes": "Model calibrated for Coastal Alluvial & Clay Loam soils."
+    },
+    "gdd_agronomic": {
+      "current_gdd": 1450,
+      "base_temp_c": 10,
+      "target_harvest_gdd": 1850,
+      "progress_pct": 78,
+      "methodology": "Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)"
+    },
+    "explainability": {
+      "yield_factors": [
+        { "factor": "Optimal Standing Water Regime", "impact": 10, "direction": "increase", "description": "5cm water level maintained during tillering" }
+      ],
+      "disease_factors": []
+    }
+  },
+  {
+    "farm_id": "farm_mh_01",
+    "farm_name": "Vidarbha Cotton & Soybean Collective",
+    "farmer_name": "Subhash Rao Deshmukh",
+    "farmer_phone": "+91-98230-11223",
+    "farmer_email": "subhash.deshmukh@agrisense.in",
+    "location_name": "Katol Road, Nagpur",
+    "district": "Nagpur",
+    "state": "Maharashtra",
+    "latitude": 21.1458,
+    "longitude": 79.0882,
+    "boundary_coordinates": [
+      { "lat": 21.1465, "lng": 79.0875 },
+      { "lat": 21.1472, "lng": 79.0895 },
+      { "lat": 21.1450, "lng": 79.0900 },
+      { "lat": 21.1442, "lng": 79.0880 }
+    ],
+    "crop": "Cotton",
+    "area_hectares": 5.0,
+    "soil_type": "Black Cotton Soil (Regur)",
+    "soil_moisture": 44,
+    "ph": 7.6,
+    "nitrogen": 46,
+    "phosphorus": 34,
+    "potassium": 38,
+    "predicted_yield_tha": 2.4,
+    "expected_production_tons": 12.0,
+    "risk_level": "HIGH",
+    "risk_score": 76,
+    "growth_stage": "Boll Opening",
+    "current_gdd": 1780,
+    "expected_harvest_date": "2026-11-20",
+    "harvest_window": "Nov 15 - Dec 05, 2026",
+    "weather_temp_c": 33,
+    "weather_humidity": 68,
+    "weather_description": "Humid & Overcast",
+    "last_updated": "2026-03-14T06:50:00.000Z",
+    "is_live": true,
+    "data_origin": "REGISTERED",
+    "model_calibration": {
+      "calibrated_region": "Deccan Trap Black Soils",
+      "calibrated_soil": "Black Cotton Soil (Regur)",
+      "is_calibrated": true,
+      "notes": "Model calibrated on Bt-Cotton phenology in Vidarbha tract."
+    },
+    "gdd_agronomic": {
+      "current_gdd": 1780,
+      "base_temp_c": 12,
+      "target_harvest_gdd": 2200,
+      "progress_pct": 81,
+      "methodology": "Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)"
+    },
+    "explainability": {
+      "yield_factors": [
+        { "factor": "Adequate Boll Formation", "impact": 9, "direction": "increase", "description": "High retention of primary sympodial bolls" }
+      ],
+      "disease_factors": [
+        { "factor": "Pink Bollworm (Pectinophora gossypiella) Threat", "impact": 22, "direction": "increase", "description": "High nighttime moth activity and rosette flowers observed" }
+      ]
+    }
+  }
+]

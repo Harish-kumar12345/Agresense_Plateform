@@ -1,0 +1,273 @@
+{
+  "_meta": {
+    "source": "ICAR - Indian Institute of Soil Science (IISS) & State Agricultural Universities (SAUs)",
+    "framework": "Soil Test Crop Response (STCR) & Targeted Yield Approach",
+    "license": "Open Government Data License - India (ICAR Research Publications)",
+    "refreshCadence": "Per Kharif/Rabi agricultural season advisory"
+  },
+  "crops": {
+    "Rice": {
+      "name": "Rice (Paddy)",
+      "standard_rdf_kgha": {
+        "N": 120,
+        "P2O5": 60,
+        "K2O": 40
+      },
+      "default_target_yield_tha": 5.0,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 4.39,
+          "soil_eff": 0.51
+        },
+        "FP": {
+          "target_mult": 2.83,
+          "soil_eff": 0.74
+        },
+        "FK": {
+          "target_mult": 2.21,
+          "soil_eff": 0.28
+        }
+      },
+      "split_schedule": {
+        "basal": "50% N (as DAP & Urea) + 100% P2O5 (as DAP) + 75% K2O (as MOP)",
+        "active_tillering": "25% N (top dressing)",
+        "panicle_initiation": "25% N + 25% K2O (top dressing)"
+      },
+      "micronutrient_advisory": "In case of Khaira disease (leaf bronzing), spray Zinc Sulphate (ZnSO₄ 21%) @ 5 kg/ha with 2.5 kg lime in 500L water.",
+      "organic_manure_kgha": 5000
+    },
+    "Wheat": {
+      "name": "Wheat",
+      "standard_rdf_kgha": {
+        "N": 120,
+        "P2O5": 60,
+        "K2O": 40
+      },
+      "default_target_yield_tha": 4.8,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 4.02,
+          "soil_eff": 0.44
+        },
+        "FP": {
+          "target_mult": 2.55,
+          "soil_eff": 0.68
+        },
+        "FK": {
+          "target_mult": 1.95,
+          "soil_eff": 0.22
+        }
+      },
+      "split_schedule": {
+        "basal": "50% N + 100% P2O5 + 100% K2O at sowing",
+        "first_irrigation_cri": "25% N at Crown Root Initiation (CRI stage, 21-25 DAS)",
+        "booting_stage": "25% N before flowering"
+      },
+      "micronutrient_advisory": "If yellowing of new leaves appears, apply Manganese Sulphate (0.5%) foliar spray.",
+      "organic_manure_kgha": 4000
+    },
+    "Maize": {
+      "name": "Maize",
+      "standard_rdf_kgha": {
+        "N": 150,
+        "P2O5": 60,
+        "K2O": 50
+      },
+      "default_target_yield_tha": 5.5,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 4.15,
+          "soil_eff": 0.48
+        },
+        "FP": {
+          "target_mult": 2.65,
+          "soil_eff": 0.7
+        },
+        "FK": {
+          "target_mult": 2.1,
+          "soil_eff": 0.25
+        }
+      },
+      "split_schedule": {
+        "basal": "33% N + 100% P2O5 + 100% K2O at sowing",
+        "knee_high": "33% N at knee-high stage (30 DAS)",
+        "tasseling": "33% N at tasseling stage (50 DAS)"
+      },
+      "micronutrient_advisory": "Zinc deficiency is common in maize (white bud). Apply 25 kg/ha ZnSO₄ at land prep.",
+      "organic_manure_kgha": 6000
+    },
+    "Cotton": {
+      "name": "Cotton",
+      "standard_rdf_kgha": {
+        "N": 120,
+        "P2O5": 60,
+        "K2O": 60
+      },
+      "default_target_yield_tha": 2.2,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 8.5,
+          "soil_eff": 0.52
+        },
+        "FP": {
+          "target_mult": 4.2,
+          "soil_eff": 0.65
+        },
+        "FK": {
+          "target_mult": 3.8,
+          "soil_eff": 0.24
+        }
+      },
+      "split_schedule": {
+        "basal": "25% N + 100% P2O5 + 50% K2O",
+        "squaring": "50% N at square formation",
+        "boll_formation": "25% N + 50% K2O at flowering & boll setting"
+      },
+      "micronutrient_advisory": "Foliar spray of 2% DAP + 1% MgSO₄ at squaring & boll formation prevents red leaf disease.",
+      "organic_manure_kgha": 5000
+    },
+    "Sugarcane": {
+      "name": "Sugarcane",
+      "standard_rdf_kgha": {
+        "N": 250,
+        "P2O5": 80,
+        "K2O": 80
+      },
+      "default_target_yield_tha": 85.0,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 0.42,
+          "soil_eff": 0.35
+        },
+        "FP": {
+          "target_mult": 0.18,
+          "soil_eff": 0.55
+        },
+        "FK": {
+          "target_mult": 0.16,
+          "soil_eff": 0.2
+        }
+      },
+      "split_schedule": {
+        "basal": "25% N + 100% P2O5 + 50% K2O in furrows",
+        "tillering_45d": "35% N top dressing at first earthing up",
+        "grand_growth_90d": "40% N + 50% K2O at final earthing up"
+      },
+      "micronutrient_advisory": "Apply Ferrous Sulphate (FeSO₄) @ 25 kg/ha in calcareous soils showing interveinal chlorosis.",
+      "organic_manure_kgha": 10000
+    },
+    "Potato": {
+      "name": "Potato",
+      "standard_rdf_kgha": {
+        "N": 150,
+        "P2O5": 100,
+        "K2O": 120
+      },
+      "default_target_yield_tha": 25.0,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 0.85,
+          "soil_eff": 0.4
+        },
+        "FP": {
+          "target_mult": 0.62,
+          "soil_eff": 0.65
+        },
+        "FK": {
+          "target_mult": 0.7,
+          "soil_eff": 0.25
+        }
+      },
+      "split_schedule": {
+        "basal": "50% N + 100% P2O5 + 50% K2O at planting",
+        "earthing_up_30d": "50% N + 50% K2O at tuber initiation"
+      },
+      "micronutrient_advisory": "Apply Borax @ 2 kg/ha in boron-deficient soils to prevent internal brown spot.",
+      "organic_manure_kgha": 8000
+    },
+    "Mustard": {
+      "name": "Mustard / Rapeseed",
+      "standard_rdf_kgha": {
+        "N": 80,
+        "P2O5": 40,
+        "K2O": 40
+      },
+      "default_target_yield_tha": 2.0,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 4.5,
+          "soil_eff": 0.46
+        },
+        "FP": {
+          "target_mult": 2.7,
+          "soil_eff": 0.65
+        },
+        "FK": {
+          "target_mult": 2.2,
+          "soil_eff": 0.22
+        }
+      },
+      "split_schedule": {
+        "basal": "50% N + 100% P2O5 + 100% K2O + 30 kg/ha Sulphur",
+        "flowering": "50% N top dressing at first irrigation"
+      },
+      "micronutrient_advisory": "Elemental Sulphur @ 30 kg/ha or Gypsum @ 200 kg/ha is critical for high oil content.",
+      "organic_manure_kgha": 3000
+    },
+    "Soybean": {
+      "name": "Soybean",
+      "standard_rdf_kgha": {
+        "N": 30,
+        "P2O5": 60,
+        "K2O": 40
+      },
+      "default_target_yield_tha": 2.5,
+      "stcr_coefficients": {
+        "FN": {
+          "target_mult": 1.4,
+          "soil_eff": 0.3
+        },
+        "FP": {
+          "target_mult": 3.1,
+          "soil_eff": 0.7
+        },
+        "FK": {
+          "target_mult": 2.4,
+          "soil_eff": 0.24
+        }
+      },
+      "split_schedule": {
+        "basal": "100% N + 100% P2O5 + 100% K2O as basal starter dose (Rhizobium culture handles atmospheric N fixation)."
+      },
+      "micronutrient_advisory": "Inoculate seeds with Bradyrhizobium japonicum + PSB (Phosphate Solubilizing Bacteria).",
+      "organic_manure_kgha": 4000
+    }
+  },
+  "soil_type_modifiers": {
+    "Alluvial Loam": {
+      "retention_factor": 1.0,
+      "nitrogen_loss_risk": "Moderate",
+      "leaching": "Low"
+    },
+    "Black Cotton Soil (Vertisol)": {
+      "retention_factor": 1.15,
+      "nitrogen_loss_risk": "Low",
+      "leaching": "Very Low"
+    },
+    "Red Sandy Loam": {
+      "retention_factor": 0.88,
+      "nitrogen_loss_risk": "High",
+      "leaching": "High (split applications necessary)"
+    },
+    "Laterite Soil": {
+      "retention_factor": 0.82,
+      "nitrogen_loss_risk": "High",
+      "leaching": "High; phosphorus fixation is severe, use rock phosphate + lime"
+    },
+    "Clay Loam": {
+      "retention_factor": 1.08,
+      "nitrogen_loss_risk": "Low",
+      "leaching": "Low"
+    }
+  }
+}

@@ -1,0 +1,1366 @@
+Commodity,Market,State,Date,Modal_Price,Min_Price,Max_Price,Arrival_Tons,Unit
+Rice,Azadpur Mandi,Delhi,2026-06-16,3942,3666,4257,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-17,3913,3639,4226,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-18,3925,3650,4239,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-19,3916,3642,4229,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-20,3908,3634,4221,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-21,3919,3645,4233,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-22,3872,3601,4182,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-23,4001,3721,4321,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-24,3973,3695,4291,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-25,3984,3705,4303,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-26,3976,3698,4294,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-27,3967,3689,4284,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-28,3979,3700,4297,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-29,3931,3656,4245,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-06-30,3942,3666,4257,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-01,3914,3640,4227,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-02,3925,3650,4239,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-03,3917,3643,4230,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-04,3908,3634,4221,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-05,3919,3645,4233,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-06,3872,3601,4182,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-07,4002,3722,4322,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-08,3973,3695,4291,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-09,3985,3706,4304,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-10,3976,3698,4294,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-11,3968,3690,4285,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-12,3979,3700,4297,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-13,3931,3656,4245,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-14,3943,3667,4258,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-15,3915,3641,4228,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-16,3926,3651,4240,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-17,3917,3643,4230,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-18,3909,3635,4222,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-19,3920,3646,4234,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-20,3873,3602,4183,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-21,4002,3722,4322,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-22,3974,3696,4292,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-23,3985,3706,4304,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-24,3977,3699,4295,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-25,3968,3690,4285,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-26,3980,3701,4298,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-27,3932,3657,4247,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-28,3943,3667,4258,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-29,3915,3641,4228,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-30,3926,3651,4240,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-07-31,3918,3644,4231,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-01,3910,3636,4223,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-02,3921,3647,4235,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-03,3873,3602,4183,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-04,4003,3723,4323,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-05,3974,3696,4292,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-06,3986,3707,4305,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-07,3977,3699,4295,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-08,3969,3691,4287,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-09,3980,3701,4298,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-10,3932,3657,4247,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-11,3944,3668,4260,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-12,3916,3642,4229,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-13,3927,3652,4241,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-14,3919,3645,4233,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-15,3910,3636,4223,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-16,3921,3647,4235,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-17,3874,3603,4184,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-18,4003,3723,4323,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-19,3975,3697,4293,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-20,3986,3707,4305,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-21,3978,3700,4296,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-22,3970,3692,4288,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-23,3981,3702,4299,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-24,3933,3658,4248,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-25,3944,3668,4260,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-26,3916,3642,4229,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-27,3927,3652,4241,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-28,3919,3645,4233,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-29,3911,3637,4224,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-30,3922,3647,4236,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-08-31,3874,3603,4184,309,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-01,4004,3724,4324,234,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-02,3975,3697,4293,294,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-03,3987,3708,4306,236,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-04,3979,3700,4297,237,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-05,3970,3692,4288,238,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-06,3982,3703,4301,84,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-07,3934,3659,4249,300,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-08,3945,3669,4261,241,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-09,3917,3643,4230,303,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-10,3928,3653,4242,243,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-11,3920,3646,4234,244,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-12,3911,3637,4224,245,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-13,3922,3647,4236,86,Quintal
+Rice,Azadpur Mandi,Delhi,2026-09-14,3950,3674,4266,309,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-16,2475,2351,2599,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-17,2457,2334,2580,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-18,2464,2341,2587,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-19,2459,2336,2582,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-20,2454,2331,2577,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-21,2460,2337,2583,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-22,2431,2309,2553,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-23,2512,2386,2638,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-24,2494,2369,2619,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-25,2501,2376,2626,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-26,2496,2371,2621,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-27,2491,2366,2616,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-28,2498,2373,2623,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-29,2468,2345,2591,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-06-30,2475,2351,2599,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-01,2457,2334,2580,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-02,2464,2341,2587,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-03,2459,2336,2582,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-04,2454,2331,2577,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-05,2461,2338,2584,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-06,2431,2309,2553,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-07,2512,2386,2638,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-08,2494,2369,2619,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-09,2502,2377,2627,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-10,2496,2371,2621,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-11,2491,2366,2616,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-12,2498,2373,2623,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-13,2468,2345,2591,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-14,2475,2351,2599,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-15,2458,2335,2581,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-16,2465,2342,2588,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-17,2459,2336,2582,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-18,2454,2331,2577,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-19,2461,2338,2584,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-20,2431,2309,2553,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-21,2513,2387,2639,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-22,2495,2370,2620,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-23,2502,2377,2627,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-24,2497,2372,2622,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-25,2491,2366,2616,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-26,2499,2374,2624,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-27,2468,2345,2591,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-28,2476,2352,2600,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-29,2458,2335,2581,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-30,2465,2342,2588,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-07-31,2460,2337,2583,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-01,2454,2331,2577,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-02,2461,2338,2584,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-03,2432,2310,2554,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-04,2513,2387,2639,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-05,2495,2370,2620,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-06,2502,2377,2627,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-07,2497,2372,2622,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-08,2492,2367,2617,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-09,2499,2374,2624,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-10,2469,2346,2592,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-11,2476,2352,2600,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-12,2458,2335,2581,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-13,2465,2342,2588,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-14,2460,2337,2583,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-15,2455,2332,2578,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-16,2462,2339,2585,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-17,2432,2310,2554,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-18,2513,2387,2639,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-19,2495,2370,2620,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-20,2503,2378,2628,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-21,2497,2372,2622,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-22,2492,2367,2617,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-23,2499,2374,2624,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-24,2469,2346,2592,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-25,2476,2352,2600,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-26,2458,2335,2581,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-27,2465,2342,2588,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-28,2460,2337,2583,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-29,2455,2332,2578,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-30,2462,2339,2585,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-08-31,2432,2310,2554,238,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-01,2513,2387,2639,180,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-02,2496,2371,2621,226,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-03,2503,2378,2628,182,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-04,2498,2373,2623,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-05,2492,2367,2617,183,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-06,2499,2374,2624,64,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-07,2469,2346,2592,231,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-08,2476,2352,2600,186,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-09,2459,2336,2582,233,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-10,2466,2343,2589,187,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-11,2460,2337,2583,188,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-12,2455,2332,2578,189,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-13,2462,2339,2585,66,Quintal
+Wheat,Khanna Mandi,Punjab,2026-09-14,2480,2356,2604,238,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-16,2145,1973,2295,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-17,2130,1960,2279,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-18,2136,1965,2286,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-19,2132,1961,2281,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-20,2127,1957,2276,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-21,2133,1962,2282,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-22,2107,1938,2254,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-23,2178,2004,2330,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-24,2162,1989,2313,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-25,2169,1995,2321,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-26,2164,1991,2315,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-27,2159,1986,2310,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-28,2166,1993,2318,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-29,2139,1968,2289,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-06-30,2146,1974,2296,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-01,2130,1960,2279,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-02,2136,1965,2286,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-03,2132,1961,2281,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-04,2127,1957,2276,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-05,2133,1962,2282,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-06,2107,1938,2254,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-07,2178,2004,2330,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-08,2162,1989,2313,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-09,2169,1995,2321,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-10,2164,1991,2315,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-11,2160,1987,2311,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-12,2166,1993,2318,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-13,2140,1969,2290,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-14,2146,1974,2296,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-15,2131,1961,2280,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-16,2137,1966,2287,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-17,2132,1961,2281,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-18,2127,1957,2276,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-19,2133,1962,2282,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-20,2108,1939,2256,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-21,2178,2004,2330,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-22,2163,1990,2314,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-23,2169,1995,2321,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-24,2164,1991,2315,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-25,2160,1987,2311,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-26,2166,1993,2318,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-27,2140,1969,2290,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-28,2146,1974,2296,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-29,2131,1961,2280,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-30,2137,1966,2287,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-07-31,2132,1961,2281,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-01,2128,1958,2277,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-02,2134,1963,2283,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-03,2108,1939,2256,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-04,2178,2004,2330,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-05,2163,1990,2314,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-06,2169,1995,2321,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-07,2165,1992,2317,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-08,2160,1987,2311,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-09,2166,1993,2318,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-10,2140,1969,2290,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-11,2146,1974,2296,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-12,2131,1961,2280,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-13,2137,1966,2287,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-14,2132,1961,2281,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-15,2128,1958,2277,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-16,2134,1963,2283,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-17,2108,1939,2256,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-18,2179,2005,2332,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-19,2163,1990,2314,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-20,2169,1995,2321,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-21,2165,1992,2317,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-22,2160,1987,2311,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-23,2166,1993,2318,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-24,2140,1969,2290,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-25,2146,1974,2296,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-26,2131,1961,2280,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-27,2137,1966,2287,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-28,2133,1962,2282,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-29,2128,1958,2277,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-30,2134,1963,2283,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-08-31,2108,1939,2256,122,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-01,2179,2005,2332,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-02,2163,1990,2314,116,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-03,2170,1996,2322,93,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-04,2165,1992,2317,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-05,2160,1987,2311,94,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-06,2167,1994,2319,33,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-07,2140,1969,2290,119,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-08,2147,1975,2297,95,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-09,2131,1961,2280,120,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-10,2137,1966,2287,96,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-11,2133,1962,2282,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-12,2128,1958,2277,97,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-13,2134,1963,2283,34,Quintal
+Maize,Davangere Mandi,Karnataka,2026-09-14,2150,1978,2300,122,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-16,7234,6800,7668,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-17,7183,6752,7614,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-18,7204,6772,7636,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-19,7188,6757,7619,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-20,7173,6743,7603,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-21,7193,6761,7625,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-22,7106,6680,7532,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-23,7344,6903,7785,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-24,7292,6854,7730,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-25,7313,6874,7752,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-26,7297,6859,7735,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-27,7282,6845,7719,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-28,7303,6865,7741,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-29,7215,6782,7648,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-06-30,7235,6801,7669,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-01,7184,6753,7615,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-02,7204,6772,7636,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-03,7189,6758,7620,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-04,7173,6743,7603,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-05,7194,6762,7626,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-06,7107,6681,7533,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-07,7344,6903,7785,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-08,7292,6854,7730,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-09,7314,6875,7753,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-10,7298,6860,7736,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-11,7283,6846,7720,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-12,7303,6865,7741,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-13,7215,6782,7648,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-14,7236,6802,7670,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-15,7185,6754,7616,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-16,7205,6773,7637,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-17,7190,6759,7621,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-18,7174,6744,7604,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-19,7195,6763,7627,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-20,7108,6682,7534,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-21,7345,6904,7786,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-22,7293,6855,7731,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-23,7314,6875,7753,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-24,7299,6861,7737,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-25,7283,6846,7720,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-26,7304,6866,7742,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-27,7216,6783,7649,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-28,7237,6803,7671,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-29,7185,6754,7616,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-30,7206,6774,7638,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-07-31,7191,6760,7622,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-01,7175,6744,7606,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-02,7195,6763,7627,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-03,7108,6682,7534,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-04,7346,6905,7787,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-05,7294,6856,7732,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-06,7315,6876,7754,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-07,7300,6862,7738,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-08,7284,6847,7721,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-09,7305,6867,7743,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-10,7217,6784,7650,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-11,7238,6804,7672,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-12,7186,6755,7617,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-13,7207,6775,7639,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-14,7191,6760,7622,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-15,7176,6745,7607,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-16,7196,6764,7628,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-17,7109,6682,7536,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-18,7347,6906,7788,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-19,7295,6857,7733,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-20,7316,6877,7755,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-21,7301,6863,7739,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-22,7285,6848,7722,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-23,7306,6868,7744,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-24,7218,6785,7651,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-25,7239,6805,7673,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-26,7187,6756,7618,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-27,7208,6776,7640,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-28,7192,6760,7624,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-29,7177,6746,7608,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-30,7197,6765,7629,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-08-31,7110,6683,7537,180,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-01,7348,6907,7789,136,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-02,7296,6858,7734,171,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-03,7317,6878,7756,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-04,7301,6863,7739,138,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-05,7286,6849,7723,139,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-06,7307,6869,7745,49,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-07,7219,6786,7652,175,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-08,7240,6806,7674,141,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-09,7188,6757,7619,177,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-10,7209,6776,7642,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-11,7193,6761,7625,142,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-12,7178,6747,7609,143,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-13,7198,6766,7630,50,Quintal
+Cotton,Rajkot Mandi,Gujarat,2026-09-14,7250,6815,7685,180,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-16,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-17,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-18,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-19,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-20,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-21,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-22,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-23,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-24,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-25,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-26,377,358,396,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-27,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-28,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-29,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-06-30,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-01,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-02,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-03,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-04,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-05,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-06,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-07,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-08,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-09,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-10,377,358,396,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-11,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-12,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-13,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-14,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-15,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-16,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-17,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-18,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-19,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-20,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-21,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-22,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-23,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-24,378,359,397,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-25,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-26,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-27,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-28,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-29,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-30,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-07-31,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-01,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-02,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-03,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-04,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-05,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-06,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-07,378,359,397,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-08,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-09,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-10,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-11,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-12,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-13,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-14,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-15,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-16,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-17,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-18,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-19,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-20,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-21,378,359,397,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-22,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-23,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-24,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-25,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-26,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-27,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-28,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-29,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-30,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-08-31,368,350,386,876,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-01,380,361,399,663,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-02,377,358,396,832,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-03,378,359,397,668,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-04,378,359,397,671,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-05,377,358,396,674,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-06,378,359,397,237,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-07,373,354,392,850,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-08,374,355,393,683,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-09,372,353,391,857,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-10,373,354,392,689,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-11,372,353,391,692,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-12,371,352,390,695,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-13,372,353,391,244,Quintal
+Sugarcane,Muzaffarnagar Mandi,Uttar Pradesh,2026-09-14,375,356,394,876,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-16,4640,4315,4965,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-17,4607,4285,4929,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-18,4620,4297,4943,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-19,4610,4287,4933,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-20,4600,4278,4922,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-21,4613,4290,4936,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-22,4558,4239,4877,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-23,4710,4380,5040,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-24,4677,4350,5004,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-25,4690,4362,5018,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-26,4680,4352,5008,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-27,4670,4343,4997,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-28,4684,4356,5012,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-29,4627,4303,4951,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-06-30,4641,4316,4966,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-01,4608,4285,4931,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-02,4621,4298,4944,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-03,4611,4288,4934,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-04,4601,4279,4923,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-05,4614,4291,4937,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-06,4558,4239,4877,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-07,4711,4381,5041,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-08,4677,4350,5004,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-09,4691,4363,5019,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-10,4681,4353,5009,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-11,4671,4344,4998,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-12,4684,4356,5012,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-13,4628,4304,4952,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-14,4641,4316,4966,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-15,4608,4285,4931,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-16,4621,4298,4944,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-17,4612,4289,4935,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-18,4602,4280,4924,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-19,4615,4292,4938,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-20,4559,4240,4878,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-21,4711,4381,5041,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-22,4678,4351,5005,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-23,4692,4364,5020,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-24,4682,4354,5010,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-25,4672,4345,4999,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-26,4685,4357,5013,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-27,4629,4305,4953,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-28,4642,4317,4967,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-29,4609,4286,4932,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-30,4622,4298,4946,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-07-31,4612,4289,4935,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-01,4602,4280,4924,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-02,4615,4292,4938,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-03,4559,4240,4878,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-04,4712,4382,5042,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-05,4679,4351,5007,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-06,4692,4364,5020,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-07,4682,4354,5010,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-08,4672,4345,4999,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-09,4686,4358,5014,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-10,4629,4305,4953,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-11,4643,4318,4968,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-12,4609,4286,4932,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-13,4623,4299,4947,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-14,4613,4290,4936,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-15,4603,4281,4925,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-16,4616,4293,4939,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-17,4560,4241,4879,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-18,4713,4383,5043,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-19,4679,4351,5007,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-20,4693,4364,5022,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-21,4683,4355,5011,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-22,4673,4346,5000,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-23,4686,4358,5014,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-24,4630,4306,4954,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-25,4643,4318,4968,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-26,4610,4287,4933,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-27,4623,4299,4947,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-28,4613,4290,4936,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-29,4604,4282,4926,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-30,4617,4294,4940,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-08-31,4561,4242,4880,225,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-01,4713,4383,5043,170,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-02,4680,4352,5008,214,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-03,4693,4364,5022,172,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-04,4683,4355,5011,173,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-05,4674,4347,5001,174,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-06,4687,4359,5015,61,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-07,4630,4306,4954,219,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-08,4644,4319,4969,176,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-09,4611,4288,4934,221,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-10,4624,4300,4948,177,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-11,4614,4291,4937,178,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-12,4604,4282,4926,179,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-13,4617,4294,4940,63,Quintal
+Soybean,Indore Mandi,Madhya Pradesh,2026-09-14,4650,4324,4976,225,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-16,5638,5300,5976,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-17,5598,5262,5934,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-18,5614,5277,5951,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-19,5602,5266,5938,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-20,5590,5255,5925,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-21,5605,5269,5941,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-22,5538,5206,5870,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-23,5723,5380,6066,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-24,5682,5341,6023,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-25,5699,5357,6041,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-26,5687,5346,6028,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-27,5675,5334,6016,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-28,5691,5350,6032,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-29,5622,5285,5959,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-06-30,5638,5300,5976,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-01,5598,5262,5934,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-02,5614,5277,5951,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-03,5602,5266,5938,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-04,5590,5255,5925,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-05,5606,5270,5942,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-06,5538,5206,5870,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-07,5723,5380,6066,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-08,5683,5342,6024,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-09,5699,5357,6041,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-10,5687,5346,6028,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-11,5675,5334,6016,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-12,5691,5350,6032,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-13,5623,5286,5960,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-14,5639,5301,5977,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-15,5599,5263,5935,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-16,5615,5278,5952,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-17,5603,5267,5939,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-18,5591,5256,5926,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-19,5606,5270,5942,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-20,5539,5207,5871,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-21,5724,5381,6067,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-22,5683,5342,6024,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-23,5700,5358,6042,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-24,5688,5347,6029,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-25,5676,5335,6017,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-26,5692,5350,6034,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-27,5623,5286,5960,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-28,5639,5301,5977,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-29,5599,5263,5935,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-30,5615,5278,5952,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-07-31,5603,5267,5939,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-01,5591,5256,5926,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-02,5607,5271,5943,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-03,5539,5207,5871,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-04,5724,5381,6067,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-05,5684,5343,6025,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-06,5700,5358,6042,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-07,5688,5347,6029,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-08,5676,5335,6017,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-09,5692,5350,6034,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-10,5624,5287,5961,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-11,5640,5302,5978,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-12,5600,5264,5936,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-13,5616,5279,5953,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-14,5604,5268,5940,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-15,5592,5256,5928,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-16,5607,5271,5943,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-17,5540,5208,5872,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-18,5725,5382,6068,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-19,5684,5343,6025,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-20,5701,5359,6043,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-21,5689,5348,6030,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-22,5677,5336,6018,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-23,5693,5351,6035,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-24,5624,5287,5961,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-25,5640,5302,5978,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-26,5600,5264,5936,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-27,5616,5279,5953,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-28,5604,5268,5940,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-29,5592,5256,5928,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-30,5608,5272,5944,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-08-31,5540,5208,5872,142,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-01,5725,5382,6068,107,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-02,5685,5344,6026,135,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-03,5701,5359,6043,108,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-04,5689,5348,6030,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-05,5677,5336,6018,109,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-06,5693,5351,6035,38,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-07,5625,5288,5962,138,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-08,5641,5303,5979,110,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-09,5601,5265,5937,139,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-10,5617,5280,5954,111,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-11,5605,5269,5941,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-12,5593,5257,5929,112,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-13,5608,5272,5944,39,Quintal
+Mustard,Bharatpur Mandi,Rajasthan,2026-09-14,5650,5311,5989,142,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-16,1317,1185,1449,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-17,1308,1177,1439,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-18,1312,1181,1443,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-19,1309,1178,1440,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-20,1306,1175,1437,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-21,1310,1179,1441,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-22,1294,1165,1423,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-23,1337,1203,1471,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-24,1328,1195,1461,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-25,1332,1199,1465,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-26,1329,1196,1462,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-27,1326,1193,1459,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-28,1330,1197,1463,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-29,1314,1183,1445,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-06-30,1318,1186,1450,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-01,1308,1177,1439,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-02,1312,1181,1443,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-03,1309,1178,1440,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-04,1306,1175,1437,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-05,1310,1179,1441,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-06,1294,1165,1423,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-07,1337,1203,1471,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-08,1328,1195,1461,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-09,1332,1199,1465,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-10,1329,1196,1462,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-11,1326,1193,1459,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-12,1330,1197,1463,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-13,1314,1183,1445,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-14,1318,1186,1450,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-15,1308,1177,1439,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-16,1312,1181,1443,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-17,1309,1178,1440,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-18,1307,1176,1438,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-19,1310,1179,1441,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-20,1295,1166,1425,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-21,1338,1204,1472,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-22,1328,1195,1461,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-23,1332,1199,1465,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-24,1329,1196,1462,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-25,1327,1194,1460,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-26,1330,1197,1463,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-27,1314,1183,1445,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-28,1318,1186,1450,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-29,1309,1178,1440,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-30,1313,1182,1444,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-07-31,1310,1179,1441,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-01,1307,1176,1438,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-02,1311,1180,1442,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-03,1295,1166,1425,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-04,1338,1204,1472,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-05,1329,1196,1462,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-06,1333,1200,1466,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-07,1330,1197,1463,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-08,1327,1194,1460,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-09,1331,1198,1464,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-10,1315,1184,1447,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-11,1319,1187,1451,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-12,1309,1178,1440,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-13,1313,1182,1444,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-14,1310,1179,1441,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-15,1307,1176,1438,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-16,1311,1180,1442,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-17,1295,1166,1425,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-18,1339,1205,1473,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-19,1329,1196,1462,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-20,1333,1200,1466,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-21,1330,1197,1463,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-22,1327,1194,1460,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-23,1331,1198,1464,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-24,1315,1184,1447,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-25,1319,1187,1451,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-26,1310,1179,1441,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-27,1313,1182,1444,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-28,1311,1180,1442,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-29,1308,1177,1439,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-30,1311,1180,1442,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-08-31,1296,1166,1426,373,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-01,1339,1205,1473,283,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-02,1329,1196,1462,355,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-03,1333,1200,1466,285,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-04,1330,1197,1463,286,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-05,1328,1195,1461,288,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-06,1332,1199,1465,101,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-07,1315,1184,1447,362,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-08,1319,1187,1451,291,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-09,1310,1179,1441,366,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-10,1314,1183,1445,294,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-11,1311,1180,1442,295,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-12,1308,1177,1439,296,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-13,1312,1181,1443,104,Quintal
+Potato,Agra Mandi,Uttar Pradesh,2026-09-14,1320,1188,1452,373,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-16,2175,1914,2480,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-17,2160,1901,2462,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-18,2166,1906,2469,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-19,2162,1903,2465,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-20,2157,1898,2459,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-21,2163,1903,2466,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-22,2137,1881,2436,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-23,2209,1944,2518,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-24,2193,1930,2500,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-25,2199,1935,2507,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-26,2195,1932,2502,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-27,2190,1927,2497,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-28,2196,1932,2503,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-29,2170,1910,2474,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-06-30,2176,1915,2481,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-01,2161,1902,2464,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-02,2167,1907,2470,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-03,2163,1903,2466,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-04,2158,1899,2460,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-05,2164,1904,2467,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-06,2138,1881,2437,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-07,2209,1944,2518,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-08,2194,1931,2501,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-09,2200,1936,2508,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-10,2196,1932,2503,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-11,2191,1928,2498,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-12,2197,1933,2505,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-13,2171,1910,2475,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-14,2177,1916,2482,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-15,2162,1903,2465,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-16,2168,1908,2472,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-17,2163,1903,2466,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-18,2159,1900,2461,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-19,2165,1905,2468,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-20,2139,1882,2438,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-21,2210,1945,2519,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-22,2195,1932,2502,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-23,2201,1937,2509,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-24,2197,1933,2505,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-25,2192,1929,2499,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-26,2198,1934,2506,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-27,2172,1911,2476,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-28,2178,1917,2483,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-29,2163,1903,2466,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-30,2169,1909,2473,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-07-31,2164,1904,2467,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-01,2160,1901,2462,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-02,2166,1906,2469,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-03,2140,1883,2440,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-04,2211,1946,2521,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-05,2196,1932,2503,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-06,2202,1938,2510,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-07,2198,1934,2506,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-08,2193,1930,2500,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-09,2199,1935,2507,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-10,2173,1912,2477,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-11,2179,1918,2484,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-12,2164,1904,2467,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-13,2170,1910,2474,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-14,2165,1905,2468,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-15,2161,1902,2464,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-16,2167,1907,2470,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-17,2141,1884,2441,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-18,2212,1947,2522,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-19,2197,1933,2505,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-20,2203,1939,2511,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-21,2199,1935,2507,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-22,2194,1931,2501,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-23,2200,1936,2508,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-24,2174,1913,2478,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-25,2180,1918,2485,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-26,2165,1905,2468,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-27,2171,1910,2475,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-28,2166,1906,2469,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-29,2162,1903,2465,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-30,2168,1908,2472,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-08-31,2142,1885,2442,541,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-01,2213,1947,2523,409,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-02,2198,1934,2506,514,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-03,2204,1940,2513,413,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-04,2200,1936,2508,415,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-05,2195,1932,2502,416,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-06,2201,1937,2509,146,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-07,2175,1914,2480,525,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-08,2181,1919,2486,422,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-09,2166,1906,2469,530,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-10,2172,1911,2476,425,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-11,2167,1907,2470,427,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-12,2163,1903,2466,429,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-13,2169,1909,2473,151,Quintal
+Onion,Lasalgaon Mandi,Maharashtra,2026-09-14,2180,1918,2485,541,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-16,1646,1399,1909,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-17,1635,1390,1897,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-18,1639,1393,1901,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-19,1636,1391,1898,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-20,1632,1387,1893,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-21,1637,1391,1899,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-22,1617,1374,1876,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-23,1671,1420,1938,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-24,1660,1411,1926,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-25,1664,1414,1930,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-26,1661,1412,1927,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-27,1657,1408,1922,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-28,1662,1413,1928,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-29,1642,1396,1905,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-06-30,1647,1400,1911,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-01,1635,1390,1897,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-02,1640,1394,1902,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-03,1636,1391,1898,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-04,1633,1388,1894,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-05,1638,1392,1900,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-06,1618,1375,1877,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-07,1672,1421,1940,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-08,1660,1411,1926,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-09,1665,1415,1931,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-10,1661,1412,1927,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-11,1658,1409,1923,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-12,1663,1414,1929,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-13,1643,1397,1906,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-14,1647,1400,1911,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-15,1636,1391,1898,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-16,1640,1394,1902,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-17,1637,1391,1899,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-18,1633,1388,1894,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-19,1638,1392,1900,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-20,1618,1375,1877,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-21,1672,1421,1940,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-22,1660,1411,1926,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-23,1665,1415,1931,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-24,1662,1413,1928,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-25,1658,1409,1923,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-26,1663,1414,1929,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-27,1643,1397,1906,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-28,1648,1401,1912,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-29,1636,1391,1898,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-30,1641,1395,1904,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-07-31,1637,1391,1899,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-01,1634,1389,1895,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-02,1638,1392,1900,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-03,1619,1376,1878,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-04,1673,1422,1941,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-05,1661,1412,1927,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-06,1666,1416,1933,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-07,1662,1413,1928,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-08,1659,1410,1924,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-09,1663,1414,1929,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-10,1643,1397,1906,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-11,1648,1401,1912,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-12,1636,1391,1898,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-13,1641,1395,1904,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-14,1638,1392,1900,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-15,1634,1389,1895,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-16,1639,1393,1901,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-17,1619,1376,1878,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-18,1673,1422,1941,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-19,1661,1412,1927,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-20,1666,1416,1933,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-21,1663,1414,1929,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-22,1659,1410,1924,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-23,1664,1414,1930,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-24,1644,1397,1907,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-25,1649,1402,1913,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-26,1637,1391,1899,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-27,1642,1396,1905,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-28,1638,1392,1900,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-29,1635,1390,1897,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-30,1639,1393,1901,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-08-31,1619,1376,1878,245,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-01,1674,1423,1942,185,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-02,1662,1413,1928,232,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-03,1667,1417,1934,187,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-04,1663,1414,1929,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-05,1660,1411,1926,188,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-06,1664,1414,1930,66,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-07,1644,1397,1907,238,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-08,1649,1402,1913,191,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-09,1637,1391,1899,240,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-10,1642,1396,1905,192,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-11,1638,1392,1900,193,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-12,1635,1390,1897,194,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-13,1640,1394,1902,68,Quintal
+Tomato,Kolar Mandi,Karnataka,2026-09-14,1650,1402,1914,245,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-16,13571,12757,14385,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-17,13474,12666,14282,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-18,13513,12702,14324,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-19,13484,12675,14293,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-20,13455,12648,14262,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-21,13493,12683,14303,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-22,13330,12530,14130,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-23,13776,12949,14603,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-24,13678,12857,14499,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-25,13718,12895,14541,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-26,13688,12867,14509,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-27,13659,12839,14479,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-28,13699,12877,14521,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-29,13533,12721,14345,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-06-30,13572,12758,14386,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-01,13476,12667,14285,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-02,13514,12703,14325,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-03,13485,12676,14294,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-04,13456,12649,14263,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-05,13494,12684,14304,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-06,13331,12531,14131,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-07,13777,12950,14604,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-08,13679,12858,14500,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-09,13719,12896,14542,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-10,13690,12869,14511,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-11,13661,12841,14481,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-12,13700,12878,14522,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-13,13535,12723,14347,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-14,13574,12760,14388,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-15,13477,12668,14286,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-16,13516,12705,14327,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-17,13487,12678,14296,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-18,13458,12651,14265,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-19,13496,12686,14306,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-20,13333,12533,14133,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-21,13779,12952,14606,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-22,13681,12860,14502,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-23,13720,12897,14543,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-24,13691,12870,14512,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-25,13662,12842,14482,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-26,13702,12880,14524,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-27,13536,12724,14348,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-28,13575,12760,14390,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-29,13478,12669,14287,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-30,13517,12706,14328,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-07-31,13488,12679,14297,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-01,13459,12651,14267,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-02,13497,12687,14307,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-03,13334,12534,14134,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-04,13780,12953,14607,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-05,13682,12861,14503,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-06,13722,12899,14545,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-07,13693,12871,14515,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-08,13664,12844,14484,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-09,13703,12881,14525,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-10,13538,12726,14350,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-11,13577,12762,14392,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-12,13480,12671,14289,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-13,13519,12708,14330,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-14,13490,12681,14299,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-15,13461,12653,14269,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-16,13499,12689,14309,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-17,13335,12535,14135,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-18,13781,12954,14608,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-19,13684,12863,14505,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-20,13723,12900,14546,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-21,13694,12872,14516,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-22,13665,12845,14485,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-23,13704,12882,14526,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-24,13539,12727,14351,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-25,13578,12763,14393,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-26,13481,12672,14290,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-27,13520,12709,14331,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-28,13491,12682,14300,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-29,13462,12654,14270,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-30,13500,12690,14310,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-08-31,13337,12537,14137,58,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-01,13783,12956,14610,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-02,13685,12864,14506,55,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-03,13725,12902,14548,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-04,13696,12874,14518,44,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-05,13667,12847,14487,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-06,13706,12884,14528,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-07,13541,12729,14353,56,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-08,13580,12765,14395,45,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-09,13483,12674,14292,57,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-10,13522,12711,14333,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-11,13493,12683,14303,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-12,13464,12656,14272,46,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-13,13502,12692,14312,16,Quintal
+Coconut,Pollachi Mandi,Tamil Nadu,2026-09-14,13600,12784,14416,58,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-16,58375,55456,61294,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-17,57958,55060,60856,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-18,58124,55218,61030,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-19,57999,55099,60899,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-20,57874,54980,60768,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-21,58038,55136,60940,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-22,57336,54469,60203,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-23,59254,56291,62217,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-24,58833,55891,61775,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-25,59003,56053,61953,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-26,58878,55934,61822,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-27,58753,55815,61691,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-28,58921,55975,61867,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-29,58210,55300,61120,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-06-30,58378,55459,61297,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-01,57961,55063,60859,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-02,58128,55222,61034,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-03,58002,55102,60902,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-04,57877,54983,60771,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-05,58041,55139,60943,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-06,57339,54472,60206,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-07,59257,56294,62220,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-08,58836,55894,61778,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-09,59007,56057,61957,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-10,58881,55937,61825,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-11,58756,55818,61694,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-12,58924,55978,61870,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-13,58214,55303,61125,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-14,58381,55462,61300,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-15,57965,55067,60863,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-16,58131,55224,61038,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-17,58006,55106,60906,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-18,57880,54986,60774,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-19,58044,55142,60946,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-20,57342,54475,60209,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-21,59260,56297,62223,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-22,58839,55897,61781,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-23,59010,56060,61960,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-24,58885,55941,61829,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-25,58759,55821,61697,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-26,58928,55982,61874,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-27,58217,55306,61128,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-28,58384,55465,61303,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-29,57968,55070,60866,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-30,58134,55227,61041,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-07-31,58009,55109,60909,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-01,57884,54990,60778,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-02,58047,55145,60949,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-03,57345,54478,60212,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-04,59263,56300,62226,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-05,58842,55900,61784,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-06,59013,56062,61964,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-07,58888,55944,61832,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-08,58763,55825,61701,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-09,58931,55984,61878,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-10,58220,55309,61131,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-11,58387,55468,61306,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-12,57971,55072,60870,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-13,58137,55230,61044,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-14,58012,55111,60913,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-15,57887,54993,60781,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-16,58050,55148,60952,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-17,57348,54481,60215,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-18,59266,56303,62229,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-19,58845,55903,61787,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-20,59016,56065,61967,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-21,58891,55946,61836,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-22,58766,55828,61704,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-23,58934,55987,61881,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-24,58223,55312,61134,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-25,58390,55470,61310,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-26,57974,55075,60873,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-27,58140,55233,61047,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-28,58015,55114,60916,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-29,57890,54996,60784,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-30,58054,55151,60957,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-08-31,57351,54483,60219,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-01,59269,56306,62232,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-02,58849,55907,61791,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-03,59019,56068,61970,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-04,58894,55949,61839,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-05,58769,55831,61707,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-06,58937,55990,61884,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-07,58226,55315,61137,22,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-08,58394,55474,61314,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-09,57977,55078,60876,23,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-10,58143,55236,61050,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-11,58018,55117,60919,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-12,57893,54998,60788,18,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-13,58057,55154,60960,6,Quintal
+Black Pepper,Kochi Spices Board,Kerala,2026-09-14,58500,55575,61425,23,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-16,131717,121180,140937,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-17,130777,120315,139931,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-18,131151,120659,140332,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-19,130868,120399,140029,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-20,130585,120138,139726,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-21,130953,120477,140120,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-22,129368,119019,138424,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-23,133695,122999,143054,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-24,132745,122125,142037,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-25,133129,122479,142448,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-26,132846,122218,142145,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-27,132562,121957,141841,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-28,132941,122306,142247,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-29,131336,120829,140530,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-06-30,131713,121176,140933,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-01,130773,120311,139927,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-02,131147,120655,140327,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-03,130863,120394,140023,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-04,130580,120134,139721,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-05,130949,120473,140115,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-06,129364,119015,138419,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-07,133691,122996,143049,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-08,132741,122122,142033,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-09,133125,122475,142444,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-10,132841,122214,142140,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-11,132558,121953,141837,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-12,132936,122301,142242,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-13,131332,120825,140525,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-14,131709,121172,140929,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-15,130768,120307,139922,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-16,131142,120651,140322,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-17,130859,120390,140019,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-18,130576,120130,139716,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-19,130944,120468,140110,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-20,129360,119011,138415,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-21,133687,122992,143045,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-22,132736,122117,142028,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-23,133120,122470,142438,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-24,132837,122210,142136,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-25,132554,121950,141833,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-26,132932,122297,142237,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-27,131328,120822,140521,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-28,131705,121169,140924,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-29,130764,120303,139917,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-30,131138,120647,140318,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-07-31,130855,120387,140015,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-01,130572,120126,139712,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-02,130940,120465,140106,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-03,129356,119008,138411,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-04,133682,122987,143040,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-05,132732,122113,142023,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-06,133116,122467,142434,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-07,132833,122206,142131,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-08,132550,121946,141828,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-09,132928,122294,142233,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-10,131324,120818,140517,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-11,131700,121164,140919,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-12,130760,120299,139913,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-13,131134,120643,140313,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-14,130851,120383,140011,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-15,130568,120123,139708,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-16,130936,120461,140102,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-17,129351,119003,138406,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-18,133678,122984,143035,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-19,132728,122110,142019,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-20,133112,122463,142430,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-21,132829,122203,142127,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-22,132546,121942,141824,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-23,132924,122290,142229,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-24,131319,120813,140511,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-25,131696,121160,140915,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-26,130756,120296,139909,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-27,131130,120640,140309,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-28,130847,120379,140006,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-29,130564,120119,139703,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-30,130932,120457,140097,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-08-31,129347,118999,138401,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-01,133674,122980,143031,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-02,132724,122106,142015,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-03,133108,122459,142426,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-04,132825,122199,142123,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-05,132541,121938,141819,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-06,132920,122286,142224,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-07,131315,120810,140507,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-08,131692,121157,140910,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-09,130752,120292,139905,15,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-10,131126,120636,140305,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-11,130842,120375,140001,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-12,130559,120114,139698,12,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-13,130928,120454,140093,5,Quintal
+Cardamom,Kumily Auction Centre,Kerala,2026-09-14,132000,121440,141240,15,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-16,17462,16589,18335,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-17,17338,16471,18205,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-18,17388,16519,18257,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-19,17350,16482,18218,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-20,17313,16447,18179,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-21,17362,16494,18230,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-22,17152,16294,18010,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-23,17726,16840,18612,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-24,17600,16720,18480,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-25,17651,16768,18534,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-26,17613,16732,18494,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-27,17576,16697,18455,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-28,17626,16745,18507,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-29,17413,16542,18284,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-06-30,17464,16591,18337,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-01,17339,16472,18206,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-02,17389,16520,18258,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-03,17351,16483,18219,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-04,17314,16448,18180,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-05,17363,16495,18231,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-06,17153,16295,18011,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-07,17727,16841,18613,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-08,17601,16721,18481,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-09,17652,16769,18535,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-10,17614,16733,18495,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-11,17577,16698,18456,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-12,17627,16746,18508,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-13,17415,16544,18286,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-14,17465,16592,18338,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-15,17340,16473,18207,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-16,17390,16520,18260,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-17,17352,16484,18220,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-18,17315,16449,18181,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-19,17364,16496,18232,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-20,17154,16296,18012,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-21,17728,16842,18614,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-22,17602,16722,18482,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-23,17653,16770,18536,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-24,17615,16734,18496,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-25,17578,16699,18457,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-26,17628,16747,18509,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-27,17416,16545,18287,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-28,17466,16593,18339,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-29,17341,16474,18208,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-30,17391,16521,18261,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-07-31,17353,16485,18221,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-01,17316,16450,18182,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-02,17365,16497,18233,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-03,17155,16297,18013,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-04,17729,16843,18615,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-05,17603,16723,18483,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-06,17654,16771,18537,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-07,17616,16735,18497,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-08,17579,16700,18458,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-09,17629,16748,18510,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-10,17417,16546,18288,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-11,17467,16594,18340,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-12,17342,16475,18209,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-13,17392,16522,18262,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-14,17354,16486,18222,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-15,17317,16451,18183,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-16,17366,16498,18234,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-17,17156,16298,18014,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-18,17730,16844,18616,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-19,17604,16724,18484,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-20,17655,16772,18538,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-21,17617,16736,18498,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-22,17580,16701,18459,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-23,17630,16748,18512,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-24,17418,16547,18289,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-25,17468,16595,18341,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-26,17343,16476,18210,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-27,17393,16523,18263,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-28,17355,16487,18223,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-29,17318,16452,18184,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-30,17367,16499,18235,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-08-31,17157,16299,18015,71,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-01,17731,16844,18618,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-02,17605,16725,18485,67,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-03,17656,16773,18539,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-04,17618,16737,18499,54,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-05,17581,16702,18460,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-06,17631,16749,18513,19,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-07,17419,16548,18290,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-08,17469,16596,18342,55,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-09,17344,16477,18211,69,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-10,17394,16524,18264,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-11,17357,16489,18225,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-12,17319,16453,18185,56,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-13,17368,16500,18236,20,Quintal
+Rubber,Kottayam Rubber Board,Kerala,2026-09-14,17500,16625,18375,71,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-16,6436,6050,6822,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-17,6390,6007,6773,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-18,6409,6024,6794,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-19,6395,6011,6779,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-20,6381,5998,6764,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-21,6399,6015,6783,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-22,6322,5943,6701,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-23,6533,6141,6925,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-24,6487,6098,6876,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-25,6506,6116,6896,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-26,6492,6102,6882,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-27,6478,6089,6867,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-28,6497,6107,6887,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-29,6418,6033,6803,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-06-30,6437,6051,6823,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-01,6391,6008,6774,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-02,6409,6024,6794,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-03,6395,6011,6779,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-04,6382,5999,6765,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-05,6400,6016,6784,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-06,6322,5943,6701,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-07,6534,6142,6926,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-08,6487,6098,6876,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-09,6506,6116,6896,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-10,6492,6102,6882,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-11,6479,6090,6868,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-12,6497,6107,6887,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-13,6419,6034,6804,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-14,6437,6051,6823,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-15,6391,6008,6774,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-16,6410,6025,6795,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-17,6396,6012,6780,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-18,6382,5999,6765,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-19,6400,6016,6784,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-20,6323,5944,6702,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-21,6534,6142,6926,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-22,6488,6099,6877,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-23,6507,6117,6897,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-24,6493,6103,6883,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-25,6479,6090,6868,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-26,6498,6108,6888,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-27,6419,6034,6804,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-28,6438,6052,6824,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-29,6392,6008,6776,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-30,6410,6025,6795,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-07-31,6397,6013,6781,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-01,6383,6000,6766,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-02,6401,6017,6785,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-03,6323,5944,6702,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-04,6535,6143,6927,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-05,6489,6100,6878,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-06,6507,6117,6897,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-07,6494,6104,6884,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-08,6480,6091,6869,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-09,6498,6108,6888,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-10,6420,6035,6805,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-11,6438,6052,6824,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-12,6393,6009,6777,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-13,6411,6026,6796,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-14,6397,6013,6781,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-15,6383,6000,6766,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-16,6401,6017,6785,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-17,6324,5945,6703,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-18,6535,6143,6927,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-19,6489,6100,6878,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-20,6508,6118,6898,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-21,6494,6104,6884,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-22,6480,6091,6869,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-23,6499,6109,6889,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-24,6420,6035,6805,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-25,6439,6053,6825,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-26,6393,6009,6777,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-27,6411,6026,6796,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-28,6398,6014,6782,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-29,6384,6001,6767,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-30,6402,6018,6786,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-08-31,6325,5946,6704,167,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-01,6536,6144,6928,127,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-02,6490,6101,6879,159,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-03,6508,6118,6898,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-04,6495,6105,6885,128,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-05,6481,6092,6870,129,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-06,6499,6109,6889,45,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-07,6421,6036,6806,162,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-08,6440,6054,6826,131,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-09,6394,6010,6778,164,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-10,6412,6027,6797,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-11,6398,6014,6782,132,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-12,6384,6001,6767,133,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-13,6402,6018,6786,47,Quintal
+Groundnut,Gondal Mandi,Gujarat,2026-09-14,6450,6063,6837,167,Quintal

@@ -1,0 +1,52 @@
+Crop,Disease_or_Pest,Type,Opt_Temp_Min_C,Opt_Temp_Max_C,Opt_Humidity_Pct,Excess_Nitrogen_Vulnerability,Soil_Moisture_Vulnerability,Recommended_Control
+Rice,Rice Blast (Magnaporthe oryzae),Fungal,22,28,85,True,True,Tricyclazole 75% WP @ 0.6 g/L or Kasugamycin 3% SL @ 2 ml/L
+Rice,Sheath Blight (Rhizoctonia solani),Fungal,28,33,85,True,True,Validamycin 3% L @ 2.5 ml/L or Hexaconazole 5% EC @ 2 ml/L
+Rice,Brown Planthopper (Nilaparvata lugens),Pest,25,31,75,True,False,Pymetrozine 50% WDG @ 0.6 g/L or Triflumezopyrim 10% SC @ 0.5 ml/L
+Rice,Bacterial Leaf Blight (Xanthomonas oryzae),Bacterial,25,34,78,True,True,Copper Oxychloride 50% WP @ 2.5 g/L + Streptocycline @ 0.1 g/L
+Wheat,Yellow / Stripe Rust (Puccinia striiformis),Fungal,10,18,75,False,True,Propiconazole 25% EC (Tilt) @ 1 ml/L at first notice
+Wheat,Brown / Leaf Rust (Puccinia triticina),Fungal,16,25,70,False,True,Propiconazole 25% EC @ 1 ml/L or Tebuconazole 25.9% EC @ 1 ml/L
+Wheat,Powdery Mildew (Blumeria graminis),Fungal,15,22,65,True,False,Wettable Sulphur 80% WP @ 3 g/L or Propiconazole @ 1 ml/L
+Wheat,Wheat Aphids (Sitobion avenae),Pest,18,26,50,False,False,Thiamethoxam 25% WG @ 0.2 g/L or Imidacloprid 17.8% SL @ 0.3 ml/L
+Cotton,Pink Bollworm (Pectinophora gossypiella),Pest,24,33,60,False,False,Pheromone traps (8/ha) + Profenofos 50% EC @ 2 ml/L or Emamectin Benzoate 5% SG @ 0.5 g/L
+Cotton,Whitefly & Leaf Curl Vector (Bemisia tabaci),Pest,26,36,55,True,False,Diafenthiuron 50% WP @ 1.2 g/L or Pyriproxyfen 10% EC @ 2 ml/L
+Cotton,Bacterial Blight (Xanthomonas citri pv. malvacearum),Bacterial,28,34,80,True,True,Copper Oxychloride 50% WP @ 2.5 g/L + Streptocycline 100 ppm
+Cotton,Fusarium Wilt (Fusarium oxysporum),Fungal,22,29,70,False,True,Trichoderma viride soil application @ 2.5 kg/ha in FYM
+Maize,Fall Armyworm (Spodoptera frugiperda),Pest,24,32,60,False,False,Spinetoram 11.7% SC @ 0.5 ml/L or Chlorantraniliprole 18.5% SC @ 0.4 ml/L
+Maize,Maydis Leaf Blight (Bipolaris maydis),Fungal,20,30,80,True,True,Mancozeb 75% WP @ 2.5 g/L or Azoxystrobin @ 1 ml/L
+Maize,Stem Borer (Chilo partellus),Pest,25,33,65,False,False,Carbofuran 3G granules @ 7.5 kg/ha or Chlorantraniliprole @ 0.4 ml/L
+Sugarcane,Red Rot (Colletotrichum falcatum),Fungal,27,34,85,True,True,Use healthy seed setts treated with Carbendazim 50% WP @ 2 g/L; ensure drainage
+Sugarcane,Top Borer (Scirpophaga excerptalis),Pest,26,33,70,False,False,Chlorantraniliprole 0.4% G @ 18 kg/ha at shoot emergence
+Sugarcane,Sugarcane Smut (Sporisorium scitamineum),Fungal,25,35,65,False,False,Rogue out infected whips; spray Propiconazole 25% EC @ 1 ml/L
+Potato,Late Blight (Phytophthora infestans),Fungal,12,22,85,True,True,Prophylactic Mancozeb 75% WP @ 2.5 g/L; post-outbreak Cymoxanil 8% + Mancozeb 64% WP @ 3 g/L
+Potato,Early Blight (Alternaria solani),Fungal,24,30,75,False,False,Chlorothalonil 75% WP @ 2 g/L or Mancozeb @ 2.5 g/L
+Potato,Potato Aphids (Myzus persicae),Pest,18,25,55,False,False,Imidacloprid 17.8% SL @ 0.3 ml/L or Acetamiprid 20% SP @ 0.2 g/L
+Tomato,Early Blight (Alternaria solani),Fungal,24,30,75,False,False,Mancozeb 75% WP @ 2.5 g/L or Azoxystrobin @ 1 ml/L
+Tomato,Tomato Leaf Curl Virus (Whitefly vector),Viral,26,35,55,True,False,Yellow sticky traps + Diafenthiuron 50% WP @ 1.2 g/L
+Tomato,Fruit Borer (Helicoverpa armigera),Pest,24,32,60,False,False,Emamectin Benzoate 5% SG @ 0.5 g/L or Chlorantraniliprole @ 0.4 ml/L
+Mustard,White Rust (Albugo candida),Fungal,12,20,80,False,True,Metalaxyl 8% + Mancozeb 64% WP (Ridomil MZ) @ 2 g/L
+Mustard,Mustard Aphid (Lipaphis erysimi),Pest,14,22,60,False,False,Dimethoate 30% EC @ 1.5 ml/L or Thiamethoxam 25% WG @ 0.2 g/L
+Mustard,Alternaria Blight (Alternaria brassicae),Fungal,18,26,75,True,True,Iprodione 50% WP @ 2 g/L or Mancozeb @ 2.5 g/L
+Soybean,Soybean Rust (Phakopsora pachyrhizi),Fungal,18,26,80,False,True,Hexaconazole 5% EC @ 2 ml/L or Propiconazole 25% EC @ 1 ml/L
+Soybean,Girdle Beetle (Obereopsis brevis),Pest,25,33,65,False,False,Thiamethoxam 12.6% + Lambda-cyhalothrin 9.5% ZC @ 0.3 ml/L
+Soybean,Yellow Mosaic Virus (Whitefly vector),Viral,26,35,60,True,False,Acetamiprid 20% SP @ 0.2 g/L or Thiamethoxam @ 0.2 g/L
+Groundnut,Tikka Leaf Spot (Cercospora arachidicola),Fungal,24,30,80,False,True,Carbendazim 50% WP @ 1 g/L or Chlorothalonil @ 2 g/L
+Groundnut,Groundnut Rust (Puccinia arachidis),Fungal,22,28,80,False,True,Mancozeb @ 2.5 g/L or Hexaconazole @ 1.5 ml/L
+Groundnut,Spodoptera Defoliator (Spodoptera litura),Pest,25,34,65,False,False,Chlorantraniliprole 18.5% SC @ 0.3 ml/L
+Gram,Ascochyta Blight (Ascochyta rabiei),Fungal,15,23,75,False,True,Chlorothalonil 75% WP @ 2 g/L or Carbendazim @ 1 g/L
+Gram,Fusarium Wilt (Fusarium oxysporum f. sp. ciceris),Fungal,23,28,65,False,False,Seed treatment with Trichoderma viride @ 4 g/kg seed
+Gram,Gram Pod Borer (Helicoverpa armigera),Pest,22,32,55,False,False,Pheromone traps (5/ha) + Indoxacarb 14.5% SC @ 1 ml/L or Emamectin Benzoate @ 0.5 g/L
+Pulses,Yellow Mosaic Virus (Mungbean YMV),Viral,26,35,60,True,False,Imidacloprid 17.8% SL @ 0.3 ml/L to control whiteflies
+Pulses,Powdery Mildew (Erysiphe polygoni),Fungal,20,27,65,False,False,Wettable Sulphur 80% WP @ 3 g/L or Hexaconazole @ 1.5 ml/L
+Pulses,Pod Borer Complex,Pest,24,32,60,False,False,Chlorantraniliprole @ 0.3 ml/L or Flubendiamide 39.35% SC @ 0.2 ml/L
+Onion,Purple Blotch (Alternaria porri),Fungal,22,29,85,True,True,Mancozeb 75% WP @ 2.5 g/L or Tebuconazole @ 1 ml/L
+Onion,Stemphylium Leaf Blight,Fungal,20,27,80,False,True,Difenoconazole 25% EC @ 1 ml/L
+Onion,Onion Thrips (Thrips tabaci),Pest,20,30,50,False,False,Fipronil 5% SC @ 1.5 ml/L or Spinosad 45% SC @ 0.3 ml/L
+Chilli,Anthracnose / Die-back (Colletotrichum capsici),Fungal,25,30,80,False,True,Azoxystrobin 23% SC @ 1 ml/L or Copper Oxychloride @ 2.5 g/L
+Chilli,Chilli Thrips & Yellow Mite,Pest,25,34,55,False,False,Diafenthiuron 50% WP @ 1.2 g/L or Spiromesifen 22.9% SC @ 1 ml/L
+Chilli,Bacterial Leaf Spot (Xanthomonas),Bacterial,25,33,80,True,True,Streptocycline 100 ppm + Copper Oxychloride @ 2 g/L
+Apple,Apple Scab (Venturia inaequalis),Fungal,14,21,85,False,True,Difenoconazole 25% EC @ 0.3 ml/L or Captan 50% WP @ 2.5 g/L
+Apple,Powdery Mildew (Podosphaera leucotricha),Fungal,18,25,65,True,False,Hexaconazole 5% EC @ 0.5 ml/L or Wettable Sulphur @ 2.5 g/L
+Apple,San Jose Scale (Diaspidiotus perniciosus),Pest,20,29,60,False,False,Dormant spray with Horticultural Mineral Oil (HMO) @ 20 ml/L
+Coconut,Rhinoceros Beetle (Oryctes rhinoceros),Pest,24,33,70,False,False,Hook extraction from crown; apply Phorate 10G or neem cake mixture to leaf axils
+Coconut,Red Palm Weevil (Rhynchophorus ferrugineus),Pest,25,34,70,False,False,Pheromone lures (Ferrolure+) + crown stem injection with Imidacloprid @ 3 ml/tree
+Coconut,Bud Rot (Phytophthora palmivora),Fungal,22,28,85,False,True,Bordeaux paste application on crown; spray Bordeaux mixture 1% before monsoon

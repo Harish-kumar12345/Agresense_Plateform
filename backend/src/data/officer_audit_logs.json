@@ -1,0 +1,67 @@
+[
+  {
+    "_id": "audit_001",
+    "officer_id": "off_01",
+    "officer_name": "Dr. Sunita Sharma (District Agronomist)",
+    "action_type": "ADVISORY_DISPATCHED",
+    "target_id": "farm_up_01",
+    "target_type": "farm",
+    "details": "Dispatched emergency Yellow Rust preventive spray advisory (Tebuconazole 25.9% EC @ 500 ml/ha) to farmers in Ghaziabad district.",
+    "before_value": { "advisory_status": "NONE" },
+    "after_value": { "advisory_status": "DISPATCHED", "protocol": "Tebuconazole 25.9% EC @ 500 ml/ha" },
+    "ip_address": "192.168.1.102",
+    "created_at": "2026-03-14T09:30:00.000Z"
+  },
+  {
+    "_id": "audit_002",
+    "officer_id": "off_01",
+    "officer_name": "Dr. Sunita Sharma (District Agronomist)",
+    "action_type": "INCIDENT_STATUS_CHANGED",
+    "target_id": "inc_882",
+    "target_type": "incident",
+    "details": "Updated field pathogen scouting status for Rice Blast in Meerut sector per ICAR-NCIPM surveillance guidelines.",
+    "before_value": { "status": "REPORTED" },
+    "after_value": { "status": "UNDER_INVESTIGATION" },
+    "ip_address": "192.168.1.102",
+    "created_at": "2026-03-13T14:15:00.000Z"
+  },
+  {
+    "_id": "audit_003",
+    "officer_id": "off_02",
+    "officer_name": "K. Rajan (Cooperative Extension Officer)",
+    "action_type": "INVENTORY_ADJUSTED",
+    "target_id": "inv_404",
+    "target_type": "inventory_item",
+    "details": "Reallocated 50 bags of Bio-NPK 10-26-26 to Kumily cooperative depot for spice cultivators.",
+    "before_value": { "quantity": 180, "location": "Central Godown" },
+    "after_value": { "quantity": 130, "location": "Central Godown" },
+    "ip_address": "192.168.1.115",
+    "created_at": "2026-03-12T11:45:00.000Z"
+  },
+  {
+    "_id": "audit_004",
+    "officer_id": "off_01",
+    "officer_name": "Dr. Sunita Sharma (District Agronomist)",
+    "action_type": "REPORT_EXPORTED_PDF",
+    "target_id": "report_reg_oct",
+    "target_type": "report",
+    "details": "Exported Comprehensive Regional Agronomic Evaluation PDF Report cross-referenced with DES Agriculture Census.",
+    "before_value": null,
+    "after_value": { "format": "PDF", "records_exported": 8 },
+    "ip_address": "192.168.1.102",
+    "created_at": "2026-03-11T16:20:00.000Z"
+  },
+  {
+    "_id": "audit_005",
+    "officer_id": "off_03",
+    "officer_name": "Harpreet Singh (Sub-Divisional Agriculture Officer)",
+    "action_type": "HARVEST_UPDATED",
+    "target_id": "farm_pb_01",
+    "target_type": "harvest_batch",
+    "details": "Confirmed custom hiring center combine harvester dispatch with Happy Seeder for in-situ paddy straw management.",
+    "before_value": { "harvest_window": "Oct 20 - Nov 05, 2026", "equipment": "PENDING" },
+    "after_value": { "harvest_window": "Oct 20 - Nov 05, 2026", "equipment": "CONFIRMED" },
+    "ip_address": "192.168.1.120",
+    "created_at": "2026-03-10T10:00:00.000Z"
+  }
+]

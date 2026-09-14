@@ -1,0 +1,434 @@
+{
+  "dataset_name": "CIBRC Approved Agrochemicals & Pre-Harvest Interval (PHI) Master Directory",
+  "regulatory_authority": "Central Insecticide Board & Registration Committee (CIBRC), Directorate of Plant Protection, Quarantine & Storage (DPPQS), Ministry of Agriculture & Farmers Welfare, Government of India",
+  "governing_act": "Insecticides Act, 1968 and Insecticides Rules, 1971",
+  "portal": "https://cibrc.gov.in/major-uses-of-pesticides/",
+  "total_records": 25,
+  "agrochemicals": [
+    {
+      "id": "cibrc_001",
+      "chemical_name": "Chlorantraniliprole 18.5% SC",
+      "common_brands": ["Coragen", "Cosko", "Cover"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice", "Wheat", "Maize", "Cotton", "Sugarcane", "Tomato", "Brinjal", "Chilli"],
+      "target_pests": ["Yellow Stem Borer", "Leaf Folder", "Fall Armyworm", "American Bollworm", "Fruit Borer", "Top Borer"],
+      "recommended_dosage": {
+        "per_hectare": "150 ml",
+        "per_acre": "60 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 14,
+      "safety_instructions": "Wear rubber gloves and protective goggles. Do not apply near water bodies during bee foraging hours."
+    },
+    {
+      "id": "cibrc_002",
+      "chemical_name": "Imidacloprid 17.8% SL",
+      "common_brands": ["Confidor", "Tatamida", "Victor"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class II (Yellow Label - Highly Toxic)",
+      "target_crops": ["Rice", "Cotton", "Chilli", "Sugarcane", "Tomato", "Potato", "Groundnut"],
+      "target_pests": ["Brown Planthopper", "White Backed Planthopper", "Aphids", "Jassids", "Thrips", "Termites"],
+      "recommended_dosage": {
+        "per_hectare": "100 - 125 ml",
+        "per_acre": "40 - 50 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 21,
+      "safety_instructions": "Highly toxic to honeybees. Avoid spraying during bloom. Pre-harvest interval must strictly be observed."
+    },
+    {
+      "id": "cibrc_003",
+      "chemical_name": "Emamectin Benzoate 5% SG",
+      "common_brands": ["Proclaim", "EM-1", "Safari"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Cotton", "Maize", "Tomato", "Cabbage", "Chilli", "Chickpea", "Pigeon Pea"],
+      "target_pests": ["Spodoptera frugiperda (Fall Armyworm)", "Helicoverpa armigera (Pod Borer)", "Diamondback Moth", "Fruit Borer"],
+      "recommended_dosage": {
+        "per_hectare": "200 - 220 g",
+        "per_acre": "80 - 100 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 5,
+      "safety_instructions": "Target early larval instars (L1-L2). Spray during morning or late afternoon."
+    },
+    {
+      "id": "cibrc_004",
+      "chemical_name": "Cartap Hydrochloride 50% SP",
+      "common_brands": ["Padan", "Caldan", "Kritap"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class II (Yellow Label - Highly Toxic)",
+      "target_crops": ["Rice"],
+      "target_pests": ["Stem Borer (Scirpophaga incertulas)", "Leaf Folder (Cnaphalocrocis medinalis)"],
+      "recommended_dosage": {
+        "per_hectare": "1000 g",
+        "per_acre": "400 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 21,
+      "safety_instructions": "Ensure complete canopy coverage. Toxic to aquatic organisms; prevent runoff into drainage canals."
+    },
+    {
+      "id": "cibrc_005",
+      "chemical_name": "Thiamethoxam 25% WG",
+      "common_brands": ["Actara", "Areva", "Anant"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice", "Wheat", "Cotton", "Mustard", "Tomato", "Potato"],
+      "target_pests": ["Green Leafhopper", "Brown Planthopper", "Aphids", "Whiteflies", "Mosquito Bug"],
+      "recommended_dosage": {
+        "per_hectare": "100 g",
+        "per_acre": "40 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 14,
+      "safety_instructions": "Systemic action. Avoid spraying on blooming crops to protect native pollinators."
+    },
+    {
+      "id": "cibrc_006",
+      "chemical_name": "Fipronil 5% SC",
+      "common_brands": ["Regent", "Mortal", "Mahaveer"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class II (Yellow Label - Highly Toxic)",
+      "target_crops": ["Rice", "Sugarcane", "Chilli", "Cotton"],
+      "target_pests": ["Stem Borer", "Brown Planthopper", "Root Borer", "Thrips"],
+      "recommended_dosage": {
+        "per_hectare": "1000 - 1500 ml",
+        "per_acre": "400 - 600 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 32,
+      "safety_instructions": "Long pre-harvest interval of 32 days. Do not graze cattle on treated fields."
+    },
+    {
+      "id": "cibrc_007",
+      "chemical_name": "Spinosad 45% SC",
+      "common_brands": ["Tracer", "Spintor", "Success"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Cotton", "Chilli", "Tomato", "Brinjal", "Cabbage"],
+      "target_pests": ["Spotted Bollworm", "Thrips", "Fruit Borer", "Diamondback Moth"],
+      "recommended_dosage": {
+        "per_hectare": "160 - 200 ml",
+        "per_acre": "65 - 80 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 3,
+      "safety_instructions": "Naturally derived fermentation product with short 3-day PHI, suitable for vegetable crops close to harvest."
+    },
+    {
+      "id": "cibrc_008",
+      "chemical_name": "Flubendiamide 39.35% SC",
+      "common_brands": ["Fame", "Fluben"],
+      "category": "Insecticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice", "Cotton", "Tomato", "Cabbage", "Pigeon Pea"],
+      "target_pests": ["Stem Borer", "Leaf Folder", "American Bollworm", "Pod Borer"],
+      "recommended_dosage": {
+        "per_hectare": "100 - 125 ml",
+        "per_acre": "40 - 50 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 7,
+      "safety_instructions": "Provides rapid cessation of feeding. Rotate with different chemical classes to prevent resistance."
+    },
+    {
+      "id": "cibrc_009",
+      "chemical_name": "Azoxystrobin 18.2% + Difenoconazole 11.4% SC",
+      "common_brands": ["Amistar Top", "Custodia", "Godrej Double"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice", "Wheat", "Maize", "Tomato", "Chilli", "Onion"],
+      "target_pests": ["Sheath Blight", "Blast", "Yellow Rust", "Early Blight", "Powdery Mildew", "Purple Blotch"],
+      "recommended_dosage": {
+        "per_hectare": "500 ml",
+        "per_acre": "200 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 10,
+      "safety_instructions": "Dual-action systemic fungicide (Strobilurin + Triazole). Apply at first sign of disease onset."
+    },
+    {
+      "id": "cibrc_010",
+      "chemical_name": "Tricyclazole 75% WP",
+      "common_brands": ["Beam", "Baan", "Sivic"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice"],
+      "target_pests": ["Rice Blast (Leaf, Neck, and Node Blast)"],
+      "recommended_dosage": {
+        "per_hectare": "300 - 400 g",
+        "per_acre": "120 - 160 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 30,
+      "safety_instructions": "Specific melanin biosynthesis inhibitor for Pyricularia oryzae. Apply prophylactic spray before boot leaf stage."
+    },
+    {
+      "id": "cibrc_011",
+      "chemical_name": "Mancozeb 75% WP",
+      "common_brands": ["Dithane M-45", "Indofil M-45", "Uthane"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Potato", "Tomato", "Wheat", "Mustard", "Groundnut", "Chilli", "Grapes"],
+      "target_pests": ["Late Blight", "Early Blight", "Brown Rust", "Alternaria Blight", "Tikka Disease"],
+      "recommended_dosage": {
+        "per_hectare": "1500 - 2000 g",
+        "per_acre": "600 - 800 g",
+        "dilution_water_liters_per_ha": 750
+      },
+      "phi_days": 7,
+      "safety_instructions": "Broad-spectrum contact fungicide with multi-site activity. Spray uniformly over both upper and lower leaf surfaces."
+    },
+    {
+      "id": "cibrc_012",
+      "chemical_name": "Carbendazim 50% WP",
+      "common_brands": ["Bavistin", "Derosal", "Agrozim"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Wheat", "Rice", "Cotton", "Groundnut", "Gram", "Pigeon Pea"],
+      "target_pests": ["Loose Smut", "Sheath Blight", "Anthracnose", "Tikka Leaf Spot", "Wilt"],
+      "recommended_dosage": {
+        "per_hectare": "500 g (or 2g/kg seed for treatment)",
+        "per_acre": "200 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 14,
+      "safety_instructions": "Widely used for seed treatment. For foliar application, limit to max 2 sprays per season to mitigate resistance."
+    },
+    {
+      "id": "cibrc_013",
+      "chemical_name": "Hexaconazole 5% SC",
+      "common_brands": ["Contaf Plus", "Sitara", "Krizole"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice", "Groundnut", "Mango", "Grapes"],
+      "target_pests": ["Sheath Blight (Rhizoctonia solani)", "Tikka Disease", "Powdery Mildew"],
+      "recommended_dosage": {
+        "per_hectare": "1000 ml",
+        "per_acre": "400 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 30,
+      "safety_instructions": "Ergosterol biosynthesis inhibitor with strong curative and protective action."
+    },
+    {
+      "id": "cibrc_014",
+      "chemical_name": "Copper Oxychloride 50% WP",
+      "common_brands": ["Blitox 50", "Blue Copper", "Fytolan"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice", "Potato", "Tomato", "Cardamom", "Pepper", "Rubber", "Citrus"],
+      "target_pests": ["Bacterial Leaf Blight", "Late Blight", "Downy Mildew", "Foot Rot (Quick Wilt)", "Canker"],
+      "recommended_dosage": {
+        "per_hectare": "2500 g",
+        "per_acre": "1000 g",
+        "dilution_water_liters_per_ha": 750
+      },
+      "phi_days": 7,
+      "safety_instructions": "Inorganic protective bactericide and fungicide. Mix fresh solution before application. Do not mix with acidic chemicals."
+    },
+    {
+      "id": "cibrc_015",
+      "chemical_name": "Tebuconazole 25.9% EC",
+      "common_brands": ["Folicur", "Orius", "Tebusul"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Wheat", "Rice", "Groundnut", "Chilli", "Onion"],
+      "target_pests": ["Yellow Rust (Stripe Rust)", "Sheath Blight", "Tikka", "Powdery Mildew", "Purple Blotch"],
+      "recommended_dosage": {
+        "per_hectare": "500 - 750 ml",
+        "per_acre": "200 - 300 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 21,
+      "safety_instructions": "Highly effective against Puccinia striiformis (Yellow Rust) in North Indian wheat belts."
+    },
+    {
+      "id": "cibrc_016",
+      "chemical_name": "Validamycin 3% L",
+      "common_brands": ["Sheathmar", "Rhizocin", "Valida"],
+      "category": "Fungicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice"],
+      "target_pests": ["Sheath Blight (Rhizoctonia solani)"],
+      "recommended_dosage": {
+        "per_hectare": "1000 ml",
+        "per_acre": "400 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 9,
+      "safety_instructions": "Antibiotic fungicide produced by fermentation of Streptomyces hygroscopicus. Safe for beneficial insects."
+    },
+    {
+      "id": "cibrc_017",
+      "chemical_name": "Bispyribac-sodium 10% SC",
+      "common_brands": ["Nominee Gold", "Adora", "Tarang"],
+      "category": "Herbicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice"],
+      "target_pests": ["Echinochloa crus-galli (Barnyard grass)", "Cyperus difformis", "Broad-spectrum post-emergence weeds"],
+      "recommended_dosage": {
+        "per_hectare": "200 - 250 ml",
+        "per_acre": "80 - 100 ml",
+        "dilution_water_liters_per_ha": 300
+      },
+      "phi_days": 78,
+      "safety_instructions": "Post-emergence herbicide (apply 15-25 days after transplanting or direct seeding). Drain excess water before spray and re-flood after 48 hrs."
+    },
+    {
+      "id": "cibrc_018",
+      "chemical_name": "Pretilachlor 50% EC",
+      "common_brands": ["Rifit", "Eraze", "K-Chlor"],
+      "category": "Herbicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Rice"],
+      "target_pests": ["Annual grasses", "Sedges", "Broadleaf weeds in transplanted paddy"],
+      "recommended_dosage": {
+        "per_hectare": "1000 - 1500 ml",
+        "per_acre": "400 - 600 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 90,
+      "safety_instructions": "Pre-emergence herbicide applied 0-4 days after transplanting with thin standing water layer."
+    },
+    {
+      "id": "cibrc_019",
+      "chemical_name": "Pendimethalin 30% EC",
+      "common_brands": ["Stomp", "Dhanutop", "Tata Panida"],
+      "category": "Herbicide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Wheat", "Cotton", "Soybean", "Groundnut", "Mustard", "Onion", "Gram"],
+      "target_pests": ["Phalaris minor (Canary grass)", "Chenopodium album", "Echinochloa colona"],
+      "recommended_dosage": {
+        "per_hectare": "2500 - 3300 ml",
+        "per_acre": "1000 - 1300 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 60,
+      "safety_instructions": "Pre-emergence herbicide applied within 48 hours of sowing on moist soil surface."
+    },
+    {
+      "id": "cibrc_020",
+      "chemical_name": "Azadirachtin 10,000 ppm (1% EC) - Bio-Pesticide",
+      "common_brands": ["Neemazal", "Nimbecidine", "Econeem Plus"],
+      "category": "Bio-Pesticide",
+      "cibrc_status": "Approved under Section 9(3B) for Organic Farming",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice", "Cotton", "Vegetables", "Spices", "Pulses", "Fruits"],
+      "target_pests": ["Aphids", "Jassids", "Whiteflies", "Thrips", "Leaf Miners", "Mites", "Bollworms"],
+      "recommended_dosage": {
+        "per_hectare": "1000 - 1500 ml",
+        "per_acre": "400 - 600 ml",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 0,
+      "safety_instructions": "Botanical bio-pesticide completely safe for mammals and pollinators. Zero Pre-Harvest Interval (PHI = 0 days); approved for certified organic farms."
+    },
+    {
+      "id": "cibrc_021",
+      "chemical_name": "Trichoderma viride 1% WP (2x10^6 cfu/g) - Bio-Fungicide",
+      "common_brands": ["Niprot", "Biocure-F", "Triko-Shield"],
+      "category": "Bio-Pesticide",
+      "cibrc_status": "Approved under Section 9(3B) for Biological Control",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice", "Wheat", "Pulses", "Cotton", "Potato", "Tomato", "Cardamom", "Ginger"],
+      "target_pests": ["Root Rot", "Collar Rot", "Fusarium Wilt", "Damping-off", "Rhizoctonia solani"],
+      "recommended_dosage": {
+        "per_hectare": "2500 g (mixed with 100 kg FYM/compost)",
+        "per_acre": "1000 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 0,
+      "safety_instructions": "Antagonistic biological fungus. Apply with organic manure or as seed treatment (5-10 g/kg seed). Do not mix with chemical fungicides."
+    },
+    {
+      "id": "cibrc_022",
+      "chemical_name": "Pseudomonas fluorescens 1% WP (1x10^8 cfu/g) - Bio-Bactericide",
+      "common_brands": ["Biocure-B", "Spotless", "Ecomonas"],
+      "category": "Bio-Pesticide",
+      "cibrc_status": "Approved under Section 9(3B)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Rice", "Banana", "Tomato", "Chilli", "Potato", "Cardamom"],
+      "target_pests": ["Bacterial Leaf Blight", "Bacterial Wilt", "Sheath Rot", "Panicle Blight"],
+      "recommended_dosage": {
+        "per_hectare": "2500 g",
+        "per_acre": "1000 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 0,
+      "safety_instructions": "Produces siderophores and phenazine antibiotics against phytopathogenic bacteria. Zero days PHI."
+    },
+    {
+      "id": "cibrc_023",
+      "chemical_name": "Bacillus thuringiensis var. kurstaki (Bt) 5% WP",
+      "common_brands": ["Dipel", "Biolep", "Halt"],
+      "category": "Bio-Pesticide",
+      "cibrc_status": "Approved under Section 9(3)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Cotton", "Cabbage", "Cauliflower", "Tomato", "Chickpea"],
+      "target_pests": ["Helicoverpa armigera", "Spodoptera litura", "Diamondback Moth"],
+      "recommended_dosage": {
+        "per_hectare": "1000 - 1500 g",
+        "per_acre": "400 - 600 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 0,
+      "safety_instructions": "Bacterial bio-insecticide containing crystal endotoxins specific to lepidopteran larvae. Completely non-toxic to fish, bees, and human beings."
+    },
+    {
+      "id": "cibrc_024",
+      "chemical_name": "Beauveria bassiana 1.15% WP (1x10^8 cfu/g) - Bio-Insecticide",
+      "common_brands": ["Daman", "Biopower", "Boverin"],
+      "category": "Bio-Pesticide",
+      "cibrc_status": "Approved under Section 9(3B)",
+      "toxicity_class": "Class IV (Green Label - Caution)",
+      "target_crops": ["Cotton", "Rice", "Sugarcane", "Cardamom", "Coffee", "Tea"],
+      "target_pests": ["Whitefly", "Root Grub", "Stem Borer", "Berry Borer", "Tea Mosquito Bug"],
+      "recommended_dosage": {
+        "per_hectare": "2500 g",
+        "per_acre": "1000 g",
+        "dilution_water_liters_per_ha": 500
+      },
+      "phi_days": 0,
+      "safety_instructions": "Entomopathogenic fungus. Spray in humid evening conditions to facilitate fungal spore germination on insect cuticle."
+    },
+    {
+      "id": "cibrc_025",
+      "chemical_name": "Glyphosate 41% SL",
+      "common_brands": ["Roundup", "Glycel", "Sweep"],
+      "category": "Herbicide",
+      "cibrc_status": "Restricted use under S.O. 5013(E) dated 21-10-2022 (Permitted in Tea plantations and non-cropped land only through Pest Control Operators)",
+      "toxicity_class": "Class III (Blue Label - Danger)",
+      "target_crops": ["Tea", "Non-cropped Bunds / Open Irrigation Canals"],
+      "target_pests": ["Deep-rooted perennial grasses", "Cyperus rotundus", "Imperata cylindrica"],
+      "recommended_dosage": {
+        "per_hectare": "2000 - 3000 ml",
+        "per_acre": "800 - 1200 ml",
+        "dilution_water_liters_per_ha": 400
+      },
+      "phi_days": 60,
+      "safety_instructions": "CRITICAL REGULATORY COMPLIANCE: Application restricted to tea gardens and non-cropped areas strictly through certified PCOs per Gazette Notification S.O. 5013(E)."
+    }
+  ]
+}
