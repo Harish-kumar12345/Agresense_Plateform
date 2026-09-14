@@ -1,0 +1,9 @@
+Crop,Crop_Name,Default_Target_Yield_t_ha,RDF_N_kgha,RDF_P2O5_kgha,RDF_K2O_kgha,STCR_FN_Target_Mult,STCR_FN_Soil_Eff,STCR_FP_Target_Mult,STCR_FP_Soil_Eff,STCR_FK_Target_Mult,STCR_FK_Soil_Eff,Basal_Application,Micronutrient_Advisory
+Rice,Rice (Paddy),5.0,120,60,40,4.39,0.51,2.83,0.74,2.21,0.28,50% N (as DAP & Urea) + 100% P2O5 (as DAP) + 75% K2O (as MOP),"In case of Khaira disease (leaf bronzing), spray Zinc Sulphate (ZnSO₄ 21%) @ 5 kg/ha with 2.5 kg lime in 500L water."
+Wheat,Wheat,4.8,120,60,40,4.02,0.44,2.55,0.68,1.95,0.22,50% N + 100% P2O5 + 100% K2O at sowing,"If yellowing of new leaves appears, apply Manganese Sulphate (0.5%) foliar spray."
+Maize,Maize,5.5,150,60,50,4.15,0.48,2.65,0.7,2.1,0.25,33% N + 100% P2O5 + 100% K2O at sowing,Zinc deficiency is common in maize (white bud). Apply 25 kg/ha ZnSO₄ at land prep.
+Cotton,Cotton,2.2,120,60,60,8.5,0.52,4.2,0.65,3.8,0.24,25% N + 100% P2O5 + 50% K2O,Foliar spray of 2% DAP + 1% MgSO₄ at squaring & boll formation prevents red leaf disease.
+Sugarcane,Sugarcane,85.0,250,80,80,0.42,0.35,0.18,0.55,0.16,0.2,25% N + 100% P2O5 + 50% K2O in furrows,Apply Ferrous Sulphate (FeSO₄) @ 25 kg/ha in calcareous soils showing interveinal chlorosis.
+Potato,Potato,25.0,150,100,120,0.85,0.4,0.62,0.65,0.7,0.25,50% N + 100% P2O5 + 50% K2O at planting,Apply Borax @ 2 kg/ha in boron-deficient soils to prevent internal brown spot.
+Mustard,Mustard / Rapeseed,2.0,80,40,40,4.5,0.46,2.7,0.65,2.2,0.22,50% N + 100% P2O5 + 100% K2O + 30 kg/ha Sulphur,Elemental Sulphur @ 30 kg/ha or Gypsum @ 200 kg/ha is critical for high oil content.
+Soybean,Soybean,2.5,30,60,40,1.4,0.3,3.1,0.7,2.4,0.24,100% N + 100% P2O5 + 100% K2O as basal starter dose (Rhizobium culture handles atmospheric N fixation).,Inoculate seeds with Bradyrhizobium japonicum + PSB (Phosphate Solubilizing Bacteria).
