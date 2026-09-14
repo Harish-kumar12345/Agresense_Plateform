@@ -8,33 +8,61 @@ const CROPS = [
   'Maize',
   'Cotton',
   'Sugarcane',
+  'Soybean',
+  'Groundnut',
+  'Mustard',
+  'Gram (Chickpea)',
+  'Tur (Pigeon Pea)',
+  'Moong (Green Gram)',
+  'Urad (Black Gram)',
+  'Barley',
+  'Jowar (Sorghum)',
+  'Bajra (Pearl Millet)',
+  'Ragi (Finger Millet)',
+  'Potato',
+  'Onion',
+  'Tomato',
+  'Brinjal',
+  'Cabbage',
+  'Cauliflower',
+  'Chilli',
+  'Turmeric',
+  'Ginger',
   'Coconut',
   'Pepper',
   'Cardamom',
   'Rubber',
+  'Tea',
+  'Coffee',
   'Other'
 ];
 
 const SEASONS = ['Kharif', 'Rabi', 'Zaid', 'Year-round'];
 
 const SOIL_TYPES = [
-  'Clay Loam',
-  'Sandy Loam',
-  'Loamy',
   'Alluvial Soil',
-  'Black Soil',
+  'Black Cotton Soil (Regur)',
   'Red Soil',
   'Laterite Soil',
-  'Peaty/Marshy'
+  'Clay Loam',
+  'Sandy Loam',
+  'Silt Loam',
+  'Loamy Soil',
+  'Sandy Soil',
+  'Saline / Alkaline Soil',
+  'Peaty / Marshy Soil',
+  'Forest / Mountain Soil'
 ];
 
 const IRRIGATION_TYPES = [
-  'Canal',
+  'Canal Irrigation',
+  'Tube Well / Borewell',
   'Drip Irrigation',
-  'Sprinkler',
-  'Flood / Surface',
-  'Rainfed',
-  'Sub-surface'
+  'Sprinkler Irrigation',
+  'Flood / Surface / Basin',
+  'Rainfed / Dryland',
+  'Sub-surface Drip',
+  'Pond / Tank Storage'
 ];
 
 interface FarmDetailsFormProps {

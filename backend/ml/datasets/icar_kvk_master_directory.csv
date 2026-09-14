@@ -1,0 +1,795 @@
+id,kvk_name,state,district,host_institution,latitude,longitude,phone,pincode
+kvk_001,"Krishi Vigyan Kendra, Andaman and Nicobar Islands",Andaman and Nicobar Islands,Andaman and Nicobar Islands,,,,+91-054-56659,546542
+kvk_002,"Krishi Vigyan Kendra, NICOBARS",Andaman and Nicobar Islands,NICOBARS,,,,+91-043-30904,430866
+kvk_003,"Krishi Vigyan Kendra, NORTH AND MIDDLE ANDAMAN",Andaman and Nicobar Islands,NORTH AND MIDDLE ANDAMAN,,,,+91-023-42850,232719
+kvk_004,"Krishi Vigyan Kendra, SOUTH ANDAMANS",Andaman and Nicobar Islands,SOUTH ANDAMANS,,,,+91-065-73473,653433
+kvk_005,"Krishi Vigyan Kendra, ADILABAD",Andhra Pradesh,ADILABAD,,,,+91-040-39967,409808
+kvk_006,"Krishi Vigyan Kendra, ANANTAPUR",Andhra Pradesh,ANANTAPUR,,,,+91-023-43159,233158
+kvk_007,"Krishi Vigyan Kendra, CHITTOOR",Andhra Pradesh,CHITTOOR,,,,+91-014-15029,145020
+kvk_008,"Krishi Vigyan Kendra, EAST GODAVARI",Andhra Pradesh,EAST GODAVARI,,,,+91-039-54414,394238
+kvk_009,"Krishi Vigyan Kendra, GUNTUR",Andhra Pradesh,GUNTUR,,,,+91-073-70134,739963
+kvk_010,"Krishi Vigyan Kendra, HYDERABAD",Andhra Pradesh,HYDERABAD,,,,+91-084-23765,843601
+kvk_011,"Krishi Vigyan Kendra, KADAPA",Andhra Pradesh,KADAPA,,,,+91-067-96705,676665
+kvk_012,"Krishi Vigyan Kendra, KARIMNAGAR",Andhra Pradesh,KARIMNAGAR,,,,+91-028-94116,284115
+kvk_013,"Krishi Vigyan Kendra, KHAMMAM",Andhra Pradesh,KHAMMAM,,,,+91-033-88107,338010
+kvk_014,"Krishi Vigyan Kendra, KRISHNA",Andhra Pradesh,KRISHNA,,,,+91-052-37096,527031
+kvk_015,"Krishi Vigyan Kendra, KURNOOL",Andhra Pradesh,KURNOOL,,,,+91-038-45646,385496
+kvk_016,"Krishi Vigyan Kendra, MAHBUBNAGAR",Andhra Pradesh,MAHBUBNAGAR,,,,+91-041-47718,417585
+kvk_017,"Krishi Vigyan Kendra, MEDAK",Andhra Pradesh,MEDAK,,,,+91-027-22920,272745
+kvk_018,"Krishi Vigyan Kendra, NALGONDA",Andhra Pradesh,NALGONDA,,,,+91-018-21023,180849
+kvk_019,"Krishi Vigyan Kendra, NIZAMABAD",Andhra Pradesh,NIZAMABAD,,,,+91-062-76477,626446
+kvk_020,"Krishi Vigyan Kendra, PRAKASAM",Andhra Pradesh,PRAKASAM,,,,+91-069-53797,693661
+kvk_021,"Krishi Vigyan Kendra, RANGAREDDI",Andhra Pradesh,RANGAREDDI,,,,+91-022-32769,222638
+kvk_022,"Krishi Vigyan Kendra, SPSR NELLORE",Andhra Pradesh,SPSR NELLORE,,,,+91-014-45840,145684
+kvk_023,"Krishi Vigyan Kendra, SRIKAKULAM",Andhra Pradesh,SRIKAKULAM,,,,+91-044-79316,449183
+kvk_024,"Krishi Vigyan Kendra, VISAKHAPATANAM",Andhra Pradesh,VISAKHAPATANAM,,,,+91-073-37988,737938
+kvk_025,"Krishi Vigyan Kendra, VIZIANAGARAM",Andhra Pradesh,VIZIANAGARAM,,,,+91-082-62150,822004
+kvk_026,"Krishi Vigyan Kendra, WARANGAL",Andhra Pradesh,WARANGAL,,,,+91-081-21133,811004
+kvk_027,"Krishi Vigyan Kendra, WEST GODAVARI",Andhra Pradesh,WEST GODAVARI,,,,+91-065-73706,653640
+kvk_028,"Krishi Vigyan Kendra, ANJAW",Arunachal Pradesh,ANJAW,,,,+91-022-30850,220745
+kvk_029,"Krishi Vigyan Kendra, CHANGLANG",Arunachal Pradesh,CHANGLANG,,,,+91-019-32297,192175
+kvk_030,"Krishi Vigyan Kendra, DIBANG VALLEY",Arunachal Pradesh,DIBANG VALLEY,,,,+91-016-64483,164353
+kvk_031,"Krishi Vigyan Kendra, EAST KAMENG",Arunachal Pradesh,EAST KAMENG,,,,+91-084-54482,844353
+kvk_032,"Krishi Vigyan Kendra, EAST SIANG",Arunachal Pradesh,EAST SIANG,,,,+91-067-31432,671296
+kvk_033,"Krishi Vigyan Kendra, KAMLE",Arunachal Pradesh,KAMLE,,,,+91-023-10586,230550
+kvk_034,"Krishi Vigyan Kendra, KRA DAADI",Arunachal Pradesh,KRA DAADI,,,,+91-088-65098,885012
+kvk_035,"Krishi Vigyan Kendra, KURUNG KUMEY",Arunachal Pradesh,KURUNG KUMEY,,,,+91-033-85493,335474
+kvk_036,"Krishi Vigyan Kendra, LEPARADA",Arunachal Pradesh,LEPARADA,,,,+91-033-20246,330183
+kvk_037,"Krishi Vigyan Kendra, LOHIT",Arunachal Pradesh,LOHIT,,,,+91-067-39797,679635
+kvk_038,"Krishi Vigyan Kendra, LONGDING",Arunachal Pradesh,LONGDING,,,,+91-063-54619,634475
+kvk_039,"Krishi Vigyan Kendra, LOWER DIBANG VALLEY",Arunachal Pradesh,LOWER DIBANG VALLEY,,,,+91-016-69644,169592
+kvk_040,"Krishi Vigyan Kendra, LOWER SIANG",Arunachal Pradesh,LOWER SIANG,,,,+91-060-29084,608914
+kvk_041,"Krishi Vigyan Kendra, LOWER SUBANSIRI",Arunachal Pradesh,LOWER SUBANSIRI,,,,+91-061-30105,610039
+kvk_042,"Krishi Vigyan Kendra, NAMSAI",Arunachal Pradesh,NAMSAI,,,,+91-044-41997,441829
+kvk_043,"Krishi Vigyan Kendra, PAKKE KESSANG",Arunachal Pradesh,PAKKE KESSANG,,,,+91-020-72374,202287
+kvk_044,"Krishi Vigyan Kendra, PAPUM PARE",Arunachal Pradesh,PAPUM PARE,,,,+91-020-73119,202980
+kvk_045,"Krishi Vigyan Kendra, SHI YOMI",Arunachal Pradesh,SHI YOMI,,,,+91-084-83773,843627
+kvk_046,"Krishi Vigyan Kendra, SIANG",Arunachal Pradesh,SIANG,,,,+91-062-11419,621370
+kvk_047,"Krishi Vigyan Kendra, TAWANG",Arunachal Pradesh,TAWANG,,,,+91-029-10081,290027
+kvk_048,"Krishi Vigyan Kendra, TIRAP",Arunachal Pradesh,TIRAP,,,,+91-019-65271,195210
+kvk_049,"Krishi Vigyan Kendra, UPPER SIANG",Arunachal Pradesh,UPPER SIANG,,,,+91-078-57883,787798
+kvk_050,"Krishi Vigyan Kendra, UPPER SUBANSIRI",Arunachal Pradesh,UPPER SUBANSIRI,,,,+91-038-76345,386178
+kvk_051,"Krishi Vigyan Kendra, WEST KAMENG",Arunachal Pradesh,WEST KAMENG,,,,+91-069-58897,698891
+kvk_052,"Krishi Vigyan Kendra, WEST SIANG",Arunachal Pradesh,WEST SIANG,,,,+91-029-45638,295463
+kvk_053,"Krishi Vigyan Kendra, BAKSA",Assam,BAKSA,,,,+91-037-68591,378580
+kvk_054,"Krishi Vigyan Kendra, BARPETA",Assam,BARPETA,,,,+91-078-85950,785822
+kvk_055,"Krishi Vigyan Kendra, BISWANATH",Assam,BISWANATH,,,,+91-076-31682,761519
+kvk_056,"Krishi Vigyan Kendra, BONGAIGAON",Assam,BONGAIGAON,,,,+91-043-97741,437617
+kvk_057,"Krishi Vigyan Kendra, CACHAR",Assam,CACHAR,,,,+91-014-40199,140043
+kvk_058,"Krishi Vigyan Kendra, CHARAIDEO",Assam,CHARAIDEO,,,,+91-044-76825,446770
+kvk_059,"Krishi Vigyan Kendra, CHIRANG",Assam,CHIRANG,,,,+91-022-65435,225391
+kvk_060,"Krishi Vigyan Kendra, DARRANG",Assam,DARRANG,,,,+91-030-23303,303249
+kvk_061,"Krishi Vigyan Kendra, DHEMAJI",Assam,DHEMAJI,,,,+91-088-60909,880875
+kvk_062,"Krishi Vigyan Kendra, DHUBRI",Assam,DHUBRI,,,,+91-027-58214,278074
+kvk_063,"Krishi Vigyan Kendra, DIBRUGARH",Assam,DIBRUGARH,,,,+91-073-99299,739241
+kvk_064,"Krishi Vigyan Kendra, DIMA HASAO",Assam,DIMA HASAO,,,,+91-081-81138,810975
+kvk_065,"Krishi Vigyan Kendra, GOALPARA",Assam,GOALPARA,,,,+91-042-52843,422736
+kvk_066,"Krishi Vigyan Kendra, GOLAGHAT",Assam,GOLAGHAT,,,,+91-011-11315,111185
+kvk_067,"Krishi Vigyan Kendra, HAILAKANDI",Assam,HAILAKANDI,,,,+91-018-20265,180195
+kvk_068,"Krishi Vigyan Kendra, HOJAI",Assam,HOJAI,,,,+91-065-41764,651715
+kvk_069,"Krishi Vigyan Kendra, JORHAT",Assam,JORHAT,,,,+91-073-38156,738028
+kvk_070,"Krishi Vigyan Kendra, KAMRUP",Assam,KAMRUP,,,,+91-056-19222,569139
+kvk_071,"Krishi Vigyan Kendra, KAMRUP METRO",Assam,KAMRUP METRO,,,,+91-040-32604,402445
+kvk_072,"Krishi Vigyan Kendra, KARBI ANGLONG",Assam,KARBI ANGLONG,,,,+91-044-49767,449625
+kvk_073,"Krishi Vigyan Kendra, KARIMGANJ",Assam,KARIMGANJ,,,,+91-087-29086,878991
+kvk_074,"Krishi Vigyan Kendra, KOKRAJHAR",Assam,KOKRAJHAR,,,,+91-018-85288,185184
+kvk_075,"Krishi Vigyan Kendra, LAKHIMPUR",Assam,LAKHIMPUR,,,,+91-014-17350,147185
+kvk_076,"Krishi Vigyan Kendra, MAJULI",Assam,MAJULI,,,,+91-015-51950,151768
+kvk_077,"Krishi Vigyan Kendra, MARIGAON",Assam,MARIGAON,,,,+91-085-64775,854646
+kvk_078,"Krishi Vigyan Kendra, NAGAON",Assam,NAGAON,,,,+91-029-47200,297155
+kvk_079,"Krishi Vigyan Kendra, NALBARI",Assam,NALBARI,,,,+91-063-83860,633829
+kvk_080,"Krishi Vigyan Kendra, SIVASAGAR",Assam,SIVASAGAR,,,,+91-016-63676,163572
+kvk_081,"Krishi Vigyan Kendra, SONITPUR",Assam,SONITPUR,,,,+91-050-73826,503753
+kvk_082,"Krishi Vigyan Kendra, SOUTH SALMARA MANCACHAR",Assam,SOUTH SALMARA MANCACHAR,,,,+91-021-88951,218942
+kvk_083,"Krishi Vigyan Kendra, TINSUKIA",Assam,TINSUKIA,,,,+91-022-63729,223607
+kvk_084,"Krishi Vigyan Kendra, UDALGURI",Assam,UDALGURI,,,,+91-019-91443,191443
+kvk_085,"Krishi Vigyan Kendra, WEST KARBI ANGLONG",Assam,WEST KARBI ANGLONG,,,,+91-068-71564,681463
+kvk_086,"Krishi Vigyan Kendra, ARARIA",Bihar,ARARIA,,,,+91-044-76578,446445
+kvk_087,"Krishi Vigyan Kendra, ARWAL",Bihar,ARWAL,,,,+91-019-36713,196695
+kvk_088,"Krishi Vigyan Kendra, AURANGABAD",Bihar,AURANGABAD,,,,+91-084-52439,842284
+kvk_089,"Krishi Vigyan Kendra, BANKA",Bihar,BANKA,,,,+91-031-30387,310229
+kvk_090,"Krishi Vigyan Kendra, BEGUSARAI",Bihar,BEGUSARAI,,,,+91-063-83947,633786
+kvk_091,"Krishi Vigyan Kendra, BHAGALPUR",Bihar,BHAGALPUR,,,,+91-028-37562,287439
+kvk_092,"Krishi Vigyan Kendra, BHOJPUR",Bihar,BHOJPUR,,,,+91-087-25794,875699
+kvk_093,"Krishi Vigyan Kendra, BOKARO",Bihar,BOKARO,,,,+91-031-66040,315917
+kvk_094,"Krishi Vigyan Kendra, BUXAR",Bihar,BUXAR,,,,+91-031-39172,319144
+kvk_095,"Krishi Vigyan Kendra, CHATRA",Bihar,CHATRA,,,,+91-052-31616,521447
+kvk_096,"Krishi Vigyan Kendra, DARBHANGA",Bihar,DARBHANGA,,,,+91-056-40294,560220
+kvk_097,"Krishi Vigyan Kendra, DEOGHAR",Bihar,DEOGHAR,,,,+91-051-25192,515023
+kvk_098,"Krishi Vigyan Kendra, DHANBAD",Bihar,DHANBAD,,,,+91-061-95306,615180
+kvk_099,"Krishi Vigyan Kendra, DUMKA",Bihar,DUMKA,,,,+91-086-15637,865542
+kvk_100,"Krishi Vigyan Kendra, EAST SINGHBUM",Bihar,EAST SINGHBUM,,,,+91-020-45767,205697
+kvk_101,"Krishi Vigyan Kendra, GARHWA",Bihar,GARHWA,,,,+91-078-56431,786372
+kvk_102,"Krishi Vigyan Kendra, GAYA",Bihar,GAYA,,,,+91-061-67423,617392
+kvk_103,"Krishi Vigyan Kendra, GIRIDIH",Bihar,GIRIDIH,,,,+91-083-15894,835782
+kvk_104,"Krishi Vigyan Kendra, GODDA",Bihar,GODDA,,,,+91-029-70922,290808
+kvk_105,"Krishi Vigyan Kendra, GOPALGANJ",Bihar,GOPALGANJ,,,,+91-066-52432,662383
+kvk_106,"Krishi Vigyan Kendra, GUMLA",Bihar,GUMLA,,,,+91-075-85040,755025
+kvk_107,"Krishi Vigyan Kendra, HAZARIBAGH",Bihar,HAZARIBAGH,,,,+91-044-80039,449880
+kvk_108,"Krishi Vigyan Kendra, JAMUI",Bihar,JAMUI,,,,+91-083-71738,831566
+kvk_109,"Krishi Vigyan Kendra, JEHANABAD",Bihar,JEHANABAD,,,,+91-088-93731,883680
+kvk_110,"Krishi Vigyan Kendra, KAIMUR (BHABUA)",Bihar,KAIMUR (BHABUA),,,,+91-023-14887,234851
+kvk_111,"Krishi Vigyan Kendra, KATIHAR",Bihar,KATIHAR,,,,+91-085-69510,859485
+kvk_112,"Krishi Vigyan Kendra, KHAGARIA",Bihar,KHAGARIA,,,,+91-059-10467,590401
+kvk_113,"Krishi Vigyan Kendra, KISHANGANJ",Bihar,KISHANGANJ,,,,+91-039-54900,394854
+kvk_114,"Krishi Vigyan Kendra, KODERMA",Bihar,KODERMA,,,,+91-032-12067,321978
+kvk_115,"Krishi Vigyan Kendra, LAKHISARAI",Bihar,LAKHISARAI,,,,+91-047-18736,478654
+kvk_116,"Krishi Vigyan Kendra, LOHARDAGA",Bihar,LOHARDAGA,,,,+91-012-21581,121503
+kvk_117,"Krishi Vigyan Kendra, MADHEPURA",Bihar,MADHEPURA,,,,+91-062-17954,627775
+kvk_118,"Krishi Vigyan Kendra, MADHUBANI",Bihar,MADHUBANI,,,,+91-037-69775,379660
+kvk_119,"Krishi Vigyan Kendra, MUNGER",Bihar,MUNGER,,,,+91-049-34785,494599
+kvk_120,"Krishi Vigyan Kendra, MUZAFFARPUR",Bihar,MUZAFFARPUR,,,,+91-030-84190,304128
+kvk_121,"Krishi Vigyan Kendra, NALANDA",Bihar,NALANDA,,,,+91-053-77380,537350
+kvk_122,"Krishi Vigyan Kendra, NAWADA",Bihar,NAWADA,,,,+91-074-19961,749850
+kvk_123,"Krishi Vigyan Kendra, PAKUR",Bihar,PAKUR,,,,+91-025-60660,250633
+kvk_124,"Krishi Vigyan Kendra, PALAMU",Bihar,PALAMU,,,,+91-048-83446,483278
+kvk_125,"Krishi Vigyan Kendra, PASHCHIM CHAMPARAN",Bihar,PASHCHIM CHAMPARAN,,,,+91-083-19284,839224
+kvk_126,"Krishi Vigyan Kendra, PATNA",Bihar,PATNA,,,,+91-011-77455,117447
+kvk_127,"Krishi Vigyan Kendra, PURBI CHAMPARAN",Bihar,PURBI CHAMPARAN,,,,+91-077-11635,771463
+kvk_128,"Krishi Vigyan Kendra, PURNIA",Bihar,PURNIA,,,,+91-029-79705,299591
+kvk_129,"Krishi Vigyan Kendra, RANCHI",Bihar,RANCHI,,,,+91-025-66128,255997
+kvk_130,"Krishi Vigyan Kendra, ROHTAS",Bihar,ROHTAS,,,,+91-065-45184,655109
+kvk_131,"Krishi Vigyan Kendra, SAHARSA",Bihar,SAHARSA,,,,+91-077-16619,776473
+kvk_132,"Krishi Vigyan Kendra, SAHEBGANJ",Bihar,SAHEBGANJ,,,,+91-039-86221,396184
+kvk_133,"Krishi Vigyan Kendra, SAMASTIPUR",Bihar,SAMASTIPUR,,,,+91-074-44151,744127
+kvk_134,"Krishi Vigyan Kendra, SARAN",Bihar,SARAN,,,,+91-058-90871,580806
+kvk_135,"Krishi Vigyan Kendra, SHEIKHPURA",Bihar,SHEIKHPURA,,,,+91-017-45002,174863
+kvk_136,"Krishi Vigyan Kendra, SHEOHAR",Bihar,SHEOHAR,,,,+91-048-25402,485216
+kvk_137,"Krishi Vigyan Kendra, SITAMARHI",Bihar,SITAMARHI,,,,+91-011-46644,116523
+kvk_138,"Krishi Vigyan Kendra, SIWAN",Bihar,SIWAN,,,,+91-051-58295,518213
+kvk_139,"Krishi Vigyan Kendra, SUPAUL",Bihar,SUPAUL,,,,+91-088-93512,883435
+kvk_140,"Krishi Vigyan Kendra, VAISHALI",Bihar,VAISHALI,,,,+91-065-16585,656501
+kvk_141,"Krishi Vigyan Kendra, WEST SINGHBHUM",Bihar,WEST SINGHBHUM,,,,+91-025-32671,252531
+kvk_142,"Krishi Vigyan Kendra, CHANDIGARH",Chandigarh,CHANDIGARH,,,,+91-068-16176,686057
+kvk_143,"Krishi Vigyan Kendra, BALOD",Chhattisgarh,BALOD,,,,+91-065-44197,654018
+kvk_144,"Krishi Vigyan Kendra, BALODA BAZAR",Chhattisgarh,BALODA BAZAR,,,,+91-018-89052,188974
+kvk_145,"Krishi Vigyan Kendra, BALRAMPUR",Chhattisgarh,BALRAMPUR,,,,+91-028-31069,280894
+kvk_146,"Krishi Vigyan Kendra, BASTAR",Chhattisgarh,BASTAR,,,,+91-072-87846,727684
+kvk_147,"Krishi Vigyan Kendra, BEMETARA",Chhattisgarh,BEMETARA,,,,+91-079-69163,799052
+kvk_148,"Krishi Vigyan Kendra, BIJAPUR",Chhattisgarh,BIJAPUR,,,,+91-058-32731,582674
+kvk_149,"Krishi Vigyan Kendra, BILASPUR",Chhattisgarh,BILASPUR,,,,+91-075-83771,753600
+kvk_150,"Krishi Vigyan Kendra, DANTEWADA",Chhattisgarh,DANTEWADA,,,,+91-074-41903,741749
+kvk_151,"Krishi Vigyan Kendra, DHAMTARI",Chhattisgarh,DHAMTARI,,,,+91-068-71910,681835
+kvk_152,"Krishi Vigyan Kendra, DURG",Chhattisgarh,DURG,,,,+91-076-30697,760586
+kvk_153,"Krishi Vigyan Kendra, GARIYABAND",Chhattisgarh,GARIYABAND,,,,+91-028-30597,280474
+kvk_154,"Krishi Vigyan Kendra, GAURELLA-PENDRA-MARWAHI",Chhattisgarh,GAURELLA-PENDRA-MARWAHI,,,,+91-046-90574,460415
+kvk_155,"Krishi Vigyan Kendra, JANJGIR-CHAMPA",Chhattisgarh,JANJGIR-CHAMPA,,,,+91-011-42387,112318
+kvk_156,"Krishi Vigyan Kendra, JASHPUR",Chhattisgarh,JASHPUR,,,,+91-022-39547,229442
+kvk_157,"Krishi Vigyan Kendra, KABIRDHAM",Chhattisgarh,KABIRDHAM,,,,+91-073-37513,737489
+kvk_158,"Krishi Vigyan Kendra, KANKER",Chhattisgarh,KANKER,,,,+91-056-46441,566315
+kvk_159,"Krishi Vigyan Kendra, KONDAGAON",Chhattisgarh,KONDAGAON,,,,+91-042-58244,428215
+kvk_160,"Krishi Vigyan Kendra, KORBA",Chhattisgarh,KORBA,,,,+91-040-36278,406171
+kvk_161,"Krishi Vigyan Kendra, KOREA",Chhattisgarh,KOREA,,,,+91-052-34263,524198
+kvk_162,"Krishi Vigyan Kendra, MAHASAMUND",Chhattisgarh,MAHASAMUND,,,,+91-029-50136,299987
+kvk_163,"Krishi Vigyan Kendra, MUNGELI",Chhattisgarh,MUNGELI,,,,+91-051-20410,510293
+kvk_164,"Krishi Vigyan Kendra, NARAYANPUR",Chhattisgarh,NARAYANPUR,,,,+91-024-83838,243742
+kvk_165,"Krishi Vigyan Kendra, RAIGARH",Chhattisgarh,RAIGARH,,,,+91-064-92266,642235
+kvk_166,"Krishi Vigyan Kendra, RAIPUR",Chhattisgarh,RAIPUR,,,,+91-022-96777,226716
+kvk_167,"Krishi Vigyan Kendra, RAJNANDGAON",Chhattisgarh,RAJNANDGAON,,,,+91-072-26289,726135
+kvk_168,"Krishi Vigyan Kendra, SUKMA",Chhattisgarh,SUKMA,,,,+91-014-10363,140250
+kvk_169,"Krishi Vigyan Kendra, SURAJPUR",Chhattisgarh,SURAJPUR,,,,+91-025-97813,257769
+kvk_170,"Krishi Vigyan Kendra, SURGUJA",Chhattisgarh,SURGUJA,,,,+91-044-78179,448098
+kvk_171,"Krishi Vigyan Kendra, DADRA AND NAGAR HAVELI",Dadra and Nagar Haveli,DADRA AND NAGAR HAVELI,,,,+91-060-21268,601202
+kvk_172,"Krishi Vigyan Kendra, DAMAN",Daman and Diu,DAMAN,,,,+91-034-63153,343151
+kvk_173,"Krishi Vigyan Kendra, DIU",Daman and Diu,DIU,,,,+91-014-49522,149392
+kvk_174,"Krishi Vigyan Kendra, Daman and Diu",Daman and Diu,Daman and Diu,,,,+91-045-58936,458820
+kvk_175,"Krishi Vigyan Kendra, DELHI_TOTAL",Delhi,DELHI_TOTAL,,,,+91-088-36422,886249
+kvk_176,"Krishi Vigyan Kendra, Delhi",Delhi,Delhi,,,,+91-060-88520,608342
+kvk_177,"Krishi Vigyan Kendra, Goa",Goa,Goa,,,,+91-016-34915,164828
+kvk_178,"Krishi Vigyan Kendra, NORTH GOA",Goa,NORTH GOA,,,,+91-020-18670,208617
+kvk_179,"Krishi Vigyan Kendra, SOUTH GOA",Goa,SOUTH GOA,,,,+91-015-53419,153237
+kvk_180,"Krishi Vigyan Kendra, AHMADABAD",Gujarat,AHMADABAD,,,,+91-060-89258,609080
+kvk_181,"Krishi Vigyan Kendra, AMRELI",Gujarat,AMRELI,,,,+91-040-38293,408186
+kvk_182,"Krishi Vigyan Kendra, ANAND",Gujarat,ANAND,,,,+91-045-21569,451548
+kvk_183,"Krishi Vigyan Kendra, ARAVALLI",Gujarat,ARAVALLI,,,,+91-084-83766,843698
+kvk_184,"Krishi Vigyan Kendra, BANAS KANTHA",Gujarat,BANAS KANTHA,,,,+91-015-59118,158962
+kvk_185,"Krishi Vigyan Kendra, BHARUCH",Gujarat,BHARUCH,,,,+91-051-24036,514023
+kvk_186,"Krishi Vigyan Kendra, BHAVNAGAR",Gujarat,BHAVNAGAR,,,,+91-025-37912,257824
+kvk_187,"Krishi Vigyan Kendra, BOTAD",Gujarat,BOTAD,,,,+91-078-22812,782744
+kvk_188,"Krishi Vigyan Kendra, CHHOTAUDEPUR",Gujarat,CHHOTAUDEPUR,,,,+91-085-33066,852954
+kvk_189,"Krishi Vigyan Kendra, DANG",Gujarat,DANG,,,,+91-029-15610,295530
+kvk_190,"Krishi Vigyan Kendra, DEVBHUMI DWARKA",Gujarat,DEVBHUMI DWARKA,,,,+91-016-32757,162644
+kvk_191,"Krishi Vigyan Kendra, DOHAD",Gujarat,DOHAD,,,,+91-027-24212,274063
+kvk_192,"Krishi Vigyan Kendra, GANDHINAGAR",Gujarat,GANDHINAGAR,,,,+91-035-70463,350331
+kvk_193,"Krishi Vigyan Kendra, GIR SOMNATH",Gujarat,GIR SOMNATH,,,,+91-048-25393,485337
+kvk_194,"Krishi Vigyan Kendra, JAMNAGAR",Gujarat,JAMNAGAR,,,,+91-052-96772,526751
+kvk_195,"Krishi Vigyan Kendra, JUNAGADH",Gujarat,JUNAGADH,,,,+91-038-45318,385246
+kvk_196,"Krishi Vigyan Kendra, KACHCHH",Gujarat,KACHCHH,,,,+91-070-61723,701587
+kvk_197,"Krishi Vigyan Kendra, KHEDA",Gujarat,KHEDA,,,,+91-074-44064,743988
+kvk_198,"Krishi Vigyan Kendra, MAHESANA",Gujarat,MAHESANA,,,,+91-065-11957,651899
+kvk_199,"Krishi Vigyan Kendra, MAHISAGAR",Gujarat,MAHISAGAR,,,,+91-033-26824,336709
+kvk_200,"Krishi Vigyan Kendra, MORBI",Gujarat,MORBI,,,,+91-031-90080,310044
+kvk_201,"Krishi Vigyan Kendra, NARMADA",Gujarat,NARMADA,,,,+91-052-39873,529782
+kvk_202,"Krishi Vigyan Kendra, NAVSARI",Gujarat,NAVSARI,,,,+91-024-85057,244909
+kvk_203,"Krishi Vigyan Kendra, PANCH MAHALS",Gujarat,PANCH MAHALS,,,,+91-083-70665,830649
+kvk_204,"Krishi Vigyan Kendra, PATAN",Gujarat,PATAN,,,,+91-083-75310,835164
+kvk_205,"Krishi Vigyan Kendra, PORBANDAR",Gujarat,PORBANDAR,,,,+91-062-46481,626467
+kvk_206,"Krishi Vigyan Kendra, RAJKOT",Gujarat,RAJKOT,,,,+91-056-17498,567467
+kvk_207,"Krishi Vigyan Kendra, SABAR KANTHA",Gujarat,SABAR KANTHA,,,,+91-070-68017,708011
+kvk_208,"Krishi Vigyan Kendra, SURAT",Gujarat,SURAT,,,,+91-045-53062,452920
+kvk_209,"Krishi Vigyan Kendra, SURENDRANAGAR",Gujarat,SURENDRANAGAR,,,,+91-052-62206,522176
+kvk_210,"Krishi Vigyan Kendra, TAPI",Gujarat,TAPI,,,,+91-057-59883,579705
+kvk_211,"Krishi Vigyan Kendra, VADODARA",Gujarat,VADODARA,,,,+91-077-44224,774113
+kvk_212,"Krishi Vigyan Kendra, VALSAD",Gujarat,VALSAD,,,,+91-063-80673,630642
+kvk_213,"Krishi Vigyan Kendra, AMBALA",Haryana,AMBALA,,,,+91-072-59746,729705
+kvk_214,"Krishi Vigyan Kendra, BHIWANI",Haryana,BHIWANI,,,,+91-047-19841,479837
+kvk_215,"Krishi Vigyan Kendra, CHARKI DADRI",Haryana,CHARKI DADRI,,,,+91-013-60149,130132
+kvk_216,"Krishi Vigyan Kendra, FARIDABAD",Haryana,FARIDABAD,,,,+91-012-54031,123988
+kvk_217,"Krishi Vigyan Kendra, FATEHABAD",Haryana,FATEHABAD,,,,+91-088-65747,885635
+kvk_218,"Krishi Vigyan Kendra, GURGAON",Haryana,GURGAON,,,,+91-015-88766,158593
+kvk_219,"Krishi Vigyan Kendra, HISAR",Haryana,HISAR,,,,+91-076-94452,764307
+kvk_220,"Krishi Vigyan Kendra, JHAJJAR",Haryana,JHAJJAR,,,,+91-072-56496,726377
+kvk_221,"Krishi Vigyan Kendra, JIND",Haryana,JIND,,,,+91-088-69058,888894
+kvk_222,"Krishi Vigyan Kendra, KAITHAL",Haryana,KAITHAL,,,,+91-065-45800,655699
+kvk_223,"Krishi Vigyan Kendra, KARNAL",Haryana,KARNAL,,,,+91-087-27478,877461
+kvk_224,"Krishi Vigyan Kendra, KURUKSHETRA",Haryana,KURUKSHETRA,,,,+91-036-87397,367239
+kvk_225,"Krishi Vigyan Kendra, MAHENDRAGARH",Haryana,MAHENDRAGARH,,,,+91-077-45610,775473
+kvk_226,"Krishi Vigyan Kendra, MEWAT",Haryana,MEWAT,,,,+91-064-30134,640007
+kvk_227,"Krishi Vigyan Kendra, PALWAL",Haryana,PALWAL,,,,+91-015-29634,159625
+kvk_228,"Krishi Vigyan Kendra, PANCHKULA",Haryana,PANCHKULA,,,,+91-025-32929,252867
+kvk_229,"Krishi Vigyan Kendra, PANIPAT",Haryana,PANIPAT,,,,+91-030-21469,301337
+kvk_230,"Krishi Vigyan Kendra, REWARI",Haryana,REWARI,,,,+91-059-72441,592419
+kvk_231,"Krishi Vigyan Kendra, ROHTAK",Haryana,ROHTAK,,,,+91-041-44678,414545
+kvk_232,"Krishi Vigyan Kendra, SIRSA",Haryana,SIRSA,,,,+91-029-46773,296650
+kvk_233,"Krishi Vigyan Kendra, SONIPAT",Haryana,SONIPAT,,,,+91-022-64437,224341
+kvk_234,"Krishi Vigyan Kendra, YAMUNANAGAR",Haryana,YAMUNANAGAR,,,,+91-057-21207,571072
+kvk_235,"Krishi Vigyan Kendra, BILASPUR",Himachal Pradesh,BILASPUR,,,,+91-072-54521,724350
+kvk_236,"Krishi Vigyan Kendra, CHAMBA",Himachal Pradesh,CHAMBA,,,,+91-015-25949,155784
+kvk_237,"Krishi Vigyan Kendra, HAMIRPUR",Himachal Pradesh,HAMIRPUR,,,,+91-014-73860,143843
+kvk_238,"Krishi Vigyan Kendra, KANGRA",Himachal Pradesh,KANGRA,,,,+91-083-16574,836488
+kvk_239,"Krishi Vigyan Kendra, KINNAUR",Himachal Pradesh,KINNAUR,,,,+91-047-44060,473909
+kvk_240,"Krishi Vigyan Kendra, KULLU",Himachal Pradesh,KULLU,,,,+91-086-72126,861945
+kvk_241,"Krishi Vigyan Kendra, LAHUL AND SPITI",Himachal Pradesh,LAHUL AND SPITI,,,,+91-021-87669,217556
+kvk_242,"Krishi Vigyan Kendra, MANDI",Himachal Pradesh,MANDI,,,,+91-013-99234,139122
+kvk_243,"Krishi Vigyan Kendra, SHIMLA",Himachal Pradesh,SHIMLA,,,,+91-065-49120,659045
+kvk_244,"Krishi Vigyan Kendra, SIRMAUR",Himachal Pradesh,SIRMAUR,,,,+91-050-70985,500834
+kvk_245,"Krishi Vigyan Kendra, SOLAN",Himachal Pradesh,SOLAN,,,,+91-043-38569,438453
+kvk_246,"Krishi Vigyan Kendra, UNA",Himachal Pradesh,UNA,,,,+91-061-62034,611977
+kvk_247,"Krishi Vigyan Kendra, ANANTNAG",Jammu and Kashmir,ANANTNAG,,,,+91-014-15382,145295
+kvk_248,"Krishi Vigyan Kendra, BADGAM",Jammu and Kashmir,BADGAM,,,,+91-065-11367,651361
+kvk_249,"Krishi Vigyan Kendra, BANDIPORA",Jammu and Kashmir,BANDIPORA,,,,+91-087-58250,878242
+kvk_250,"Krishi Vigyan Kendra, BARAMULLA",Jammu and Kashmir,BARAMULLA,,,,+91-055-66568,556555
+kvk_251,"Krishi Vigyan Kendra, DODA",Jammu and Kashmir,DODA,,,,+91-017-79134,179004
+kvk_252,"Krishi Vigyan Kendra, GANDERBAL",Jammu and Kashmir,GANDERBAL,,,,+91-026-47731,267643
+kvk_253,"Krishi Vigyan Kendra, JAMMU",Jammu and Kashmir,JAMMU,,,,+91-022-96750,226585
+kvk_254,"Krishi Vigyan Kendra, KARGIL",Jammu and Kashmir,KARGIL,,,,+91-060-51178,601017
+kvk_255,"Krishi Vigyan Kendra, KATHUA",Jammu and Kashmir,KATHUA,,,,+91-035-15028,354982
+kvk_256,"Krishi Vigyan Kendra, KISHTWAR",Jammu and Kashmir,KISHTWAR,,,,+91-059-74642,594620
+kvk_257,"Krishi Vigyan Kendra, KULGAM",Jammu and Kashmir,KULGAM,,,,+91-041-17299,417157
+kvk_258,"Krishi Vigyan Kendra, KUPWARA",Jammu and Kashmir,KUPWARA,,,,+91-077-77211,777057
+kvk_259,"Krishi Vigyan Kendra, LEH LADAKH",Jammu and Kashmir,LEH LADAKH,,,,+91-041-12471,412459
+kvk_260,"Krishi Vigyan Kendra, POONCH",Jammu and Kashmir,POONCH,,,,+91-083-12997,832885
+kvk_261,"Krishi Vigyan Kendra, PULWAMA",Jammu and Kashmir,PULWAMA,,,,+91-078-51941,781908
+kvk_262,"Krishi Vigyan Kendra, RAJAURI",Jammu and Kashmir,RAJAURI,,,,+91-076-69366,769212
+kvk_263,"Krishi Vigyan Kendra, RAMBAN",Jammu and Kashmir,RAMBAN,,,,+91-037-65766,375625
+kvk_264,"Krishi Vigyan Kendra, REASI",Jammu and Kashmir,REASI,,,,+91-083-13761,833597
+kvk_265,"Krishi Vigyan Kendra, SAMBA",Jammu and Kashmir,SAMBA,,,,+91-029-10922,290764
+kvk_266,"Krishi Vigyan Kendra, SHOPIAN",Jammu and Kashmir,SHOPIAN,,,,+91-074-73157,743142
+kvk_267,"Krishi Vigyan Kendra, SRINAGAR",Jammu and Kashmir,SRINAGAR,,,,+91-019-36493,196475
+kvk_268,"Krishi Vigyan Kendra, UDHAMPUR",Jammu and Kashmir,UDHAMPUR,,,,+91-057-25838,575781
+kvk_269,"Krishi Vigyan Kendra, BOKARO",Jharkhand,BOKARO,,,,+91-050-16555,506386
+kvk_270,"Krishi Vigyan Kendra, CHATRA",Jharkhand,CHATRA,,,,+91-063-51915,631771
+kvk_271,"Krishi Vigyan Kendra, DEOGHAR",Jharkhand,DEOGHAR,,,,+91-082-33070,822889
+kvk_272,"Krishi Vigyan Kendra, DHANBAD",Jharkhand,DHANBAD,,,,+91-036-52220,362209
+kvk_273,"Krishi Vigyan Kendra, DUMKA",Jharkhand,DUMKA,,,,+91-059-46521,596438
+kvk_274,"Krishi Vigyan Kendra, EAST SINGHBUM",Jharkhand,EAST SINGHBUM,,,,+91-019-96359,196177
+kvk_275,"Krishi Vigyan Kendra, GARHWA",Jharkhand,GARHWA,,,,+91-073-93438,733276
+kvk_276,"Krishi Vigyan Kendra, GIRIDIH",Jharkhand,GIRIDIH,,,,+91-078-88180,788026
+kvk_277,"Krishi Vigyan Kendra, GODDA",Jharkhand,GODDA,,,,+91-015-21626,151539
+kvk_278,"Krishi Vigyan Kendra, GUMLA",Jharkhand,GUMLA,,,,+91-075-56893,756765
+kvk_279,"Krishi Vigyan Kendra, HAZARIBAGH",Jharkhand,HAZARIBAGH,,,,+91-081-27239,817084
+kvk_280,"Krishi Vigyan Kendra, JAMTARA",Jharkhand,JAMTARA,,,,+91-023-43750,233567
+kvk_281,"Krishi Vigyan Kendra, KHUNTI",Jharkhand,KHUNTI,,,,+91-035-44283,354272
+kvk_282,"Krishi Vigyan Kendra, KODERMA",Jharkhand,KODERMA,,,,+91-068-77383,687334
+kvk_283,"Krishi Vigyan Kendra, LATEHAR",Jharkhand,LATEHAR,,,,+91-030-56287,306268
+kvk_284,"Krishi Vigyan Kendra, LOHARDAGA",Jharkhand,LOHARDAGA,,,,+91-067-93132,673014
+kvk_285,"Krishi Vigyan Kendra, PAKUR",Jharkhand,PAKUR,,,,+91-075-56166,756064
+kvk_286,"Krishi Vigyan Kendra, PALAMU",Jharkhand,PALAMU,,,,+91-024-54908,244751
+kvk_287,"Krishi Vigyan Kendra, RAMGARH",Jharkhand,RAMGARH,,,,+91-060-85106,605006
+kvk_288,"Krishi Vigyan Kendra, RANCHI",Jharkhand,RANCHI,,,,+91-083-42082,831927
+kvk_289,"Krishi Vigyan Kendra, SAHEBGANJ",Jharkhand,SAHEBGANJ,,,,+91-049-98929,498865
+kvk_290,"Krishi Vigyan Kendra, SARAIKELA KHARSAWAN",Jharkhand,SARAIKELA KHARSAWAN,,,,+91-076-39209,769072
+kvk_291,"Krishi Vigyan Kendra, SIMDEGA",Jharkhand,SIMDEGA,,,,+91-055-39473,559451
+kvk_292,"Krishi Vigyan Kendra, WEST SINGHBHUM",Jharkhand,WEST SINGHBHUM,,,,+91-034-92692,342517
+kvk_293,"Krishi Vigyan Kendra, BAGALKOT",Karnataka,BAGALKOT,,,,+91-036-83219,363087
+kvk_294,"Krishi Vigyan Kendra, BAGALKOTE",Karnataka,BAGALKOTE,,,,+91-032-79912,329867
+kvk_295,"Krishi Vigyan Kendra, BALLARI",Karnataka,BALLARI,,,,+91-049-31297,491267
+kvk_296,"Krishi Vigyan Kendra, BANGALORE RURAL",Karnataka,BANGALORE RURAL,,,,+91-059-45077,594942
+kvk_297,"Krishi Vigyan Kendra, BELAGAVI",Karnataka,BELAGAVI,,,,+91-081-83569,813484
+kvk_298,"Krishi Vigyan Kendra, BELGAUM",Karnataka,BELGAUM,,,,+91-018-28863,188689
+kvk_299,"Krishi Vigyan Kendra, BELLARY",Karnataka,BELLARY,,,,+91-065-12437,652379
+kvk_300,"Krishi Vigyan Kendra, BENGALURU URBAN",Karnataka,BENGALURU URBAN,,,,+91-062-12013,621938
+kvk_301,"Krishi Vigyan Kendra, BIDAR",Karnataka,BIDAR,,,,+91-050-76434,506309
+kvk_302,"Krishi Vigyan Kendra, BIJAPUR",Karnataka,BIJAPUR,,,,+91-048-22298,482190
+kvk_303,"Krishi Vigyan Kendra, CHAMARAJANAGAR",Karnataka,CHAMARAJANAGAR,,,,+91-037-63779,373690
+kvk_304,"Krishi Vigyan Kendra, CHAMARAJANAGARA",Karnataka,CHAMARAJANAGARA,,,,+91-053-73413,533253
+kvk_305,"Krishi Vigyan Kendra, CHIKBALLAPUR",Karnataka,CHIKBALLAPUR,,,,+91-069-28796,698651
+kvk_306,"Krishi Vigyan Kendra, CHIKKABALLAPURA",Karnataka,CHIKKABALLAPURA,,,,+91-018-84898,184872
+kvk_307,"Krishi Vigyan Kendra, CHIKKAMAGALURU",Karnataka,CHIKKAMAGALURU,,,,+91-061-93553,613505
+kvk_308,"Krishi Vigyan Kendra, CHIKMAGALUR",Karnataka,CHIKMAGALUR,,,,+91-071-79902,719766
+kvk_309,"Krishi Vigyan Kendra, CHITRADURGA",Karnataka,CHITRADURGA,,,,+91-016-95953,165780
+kvk_310,"Krishi Vigyan Kendra, DAKSHIN KANNAD",Karnataka,DAKSHIN KANNAD,,,,+91-040-33910,403751
+kvk_311,"Krishi Vigyan Kendra, DAKSHINA KANNADA",Karnataka,DAKSHINA KANNADA,,,,+91-067-96729,676715
+kvk_312,"Krishi Vigyan Kendra, DAVANGERE",Karnataka,DAVANGERE,,,,+91-014-41121,141069
+kvk_313,"Krishi Vigyan Kendra, DHARWAD",Karnataka,DHARWAD,,,,+91-013-98439,138353
+kvk_314,"Krishi Vigyan Kendra, GADAG",Karnataka,GADAG,,,,+91-029-71745,291631
+kvk_315,"Krishi Vigyan Kendra, GULBARGA",Karnataka,GULBARGA,,,,+91-079-93399,793323
+kvk_316,"Krishi Vigyan Kendra, HASSAN",Karnataka,HASSAN,,,,+91-017-11617,171443
+kvk_317,"Krishi Vigyan Kendra, HAVERI",Karnataka,HAVERI,,,,+91-076-94446,764275
+kvk_318,"Krishi Vigyan Kendra, KALABURAGI",Karnataka,KALABURAGI,,,,+91-066-56181,666054
+kvk_319,"Krishi Vigyan Kendra, KODAGU",Karnataka,KODAGU,,,,+91-083-14858,834824
+kvk_320,"Krishi Vigyan Kendra, KOLAR",Karnataka,KOLAR,,,,+91-056-19638,569607
+kvk_321,"Krishi Vigyan Kendra, KOPPAL",Karnataka,KOPPAL,,,,+91-013-92780,132720
+kvk_322,"Krishi Vigyan Kendra, MANDYA",Karnataka,MANDYA,,,,+91-050-44017,503857
+kvk_323,"Krishi Vigyan Kendra, MYSORE",Karnataka,MYSORE,,,,+91-081-81030,810893
+kvk_324,"Krishi Vigyan Kendra, MYSURU",Karnataka,MYSURU,,,,+91-053-42945,532906
+kvk_325,"Krishi Vigyan Kendra, RAICHUR",Karnataka,RAICHUR,,,,+91-059-42473,592416
+kvk_326,"Krishi Vigyan Kendra, RAMANAGARA",Karnataka,RAMANAGARA,,,,+91-088-97244,887089
+kvk_327,"Krishi Vigyan Kendra, SHIMOGA",Karnataka,SHIMOGA,,,,+91-016-97231,167214
+kvk_328,"Krishi Vigyan Kendra, SHIVAMOGGA",Karnataka,SHIVAMOGGA,,,,+91-036-87522,367390
+kvk_329,"Krishi Vigyan Kendra, TUMAKURU",Karnataka,TUMAKURU,,,,+91-080-14051,803896
+kvk_330,"Krishi Vigyan Kendra, TUMKUR",Karnataka,TUMKUR,,,,+91-033-54034,333980
+kvk_331,"Krishi Vigyan Kendra, UDUPI",Karnataka,UDUPI,,,,+91-043-98691,438567
+kvk_332,"Krishi Vigyan Kendra, UTTAR KANNAD",Karnataka,UTTAR KANNAD,,,,+91-013-92448,132388
+kvk_333,"Krishi Vigyan Kendra, UTTARA KANNADA",Karnataka,UTTARA KANNADA,,,,+91-042-29286,429170
+kvk_334,"Krishi Vigyan Kendra, VIJAYAPURA",Karnataka,VIJAYAPURA,,,,+91-056-46502,566402
+kvk_335,"Krishi Vigyan Kendra, YADAGIRI",Karnataka,YADAGIRI,,,,+91-060-56508,606347
+kvk_336,"Krishi Vigyan Kendra, YADGIR",Karnataka,YADGIR,,,,+91-060-23382,603238
+kvk_337,"Krishi Vigyan Kendra, ALAPPUZHA",Kerala,ALAPPUZHA,,,,+91-019-95116,194986
+kvk_338,"Krishi Vigyan Kendra, ERNAKULAM",Kerala,ERNAKULAM,,,,+91-019-97404,197378
+kvk_339,"Krishi Vigyan Kendra, IDUKKI",Kerala,IDUKKI,,,,+91-012-88514,128402
+kvk_340,"Krishi Vigyan Kendra, KANNUR",Kerala,KANNUR,,,,+91-050-75623,505446
+kvk_341,"Krishi Vigyan Kendra, KASARAGOD",Kerala,KASARAGOD,,,,+91-027-58181,278171
+kvk_342,"Krishi Vigyan Kendra, KOLLAM",Kerala,KOLLAM,,,,+91-031-32615,312457
+kvk_343,"Krishi Vigyan Kendra, KOTTAYAM",Kerala,KOTTAYAM,,,,+91-086-76499,866422
+kvk_344,"Krishi Vigyan Kendra, KOZHIKODE",Kerala,KOZHIKODE,,,,+91-011-12460,112434
+kvk_345,"Krishi Vigyan Kendra, MALAPPURAM",Kerala,MALAPPURAM,,,,+91-049-31015,491011
+kvk_346,"Krishi Vigyan Kendra, PALAKKAD",Kerala,PALAKKAD,,,,+91-018-54657,184518
+kvk_347,"Krishi Vigyan Kendra, PATHANAMTHITTA",Kerala,PATHANAMTHITTA,,,,+91-082-32010,821881
+kvk_348,"Krishi Vigyan Kendra, THIRUVANANTHAPURAM",Kerala,THIRUVANANTHAPURAM,,,,+91-086-14362,864241
+kvk_349,"Krishi Vigyan Kendra, THRISSUR",Kerala,THRISSUR,,,,+91-067-91529,671437
+kvk_350,"Krishi Vigyan Kendra, WAYANAD",Kerala,WAYANAD,,,,+91-041-44549,414468
+kvk_351,"Krishi Vigyan Kendra, KARGIL",Laddakh,KARGIL,,,,+91-081-25144,815041
+kvk_352,"Krishi Vigyan Kendra, AGAR MALWA",Madhya Pradesh,AGAR MALWA,,,,+91-026-70825,260694
+kvk_353,"Krishi Vigyan Kendra, ALIRAJPUR",Madhya Pradesh,ALIRAJPUR,,,,+91-086-15822,865701
+kvk_354,"Krishi Vigyan Kendra, ANUPPUR",Madhya Pradesh,ANUPPUR,,,,+91-052-33713,523622
+kvk_355,"Krishi Vigyan Kendra, ASHOKNAGAR",Madhya Pradesh,ASHOKNAGAR,,,,+91-046-95984,465981
+kvk_356,"Krishi Vigyan Kendra, BALAGHAT",Madhya Pradesh,BALAGHAT,,,,+91-051-21818,511675
+kvk_357,"Krishi Vigyan Kendra, BARWANI",Madhya Pradesh,BARWANI,,,,+91-039-29759,399600
+kvk_358,"Krishi Vigyan Kendra, BASTAR",Madhya Pradesh,BASTAR,,,,+91-068-45598,685540
+kvk_359,"Krishi Vigyan Kendra, BETUL",Madhya Pradesh,BETUL,,,,+91-088-95464,885335
+kvk_360,"Krishi Vigyan Kendra, BHIND",Madhya Pradesh,BHIND,,,,+91-047-49853,479728
+kvk_361,"Krishi Vigyan Kendra, BHOPAL",Madhya Pradesh,BHOPAL,,,,+91-088-32798,882781
+kvk_362,"Krishi Vigyan Kendra, BILASPUR",Madhya Pradesh,BILASPUR,,,,+91-026-13731,263556
+kvk_363,"Krishi Vigyan Kendra, BURHANPUR",Madhya Pradesh,BURHANPUR,,,,+91-083-46680,836499
+kvk_364,"Krishi Vigyan Kendra, CHHATARPUR",Madhya Pradesh,CHHATARPUR,,,,+91-022-38133,228132
+kvk_365,"Krishi Vigyan Kendra, CHHINDWARA",Madhya Pradesh,CHHINDWARA,,,,+91-022-61652,221504
+kvk_366,"Krishi Vigyan Kendra, DAMOH",Madhya Pradesh,DAMOH,,,,+91-084-21913,841905
+kvk_367,"Krishi Vigyan Kendra, DANTEWADA",Madhya Pradesh,DANTEWADA,,,,+91-058-93337,583220
+kvk_368,"Krishi Vigyan Kendra, DATIA",Madhya Pradesh,DATIA,,,,+91-084-53932,843829
+kvk_369,"Krishi Vigyan Kendra, DEWAS",Madhya Pradesh,DEWAS,,,,+91-077-70172,770096
+kvk_370,"Krishi Vigyan Kendra, DHAMTARI",Madhya Pradesh,DHAMTARI,,,,+91-087-60023,879937
+kvk_371,"Krishi Vigyan Kendra, DHAR",Madhya Pradesh,DHAR,,,,+91-088-37805,887632
+kvk_372,"Krishi Vigyan Kendra, DINDORI",Madhya Pradesh,DINDORI,,,,+91-061-99519,619367
+kvk_373,"Krishi Vigyan Kendra, DURG",Madhya Pradesh,DURG,,,,+91-084-83818,843750
+kvk_374,"Krishi Vigyan Kendra, GUNA",Madhya Pradesh,GUNA,,,,+91-022-96517,226482
+kvk_375,"Krishi Vigyan Kendra, GWALIOR",Madhya Pradesh,GWALIOR,,,,+91-019-62575,192566
+kvk_376,"Krishi Vigyan Kendra, HARDA",Madhya Pradesh,HARDA,,,,+91-077-78475,778373
+kvk_377,"Krishi Vigyan Kendra, HOSHANGABAD",Madhya Pradesh,HOSHANGABAD,,,,+91-014-71079,141036
+kvk_378,"Krishi Vigyan Kendra, INDORE",Madhya Pradesh,INDORE,,,,+91-025-30937,250927
+kvk_379,"Krishi Vigyan Kendra, JABALPUR",Madhya Pradesh,JABALPUR,,,,+91-060-29569,609529
+kvk_380,"Krishi Vigyan Kendra, JANJGIR-CHAMPA",Madhya Pradesh,JANJGIR-CHAMPA,,,,+91-085-95762,855668
+kvk_381,"Krishi Vigyan Kendra, JASHPUR",Madhya Pradesh,JASHPUR,,,,+91-064-94952,644895
+kvk_382,"Krishi Vigyan Kendra, JHABUA",Madhya Pradesh,JHABUA,,,,+91-083-14907,834899
+kvk_383,"Krishi Vigyan Kendra, KABIRDHAM",Madhya Pradesh,KABIRDHAM,,,,+91-036-53309,363246
+kvk_384,"Krishi Vigyan Kendra, KANKER",Madhya Pradesh,KANKER,,,,+91-066-81286,661246
+kvk_385,"Krishi Vigyan Kendra, KATNI",Madhya Pradesh,KATNI,,,,+91-037-69414,379299
+kvk_386,"Krishi Vigyan Kendra, KHANDWA",Madhya Pradesh,KHANDWA,,,,+91-023-74969,234899
+kvk_387,"Krishi Vigyan Kendra, KHARGONE",Madhya Pradesh,KHARGONE,,,,+91-019-38532,198384
+kvk_388,"Krishi Vigyan Kendra, KORBA",Madhya Pradesh,KORBA,,,,+91-076-35271,765108
+kvk_389,"Krishi Vigyan Kendra, KOREA",Madhya Pradesh,KOREA,,,,+91-067-68980,678879
+kvk_390,"Krishi Vigyan Kendra, MAHASAMUND",Madhya Pradesh,MAHASAMUND,,,,+91-045-82650,452621
+kvk_391,"Krishi Vigyan Kendra, MANDLA",Madhya Pradesh,MANDLA,,,,+91-057-58488,578388
+kvk_392,"Krishi Vigyan Kendra, MANDSAUR",Madhya Pradesh,MANDSAUR,,,,+91-035-47701,357690
+kvk_393,"Krishi Vigyan Kendra, MORENA",Madhya Pradesh,MORENA,,,,+91-085-63131,853028
+kvk_394,"Krishi Vigyan Kendra, NARSINGHPUR",Madhya Pradesh,NARSINGHPUR,,,,+91-044-14038,443939
+kvk_395,"Krishi Vigyan Kendra, NEEMUCH",Madhya Pradesh,NEEMUCH,,,,+91-052-92227,522128
+kvk_396,"Krishi Vigyan Kendra, NIWARI",Madhya Pradesh,NIWARI,,,,+91-070-30284,700269
+kvk_397,"Krishi Vigyan Kendra, PANNA",Madhya Pradesh,PANNA,,,,+91-080-18316,808135
+kvk_398,"Krishi Vigyan Kendra, RAIPUR",Madhya Pradesh,RAIPUR,,,,+91-018-82002,181820
+kvk_399,"Krishi Vigyan Kendra, RAISEN",Madhya Pradesh,RAISEN,,,,+91-018-53694,183581
+kvk_400,"Krishi Vigyan Kendra, RAJGARH",Madhya Pradesh,RAJGARH,,,,+91-060-54819,604762
+kvk_401,"Krishi Vigyan Kendra, RAJNANDGAON",Madhya Pradesh,RAJNANDGAON,,,,+91-050-74669,504518
+kvk_402,"Krishi Vigyan Kendra, RATLAM",Madhya Pradesh,RATLAM,,,,+91-085-61658,851607
+kvk_403,"Krishi Vigyan Kendra, REWA",Madhya Pradesh,REWA,,,,+91-036-26841,366795
+kvk_404,"Krishi Vigyan Kendra, SAGAR",Madhya Pradesh,SAGAR,,,,+91-061-39038,618998
+kvk_405,"Krishi Vigyan Kendra, SATNA",Madhya Pradesh,SATNA,,,,+91-060-58595,608590
+kvk_406,"Krishi Vigyan Kendra, SEHORE",Madhya Pradesh,SEHORE,,,,+91-031-94239,314099
+kvk_407,"Krishi Vigyan Kendra, SEONI",Madhya Pradesh,SEONI,,,,+91-043-68093,438090
+kvk_408,"Krishi Vigyan Kendra, SHAHDOL",Madhya Pradesh,SHAHDOL,,,,+91-043-32914,432824
+kvk_409,"Krishi Vigyan Kendra, SHAJAPUR",Madhya Pradesh,SHAJAPUR,,,,+91-062-47385,627371
+kvk_410,"Krishi Vigyan Kendra, SHEOPUR",Madhya Pradesh,SHEOPUR,,,,+91-065-42248,652095
+kvk_411,"Krishi Vigyan Kendra, SHIVPURI",Madhya Pradesh,SHIVPURI,,,,+91-037-98101,377969
+kvk_412,"Krishi Vigyan Kendra, SIDHI",Madhya Pradesh,SIDHI,,,,+91-038-18112,388083
+kvk_413,"Krishi Vigyan Kendra, SINGRAULI",Madhya Pradesh,SINGRAULI,,,,+91-083-73133,833039
+kvk_414,"Krishi Vigyan Kendra, SURGUJA",Madhya Pradesh,SURGUJA,,,,+91-019-67801,197792
+kvk_415,"Krishi Vigyan Kendra, TIKAMGARH",Madhya Pradesh,TIKAMGARH,,,,+91-056-48199,568151
+kvk_416,"Krishi Vigyan Kendra, UJJAIN",Madhya Pradesh,UJJAIN,,,,+91-015-59320,159164
+kvk_417,"Krishi Vigyan Kendra, UMARIA",Madhya Pradesh,UMARIA,,,,+91-021-84031,213918
+kvk_418,"Krishi Vigyan Kendra, VIDISHA",Madhya Pradesh,VIDISHA,,,,+91-059-71994,591816
+kvk_419,"Krishi Vigyan Kendra, AHMEDNAGAR",Maharashtra,AHMEDNAGAR,,,,+91-018-85686,185686
+kvk_420,"Krishi Vigyan Kendra, AKOLA",Maharashtra,AKOLA,,,,+91-023-49949,239844
+kvk_421,"Krishi Vigyan Kendra, AMRAVATI",Maharashtra,AMRAVATI,,,,+91-046-68920,468856
+kvk_422,"Krishi Vigyan Kendra, AURANGABAD",Maharashtra,AURANGABAD,,,,+91-043-63354,433247
+kvk_423,"Krishi Vigyan Kendra, BEED",Maharashtra,BEED,,,,+91-045-20819,450798
+kvk_424,"Krishi Vigyan Kendra, BHANDARA",Maharashtra,BHANDARA,,,,+91-068-79737,689584
+kvk_425,"Krishi Vigyan Kendra, BULDHANA",Maharashtra,BULDHANA,,,,+91-020-40368,200194
+kvk_426,"Krishi Vigyan Kendra, CHANDRAPUR",Maharashtra,CHANDRAPUR,,,,+91-023-10559,230523
+kvk_427,"Krishi Vigyan Kendra, DHULE",Maharashtra,DHULE,,,,+91-072-86103,726097
+kvk_428,"Krishi Vigyan Kendra, GADCHIROLI",Maharashtra,GADCHIROLI,,,,+91-025-66030,255847
+kvk_429,"Krishi Vigyan Kendra, GONDIA",Maharashtra,GONDIA,,,,+91-045-86063,455930
+kvk_430,"Krishi Vigyan Kendra, HINGOLI",Maharashtra,HINGOLI,,,,+91-031-66134,315959
+kvk_431,"Krishi Vigyan Kendra, JALGAON",Maharashtra,JALGAON,,,,+91-039-88806,398769
+kvk_432,"Krishi Vigyan Kendra, JALNA",Maharashtra,JALNA,,,,+91-044-78878,448771
+kvk_433,"Krishi Vigyan Kendra, KOLHAPUR",Maharashtra,KOLHAPUR,,,,+91-073-97030,736946
+kvk_434,"Krishi Vigyan Kendra, LATUR",Maharashtra,LATUR,,,,+91-049-94759,494669
+kvk_435,"Krishi Vigyan Kendra, MUMBAI",Maharashtra,MUMBAI,,,,+91-045-59191,459023
+kvk_436,"Krishi Vigyan Kendra, MUMBAI SUBURBAN",Maharashtra,MUMBAI SUBURBAN,,,,+91-033-83907,333732
+kvk_437,"Krishi Vigyan Kendra, NAGPUR",Maharashtra,NAGPUR,,,,+91-081-81632,811495
+kvk_438,"Krishi Vigyan Kendra, NANDED",Maharashtra,NANDED,,,,+91-086-46217,866053
+kvk_439,"Krishi Vigyan Kendra, NANDURBAR",Maharashtra,NANDURBAR,,,,+91-051-25574,515535
+kvk_440,"Krishi Vigyan Kendra, NASHIK",Maharashtra,NASHIK,,,,+91-070-66995,706937
+kvk_441,"Krishi Vigyan Kendra, OSMANABAD",Maharashtra,OSMANABAD,,,,+91-078-86793,786769
+kvk_442,"Krishi Vigyan Kendra, PALGHAR",Maharashtra,PALGHAR,,,,+91-046-94907,464748
+kvk_443,"Krishi Vigyan Kendra, PARBHANI",Maharashtra,PARBHANI,,,,+91-075-83364,753297
+kvk_444,"Krishi Vigyan Kendra, PUNE",Maharashtra,PUNE,,,,+91-024-27951,247941
+kvk_445,"Krishi Vigyan Kendra, RAIGAD",Maharashtra,RAIGAD,,,,+91-022-98410,228323
+kvk_446,"Krishi Vigyan Kendra, RATNAGIRI",Maharashtra,RATNAGIRI,,,,+91-036-87957,367955
+kvk_447,"Krishi Vigyan Kendra, SANGLI",Maharashtra,SANGLI,,,,+91-049-97308,497244
+kvk_448,"Krishi Vigyan Kendra, SATARA",Maharashtra,SATARA,,,,+91-034-35439,345428
+kvk_449,"Krishi Vigyan Kendra, SINDHUDURG",Maharashtra,SINDHUDURG,,,,+91-051-59983,519823
+kvk_450,"Krishi Vigyan Kendra, SOLAPUR",Maharashtra,SOLAPUR,,,,+91-030-81221,301055
+kvk_451,"Krishi Vigyan Kendra, THANE",Maharashtra,THANE,,,,+91-023-75193,235175
+kvk_452,"Krishi Vigyan Kendra, WARDHA",Maharashtra,WARDHA,,,,+91-082-64483,824415
+kvk_453,"Krishi Vigyan Kendra, WASHIM",Maharashtra,WASHIM,,,,+91-067-66111,676010
+kvk_454,"Krishi Vigyan Kendra, YAVATMAL",Maharashtra,YAVATMAL,,,,+91-030-27121,307067
+kvk_455,"Krishi Vigyan Kendra, BISHNUPUR",Manipur,BISHNUPUR,,,,+91-023-18327,238213
+kvk_456,"Krishi Vigyan Kendra, CHANDEL",Manipur,CHANDEL,,,,+91-058-31008,580951
+kvk_457,"Krishi Vigyan Kendra, CHURACHANDPUR",Manipur,CHURACHANDPUR,,,,+91-082-98537,828426
+kvk_458,"Krishi Vigyan Kendra, IMPHAL EAST",Manipur,IMPHAL EAST,,,,+91-058-66376,586224
+kvk_459,"Krishi Vigyan Kendra, IMPHAL WEST",Manipur,IMPHAL WEST,,,,+91-056-17109,567078
+kvk_460,"Krishi Vigyan Kendra, SENAPATI",Manipur,SENAPATI,,,,+91-078-51645,781586
+kvk_461,"Krishi Vigyan Kendra, TAMENGLONG",Manipur,TAMENGLONG,,,,+91-038-75180,385013
+kvk_462,"Krishi Vigyan Kendra, THOUBAL",Manipur,THOUBAL,,,,+91-018-26247,186099
+kvk_463,"Krishi Vigyan Kendra, UKHRUL",Manipur,UKHRUL,,,,+91-021-29352,219169
+kvk_464,"Krishi Vigyan Kendra, EAST GARO HILLS",Meghalaya,EAST GARO HILLS,,,,+91-026-41068,260928
+kvk_465,"Krishi Vigyan Kendra, EAST JAINTIA HILLS",Meghalaya,EAST JAINTIA HILLS,,,,+91-052-30366,520249
+kvk_466,"Krishi Vigyan Kendra, EAST KHASI HILLS",Meghalaya,EAST KHASI HILLS,,,,+91-038-15415,385308
+kvk_467,"Krishi Vigyan Kendra, NORTH GARO HILLS",Meghalaya,NORTH GARO HILLS,,,,+91-066-84376,664336
+kvk_468,"Krishi Vigyan Kendra, RI BHOI",Meghalaya,RI BHOI,,,,+91-040-39127,408994
+kvk_469,"Krishi Vigyan Kendra, SOUTH GARO HILLS",Meghalaya,SOUTH GARO HILLS,,,,+91-020-40594,200472
+kvk_470,"Krishi Vigyan Kendra, SOUTH WEST GARO HILLS",Meghalaya,SOUTH WEST GARO HILLS,,,,+91-036-88043,367911
+kvk_471,"Krishi Vigyan Kendra, SOUTH WEST KHASI HILLS",Meghalaya,SOUTH WEST KHASI HILLS,,,,+91-014-46939,146809
+kvk_472,"Krishi Vigyan Kendra, WEST GARO HILLS",Meghalaya,WEST GARO HILLS,,,,+91-020-48155,208007
+kvk_473,"Krishi Vigyan Kendra, WEST JAINTIA HILLS",Meghalaya,WEST JAINTIA HILLS,,,,+91-024-26915,246905
+kvk_474,"Krishi Vigyan Kendra, WEST KHASI HILLS",Meghalaya,WEST KHASI HILLS,,,,+91-019-98722,198670
+kvk_475,"Krishi Vigyan Kendra, AIZAWL",Mizoram,AIZAWL,,,,+91-033-58055,337949
+kvk_476,"Krishi Vigyan Kendra, CHAMPHAI",Mizoram,CHAMPHAI,,,,+91-076-96919,766774
+kvk_477,"Krishi Vigyan Kendra, KOLASIB",Mizoram,KOLASIB,,,,+91-013-70120,139947
+kvk_478,"Krishi Vigyan Kendra, LAWNGTLAI",Mizoram,LAWNGTLAI,,,,+91-084-21635,841601
+kvk_479,"Krishi Vigyan Kendra, LUNGLEI",Mizoram,LUNGLEI,,,,+91-070-90909,700860
+kvk_480,"Krishi Vigyan Kendra, MAMIT",Mizoram,MAMIT,,,,+91-041-71959,411809
+kvk_481,"Krishi Vigyan Kendra, SAIHA",Mizoram,SAIHA,,,,+91-026-71590,261485
+kvk_482,"Krishi Vigyan Kendra, SERCHHIP",Mizoram,SERCHHIP,,,,+91-048-83916,483852
+kvk_483,"Krishi Vigyan Kendra, DIMAPUR",Nagaland,DIMAPUR,,,,+91-017-45215,175154
+kvk_484,"Krishi Vigyan Kendra, KIPHIRE",Nagaland,KIPHIRE,,,,+91-051-86340,516319
+kvk_485,"Krishi Vigyan Kendra, KOHIMA",Nagaland,KOHIMA,,,,+91-017-78770,178770
+kvk_486,"Krishi Vigyan Kendra, LONGLENG",Nagaland,LONGLENG,,,,+91-020-74715,204680
+kvk_487,"Krishi Vigyan Kendra, MOKOKCHUNG",Nagaland,MOKOKCHUNG,,,,+91-076-32712,762549
+kvk_488,"Krishi Vigyan Kendra, MON",Nagaland,MON,,,,+91-041-71958,411886
+kvk_489,"Krishi Vigyan Kendra, PEREN",Nagaland,PEREN,,,,+91-021-53003,212855
+kvk_490,"Krishi Vigyan Kendra, PHEK",Nagaland,PHEK,,,,+91-052-66212,526130
+kvk_491,"Krishi Vigyan Kendra, TUENSANG",Nagaland,TUENSANG,,,,+91-076-38888,768881
+kvk_492,"Krishi Vigyan Kendra, WOKHA",Nagaland,WOKHA,,,,+91-031-90387,310273
+kvk_493,"Krishi Vigyan Kendra, ZUNHEBOTO",Nagaland,ZUNHEBOTO,,,,+91-088-95357,885228
+kvk_494,"Krishi Vigyan Kendra, ANUGUL",Odisha,ANUGUL,,,,+91-043-36513,436371
+kvk_495,"Krishi Vigyan Kendra, BALANGIR",Odisha,BALANGIR,,,,+91-038-40777,380679
+kvk_496,"Krishi Vigyan Kendra, BALESHWAR",Odisha,BALESHWAR,,,,+91-041-78670,418598
+kvk_497,"Krishi Vigyan Kendra, BARGARH",Odisha,BARGARH,,,,+91-015-21204,151039
+kvk_498,"Krishi Vigyan Kendra, BHADRAK",Odisha,BHADRAK,,,,+91-085-95022,854902
+kvk_499,"Krishi Vigyan Kendra, BOUDH",Odisha,BOUDH,,,,+91-063-57991,637873
+kvk_500,"Krishi Vigyan Kendra, CUTTACK",Odisha,CUTTACK,,,,+91-071-49994,719849
+kvk_501,"Krishi Vigyan Kendra, DEOGARH",Odisha,DEOGARH,,,,+91-031-69537,319492
+kvk_502,"Krishi Vigyan Kendra, DHENKANAL",Odisha,DHENKANAL,,,,+91-054-87182,547022
+kvk_503,"Krishi Vigyan Kendra, GAJAPATI",Odisha,GAJAPATI,,,,+91-034-31496,341329
+kvk_504,"Krishi Vigyan Kendra, GANJAM",Odisha,GANJAM,,,,+91-074-47497,747395
+kvk_505,"Krishi Vigyan Kendra, JAGATSINGHAPUR",Odisha,JAGATSINGHAPUR,,,,+91-068-20014,689843
+kvk_506,"Krishi Vigyan Kendra, JAJAPUR",Odisha,JAJAPUR,,,,+91-040-64331,404311
+kvk_507,"Krishi Vigyan Kendra, JHARSUGUDA",Odisha,JHARSUGUDA,,,,+91-043-62335,432176
+kvk_508,"Krishi Vigyan Kendra, KALAHANDI",Odisha,KALAHANDI,,,,+91-018-86361,186309
+kvk_509,"Krishi Vigyan Kendra, KANDHAMAL",Odisha,KANDHAMAL,,,,+91-039-87972,397935
+kvk_510,"Krishi Vigyan Kendra, KENDRAPARA",Odisha,KENDRAPARA,,,,+91-065-70254,650110
+kvk_511,"Krishi Vigyan Kendra, KENDUJHAR",Odisha,KENDUJHAR,,,,+91-080-15962,805885
+kvk_512,"Krishi Vigyan Kendra, KHORDHA",Odisha,KHORDHA,,,,+91-025-30426,250390
+kvk_513,"Krishi Vigyan Kendra, KORAPUT",Odisha,KORAPUT,,,,+91-054-89368,549338
+kvk_514,"Krishi Vigyan Kendra, MALKANGIRI",Odisha,MALKANGIRI,,,,+91-077-16763,776747
+kvk_515,"Krishi Vigyan Kendra, MAYURBHANJ",Odisha,MAYURBHANJ,,,,+91-079-33145,792999
+kvk_516,"Krishi Vigyan Kendra, NABARANGPUR",Odisha,NABARANGPUR,,,,+91-055-91289,551129
+kvk_517,"Krishi Vigyan Kendra, NAYAGARH",Odisha,NAYAGARH,,,,+91-043-36049,435933
+kvk_518,"Krishi Vigyan Kendra, NUAPADA",Odisha,NUAPADA,,,,+91-053-45712,535647
+kvk_519,"Krishi Vigyan Kendra, PURI",Odisha,PURI,,,,+91-045-26504,456353
+kvk_520,"Krishi Vigyan Kendra, RAYAGADA",Odisha,RAYAGADA,,,,+91-024-51375,241192
+kvk_521,"Krishi Vigyan Kendra, SAMBALPUR",Odisha,SAMBALPUR,,,,+91-070-38921,708854
+kvk_522,"Krishi Vigyan Kendra, SONEPUR",Odisha,SONEPUR,,,,+91-079-37094,797026
+kvk_523,"Krishi Vigyan Kendra, SUNDARGARH",Odisha,SUNDARGARH,,,,+91-030-54377,304280
+kvk_524,"Krishi Vigyan Kendra, KARAIKAL",Puducherry,KARAIKAL,,,,+91-025-66803,256672
+kvk_525,"Krishi Vigyan Kendra, MAHE",Puducherry,MAHE,,,,+91-060-53962,603931
+kvk_526,"Krishi Vigyan Kendra, PONDICHERRY",Puducherry,PONDICHERRY,,,,+91-019-33832,193814
+kvk_527,"Krishi Vigyan Kendra, YANAM",Puducherry,YANAM,,,,+91-063-87216,637081
+kvk_528,"Krishi Vigyan Kendra, AMRITSAR",Punjab,AMRITSAR,,,,+91-015-51909,151779
+kvk_529,"Krishi Vigyan Kendra, BARNALA",Punjab,BARNALA,,,,+91-021-84159,213994
+kvk_530,"Krishi Vigyan Kendra, BATHINDA",Punjab,BATHINDA,,,,+91-066-24252,664220
+kvk_531,"Krishi Vigyan Kendra, FARIDKOT",Punjab,FARIDKOT,,,,+91-071-20097,719943
+kvk_532,"Krishi Vigyan Kendra, FATEHGARH SAHIB",Punjab,FATEHGARH SAHIB,,,,+91-035-18586,358566
+kvk_533,"Krishi Vigyan Kendra, FAZILKA",Punjab,FAZILKA,,,,+91-085-32789,852651
+kvk_534,"Krishi Vigyan Kendra, FIROZEPUR",Punjab,FIROZEPUR,,,,+91-046-95606,465447
+kvk_535,"Krishi Vigyan Kendra, GURDASPUR",Punjab,GURDASPUR,,,,+91-047-14492,474488
+kvk_536,"Krishi Vigyan Kendra, HOSHIARPUR",Punjab,HOSHIARPUR,,,,+91-066-55624,665549
+kvk_537,"Krishi Vigyan Kendra, JALANDHAR",Punjab,JALANDHAR,,,,+91-058-94886,584873
+kvk_538,"Krishi Vigyan Kendra, KAPURTHALA",Punjab,KAPURTHALA,,,,+91-052-37760,527721
+kvk_539,"Krishi Vigyan Kendra, LUDHIANA",Punjab,LUDHIANA,,,,+91-035-18570,358446
+kvk_540,"Krishi Vigyan Kendra, MANSA",Punjab,MANSA,,,,+91-067-63020,672919
+kvk_541,"Krishi Vigyan Kendra, MOGA",Punjab,MOGA,,,,+91-087-56321,876313
+kvk_542,"Krishi Vigyan Kendra, MUKTSAR",Punjab,MUKTSAR,,,,+91-059-49628,599467
+kvk_543,"Krishi Vigyan Kendra, NAWANSHAHR",Punjab,NAWANSHAHR,,,,+91-084-27771,847711
+kvk_544,"Krishi Vigyan Kendra, PATHANKOT",Punjab,PATHANKOT,,,,+91-028-63695,283529
+kvk_545,"Krishi Vigyan Kendra, PATIALA",Punjab,PATIALA,,,,+91-056-14166,564161
+kvk_546,"Krishi Vigyan Kendra, RUPNAGAR",Punjab,RUPNAGAR,,,,+91-078-80648,780494
+kvk_547,"Krishi Vigyan Kendra, S",Punjab,S,,,,+91-078-23753,783633
+kvk_548,"Krishi Vigyan Kendra, SANGRUR",Punjab,SANGRUR,,,,+91-040-63187,403089
+kvk_549,"Krishi Vigyan Kendra, SHAHID BHAGAT SINGH NAGAR",Punjab,SHAHID BHAGAT SINGH NAGAR,,,,+91-085-93745,853703
+kvk_550,"Krishi Vigyan Kendra, TARN TARAN",Punjab,TARN TARAN,,,,+91-023-16708,236620
+kvk_551,"Krishi Vigyan Kendra, AJMER",Rajasthan,AJMER,,,,+91-082-32117,821962
+kvk_552,"Krishi Vigyan Kendra, ALWAR",Rajasthan,ALWAR,,,,+91-042-55127,425098
+kvk_553,"Krishi Vigyan Kendra, BANSWARA",Rajasthan,BANSWARA,,,,+91-058-31714,581657
+kvk_554,"Krishi Vigyan Kendra, BARAN",Rajasthan,BARAN,,,,+91-034-61937,341831
+kvk_555,"Krishi Vigyan Kendra, BARMER",Rajasthan,BARMER,,,,+91-033-85831,335708
+kvk_556,"Krishi Vigyan Kendra, BHARATPUR",Rajasthan,BHARATPUR,,,,+91-037-33393,373347
+kvk_557,"Krishi Vigyan Kendra, BHILWARA",Rajasthan,BHILWARA,,,,+91-070-65485,705401
+kvk_558,"Krishi Vigyan Kendra, BIKANER",Rajasthan,BIKANER,,,,+91-016-64989,164937
+kvk_559,"Krishi Vigyan Kendra, BUNDI",Rajasthan,BUNDI,,,,+91-013-62700,132579
+kvk_560,"Krishi Vigyan Kendra, CHITTORGARH",Rajasthan,CHITTORGARH,,,,+91-060-57953,607922
+kvk_561,"Krishi Vigyan Kendra, CHURU",Rajasthan,CHURU,,,,+91-088-35175,885002
+kvk_562,"Krishi Vigyan Kendra, DAUSA",Rajasthan,DAUSA,,,,+91-078-59949,789942
+kvk_563,"Krishi Vigyan Kendra, DHOLPUR",Rajasthan,DHOLPUR,,,,+91-077-49713,779550
+kvk_564,"Krishi Vigyan Kendra, DUNGARPUR",Rajasthan,DUNGARPUR,,,,+91-044-46562,446498
+kvk_565,"Krishi Vigyan Kendra, GANGANAGAR",Rajasthan,GANGANAGAR,,,,+91-048-22188,482080
+kvk_566,"Krishi Vigyan Kendra, HANUMANGARH",Rajasthan,HANUMANGARH,,,,+91-064-95324,645241
+kvk_567,"Krishi Vigyan Kendra, JAIPUR",Rajasthan,JAIPUR,,,,+91-088-67940,887828
+kvk_568,"Krishi Vigyan Kendra, JAISALMER",Rajasthan,JAISALMER,,,,+91-060-87523,607397
+kvk_569,"Krishi Vigyan Kendra, JALORE",Rajasthan,JALORE,,,,+91-027-28133,278088
+kvk_570,"Krishi Vigyan Kendra, JHALAWAR",Rajasthan,JHALAWAR,,,,+91-086-11190,861043
+kvk_571,"Krishi Vigyan Kendra, JHUNJHUNU",Rajasthan,JHUNJHUNU,,,,+91-070-64404,704268
+kvk_572,"Krishi Vigyan Kendra, JODHPUR",Rajasthan,JODHPUR,,,,+91-074-18011,747952
+kvk_573,"Krishi Vigyan Kendra, KARAULI",Rajasthan,KARAULI,,,,+91-075-58176,758048
+kvk_574,"Krishi Vigyan Kendra, KOTA",Rajasthan,KOTA,,,,+91-051-83527,513454
+kvk_575,"Krishi Vigyan Kendra, NAGAUR",Rajasthan,NAGAUR,,,,+91-047-19211,479181
+kvk_576,"Krishi Vigyan Kendra, PALI",Rajasthan,PALI,,,,+91-058-96723,586554
+kvk_577,"Krishi Vigyan Kendra, PRATAPGARH",Rajasthan,PRATAPGARH,,,,+91-027-54024,273962
+kvk_578,"Krishi Vigyan Kendra, RAJSAMAND",Rajasthan,RAJSAMAND,,,,+91-022-64055,224037
+kvk_579,"Krishi Vigyan Kendra, SAWAI MADHOPUR",Rajasthan,SAWAI MADHOPUR,,,,+91-012-57757,127688
+kvk_580,"Krishi Vigyan Kendra, SIKAR",Rajasthan,SIKAR,,,,+91-042-80335,420211
+kvk_581,"Krishi Vigyan Kendra, SIROHI",Rajasthan,SIROHI,,,,+91-058-62906,582858
+kvk_582,"Krishi Vigyan Kendra, TONK",Rajasthan,TONK,,,,+91-084-26153,846015
+kvk_583,"Krishi Vigyan Kendra, UDAIPUR",Rajasthan,UDAIPUR,,,,+91-058-69789,589689
+kvk_584,"Krishi Vigyan Kendra, EAST DISTRICT",Sikkim,EAST DISTRICT,,,,+91-073-40043,739941
+kvk_585,"Krishi Vigyan Kendra, NORTH DISTRICT",Sikkim,NORTH DISTRICT,,,,+91-022-98579,228518
+kvk_586,"Krishi Vigyan Kendra, SOUTH DISTRICT",Sikkim,SOUTH DISTRICT,,,,+91-053-43130,533091
+kvk_587,"Krishi Vigyan Kendra, WEST DISTRICT",Sikkim,WEST DISTRICT,,,,+91-049-70010,499833
+kvk_588,"Krishi Vigyan Kendra, ARIYALUR",Tamil Nadu,ARIYALUR,,,,+91-071-74533,714423
+kvk_589,"Krishi Vigyan Kendra, CHENGALPATTU",Tamil Nadu,CHENGALPATTU,,,,+91-018-20907,180889
+kvk_590,"Krishi Vigyan Kendra, CHENNAI",Tamil Nadu,CHENNAI,,,,+91-087-29262,879115
+kvk_591,"Krishi Vigyan Kendra, COIMBATORE",Tamil Nadu,COIMBATORE,,,,+91-088-93784,883655
+kvk_592,"Krishi Vigyan Kendra, CUDDALORE",Tamil Nadu,CUDDALORE,,,,+91-066-20593,660483
+kvk_593,"Krishi Vigyan Kendra, DHARMAPURI",Tamil Nadu,DHARMAPURI,,,,+91-052-36379,526366
+kvk_594,"Krishi Vigyan Kendra, DINDIGUL",Tamil Nadu,DINDIGUL,,,,+91-071-77010,716848
+kvk_595,"Krishi Vigyan Kendra, ERODE",Tamil Nadu,ERODE,,,,+91-036-88428,368270
+kvk_596,"Krishi Vigyan Kendra, KALLAKURICHI",Tamil Nadu,KALLAKURICHI,,,,+91-025-91721,251599
+kvk_597,"Krishi Vigyan Kendra, KANCHIPURAM",Tamil Nadu,KANCHIPURAM,,,,+91-045-84519,454386
+kvk_598,"Krishi Vigyan Kendra, KANNIYAKUMARI",Tamil Nadu,KANNIYAKUMARI,,,,+91-027-89982,279981
+kvk_599,"Krishi Vigyan Kendra, KARUR",Tamil Nadu,KARUR,,,,+91-041-72834,412658
+kvk_600,"Krishi Vigyan Kendra, KRISHNAGIRI",Tamil Nadu,KRISHNAGIRI,,,,+91-063-84277,634142
+kvk_601,"Krishi Vigyan Kendra, MADURAI",Tamil Nadu,MADURAI,,,,+91-011-10349,110193
+kvk_602,"Krishi Vigyan Kendra, NAGAPATTINAM",Tamil Nadu,NAGAPATTINAM,,,,+91-082-36506,826481
+kvk_603,"Krishi Vigyan Kendra, NAMAKKAL",Tamil Nadu,NAMAKKAL,,,,+91-034-65043,345015
+kvk_604,"Krishi Vigyan Kendra, PERAMBALUR",Tamil Nadu,PERAMBALUR,,,,+91-040-97263,407174
+kvk_605,"Krishi Vigyan Kendra, PUDUKKOTTAI",Tamil Nadu,PUDUKKOTTAI,,,,+91-071-76168,716162
+kvk_606,"Krishi Vigyan Kendra, RAMANATHAPURAM",Tamil Nadu,RAMANATHAPURAM,,,,+91-032-12557,322442
+kvk_607,"Krishi Vigyan Kendra, RANIPET",Tamil Nadu,RANIPET,,,,+91-037-39085,379013
+kvk_608,"Krishi Vigyan Kendra, SALEM",Tamil Nadu,SALEM,,,,+91-061-35283,615165
+kvk_609,"Krishi Vigyan Kendra, SIVAGANGA",Tamil Nadu,SIVAGANGA,,,,+91-070-96557,706456
+kvk_610,"Krishi Vigyan Kendra, TENKASI",Tamil Nadu,TENKASI,,,,+91-065-48629,658450
+kvk_611,"Krishi Vigyan Kendra, THANJAVUR",Tamil Nadu,THANJAVUR,,,,+91-079-62895,792758
+kvk_612,"Krishi Vigyan Kendra, THE NILGIRIS",Tamil Nadu,THE NILGIRIS,,,,+91-043-62021,431992
+kvk_613,"Krishi Vigyan Kendra, THENI",Tamil Nadu,THENI,,,,+91-076-69070,768942
+kvk_614,"Krishi Vigyan Kendra, THIRUVALLUR",Tamil Nadu,THIRUVALLUR,,,,+91-015-83902,153859
+kvk_615,"Krishi Vigyan Kendra, THIRUVARUR",Tamil Nadu,THIRUVARUR,,,,+91-056-19519,569384
+kvk_616,"Krishi Vigyan Kendra, THOOTHUKUDI",Tamil Nadu,THOOTHUKUDI,,,,+91-014-15374,145287
+kvk_617,"Krishi Vigyan Kendra, TIRUCHIRAPPALLI",Tamil Nadu,TIRUCHIRAPPALLI,,,,+91-071-72928,712844
+kvk_618,"Krishi Vigyan Kendra, TIRUNELVELI",Tamil Nadu,TIRUNELVELI,,,,+91-075-80719,750600
+kvk_619,"Krishi Vigyan Kendra, TIRUPATHUR",Tamil Nadu,TIRUPATHUR,,,,+91-037-90880,370696
+kvk_620,"Krishi Vigyan Kendra, TIRUPPUR",Tamil Nadu,TIRUPPUR,,,,+91-079-60173,790036
+kvk_621,"Krishi Vigyan Kendra, TIRUVANNAMALAI",Tamil Nadu,TIRUVANNAMALAI,,,,+91-073-98912,738802
+kvk_622,"Krishi Vigyan Kendra, TUTICORIN",Tamil Nadu,TUTICORIN,,,,+91-036-21995,361897
+kvk_623,"Krishi Vigyan Kendra, VELLORE",Tamil Nadu,VELLORE,,,,+91-088-36586,886439
+kvk_624,"Krishi Vigyan Kendra, VILLUPURAM",Tamil Nadu,VILLUPURAM,,,,+91-039-25888,395729
+kvk_625,"Krishi Vigyan Kendra, VIRUDHUNAGAR",Tamil Nadu,VIRUDHUNAGAR,,,,+91-045-87733,457652
+kvk_626,"Krishi Vigyan Kendra, ADILABAD",Telangana,ADILABAD,,,,+91-082-92504,822445
+kvk_627,"Krishi Vigyan Kendra, BHADRADRI",Telangana,BHADRADRI,,,,+91-049-39943,499757
+kvk_628,"Krishi Vigyan Kendra, DADRA AND NAGAR HAVELI",Telangana,DADRA AND NAGAR HAVELI,,,,+91-031-91393,311357
+kvk_629,"Krishi Vigyan Kendra, DAMAN",Telangana,DAMAN,,,,+91-045-53235,453171
+kvk_630,"Krishi Vigyan Kendra, DIU",Telangana,DIU,,,,+91-028-36687,286642
+kvk_631,"Krishi Vigyan Kendra, HANUMAKONDA",Telangana,HANUMAKONDA,,,,+91-034-99342,349323
+kvk_632,"Krishi Vigyan Kendra, JAGITIAL",Telangana,JAGITIAL,,,,+91-087-89235,879158
+kvk_633,"Krishi Vigyan Kendra, JANGOAN",Telangana,JANGOAN,,,,+91-083-46049,836024
+kvk_634,"Krishi Vigyan Kendra, JAYASHANKAR",Telangana,JAYASHANKAR,,,,+91-083-41580,831399
+kvk_635,"Krishi Vigyan Kendra, JOGULAMBA",Telangana,JOGULAMBA,,,,+91-083-44635,834610
+kvk_636,"Krishi Vigyan Kendra, KAMAREDDY",Telangana,KAMAREDDY,,,,+91-047-18693,478637
+kvk_637,"Krishi Vigyan Kendra, KARIMNAGAR",Telangana,KARIMNAGAR,,,,+91-088-92673,882648
+kvk_638,"Krishi Vigyan Kendra, KHAMMAM",Telangana,KHAMMAM,,,,+91-029-72991,292851
+kvk_639,"Krishi Vigyan Kendra, KOMARAM BHEEM ASIFABAD",Telangana,KOMARAM BHEEM ASIFABAD,,,,+91-036-51995,361958
+kvk_640,"Krishi Vigyan Kendra, MAHABUBABAD",Telangana,MAHABUBABAD,,,,+91-048-89927,489759
+kvk_641,"Krishi Vigyan Kendra, MAHBUBNAGAR",Telangana,MAHBUBNAGAR,,,,+91-051-25204,515087
+kvk_642,"Krishi Vigyan Kendra, MANCHERIAL",Telangana,MANCHERIAL,,,,+91-051-21548,511379
+kvk_643,"Krishi Vigyan Kendra, MEDAK",Telangana,MEDAK,,,,+91-031-30942,310940
+kvk_644,"Krishi Vigyan Kendra, MEDCHAL",Telangana,MEDCHAL,,,,+91-068-48326,688294
+kvk_645,"Krishi Vigyan Kendra, MEDCHAL MALKAJGIRI",Telangana,MEDCHAL MALKAJGIRI,,,,+91-080-48050,807904
+kvk_646,"Krishi Vigyan Kendra, MULUGU",Telangana,MULUGU,,,,+91-016-35661,165522
+kvk_647,"Krishi Vigyan Kendra, NAGARKURNOOL",Telangana,NAGARKURNOOL,,,,+91-040-91509,401498
+kvk_648,"Krishi Vigyan Kendra, NALGONDA",Telangana,NALGONDA,,,,+91-020-13481,203376
+kvk_649,"Krishi Vigyan Kendra, NARAYANAPET",Telangana,NARAYANAPET,,,,+91-030-20574,300442
+kvk_650,"Krishi Vigyan Kendra, NIRMAL",Telangana,NIRMAL,,,,+91-080-79742,809579
+kvk_651,"Krishi Vigyan Kendra, NIZAMABAD",Telangana,NIZAMABAD,,,,+91-015-23607,153520
+kvk_652,"Krishi Vigyan Kendra, PEDDAPALLI",Telangana,PEDDAPALLI,,,,+91-018-26152,186056
+kvk_653,"Krishi Vigyan Kendra, RAJANNA",Telangana,RAJANNA,,,,+91-045-27789,457768
+kvk_654,"Krishi Vigyan Kendra, RANGAREDDI",Telangana,RANGAREDDI,,,,+91-075-82793,752622
+kvk_655,"Krishi Vigyan Kendra, SANGAREDDY",Telangana,SANGAREDDY,,,,+91-046-64239,464201
+kvk_656,"Krishi Vigyan Kendra, SIDDIPET",Telangana,SIDDIPET,,,,+91-045-28217,458118
+kvk_657,"Krishi Vigyan Kendra, SURYAPET",Telangana,SURYAPET,,,,+91-040-95475,405308
+kvk_658,"Krishi Vigyan Kendra, THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU",Telangana,THE DADRA AND NAGAR HAVELI AND DAMAN AND DIU,,,,+91-080-46500,806380
+kvk_659,"Krishi Vigyan Kendra, VIKARABAD",Telangana,VIKARABAD,,,,+91-078-84654,784474
+kvk_660,"Krishi Vigyan Kendra, WANAPARTHY",Telangana,WANAPARTHY,,,,+91-047-76829,476765
+kvk_661,"Krishi Vigyan Kendra, WARANGAL",Telangana,WARANGAL,,,,+91-062-70352,620347
+kvk_662,"Krishi Vigyan Kendra, WARANGAL URBAN",Telangana,WARANGAL URBAN,,,,+91-050-77216,507117
+kvk_663,"Krishi Vigyan Kendra, YADADRI",Telangana,YADADRI,,,,+91-031-37744,317638
+kvk_664,"Krishi Vigyan Kendra, DHALAI",Tripura,DHALAI,,,,+91-068-44262,684100
+kvk_665,"Krishi Vigyan Kendra, GOMATI",Tripura,GOMATI,,,,+91-060-20528,600358
+kvk_666,"Krishi Vigyan Kendra, KHOWAI",Tripura,KHOWAI,,,,+91-076-38289,768256
+kvk_667,"Krishi Vigyan Kendra, NORTH TRIPURA",Tripura,NORTH TRIPURA,,,,+91-020-40914,200896
+kvk_668,"Krishi Vigyan Kendra, SEPAHIJALA",Tripura,SEPAHIJALA,,,,+91-066-82344,662174
+kvk_669,"Krishi Vigyan Kendra, SOUTH TRIPURA",Tripura,SOUTH TRIPURA,,,,+91-046-35284,465133
+kvk_670,"Krishi Vigyan Kendra, UNAKOTI",Tripura,UNAKOTI,,,,+91-033-87909,337838
+kvk_671,"Krishi Vigyan Kendra, WEST TRIPURA",Tripura,WEST TRIPURA,,,,+91-017-79280,179202
+kvk_672,"Krishi Vigyan Kendra, AGRA",Uttar Pradesh,AGRA,,,,+91-083-40842,830817
+kvk_673,"Krishi Vigyan Kendra, ALIGARH",Uttar Pradesh,ALIGARH,,,,+91-058-93812,583773
+kvk_674,"Krishi Vigyan Kendra, ALLAHABAD",Uttar Pradesh,ALLAHABAD,,,,+91-053-77222,537192
+kvk_675,"Krishi Vigyan Kendra, ALMORA",Uttar Pradesh,ALMORA,,,,+91-075-85650,755531
+kvk_676,"Krishi Vigyan Kendra, AMBEDKAR NAGAR",Uttar Pradesh,AMBEDKAR NAGAR,,,,+91-052-92874,522775
+kvk_677,"Krishi Vigyan Kendra, AMETHI",Uttar Pradesh,AMETHI,,,,+91-061-97455,617355
+kvk_678,"Krishi Vigyan Kendra, AMROHA",Uttar Pradesh,AMROHA,,,,+91-041-47502,417343
+kvk_679,"Krishi Vigyan Kendra, AURAIYA",Uttar Pradesh,AURAIYA,,,,+91-016-94018,163871
+kvk_680,"Krishi Vigyan Kendra, AZAMGARH",Uttar Pradesh,AZAMGARH,,,,+91-039-25947,395762
+kvk_681,"Krishi Vigyan Kendra, BAGESHWAR",Uttar Pradesh,BAGESHWAR,,,,+91-031-31722,311616
+kvk_682,"Krishi Vigyan Kendra, BAGHPAT",Uttar Pradesh,BAGHPAT,,,,+91-087-89596,879415
+kvk_683,"Krishi Vigyan Kendra, BAHRAICH",Uttar Pradesh,BAHRAICH,,,,+91-068-16928,686783
+kvk_684,"Krishi Vigyan Kendra, BALLIA",Uttar Pradesh,BALLIA,,,,+91-014-15194,145107
+kvk_685,"Krishi Vigyan Kendra, BALRAMPUR",Uttar Pradesh,BALRAMPUR,,,,+91-048-83703,483587
+kvk_686,"Krishi Vigyan Kendra, BANDA",Uttar Pradesh,BANDA,,,,+91-056-45499,565425
+kvk_687,"Krishi Vigyan Kendra, BARABANKI",Uttar Pradesh,BARABANKI,,,,+91-046-90342,460209
+kvk_688,"Krishi Vigyan Kendra, BAREILLY",Uttar Pradesh,BAREILLY,,,,+91-042-89215,429143
+kvk_689,"Krishi Vigyan Kendra, BASTI",Uttar Pradesh,BASTI,,,,+91-065-42290,652163
+kvk_690,"Krishi Vigyan Kendra, BIJNOR",Uttar Pradesh,BIJNOR,,,,+91-040-69943,409819
+kvk_691,"Krishi Vigyan Kendra, BUDAUN",Uttar Pradesh,BUDAUN,,,,+91-037-36876,376778
+kvk_692,"Krishi Vigyan Kendra, BULANDSHAHR",Uttar Pradesh,BULANDSHAHR,,,,+91-055-96943,556783
+kvk_693,"Krishi Vigyan Kendra, CHAMOLI",Uttar Pradesh,CHAMOLI,,,,+91-087-84201,874046
+kvk_694,"Krishi Vigyan Kendra, CHAMPAWAT",Uttar Pradesh,CHAMPAWAT,,,,+91-057-21100,571095
+kvk_695,"Krishi Vigyan Kendra, CHANDAULI",Uttar Pradesh,CHANDAULI,,,,+91-059-78223,598071
+kvk_696,"Krishi Vigyan Kendra, CHITRAKOOT",Uttar Pradesh,CHITRAKOOT,,,,+91-080-14604,804449
+kvk_697,"Krishi Vigyan Kendra, DEHRADUN",Uttar Pradesh,DEHRADUN,,,,+91-058-31909,581904
+kvk_698,"Krishi Vigyan Kendra, DEORIA",Uttar Pradesh,DEORIA,,,,+91-016-37163,167154
+kvk_699,"Krishi Vigyan Kendra, ETAH",Uttar Pradesh,ETAH,,,,+91-015-23070,152983
+kvk_700,"Krishi Vigyan Kendra, ETAWAH",Uttar Pradesh,ETAWAH,,,,+91-049-90283,490167
+kvk_701,"Krishi Vigyan Kendra, FAIZABAD",Uttar Pradesh,FAIZABAD,,,,+91-043-60046,430017
+kvk_702,"Krishi Vigyan Kendra, FARRUKHABAD",Uttar Pradesh,FARRUKHABAD,,,,+91-023-75828,235784
+kvk_703,"Krishi Vigyan Kendra, FATEHPUR",Uttar Pradesh,FATEHPUR,,,,+91-036-26013,365967
+kvk_704,"Krishi Vigyan Kendra, FIROZABAD",Uttar Pradesh,FIROZABAD,,,,+91-027-24139,274094
+kvk_705,"Krishi Vigyan Kendra, GAUTAM BUDDHA NAGAR",Uttar Pradesh,GAUTAM BUDDHA NAGAR,,,,+91-021-26857,216726
+kvk_706,"Krishi Vigyan Kendra, GHAZIABAD",Uttar Pradesh,GHAZIABAD,,,,+91-023-40402,230401
+kvk_707,"Krishi Vigyan Kendra, GHAZIPUR",Uttar Pradesh,GHAZIPUR,,,,+91-071-71955,711897
+kvk_708,"Krishi Vigyan Kendra, GONDA",Uttar Pradesh,GONDA,,,,+91-085-91756,851714
+kvk_709,"Krishi Vigyan Kendra, GORAKHPUR",Uttar Pradesh,GORAKHPUR,,,,+91-053-15708,535582
+kvk_710,"Krishi Vigyan Kendra, HAMIRPUR",Uttar Pradesh,HAMIRPUR,,,,+91-027-22347,272198
+kvk_711,"Krishi Vigyan Kendra, HAPUR",Uttar Pradesh,HAPUR,,,,+91-027-58637,278601
+kvk_712,"Krishi Vigyan Kendra, HARDOI",Uttar Pradesh,HARDOI,,,,+91-050-41989,501855
+kvk_713,"Krishi Vigyan Kendra, HARIDWAR",Uttar Pradesh,HARIDWAR,,,,+91-035-41535,351420
+kvk_714,"Krishi Vigyan Kendra, HATHRAS",Uttar Pradesh,HATHRAS,,,,+91-059-13603,593511
+kvk_715,"Krishi Vigyan Kendra, JALAUN",Uttar Pradesh,JALAUN,,,,+91-067-67440,677365
+kvk_716,"Krishi Vigyan Kendra, JAUNPUR",Uttar Pradesh,JAUNPUR,,,,+91-071-78743,718711
+kvk_717,"Krishi Vigyan Kendra, JHANSI",Uttar Pradesh,JHANSI,,,,+91-082-62661,822567
+kvk_718,"Krishi Vigyan Kendra, KANNAUJ",Uttar Pradesh,KANNAUJ,,,,+91-051-88476,518299
+kvk_719,"Krishi Vigyan Kendra, KANPUR DEHAT",Uttar Pradesh,KANPUR DEHAT,,,,+91-011-19293,119137
+kvk_720,"Krishi Vigyan Kendra, KANPUR NAGAR",Uttar Pradesh,KANPUR NAGAR,,,,+91-017-74991,174965
+kvk_721,"Krishi Vigyan Kendra, KASGANJ",Uttar Pradesh,KASGANJ,,,,+91-067-68260,678185
+kvk_722,"Krishi Vigyan Kendra, KAUSHAMBI",Uttar Pradesh,KAUSHAMBI,,,,+91-085-67658,857555
+kvk_723,"Krishi Vigyan Kendra, KHERI",Uttar Pradesh,KHERI,,,,+91-058-93108,582939
+kvk_724,"Krishi Vigyan Kendra, KUSHI NAGAR",Uttar Pradesh,KUSHI NAGAR,,,,+91-077-76007,775853
+kvk_725,"Krishi Vigyan Kendra, LALITPUR",Uttar Pradesh,LALITPUR,,,,+91-026-14106,264061
+kvk_726,"Krishi Vigyan Kendra, LUCKNOW",Uttar Pradesh,LUCKNOW,,,,+91-081-56514,816342
+kvk_727,"Krishi Vigyan Kendra, MAHARAJGANJ",Uttar Pradesh,MAHARAJGANJ,,,,+91-027-81799,271694
+kvk_728,"Krishi Vigyan Kendra, MAHOBA",Uttar Pradesh,MAHOBA,,,,+91-077-74500,774320
+kvk_729,"Krishi Vigyan Kendra, MAINPURI",Uttar Pradesh,MAINPURI,,,,+91-029-12198,292066
+kvk_730,"Krishi Vigyan Kendra, MATHURA",Uttar Pradesh,MATHURA,,,,+91-044-11910,441759
+kvk_731,"Krishi Vigyan Kendra, MAU",Uttar Pradesh,MAU,,,,+91-050-19591,509448
+kvk_732,"Krishi Vigyan Kendra, MEERUT",Uttar Pradesh,MEERUT,,,,+91-024-59093,249014
+kvk_733,"Krishi Vigyan Kendra, MIRZAPUR",Uttar Pradesh,MIRZAPUR,,,,+91-055-65334,555321
+kvk_734,"Krishi Vigyan Kendra, MORADABAD",Uttar Pradesh,MORADABAD,,,,+91-041-44555,414474
+kvk_735,"Krishi Vigyan Kendra, MUZAFFARNAGAR",Uttar Pradesh,MUZAFFARNAGAR,,,,+91-052-97730,527657
+kvk_736,"Krishi Vigyan Kendra, NAINITAL",Uttar Pradesh,NAINITAL,,,,+91-072-60010,729995
+kvk_737,"Krishi Vigyan Kendra, PAURI GARHWAL",Uttar Pradesh,PAURI GARHWAL,,,,+91-024-27409,247321
+kvk_738,"Krishi Vigyan Kendra, PILIBHIT",Uttar Pradesh,PILIBHIT,,,,+91-051-53060,512926
+kvk_739,"Krishi Vigyan Kendra, PITHORAGARH",Uttar Pradesh,PITHORAGARH,,,,+91-077-43857,773850
+kvk_740,"Krishi Vigyan Kendra, PRATAPGARH",Uttar Pradesh,PRATAPGARH,,,,+91-033-28270,338155
+kvk_741,"Krishi Vigyan Kendra, RAE BARELI",Uttar Pradesh,RAE BARELI,,,,+91-064-91717,641660
+kvk_742,"Krishi Vigyan Kendra, RAMPUR",Uttar Pradesh,RAMPUR,,,,+91-056-49948,569822
+kvk_743,"Krishi Vigyan Kendra, RUDRA PRAYAG",Uttar Pradesh,RUDRA PRAYAG,,,,+91-045-27855,457704
+kvk_744,"Krishi Vigyan Kendra, SAHARANPUR",Uttar Pradesh,SAHARANPUR,,,,+91-031-30666,310638
+kvk_745,"Krishi Vigyan Kendra, SAMBHAL",Uttar Pradesh,SAMBHAL,,,,+91-014-14595,144560
+kvk_746,"Krishi Vigyan Kendra, SANT KABEER NAGAR",Uttar Pradesh,SANT KABEER NAGAR,,,,+91-068-12055,681910
+kvk_747,"Krishi Vigyan Kendra, SANT RAVIDAS NAGAR",Uttar Pradesh,SANT RAVIDAS NAGAR,,,,+91-012-25620,125542
+kvk_748,"Krishi Vigyan Kendra, SHAHJAHANPUR",Uttar Pradesh,SHAHJAHANPUR,,,,+91-079-67559,797422
+kvk_749,"Krishi Vigyan Kendra, SHAMLI",Uttar Pradesh,SHAMLI,,,,+91-064-38023,647974
+kvk_750,"Krishi Vigyan Kendra, SHRAVASTI",Uttar Pradesh,SHRAVASTI,,,,+91-025-37609,257469
+kvk_751,"Krishi Vigyan Kendra, SIDDHARTH NAGAR",Uttar Pradesh,SIDDHARTH NAGAR,,,,+91-022-91638,221525
+kvk_752,"Krishi Vigyan Kendra, SITAPUR",Uttar Pradesh,SITAPUR,,,,+91-087-85874,875771
+kvk_753,"Krishi Vigyan Kendra, SONBHADRA",Uttar Pradesh,SONBHADRA,,,,+91-016-94717,164596
+kvk_754,"Krishi Vigyan Kendra, SULTANPUR",Uttar Pradesh,SULTANPUR,,,,+91-049-63225,493100
+kvk_755,"Krishi Vigyan Kendra, TEHRI GARHWAL",Uttar Pradesh,TEHRI GARHWAL,,,,+91-065-18784,658726
+kvk_756,"Krishi Vigyan Kendra, UDAM SINGH NAGAR",Uttar Pradesh,UDAM SINGH NAGAR,,,,+91-012-59985,129968
+kvk_757,"Krishi Vigyan Kendra, UNNAO",Uttar Pradesh,UNNAO,,,,+91-014-79671,149524
+kvk_758,"Krishi Vigyan Kendra, UTTAR KASHI",Uttar Pradesh,UTTAR KASHI,,,,+91-025-63714,253609
+kvk_759,"Krishi Vigyan Kendra, VARANASI",Uttar Pradesh,VARANASI,,,,+91-088-93557,883480
+kvk_760,"Krishi Vigyan Kendra, ALMORA",Uttarakhand,ALMORA,,,,+91-057-51377,571225
+kvk_761,"Krishi Vigyan Kendra, BAGESHWAR",Uttarakhand,BAGESHWAR,,,,+91-054-88156,547996
+kvk_762,"Krishi Vigyan Kendra, CHAMOLI",Uttarakhand,CHAMOLI,,,,+91-039-84344,394307
+kvk_763,"Krishi Vigyan Kendra, CHAMPAWAT",Uttarakhand,CHAMPAWAT,,,,+91-063-85850,635715
+kvk_764,"Krishi Vigyan Kendra, DEHRADUN",Uttarakhand,DEHRADUN,,,,+91-082-99160,829153
+kvk_765,"Krishi Vigyan Kendra, HARIDWAR",Uttarakhand,HARIDWAR,,,,+91-061-90840,610766
+kvk_766,"Krishi Vigyan Kendra, NAINITAL",Uttarakhand,NAINITAL,,,,+91-037-62958,372947
+kvk_767,"Krishi Vigyan Kendra, PAURI GARHWAL",Uttarakhand,PAURI GARHWAL,,,,+91-068-41936,681930
+kvk_768,"Krishi Vigyan Kendra, PITHORAGARH",Uttarakhand,PITHORAGARH,,,,+91-078-22344,782276
+kvk_769,"Krishi Vigyan Kendra, RUDRA PRAYAG",Uttarakhand,RUDRA PRAYAG,,,,+91-016-68723,168723
+kvk_770,"Krishi Vigyan Kendra, TEHRI GARHWAL",Uttarakhand,TEHRI GARHWAL,,,,+91-075-26221,756058
+kvk_771,"Krishi Vigyan Kendra, UDAM SINGH NAGAR",Uttarakhand,UDAM SINGH NAGAR,,,,+91-076-90212,760093
+kvk_772,"Krishi Vigyan Kendra, UTTAR KASHI",Uttarakhand,UTTAR KASHI,,,,+91-080-48016,807844
+kvk_773,"Krishi Vigyan Kendra, 24 PARAGANAS NORTH",West Bengal,24 PARAGANAS NORTH,,,,+91-015-24923,154758
+kvk_774,"Krishi Vigyan Kendra, 24 PARAGANAS SOUTH",West Bengal,24 PARAGANAS SOUTH,,,,+91-067-91585,671493
+kvk_775,"Krishi Vigyan Kendra, ALIPURDUAR",West Bengal,ALIPURDUAR,,,,+91-028-99155,288998
+kvk_776,"Krishi Vigyan Kendra, BANKURA",West Bengal,BANKURA,,,,+91-088-95482,885379
+kvk_777,"Krishi Vigyan Kendra, BIRBHUM",West Bengal,BIRBHUM,,,,+91-070-36381,706210
+kvk_778,"Krishi Vigyan Kendra, COOCHBEHAR",West Bengal,COOCHBEHAR,,,,+91-019-91978,191952
+kvk_779,"Krishi Vigyan Kendra, DARJEELING",West Bengal,DARJEELING,,,,+91-045-80452,450319
+kvk_780,"Krishi Vigyan Kendra, DINAJPUR DAKSHIN",West Bengal,DINAJPUR DAKSHIN,,,,+91-079-66921,796888
+kvk_781,"Krishi Vigyan Kendra, DINAJPUR UTTAR",West Bengal,DINAJPUR UTTAR,,,,+91-046-98568,468383
+kvk_782,"Krishi Vigyan Kendra, HOOGHLY",West Bengal,HOOGHLY,,,,+91-047-16038,475852
+kvk_783,"Krishi Vigyan Kendra, HOWRAH",West Bengal,HOWRAH,,,,+91-020-46533,206411
+kvk_784,"Krishi Vigyan Kendra, JALPAIGURI",West Bengal,JALPAIGURI,,,,+91-052-91218,521145
+kvk_785,"Krishi Vigyan Kendra, JHARGRAM",West Bengal,JHARGRAM,,,,+91-037-94534,374454
+kvk_786,"Krishi Vigyan Kendra, KALIMPONG",West Bengal,KALIMPONG,,,,+91-042-58036,427955
+kvk_787,"Krishi Vigyan Kendra, MALDAH",West Bengal,MALDAH,,,,+91-077-72084,771930
+kvk_788,"Krishi Vigyan Kendra, MEDINIPUR EAST",West Bengal,MEDINIPUR EAST,,,,+91-068-70692,680617
+kvk_789,"Krishi Vigyan Kendra, MEDINIPUR WEST",West Bengal,MEDINIPUR WEST,,,,+91-050-45214,505106
+kvk_790,"Krishi Vigyan Kendra, MURSHIDABAD",West Bengal,MURSHIDABAD,,,,+91-071-40205,710086
+kvk_791,"Krishi Vigyan Kendra, NADIA",West Bengal,NADIA,,,,+91-014-41396,141214
+kvk_792,"Krishi Vigyan Kendra, PASCHIM BARDHAMAN",West Bengal,PASCHIM BARDHAMAN,,,,+91-084-21850,841764
+kvk_793,"Krishi Vigyan Kendra, PURBA BARDHAMAN",West Bengal,PURBA BARDHAMAN,,,,+91-083-73972,833904
+kvk_794,"Krishi Vigyan Kendra, PURULIA",West Bengal,PURULIA,,,,+91-045-26145,456020

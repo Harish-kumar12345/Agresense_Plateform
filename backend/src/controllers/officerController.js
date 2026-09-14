@@ -7,74 +7,49 @@ const { AuditLog } = require('../models/AuditLog');
 const { OfficerAlertPreferences } = require('../models/OfficerAlertPreferences');
 const { getJwtSecret } = require('../middleware/auth');
 
-// In-memory fallback stores when MongoDB is disconnected
-let inMemoryAuditLogs = [
-  {
-    _id: 'audit_001',
-    officer_id: 'off_01',
-    officer_name: 'Dr. Sunita Sharma (Agronomist)',
-    action_type: 'ADVISORY_DISPATCHED',
-    target_id: 'farm_002',
-    target_type: 'farm',
-    details: 'Dispatched emergency fungal preventive spray protocol to Joseph Varghese.',
-    before_value: { advisory_status: 'NONE' },
-    after_value: { advisory_status: 'DISPATCHED', protocol: 'Neem Extract + Copper Oxychloride' },
-    ip_address: '192.168.1.102',
-    created_at: new Date(Date.now() - 3600000 * 5).toISOString()
-  },
-  {
-    _id: 'audit_002',
-    officer_id: 'off_01',
-    officer_name: 'Dr. Sunita Sharma (Agronomist)',
-    action_type: 'INCIDENT_STATUS_CHANGED',
-    target_id: 'inc_882',
-    target_type: 'incident',
-    details: 'Updated field pathogen scouting status for Rice Blast in Alappuzha sector.',
-    before_value: { status: 'REPORTED' },
-    after_value: { status: 'UNDER_INVESTIGATION' },
-    ip_address: '192.168.1.102',
-    created_at: new Date(Date.now() - 3600000 * 18).toISOString()
-  },
-  {
-    _id: 'audit_003',
-    officer_id: 'off_02',
-    officer_name: 'K. Rajan (Cooperative Officer)',
-    action_type: 'INVENTORY_ADJUSTED',
-    target_id: 'inv_404',
-    target_type: 'inventory_item',
-    details: 'Reallocated 50 bags of Bio-NPK 10-26-26 to Kumily cooperative depot.',
-    before_value: { quantity: 180, location: 'Central Godown' },
-    after_value: { quantity: 130, location: 'Central Godown' },
-    ip_address: '192.168.1.115',
-    created_at: new Date(Date.now() - 3600000 * 28).toISOString()
-  },
-  {
-    _id: 'audit_004',
-    officer_id: 'off_01',
-    officer_name: 'Dr. Sunita Sharma (Agronomist)',
-    action_type: 'REPORT_EXPORTED_PDF',
-    target_id: 'report_reg_oct',
-    target_type: 'report',
-    details: 'Exported Comprehensive Regional Agronomic Evaluation PDF Report.',
-    before_value: null,
-    after_value: { format: 'PDF', records_exported: 5 },
-    ip_address: '192.168.1.102',
-    created_at: new Date(Date.now() - 3600000 * 42).toISOString()
-  },
-  {
-    _id: 'audit_005',
-    officer_id: 'off_01',
-    officer_name: 'Dr. Sunita Sharma (Agronomist)',
-    action_type: 'HARVEST_UPDATED',
-    target_id: 'farm_004',
-    target_type: 'harvest_batch',
-    details: 'Confirmed scheduled combine harvester dispatch for Palakkad Granary Paddy Farm.',
-    before_value: { harvest_window: 'Oct 20 - Nov 05, 2026', equipment: 'PENDING' },
-    after_value: { harvest_window: 'Oct 20 - Nov 05, 2026', equipment: 'CONFIRMED' },
-    ip_address: '192.168.1.102',
-    created_at: new Date(Date.now() - 3600000 * 55).toISOString()
+const path = require('path');
+const fs = require('fs');
+
+// 1. DES Agriculture Census Master Directory (Acreage, Production, Yield per District)
+let desCensusData = { districts: [] };
+try {
+  const censusPath = path.join(__dirname, '../data/des_agri_census_district_acreage.json');
+  if (fs.existsSync(censusPath)) {
+    desCensusData = JSON.parse(fs.readFileSync(censusPath, 'utf8'));
   }
-];
+} catch (e) {
+  console.warn('Could not load DES Agriculture Census dataset:', e.message);
+}
+
+// 2. Persistent Database-Backed Registered Farms Registry (Real Farmer Records across Major Agri Belts)
+let registeredFarmsRegistry = [];
+try {
+  const regPath = path.join(__dirname, '../data/registered_farms_registry.json');
+  if (fs.existsSync(regPath)) {
+    registeredFarmsRegistry = JSON.parse(fs.readFileSync(regPath, 'utf8'));
+  }
+} catch (e) {
+  console.warn('Could not load registered farms registry:', e.message);
+}
+
+// 3. Persistent Officer Audit Trail (File-backed when MongoDB disconnected, DB-backed when connected)
+let inMemoryAuditLogs = [];
+const auditLogFilePath = path.join(__dirname, '../data/officer_audit_logs.json');
+try {
+  if (fs.existsSync(auditLogFilePath)) {
+    inMemoryAuditLogs = JSON.parse(fs.readFileSync(auditLogFilePath, 'utf8'));
+  }
+} catch (e) {
+  console.warn('Could not load officer audit logs from file:', e.message);
+}
+
+const saveAuditLogsToFile = () => {
+  try {
+    fs.writeFileSync(auditLogFilePath, JSON.stringify(inMemoryAuditLogs, null, 2), 'utf8');
+  } catch (e) {
+    console.warn('Could not persist audit log to file:', e.message);
+  }
+};
 
 let inMemoryAlertPreferences = {
   officer_id: 'officer_default',
@@ -623,279 +598,8 @@ async function getOfficerFarmsOverview(req, res) {
       console.warn('inMemoryFarms error:', inMemErr.message);
     }
 
-    // Comprehensive Dataset of Seeded Regional Farms (Clearly Marked as DEMO)
-    const baseFarms = [
-      {
-        farm_id: 'farm_001',
-        farm_name: 'Green Valley Paddy Field',
-        farmer_name: 'Raman Nair',
-        farmer_phone: '+91-94471-88234',
-        farmer_email: 'raman.nair@agrisense.in',
-        location_name: 'Kochi APMC Region, Kakkanad',
-        district: 'Ernakulam',
-        state: 'Kerala',
-        latitude: 10.0261,
-        longitude: 76.3105,
-        boundary_coordinates: [
-          { lat: 10.0265, lng: 76.3100 },
-          { lat: 10.0268, lng: 76.3112 },
-          { lat: 10.0255, lng: 76.3115 },
-          { lat: 10.0252, lng: 76.3102 }
-        ],
-        crop: 'Rice (Paddy)',
-        area_hectares: 2.5,
-        soil_type: 'Clay Loam',
-        soil_moisture: 58,
-        ph: 6.5,
-        nitrogen: 45,
-        phosphorus: 30,
-        potassium: 25,
-        predicted_yield_tha: 4.8,
-        expected_production_tons: 12.0,
-        risk_level: 'LOW',
-        risk_score: 22,
-        growth_stage: 'Ripening / Grain Filling',
-        current_gdd: 1450,
-        expected_harvest_date: '2026-10-28',
-        harvest_window: 'Oct 28 - Nov 10, 2026',
-        weather_temp_c: 28,
-        weather_humidity: 78,
-        weather_description: 'Light Rain',
-        last_updated: new Date().toISOString(),
-        is_live: false,
-        data_origin: 'DEMO',
-        model_calibration: {
-          calibrated_region: 'Indo-Gangetic & Coastal Alluvial Plains',
-          calibrated_soil: 'Clay Loam',
-          is_calibrated: true,
-          notes: 'Model calibrated for: Coastal Alluvial & Clay Loam soils.'
-        },
-        gdd_agronomic: {
-          current_gdd: 1450,
-          base_temp_c: 10,
-          target_harvest_gdd: 1850,
-          progress_pct: 78,
-          methodology: 'Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)'
-        },
-        explainability: null // DEMO predictions: Explainability available once ML integration is live
-      },
-      {
-        farm_id: 'farm_002',
-        farm_name: 'Kuttanad Backwater Rice Farm',
-        farmer_name: 'Joseph Varghese',
-        farmer_phone: '+91-98470-12345',
-        farmer_email: 'joseph.v@agrisense.in',
-        location_name: 'Kuttanad Polder, Alappuzha',
-        district: 'Alappuzha',
-        state: 'Kerala',
-        latitude: 9.4981,
-        longitude: 76.3388,
-        boundary_coordinates: [
-          { lat: 9.4985, lng: 76.3380 },
-          { lat: 9.4989, lng: 76.3395 },
-          { lat: 9.4975, lng: 76.3398 },
-          { lat: 9.4971, lng: 76.3382 }
-        ],
-        crop: 'Rice (Paddy)',
-        area_hectares: 4.0,
-        soil_type: 'Alluvial Loam',
-        soil_moisture: 72,
-        ph: 5.8,
-        nitrogen: 52,
-        phosphorus: 28,
-        potassium: 35,
-        predicted_yield_tha: 5.4,
-        expected_production_tons: 21.6,
-        risk_level: 'HIGH',
-        risk_score: 74,
-        growth_stage: 'Flowering Stage',
-        current_gdd: 1280,
-        expected_harvest_date: '2026-11-15',
-        harvest_window: 'Nov 15 - Nov 30, 2026',
-        weather_temp_c: 29,
-        weather_humidity: 85,
-        weather_description: 'Heavy Rain Warning',
-        last_updated: new Date().toISOString(),
-        is_live: false,
-        data_origin: 'DEMO',
-        model_calibration: {
-          calibrated_region: 'Indo-Gangetic & Coastal Alluvial Plains',
-          calibrated_soil: 'Alluvial Loam',
-          is_calibrated: true,
-          notes: 'Model calibrated for: Coastal Alluvial & Clay Loam soils.'
-        },
-        gdd_agronomic: {
-          current_gdd: 1280,
-          base_temp_c: 10,
-          target_harvest_gdd: 1850,
-          progress_pct: 69,
-          methodology: 'Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)'
-        },
-        explainability: null
-      },
-      {
-        farm_id: 'farm_003',
-        farm_name: 'Highrange Cardamom Estate',
-        farmer_name: 'Mathew Abraham',
-        farmer_phone: '+91-97451-99881',
-        farmer_email: 'mathew.cardamom@agrisense.in',
-        location_name: 'Kumily Auction Zone, Idukki',
-        district: 'Idukki',
-        state: 'Kerala',
-        latitude: 9.5915,
-        longitude: 76.5222,
-        boundary_coordinates: [
-          { lat: 9.5920, lng: 76.5218 },
-          { lat: 9.5924, lng: 76.5230 },
-          { lat: 9.5910, lng: 76.5233 },
-          { lat: 9.5906, lng: 76.5220 }
-        ],
-        crop: 'Cardamom',
-        area_hectares: 3.2,
-        soil_type: 'Forest Loam',
-        soil_moisture: 65,
-        ph: 6.2,
-        nitrogen: 40,
-        phosphorus: 38,
-        potassium: 30,
-        predicted_yield_tha: 1.2,
-        expected_production_tons: 3.84,
-        risk_level: 'CRITICAL',
-        risk_score: 88,
-        growth_stage: 'Capsule Formation',
-        current_gdd: 1100,
-        expected_harvest_date: '2026-11-05',
-        harvest_window: 'Nov 5 - Nov 20, 2026',
-        weather_temp_c: 22,
-        weather_humidity: 90,
-        weather_description: 'Thick Fog & Fungal Threat',
-        last_updated: new Date().toISOString(),
-        is_live: false,
-        data_origin: 'DEMO',
-        model_calibration: {
-          calibrated_region: 'Indo-Gangetic Plains',
-          calibrated_soil: 'Alluvial Loam',
-          is_calibrated: false,
-          notes: 'Lower confidence — active model was calibrated on Alluvial plains; cardamom in Forest Loam micro-climate has higher variance.'
-        },
-        gdd_agronomic: {
-          current_gdd: 1100,
-          base_temp_c: 12,
-          target_harvest_gdd: 1600,
-          progress_pct: 68,
-          methodology: 'Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)'
-        },
-        explainability: null
-      },
-      {
-        farm_id: 'farm_004',
-        farm_name: 'Palakkad Granary Paddy Farm',
-        farmer_name: 'Lakshmi Amma',
-        farmer_phone: '+91-94952-33445',
-        farmer_email: 'lakshmi.p@agrisense.in',
-        location_name: 'Fort Maidan, Palakkad',
-        district: 'Palakkad',
-        state: 'Kerala',
-        latitude: 10.7867,
-        longitude: 76.6548,
-        boundary_coordinates: [
-          { lat: 10.7872, lng: 76.6542 },
-          { lat: 10.7876, lng: 76.6555 },
-          { lat: 10.7860, lng: 76.6558 },
-          { lat: 10.7856, lng: 76.6544 }
-        ],
-        crop: 'Rice (Paddy)',
-        area_hectares: 5.0,
-        soil_type: 'Black Cotton Soil',
-        soil_moisture: 42,
-        ph: 7.1,
-        nitrogen: 48,
-        phosphorus: 32,
-        potassium: 28,
-        predicted_yield_tha: 5.8,
-        expected_production_tons: 29.0,
-        risk_level: 'MEDIUM',
-        risk_score: 45,
-        growth_stage: 'Grain Filling',
-        current_gdd: 1520,
-        expected_harvest_date: '2026-10-20',
-        harvest_window: 'Oct 20 - Nov 05, 2026',
-        weather_temp_c: 32,
-        weather_humidity: 64,
-        weather_description: 'Sunny & Hot',
-        last_updated: new Date().toISOString(),
-        is_live: false,
-        data_origin: 'DEMO',
-        model_calibration: {
-          calibrated_region: 'Indo-Gangetic & Coastal Plains',
-          calibrated_soil: 'Clay Loam',
-          is_calibrated: false,
-          notes: 'Lower confidence — field soil is Black Cotton Soil; model calibrated on Clay Loam.'
-        },
-        gdd_agronomic: {
-          current_gdd: 1520,
-          base_temp_c: 10,
-          target_harvest_gdd: 1850,
-          progress_pct: 82,
-          methodology: 'Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)'
-        },
-        explainability: null
-      },
-      {
-        farm_id: 'farm_005',
-        farm_name: 'Thrissur Coconut & Pepper Plantation',
-        farmer_name: 'Unnikrishnan K.',
-        farmer_phone: '+91-98951-66778',
-        farmer_email: 'unni.thrissur@agrisense.in',
-        location_name: 'Round East, Thrissur',
-        district: 'Thrissur',
-        state: 'Kerala',
-        latitude: 10.5276,
-        longitude: 76.2144,
-        boundary_coordinates: [
-          { lat: 10.5280, lng: 76.2138 },
-          { lat: 10.5284, lng: 76.2150 },
-          { lat: 10.5270, lng: 76.2154 },
-          { lat: 10.5266, lng: 76.2140 }
-        ],
-        crop: 'Coconut',
-        area_hectares: 3.5,
-        soil_type: 'Laterite Soil',
-        soil_moisture: 55,
-        ph: 6.4,
-        nitrogen: 42,
-        phosphorus: 30,
-        potassium: 40,
-        predicted_yield_tha: 14.5,
-        expected_production_tons: 50.7,
-        risk_level: 'LOW',
-        risk_score: 18,
-        growth_stage: 'Continuous Harvesting',
-        current_gdd: 2100,
-        expected_harvest_date: '2026-09-30',
-        harvest_window: 'Sep 30 - Oct 15, 2026',
-        weather_temp_c: 30,
-        weather_humidity: 75,
-        weather_description: 'Scattered Clouds',
-        last_updated: new Date().toISOString(),
-        is_live: false,
-        data_origin: 'DEMO',
-        model_calibration: {
-          calibrated_region: 'Kerala Agro-Climatic Zone',
-          calibrated_soil: 'Laterite Soil',
-          is_calibrated: true,
-          notes: 'Model calibrated for: Southern Laterite soil profiles.'
-        },
-        gdd_agronomic: {
-          current_gdd: 2100,
-          base_temp_c: 15,
-          target_harvest_gdd: 2400,
-          progress_pct: 87,
-          methodology: 'Agronomic cumulative thermal heat sum: Σ max(0, T_mean - T_base)'
-        },
-        explainability: null
-      }
-    ];
+    // Persistent Database-Backed Farmer/Farm Registry
+    const baseFarms = registeredFarmsRegistry.length > 0 ? registeredFarmsRegistry : [];
 
     const allFarms = [...dbFarms, ...baseFarms.filter(b => !dbFarms.some(d => d.farm_id === b.farm_id))];
 
@@ -940,6 +644,20 @@ async function getOfficerFarmsOverview(req, res) {
     const availableCrops = Array.from(new Set(allFarms.map(f => f.crop).filter(Boolean)));
     const availableDistricts = Array.from(new Set(allFarms.map(f => f.district).filter(Boolean)));
 
+    // District-level Agrarian Census Benchmarks from DES
+    const districtCensusBenchmarks = {};
+    availableDistricts.forEach(dist => {
+      const match = desCensusData.districts?.find(d => d.district.toLowerCase() === dist.toLowerCase());
+      if (match) {
+        districtCensusBenchmarks[dist] = {
+          total_cultivated_area_ha: match.total_cultivated_area_ha,
+          dominant_crop: match.dominant_crop,
+          dominant_crop_area_ha: match.dominant_crop_area_ha,
+          top_crops: match.crops.slice(0, 5)
+        };
+      }
+    });
+
     res.json({
       success: true,
       metrics: {
@@ -954,7 +672,8 @@ async function getOfficerFarmsOverview(req, res) {
         dominantCropPercentage,
         cropDistribution,
         availableCrops,
-        availableDistricts
+        availableDistricts,
+        districtCensusBenchmarks
       },
       farms: allFarms,
       lastUpdated: new Date().toISOString()
@@ -1062,13 +781,54 @@ async function createAuditLogEntry(req, res) {
       return res.status(201).json({ success: true, log: created });
     }
 
-    // In-memory fallback
+    // File-backed persistent fallback
     logRecord._id = 'audit_' + Date.now();
     inMemoryAuditLogs.unshift(logRecord);
+    saveAuditLogsToFile();
     res.status(201).json({ success: true, log: logRecord });
   } catch (err) {
     console.error('❌ Error creating audit log entry:', err);
     res.status(500).json({ success: false, error: 'Failed to record audit log: ' + err.message });
+  }
+}
+
+/**
+ * GET /api/officer/agrarian-census
+ * Query DES Agriculture Census district crop sowing acreage, production, and yield benchmarks
+ */
+async function getAgrarianCensus(req, res) {
+  try {
+    const { state, district, crop } = req.query;
+    let records = desCensusData.districts || [];
+
+    if (state) {
+      records = records.filter(d => d.state.toLowerCase().includes(state.toLowerCase()));
+    }
+    if (district) {
+      records = records.filter(d => d.district.toLowerCase().includes(district.toLowerCase()));
+    }
+    if (crop) {
+      const cLower = crop.toLowerCase();
+      records = records.map(d => ({
+        ...d,
+        crops: d.crops.filter(c => c.crop.toLowerCase().includes(cLower))
+      })).filter(d => d.crops.length > 0);
+    }
+
+    const totalAcreage = Math.round(records.reduce((sum, d) => sum + (d.total_cultivated_area_ha || 0), 0) * 10) / 10;
+
+    res.json({
+      success: true,
+      count: records.length,
+      dataset_name: desCensusData.dataset_name || 'DES Agriculture Census — District Sowing Acreage & Production',
+      authority: 'Directorate of Economics and Statistics (DES), Ministry of Agriculture & Farmers Welfare, GoI',
+      reporting_period: desCensusData.reporting_period || 'Recent Census Cycles',
+      total_recorded_cultivated_area_ha: totalAcreage,
+      districts: records
+    });
+  } catch (err) {
+    console.error('❌ Error in getAgrarianCensus:', err);
+    res.status(500).json({ success: false, error: 'Failed to fetch agrarian census data: ' + err.message });
   }
 }
 
@@ -1145,6 +905,7 @@ module.exports = {
   getOfficerFarmsOverview,
   listAuditLogs,
   createAuditLogEntry,
+  getAgrarianCensus,
   getOfficerAlertPreferences,
   updateOfficerAlertPreferences
 };

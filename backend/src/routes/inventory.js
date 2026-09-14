@@ -5,7 +5,22 @@ const Inventory = require('../models/Inventory');
 const ApplicationLog = require('../models/ApplicationLog');
 const { requireAuth } = require('../middleware/auth');
 
-// In-Memory Fallback Storage ONLY if MongoDB Atlas is disconnected
+const path = require('path');
+const fs = require('fs');
+
+// CIBRC Approved Agrochemicals & Pre-Harvest Interval (PHI) Master Dataset
+let cibrcAgrochemicals = [];
+try {
+  const cibrcPath = path.join(__dirname, '../data/cibrc_approved_agrochemicals_phi.json');
+  if (fs.existsSync(cibrcPath)) {
+    const raw = JSON.parse(fs.readFileSync(cibrcPath, 'utf8'));
+    cibrcAgrochemicals = raw.agrochemicals || [];
+  }
+} catch (e) {
+  console.warn('Could not load CIBRC dataset:', e.message);
+}
+
+// In-Memory Fallback Storage ONLY if MongoDB Atlas is disconnected (Clearly marked as DEMO_SEED)
 let inMemoryInventory = [
   {
     _id: 'inv_f1',
@@ -18,8 +33,10 @@ let inMemoryInventory = [
     purchase_date: '2026-01-10',
     expiry_date: '2027-01-10',
     cost: 320,
-    notes: 'High nitrogen booster for vegetative stage',
-    status: 'Available'
+    notes: 'High nitrogen booster for vegetative stage (ICAR Package of Practices calibrated)',
+    status: 'Available',
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     _id: 'inv_f2',
@@ -33,7 +50,9 @@ let inMemoryInventory = [
     expiry_date: '2027-02-01',
     cost: 1350,
     notes: 'Root formation and early tiller establishment',
-    status: 'Available'
+    status: 'Available',
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     _id: 'inv_f3',
@@ -47,12 +66,14 @@ let inMemoryInventory = [
     expiry_date: '2026-11-10',
     cost: 850,
     notes: 'Grain filling and drought resistance',
-    status: 'Low Stock'
+    status: 'Low Stock',
+    is_demo: true,
+    data_origin: 'DEMO_SEED'
   },
   {
     _id: 'inv_p1',
     userId: 'default_farmer',
-    name: 'Neem Oil Bio-Pesticide (10000 ppm)',
+    name: 'Azadirachtin 10,000 ppm (Neem Oil 1% EC)',
     category: 'Pesticide',
     type: 'Bio-Pesticide',
     quantity: 4,
@@ -60,8 +81,12 @@ let inMemoryInventory = [
     purchase_date: '2026-03-01',
     expiry_date: '2027-03-01',
     cost: 450,
-    notes: 'Organic repellent for sucking insects & aphids',
-    status: 'Available'
+    notes: 'CIBRC-approved bio-pesticide for sucking insects & aphids. PHI = 0 days.',
+    status: 'Available',
+    is_demo: true,
+    data_origin: 'DEMO_SEED',
+    phi_days: 0,
+    cibrc_registration: 'Section 9(3B)'
   }
 ];
 
@@ -466,6 +491,50 @@ router.get('/inventory/logs', requireAuth, async (req, res) => {
     return res.json({ success: true, count: logs.length, logs, usingFallbackData: true });
   } catch (error) {
     console.error('Error fetching inventory logs:', error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+/**
+ * GET /api/inventory/cibrc-guide
+ * Query CIBRC-approved agrochemicals, registered label claims, doses & PHI
+ */
+router.get('/cibrc-guide', (req, res) => {
+  try {
+    const { crop, pest, category, search } = req.query;
+    let results = cibrcAgrochemicals;
+
+    if (crop) {
+      const cLower = crop.toLowerCase();
+      results = results.filter(item => item.target_crops.some(c => c.toLowerCase().includes(cLower)));
+    }
+    if (pest) {
+      const pLower = pest.toLowerCase();
+      results = results.filter(item => item.target_pests.some(p => p.toLowerCase().includes(pLower)));
+    }
+    if (category) {
+      const catLower = category.toLowerCase();
+      results = results.filter(item => item.category.toLowerCase() === catLower);
+    }
+    if (search) {
+      const sLower = search.toLowerCase();
+      results = results.filter(item => 
+        item.chemical_name.toLowerCase().includes(sLower) ||
+        (Array.isArray(item.common_brands) && item.common_brands.some(b => b.toLowerCase().includes(sLower))) ||
+        (Array.isArray(item.target_pests) && item.target_pests.some(p => p.toLowerCase().includes(sLower))) ||
+        (Array.isArray(item.target_crops) && item.target_crops.some(c => c.toLowerCase().includes(sLower)))
+      );
+    }
+
+    return res.json({
+      success: true,
+      count: results.length,
+      authority: 'Central Insecticide Board & Registration Committee (CIBRC), GoI',
+      source_portal: 'https://cibrc.gov.in/major-uses-of-pesticides/',
+      data: results
+    });
+  } catch (error) {
+    console.error('Error fetching CIBRC guide:', error);
     return res.status(500).json({ success: false, message: error.message });
   }
 });
