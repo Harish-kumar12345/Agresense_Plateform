@@ -127,6 +127,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
     storageBagsCount: number;
     storageMoistureTargetPct: number;
     totalProductionTons: number;
+    machineryRecommendation: string;
   }>({
     growthStage: 'Ripening & Grain Filling',
     expectedHarvestDate: 'Nov 5, 2026',
@@ -141,7 +142,8 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
     storageRequirementSqft: 180,
     storageBagsCount: 240,
     storageMoistureTargetPct: 13.5,
-    totalProductionTons: 12.0
+    totalProductionTons: 12.0,
+    machineryRecommendation: 'Combine Harvester (Track type), Paddy Thresher, Grain Moisture Meter'
   });
 
   const loadData = async () => {
@@ -149,12 +151,20 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
     setError('');
 
     try {
-      const [acts, alrs] = await Promise.all([
+      const [acts, alrs, harvestRecs] = await Promise.all([
         farmActivityService.getActivities(farm?.farm_id),
-        farmActivityService.getHarvestAlerts(farm?.farm_id)
+        farmActivityService.getHarvestAlerts(farm?.farm_id),
+        farmActivityService.getHarvestRecords(farm?.farm_id, selectedCrop)
       ]);
       setActivities(acts);
       setAlerts(alrs);
+
+      // Check if user previously adjusted or saved manual harvest date
+      const savedRec = harvestRecs && harvestRecs.length > 0 ? harvestRecs[0] : null;
+      const effectiveManualDate = manualHarvestDate || (savedRec?.manual_harvest_date ? new Date(savedRec.manual_harvest_date).toISOString().split('T')[0] : '');
+      if (effectiveManualDate && !manualHarvestDate) {
+        setManualHarvestDate(effectiveManualDate);
+      }
 
       let wTemp = 28;
       try {
@@ -190,7 +200,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
         selectedCrop,
         farmArea,
         wTemp,
-        manualHarvestDate || undefined
+        effectiveManualDate || undefined
       );
       setComputedStatus(statusInfo);
       setLabourWorkers(statusInfo.requiredLabour);
@@ -479,10 +489,10 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
 
             <div className="my-3">
               <div className="text-2xl font-extrabold text-white font-display">
-                {computedStatus.machineryRecommendation.split(',')[0]}
+                {(computedStatus.machineryRecommendation || 'Combine Harvester').split(',')[0]}
               </div>
               <p className="text-xs text-slate-300 mt-1.5">
-                {computedStatus.machineryRecommendation}
+                {computedStatus.machineryRecommendation || 'Combine Harvester with straw chopper, Digital moisture meter'}
               </p>
             </div>
 

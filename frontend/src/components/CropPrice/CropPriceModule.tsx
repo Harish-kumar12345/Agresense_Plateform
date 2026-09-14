@@ -136,7 +136,15 @@ export const CropPriceModule: React.FC<CropPriceModuleProps> = ({
   const dynamicTickerCommodities = useMemo<TickerItem[]>(() => {
     if (pricesList && pricesList.length > 0) {
       return pricesList.map(p => {
-        const displayName = p.variety && !p.variety.toLowerCase().includes('standard') && !p.variety.toLowerCase().includes('faq')
+        const vLower = (p.variety || '').toLowerCase().trim();
+        const isGenericVariety = !p.variety || 
+          vLower === 'other' || 
+          vLower === 'general' || 
+          vLower.includes('standard') || 
+          vLower.includes('faq') || 
+          vLower === p.crop.toLowerCase().trim();
+
+        const displayName = !isGenericVariety
           ? `${p.crop} (${p.variety})`
           : p.crop;
 
