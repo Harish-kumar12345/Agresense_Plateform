@@ -53,7 +53,7 @@ router.get('/', optionalAuth, async (req, res) => {
 });
 
 // POST /api/harvest-management - Save or update harvest tracking record
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', optionalAuth, async (req, res) => {
   try {
     const {
       farm_id = 'default_farm',

@@ -107,7 +107,7 @@ router.get('/', optionalAuth, async (req, res) => {
 });
 
 // POST /api/farm-activities - Add a new activity
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', optionalAuth, async (req, res) => {
   try {
     const {
       farm_id = 'default_farm',
@@ -172,7 +172,7 @@ router.post('/', requireAuth, async (req, res) => {
 });
 
 // PUT /api/farm-activities/:id - Update an activity
-router.put('/:id', requireAuth, async (req, res) => {
+router.put('/:id', optionalAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { field_name, crop, activity_type, date, quantity_details, notes } = req.body || {};
@@ -221,7 +221,7 @@ router.put('/:id', requireAuth, async (req, res) => {
 });
 
 // DELETE /api/farm-activities/:id - Delete an activity
-router.delete('/:id', requireAuth, async (req, res) => {
+router.delete('/:id', optionalAuth, async (req, res) => {
   try {
     const { id } = req.params;
 

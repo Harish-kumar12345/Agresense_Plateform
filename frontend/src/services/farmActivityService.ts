@@ -68,13 +68,13 @@ function getAuthHeaders(): Record<string, string> {
 }
 
 // Baseline maturity GDD & duration guidelines per crop
-export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number }> = {
-  Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5 },
-  Wheat: { maturityDays: 110, gddThreshold: 1400, baseTemp: 5, baseYield: 3.8, moistureTarget: 12.0, workersPerHa: 4 },
-  Maize: { maturityDays: 100, gddThreshold: 1500, baseTemp: 10, baseYield: 5.5, moistureTarget: 14.0, workersPerHa: 4 },
-  Cotton: { maturityDays: 160, gddThreshold: 2200, baseTemp: 12, baseYield: 2.4, moistureTarget: 10.0, workersPerHa: 7 },
-  Sugarcane: { maturityDays: 330, gddThreshold: 4500, baseTemp: 18, baseYield: 72.0, moistureTarget: 70.0, workersPerHa: 10 },
-  Pulses: { maturityDays: 90, gddThreshold: 1200, baseTemp: 10, baseYield: 1.8, moistureTarget: 11.0, workersPerHa: 3 }
+export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number; machineryRecommendation: string }> = {
+  Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5, machineryRecommendation: 'Combine Harvester (Track type), Paddy Thresher, Grain Moisture Meter' },
+  Wheat: { maturityDays: 110, gddThreshold: 1400, baseTemp: 5, baseYield: 3.8, moistureTarget: 12.0, workersPerHa: 4, machineryRecommendation: 'Combine Harvester (Wheel type), Straw Reaper, Seed Cleaner' },
+  Maize: { maturityDays: 100, gddThreshold: 1500, baseTemp: 10, baseYield: 5.5, moistureTarget: 14.0, workersPerHa: 4, machineryRecommendation: 'Corn Combine Harvester, Maize Sheller, Moisture Tester' },
+  Cotton: { maturityDays: 160, gddThreshold: 2200, baseTemp: 12, baseYield: 2.4, moistureTarget: 10.0, workersPerHa: 7, machineryRecommendation: 'Mechanical Cotton Stripper, Pneumatic Baling Press, Moisture Meter' },
+  Sugarcane: { maturityDays: 330, gddThreshold: 4500, baseTemp: 18, baseYield: 72.0, moistureTarget: 70.0, workersPerHa: 10, machineryRecommendation: 'Sugarcane Harvester, Billet Chopper, Cane Loading Trolley' },
+  Pulses: { maturityDays: 90, gddThreshold: 1200, baseTemp: 10, baseYield: 1.8, moistureTarget: 11.0, workersPerHa: 3, machineryRecommendation: 'Multi-crop Thresher, Pulse Pod Stripper, Grading Sieve' }
 };
 
 export const farmActivityService = {
@@ -392,6 +392,7 @@ export const farmActivityService = {
     storageBagsCount: number;
     storageMoistureTargetPct: number;
     totalProductionTons: number;
+    machineryRecommendation: string;
   } {
     const cropKey = Object.keys(CROP_HARVEST_SPECS).find(c => c.toLowerCase() === cropName.toLowerCase()) || 'Rice';
     const spec = CROP_HARVEST_SPECS[cropKey];
@@ -461,7 +462,8 @@ export const farmActivityService = {
       storageRequirementSqft,
       storageBagsCount,
       storageMoistureTargetPct,
-      totalProductionTons
+      totalProductionTons,
+      machineryRecommendation: spec.machineryRecommendation || 'Combine Harvester, Tractor Trolley, Moisture Meter'
     };
   }
 };
