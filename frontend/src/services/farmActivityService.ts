@@ -68,8 +68,7 @@ function getAuthHeaders(): Record<string, string> {
 }
 
 // Baseline maturity GDD & duration guidelines per crop (FAO-56 & ICAR Standards)
-<<<<<<< HEAD
-export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number; machineryRecommendation: string }> = {
+export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number; machineryRecommendation?: string }> = {
   Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5, machineryRecommendation: 'Combine Harvester (Track type), Paddy Thresher, Grain Moisture Meter' },
   Wheat: { maturityDays: 110, gddThreshold: 1400, baseTemp: 5, baseYield: 3.8, moistureTarget: 12.0, workersPerHa: 4, machineryRecommendation: 'Combine Harvester (Wheel type), Straw Reaper, Seed Cleaner' },
   Maize: { maturityDays: 100, gddThreshold: 1500, baseTemp: 10, baseYield: 5.5, moistureTarget: 14.0, workersPerHa: 4, machineryRecommendation: 'Corn Combine Harvester, Maize Sheller, Moisture Tester' },
@@ -83,22 +82,6 @@ export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThres
   Gram: { maturityDays: 105, gddThreshold: 1250, baseTemp: 8, baseYield: 1.5, moistureTarget: 10.5, workersPerHa: 3, machineryRecommendation: 'Tractor-drawn Gram Harvester, Multi-crop Thresher' },
   Onion: { maturityDays: 120, gddThreshold: 1300, baseTemp: 6, baseYield: 18.0, moistureTarget: 12.0, workersPerHa: 6, machineryRecommendation: 'Tractor Mounted Onion Digger, Curing Racks, De-topper' },
   Pulses: { maturityDays: 90, gddThreshold: 1200, baseTemp: 10, baseYield: 1.8, moistureTarget: 11.0, workersPerHa: 3, machineryRecommendation: 'Multi-crop Thresher, Pulse Pod Stripper, Grading Sieve' }
-=======
-export const CROP_HARVEST_SPECS: Record<string, { maturityDays: number; gddThreshold: number; baseTemp: number; baseYield: number; moistureTarget: number; workersPerHa: number; machineryRecommendation?: string }> = {
-  Rice: { maturityDays: 120, gddThreshold: 1600, baseTemp: 10, baseYield: 4.2, moistureTarget: 13.5, workersPerHa: 5 },
-  Wheat: { maturityDays: 110, gddThreshold: 1400, baseTemp: 5, baseYield: 3.8, moistureTarget: 12.0, workersPerHa: 4 },
-  Maize: { maturityDays: 100, gddThreshold: 1500, baseTemp: 10, baseYield: 5.5, moistureTarget: 14.0, workersPerHa: 4 },
-  Cotton: { maturityDays: 160, gddThreshold: 2200, baseTemp: 15, baseYield: 2.4, moistureTarget: 10.0, workersPerHa: 7 },
-  Sugarcane: { maturityDays: 330, gddThreshold: 4500, baseTemp: 12, baseYield: 72.0, moistureTarget: 70.0, workersPerHa: 10 },
-  Potato: { maturityDays: 85, gddThreshold: 1250, baseTemp: 7, baseYield: 22.0, moistureTarget: 78.0, workersPerHa: 6 },
-  Tomato: { maturityDays: 85, gddThreshold: 1350, baseTemp: 10, baseYield: 28.0, moistureTarget: 85.0, workersPerHa: 8 },
-  Mustard: { maturityDays: 105, gddThreshold: 1200, baseTemp: 5, baseYield: 1.6, moistureTarget: 9.0, workersPerHa: 4 },
-  Soybean: { maturityDays: 95, gddThreshold: 1350, baseTemp: 10, baseYield: 2.2, moistureTarget: 12.0, workersPerHa: 4 },
-  Groundnut: { maturityDays: 115, gddThreshold: 1500, baseTemp: 10, baseYield: 2.1, moistureTarget: 9.0, workersPerHa: 5 },
-  Gram: { maturityDays: 105, gddThreshold: 1250, baseTemp: 8, baseYield: 1.5, moistureTarget: 10.5, workersPerHa: 3 },
-  Onion: { maturityDays: 120, gddThreshold: 1300, baseTemp: 6, baseYield: 18.0, moistureTarget: 12.0, workersPerHa: 6 },
-  Pulses: { maturityDays: 90, gddThreshold: 1200, baseTemp: 10, baseYield: 1.8, moistureTarget: 11.0, workersPerHa: 3 }
->>>>>>> 17a48642ef2a96dd76c43c9400fb4bb6eb9056ed
 };
 
 export const farmActivityService = {
