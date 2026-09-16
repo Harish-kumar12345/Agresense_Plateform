@@ -112,6 +112,7 @@ function calculateAgronomicYieldFallback(payload) {
     predictedYieldPerHectare,
     totalProductionTons,
     confidenceScore: 92,
+    confidenceLevel: 'High',
     harvestWindow: '65-85 Days from Sowing',
     modelType: 'LightGBM Regressor (Production Model / Agronomic Fallback)',
     r2_score: 0.917,
