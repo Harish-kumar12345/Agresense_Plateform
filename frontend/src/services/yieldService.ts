@@ -60,6 +60,31 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export const yieldService = {
   /**
+   * Sanitize a feature payload — replaces undefined/null/NaN with safe defaults
+   */
+  sanitizeFeatures(payload: Record<string, any>): Record<string, any> {
+    const safe = (val: any, def: number) => {
+      const n = Number(val);
+      return Number.isFinite(n) ? n : def;
+    };
+    return {
+      ...payload,
+      crop: String(payload.crop || 'Rice'),
+      farm_area_ha: safe(payload.farm_area_ha, 2.5),
+      temperature_c: safe(payload.temperature_c, 28),
+      rainfall_mm: safe(payload.rainfall_mm, 5),
+      humidity_pct: safe(payload.humidity_pct, 70),
+      soil_moisture_pct: safe(payload.soil_moisture_pct, 35),
+      soil_ph: safe(payload.soil_ph, 6.5),
+      soil_n: safe(payload.soil_n, 70),
+      soil_p: safe(payload.soil_p, 50),
+      soil_k: safe(payload.soil_k, 80),
+      gdd: safe(payload.gdd, 1200),
+      historical_yield_tha: safe(payload.historical_yield_tha, 0)
+    };
+  },
+
+  /**
    * Validate that all 12 model features are present before calling prediction engine
    */
   validatePipelineFeatures(payload: Record<string, any>): PipelineFeatureValidation {
@@ -119,6 +144,7 @@ export const yieldService = {
   /**
    * AUTO-ENRICHED prediction: only needs crop, area, lat/lon.
    * Backend fetches LIVE weather (Open-Meteo), soil (SoilGrids), and GDD automatically.
+   * Includes Indian Soil Health Card district-level fallbacks for every API failure.
    */
   async predictYieldAuto(params: {
     crop: string;
@@ -126,24 +152,27 @@ export const yieldService = {
     latitude: number;
     longitude: number;
     sowing_date?: string;
+    state?: string;
+    district?: string;
     historical_yield_tha?: number;
   }): Promise<YieldPredictionResult> {
     try {
-      const response = await axios.post(`${API_BASE}/api/ml/predict-yield-auto`, params, { timeout: 15000 });
+      const response = await axios.post(`${API_BASE}/api/ml/auto-predict`, params, { timeout: 18000 });
       if (response.data && response.data.success) {
-        // Add alias fields for backward compatibility
         const result = response.data;
+        // Add alias fields for backward compatibility with analyticsService
         result.predicted_yield_tha = result.predictedYieldPerHectare;
         result.expected_production_tons = result.totalProductionTons;
         result.confidence_score = result.confidenceScore;
+        result.confidenceLevel = result.confidenceLevel || (result.confidenceScore >= 90 ? 'High' : result.confidenceScore >= 75 ? 'Moderate' : 'Low');
         return result;
       }
     } catch (e: any) {
-      console.warn('Auto yield prediction failed, falling back to local:', e.message);
+      console.warn('Auto yield prediction failed, falling back to local engine:', e.message);
     }
 
-    // Fallback: use local calculation with default values
-    return this.calculateLocalYieldPrediction({
+    // Offline fallback — uses agronomic model with safe default values
+    const fallbackResult = this.calculateLocalYieldPrediction({
       crop: params.crop,
       farm_area_ha: params.farm_area_ha,
       temperature_c: 28,
@@ -157,6 +186,11 @@ export const yieldService = {
       gdd: 1200,
       historical_yield_tha: params.historical_yield_tha || 0
     });
+    return {
+      ...fallbackResult,
+      // Empty dataSources so the UI shows 'offline' label
+      dataSources: undefined
+    };
   },
 
   /**

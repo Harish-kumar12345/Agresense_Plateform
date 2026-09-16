@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   TrendingUp,
   RefreshCw,
@@ -6,9 +6,8 @@ import {
   Sliders,
   Sprout,
   ShieldCheck,
-  Award,
-  Layers,
-  Calendar,
+  Database,
+  Wifi,
   X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -24,9 +23,7 @@ import {
   CartesianGrid,
   Cell
 } from 'recharts';
-import { yieldService, YieldPredictionResult, PipelineFeatureValidation } from '../../services/yieldService';
-import { soilService } from '../../services/soilService';
-import { weatherService } from '../../services/weatherService';
+import { yieldService, YieldPredictionResult } from '../../services/yieldService';
 import { FarmData } from '../../services/farmService';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -64,9 +61,10 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
   const locationLabel = farm?.location_name || (location?.city ? `${location.city}, India` : 'Ghaziabad, Uttar Pradesh');
 
   const [prediction, setPrediction] = useState<YieldPredictionResult | null>(null);
-  const [pipelineValidation, setPipelineValidation] = useState<PipelineFeatureValidation | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
+  const [dataSource, setDataSource] = useState<string>('');
+  const [lastFetched, setLastFetched] = useState<string>('');
 
   const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
   const [simN, setSimN] = useState<number>(70);
@@ -74,53 +72,55 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
   const [simPh, setSimPh] = useState<number>(6.5);
   const [simulatedYield, setSimulatedYield] = useState<number | null>(null);
 
+  // Ref to prevent duplicate calls on mount
+  const hasFetched = useRef(false);
+
   const runAutomatedPipeline = async () => {
     setLoading(true);
     setError('');
+    setDataSource('');
 
     try {
-      const [soilRes, weatherRes] = await Promise.all([
-        soilService.getSoilAnalysis(safeLat, safeLon, farm?.farm_id || 'default_farm', selectedCrop),
-        weatherService.getLiveWeatherData(safeLat, safeLon, selectedCrop)
-      ]);
-
-      const soil = soilRes.soilData;
-      const weather = weatherRes.current;
-
-      const featurePayload = {
+      // Use the backend auto-enriched endpoint:
+      // It fetches live Open-Meteo weather, ISRIC SoilGrids soil data, and real GDD
+      // in parallel, with Indian Soil Health Card district fallbacks for any failure.
+      const result = await yieldService.predictYieldAuto({
         crop: selectedCrop,
         farm_area_ha: Number(farmArea) || 2.5,
-        temperature_c: weather.temperature_c,
-        rainfall_mm: weather.precipitation_mm,
-        humidity_pct: weather.relative_humidity,
-        soil_moisture_pct: soil.moisture,
-        soil_ph: soil.ph,
-        soil_n: soil.nitrogen,
-        soil_p: soil.phosphorus,
-        soil_k: soil.potassium,
-        gdd: 1450,
+        latitude: safeLat,
+        longitude: safeLon,
         historical_yield_tha: 0
-      };
+      });
 
-      const validation = yieldService.validatePipelineFeatures(featurePayload);
-      setPipelineValidation(validation);
-
-      setSimN(soil.nitrogen || 70);
-      setSimMoisture(soil.moisture || 35);
-      setSimPh(soil.ph || 6.5);
-
-      const result = await yieldService.predictYield(featurePayload);
       setPrediction(result);
       setSimulatedYield(result.predictedYieldPerHectare);
+
+      // Populate simulator sliders from the real enriched features
+      const features = (result as any).validatedFeatures;
+      if (features) {
+        setSimN(Number(features.soil_n) || 70);
+        setSimMoisture(Number(features.soil_moisture_pct) || 35);
+        setSimPh(Number(features.soil_ph) || 6.5);
+      }
+
+      // Track data source label
+      const ds = (result as any).dataSources;
+      if (ds?.weather) {
+        setDataSource(`Weather: ${ds.weather} | Soil: ${ds.soil}`);
+      } else {
+        setDataSource('Agronomic fallback model (offline)');
+      }
+      setLastFetched(new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     } catch (err: any) {
       console.error('Yield prediction error:', err);
-      setError(err?.message || 'Failed to run yield prediction model.');
+      setError(err?.message || 'Failed to run yield prediction model. Check your network connection.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    // Run on mount and when key farm parameters change
     runAutomatedPipeline();
   }, [safeLat, safeLon, farmArea, selectedCrop]);
 
@@ -184,7 +184,7 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
               </Badge>
             </div>
 
-            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium">
+            <p className="text-xs text-slate-200 flex items-center gap-2 font-medium flex-wrap">
               <span className="font-bold text-white">{farmTitle}</span>
               <span className="text-amber-800">•</span>
               <span className="flex items-center gap-1 text-amber-300">
@@ -194,6 +194,15 @@ export const YieldPredictionModule: React.FC<YieldPredictionModuleProps> = ({
               <span className="text-amber-800">•</span>
               <span className="text-slate-300 font-mono text-[11px]">Harvest Window: {prediction?.harvestWindow || 'Approaching'}</span>
             </p>
+
+            {/* Real-time data source indicator */}
+            {dataSource && (
+              <p className="text-[10px] text-amber-400/70 flex items-center gap-1.5 font-mono">
+                <Wifi className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate">{dataSource}</span>
+                {lastFetched && <span className="text-amber-600 shrink-0">· {lastFetched}</span>}
+              </p>
+            )}
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">

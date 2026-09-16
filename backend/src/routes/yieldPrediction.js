@@ -172,6 +172,8 @@ router.post(['/auto-predict', '/predict-yield-auto'], optionalAuth, async (req, 
 
     res.json({
       ...prediction,
+      confidenceLevel: prediction.confidenceLevel ||
+        (prediction.confidenceScore >= 90 ? 'High' : prediction.confidenceScore >= 75 ? 'Moderate' : 'Low'),
       historicalSeries,
       regionalAvg: regionalBaseYield,
       regionalInsight: `Historical 2021-2025 series queried from statistical crop production records (crop_production_india.csv). LightGBM forecast: ${baseTarget} t/ha.`,
