@@ -351,18 +351,24 @@ async function resolveSowingDate(farmId, cropName, explicitDate) {
     }
   }
 
-  // Fallback to Kharif / Rabi seasonal sowing date
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth(); // 0 = Jan, 8 = Sep
-  // Kharif: June-July sowing (Month 5 to 6)
-  // Rabi: Oct-Nov sowing (Month 9 to 10)
-  if (month >= 5 && month <= 10) {
-    return new Date(year, 5, 20); // June 20 of current year
-  } else {
-    const sowYear = month <= 3 ? year - 1 : year;
-    return new Date(sowYear, 10, 5); // November 5
-  }
+  // Also query inMemoryActivities from farmActivity module
+  try {
+    const farmActivityModule = require('./farmActivity');
+    const inMem = farmActivityModule.inMemoryActivities || [];
+    const isDemo = !farmId || ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(farmId);
+    const sowingInMem = inMem.find(a => 
+      a.activity_type === 'Sowing' &&
+      a.crop.toLowerCase() === cropName.toLowerCase() &&
+      (!farmId || a.farm_id === farmId || (isDemo && ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(a.farm_id)))
+    );
+    if (sowingInMem && sowingInMem.date) {
+      const d = new Date(sowingInMem.date);
+      if (!isNaN(d.getTime())) return d;
+    }
+  } catch (e) {}
+
+  // Active season mid-transplanting baseline (approx 65 days ago)
+  return new Date(Date.now() - 65 * 86400000);
 }
 
 /**
@@ -537,20 +543,30 @@ async function computeLiveHarvestPlan({
 
   const gddPercentage = Math.min(100, Math.round((gddAccumulated / spec.gddThreshold) * 100));
 
-  // 3. Expected Harvest Date and Remaining Days
-  const expHarvestDate = new Date(sowingDate.getTime() + spec.maturityDays * 86400000);
-  const activeTargetDate = manualHarvestDateStr ? new Date(manualHarvestDateStr) : expHarvestDate;
-  const daysRemaining = Math.max(0, Math.ceil((activeTargetDate.getTime() - now.getTime()) / 86400000));
+  // 3. Expected Harvest Date and Remaining Days (Thermal GDD calculation)
+  const dailyGdd = Math.max(1, weather.temperature_c - spec.baseTemp);
+  const remainingGdd = Math.max(0, spec.gddThreshold - gddAccumulated);
+  const thermalDaysRemaining = gddPercentage >= 100 ? 0 : Math.max(1, Math.ceil(remainingGdd / dailyGdd));
 
-  const winStart = new Date(expHarvestDate.getTime() - 5 * 86400000);
-  const winEnd = new Date(expHarvestDate.getTime() + 10 * 86400000);
-  const harvestWindow = `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  const daysRemaining = manualHarvestDateStr
+    ? Math.max(0, Math.ceil((new Date(manualHarvestDateStr).getTime() - now.getTime()) / 86400000))
+    : thermalDaysRemaining;
+
+  const expHarvestDate = gddPercentage >= 100
+    ? now
+    : new Date(now.getTime() + thermalDaysRemaining * 86400000);
+
+  const winStart = new Date(expHarvestDate.getTime() - (gddPercentage >= 100 ? 2 : 5) * 86400000);
+  const winEnd = new Date(expHarvestDate.getTime() + (gddPercentage >= 100 ? 5 : 10) * 86400000);
+  const harvestWindow = gddPercentage >= 100
+    ? `Ready Now (Optimal through ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`
+    : `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
 
   // 4. Status Determination
   let status = 'Not Ready';
-  if (gddPercentage >= 90 || daysRemaining <= 5) {
+  if (gddPercentage >= 95 || daysRemaining <= 3) {
     status = 'Harvest Ready';
-  } else if (gddPercentage >= 65 || daysRemaining <= 25) {
+  } else if (gddPercentage >= 70 || daysRemaining <= 20) {
     status = 'Approaching';
   } else {
     status = 'Not Ready';

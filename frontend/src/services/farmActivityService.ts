@@ -861,44 +861,36 @@ export const farmActivityService = {
     const spec = CROP_HARVEST_SPECS[cropKey];
 
     const now = new Date();
-    // Use true sowing date if supplied; otherwise estimate based on Kharif (June) or Rabi (Nov)
-    let sowing: Date;
-    if (sowingDateStr) {
-      sowing = new Date(sowingDateStr);
-    } else {
-      const month = now.getMonth();
-      if (month >= 5 && month <= 10) {
-        sowing = new Date(now.getFullYear(), 5, 20); // June 20
-      } else {
-        const sowYear = month <= 3 ? now.getFullYear() - 1 : now.getFullYear();
-        sowing = new Date(sowYear, 10, 5); // Nov 5
-      }
-    }
+    const sowing = sowingDateStr ? new Date(sowingDateStr) : new Date(Date.now() - 65 * 86400000);
 
     const daysElapsed = Math.max(1, Math.floor((now.getTime() - sowing.getTime()) / 86400000));
 
     // Dynamic GDD calculation
-    const dailyGdd = Math.max(0, avgTempC - spec.baseTemp);
+    const dailyGdd = Math.max(1, avgTempC - spec.baseTemp);
     const calculatedGdd = Math.round(dailyGdd * daysElapsed);
     const gddAccumulated = (providedGdd !== undefined && providedGdd > 0) ? providedGdd : calculatedGdd;
-
-    const totalDays = spec.maturityDays;
-    const expHarvest = new Date(sowing.getTime() + totalDays * 86400000);
-
-    const activeTargetDate = manualHarvestDateStr ? new Date(manualHarvestDateStr) : expHarvest;
-    const daysRemaining = Math.max(0, Math.ceil((activeTargetDate.getTime() - now.getTime()) / 86400000));
-
-    const winStart = new Date(expHarvest.getTime() - 5 * 86400000);
-    const winEnd = new Date(expHarvest.getTime() + 10 * 86400000);
-    const harvestWindow = `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
-
     const gddPct = Math.min(100, Math.round((gddAccumulated / spec.gddThreshold) * 100));
+
+    // Thermal GDD-based remaining days
+    const remainingGdd = Math.max(0, spec.gddThreshold - gddAccumulated);
+    const thermalDaysRemaining = gddPct >= 100 ? 0 : Math.max(1, Math.ceil(remainingGdd / dailyGdd));
+
+    const activeDaysRemaining = manualHarvestDateStr
+      ? Math.max(0, Math.ceil((new Date(manualHarvestDateStr).getTime() - now.getTime()) / 86400000))
+      : thermalDaysRemaining;
+
+    const expHarvest = gddPct >= 100 ? now : new Date(now.getTime() + thermalDaysRemaining * 86400000);
+    const winStart = new Date(expHarvest.getTime() - (gddPct >= 100 ? 2 : 5) * 86400000);
+    const winEnd = new Date(expHarvest.getTime() + (gddPct >= 100 ? 5 : 10) * 86400000);
+    const harvestWindow = gddPct >= 100
+      ? `Ready Now (Optimal through ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`
+      : `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
 
     // Determine Status
     let status: HarvestStatus = 'Not Ready';
-    if (gddPct >= 90 || daysRemaining <= 5) {
+    if (gddPct >= 95 || activeDaysRemaining <= 3) {
       status = 'Harvest Ready';
-    } else if (gddPct >= 65 || daysRemaining <= 25) {
+    } else if (gddPct >= 70 || activeDaysRemaining <= 20) {
       status = 'Approaching';
     } else {
       status = 'Not Ready';
