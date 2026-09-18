@@ -22,7 +22,7 @@ import { LiveAlertToast } from './components/Alerts/LiveAlertToast';
 import { alertService } from './services/alertService';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navbar } from './components/Navigation/Navbar';
-import { Sprout, MessageSquare, Shield, LogOut, User, MapPin, CloudSun, FlaskConical, Brain, Bug, Pill, Tractor, IndianRupee, BarChart3, Bell } from 'lucide-react';
+import { Sprout, MessageSquare, Shield, LogOut, User, MapPin, CloudSun, FlaskConical, Brain, Bug, Pill, Tractor, IndianRupee, BarChart3, Bell, ArrowLeft } from 'lucide-react';
 
 type LocationData = {
   latitude: number;
@@ -76,6 +76,16 @@ function AppContent() {
     } catch {}
     return 'field-chooser';
   });
+  const [previousView, setPreviousView] = useState<string>('dashboard');
+
+  const navigateTo = (newView: string) => {
+    setView(prev => {
+      if (prev !== newView && prev !== 'chat') {
+        setPreviousView(prev);
+      }
+      return newView;
+    });
+  };
   const [gisInitialTab, setGisInitialTab] = useState<'saved-fields' | 'new-field' | undefined>(undefined);
   const [activeFarm, setActiveFarm] = useState<FarmData | null>(() => {
     try {
@@ -223,7 +233,7 @@ function AppContent() {
       {/* Sleek Modern Application Navbar */}
       <Navbar
         currentView={view}
-        onSelectView={(v) => setView(v)}
+        onSelectView={navigateTo}
         unreadAlertCount={unreadAlertCount}
         onOpenAlerts={() => setIsAlertsOpen(true)}
         user={user}
@@ -319,11 +329,27 @@ function AppContent() {
           )}
           {view === 'chat' && (
             <div className="px-4 py-8">
-              <div className="max-w-6xl mx-auto">
+              <div className="max-w-5xl mx-auto space-y-3">
+                <div className="flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setView(previousView && previousView !== 'chat' ? previousView : 'dashboard')}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#0D1612]/90 hover:bg-emerald-950/70 border border-emerald-900/50 hover:border-emerald-500/50 text-emerald-300 hover:text-white text-xs font-medium transition-all shadow-sm cursor-pointer group"
+                    title="Return to Previous Screen"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-emerald-400 group-hover:-translate-x-0.5 transition-transform" />
+                    <span>Back to {previousView === 'field-chooser' ? 'Farm Chooser' : previousView === 'gis' ? 'GIS Map' : 'Dashboard'}</span>
+                  </button>
+                  <span className="text-xs text-slate-400 flex items-center gap-1.5 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Agronomist Advisor Live
+                  </span>
+                </div>
                 <Chat
                   activeFarm={activeFarm}
                   location={currentLocation}
                   crop={currentCrop}
+                  onBack={() => setView(previousView && previousView !== 'chat' ? previousView : 'dashboard')}
                 />
               </div>
             </div>
@@ -346,13 +372,13 @@ function AppContent() {
       <SmartAlertsCenter
         isOpen={isAlertsOpen}
         onClose={() => setIsAlertsOpen(false)}
-        onNavigateModule={(modKey) => setView(modKey)}
+        onNavigateModule={navigateTo}
         activeFarmId={activeFarm?.farm_id || (activeFarm as any)?.id || 'farm_01'}
         isOfficer={user?.role === 'officer' || user?.role === 'admin'}
       />
       <LiveAlertToast
         onOpenAlerts={() => setIsAlertsOpen(true)}
-        onNavigateModule={(modKey) => setView(modKey)}
+        onNavigateModule={navigateTo}
       />
       <footer className="border-t border-emerald-900/30 bg-[#070D0A]/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 py-5 text-sm text-[#D1DED6] flex items-center justify-between">

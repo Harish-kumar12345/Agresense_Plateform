@@ -9,6 +9,7 @@ import {
   VolumeX, 
   User, 
   ArrowDown,
+  ArrowLeft,
   Sprout,
   ShieldCheck,
   Compass,
@@ -41,9 +42,10 @@ interface ChatProps {
     district?: string;
   };
   crop?: string;
+  onBack?: () => void;
 }
 
-export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
+export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop, onBack }) => {
   const { t, language, setLanguage, speak } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -253,6 +255,18 @@ export const Chat: React.FC<ChatProps> = ({ activeFarm, location, crop }) => {
       {/* Header Bar - Agronomic Specialist Console */}
       <div className="p-4 px-6 bg-[#070D0A]/95 border-b border-emerald-900/40 flex flex-wrap items-center justify-between gap-3 shrink-0 z-20 backdrop-blur-xl">
         <div className="flex items-center gap-3.5">
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="p-2 sm:px-3 sm:py-2 text-slate-300 hover:text-white bg-[#13231B] hover:bg-emerald-950/80 rounded-xl border border-emerald-700/50 hover:border-emerald-500/70 shadow-xs transition-all cursor-pointer flex items-center gap-1.5 text-xs font-semibold group shrink-0"
+              title="Back to Dashboard"
+              aria-label="Back to Dashboard"
+            >
+              <ArrowLeft className="w-4 h-4 text-emerald-400 group-hover:-translate-x-0.5 transition-transform" />
+              <span className="hidden sm:inline">Back</span>
+            </button>
+          )}
           <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-600/25 border border-emerald-300/40 shrink-0">
             <Sprout className="w-6 h-6 text-slate-950" />
           </div>
