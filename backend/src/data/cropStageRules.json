@@ -1,0 +1,226 @@
+{
+  "defaultDurationDays": 105,
+  "defaultStageDistribution": [
+    { "name": "Germination & Emergence", "minPct": 0, "maxPct": 10 },
+    { "name": "Vegetative Growth", "minPct": 10, "maxPct": 50 },
+    { "name": "Flowering / Reproductive", "minPct": 50, "maxPct": 70 },
+    { "name": "Grain Filling / Maturation", "minPct": 70, "maxPct": 90 },
+    { "name": "Physiological Maturity / Harvest", "minPct": 90, "maxPct": 100 }
+  ],
+  "crops": {
+    "Maize": {
+      "defaultDurationDays": 105,
+      "varieties": {
+        "short": { "name": "Short Duration Hybrids (Early Maturity)", "durationDays": 85, "range": [80, 90] },
+        "medium": { "name": "Medium Duration Hybrids (Standard)", "durationDays": 105, "range": [95, 115] },
+        "long": { "name": "Long Duration Varieties (Late Maturity)", "durationDays": 130, "range": [120, 140] }
+      },
+      "stages": [
+        { "name": "Germination & Seedling Emergence (VE-V2)", "minPct": 0, "maxPct": 10 },
+        { "name": "Vegetative Growth & Knee-High (V3-V12)", "minPct": 10, "maxPct": 50 },
+        { "name": "Flowering: Tasseling & Silking (VT-R1)", "minPct": 50, "maxPct": 70 },
+        { "name": "Grain Filling: Milk & Dough (R2-R4)", "minPct": 70, "maxPct": 90 },
+        { "name": "Physiological Maturity / Black Layer (R6)", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 1500,
+      "baseTemp": 10
+    },
+    "Rice": {
+      "defaultDurationDays": 120,
+      "varieties": {
+        "short": { "name": "Short Duration / Semi-Dwarf Early", "durationDays": 95, "range": [90, 105] },
+        "medium": { "name": "Medium Duration (Standard)", "durationDays": 120, "range": [115, 130] },
+        "long": { "name": "Long Duration / Traditional Late", "durationDays": 140, "range": [135, 155] }
+      },
+      "stages": [
+        { "name": "Nursery & Seedling Emergence", "minPct": 0, "maxPct": 10 },
+        { "name": "Active Tillering & Stem Elongation", "minPct": 10, "maxPct": 50 },
+        { "name": "Panicle Initiation & Flowering", "minPct": 50, "maxPct": 70 },
+        { "name": "Grain Filling & Dough", "minPct": 70, "maxPct": 90 },
+        { "name": "Physiological Maturity & Golden Ripe", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 1600,
+      "baseTemp": 10
+    },
+    "Wheat": {
+      "defaultDurationDays": 110,
+      "varieties": {
+        "short": { "name": "Short Duration / Late-Sown Varieties", "durationDays": 95, "range": [90, 100] },
+        "medium": { "name": "Timely Sown Standard Varieties", "durationDays": 110, "range": [105, 120] },
+        "long": { "name": "Long Duration / Rainfed Winter Types", "durationDays": 125, "range": [120, 135] }
+      },
+      "stages": [
+        { "name": "Germination & Crown Root Initiation (CRI)", "minPct": 0, "maxPct": 12 },
+        { "name": "Tillering & Stem Jointing", "minPct": 12, "maxPct": 48 },
+        { "name": "Booting, Heading & Anthesis", "minPct": 48, "maxPct": 68 },
+        { "name": "Milk & Soft Dough Filling", "minPct": 68, "maxPct": 88 },
+        { "name": "Hard Dough & Golden Maturity", "minPct": 88, "maxPct": 100 }
+      ],
+      "gddThreshold": 1400,
+      "baseTemp": 5
+    },
+    "Cotton": {
+      "defaultDurationDays": 160,
+      "varieties": {
+        "short": { "name": "Early Bt Cotton Hybrids", "durationDays": 145, "range": [140, 150] },
+        "medium": { "name": "Medium Bt Hybrids", "durationDays": 160, "range": [155, 170] },
+        "long": { "name": "Long Duration Cotton", "durationDays": 180, "range": [175, 195] }
+      },
+      "stages": [
+        { "name": "Seedling Emergence", "minPct": 0, "maxPct": 10 },
+        { "name": "Vegetative Branching & Square Formation", "minPct": 10, "maxPct": 45 },
+        { "name": "Flowering & Early Boll Setting", "minPct": 45, "maxPct": 70 },
+        { "name": "Boll Maturation & Fiber Development", "minPct": 70, "maxPct": 90 },
+        { "name": "Boll Bursting & Fluff Opening", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 2200,
+      "baseTemp": 15
+    },
+    "Potato": {
+      "defaultDurationDays": 85,
+      "varieties": {
+        "short": { "name": "Early (e.g. Kufri Pukhraj)", "durationDays": 75, "range": [70, 80] },
+        "medium": { "name": "Medium (e.g. Kufri Jyoti)", "durationDays": 85, "range": [80, 95] },
+        "long": { "name": "Late (e.g. Kufri Sindhuri)", "durationDays": 105, "range": [100, 115] }
+      },
+      "stages": [
+        { "name": "Sprout Emergence", "minPct": 0, "maxPct": 12 },
+        { "name": "Vegetative Canopy Development", "minPct": 12, "maxPct": 40 },
+        { "name": "Tuber Initiation & Flowering", "minPct": 40, "maxPct": 65 },
+        { "name": "Tuber Bulking", "minPct": 65, "maxPct": 90 },
+        { "name": "Dehaulming & Skin Curing", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 1250,
+      "baseTemp": 7
+    },
+    "Tomato": {
+      "defaultDurationDays": 85,
+      "varieties": {
+        "short": { "name": "Determinate Hybrids", "durationDays": 75, "range": [70, 80] },
+        "medium": { "name": "Semi-determinate Commercial", "durationDays": 85, "range": [80, 95] },
+        "long": { "name": "Indeterminate Greenhouse/Trellised", "durationDays": 110, "range": [100, 125] }
+      },
+      "stages": [
+        { "name": "Transplant Establishment", "minPct": 0, "maxPct": 12 },
+        { "name": "Vegetative Branching", "minPct": 12, "maxPct": 42 },
+        { "name": "Flowering & Fruit Set", "minPct": 42, "maxPct": 68 },
+        { "name": "Mature Green & Sizing", "minPct": 68, "maxPct": 88 },
+        { "name": "Breaker & Ripe Picking", "minPct": 88, "maxPct": 100 }
+      ],
+      "gddThreshold": 1350,
+      "baseTemp": 10
+    },
+    "Mustard": {
+      "defaultDurationDays": 105,
+      "varieties": {
+        "short": { "name": "Early Mustard (e.g. Pusa Bold)", "durationDays": 95, "range": [90, 100] },
+        "medium": { "name": "Medium (e.g. RH-749, Varuna)", "durationDays": 105, "range": [100, 115] },
+        "long": { "name": "Late (e.g. Kranti)", "durationDays": 120, "range": [115, 130] }
+      },
+      "stages": [
+        { "name": "Germination & Seedling", "minPct": 0, "maxPct": 10 },
+        { "name": "Rosette & Vegetative Branching", "minPct": 10, "maxPct": 45 },
+        { "name": "Flowering & Pod Formation", "minPct": 45, "maxPct": 70 },
+        { "name": "Seed Development & Pod Filling", "minPct": 70, "maxPct": 90 },
+        { "name": "Siliqua Browning & Seed Hardening", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 1300,
+      "baseTemp": 5
+    },
+    "Soybean": {
+      "defaultDurationDays": 95,
+      "varieties": {
+        "short": { "name": "Early Maturity (JS 95-60)", "durationDays": 85, "range": [80, 90] },
+        "medium": { "name": "Medium Maturity (JS 335, JS 20-29)", "durationDays": 95, "range": [90, 105] },
+        "long": { "name": "Late Maturity (NRC 37)", "durationDays": 110, "range": [105, 120] }
+      },
+      "stages": [
+        { "name": "Emergence & Unifoliate (VE-VC)", "minPct": 0, "maxPct": 10 },
+        { "name": "Vegetative Trifoliate (V1-V4)", "minPct": 10, "maxPct": 45 },
+        { "name": "Flowering & Pod Initiation (R1-R3)", "minPct": 45, "maxPct": 68 },
+        { "name": "Pod Filling & Seed Enlargement (R5-R6)", "minPct": 68, "maxPct": 88 },
+        { "name": "Leaf Yellowing & Pod Maturity (R7-R8)", "minPct": 88, "maxPct": 100 }
+      ],
+      "gddThreshold": 1350,
+      "baseTemp": 10
+    },
+    "Groundnut": {
+      "defaultDurationDays": 115,
+      "varieties": {
+        "short": { "name": "Spanish Bunch (Early)", "durationDays": 100, "range": [95, 105] },
+        "medium": { "name": "Semi-Spreading (Medium)", "durationDays": 115, "range": [110, 125] },
+        "long": { "name": "Virginia Runner (Late)", "durationDays": 135, "range": [130, 145] }
+      },
+      "stages": [
+        { "name": "Emergence & Seedling", "minPct": 0, "maxPct": 10 },
+        { "name": "Vegetative Branching & Canopy", "minPct": 10, "maxPct": 42 },
+        { "name": "Flowering & Peg Initiation", "minPct": 42, "maxPct": 65 },
+        { "name": "Pod Development & Kernel Filling", "minPct": 65, "maxPct": 88 },
+        { "name": "Pod Maturation & Shell Hardening", "minPct": 88, "maxPct": 100 }
+      ],
+      "gddThreshold": 1500,
+      "baseTemp": 10
+    },
+    "Chickpea": {
+      "defaultDurationDays": 105,
+      "varieties": {
+        "short": { "name": "Desi Early (JG 14)", "durationDays": 90, "range": [85, 95] },
+        "medium": { "name": "Desi / Kabuli Standard", "durationDays": 105, "range": [100, 115] },
+        "long": { "name": "Kabuli Large Seeded Late", "durationDays": 120, "range": [115, 130] }
+      },
+      "stages": [
+        { "name": "Emergence & Seedling Establishment", "minPct": 0, "maxPct": 12 },
+        { "name": "Vegetative Branching", "minPct": 12, "maxPct": 46 },
+        { "name": "Flowering & Podding", "minPct": 46, "maxPct": 70 },
+        { "name": "Grain Filling & Pod Development", "minPct": 70, "maxPct": 90 },
+        { "name": "Physiological Maturity & Dryness", "minPct": 90, "maxPct": 100 }
+      ],
+      "gddThreshold": 1350,
+      "baseTemp": 7
+    },
+    "Bajra": {
+      "defaultDurationDays": 85,
+      "varieties": {
+        "short": { "name": "Early Hybrids", "durationDays": 75, "range": [70, 80] },
+        "medium": { "name": "Standard Hybrids", "durationDays": 85, "range": [80, 92] },
+        "long": { "name": "Dual Purpose Late", "durationDays": 98, "range": [95, 105] }
+      },
+      "stages": [
+        { "name": "Emergence & Seedling", "minPct": 0, "maxPct": 12 },
+        { "name": "Tillering & Stem Elongation", "minPct": 12, "maxPct": 48 },
+        { "name": "Booting & Panicle Emergence", "minPct": 48, "maxPct": 68 },
+        { "name": "Grain Development & Dough", "minPct": 68, "maxPct": 88 },
+        { "name": "Maturity & Harvest", "minPct": 88, "maxPct": 100 }
+      ],
+      "gddThreshold": 1300,
+      "baseTemp": 10
+    }
+  },
+  "adjustmentRules": {
+    "irrigation": {
+      "optimalIntervalDays": 12,
+      "maxAllowedGapDays": 18,
+      "gapDelayPerWeek": 3,
+      "onScheduleAdvancementDays": 1
+    },
+    "fertilization": {
+      "expectedVegetativeCutoffPct": 45,
+      "missingFertilizationDelayDays": 3
+    },
+    "pestAndDisease": {
+      "unmitigatedInfectionDelayDays": 5,
+      "sprayMitigationDaysRecovered": 3
+    },
+    "weeding": {
+      "cutoffDay": 40,
+      "missingWeedingDelayDays": 2
+    },
+    "stressEvents": {
+      "droughtDelayDays": 5,
+      "waterloggingDelayDays": 4,
+      "diseaseDelayDays": 4,
+      "heatwaveDelayDays": 3,
+      "generalStressDelayDays": 3
+    }
+  }
+}

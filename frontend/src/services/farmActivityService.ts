@@ -1,4 +1,11 @@
 import axios from 'axios';
+import {
+  lookupCropDuration,
+  getPhenologicalStage,
+  calculateActivityAdjustments,
+  CROP_STAGE_RULES,
+  DEFAULT_CROP_DURATION_DAYS
+} from './cropStageRules';
 
 export type ActivityType =
   | 'Sowing'
@@ -49,7 +56,7 @@ export type HarvestRecord = {
 export type HarvestAlert = {
   id: string;
   type: 'warning' | 'info' | 'success' | 'danger';
-  severity?: string;
+  severity: 'Immediate' | 'Approaching' | 'Critical' | 'Moderate' | 'Normal' | 'Action Required' | 'Guideline';
   category: string;
   title: string;
   description: string;
@@ -68,13 +75,27 @@ export type LiveHarvestPlan = {
   farm_id: string;
   farm_name: string;
   crop: string;
+  variety_name?: string;
+  crop_duration_days?: number;
+  is_estimated_duration?: boolean;
+  duration_range?: [number, number];
   area_hectares: number;
   sowing_date: string;
   days_elapsed: number;
   growth_stage: string;
+  base_harvest_date?: string;
   expected_harvest_date: string;
   manual_harvest_date: string | null;
   harvest_window: string;
+  net_shift_days?: number;
+  adjustment_reasons?: string[];
+  activity_flags?: {
+    waterStress: boolean;
+    nutrientRisk: boolean;
+    pestDiseaseRisk: boolean;
+    weedCompetitionRisk: boolean;
+    environmentalStress: boolean;
+  };
   status: HarvestStatus;
   days_to_harvest: number;
   gdd_accumulated: number;
@@ -624,6 +645,7 @@ export const farmActivityService = {
     district?: string;
     sowing_date?: string;
     manual_harvest_date?: string;
+    activities?: FarmActivity[];
   }): Promise<LiveHarvestPlan> {
     try {
       const response = await axios.post(`${API_BASE}/harvest-management/live-plan`, params, {
@@ -639,6 +661,7 @@ export const farmActivityService = {
 
     // Dynamic local fallback
     const crop = params.crop || 'Rice';
+    const durationInfo = lookupCropDuration(crop);
     const fallbackStatus = this.calculateHarvestStatus(
       crop,
       params.sowing_date,
@@ -646,38 +669,47 @@ export const farmActivityService = {
       undefined,
       params.area_hectares || 2.5,
       28,
-      params.manual_harvest_date
+      params.manual_harvest_date,
+      undefined,
+      params.activities
     );
 
     const spec = CROP_HARVEST_SPECS[crop] || CROP_HARVEST_SPECS.Rice;
-    const stageProjection: PhenologicalStageProgress[] = spec.stages.map((stg, idx) => {
-      const prevPct = idx === 0 ? 0 : spec.stages[idx - 1].gddPct;
-      const stageSpan = stg.gddPct - prevPct;
+    const stageProjection: PhenologicalStageProgress[] = durationInfo.stages.map((stg) => {
+      const stageSpan = Math.max(1, stg.maxPct - stg.minPct);
       let progress = 0;
 
-      if (fallbackStatus.gddPercentage >= stg.gddPct) {
+      if (fallbackStatus.gddPercentage >= stg.maxPct) {
         progress = 100;
-      } else if (fallbackStatus.gddPercentage <= prevPct) {
+      } else if (fallbackStatus.gddPercentage <= stg.minPct) {
         progress = 0;
       } else {
-        progress = Math.round(((fallbackStatus.gddPercentage - prevPct) / stageSpan) * 100);
+        progress = Math.round(((fallbackStatus.gddPercentage - stg.minPct) / stageSpan) * 100);
       }
 
       return {
         stage: stg.name,
         progress,
         label: progress >= 100 ? 'Completed' : progress > 0 ? 'Current' : 'Upcoming',
-        targetGddPct: stg.gddPct
+        targetGddPct: stg.maxPct
       };
     });
+
+    const now = new Date();
+    const sowing = params.sowing_date ? new Date(params.sowing_date) : now;
+    const daysElapsed = Math.max(0, Math.floor((now.getTime() - sowing.getTime()) / 86400000));
 
     return {
       farm_id: params.farm_id || 'default_farm',
       farm_name: params.farm_name || 'Farm Field',
       crop,
+      variety_name: durationInfo.varietyName,
+      crop_duration_days: durationInfo.durationDays,
+      is_estimated_duration: durationInfo.isEstimated,
+      duration_range: durationInfo.durationRange,
       area_hectares: params.area_hectares || 2.5,
-      sowing_date: params.sowing_date || new Date(Date.now() - 65 * 86400000).toISOString(),
-      days_elapsed: 65,
+      sowing_date: sowing.toISOString(),
+      days_elapsed: daysElapsed,
       growth_stage: fallbackStatus.growthStage,
       expected_harvest_date: fallbackStatus.expectedHarvestDate,
       manual_harvest_date: fallbackStatus.manualHarvestDate,
@@ -839,7 +871,9 @@ export const farmActivityService = {
     predictedYieldTha?: number,
     areaHa: number = 2.5,
     avgTempC: number = 28,
-    manualHarvestDateStr?: string | null
+    manualHarvestDateStr?: string | null,
+    varietyOrNotes?: string,
+    activities?: FarmActivity[]
   ): {
     growthStage: string;
     expectedHarvestDate: string;
@@ -856,53 +890,66 @@ export const farmActivityService = {
     storageMoistureTargetPct: number;
     totalProductionTons: number;
     machineryRecommendation: string;
+    cropDurationDays?: number;
+    varietyName?: string;
+    isEstimatedDuration?: boolean;
+    durationRange?: [number, number];
+    baseHarvestDate?: string;
+    netShiftDays?: number;
+    adjustmentReasons?: string[];
+    flags?: {
+      waterStress: boolean;
+      nutrientRisk: boolean;
+      pestDiseaseRisk: boolean;
+      weedCompetitionRisk: boolean;
+      environmentalStress: boolean;
+    };
   } {
     const cropKey = Object.keys(CROP_HARVEST_SPECS).find(c => c.toLowerCase() === cropName.toLowerCase()) || 'Rice';
-    const spec = CROP_HARVEST_SPECS[cropKey];
+    const spec = CROP_HARVEST_SPECS[cropKey] || CROP_HARVEST_SPECS.Rice;
+    const durationInfo = lookupCropDuration(cropName, varietyOrNotes);
+    const cropDurationDays = durationInfo.durationDays;
 
     const now = new Date();
-    const sowing = sowingDateStr ? new Date(sowingDateStr) : new Date(Date.now() - 65 * 86400000);
+    const sowing = sowingDateStr ? new Date(sowingDateStr) : now;
+    const daysElapsed = Math.max(0, Math.floor((now.getTime() - sowing.getTime()) / 86400000));
 
-    const daysElapsed = Math.max(1, Math.floor((now.getTime() - sowing.getTime()) / 86400000));
+    // Dynamic Activity-Aware Adjustments
+    const adjustments = calculateActivityAdjustments(
+      cropName,
+      cropDurationDays,
+      sowing,
+      activities || [],
+      now,
+      varietyOrNotes
+    );
+
+    const baseHarvest = adjustments.baseHarvestDate;
+    const expHarvest = manualHarvestDateStr ? new Date(manualHarvestDateStr) : adjustments.adjustedHarvestDate;
+    const daysRemaining = Math.max(0, Math.ceil((expHarvest.getTime() - now.getTime()) / 86400000));
+    const progressPct = adjustments.growthPercent;
 
     // Dynamic GDD calculation
     const dailyGdd = Math.max(1, avgTempC - spec.baseTemp);
     const calculatedGdd = Math.round(dailyGdd * daysElapsed);
     const gddAccumulated = (providedGdd !== undefined && providedGdd > 0) ? providedGdd : calculatedGdd;
-    const gddPct = Math.min(100, Math.round((gddAccumulated / spec.gddThreshold) * 100));
 
-    // Thermal GDD-based remaining days
-    const remainingGdd = Math.max(0, spec.gddThreshold - gddAccumulated);
-    const thermalDaysRemaining = gddPct >= 100 ? 0 : Math.max(1, Math.ceil(remainingGdd / dailyGdd));
-
-    const activeDaysRemaining = manualHarvestDateStr
-      ? Math.max(0, Math.ceil((new Date(manualHarvestDateStr).getTime() - now.getTime()) / 86400000))
-      : thermalDaysRemaining;
-
-    const expHarvest = gddPct >= 100 ? now : new Date(now.getTime() + thermalDaysRemaining * 86400000);
-    const winStart = new Date(expHarvest.getTime() - (gddPct >= 100 ? 2 : 5) * 86400000);
-    const winEnd = new Date(expHarvest.getTime() + (gddPct >= 100 ? 5 : 10) * 86400000);
-    const harvestWindow = gddPct >= 100
-      ? `Ready Now (Optimal through ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`
-      : `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    const harvestWindow = progressPct >= 100
+      ? `Ready Now (Optimal through ${new Date(expHarvest.getTime() + 5 * 86400000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`
+      : adjustments.harvestWindowRange;
 
     // Determine Status
     let status: HarvestStatus = 'Not Ready';
-    if (gddPct >= 95 || activeDaysRemaining <= 3) {
+    if (progressPct >= 95 || daysRemaining <= 3) {
       status = 'Harvest Ready';
-    } else if (gddPct >= 70 || activeDaysRemaining <= 20) {
+    } else if (progressPct >= 70 || daysRemaining <= 20) {
       status = 'Approaching';
     } else {
       status = 'Not Ready';
     }
 
-    // Determine Phenological Growth Stage from Crop Spec
-    let growthStage = spec.stages[0].name;
-    for (let i = 0; i < spec.stages.length; i++) {
-      if (gddPct >= spec.stages[i].gddPct - 15) {
-        growthStage = spec.stages[i].name;
-      }
-    }
+    // Determine Phenological Growth Stage from activity adjustments
+    const growthStage = adjustments.currentGrowthStage;
 
     // Yield and production calculation
     const effectiveYield = (predictedYieldTha && predictedYieldTha > 0) ? predictedYieldTha : spec.baseYield;
@@ -921,13 +968,21 @@ export const farmActivityService = {
       daysToHarvest: daysRemaining,
       gddAccumulated,
       gddThreshold: spec.gddThreshold,
-      gddPercentage: gddPct,
+      gddPercentage: progressPct,
       requiredLabour,
       storageRequirementSqft,
       storageBagsCount,
       storageMoistureTargetPct,
       totalProductionTons,
-      machineryRecommendation: spec.machineryRecommendation
+      machineryRecommendation: spec.machineryRecommendation,
+      cropDurationDays,
+      varietyName: durationInfo.varietyName,
+      isEstimatedDuration: durationInfo.isEstimated,
+      durationRange: durationInfo.durationRange,
+      baseHarvestDate: baseHarvest.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      netShiftDays: adjustments.netShiftDays,
+      adjustmentReasons: adjustments.adjustmentReasons,
+      flags: adjustments.flags
     };
   }
 };

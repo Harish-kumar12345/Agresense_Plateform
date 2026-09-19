@@ -22,7 +22,8 @@ import {
   ShieldAlert,
   Layers,
   Thermometer,
-  Gauge
+  Gauge,
+  Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -139,6 +140,20 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
     storageMoistureTargetPct: number;
     totalProductionTons: number;
     machineryRecommendation: string;
+    cropDurationDays?: number;
+    varietyName?: string;
+    isEstimatedDuration?: boolean;
+    durationRange?: [number, number];
+    baseHarvestDate?: string;
+    netShiftDays?: number;
+    adjustmentReasons?: string[];
+    activityFlags?: {
+      waterStress: boolean;
+      nutrientRisk: boolean;
+      pestDiseaseRisk: boolean;
+      weedCompetitionRisk: boolean;
+      environmentalStress: boolean;
+    };
   }>({
     growthStage: 'Maturity Tracking',
     expectedHarvestDate: 'Calculating...',
@@ -154,7 +169,9 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
     storageBagsCount: 100,
     storageMoistureTargetPct: 13.5,
     totalProductionTons: 0,
-    machineryRecommendation: 'Combine Harvester'
+    machineryRecommendation: 'Combine Harvester',
+    netShiftDays: 0,
+    adjustmentReasons: []
   });
 
   // Dynamic checklist setup based on crop
@@ -214,6 +231,7 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
       // 2. Look for real Sowing date in logged activities
       const sowingAct = acts.find(a => a.activity_type === 'Sowing');
       const actualSowingDate = sowingAct?.date || undefined;
+      const sowingVarietyOrNotes = sowingAct ? `${sowingAct.quantity_details || ''} ${sowingAct.notes || ''}`.trim() : '';
 
       // 3. Fetch live weather telemetry from Open-Meteo
       let liveTemp = 28;
@@ -253,7 +271,8 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
           state: location?.state,
           district: location?.city,
           sowing_date: actualSowingDate,
-          manual_harvest_date: effectiveManualDate || undefined
+          manual_harvest_date: effectiveManualDate || undefined,
+          activities: acts
         });
 
         setLivePlan(plan);
@@ -273,7 +292,15 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
           storageBagsCount: plan.storage_bags_count,
           storageMoistureTargetPct: plan.storage_moisture_target_pct,
           totalProductionTons: plan.total_production_tons,
-          machineryRecommendation: plan.machinery_recommendation
+          machineryRecommendation: plan.machinery_recommendation,
+          cropDurationDays: plan.crop_duration_days,
+          varietyName: plan.variety_name,
+          isEstimatedDuration: plan.is_estimated_duration,
+          durationRange: plan.duration_range,
+          baseHarvestDate: plan.base_harvest_date,
+          netShiftDays: plan.net_shift_days,
+          adjustmentReasons: plan.adjustment_reasons,
+          activityFlags: plan.activity_flags
         });
 
         // 5. Predict yield using real weather and actual accumulated GDD
@@ -309,7 +336,9 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
           undefined,
           farmArea,
           liveTemp,
-          effectiveManualDate || undefined
+          effectiveManualDate || undefined,
+          sowingVarietyOrNotes,
+          acts
         );
         setComputedStatus(statusInfo);
       }
@@ -559,16 +588,44 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
               <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
                 Estimated Readiness
               </div>
-              <div className="flex items-baseline gap-2">
+              <div className="flex items-baseline gap-2 flex-wrap">
                 <span className="text-3xl sm:text-4xl font-black tracking-tight text-white font-display">
                   {computedStatus.manualHarvestDate ? computedStatus.manualHarvestDate : computedStatus.expectedHarvestDate}
                 </span>
                 <Badge variant="harvest" className="ml-2">
                   <AnimatedCounter value={computedStatus.daysToHarvest} suffix="d Remaining" />
                 </Badge>
+                {computedStatus.isEstimatedDuration && (
+                  <Badge variant="outline" className="ml-2 text-[10px] text-amber-300 border-amber-500/40">
+                    Standard Estimate
+                  </Badge>
+                )}
+                {computedStatus.netShiftDays !== undefined && (
+                  <Badge
+                    variant={computedStatus.netShiftDays > 0 ? 'outline' : 'glass'}
+                    className={`ml-1 text-[11px] font-semibold ${
+                      computedStatus.netShiftDays > 0
+                        ? 'border-amber-500/60 text-amber-300 bg-amber-500/10'
+                        : computedStatus.netShiftDays < 0
+                        ? 'border-emerald-500/60 text-emerald-300 bg-emerald-500/10'
+                        : 'border-slate-500/40 text-slate-300'
+                    }`}
+                  >
+                    {computedStatus.netShiftDays > 0
+                      ? `Delayed +${computedStatus.netShiftDays}d`
+                      : computedStatus.netShiftDays < 0
+                      ? `Accelerated ${computedStatus.netShiftDays}d`
+                      : 'On Schedule'}
+                  </Badge>
+                )}
               </div>
               <p className="text-xs text-slate-300 mt-2">
                 Recommended Window: <strong className="text-white font-semibold">{computedStatus.harvestWindow}</strong>
+                {computedStatus.cropDurationDays && (
+                  <span className="text-slate-400 ml-2 font-mono text-[11px]">
+                    (~{computedStatus.cropDurationDays}d cycle • {computedStatus.varietyName || selectedCrop})
+                  </span>
+                )}
               </p>
             </div>
 
@@ -616,6 +673,35 @@ export const HarvestManagementModule: React.FC<HarvestManagementModuleProps> = (
               <p className="text-[10px] text-amber-400 mt-1 font-medium">{weatherTelemetry.condition || 'Open-Meteo Live'}</p>
             </div>
           </div>
+
+          {/* Activity-Aware Timeline Adjustments & Insights */}
+          {computedStatus.adjustmentReasons && computedStatus.adjustmentReasons.length > 0 && (
+            <div className="bg-amber-950/40 border border-amber-500/30 rounded-2xl p-3.5 relative z-10 backdrop-blur-md">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-1.5">
+                  <Activity className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300">
+                    Agronomic Timeline Calibration
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-amber-400 font-medium">
+                  {computedStatus.netShiftDays && computedStatus.netShiftDays > 0
+                    ? `+${computedStatus.netShiftDays}d shift`
+                    : computedStatus.netShiftDays && computedStatus.netShiftDays < 0
+                    ? `${computedStatus.netShiftDays}d shift`
+                    : 'Timeline calibrated'}
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                {computedStatus.adjustmentReasons.map((reason, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-xs text-slate-300 leading-snug">
+                    <span className="text-amber-400 shrink-0 mt-0.5">•</span>
+                    <span>{reason}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Logistics & Post-Harvest Storage Desk (5 Cols) */}
