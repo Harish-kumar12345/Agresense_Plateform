@@ -3,6 +3,7 @@ import { yieldService, YieldPredictionResult } from './yieldService';
 import { diseaseRiskService } from './diseaseRiskService';
 import { cropPriceService } from './cropPriceService';
 import { farmActivityService } from './farmActivityService';
+import { lookupCropDuration, getPhenologicalStage } from './cropStageRules';
 
 export interface FarmAnalyticsData {
   farmInfo: {
@@ -139,45 +140,60 @@ class AnalyticsService {
     const estimatedRevenueRs = Math.round(totalProduction * 10 * modalPrice);
     const estimatedRevenueLakhs = Math.round((estimatedRevenueRs / 100000) * 100) / 100;
 
-    // 5. GDD & Harvest Stage Data (with safe fallbacks)
+    // 5. GDD & Harvest Stage Data (using authentic crop duration registry)
     let growthStageProgress: any = {};
     try {
-      const baseTemp = crop.toLowerCase().includes('rice') ? 10 : crop.toLowerCase().includes('wheat') ? 5 : 10;
-      // Calculate approximate GDD based on current date and assumed sowing
-      const daysSinceSowing = 65; // approximate
-      const avgTemp = 28;
-      const accGdd = Math.round((avgTemp - baseTemp) * daysSinceSowing);
+      const durationInfo = lookupCropDuration(crop);
+      const cropDurationDays = durationInfo.durationDays;
+
+      // Check if user has a real Sowing activity in local storage or farm data
+      let sowingDate = new Date();
+      try {
+        const storedActs = localStorage.getItem('agrisense_farm_activities');
+        if (storedActs) {
+          const parsed = JSON.parse(storedActs);
+          const sowingAct = parsed.find((a: any) =>
+            a.activity_type === 'Sowing' &&
+            (!farm?.farm_id || a.farm_id === farm.farm_id) &&
+            (!crop || a.crop?.toLowerCase() === crop.toLowerCase())
+          );
+          if (sowingAct && sowingAct.date) {
+            sowingDate = new Date(sowingAct.date);
+          }
+        }
+      } catch (e) {}
+
+      const now = new Date();
+      const daysSinceSowing = Math.max(0, Math.floor((now.getTime() - sowingDate.getTime()) / 86400000));
+      const expectedHarvestDate = new Date(sowingDate.getTime() + cropDurationDays * 86400000);
+      const daysToHarvest = Math.max(0, Math.ceil((expectedHarvestDate.getTime() - now.getTime()) / 86400000));
+      const progressPct = Math.min(100, Math.max(0, Math.round((daysSinceSowing / cropDurationDays) * 100)));
+      const stage = getPhenologicalStage(progressPct, durationInfo.stages);
       
-      // Simple growth stage determination
-      const gddThresholds: Record<string, number> = { rice: 1800, wheat: 1500, maize: 1400 };
-      const cropLower = crop.toLowerCase();
-      const targetGdd = gddThresholds[cropLower] || 1600;
-      const progressPct = Math.min(100, Math.round((accGdd / targetGdd) * 100));
-      
-      let stage = 'Vegetative';
-      if (progressPct >= 90) stage = 'Maturity / Ready to Harvest';
-      else if (progressPct >= 70) stage = 'Ripening / Grain Filling';
-      else if (progressPct >= 50) stage = 'Flowering / Reproductive';
-      else if (progressPct >= 25) stage = 'Tillering / Vegetative';
-      
-      const daysToHarvest = Math.max(1, Math.round((1 - progressPct / 100) * 120));
-      const expectedHarvestDate = new Date(Date.now() + daysToHarvest * 86400000);
-      
+      const winStart = new Date(expectedHarvestDate.getTime() - (progressPct >= 100 ? 2 : 5) * 86400000);
+      const winEnd = new Date(expectedHarvestDate.getTime() + (progressPct >= 100 ? 5 : 10) * 86400000);
+      const harvestWindow = `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+
       growthStageProgress = {
-        currentGdd: accGdd,
-        targetGdd,
+        currentGdd: Math.round(18 * daysSinceSowing),
+        targetGdd: 1500,
         stage,
         progressPct,
-        expectedHarvestDate: expectedHarvestDate.toISOString().split('T')[0]
+        daysToHarvest,
+        expectedHarvestDate: expectedHarvestDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        harvestWindow
       };
     } catch (gddErr) {
       console.warn('GDD calculation fallback:', gddErr);
+      const defaultExp = new Date(Date.now() + 105 * 86400000);
       growthStageProgress = {
-        currentGdd: 1170,
-        targetGdd: 1800,
-        stage: 'Flowering / Reproductive',
-        progressPct: 65,
-        expectedHarvestDate: '2026-10-28'
+        currentGdd: 0,
+        targetGdd: 1500,
+        stage: 'Germination & Emergence',
+        progressPct: 0,
+        daysToHarvest: 105,
+        expectedHarvestDate: defaultExp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        harvestWindow: 'Estimated'
       };
     }
 
@@ -286,10 +302,10 @@ class AnalyticsService {
         estimatedRevenueLakhs
       },
       harvestReadiness: {
-        expectedHarvestDate: growthStageProgress.expectedHarvestDate || '2026-10-28',
-        harvestWindow: 'Oct 28 - Nov 10, 2026',
+        expectedHarvestDate: growthStageProgress.expectedHarvestDate,
+        harvestWindow: growthStageProgress.harvestWindow || 'Expected Window',
         readinessStatus: growthStageProgress.progressPct >= 90 ? 'Ready' : growthStageProgress.progressPct >= 70 ? 'Approaching' : 'Not Ready',
-        daysToHarvest: Math.max(1, Math.round((new Date('2026-10-28').getTime() - new Date().getTime()) / (1000 * 3600 * 24)))
+        daysToHarvest: growthStageProgress.daysToHarvest
       },
       lastUpdated: new Date().toISOString()
     };

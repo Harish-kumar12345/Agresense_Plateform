@@ -33,6 +33,17 @@ try {
   console.warn('Could not load ICAR Package of Practices:', e.message);
 }
 
+// Load cropStageRules dataset
+let cropStageRules = { defaultDurationDays: 105, crops: {}, adjustmentRules: {} };
+try {
+  const rulesPath = path.join(__dirname, '../data/cropStageRules.json');
+  if (fs.existsSync(rulesPath)) {
+    cropStageRules = JSON.parse(fs.readFileSync(rulesPath, 'utf8'));
+  }
+} catch (e) {
+  console.warn('Could not load cropStageRules dataset:', e.message);
+}
+
 // Standard Crop Harvest & Phenology Specifications (FAO-56 & ICAR Guidelines)
 const CROP_SPECS = {
   Rice: {
@@ -319,6 +330,279 @@ function getCropSpec(cropName) {
   return match ? CROP_SPECS[match] : CROP_SPECS.Rice;
 }
 
+/**
+ * Resolve crop duration and variety specifics from cropStageRules
+ */
+function resolveCropDuration(cropName, varietyOrNotes) {
+  const defaultDuration = cropStageRules.defaultDurationDays || 105;
+  const defaultStages = cropStageRules.defaultStageDistribution || [
+    { name: 'Germination & Emergence', minPct: 0, maxPct: 10 },
+    { name: 'Vegetative Growth', minPct: 10, maxPct: 50 },
+    { name: 'Flowering / Reproductive', minPct: 50, maxPct: 70 },
+    { name: 'Grain Filling / Maturation', minPct: 70, maxPct: 90 },
+    { name: 'Physiological Maturity / Harvest', minPct: 90, maxPct: 100 }
+  ];
+
+  if (!cropName) {
+    return {
+      cropName: 'Generic Crop',
+      varietyName: 'Standard (Default Estimate)',
+      durationDays: defaultDuration,
+      durationRange: [95, 115],
+      isEstimated: true,
+      stages: defaultStages
+    };
+  }
+
+  const cleanCrop = String(cropName).trim();
+  const matchedKey = Object.keys(cropStageRules.crops || {}).find(
+    k => k.toLowerCase() === cleanCrop.toLowerCase() ||
+         cleanCrop.toLowerCase().includes(k.toLowerCase()) ||
+         k.toLowerCase().includes(cleanCrop.toLowerCase())
+  );
+
+  if (!matchedKey) {
+    return {
+      cropName: cleanCrop,
+      varietyName: 'Standard (Default Benchmark)',
+      durationDays: defaultDuration,
+      durationRange: [95, 115],
+      isEstimated: true,
+      stages: defaultStages
+    };
+  }
+
+  const rule = cropStageRules.crops[matchedKey];
+  let chosenDuration = rule.defaultDurationDays;
+  let chosenVariety = 'Medium / Standard';
+  let chosenRange = [chosenDuration - 10, chosenDuration + 10];
+
+  if (rule.varieties && varietyOrNotes) {
+    const text = String(varietyOrNotes).toLowerCase();
+    if (text.includes('short') || text.includes('early') || text.includes('pioneer 3396') || text.includes('dkc 9108') || text.includes('pusa bold') || text.includes('pukhraj')) {
+      chosenDuration = rule.varieties.short.durationDays;
+      chosenVariety = rule.varieties.short.name;
+      chosenRange = rule.varieties.short.range;
+    } else if (text.includes('long') || text.includes('late') || text.includes('traditional') || text.includes('sindhuri') || text.includes('winter')) {
+      chosenDuration = rule.varieties.long.durationDays;
+      chosenVariety = rule.varieties.long.name;
+      chosenRange = rule.varieties.long.range;
+    } else if (rule.varieties.medium) {
+      chosenDuration = rule.varieties.medium.durationDays;
+      chosenVariety = rule.varieties.medium.name;
+      chosenRange = rule.varieties.medium.range;
+    }
+  } else if (rule.varieties && rule.varieties.medium) {
+    chosenDuration = rule.varieties.medium.durationDays;
+    chosenVariety = rule.varieties.medium.name;
+    chosenRange = rule.varieties.medium.range;
+  }
+
+  return {
+    cropName: matchedKey,
+    varietyName: chosenVariety,
+    durationDays: chosenDuration,
+    durationRange: chosenRange,
+    isEstimated: false,
+    stages: rule.stages || defaultStages
+  };
+}
+
+/**
+ * Calculate dynamic activity-aware growth progress and harvest date adjustments.
+ * Evaluates field activities (irrigation, fertilization, spraying, weeding, stress events)
+ * against agronomic thresholds and computes calibrated harvest range and physiological progress.
+ */
+function calculateBackendActivityAdjustments(
+  cropName,
+  cropDurationDays,
+  sowingDate,
+  activities = [],
+  now = new Date(),
+  varietyOrNotes = ''
+) {
+  const durationInfo = resolveCropDuration(cropName, varietyOrNotes);
+  const duration = cropDurationDays || durationInfo.durationDays;
+  const baseHarvestDate = new Date(sowingDate.getTime() + duration * 86400000);
+
+  const daysSinceSowing = Math.max(0, Math.floor((now.getTime() - sowingDate.getTime()) / 86400000));
+  const baseProgressPct = Math.min(100, Math.max(0, Math.round((daysSinceSowing / duration) * 100)));
+
+  const sortedActs = [...activities]
+    .filter(a => {
+      const actTime = new Date(a.date).getTime();
+      return !isNaN(actTime) && actTime >= sowingDate.getTime() - 86400000 && actTime <= now.getTime() + 86400000;
+    })
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const rules = cropStageRules.adjustmentRules || {
+    irrigation: { optimalIntervalDays: 12, maxAllowedGapDays: 18, gapDelayPerWeek: 3, onScheduleAdvancementDays: 1 },
+    fertilization: { expectedVegetativeCutoffPct: 45, missingFertilizationDelayDays: 3 },
+    pestAndDisease: { unmitigatedInfectionDelayDays: 5, sprayMitigationDaysRecovered: 3 },
+    weeding: { cutoffDay: 40, missingWeedingDelayDays: 2 },
+    stressEvents: { droughtDelayDays: 5, waterloggingDelayDays: 4, diseaseDelayDays: 4, heatwaveDelayDays: 3, generalStressDelayDays: 3 }
+  };
+
+  let delayDays = 0;
+  let advanceDays = 0;
+  const adjustmentReasons = [];
+  const flags = {
+    waterStress: false,
+    nutrientRisk: false,
+    pestDiseaseRisk: false,
+    weedCompetitionRisk: false,
+    environmentalStress: false
+  };
+
+  // 1. Irrigation
+  const irrigations = sortedActs.filter(a => a.activity_type === 'Irrigation');
+  if (daysSinceSowing >= rules.irrigation.maxAllowedGapDays) {
+    let lastWaterDate = sowingDate;
+    let maxGap = 0;
+    let gapStart = sowingDate;
+    let gapEnd = now;
+
+    for (const irr of irrigations) {
+      const irrDate = new Date(irr.date);
+      const gap = Math.floor((irrDate.getTime() - lastWaterDate.getTime()) / 86400000);
+      if (gap > maxGap) {
+        maxGap = gap;
+        gapStart = lastWaterDate;
+        gapEnd = irrDate;
+      }
+      lastWaterDate = irrDate;
+    }
+
+    const tailGap = Math.floor((now.getTime() - lastWaterDate.getTime()) / 86400000);
+    if (tailGap > maxGap) {
+      maxGap = tailGap;
+      gapStart = lastWaterDate;
+      gapEnd = now;
+    }
+
+    if (maxGap > rules.irrigation.maxAllowedGapDays) {
+      const excessDays = maxGap - rules.irrigation.maxAllowedGapDays;
+      const irrDelay = Math.min(7, Math.max(2, Math.round(excessDays * 0.5)));
+      delayDays += irrDelay;
+      flags.waterStress = true;
+      adjustmentReasons.push(
+        `Harvest estimate delayed by ${irrDelay} days due to water stress: irrigation gap of ${maxGap} days detected between ${gapStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} and ${gapEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`
+      );
+    } else if (irrigations.length > 0) {
+      advanceDays += rules.irrigation.onScheduleAdvancementDays;
+      adjustmentReasons.push(`Timely irrigation logged on schedule maintaining active crop progression.`);
+    }
+  } else if (irrigations.length > 0) {
+    advanceDays += rules.irrigation.onScheduleAdvancementDays;
+    adjustmentReasons.push(`Early irrigation on schedule promoting robust seedling establishment.`);
+  }
+
+  // 2. Fertilization
+  const fertilizations = sortedActs.filter(a => a.activity_type === 'Fertilization');
+  if (baseProgressPct >= rules.fertilization.expectedVegetativeCutoffPct && fertilizations.length === 0) {
+    delayDays += rules.fertilization.missingFertilizationDelayDays;
+    flags.nutrientRisk = true;
+    adjustmentReasons.push(
+      `Harvest estimate delayed by ${rules.fertilization.missingFertilizationDelayDays} days: missing expected vegetative fertilizer top-dressing.`
+    );
+  } else if (fertilizations.length > 0) {
+    adjustmentReasons.push(`Nutrient top-dressing recorded, sustaining vigorous vegetative & grain filling canopy.`);
+  }
+
+  // 3. Pest & Disease
+  const inspections = sortedActs.filter(a => a.activity_type === 'Disease Inspection');
+  const sprays = sortedActs.filter(a => a.activity_type === 'Pesticide Application');
+
+  for (const insp of inspections) {
+    const text = `${insp.quantity_details || ''} ${insp.notes || ''}`.toLowerCase();
+    const isThreat = text.includes('infest') || text.includes('blight') || text.includes('pest') || text.includes('borer') || text.includes('rot') || text.includes('mildew') || text.includes('armyworm') || text.includes('rust');
+    if (isThreat) {
+      const inspDate = new Date(insp.date);
+      const hasMitigation = sprays.some(s => {
+        const sDate = new Date(s.date);
+        const diff = (sDate.getTime() - inspDate.getTime()) / 86400000;
+        return diff >= 0 && diff <= 8;
+      });
+
+      if (!hasMitigation) {
+        delayDays += rules.pestAndDisease.unmitigatedInfectionDelayDays;
+        flags.pestDiseaseRisk = true;
+        adjustmentReasons.push(
+          `Harvest estimate delayed by ${rules.pestAndDisease.unmitigatedInfectionDelayDays} days due to unmitigated pest/disease stress noted on ${inspDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} without corrective spray.`
+        );
+      } else {
+        adjustmentReasons.push(
+          `Pest/disease inspection findings on ${inspDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} successfully mitigated by timely spray application.`
+        );
+      }
+    }
+  }
+
+  // 4. Weeding
+  const weedings = sortedActs.filter(a => a.activity_type === 'Weeding');
+  if (daysSinceSowing > rules.weeding.cutoffDay && weedings.length === 0) {
+    delayDays += rules.weeding.missingWeedingDelayDays;
+    flags.weedCompetitionRisk = true;
+    adjustmentReasons.push(
+      `Harvest estimate delayed by ${rules.weeding.missingWeedingDelayDays} days due to weed competition during early canopy closure.`
+    );
+  } else if (weedings.length > 0) {
+    adjustmentReasons.push(`Field weeding logged, minimizing resource competition.`);
+  }
+
+  // 5. Stress events
+  for (const act of sortedActs) {
+    const text = `${act.quantity_details || ''} ${act.notes || ''}`.toLowerCase();
+    if (text.includes('drought') || text.includes('waterlogging') || text.includes('flood') || text.includes('heatwave') || text.includes('hail') || text.includes('frost')) {
+      const actDate = new Date(act.date);
+      const stressType = text.includes('drought') ? 'drought' : text.includes('waterlogging') || text.includes('flood') ? 'waterlogging' : 'weather stress';
+      const eventDelay = stressType === 'drought' ? rules.stressEvents.droughtDelayDays : rules.stressEvents.waterloggingDelayDays;
+      delayDays += eventDelay;
+      flags.environmentalStress = true;
+      adjustmentReasons.push(
+        `Harvest estimate delayed by ${eventDelay} days due to documented ${stressType} on ${actDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`
+      );
+    }
+  }
+
+  const netShiftDays = Math.max(-3, Math.min(25, delayDays - advanceDays));
+  const adjustedHarvestDate = new Date(baseHarvestDate.getTime() + netShiftDays * 86400000);
+  const daysRemaining = Math.max(0, Math.ceil((adjustedHarvestDate.getTime() - now.getTime()) / 86400000));
+
+  let effectiveDays = daysSinceSowing;
+  if (netShiftDays > 0) {
+    effectiveDays = Math.max(0, daysSinceSowing - Math.min(daysSinceSowing, netShiftDays * 0.7));
+  } else if (netShiftDays < 0) {
+    effectiveDays = daysSinceSowing + Math.abs(netShiftDays) * 0.5;
+  }
+  const totalAdjustedCycle = duration + netShiftDays;
+  const growthPercent = Math.min(100, Math.max(0, Math.round((effectiveDays / totalAdjustedCycle) * 100)));
+
+  const winStart = new Date(adjustedHarvestDate.getTime() - 4 * 86400000);
+  const winEnd = new Date(adjustedHarvestDate.getTime() + 6 * 86400000);
+  const harvestWindowRange = `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+
+  let currentGrowthStage = durationInfo.stages[0].name;
+  for (let i = 0; i < durationInfo.stages.length; i++) {
+    const stg = durationInfo.stages[i];
+    if (growthPercent >= stg.minPct) {
+      currentGrowthStage = stg.name;
+    }
+  }
+
+  return {
+    baseHarvestDate,
+    adjustedHarvestDate,
+    harvestWindowRange,
+    daysRemaining,
+    growthPercent,
+    currentGrowthStage,
+    netShiftDays,
+    adjustmentReasons,
+    flags
+  };
+}
+
 // In-memory cache for dynamic live calculations when DB is offline
 const inMemoryHarvestRecords = [];
 
@@ -358,7 +642,7 @@ async function resolveSowingDate(farmId, cropName, explicitDate) {
     const isDemo = !farmId || ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(farmId);
     const sowingInMem = inMem.find(a => 
       a.activity_type === 'Sowing' &&
-      a.crop.toLowerCase() === cropName.toLowerCase() &&
+      a.crop && a.crop.toLowerCase() === (cropName || '').toLowerCase() &&
       (!farmId || a.farm_id === farmId || (isDemo && ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(a.farm_id)))
     );
     if (sowingInMem && sowingInMem.date) {
@@ -367,8 +651,8 @@ async function resolveSowingDate(farmId, cropName, explicitDate) {
     }
   } catch (e) {}
 
-  // Active season mid-transplanting baseline (approx 65 days ago)
-  return new Date(Date.now() - 65 * 86400000);
+  // If no sowing date was ever logged, return null to let caller default to today
+  return null;
 }
 
 /**
@@ -494,27 +778,65 @@ async function generateDynamicHarvestAlerts({
  * CORE LIVE HARVEST ENGINE:
  * Calculates authentic live GDD, phenological phases, days remaining, ML yield, and storage specs
  */
-async function computeLiveHarvestPlan({
-  farmId = 'default_farm',
-  farmName = 'Green Valley Farm',
-  crop = 'Rice',
-  areaHectares = 2.5,
-  latitude = 28.6692,
-  longitude = 77.4538,
-  state = 'Uttar Pradesh',
-  district = 'Ghaziabad',
-  sowingDateStr,
-  manualHarvestDateStr
-}) {
+async function computeLiveHarvestPlan(rawParams = {}) {
+  const farmId = rawParams.farmId || rawParams.farm_id || 'default_farm';
+  const farmName = rawParams.farmName || rawParams.farm_name || 'Green Valley Farm';
+  const crop = rawParams.crop || 'Rice';
+  const areaHa = Number(rawParams.areaHectares || rawParams.area_hectares) || 2.5;
+  const lat = Number(rawParams.latitude) || 28.6692;
+  const lon = Number(rawParams.longitude) || 77.4538;
+  const state = rawParams.state || 'Uttar Pradesh';
+  const district = rawParams.district || 'Ghaziabad';
+  const sowingDateStr = rawParams.sowingDateStr || rawParams.sowing_date;
+  const manualHarvestDateStr = rawParams.manualHarvestDateStr || rawParams.manual_harvest_date;
+  const varietyOrNotes = rawParams.variety || rawParams.notes || '';
+
   const spec = getCropSpec(crop);
-  const areaHa = Number(areaHectares) || 2.5;
-  const lat = Number(latitude) || 28.6692;
-  const lon = Number(longitude) || 77.4538;
+  const durationInfo = resolveCropDuration(crop, varietyOrNotes);
+  const cropDurationDays = durationInfo.durationDays;
 
   // 1. Resolve true sowing date
-  const sowingDate = await resolveSowingDate(farmId, crop, sowingDateStr);
+  const resolvedSowing = await resolveSowingDate(farmId, crop, sowingDateStr);
+  const sowingDate = resolvedSowing || new Date();
   const now = new Date();
-  const daysElapsed = Math.max(1, Math.floor((now.getTime() - sowingDate.getTime()) / 86400000));
+  const daysElapsed = Math.max(0, Math.floor((now.getTime() - sowingDate.getTime()) / 86400000));
+
+  // Retrieve field activity log for this crop cycle
+  let cycleActivities = Array.isArray(rawParams.activities) ? rawParams.activities : [];
+  if (cycleActivities.length === 0 && farmId && mongoose.connection.readyState === 1) {
+    try {
+      cycleActivities = await FarmActivity.find({ farm_id: farmId, crop: new RegExp('^' + crop + '$', 'i') })
+        .sort({ date: -1 })
+        .lean();
+    } catch (e) {}
+  }
+  if (cycleActivities.length === 0) {
+    try {
+      const farmActivityModule = require('./farmActivity');
+      const inMem = farmActivityModule.inMemoryActivities || [];
+      const isDemo = !farmId || ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(farmId);
+      cycleActivities = inMem.filter(a => 
+        a.crop && a.crop.toLowerCase() === (crop || '').toLowerCase() &&
+        (!farmId || a.farm_id === farmId || (isDemo && ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(a.farm_id)))
+      );
+    } catch (e) {}
+  }
+
+  // Activity-aware adjustment calculation: growthPercent = f(daysSinceSowing, cropDurationDays, activities)
+  const adjustments = calculateBackendActivityAdjustments(
+    crop,
+    cropDurationDays,
+    sowingDate,
+    cycleActivities,
+    now,
+    varietyOrNotes
+  );
+
+  // Harvest date & window with activity adjustments
+  const baseHarvestDate = adjustments.baseHarvestDate;
+  const expHarvestDate = manualHarvestDateStr ? new Date(manualHarvestDateStr) : adjustments.adjustedHarvestDate;
+  const daysRemaining = Math.max(0, Math.ceil((expHarvestDate.getTime() - now.getTime()) / 86400000));
+  const durationProgressPct = adjustments.growthPercent;
 
   // 2. Fetch live weather & real GDD in parallel
   const [liveWeather, realGddData] = await Promise.all([
@@ -541,57 +863,45 @@ async function computeLiveHarvestPlan({
     gddAccumulated = Math.round(dailyGdd * daysElapsed);
   }
 
-  const gddPercentage = Math.min(100, Math.round((gddAccumulated / spec.gddThreshold) * 100));
+  const gddPercentage = durationProgressPct;
 
-  // 3. Expected Harvest Date and Remaining Days (Thermal GDD calculation)
-  const dailyGdd = Math.max(1, weather.temperature_c - spec.baseTemp);
-  const remainingGdd = Math.max(0, spec.gddThreshold - gddAccumulated);
-  const thermalDaysRemaining = gddPercentage >= 100 ? 0 : Math.max(1, Math.ceil(remainingGdd / dailyGdd));
-
-  const daysRemaining = manualHarvestDateStr
-    ? Math.max(0, Math.ceil((new Date(manualHarvestDateStr).getTime() - now.getTime()) / 86400000))
-    : thermalDaysRemaining;
-
-  const expHarvestDate = gddPercentage >= 100
-    ? now
-    : new Date(now.getTime() + thermalDaysRemaining * 86400000);
-
-  const winStart = new Date(expHarvestDate.getTime() - (gddPercentage >= 100 ? 2 : 5) * 86400000);
-  const winEnd = new Date(expHarvestDate.getTime() + (gddPercentage >= 100 ? 5 : 10) * 86400000);
-  const harvestWindow = gddPercentage >= 100
+  // 3. Harvest Window
+  const winStart = new Date(expHarvestDate.getTime() - (durationProgressPct >= 100 ? 2 : 5) * 86400000);
+  const winEnd = new Date(expHarvestDate.getTime() + (durationProgressPct >= 100 ? 5 : 10) * 86400000);
+  const harvestWindow = durationProgressPct >= 100
     ? `Ready Now (Optimal through ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`
     : `${winStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${winEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
 
   // 4. Status Determination
   let status = 'Not Ready';
-  if (gddPercentage >= 95 || daysRemaining <= 3) {
+  if (durationProgressPct >= 95 || daysRemaining <= 3) {
     status = 'Harvest Ready';
-  } else if (gddPercentage >= 70 || daysRemaining <= 20) {
+  } else if (durationProgressPct >= 70 || daysRemaining <= 20) {
     status = 'Approaching';
   } else {
     status = 'Not Ready';
   }
 
-  // 5. Phenological Stage Determination & Projection Breakdown
-  let currentGrowthStage = spec.stages[0].name;
-  for (let i = 0; i < spec.stages.length; i++) {
-    if (gddPercentage >= spec.stages[i].gddPct - 15) {
-      currentGrowthStage = spec.stages[i].name;
+  // 5. Phenological Stage Determination & Projection Breakdown using duration percentages
+  let currentGrowthStage = durationInfo.stages[0].name;
+  for (let i = 0; i < durationInfo.stages.length; i++) {
+    const stg = durationInfo.stages[i];
+    if (durationProgressPct >= stg.minPct) {
+      currentGrowthStage = stg.name;
     }
   }
 
   // Stage-by-stage progression for Recharts BarChart
-  const stageProjection = spec.stages.map((stg, idx) => {
-    const prevPct = idx === 0 ? 0 : spec.stages[idx - 1].gddPct;
-    const stageSpan = stg.gddPct - prevPct;
+  const stageProjection = durationInfo.stages.map((stg) => {
+    const stageSpan = Math.max(1, stg.maxPct - stg.minPct);
     let progress = 0;
 
-    if (gddPercentage >= stg.gddPct) {
+    if (durationProgressPct >= stg.maxPct) {
       progress = 100;
-    } else if (gddPercentage <= prevPct) {
+    } else if (durationProgressPct <= stg.minPct) {
       progress = 0;
     } else {
-      progress = Math.round(((gddPercentage - prevPct) / stageSpan) * 100);
+      progress = Math.round(((durationProgressPct - stg.minPct) / stageSpan) * 100);
     }
 
     const label = progress >= 100 ? 'Completed' : progress > 0 ? 'Current' : 'Upcoming';
@@ -599,7 +909,7 @@ async function computeLiveHarvestPlan({
       stage: stg.name,
       progress,
       label,
-      targetGddPct: stg.gddPct
+      targetGddPct: stg.maxPct
     };
   });
 
@@ -660,17 +970,63 @@ async function computeLiveHarvestPlan({
     recentActivities
   });
 
+  if (durationInfo.isEstimated) {
+    alerts.unshift({
+      id: 'alert_crop_duration_estimate',
+      type: 'info',
+      severity: 'Guideline',
+      category: 'Crop Duration Model',
+      title: `ℹ️ Standard Benchmark Duration Applied (${cropDurationDays}d)`,
+      description: `Crop duration benchmarked at standard ${cropDurationDays} days. Log specific variety in activity notes for hybrid-calibrated duration.`,
+      actionRequired: 'Record hybrid seed details in Sowing activity notes to refine precision.',
+      timestamp: new Date().toISOString()
+    });
+  }
+
+  if (adjustments.flags.waterStress) {
+    alerts.push({
+      id: 'alert_water_stress',
+      type: 'warning',
+      severity: 'Moderate',
+      category: 'Irrigation Deficit',
+      title: '⚠️ Soil Water Stress Detected',
+      description: 'Extended irrigation interval has induced moisture stress, delaying maturity trajectory.',
+      actionRequired: 'Provide immediate supplemental irrigation to stabilize grain filling.',
+      timestamp: new Date().toISOString()
+    });
+  }
+  if (adjustments.flags.pestDiseaseRisk) {
+    alerts.push({
+      id: 'alert_pest_unmitigated',
+      type: 'danger',
+      severity: 'Critical',
+      category: 'Crop Health',
+      title: '⚠️ Unmitigated Pest/Disease Impact',
+      description: 'Pest infestation was observed without recorded corrective spray, shifting harvest timeline.',
+      actionRequired: 'Inspect crop immediately and deploy recommended biocontrol / agrochemical spray.',
+      timestamp: new Date().toISOString()
+    });
+  }
+
   return {
     farm_id: farmId,
     farm_name: farmName,
     crop,
+    variety_name: durationInfo.varietyName,
+    crop_duration_days: cropDurationDays,
+    is_estimated_duration: durationInfo.isEstimated,
+    duration_range: durationInfo.durationRange,
     area_hectares: areaHa,
     sowing_date: sowingDate.toISOString(),
     days_elapsed: daysElapsed,
     growth_stage: currentGrowthStage,
+    base_harvest_date: baseHarvestDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     expected_harvest_date: expHarvestDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     manual_harvest_date: manualHarvestDateStr ? new Date(manualHarvestDateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : null,
     harvest_window: harvestWindow,
+    net_shift_days: adjustments.netShiftDays,
+    adjustment_reasons: adjustments.adjustmentReasons,
+    activity_flags: adjustments.flags,
     status,
     days_to_harvest: daysRemaining,
     gdd_accumulated: gddAccumulated,
@@ -923,5 +1279,9 @@ router.get('/alerts', optionalAuth, async (req, res) => {
     return res.status(500).json({ success: false, error: 'Failed to fetch alerts' });
   }
 });
+
+router.computeLiveHarvestPlan = computeLiveHarvestPlan;
+router.calculateBackendActivityAdjustments = calculateBackendActivityAdjustments;
+router.resolveCropDuration = resolveCropDuration;
 
 module.exports = router;
