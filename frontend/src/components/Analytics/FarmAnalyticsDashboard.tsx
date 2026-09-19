@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BarChart3,
   TrendingUp,
@@ -29,11 +29,11 @@ import {
   Legend,
   CartesianGrid
 } from 'recharts';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 import { FarmData, farmService } from '../../services/farmService';
 import { analyticsService, FarmAnalyticsData } from '../../services/analyticsService';
+import { farmActivityService } from '../../services/farmActivityService';
+import { generateFarmAnalysisPdf } from '../../services/farmReportGenerator';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -67,8 +67,6 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [generatingPdf, setGeneratingPdf] = useState<boolean>(false);
-
-  const pdfReportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadFarms() {
@@ -110,30 +108,20 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
   }, [selectedFarm, farm, location, crop, selectedSeason]);
 
   const handleGeneratePdfReport = async () => {
-    if (!analytics || !pdfReportRef.current) return;
+    if (!analytics) return;
     setGeneratingPdf(true);
 
     try {
-      const element = pdfReportRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff'
-      });
+      let activities = [];
+      try {
+        activities = await farmActivityService.getActivities(analytics.farmInfo.farmId, analytics.farmInfo.crop);
+      } catch (e) {
+        console.warn('Could not fetch farm activities for report:', e);
+      }
 
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-
-      const fileName = `AgriSense_Farm_Report_${analytics.farmInfo.farmName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
-      pdf.save(fileName);
+      await generateFarmAnalysisPdf(analytics, activities);
     } catch (err) {
       console.error('PDF Generation error:', err);
-      window.print();
     } finally {
       setGeneratingPdf(false);
     }
@@ -500,87 +488,6 @@ export const FarmAnalyticsDashboard: React.FC<FarmAnalyticsDashboardProps> = ({
           </div>
         </div>
       </Card>
-
-      {/* HIDDEN PRINT / PDF DOM CONTAINER (captured by html2canvas for PDF download) */}
-      <div className="hidden">
-        <div ref={pdfReportRef} className="p-8 bg-white text-slate-900 space-y-6 max-w-4xl mx-auto font-sans" style={{ width: '800px' }}>
-          <div className="border-b-4 border-emerald-600 pb-4 flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-black text-emerald-800">🌾 AgriSense Enterprise Farm Report</h1>
-              <p className="text-xs text-slate-500 font-bold">Official Agricultural Telemetry & AI Advisory Document</p>
-            </div>
-            <div className="text-right text-xs text-slate-600">
-              <p className="font-bold">Generated: {new Date().toLocaleString()}</p>
-              <p>Report ID: AS-{Math.random().toString(36).substring(2, 8).toUpperCase()}</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div>
-              <p><span className="font-bold text-slate-700">Farm Name:</span> {farmInfo.farmName}</p>
-              <p><span className="font-bold text-slate-700">Location:</span> {farmInfo.locationName}</p>
-              <p><span className="font-bold text-slate-700">GIS Coordinates:</span> {farmInfo.coordinates.latitude.toFixed(4)}, {farmInfo.coordinates.longitude.toFixed(4)}</p>
-            </div>
-            <div>
-              <p><span className="font-bold text-slate-700">Crop Variety:</span> {farmInfo.crop}</p>
-              <p><span className="font-bold text-slate-700">Farm Area:</span> {farmInfo.areaHectares} Hectares</p>
-              <p><span className="font-bold text-slate-700">Soil Type:</span> {soilHealth.type} (pH: {soilHealth.ph})</p>
-            </div>
-          </div>
-
-          <div className="border border-emerald-200 p-4 rounded-xl bg-emerald-50/50 space-y-2">
-            <h3 className="font-bold text-emerald-900 text-sm border-b border-emerald-200 pb-1">📈 AI Yield & Market Revenue Telemetry</h3>
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <p><span className="font-bold">Predicted Yield:</span> {yieldAnalytics.currentPredictedYield} tons/ha</p>
-              <p><span className="font-bold">Total Production:</span> {yieldAnalytics.expectedProductionTons} Tons</p>
-              <p><span className="font-bold">Confidence Score:</span> {yieldAnalytics.confidenceScore}%</p>
-              <p><span className="font-bold">Market Price:</span> ₹{marketAndRevenue.currentMarketPrice}/qtl ({marketAndRevenue.marketName})</p>
-              <p><span className="font-bold">Estimated Revenue:</span> ₹{marketAndRevenue.estimatedRevenueRs.toLocaleString()} (₹{marketAndRevenue.estimatedRevenueLakhs} Lakhs)</p>
-              <p><span className="font-bold">Harvest Window:</span> {harvestReadiness.harvestWindow}</p>
-            </div>
-          </div>
-
-          <div className="border border-blue-200 p-4 rounded-xl bg-blue-50/50 space-y-2">
-            <h3 className="font-bold text-blue-900 text-sm border-b border-blue-200 pb-1">⛅ Weather & Soil Health Analysis</h3>
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <p><span className="font-bold">Temperature:</span> {weatherTrends.currentTempC}°C</p>
-              <p><span className="font-bold">Humidity:</span> {weatherTrends.humidityPct}%</p>
-              <p><span className="font-bold">Soil Moisture:</span> {soilHealth.moisturePct}%</p>
-              <p><span className="font-bold">Nitrogen (N):</span> {soilHealth.nitrogenPct}%</p>
-              <p><span className="font-bold">Phosphorus (P):</span> {soilHealth.phosphorusPct}%</p>
-              <p><span className="font-bold">Potassium (K):</span> {soilHealth.potassiumPct}%</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-xs">
-            <div className="border border-purple-200 p-3 rounded-xl bg-purple-50/50">
-              <h4 className="font-bold text-purple-900 mb-1">🌱 Growth Stage & GDD</h4>
-              <p><span className="font-bold">Current Stage:</span> {gddProgress.growthStage}</p>
-              <p><span className="font-bold">Accumulated GDD:</span> {gddProgress.accumulatedGdd} Degree Days</p>
-            </div>
-
-            <div className="border border-rose-200 p-3 rounded-xl bg-rose-50/50">
-              <h4 className="font-bold text-rose-900 mb-1">🐛 Disease & Pest Risk</h4>
-              <p><span className="font-bold">Overall Risk Score:</span> {diseaseRiskTrajectory.overallRiskScore}% ({diseaseRiskTrajectory.riskLevel})</p>
-              <p><span className="font-bold">Active Risks:</span> Low fungal monitoring active</p>
-            </div>
-          </div>
-
-          <div className="border border-slate-300 p-4 rounded-xl space-y-2 text-xs">
-            <h3 className="font-bold text-slate-800 text-sm border-b border-slate-200 pb-1">🤖 Krishi Mitra AI Recommendations</h3>
-            <ul className="list-disc pl-4 space-y-1 text-slate-700">
-              <li>Maintain shallow water depth of 2-3 cm during grain filling phase.</li>
-              <li>Foliar spray of Potassium Nitrate (13:0:45) recommended to increase grain weight.</li>
-              <li>Monitor humidity and apply preventive neem oil spray for fungal protection.</li>
-              <li>Prepare grain storage facility (moisture target &lt; 14%) prior to harvest window.</li>
-            </ul>
-          </div>
-
-          <div className="text-center text-[10px] text-slate-400 border-t pt-3">
-            <p>AgriSense Precision Agriculture Platform • Generated automatically from live GIS and sensor telemetry.</p>
-          </div>
-        </div>
-      </div>
     </motion.div>
   );
 };
