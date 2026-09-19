@@ -118,7 +118,10 @@ router.get('/', optionalAuth, async (req, res) => {
 
     // In-memory fallback
     let list = [...inMemoryActivities];
-    if (farm_id) list = list.filter(a => a.farm_id === farm_id);
+    if (farm_id) {
+      const isDemoFarm = ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(farm_id);
+      list = list.filter(a => a.farm_id === farm_id || (isDemoFarm && ['farm_demo_1', 'farm_demo_ghaziabad', 'default_farm'].includes(a.farm_id)));
+    }
     if (crop) list = list.filter(a => a.crop.toLowerCase() === crop.toLowerCase());
     if (activity_type) list = list.filter(a => a.activity_type === activity_type);
 
@@ -312,5 +315,7 @@ router.get('/guidelines', (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 });
+
+router.inMemoryActivities = inMemoryActivities;
 
 module.exports = router;

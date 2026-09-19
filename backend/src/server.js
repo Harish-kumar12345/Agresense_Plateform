@@ -45,14 +45,24 @@ const app = express();
 const server = http.createServer(app);
 
 // Unified CORS policy across REST API and WebSockets
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:3000,http://localhost:3001')
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174,http://localhost:3000,http://localhost:3001')
   .split(',')
   .map(o => o.trim())
   .filter(Boolean);
 
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+  if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) return true;
+  // Automatically allow any localhost or 127.0.0.1 dev ports in development mode
+  if (process.env.NODE_ENV !== 'production' && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+    return true;
+  }
+  return false;
+};
+
 const corsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+    if (isOriginAllowed(origin)) {
       return callback(null, true);
     }
     return callback(new Error(`Blocked by CORS policy: Origin ${origin} is not authorized`));
@@ -69,7 +79,12 @@ app.use(morgan('dev'));
 
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins.includes('*') ? '*' : allowedOrigins,
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
     methods: ['GET', 'POST'],
     credentials: true
   }
